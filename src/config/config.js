@@ -4,7 +4,8 @@ import {getFirestore} from "firebase/firestore"
 import {getStorage} from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCwOCBGoaaOAblZheXi9sa1EzQ-9Y-T3RY",
+
+  apiKey: process.env.MY_API_KEY,
   authDomain: "vulcan-web-1a194.firebaseapp.com",
   projectId: "vulcan-web-1a194",
   storageBucket: "vulcan-web-1a194.appspot.com",
