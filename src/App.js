@@ -1,9 +1,15 @@
-import './App.css';
-import Header from './components/auth/Login';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.scss';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
+
+
+
 function App() {
   return (
-    <div className="App">
-    <Header/>
+    <div >
+      <Header />
+      <Footer />
     </div>
   );
 }
