@@ -1,0 +1,26 @@
+.welcome-box{
+    height: 26.313rem;
+    width: 31.25rem;
+    background: white;
+    padding: 5rem;
+    border-radius: 1.5rem;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+.header-div{
+    height: 40px;
+    width: 2px;
+    background-color: black;
+    border: none;
+    margin: 20px 0;
+  }
+  .header-icon-base{
+    height: 2px;
+    width: 40px;
+    background-color: blue;
+    border: none;
+    margin: 20px 0;
+  }
+ 
