@@ -6,6 +6,7 @@ import Header from './components/header/Header';
 // import SignUp from './components/auth/SignUp';
 // import AuthDetails from './components/auth/AuthDetails';
 import HomeScreen from './components/Home/homeScreen/HomeScreen';
+import CourcesScreen from './components/coursesScreen/CourcesScreen';
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       {/* <Login/>
       <SignUp/>
       <AuthDetails/> */}
-      <HomeScreen/>
+      {/* <HomeScreen/> */}
+      <CourcesScreen/>
       {/* <Footer /> */}
     </div>
   );

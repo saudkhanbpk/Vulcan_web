@@ -1,14 +1,45 @@
+
 .welcome-box{
+    // margin: 10rem;
     height: 26.313rem;
     width: 31.25rem;
     background: white;
-    padding: 5rem;
+    padding: 4rem;
     border-radius: 1.5rem;
+    position: relative;
+    top: 3rem;
+    left: 12rem;
+    align-content: center;
+
+    .header{
+        display: flex;
+        justify-content: space-around;
+
+        .header-icon-base{
+                height: 2px;
+                width: 40px;
+                background-color: blue;
+                border: none;
+                margin: 20px 0;
+              }
+        .header-icon-base-grey{
+                height: 2px;
+                width: 40px;
+                background-color: grey;
+                border: none;
+                margin: 20px 0;
+              }
+        .iconHeader-1{
+          cursor: pointer;
+          
+        }
+        .iconHeader-2{
+          cursor: pointer;
+
+        }
+    }
 }
-.header{
-    display: flex;
-    justify-content: space-between;
-}
+
 .header-div{
     height: 40px;
     width: 2px;
@@ -16,11 +47,11 @@
     border: none;
     margin: 20px 0;
   }
-  .header-icon-base{
-    height: 2px;
-    width: 40px;
-    background-color: blue;
-    border: none;
-    margin: 20px 0;
-  }
  
+
+  .welcome-box h3,p{
+    text-align: center;
+  }
+  .welcome-box h3{
+    padding: 0.5rem;
+  }
