@@ -6,6 +6,9 @@ import Router from './Routing/Router';
 
 
 
+import HomeScreen from './components/Home/homeScreen/HomeScreen';
+import CourcesScreen from './components/coursesScreen/CourcesScreen';
+
 function App() {
   return (
     <div >
