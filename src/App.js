@@ -7,17 +7,17 @@ import Header from './components/header/Header';
 // import AuthDetails from './components/auth/AuthDetails';
 import HomeScreen from './components/Home/homeScreen/HomeScreen';
 import CourcesScreen from './components/coursesScreen/CourcesScreen';
+import Footer from './components/footer/Footer';
+import Router from './Routing/Router';
+
+
 
 function App() {
   return (
     <div >
       <Header />
-      {/* <Login/>
-      <SignUp/>
-      <AuthDetails/> */}
-      {/* <HomeScreen/> */}
-      <CourcesScreen/>
-      {/* <Footer /> */}
+    <Router/>  
+    <Footer/>  
     </div>
   );
 }
