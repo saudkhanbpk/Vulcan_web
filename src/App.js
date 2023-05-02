@@ -1,23 +1,22 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 import Header from './components/header/Header';
-// import Footer from './components/footer/Footer';
-// import Login from './components/auth/Login';
-// import SignUp from './components/auth/SignUp';
-// import AuthDetails from './components/auth/AuthDetails';
-import HomeScreen from './components/Home/homeScreen/HomeScreen';
-import CourcesScreen from './components/coursesScreen/CourcesScreen';
 import Footer from './components/footer/Footer';
 import Router from './Routing/Router';
+import { BrowserRouter } from 'react-router-dom';
+import BecomeEducator from './components/BecomeEducator/BecomeEducator';
 
 
 
 function App() {
   return (
     <div >
+      <BrowserRouter>
       <Header />
-    <Router/>  
-    <Footer/>  
+    {/* <Router/>  
+    <Footer/>   */}
+    <BecomeEducator/>
+      </BrowserRouter>
     </div>
   );
 }
