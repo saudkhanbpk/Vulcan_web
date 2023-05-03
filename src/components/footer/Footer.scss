@@ -1,0 +1,64 @@
+.Main_footer {
+
+    width: 100%;
+    background-color: #0000FF;
+}
+
+ul li {
+    list-style: none;
+    cursor: pointer;
+}
+
+ul li:hover {
+    color: rgb(0, 153, 255);
+    text-decoration: underline;
+}
+
+.Education_text {
+    color: #ffffff;
+    font-family: 'Audiowide', cursive;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    height: 40px;
+    line-height: 51px;
+}
+
+.vulqu_mail {
+    color: #ffffff;
+    font-family: 'Audiowide', cursive;
+    font-style: normal;
+    font-weight: 400;
+    height: 18px;
+    line-height: 51px;
+}
+
+.Peivacy_policy {
+    display: flex;
+    align-items: center;
+
+}
+
+.Peivacy_policy>p {
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+    margin-left: 10px;
+    width: 80px;
+}
+
+.iconfortwet {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+
+    .twticon {
+        color: blue;
+    }
+}
