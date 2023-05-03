@@ -4,7 +4,6 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Router from "./Routing/Router";
 import { BrowserRouter } from "react-router-dom";
-import BecomeEducator from "./components/BecomeEducator/BecomeEducator";
 
 function App() {
   return (

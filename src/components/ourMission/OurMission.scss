@@ -1,13 +1,13 @@
 
 
 .linear_back{
-    background-image: url(../Images/backlinear.png);
+    background-image: url(../../assets/images/backlinear.png);
     background-repeat: no-repeat;
     background-size: cover;
     height: 460px;
 }
 .teacher_back{
-    background-image: url(../Images/teacher.png);
+    background-image: url(../../assets/images/teacher.png);
     background-repeat: no-repeat;
     background-size: cover;
     height: 460px;
@@ -74,4 +74,6 @@ line-height: 48px;
     border: 1px solid black;
     border-radius: 20px;
     padding: 30px 10px;
+    height: 266px;
+    width: 414px;
 }

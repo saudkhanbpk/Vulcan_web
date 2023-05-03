@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.scss";
-import footerlogo from "../Images/footerlogo.png";
+import footerlogo from "../../assets/images/footerlogo.png";
 import { AiOutlineTwitter } from "react-icons/ai";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
@@ -19,7 +19,7 @@ const Footer = () => {
                 />
                 <p className="Education_text">Education for Everyone</p>
               </div>
-              <p className="vulqu_mail">© 2023 Vulcan Learning Institute LLC</p>
+              <p className="vulqu_mail text-start">© 2023 Vulcan Learning Institute LLC</p>
             </div>
             <div className="col-md-6  d-flex align-items-center">
               <div className="SOcial_sect d-flex justify-content-between  w-100">

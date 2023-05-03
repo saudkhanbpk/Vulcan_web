@@ -1,9 +1,9 @@
 import React from 'react'
 import './WelcomeBox.scss';
-import Teach from '../../../assets/teach.png';
-import Learn from '../../../assets/learn.png';
-import TeachBlack from '../../../assets/teachBlack.png';
-import LearnBlue from '../../../assets/learnBlue.png';
+import Teach from '../../../assets/images/teach.png';
+import Learn from '../../../assets/images/learn.png';
+import TeachBlack from '../../../assets/images/teachBlack.png';
+import LearnBlue from '../../../assets/images/learnBlue.png';
 
 import Button from '@mui/material/Button'
 import { Box } from '@mui/system';
