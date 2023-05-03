@@ -1,12 +1,12 @@
 import React from "react";
 import "./OurMission.scss";
-import bringIm from "../Images/bringimg.png";
+import bringIm from "../../assets/images/bringimg.png";
 
 const OurMission = () => {
   return (
     <div>
       <div className="container-fluid">
-        <div className="row">
+        <div className="row ">
           <div className="col-4 linear_back">
             <div className="ourmiss">
               <p className="mission_heading">Our Mission</p>
@@ -42,38 +42,41 @@ const OurMission = () => {
           </div>
         </div>
 
-        <div className="row">
+        <div className="row mt-2 mb-2">
           <h2 className="text-center Learn">Vulcan Learning Platform</h2>
-          <div className="col-md-4">
-            <h3 className="text-center text-primary">Univeral Access</h3>
+          <div className="col-md-4  ">
+            <h3 className="text-center text-primary fs-2">Univeral Access</h3>
             <div className="cardssInfo text-center">
-              <p className="card_ptag">
+              <p className="card_ptag fs-4 pt-2  text-start">
                 {" "}No GPA. No SAT. No assessment. No Application. Anyone can
                 enroll in a course on the Vulcan Learning platform. We won’t
                 turn our backs on learners.{" "}
               </p>
             </div>
           </div>
-          <div className="col-md-4">
-            <h3 className="text-center text-primary">Best Educators</h3>
+          <div className="col-md-4  ">
+            <h3 className="text-center text-primary fs-2">Best Educators</h3>
             <div className="cardssInfo text-center">
-              <p className="card_ptag">
+              <p className="card_ptag fs-4 pt-2  text-start">
                 Our courses are taught by the top educators in a given field.
-                Educators are vetted for demonstrated experience, skill, and
+                Educators  are vetted for demonstrated experience, skill, and
                 character.{" "}
               </p>
             </div>
           </div>
-          <div className="col-md-4">
-            <h3 className="text-center text-primary">Personalized</h3>
-            <div className="cardssInfo text-center">
-              <p className="card_ptag">
+
+          <div className="col-md-4  ">
+            <h3 className="text-center text-primary fs-2">Personalized</h3>
+            <div className="cardssInfo text-center ">
+              <p className="card_ptag fs-4 pt-2  text-start">
                 We offer a wide variety of courses with unique Educators,
                 subjects, and teaching styles. This allows learners to choose
                 the instructor, pace, and level that fits them best.{" "}
               </p>
             </div>
           </div>
+
+          <p className="text-decoration-underline fw-normal h3 pt-5 pb-5">Learn more about how the Vulcan Learning platform works</p>
         </div>
       </div>
     </div>

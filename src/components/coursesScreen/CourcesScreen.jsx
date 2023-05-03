@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './CourcesScreen.scss'
 import Button from '@mui/material/Button'
 import { Box } from '@mui/system';
-import { Grid, TextField, Typography } from '@mui/material';
+import { Grid, TextField, Typography, makeStyles } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -26,14 +26,17 @@ const CourcesScreen = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-
+ 
 
     return (
         <div className='container-fluid'>
             <div className="row">
                 <div className="col-12 courses-bg-img">
-                    <div className=" coming-soon" >
-                        <h1>Coming Soon</h1>
+                    <div className="coming-soon" >
+                        {/* <h1>Coming Soon</h1> */}
+                        <Typography variant="h1" color="primary" align='center'>
+                        Coming Soon
+                        </Typography>;
                         <h4>We’re in the process of partnering with the <br /> best Educators to offer a wide variety of <br /> educational classes. Check back soon.</h4>
                         <p>Join the waitlist to be notified when new <br /> courses are available.</p>
                         <Box display="flex" justifyContent="center">
@@ -66,13 +69,13 @@ const CourcesScreen = () => {
 
                                     <Box className='d-flex  flex-column align-items-center justify-content-center'
                                         component="form"
-                                       
+
                                         noValidate
                                         autoComplete="off"
                                     >
                                         <TextField className='m-4' display="flex" justifyContent="center" id="standard-basic" label="Email" variant="standard" />
                                         <Button className='btn-width m-4' variant="contained" style={{ textTransform: 'capitalize', }}>
-                                            Join 
+                                            Join
                                         </Button>
                                     </Box>
                                 </Box>
