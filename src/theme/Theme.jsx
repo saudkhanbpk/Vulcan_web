@@ -23,6 +23,12 @@ const theme = createTheme({
             lineHeight: 1.2,
             fontFamily: "'Audiowide', sans-serif",
         }, 
+        h3:{
+            fontsize: "32px",
+            fontWeight: 500,
+            color:"#0000FF",
+            fontFamily: "'Audiowide', sans-serif",
+        }
     
     },
     components: {

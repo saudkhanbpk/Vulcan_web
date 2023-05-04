@@ -15,11 +15,13 @@ const OurMission = () => {
               <p className="connection"> in any subject.</p>
             </div>
           </div>
-          <div className="col-8 teacher_back" />
+     
+         <div className="col-8 teacher_back" />
+        
         </div>
 
         <div className="row Bring_row">
-          <h2 className="text-center brigText">
+          <h2 className="text-center brigText mb-5">
             Bringing Education into the 21st century
           </h2>
           <div className="col-md-6">
@@ -42,10 +44,10 @@ const OurMission = () => {
           </div>
         </div>
 
-        <div className="row mt-2 mb-2">
-          <h2 className="text-center Learn">Vulcan Learning Platform</h2>
-          <div className="col-md-4  ">
-            <h3 className="text-center text-primary fs-2">Univeral Access</h3>
+        <div className="row mt-2 mb-2 align-center">
+          <h2 className="text-center Learn mb-5">Vulcan Learning Platform</h2>
+          <div className="col-md-4 col-sm-8 ">
+            <h3 className="h3 text-center  fs-2 sub-heading ">Univeral Access</h3>
             <div className="cardssInfo text-center">
               <p className="card_ptag fs-4 pt-2  text-start">
                 {" "}No GPA. No SAT. No assessment. No Application. Anyone can
@@ -54,8 +56,8 @@ const OurMission = () => {
               </p>
             </div>
           </div>
-          <div className="col-md-4  ">
-            <h3 className="text-center text-primary fs-2">Best Educators</h3>
+          <div className="col-md-4  col-sm-8">
+            <h3 className="text-center text-primary fs-2 sub-heading">Best Educators</h3>
             <div className="cardssInfo text-center">
               <p className="card_ptag fs-4 pt-2  text-start">
                 Our courses are taught by the top educators in a given field.
@@ -65,8 +67,8 @@ const OurMission = () => {
             </div>
           </div>
 
-          <div className="col-md-4  ">
-            <h3 className="text-center text-primary fs-2">Personalized</h3>
+          <div className="col-md-4  col-sm-8">
+            <h3 className="text-center text-primary fs-2 sub-heading">Personalized</h3>
             <div className="cardssInfo text-center ">
               <p className="card_ptag fs-4 pt-2  text-start">
                 We offer a wide variety of courses with unique Educators,
