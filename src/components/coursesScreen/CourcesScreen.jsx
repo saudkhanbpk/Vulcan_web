@@ -8,12 +8,24 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const style = {
   position: "absolute",
-  top: 321,
-  left: 846,
+  top: { xs: 370, sm: 325, md: 325, lg: 325, xl: 325 },
+  left: {
+    xs: 195,
+    sm: 400,
+    md: 700,
+    lg: 880,
+    xl: 880,
+  },
   transform: "translate(-50%, -50%)",
-  width: 509,
-  height: 311,
-  bgcolor: "primary.paper",
+  width: {
+    xs: 340,
+    sm: 490,
+    md: 490,
+    lg: 490,
+    xl: 490,
+  },
+  height: 305,
+  bgcolor: "white",
   border: "2px solid #000",
   borderRadius: "30px",
   boxShadow: 24,
@@ -97,6 +109,17 @@ const CourcesScreen = () => {
                       justifyContent="center"
                       id="standard-basic"
                       label="Email"
+                      InputLabelProps={{
+                        style: {
+                          paddingTop: "5px",
+                          fontSize: 16,
+                        },
+                      }}
+                      InputProps={{
+                        style: {
+                          fontSize: 16,
+                        },
+                      }}
                       variant="standard"
                     />
                     <Button
