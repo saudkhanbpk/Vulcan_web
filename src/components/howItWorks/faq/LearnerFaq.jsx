@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 
 const LearnerFaq = () => {
   return (
-    <Box  xs={{mx:8}}>
+    <Box  sx={{mx:30,}}>
 
 <Typography variant="h1" align='center' sx={{my:5}} component="h2">
   Learner FAQ
@@ -19,10 +19,10 @@ const LearnerFaq = () => {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <Typography>Where do classes happen?</Typography>
+        <Typography variant='subtitle1'>Where do classes happen?</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography>
+        <Typography  variant='subtitle2'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
           malesuada lacus ex, sit amet blandit leo lobortis eget.
         </Typography>
@@ -34,11 +34,11 @@ const LearnerFaq = () => {
         aria-controls="panel2a-content"
         id="panel2a-header"
       >
-        <Typography>Do I have to apply to enroll in a course?Is there an admissions process?</Typography>
+        <Typography variant='subtitle1'>Do I have to apply to enroll in a course?Is there an admissions process?</Typography>
       </AccordionSummary>
 
       <AccordionDetails>
-        <Typography>
+        <Typography variant='subtitle2'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
           malesuada lacus ex, sit amet blandit leo lobortis eget.
         </Typography>
@@ -52,8 +52,14 @@ const LearnerFaq = () => {
         aria-controls="panel3a-content"
         id="panel3a-header"
       >
-        <Typography>How much is tuition?</Typography>
+        <Typography variant='subtitle1'>How much is tuition?</Typography>
       </AccordionSummary>
+      <AccordionDetails>
+        <Typography variant='subtitle2'>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+          malesuada lacus ex, sit amet blandit leo lobortis eget.
+        </Typography>
+        </AccordionDetails>
     </Accordion>
 
     <Accordion>
@@ -62,11 +68,11 @@ const LearnerFaq = () => {
         aria-controls="panel2a-content"
         id="panel2a-header"
       >
-        <Typography>Are there any requirements to enroll in acourse?</Typography>
+        <Typography variant='subtitle1'>Are there any requirements to enroll in acourse?</Typography>
       </AccordionSummary>
 
       <AccordionDetails>
-        <Typography>
+        <Typography variant='subtitle2'>
             Classes happen fully online / remotely.Students will be provided with a video conferencing link with which classes can be accessed?
         </Typography>
       </AccordionDetails>
@@ -77,11 +83,11 @@ const LearnerFaq = () => {
         aria-controls="panel2a-content"
         id="panel2a-header"
       >
-        <Typography>Am I guaranteed a job after completing an advanced course?</Typography>
+        <Typography variant='subtitle1'>Am I guaranteed a job after completing an advanced course?</Typography>
       </AccordionSummary>
 
       <AccordionDetails>
-        <Typography>
+        <Typography variant='subtitle2'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
           malesuada lacus ex, sit amet blandit leo lobortis eget.
         </Typography>
@@ -93,11 +99,11 @@ const LearnerFaq = () => {
         aria-controls="panel2a-content"
         id="panel2a-header"
       >
-        <Typography>Are career services offered?</Typography>
+        <Typography variant='subtitle1'>Are career services offered?</Typography>
       </AccordionSummary>
 
       <AccordionDetails>
-        <Typography>
+        <Typography variant='subtitle2'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
           malesuada lacus ex, sit amet blandit leo lobortis eget.
         </Typography>
@@ -109,11 +115,11 @@ const LearnerFaq = () => {
         aria-controls="panel2a-content"
         id="panel2a-header"
       >
-        <Typography>What if I don't like the course and want to drop out?</Typography>
+        <Typography variant='subtitle1'>What if I don't like the course and want to drop out?</Typography>
       </AccordionSummary>
 
       <AccordionDetails>
-        <Typography>
+        <Typography variant='subtitle2'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
           malesuada lacus ex, sit amet blandit leo lobortis eget.
         </Typography>
@@ -125,11 +131,11 @@ const LearnerFaq = () => {
         aria-controls="panel2a-content"
         id="panel2a-header"
       >
-        <Typography>Who are the instructors?</Typography>
+        <Typography variant='subtitle1'>Who are the instructors?</Typography>
       </AccordionSummary>
 
       <AccordionDetails>
-        <Typography>
+        <Typography variant='subtitle2'>
           Classes happen fully online / remotely.Students will be provided with a video conferencing link with which classes can be accessed?
         </Typography>
       </AccordionDetails>

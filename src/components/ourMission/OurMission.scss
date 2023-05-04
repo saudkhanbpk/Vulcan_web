@@ -12,6 +12,7 @@
     background-size: cover;
     height: 460px;
     position: relative;
+    
 }
 .teacher_back::before{
     content: "";
@@ -20,7 +21,7 @@
     left: 0;
     width: 250px;
     height: 100%;
-   background:  linear-gradient(270deg, rgba(255, 255, 255, -0.7) 51%, rgba(255, 255, 255, 0.801558) 85%);
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0) 11%, rgba(255, 255, 255, 1.801558) 83%);
 }
 .ourmiss{
 position: relative;
@@ -33,6 +34,7 @@ font-style: normal;
 font-weight: 400;
 font-size: 40px;
 line-height: 51px;
+position: relative;
 }
 .connection{
     font-family: 'Inter';
@@ -70,10 +72,20 @@ font-weight: 700;
 font-size: 40px;
 line-height: 48px;
 }
-.cardssInfo{
+.cardssInfo{    
     border: 1px solid black;
     border-radius: 20px;
     padding: 30px 10px;
     height: 266px;
     width: 414px;
+
+}
+.sub-heading{
+    color: #0000FF !important;
+}
+
+@media screen and (max-width:1024px) {
+    .mission_heading{
+        z-index: 2;
+    }
 }
