@@ -15,9 +15,8 @@ const OurMission = () => {
               <p className="connection"> in any subject.</p>
             </div>
           </div>
-     
-         <div className="col-8 teacher_back" />
-        
+
+          <div className="col-8 teacher_back" />
         </div>
 
         <div className="row Bring_row">
@@ -47,28 +46,35 @@ const OurMission = () => {
         <div className="row mt-2 mb-2 align-center">
           <h2 className="text-center Learn mb-5">Vulcan Learning Platform</h2>
           <div className="col-md-4 col-sm-8 ">
-            <h3 className="h3 text-center  fs-2 sub-heading ">Univeral Access</h3>
+            <h3 className="h3 text-center  fs-2 sub-heading ">
+              Univeral Access
+            </h3>
             <div className="cardssInfo text-center">
               <p className="card_ptag fs-4 pt-2  text-start">
-                {" "}No GPA. No SAT. No assessment. No Application. Anyone can
-                enroll in a course on the Vulcan Learning platform. We won’t
-                turn our backs on learners.{" "}
+                {" "}
+                No GPA. No SAT. No assessment. No Application. Anyone can enroll
+                in a course on the Vulcan Learning platform. We won’t turn our
+                backs on learners.{" "}
               </p>
             </div>
           </div>
           <div className="col-md-4  col-sm-8">
-            <h3 className="text-center text-primary fs-2 sub-heading">Best Educators</h3>
+            <h3 className="text-center text-primary fs-2 sub-heading">
+              Best Educators
+            </h3>
             <div className="cardssInfo text-center">
               <p className="card_ptag fs-4 pt-2  text-start">
                 Our courses are taught by the top educators in a given field.
-                Educators  are vetted for demonstrated experience, skill, and
+                Educators are vetted for demonstrated experience, skill, and
                 character.{" "}
               </p>
             </div>
           </div>
 
           <div className="col-md-4  col-sm-8">
-            <h3 className="text-center text-primary fs-2 sub-heading">Personalized</h3>
+            <h3 className="text-center text-primary fs-2 sub-heading">
+              Personalized
+            </h3>
             <div className="cardssInfo text-center ">
               <p className="card_ptag fs-4 pt-2  text-start">
                 We offer a wide variety of courses with unique Educators,
@@ -78,7 +84,9 @@ const OurMission = () => {
             </div>
           </div>
 
-          <p className="text-decoration-underline fw-normal h3 pt-5 pb-5">Learn more about how the Vulcan Learning platform works</p>
+          <p className="text-decoration-underline fw-normal h3 pt-5 pb-5">
+            Learn more about how the Vulcan Learning platform works
+          </p>
         </div>
       </div>
     </div>

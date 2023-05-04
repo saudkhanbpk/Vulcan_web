@@ -5,6 +5,9 @@ const theme = createTheme({
     primary: {
       main: "#0000FF",
     },
+    common: {
+      main: "#000000", // replace with your custom white color value
+    },
   },
   typography: {
     // fontFamily: 'Inter, Arial',
@@ -16,12 +19,6 @@ const theme = createTheme({
       fontSize: "40px",
       fontWeight: 600,
       lineHeight: 1.2,
-      fontFamily: "'Audiowide', sans-serif",
-    },
-    h3: {
-      fontsize: "32px",
-      fontWeight: 500,
-      color: "#0000FF",
       fontFamily: "'Audiowide', sans-serif",
     },
     h5: {
