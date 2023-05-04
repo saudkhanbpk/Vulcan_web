@@ -1,6 +1,24 @@
 import React from "react";
 import "./OurMission.scss";
 import bringIm from "../../assets/images/bringimg.png";
+import { Avatar, Box, Divider, Grid, Paper, Typography } from "@mui/material";
+import styled from "styled-components";
+
+const Item = styled(Paper)(({ theme }) => ({
+  // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  // ...theme.typography.h1,
+  // padding: theme.spacing(1),
+  textAlign: 'start',
+  // color: theme.palette.text.secondary,
+  height: 266,
+  width: 414,
+  borderRadius: 20,
+  fontSize: 23,
+  padding: 20,
+  paddingTop: 40,
+  border: "1px solid black",
+
+}));
 
 const OurMission = () => {
   return (
@@ -9,84 +27,98 @@ const OurMission = () => {
         <div className="row ">
           <div className="col-4 linear_back">
             <div className="ourmiss">
-              <p className="mission_heading text-start">Our Mission</p>
-              <p className="connection">Connecting learners directly</p>
-              <p className="connection"> with subject matter experts -</p>
-              <p className="connection"> in any subject.</p>
+              <Typography variant="h1" color="primary">Our Mission</Typography>
+              <Box mt={5} mb={5} sx={{ zIndex: 10 }}>
+                <Typography sx={{ zIndex: 10 }} align="start" variant="body2">
+                  Connecting learners directly with subject matter experts - in any subject.
+                </Typography>
+              </Box>
             </div>
           </div>
 
           <div className="col-8 teacher_back" />
         </div>
 
-        <div className="row Bring_row">
-          <h2 className="text-center brigText mb-5">
-            Bringing Education into the 21st century
-          </h2>
-          <div className="col-md-6">
-            <div>
+        <Box m={6}>
+          <Typography align="center" >Bringing Education into the 21st century</Typography>
+        </Box>
+        <Grid container spacing={3}>
+
+          <Grid item xs={10} md={6}  >
+            <Box>
               <img src={bringIm} className="img-fluid brinaaimg" alt="" />
-            </div>
-          </div>
-          <div className="col-md-6">
-            <p className="bring-paratext mt-5">
-              Education is a core pillar of our society. But the current system
-              hasn’t been working for everyone. It’s been plagued with ever
-              rising costs, long timeframes, unsatisfactory outcomes, and high
-              barriers to entry.{" "}
-            </p>
-            <p className="bring-paratext mt-4">
-              We asked the question: What would an education system that works
-              for everyone look like? The Vulcan Learning platform was the
-              answer.
-            </p>
-          </div>
-        </div>
+            </Box>
+
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box p={3}>
+              <Typography align="start" variant="paragraph">
+                Education is a core pillar of our society. But the current system
+                hasn’t been working for everyone. It’s been plagued with ever
+                rising costs, long timeframes, unsatisfactory outcomes, and high
+                barriers to entry.
+              </Typography>
+              <Box mt={5}>
+                <Typography align="start" variant="paragraph">
+                  We asked the question: What would an education system that works
+                  for everyone look like? The Vulcan Learning platform was the
+                  answer.
+                </Typography>
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
 
         <div className="row mt-2 mb-2 align-center">
-          <h2 className="text-center Learn mb-5">Vulcan Learning Platform</h2>
-          <div className="col-md-4 col-sm-8 ">
-            <h3 className="h3 text-center  fs-2 sub-heading ">
-              Univeral Access
-            </h3>
-            <div className="cardssInfo text-center">
-              <p className="card_ptag fs-4 pt-2  text-start">
-                {" "}
+
+          <Box mt={10} mb={10}><Typography>Vulcan Learning Platform</Typography></Box>
+
+
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              <Typography variant="body4" color="primary.main">
+                Univeral Access
+              </Typography>
+              <Item>
+
                 No GPA. No SAT. No assessment. No Application. Anyone can enroll
                 in a course on the Vulcan Learning platform. We won’t turn our
-                backs on learners.{" "}
-              </p>
-            </div>
-          </div>
-          <div className="col-md-4  col-sm-8">
-            <h3 className="text-center text-primary fs-2 sub-heading">
-              Best Educators
-            </h3>
-            <div className="cardssInfo text-center">
-              <p className="card_ptag fs-4 pt-2  text-start">
+                backs on learners.
+
+              </Item>
+            </Grid>
+
+            <Grid item xs={12} md={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              <Typography variant="body4" color="primary.main">
+                Best Educators
+              </Typography>
+              <Item >
+
                 Our courses are taught by the top educators in a given field.
                 Educators are vetted for demonstrated experience, skill, and
-                character.{" "}
-              </p>
-            </div>
-          </div>
+                character.
 
-          <div className="col-md-4  col-sm-8">
-            <h3 className="text-center text-primary fs-2 sub-heading">
-              Personalized
-            </h3>
-            <div className="cardssInfo text-center ">
-              <p className="card_ptag fs-4 pt-2  text-start">
+              </Item>
+            </Grid>
+
+            <Grid item xs={12} md={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              <Typography variant="body4" color="primary.main" >
+                Personalized
+              </Typography>
+              <Item>
+
                 We offer a wide variety of courses with unique Educators,
                 subjects, and teaching styles. This allows learners to choose
-                the instructor, pace, and level that fits them best.{" "}
-              </p>
-            </div>
-          </div>
+                the instructor, pace, and level that fits them best.
 
-          <p className="text-decoration-underline fw-normal h3 pt-5 pb-5">
-            Learn more about how the Vulcan Learning platform works
-          </p>
+              </Item>
+            </Grid>
+
+          </Grid>
+
+          <Box mt={5} mb={5}>
+            <Typography sx={{ textDecoration: 'underline' }} variant="h4" align="center">Learn more about how the Vulcan Learning platform works</Typography>
+          </Box>
         </div>
       </div>
     </div>

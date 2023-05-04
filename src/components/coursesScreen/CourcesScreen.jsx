@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./CourcesScreen.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import { Grid, TextField, Typography, makeStyles } from "@mui/material";
+import { Grid, TextField, Typography } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 
