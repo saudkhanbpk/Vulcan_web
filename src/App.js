@@ -13,8 +13,8 @@ function App() {
     <div >
       <BrowserRouter>
         <Header />
-        {/* <Router /> */}
-        <EducatorFaq/>
+        <Router />
+        {/* <EducatorFaq/> */}
         <Footer />
       </BrowserRouter>
     </div>

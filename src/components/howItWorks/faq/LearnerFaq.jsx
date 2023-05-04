@@ -1,10 +1,16 @@
-import React from 'react'
+import * as React from 'react';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Box from '@mui/material/Box';
 
 const LearnerFaq = () => {
   return (
-    <div>
+    <Box  xs={{mx:8}}>
 
-<Typography variant="h1" component="h2">
+<Typography variant="h1" align='center' sx={{my:5}} component="h2">
   Learner FAQ
 </Typography>;
     <Accordion>
@@ -131,8 +137,8 @@ const LearnerFaq = () => {
     
 
     
-  </div>
+  </Box>
   )
 }
 
-export default LearnerFaq
+export default LearnerFaq;
