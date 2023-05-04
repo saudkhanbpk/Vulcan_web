@@ -34,6 +34,7 @@ font-style: normal;
 font-weight: 400;
 font-size: 40px;
 line-height: 51px;
+position: relative;
 }
 .connection{
     font-family: 'Inter';
@@ -71,7 +72,7 @@ font-weight: 700;
 font-size: 40px;
 line-height: 48px;
 }
-.cardssInfo{
+.cardssInfo{    
     border: 1px solid black;
     border-radius: 20px;
     padding: 30px 10px;
@@ -81,4 +82,10 @@ line-height: 48px;
 }
 .sub-heading{
     color: #0000FF !important;
+}
+
+@media screen and (max-width:1024px) {
+    .mission_heading{
+        z-index: 2;
+    }
 }

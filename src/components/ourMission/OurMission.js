@@ -9,7 +9,7 @@ const OurMission = () => {
         <div className="row ">
           <div className="col-4 linear_back">
             <div className="ourmiss">
-              <p className="mission_heading">Our Mission</p>
+              <p className="mission_heading text-start">Our Mission</p>
               <p className="connection">Connecting learners directly</p>
               <p className="connection"> with subject matter experts -</p>
               <p className="connection"> in any subject.</p>

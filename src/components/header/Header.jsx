@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <div>
       
-    <Navbar collapseOnSelect expand="lg" className="Header_nav" >
+    <Navbar collapseOnSelect expand="xlg" className="Header_nav" >
       <Container>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <img src={logo} className=" img-fluid logoImage" alt="" />
