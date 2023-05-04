@@ -17,18 +17,20 @@
 
         .header-icon-base{
                 height: 2px;
-                width: 40px;
+                width: 43px;
                 background-color: blue;
                 border: none;
                 margin: 20px 0;
+                opacity: 1;
+                
               }
-        .header-icon-base-grey{
-                height: 2px;
-                width: 40px;
-                background-color: grey;
-                border: none;
-                margin: 20px 0;
-              }
+        // .header-icon-base-grey{
+        //         height: 2px;
+        //         width: 44px;
+        //         background-color: grey;
+        //         border: none;
+        //         margin: 20px 0;
+        //       }
         .iconHeader-1{
           cursor: pointer;
           
@@ -46,6 +48,9 @@
     background-color: black;
     border: none;
     margin: 20px 0;
+    position: fixed;
+    opacity: 0.2 !important;
+   
   }
  
 
