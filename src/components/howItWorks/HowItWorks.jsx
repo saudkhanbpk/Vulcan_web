@@ -4,8 +4,20 @@ import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { Grid, Typography } from "@mui/material";
 import arrow from "../../assets/images/Arrow 3.png";
+import { useNavigate } from "react-router-dom";
 
 const HowItWorks = () => {
+  const navigate = useNavigate();
+
+  const navigateToEdu = () => {
+    // 👇️ navigate to /contacts
+    navigate('/educator-faq');
+  };
+  const navigateToLearn = () => {
+    // 👇️ navigate to /contacts
+    navigate('/learner-faq');
+  };
+
   return (
     <>
       <Grid container>
@@ -117,6 +129,7 @@ const HowItWorks = () => {
             <item>
               <Box mt={6} mb={9} justifyContent="center" display="flex">
                 <Button
+                onClick={navigateToLearn}
                   variant="contained"
                   size="small"
                   style={{ textTransform: "capitalize" }}
@@ -211,6 +224,7 @@ const HowItWorks = () => {
             <item>
               <Box mt={12} mb={10} justifyContent="center" display="flex">
                 <Button
+                onClick={navigateToEdu}
                   variant="contained"
                   size="small"
                   style={{ textTransform: "capitalize" }}
