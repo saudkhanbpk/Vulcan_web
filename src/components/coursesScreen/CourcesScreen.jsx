@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./CourcesScreen.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import { Grid, TextField, Typography } from "@mui/material";
+import { Grid, TextField, Typography, makeStyles } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -46,7 +46,7 @@ const CourcesScreen = () => {
             <Typography variant="h1" color="primary" align="center">
               Coming Soon
             </Typography>
-            ;
+
             <h4>
               We’re in the process of partnering with the <br /> best Educators
               to offer a wide variety of <br /> educational classes. Check back
@@ -76,7 +76,7 @@ const CourcesScreen = () => {
               >
                 <Box sx={style} className="">
                   <Grid className="  modal-heading" container spacing={2}>
-                    <Grid item xs={8} md={10}>
+                    <Grid item xs={10} md={10}>
                       <Typography
                         className="font-weight-bold ps-5 pe-5"
                         display="flex"
@@ -88,7 +88,7 @@ const CourcesScreen = () => {
                         Join Waitlist
                       </Typography>
                     </Grid>
-                    <Grid item xs={8} md={2} className="pt-4">
+                    <Grid item xs={2} md={2} className="pt-4">
                       <CloseIcon
                         className="cursor-pointer"
                         onClick={handleClose}
