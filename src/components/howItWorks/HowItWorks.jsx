@@ -2,7 +2,7 @@ import React from "react";
 import "./HowItWorks.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import { Grid, TextField, Typography, makeStyles } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import arrow from "../../assets/images/Arrow 3.png";
 
 const HowItWorks = () => {
@@ -39,7 +39,7 @@ const HowItWorks = () => {
                   variant="h1"
                   color="black"
                   align="center"
-                  ml={8}
+                  // ml={8}
                   mt={10}
                 >
                   Learner
@@ -134,7 +134,7 @@ const HowItWorks = () => {
                 variant="h1"
                 color="black"
                 align="center"
-                ml={8}
+                // ml={8}
                 mt={10}
               >
                 Educators
