@@ -4,7 +4,7 @@ import bringIm from "../../assets/images/bringimg.png";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import styled from "styled-components";
 
-const Item = styled(Paper)(({ theme }) => ({
+  const   Item = styled(Paper)(({ theme }) => ({
   // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   // ...theme.typography.h1,
   // padding: theme.spacing(1),
@@ -42,15 +42,15 @@ const OurMission = () => {
         <Box m={6}>
           <Typography align="center" >Bringing Education into the 21st century</Typography>
         </Box>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} sx={{pr: 10, pl:10}}>
 
-          <Grid item xs={12} sm={10} md={6} lg={4}   >
+          <Grid item xs={12} sm={10} md={6} lg={6}   >
             <Box>
               <img src={bringIm} className="img-fluid brinaaimg" alt="" />
             </Box>
 
           </Grid>
-          <Grid item xs={12} sm={10} md={6} lg={4} >
+          <Grid item xs={12} sm={10} md={6} lg={6} >
             <Box p={3}>
               <Typography align="start" variant="paragraph">
                 Education is a core pillar of our society. But the current system
@@ -126,3 +126,4 @@ const OurMission = () => {
 };
 
 export default OurMission;
+ 

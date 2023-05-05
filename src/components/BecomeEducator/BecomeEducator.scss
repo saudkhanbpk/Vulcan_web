@@ -6,7 +6,8 @@
     background-position: center;
     background-size: cover;
     display: flex;
-    justify-content: end;
+    flex-direction: column;
+    justify-content: start;
     align-items: center;
 }
 
