@@ -1,7 +1,7 @@
 import React from "react";
 import "./OurMission.scss";
 import bringIm from "../../assets/images/bringimg.png";
-import { Avatar, Box, Divider, Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid, Paper, Typography } from "@mui/material";
 import styled from "styled-components";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -44,13 +44,13 @@ const OurMission = () => {
         </Box>
         <Grid container spacing={3}>
 
-          <Grid item xs={10} md={6}  >
+          <Grid item xs={12} sm={10} md={6} lg={4}   >
             <Box>
               <img src={bringIm} className="img-fluid brinaaimg" alt="" />
             </Box>
 
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} sm={10} md={6} lg={4} >
             <Box p={3}>
               <Typography align="start" variant="paragraph">
                 Education is a core pillar of our society. But the current system
@@ -75,7 +75,7 @@ const OurMission = () => {
 
 
           <Grid container spacing={2}>
-            <Grid item xs={12} md={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <Grid item xs={12} sm={10} md={6} lg={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
               <Typography variant="body4" color="primary.main">
                 Univeral Access
               </Typography>
@@ -88,7 +88,7 @@ const OurMission = () => {
               </Item>
             </Grid>
 
-            <Grid item xs={12} md={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <Grid item xs={12} sm={10} md={6} lg={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
               <Typography variant="body4" color="primary.main">
                 Best Educators
               </Typography>
@@ -101,7 +101,7 @@ const OurMission = () => {
               </Item>
             </Grid>
 
-            <Grid item xs={12} md={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <Grid item xs={12} sm={10} md={6} lg={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
               <Typography variant="body4" color="primary.main" >
                 Personalized
               </Typography>

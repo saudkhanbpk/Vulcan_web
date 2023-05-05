@@ -1,7 +1,6 @@
 import React from "react";
 import "./Footer.scss";
 import footerlogo from "../../assets/images/footerlogo.png";
-import { AiOutlineTwitter } from "react-icons/ai";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
 const Footer = () => {
