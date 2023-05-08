@@ -1,18 +1,14 @@
 import React from "react";
 import "./OurMission.scss";
 import bringIm from "../../assets/images/bringimg.png";
-import { Box, Grid, Paper, Typography } from "@mui/material";
+import { Box, Divider, Grid, Paper, Typography } from "@mui/material";
 import styled from "styled-components";
 
-const Item = styled(Paper)(({ theme }) => ({
-  // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  // ...theme.typography.h1,
-  // padding: theme.spacing(1),
+  const   Item = styled(Paper)(({ theme }) => ({
   textAlign: 'start',
-  // color: theme.palette.text.secondary,
   height: 266,
   width: 414,
-  borderRadius: 20,
+  borderRadius: `${20} !important`,
   fontSize: 23,
   padding: 20,
   paddingTop: 40,
@@ -22,9 +18,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const OurMission = () => {
   return (
-    <div>
-      <div className="container-fluid">
-        <div className="row ">
+    <Box>
+      <div className=" row">
           <div className="col-4 linear_back">
             <div className="ourmiss">
               <Typography variant="h1" color="primary">Our Mission</Typography>
@@ -38,19 +33,18 @@ const OurMission = () => {
 
           <div className="col-8 teacher_back" />
         </div>
-
         <Box m={6}>
           <Typography align="center" >Bringing Education into the 21st century</Typography>
         </Box>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} sx={{pr: 10, pl:10, justifyContent:"center"}}>
 
-          <Grid item xs={12} sm={10} md={6} lg={4}   >
+          <Grid item xs={12} sm={10} md={6} lg={6}   >
             <Box>
               <img src={bringIm} className="img-fluid brinaaimg" alt="" />
             </Box>
 
           </Grid>
-          <Grid item xs={12} sm={10} md={6} lg={4} >
+          <Grid item xs={12} sm={10} md={6} lg={6} >
             <Box p={3}>
               <Typography align="start" variant="paragraph">
                 Education is a core pillar of our society. But the current system
@@ -69,12 +63,13 @@ const OurMission = () => {
           </Grid>
         </Grid>
 
-        <div className="row mt-2 mb-2 align-center">
-
+  
+ 
+  
           <Box mt={10} mb={10}><Typography>Vulcan Learning Platform</Typography></Box>
 
 
-          <Grid container spacing={2}>
+          <Grid container spacing={2} sx={{justifyContent:"center"}}>
             <Grid item xs={12} sm={10} md={6} lg={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
               <Typography variant="body4" color="primary.main">
                 Univeral Access
@@ -111,18 +106,20 @@ const OurMission = () => {
                 subjects, and teaching styles. This allows learners to choose
                 the instructor, pace, and level that fits them best.
 
+ 
               </Item>
             </Grid>
 
           </Grid>
 
+         
           <Box mt={5} mb={5}>
             <Typography sx={{ textDecoration: 'underline' }} variant="h4" align="center">Learn more about how the Vulcan Learning platform works</Typography>
           </Box>
-        </div>
-      </div>
-    </div>
+    
+    </Box>
   );
 };
 
 export default OurMission;
+ 

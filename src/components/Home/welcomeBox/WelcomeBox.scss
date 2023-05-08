@@ -24,13 +24,7 @@
                 opacity: 1;
                 
               }
-        // .header-icon-base-grey{
-        //         height: 2px;
-        //         width: 44px;
-        //         background-color: grey;
-        //         border: none;
-        //         margin: 20px 0;
-        //       }
+  
         .iconHeader-1{
           cursor: pointer;
           
@@ -48,7 +42,7 @@
     background-color: black;
     border: none;
     margin: 20px 0;
-    position: fixed;
+    position: relative !important;
     opacity: 0.2 !important;
    
   }
@@ -60,3 +54,76 @@
   .welcome-box h3{
     padding: 0.5rem;
   }
+   .divider  {
+    opacity:1;
+    border-color:"blue" !important;
+    height:"40px";
+    width:"2px"
+  }
+  .css-4v5sg7-MuiTypography-root{
+    font-weight: 400 !important;
+  }
+
+
+
+ 
+  
+//   @media screen and (max-width:600px) {
+//     .css-1d1cr65-MuiGrid-root {
+//       -webkit-flex-basis: 100%;
+//       -ms-flex-preferred-size: 100%;
+//       flex-basis: 20% !important;
+//       -webkit-box-flex: 0;
+//       -webkit-flex-grow: 0;
+//       -ms-flex-positive: 0;
+//       flex-grow: 0;
+//       max-width: 20% !important;
+//       display: flex;
+//       justify-content: end;
+//   }
+//   .css-1l076uc-MuiGrid-root {
+//     -webkit-flex-basis: 100%;
+//     -ms-flex-preferred-size: 100%;
+//     flex-basis: 73% !important;
+//     -webkit-box-flex: 0;
+//     -webkit-flex-grow: 0;
+//     -ms-flex-positive: 0;
+//     flex-grow: 0;
+//     max-width: 80% !important;
+//     display: flex;
+//     justify-content: space-between;
+//   }
+// }
+// @media screen and (max-width:900px) {
+//   .css-1d1cr65-MuiGrid-root {
+// -webkit-flex-basis: 100%;
+// -ms-flex-preferred-size: 100%;
+// flex-basis: 20% !important;
+// -webkit-box-flex: 0;
+// -webkit-flex-grow: 0;
+// -ms-flex-positive: 0;
+// flex-grow: 0;
+// max-width: 20% !important;
+// display: flex;
+// justify-content: end;
+// }
+// .css-1l076uc-MuiGrid-root {
+// -webkit-flex-basis: 100%;
+// -ms-flex-preferred-size: 100%;
+// flex-basis: 73% !important;
+// -webkit-box-flex: 0;
+// -webkit-flex-grow: 0;
+// -ms-flex-positive: 0;
+// flex-grow: 0;
+// max-width: 80% !important;
+// display: flex;
+// justify-content: start;
+// }
+// }
+
+// // xs: 0,
+// // sm: 600,
+// // md: 900,
+// // lg: 1200,
+// // xl: 1536,
+// // xxl: 1920,

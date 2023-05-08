@@ -42,6 +42,18 @@ const theme = createTheme({
       lineHeight: 1.2,
       fontFamily: "'Inter', sans-serif",
     },
+    subtitle1:{
+      fontSize: "24px",
+      fontWeight: 600,
+      lineHeight: 1.2,
+      fontFamily: "'Inter', sans-serif",
+    },
+    subtitle2:{
+      fontSize: "20px",
+      fontWeight: 0,
+      lineHeight: 1.2,
+      fontFamily: "'Inter', sans-serif",
+    },
     body1: {
       fontSize: "40px",
       fontWeight: 700,
@@ -67,6 +79,13 @@ const theme = createTheme({
         lineHeight: 1.2,
         fontFamily: "Inter",
     },
+    body5:{
+        fontSize: "18px",
+        fontWeight: 600,
+        color:"#00000",
+        lineHeight: "22px",
+        fontFamily: "Inter",
+    },
     paragraph:{
         fontSize: "22px"
     }
@@ -78,10 +97,23 @@ const theme = createTheme({
           borderRadius: "30px",
           border: "1px solid black",
           fontFamily: "Inter, sans-serif",
+        //   fontSize:20,
           fontWeight: 800,
         },
       },
     },
+    MuiDivider: {
+        styleOverrides: {
+          root: {
+           
+            borderColor:'#0000FF',
+            height: 1,
+            width: 50,
+            margin: '16px 0',
+            opacity: 1,
+          },
+        },
+      },
 
     // MuiCssBaseline: {
     //     styleOverrides: {
