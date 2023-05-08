@@ -191,7 +191,7 @@ const HowItWorks = () => {
                 <Box ml={8}>
                   Meet all the requirements and submit your course <br />
                   for review. We will review your course application <br />
-                  thoroughly and get back to you with a decision.{" "}
+                  thoroughly and get back to you with a decision.
                 </Box>
               </Typography>
               <Box justifyContent="center" display="flex" mt={5} mb={5}>
@@ -236,72 +236,6 @@ const HowItWorks = () => {
           </Grid>
         </Grid>
       </Grid>
-
-      {/* <div className="container-fluid">
-        <div className="row">
-          <div className="col-6 how">
-            <h2>How the Vulcan Learning platform works</h2>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-6 our">
-            <p className="text-start">
-              Our service connects Learners with Educators offering live
-              educational <br /> classes on a wide range of subjects. Here's how
-              it works:
-            </p>
-          </div>
-        </div>
-        <div className="row learn">
-          <div className="col-6 border-end">
-            <h2 className="text-center learner">Learners</h2>
-            <h5 className="find">1. Find a course</h5>
-            <p className="e text-start">
-              Explore our courses and pick one you want to take.
-            </p>
-          </div>
-          <div className="col-6 ">
-            <h2 className="text-center learner">Educators</h2>
-            <h5 className="find">1. Create your course</h5>
-            <p className="e text-start">
-              Set up an Educator account and create the course <br />
-              that you want to offer.
-            </p>
-          </div>
-          <div className="col-6 border-end">
-            <h5 className="find">2. Decide if it's right for you</h5>
-            <p className="e text-start">
-              Check the course curriculum, class schedule, <br /> instructor
-              profile, and learner reviews to verify that <br /> the course is
-              the right it for you.
-            </p>
-          </div>
-          <div className="col-6 ">
-            <h5 className="find">2. Submit for approval</h5>
-            <p className="e text-start">
-              Meet all the requirements and submit your course <br />
-              for review. We will review your course application <br />
-              thoroughly and get back to you with a decision.
-            </p>
-          </div>
-          <div className="col-6 border-end">
-            <h5 className="find">3. Complete Enrollment </h5>
-            <p className="e text-start">
-              Choose among the available class schedules, and <br /> click on
-              enroll. No application required. All you <br /> need to complete
-              enrollment is successfully <br />
-              checkout.
-            </p>
-          </div>
-          <div className="col-6 ">
-            <h5 className="find">3. Make your courses available</h5>
-            <p className="e text-start">
-              Finalize the class schedule and curriculum, pick <br />
-              the start date, and publish your course.
-            </p>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 };

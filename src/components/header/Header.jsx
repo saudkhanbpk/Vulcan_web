@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import  logo  from "../../assets/images/Logo.png";
 import Button from '@mui/material/Button';
-import {BrowserRouter, Link } from 'react-router-dom';
+import {Link } from 'react-router-dom';
 
 
 const Header = () => {

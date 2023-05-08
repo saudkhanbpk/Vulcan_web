@@ -8,7 +8,15 @@ import Box from '@mui/material/Box';
 
 const EducatorFaq = () => {
   return (
-    <Box sx={{mx:30,}} >
+    <Box sx={{
+      mx: {
+        xs: 5,
+        sm: 10,
+        md: 20,
+        lg: 30,
+      },
+      mb:30,
+    }} >
 <Typography variant="h1" align='center' sx={{my:5}}  component="h2">
   Educator FAQ
 </Typography>;
@@ -53,6 +61,12 @@ const EducatorFaq = () => {
       >
         <Typography variant='subtitle1' align='left'>How much is tuition?</Typography>
       </AccordionSummary>
+      <AccordionDetails>
+        <Typography variant='subtitle2'>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+          malesuada lacus ex, sit amet blandit leo lobortis eget.
+        </Typography>
+      </AccordionDetails>
     </Accordion>
 
     <Accordion>

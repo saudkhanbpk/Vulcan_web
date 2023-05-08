@@ -9,22 +9,17 @@ import styled from "styled-components";
 import { mainFont } from "../../theme/FontFamily";
 
 
-const   Item = styled(Paper)(({ theme }) => ({
-  // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  // ...theme.typography.h1,
-  // padding: theme.spacing(1),
+const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'start',
-  // color: theme.palette.text.secondary,
   height: 294,
   width: 586,
-  borderRadius: 20,
+  borderRadius: `${20} !important`,
   fontSize: 23,
   padding: 40,
   paddingTop: 40,
- 
   display: "flex",
-  flexDirection:"column",
-  justifyContent:"space-evenly"
+  flexDirection: "column",
+  justifyContent: "space-evenly"
 
 
 }));
@@ -34,45 +29,39 @@ const BecomeEducator = () => {
     <div className="container-fluid">
       <div className="row">
         <section className="bg-img">
-         
-            
-            <Box>
-            <Grid item  sx={{ pt:8, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              
-             
+          <Box>
+            <Grid item sx={{ pt: 8, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <Item  >
-              <Typography variant="h1" sx={{fontFamily:`${mainFont} !important`, fontWeight:"bold"}}>
-              Teach Live Classes Online
-              </Typography>
-               <Typography variant="body2" align="start" sx={{fontWeight:"bold", pt:2}} >
-               Become an Educator on the Vulcan Platform. Enrich lives. Earn income.
-               </Typography>
-               <Box xs={12} sm={8} display="flex" justifyContent="space-around" sx={{pt:5}} >
-                <Button
-                  variant="contained"
-                  sx={{ textTransform: "capitalize",  }}
-                >
-                  Get Started
-                </Button>
-               
-                <Button
-                  variant="contained"
-                  style={{ textTransform: "capitalize" }}
-                >
-                  Learn More
-                </Button>
-              </Box>
-              
-
+                <Typography variant="h1" sx={{ fontFamily: `${mainFont} !important`, fontWeight: "bold" }}>
+                  Teach Live Classes Online
+                </Typography>
+                <Typography variant="body2" align="start" sx={{ fontWeight: "bold", pt: 2 }} >
+                  Become an Educator on the Vulcan Platform. Enrich lives. Earn income.
+                </Typography>
+                <Box xs={12} sm={8} display="flex" justifyContent="space-around" sx={{ pt: 5 }} >
+                  <Button
+                    variant="contained"
+                    sx={{ textTransform: "capitalize", }}
+                  >
+                    Get Started
+                  </Button>
+                  <Button
+                    variant="contained"
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    Learn More
+                  </Button>
+                </Box>
               </Item>
-          
-          
             </Grid>
-            </Box>
+          </Box>
         </section>
         <section className=" ">
           <p className="h3 p-5 text-start fw-bold">
             Why teach on the Vulcan Learning platform?
+            <Typography>
+            {/* Why teach on the Vulcan Learning platform? */}
+            </Typography>
           </p>
           <div className="row">
             <div className="col-md-4 p-5">
