@@ -18,7 +18,7 @@ const Footer = () => {
     <div>
       <footer className={classes.myDiv}>
         <Grid container spcing={3}>
-          <Grid item xs={12} sm={12} md={4} lg={6}>
+          <Grid item xs={12} sm={12} md={12} lg={6}>
             <Box sx={{ pt: 1, pb: 0, pl: 1, display: "flex" }}>
               <img
                 src={footerlogo}
@@ -50,7 +50,7 @@ const Footer = () => {
             </Typography>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4} lg={5} mt={3}>
+          <Grid item xs={10} sm={6} md={6} lg={5} mt={3}>
             <Typography
               variant="h6"
               sx={{ margin: "10px", display: "inline-block" }}
@@ -70,11 +70,11 @@ const Footer = () => {
               Contact
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={1}>
+          <Grid item xs={2} sm={6} md={6} lg={1}>
             <Typography
               variant="h4"
               sx={{
-                margin: "15px",
+                marginTop: "21px",
                 justifyContent: "center",
                 display: "flex",
                 backgroundColor: "white",
@@ -83,7 +83,7 @@ const Footer = () => {
                 padding: "10px",
                 color: "blue",
                 borderRadius: "10px",
-                marginLeft: "60px",
+                marginLeft: { lg: "60px", xs: "10px" },
               }}
             >
               <TwitterIcon fontSize="large" className="twticon" />
