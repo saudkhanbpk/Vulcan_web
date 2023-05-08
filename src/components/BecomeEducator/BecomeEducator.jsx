@@ -15,8 +15,6 @@ const handleClick = () => {
 const BecomeEducator = () => {
   return (
     <>
-      {/* // <div className="container-fluid"> */}
-      {/* <div className="row"> */}
       <section className="bg-img">
         <Grid
           lg={6}
@@ -234,9 +232,6 @@ const BecomeEducator = () => {
           </Box>
         </Grid>
       </Grid>
-
-      {/* // </div> */}
-      {/* // </div> */}
     </>
   );
 };
