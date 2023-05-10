@@ -5,14 +5,15 @@ import { Button, Grid, Typography } from "@mui/material";
 import MoneyIcon from "../../assets/images/moneyIcon.png";
 import SharingIcon from "../../assets/images/sharingIcon.png";
 import TeachIcon from "../../assets/images/teachIcon.png";
-import Learn from "../../assets/images/learn.png";
-import TeachBlack from "../../assets/images/teachBlack.png";
+import { useNavigate } from "react-router-dom";
 
-const handleClick = () => {
-  console.log("clicked");
-};
-
+ 
 const BecomeEducator = () => {
+  const navigate = useNavigate();
+
+  const navigateToEdu = () => {
+    navigate('/educator-faq');
+  };
   return (
     <>
       <section className="bg-img">
@@ -26,6 +27,9 @@ const BecomeEducator = () => {
             backgroundColor: "rgba(255, 255, 255, 0.8)",
             marginTop: -18,
             position: "absolute",
+            pl:3,
+            pr:3,
+            
           }}
         >
           <Box>
@@ -36,18 +40,20 @@ const BecomeEducator = () => {
                 justifyContent: "center",
                 fontWeight: 700,
                 lineHeight: "48px",
-                display: "flex",
-                alignItems: "center",
-                textAlign: "center",
+                
+               
               }}
             >
               Teach Live Classes Online
             </Typography>
             <Typography
+            align=""
               sx={{
                 fontSize: { lg: "26px", sm: "24px", xs: "18px" },
                 fontWeight: 600,
                 marginTop: "30px",
+             
+                
               }}
             >
               Become an Educator on the Vulcan <br />
@@ -226,7 +232,7 @@ const BecomeEducator = () => {
         </Grid>
         <Grid lg="12" xs={12}>
           <Box display="flex" justifyContent="center" mt={10} mb={10}>
-            <Button variant="contained" style={{ textTransform: "capitalize" }}>
+            <Button onClick={navigateToEdu} variant="contained" style={{ textTransform: "capitalize" }}>
               Educator FAQ
             </Button>
           </Box>

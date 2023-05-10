@@ -2,21 +2,18 @@ import React from "react";
 import "./Footer.scss";
 import footerlogo from "../../assets/images/footerlogo.png";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import { Container, Grid, Typography, Box } from "@mui/material";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Typography, Box } from "@mui/material";
 
-const useStyles = makeStyles({
-  myDiv: {
-    backgroundColor: "blue", // set the background color here
-    padding: "20px",
-    color: "white",
-  },
-});
+ 
 const Footer = () => {
-  const classes = useStyles();
+
   return (
-    <div>
-      <footer className={classes.myDiv}>
+    <>
+      <Box sx={{
+        backgroundColor: "blue", // set the background color here
+        padding: "20px",
+        color: "white",
+      }}>
         <Grid container spcing={3}>
           <Grid item xs={12} sm={12} md={12} lg={6}>
             <Box sx={{ pt: 1, pb: 0, pl: 1, display: "flex" }}>
@@ -50,7 +47,7 @@ const Footer = () => {
             </Typography>
           </Grid>
 
-          <Grid item xs={10} sm={6} md={6} lg={5} mt={3}>
+          <Grid item xs={10} sm={11} md={11} lg={5} mt={2}>
             <Typography
               variant="h6"
               sx={{ margin: "10px", display: "inline-block" }}
@@ -70,7 +67,7 @@ const Footer = () => {
               Contact
             </Typography>
           </Grid>
-          <Grid item xs={2} sm={6} md={6} lg={1}>
+          <Grid item xs={2} sm={1} md={1} lg={1}>
             <Typography
               variant="h4"
               sx={{
@@ -90,8 +87,8 @@ const Footer = () => {
             </Typography>
           </Grid>
         </Grid>
-      </footer>
-    </div>
+      </Box>
+    </>
   );
 };
 

@@ -35,7 +35,7 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
     height: 600,
     width: 500,
-    borderRadius: `${20} !important`,
+    // borderRadius: `${20} !important`,
     fontSize: 16,
     padding: 30,
     paddingTop: 30,
@@ -66,10 +66,10 @@ const WelcomeBox = () => {
   return (
     <>
       <Grid container item sx={styles}>
-        <Item >
+        <Item sx={{borderRadius:'20px'}}>
           <Grid sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
             <Grid onClick={handleClick}>
-              {isClicked ? <CastForEducationIcon style={{ color: 'blue' }} /> : <CastForEducationIcon />}
+              {isClicked ? <CastForEducationIcon sx={{fontSize:"3.1875rem",color: 'blue'}} /> : <CastForEducationIcon sx={{fontSize:"3.1875rem"}}/>}
               <Box>
                 <Typography variant='body5'>Teach</Typography>
                 {isClicked ?
@@ -82,7 +82,7 @@ const WelcomeBox = () => {
             <Divider sx={dividerStyle} />
 
             <Grid onClick={handleClick}>
-              {isClicked ? <LocalLibraryIcon /> : <LocalLibraryIcon style={{ color: 'blue' }} />}
+              {isClicked ? <LocalLibraryIcon sx={{fontSize:"3.1875rem"}}/> : <LocalLibraryIcon  sx={{fontSize:"3.1875rem", color: 'blue'}}/>}
               <Box  >
                 <Typography variant='body5'>Learn</Typography>
                 {

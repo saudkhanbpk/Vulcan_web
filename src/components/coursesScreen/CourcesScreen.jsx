@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "./CourcesScreen.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import { Grid, TextField, Typography, makeStyles } from "@mui/material";
+import { Grid, TextField, Typography } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
+import { mainFont, specialFont } from "../../theme/FontFamily";
+ 
 
 const style = {
   position: "absolute",
@@ -32,6 +34,7 @@ const style = {
   p: 4,
 };
 
+
 const CourcesScreen = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -42,20 +45,19 @@ const CourcesScreen = () => {
       <div className="row">
         <div className="col-12 courses-bg-img">
           <div className="coming-soon">
-            {/* <h1>Coming Soon</h1> */}
-            <Typography variant="h1" color="primary" align="center">
+            
+            <Box>
+            <Typography  color="primary" align="center"  sx={{ fontWeight:'400', fontSize:'40px', fontFamily:`${specialFont}`, pb:8}}>
               Coming Soon
             </Typography>
-
-            <h4>
-              We’re in the process of partnering with the <br /> best Educators
-              to offer a wide variety of <br /> educational classes. Check back
+            <Typography variant="h5" align="center" sx={{pr:5, pl:5, fontWeight:'bold', fontSize:'24px',pb:5}}>
+            We’re in the process of partnering with the  best Educators
+              to offer a wide variety of  educational classes. Check back
               soon.
-            </h4>
-            <p>
-              Join the waitlist to be notified when new <br /> courses are
-              available.
-            </p>
+            </Typography>
+            <Typography  align="center" sx={{pr:5, pl:5, fontWeight:'400', fontSize:'20px', pb:3}}>  Join the waitlist to be notified when new  courses are
+              available</Typography>
+          </Box>
             <Box display="flex" justifyContent="center">
               <Button
                 onClick={handleOpen}
@@ -65,7 +67,7 @@ const CourcesScreen = () => {
                 Join Waitlist
               </Button>
             </Box>
-            <div className="modal">
+            {/* <div className="modal"> */}
               <Modal
                 justifyContent="center"
                 keepMounted
@@ -74,7 +76,7 @@ const CourcesScreen = () => {
                 aria-labelledby="keep-mounted-modal-title"
                 aria-describedby="keep-mounted-modal-description"
               >
-                <Box sx={style} className="">
+                <Box sx={style} >
                   <Grid className="  modal-heading" container spacing={2}>
                     <Grid item xs={10} md={10}>
                       <Typography
@@ -82,8 +84,9 @@ const CourcesScreen = () => {
                         display="flex"
                         justifyContent="center"
                         id="keep-mounted-modal-title"
-                        variant="h6"
+                        variant="h5"
                         component="h2"
+                        sx={{fontFamily: `${mainFont} !important`, paddingRight:"10px", fontWeight:"600 !important"}}
                       >
                         Join Waitlist
                       </Typography>
@@ -134,9 +137,11 @@ const CourcesScreen = () => {
               </Modal>
             </div>
           </div>
+
+          
         </div>
       </div>
-    </div>
+    // </div>
   );
 };
 

@@ -13,7 +13,7 @@ const Header = () => {
     <div>
       
     <Navbar collapseOnSelect expand="lg" className="Header_nav" >
-      <Container>
+      <Container className='navbar___Header'>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <img src={logo} className=" img-fluid logoImage" alt="" />
           <h4 className="VulLogo">Vulcan</h4>
@@ -28,8 +28,7 @@ const Header = () => {
           </Nav>
           <Nav>
             <Nav.Link as={Link} to="/become-educator" className="nav_liddd me-4">Become an Educator</Nav.Link>
-           
-           <div className="mt-1">
+           <div className="">
             <Button variant="outlined" size="small" color="common" className="me-4" >Log In </Button>
             <Button variant="contained" size="small" className="me-1">Sign Up</Button>
             </div>

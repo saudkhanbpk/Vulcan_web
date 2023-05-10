@@ -6,12 +6,9 @@ import { Box } from '@mui/material';
 const HomeScreen = () => {
   return (
     <Box sx={{
-      height: {
-        xs: "150vh",
-      }
-    }} className='home'>
-
-       
+      height: {xs: "150vh"}
+    }}
+     className='home'>
       <WelcomeBox  />
      
     </Box>

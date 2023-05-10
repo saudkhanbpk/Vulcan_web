@@ -12,6 +12,7 @@
     background-size: cover;
     height: 460px;
     position: relative;
+    z-index: -1;
     
 }
 .teacher_back::before{
@@ -100,4 +101,18 @@ line-height: 48px;
 }
 .css-1p9lkro-MuiTypography-root{
     position: relative;
+}
+@media only screen and(min-width: 200px) and(max-width: 768px) {
+    .teacher_back{
+        display: none;
+    }
+    .linear_back{
+        background-image: url(../../assets/images/teacher.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 460px;
+    }
+    .ourmiss{
+        left: 5%;
+    }
 }

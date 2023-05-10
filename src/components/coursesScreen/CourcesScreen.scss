@@ -13,19 +13,21 @@
   margin-right: 40px;
   width: 500px;
   height: 500px;
+  .coming-soon h4 {
+    font-family: "Inter";
+    margin-top: 50px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .coming-soon p {
+    margin-top: 50px;
+  
+    text-align: center;
+  }
 }
 
-.coming-soon h4 {
-  font-family: "Inter";
-  margin-top: 50px;
-  font-weight: 700;
-  text-align: center;
-}
-.coming-soon p {
-  margin-top: 50px;
 
-  text-align: center;
-}
+
 .css-1jwukhy {
   background: white;
   top: 441px !important;
@@ -37,24 +39,9 @@
   justify-content: end;
 }
 
-.btn-width {
-  width: 20px;
-}
-.modal-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.modal-header-text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.modal-header-icon-div {
-  display: flex;
-  align-items: center;
-  justify-content: end;
-}
+ 
+ 
+ 
 .css-i4bv87-MuiSvgIcon-root {
   cursor: pointer !important;
   height: 2.5rem !important;

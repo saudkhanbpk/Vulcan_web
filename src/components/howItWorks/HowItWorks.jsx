@@ -42,10 +42,12 @@ const HowItWorks = () => {
           </item>
         </Grid>
       </Grid>
+
+    
       <Grid container>
-        <Grid lg={6}>
-          <Box style={{ borderRight: "1px solid black", marginTop: "10px" }}>
-            <Grid lg={12}>
+        <Grid lg={6} md={6} sm={12} justifyContent="center" alignItems="center">
+          <Box style={{  marginTop: "10px" }}>
+            <Grid lg={12} >
               <item>
                 <Typography
                   variant="h1"
@@ -140,7 +142,10 @@ const HowItWorks = () => {
             </item>
           </Grid>
         </Grid>
-        <Grid lg={6}>
+
+        {/* <Divider orientation="vertical"/> */}
+
+        <Grid lg={6}  md={6} sm={12} justifyContent="center" alignItems="center">
           <Grid lg={12}>
             <item>
               <Typography
