@@ -13,15 +13,16 @@ const BecomeEducator = () => {
   const navigateToEdu = () => {
     navigate('/educator-faq');
   };
+
   return (
     <>
       <section className="bg-img">
         <Grid
           lg={6}
           sx={{
-            marginRight: { lg: 45, md: 30, sm: 18, xs: 1.5 },
+            marginRight: { lg: 45, md: 30, sm: 18, xs: 2.3 },
             width: { lg: "586px", md: "520px", sm: "510px", xs: "350px" },
-            height: { lg: "294px", xs: "300px" },
+            height: { lg: "294px", xs: "350px" },
             borderRadius: "50px",
             backgroundColor: "rgba(255, 255, 255, 0.8)",
             marginTop: -18,
@@ -77,6 +78,10 @@ const BecomeEducator = () => {
           </Box>
         </Grid>
       </section>
+
+
+
+
       <Grid>
         <Box>
           <Typography

@@ -30,15 +30,6 @@ const theme = createTheme({
     myVariant: {
       fontsize: "6rem",
     },
-    // navbarLogo: {
-    //   color: "#0000FF",
-    //   fontFamily: "Audiowide",
-    //   fontStyle: "normal",
-    //   fontWeight: 400,
-    //   fontSize: "30px",
-    //   height: "40px",
-    //   lineHeight: "51px",
-    // },
     h1: {
       fontSize: "40px",
       fontWeight: 600,
@@ -121,17 +112,6 @@ const theme = createTheme({
         },
       },
     },
-
-    // MuiCssBaseline: {
-    //     styleOverrides: {
-    //         '@global': {
-
-    //             body: {
-    //                 fontFamily: 'Audiowide, sans-serif',
-    //             },
-    //         },
-    //     },
-    // },
   },
 });
 

@@ -28,7 +28,7 @@ const HowItWorks = () => {
     <>
       <Grid container sx={{alignContent:"center", alignItems:"center"}}>
         <Grid lg={12} xs={12}>
-          <Typography variant="body1" color="black" align="start" ml={8} mt={5}>
+          <Typography variant="body1" color="black" align="start" sx={{ml:{lg:8, xs:2}, mt:{lg:5, xs:4}, }} >
             How the Vulcan Learning platform works
           </Typography>
         </Grid>
@@ -38,8 +38,8 @@ const HowItWorks = () => {
               variant="body2"
               color="black"
               align="start"
-              ml={8}
-              mt={10}
+              
+              sx={{ml:{lg:8, xs:2}, mt:{lg:10, xs:4}, }}
             >
               Our service connects Learners with Educators offering live
               educational classes on a wide range of subjects. Here's how
@@ -51,8 +51,8 @@ const HowItWorks = () => {
 
 
       <Grid container direction="row" sx={{ display:"flex", justifyContent:"center", alignItems:"center"}}>
-        <Grid lg={5} md={5} sm={12}   direction="column" sx={{ display:"flex", justifyContent:"center", alignItems:"center"}}>
-          <Box sx={{ mt: "10px" }}>
+        <Grid lg={5} md={5} sm={12} xs={12}   direction="column" sx={{ display:"flex", justifyContent:"center", alignItems:"center", p:{xs:2}}}>
+          <Box>
             <Grid lg={12} >
               <Box>
                 <Typography
@@ -153,7 +153,7 @@ const HowItWorks = () => {
           </Box>
         </Grid>
 
-        <Grid lg={5} md={5} sm={12} direction="column" sx={{ display:"flex", justifyContent:"center", alignItems:"center"}} >
+        <Grid lg={5} md={5} sm={12} xs={12} direction="column" sx={{ display:"flex", justifyContent:"center", alignItems:"center", p:{xs:2}}} >
           <Grid lg={12}>
             <Box>
               <Typography
@@ -219,9 +219,6 @@ const HowItWorks = () => {
                 variant="h5"
                 color="primary"
                 align="start"
-              // ml={8}
-              // mt={5}
-              // mb={2}
               >
                 3. Make your courses available
               </Typography>

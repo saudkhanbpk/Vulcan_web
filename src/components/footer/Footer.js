@@ -50,26 +50,27 @@ const Footer = () => {
           <Grid item xs={10} sm={11} md={11} lg={5} mt={2}>
             <Typography
               variant="h6"
-              sx={{ margin: "10px", display: "inline-block" }}
+              sx={{ margin: "10px", display: "inline-block", cursor:"pointer" }}
             >
               Privacy
             </Typography>
             <Typography
               variant="h6"
-              sx={{ margin: "10px", display: "inline-block" }}
+              sx={{ margin: "10px", display: "inline-block", cursor:"pointer" }}
             >
               Policy
             </Typography>
             <Typography
               variant="h6"
-              sx={{ margin: "10px", display: "inline-block" }}
+              sx={{ margin: "10px", display: "inline-block", cursor:"pointer" }}
             >
               Contact
             </Typography>
           </Grid>
           <Grid item xs={2} sm={1} md={1} lg={1}>
-            <Typography
-              variant="h4"
+            
+           
+              <TwitterIcon fontSize="large" className="twticon" 
               sx={{
                 marginTop: "21px",
                 justifyContent: "center",
@@ -80,11 +81,10 @@ const Footer = () => {
                 padding: "10px",
                 color: "blue",
                 borderRadius: "10px",
+                cursor:"pointer",
                 marginLeft: { lg: "60px", xs: "10px" },
-              }}
-            >
-              <TwitterIcon fontSize="large" className="twticon" />
-            </Typography>
+              }}/>
+             
           </Grid>
         </Grid>
       </Box>
