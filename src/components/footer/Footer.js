@@ -2,7 +2,7 @@ import React from "react";
 import "./Footer.scss";
 import footerlogo from "../../assets/images/footerlogo.png";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import { Grid, Typography, Box } from "@mui/material";
+import { Grid, Typography, Box,   } from "@mui/material";
 
  
 const Footer = () => {
@@ -16,12 +16,15 @@ const Footer = () => {
       }}>
         <Grid container spcing={3}>
           <Grid item xs={12} sm={12} md={12} lg={6}>
-            <Box sx={{ pt: 1, pb: 0, pl: 1, display: "flex" }}>
-              <img
+            <Box sx={{ pt: 1, pb: 0, pl: 1, display: "flex",  }}>
+              <Box sx={{cursor:"pointer"}}>
+             <img
                 src={footerlogo}
                 // className="img-fluid footer_loggoo"
                 alt=""
-              />
+              /> 
+
+              </Box>
 
               <Typography
                 variant="h1"

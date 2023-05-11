@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./BecomeEducator.scss";
 import { Box } from "@mui/system";
 import { Button, Grid, Typography } from "@mui/material";
@@ -9,9 +9,14 @@ import { useNavigate } from "react-router-dom";
 
 const BecomeEducator = () => {
   const navigate = useNavigate();
+  const sectionRef = useRef(null);
 
   const navigateToEdu = () => {
     navigate('/educator-faq');
+  };
+
+  const scrollToSection = () => {
+    sectionRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -69,6 +74,7 @@ const BecomeEducator = () => {
               Get Started
             </Button>{" "}
             <Button
+              onClick={scrollToSection}
               variant="contained"
               size="small"
               style={{ textTransform: "capitalize" }}
@@ -82,39 +88,43 @@ const BecomeEducator = () => {
 
 
 
-      <Grid>
-        <Box>
+      <Grid >
+        <Box ref={sectionRef} sx={{ pt:"10px", pb:"10px",ml:"10px"}}>
           <Typography
             sx={{
               width: { lg: "900px" },
-              marginTop: "50px",
+              // marginTop: "50px",
               height: "44px",
               lineHeight: "44px",
               fontSize: "36px",
               fontWeight: 700,
-              textAlign: "center",
+              textAlign: "start",
+              
+             
             }}
           >
             Why teach on the Vulcan Learning platform?
           </Typography>
         </Box>
       </Grid>
-      <Grid container>
-        <Grid lg={4} sm={12} md={4} xs={12}>
+
+
+      <Grid container mt={8} sx={{ display:"flex", justifyContent:"start", alignItems:"start"}}>
+        <Grid lg={4} sm={12} md={4} xs={12} p={2} direction="column" sx={{ display:"flex", justifyContent:"center", alignItems:"center"}}>
           <Box
             sx={{
               width: "150px",
               height: "150px",
-              marginLeft: {
-                lg: "175px",
-                md: "100px",
-                sm: "330px",
-                xs: "100px",
-              },
-              marginTop: { lg: "50px", md: "50px", xs: "130px" },
+              // marginLeft: {
+              //   lg: "175px",
+              //   md: "100px",
+              //   sm: "330px",
+              //   xs: "100px",
+              // },
+              // marginTop: { lg: "50px", md: "50px", xs: "130px" },
               // position: "absolute",
-              display: "flex",
-              justifyContent: "center",
+              // display: "flex",
+              // justifyContent: "center",
             }}
           >
             <img src={MoneyIcon} alt="dollar" />
@@ -124,7 +134,7 @@ const BecomeEducator = () => {
               fontSize: "32px",
               fontWeight: 700,
               textAlign: "center",
-              marginLeft: { lg: "25px", xs: "10px" },
+              // marginLeft: { lg: "25px", xs: "10px" },
               marginTop: "40px",
             }}
           >
@@ -135,7 +145,7 @@ const BecomeEducator = () => {
               fontSize: "24px",
               fontWeight: 600,
               textAlign: "center",
-              marginLeft: { lg: "25px", xs: "15px" },
+              // marginLeft: { lg: "25px", xs: "15px" },
               marginTop: "25px",
             }}
           >
@@ -143,21 +153,21 @@ const BecomeEducator = () => {
             the Vulcan Learning platform you keep 100% of what you earn.
           </Typography>
         </Grid>
-        <Grid lg={4} sm={12} md={4} xs={12}>
+        <Grid lg={4} sm={12} md={4} xs={12} p={2} direction="column" sx={{ display:"flex", justifyContent:"center", alignItems:"center"}}> 
           <Box
             sx={{
               width: "150px",
               height: "150px",
-              marginLeft: {
-                lg: "175px",
-                md: "100px",
-                sm: "330px",
-                xs: "100px",
-              },
-              marginTop: "50px",
-              // position: "absolute",
-              display: "flex",
-              justifyContent: "center",
+              // marginLeft: {
+              //   lg: "175px",
+              //   md: "100px",
+              //   sm: "330px",
+              //   xs: "100px",
+              // },
+              // marginTop: "50px",
+              // // position: "absolute",
+              // display: "flex",
+              // justifyContent: "center",
             }}
           >
             <img src={SharingIcon} alt="" />
@@ -167,7 +177,7 @@ const BecomeEducator = () => {
               fontSize: "32px",
               fontWeight: 700,
               textAlign: "center",
-              marginLeft: { lg: "25px", xs: "15px" },
+              // marginLeft: { lg: "25px", xs: "15px" },
               marginTop: "40px",
             }}
           >
@@ -178,8 +188,9 @@ const BecomeEducator = () => {
               fontSize: "24px",
               fontWeight: 600,
               textAlign: "center",
-              marginLeft: { lg: "60px", xs: "15px" },
+              // marginLeft: { lg: "60px", xs: "15px" },
               marginTop: "25px",
+              
             }}
           >
             {" "}
@@ -187,21 +198,21 @@ const BecomeEducator = () => {
             gain new skills, and advance their careers.
           </Typography>
         </Grid>
-        <Grid lg={4} sm={12} md={4} xs={12}>
+        <Grid lg={4} sm={12} md={4} xs={12} p={2} direction="column" sx={{ display:"flex", justifyContent:"center", alignItems:"center"}}>
           <Box
             sx={{
               width: "150px",
               height: "150px",
-              marginLeft: {
-                lg: "175px",
-                md: "100px",
-                sm: "330px",
-                xs: "100px",
-              },
-              marginTop: "50px",
+              // marginLeft: {
+              //   lg: "175px",
+              //   md: "100px",
+              //   sm: "330px",
+              //   xs: "100px",
+              // },
+              // marginTop: "50px",
               // position: "absolute",
-              display: "flex",
-              justifyContent: "center",
+              // display: "flex",
+              // justifyContent: "center",
             }}
           >
             <img src={TeachIcon} alt="" />
@@ -222,7 +233,7 @@ const BecomeEducator = () => {
               fontSize: "24px",
               fontWeight: 600,
               textAlign: "center",
-              marginLeft: { lg: "60px", xs: "15px" },
+              // marginLeft: { lg: "60px", xs: "15px" },
               marginTop: "25px",
             }}
           >

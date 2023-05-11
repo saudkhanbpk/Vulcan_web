@@ -7,6 +7,8 @@ import { useState } from 'react';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import { Divider, Grid, Paper, Typography } from '@mui/material';
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
+import ModalComponent from '../../coursesScreen/modal/ModalComponent';
 
 
 const dividerStyle = {
@@ -16,7 +18,8 @@ const dividerStyle = {
   border: "none",
   margin: "20px 0",
   position: "relative !important",
-  opacity: "0.2 !important"
+  opacity: "0.2 !important",
+  mb:"15px"
 }
 const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
@@ -25,8 +28,9 @@ const Item = styled(Paper)(({ theme }) => ({
   borderRadius: `${20} !important`,
   fontSize: 23,
   padding: 40,
-  paddingTop: 40,
-  marginLeft: 40,
+  paddingTop: 20,
+  marginTop:40,
+  marginLeft: 180,
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-evenly",
@@ -49,26 +53,37 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 const WelcomeBox = () => {
-
+  const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setOpen(false);
   const [isClicked, setIsClicked] = useState(true); // Initial state is false
-
+  const navigate = useNavigate();
+  
+  const navigateToBecomeEdu = () => {
+    navigate('/become-educator');
+  };
+  const modalHandle=()=>{
+    setOpen(!open)
+  }
 
   const handleClick = () => {
     setIsClicked(!isClicked);
 
   }
   const styles = {
-    pt: 8,
+    // pt: 8,
     display: 'flex',
     justifyContent: 'start',
     alignItems: 'center',
   }
   return (
     <>
+    <ModalComponent open={open} setOpen={setOpen}/>
+
       <Grid container item sx={styles}>
         <Item sx={{borderRadius:'20px'}}>
           <Grid sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-            <Grid onClick={handleClick}>
+            <Grid onClick={handleClick} sx={{cursor:"pointer"}}>
               {isClicked ? <CastForEducationIcon sx={{fontSize:"3.1875rem",color: 'blue'}} /> : <CastForEducationIcon sx={{fontSize:"3.1875rem"}}/>}
               <Box>
                 <Typography variant='body5'>Teach</Typography>
@@ -79,9 +94,9 @@ const WelcomeBox = () => {
             </Grid>
 
 
-            <Divider sx={dividerStyle} />
+            <Divider sx={dividerStyle}   />
 
-            <Grid onClick={handleClick}>
+            <Grid onClick={handleClick}  sx={{cursor:"pointer"}}>
               {isClicked ? <LocalLibraryIcon sx={{fontSize:"3.1875rem"}}/> : <LocalLibraryIcon  sx={{fontSize:"3.1875rem", color: 'blue'}}/>}
               <Box  >
                 <Typography variant='body5'>Learn</Typography>
@@ -97,7 +112,7 @@ const WelcomeBox = () => {
               {/* fontWeight: 0, p: 2, */}
               <Typography variant="body2" sx={{
                 fontWeight: 0, 
-                p: 2, 
+                // p: 2, 
                 textAlign: "center", // default alignment
                 "@media (max-width: 300px)": {
                  textAlign: "left", // alignment for screen width less than or equal to 600px
@@ -105,22 +120,22 @@ const WelcomeBox = () => {
               }} >
                 Become an Educator <br /> on the Vulcan Platform
               </Typography>
-              <Typography variant="body5" sx={{ fontFamily: "Inter", fontWeight: "" }}>
+              <Typography variant="body5" sx={{ fontFamily: "Inter", fontWeight: "", pt:"12px" }}>
                 Teach live online classes on any subject matter of your expertise. Keep 100% of the earnings.
               </Typography>
             </>
               :
               <>
-                <Typography variant="body2" align=" " sx={{ fontWeight: " ", pt: 2 }} >
+                <Typography variant="body2" align=" " sx={{ fontWeight: " ", }} >
                   Enroll in a Course <br /> on the Vulcan Platform
                 </Typography>
-                <Typography variant="body3" sx={{ fontFamily: "Inter", fontWeight: "" }}>
+                <Typography variant="body5" sx={{ fontFamily: "Inter", fontWeight: "", pt:"12px" }}>
                   Learn directly from subject matter experts in live classes. Courses available soon.
                 </Typography>
               </>
           }
-          <Box display="flex" justifyContent="center">
-            <Button variant="contained" style={{ textTransform: 'capitalize', }}>
+          <Box display="flex" justifyContent="center" mt={6}>
+            <Button onClick={isClicked ? navigateToBecomeEdu : modalHandle} variant="contained" style={{ textTransform: 'capitalize', }}>
               {isClicked ? "Sign Up To Teach" : "Get on Waitlist"}
             </Button>
           </Box>

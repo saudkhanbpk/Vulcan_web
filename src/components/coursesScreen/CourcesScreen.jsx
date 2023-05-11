@@ -6,6 +6,7 @@ import { Grid, TextField, Typography } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 import { mainFont, specialFont } from "../../theme/FontFamily";
+import ModalComponent from "./modal/ModalComponent";
  
 
 const style = {
@@ -36,11 +37,17 @@ const style = {
 
 
 const CourcesScreen = () => {
+  
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  
+  const modalHandle=()=>{
+    setOpen(!open)
+  }
 
   return (
+    <>
+    <ModalComponent open={open} setOpen={setOpen}/>
+    
     <div className="container-fluid">
       <div className="row">
         <div className="col-12 courses-bg-img">
@@ -60,15 +67,17 @@ const CourcesScreen = () => {
           </Box>
             <Box display="flex" justifyContent="center">
               <Button
-                onClick={handleOpen}
+                onClick={modalHandle}
                 variant="contained"
                 style={{ textTransform: "capitalize" }}
               >
                 Join Waitlist
               </Button>
             </Box>
+
+
             {/* <div className="modal"> */}
-              <Modal
+              {/* <Modal
                 justifyContent="center"
                 keepMounted
                 open={open}
@@ -134,14 +143,15 @@ const CourcesScreen = () => {
                     </Button>
                   </Box>
                 </Box>
-              </Modal>
+              </Modal> */}
             </div>
           </div>
 
           
         </div>
       </div>
-    // </div>
+      </>
+    
   );
 };
 

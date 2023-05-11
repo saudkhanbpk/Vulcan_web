@@ -92,11 +92,12 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          fontSize:"20px",
+          // fontSize:"20px",
           borderRadius: "30px",
           border: "1px solid black",
           fontFamily: "Inter, sans-serif",
           fontWeight: 800,
+          height:"40px"
         },
       },
     },
