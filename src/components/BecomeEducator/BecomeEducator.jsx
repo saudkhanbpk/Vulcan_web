@@ -7,7 +7,6 @@ import SharingIcon from "../../assets/images/sharingIcon.png";
 import TeachIcon from "../../assets/images/teachIcon.png";
 import { useNavigate } from "react-router-dom";
 
- 
 const BecomeEducator = () => {
   const navigate = useNavigate();
 
@@ -27,9 +26,9 @@ const BecomeEducator = () => {
             backgroundColor: "rgba(255, 255, 255, 0.8)",
             marginTop: -18,
             position: "absolute",
-            pl:3,
-            pr:3,
-            
+            pl: 3,
+            pr: 3,
+
           }}
         >
           <Box>
@@ -40,20 +39,16 @@ const BecomeEducator = () => {
                 justifyContent: "center",
                 fontWeight: 700,
                 lineHeight: "48px",
-                
-               
               }}
             >
               Teach Live Classes Online
             </Typography>
             <Typography
-            align=""
+              align=""
               sx={{
                 fontSize: { lg: "26px", sm: "24px", xs: "18px" },
                 fontWeight: 600,
                 marginTop: "30px",
-             
-                
               }}
             >
               Become an Educator on the Vulcan <br />

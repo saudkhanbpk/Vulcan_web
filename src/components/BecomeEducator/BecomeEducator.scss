@@ -9,35 +9,6 @@
   justify-content: end;
   align-items: center;
 }
-
-// .img-div{
-//     height:150px;
-//     width: 150px;
-// }
-.teachLive {
-  height: 294px;
-  width: 586px;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 3rem;
-  border-radius: 50px;
-  position: absolute;
-  top: 7rem;
-  left: 20rem;
-  align-content: center;
-
-  .bottom {
-    display: flex;
-    justify-content: space-around;
-
-    .iconHeader-1 {
-      cursor: pointer;
-    }
-
-    .iconHeader-2 {
-      cursor: pointer;
-    }
-  }
-}
 .css-sghohy-MuiButtonBase-root-MuiButton-root {
   font-size: 2rem;
 }

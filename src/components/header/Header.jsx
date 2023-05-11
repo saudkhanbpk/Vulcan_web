@@ -10,7 +10,6 @@ import {Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <div>
       
     <Navbar collapseOnSelect expand="lg" className="Header_nav" >
       <Container className='navbar___Header'>
@@ -36,7 +35,6 @@ const Header = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    </div>
   )
 }
 

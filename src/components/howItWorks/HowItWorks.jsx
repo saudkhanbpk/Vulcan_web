@@ -2,11 +2,17 @@ import React from "react";
 import "./HowItWorks.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import { Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography, useMediaQuery } from "@mui/material";
 import arrow from "../../assets/images/Arrow 3.png";
 import { useNavigate } from "react-router-dom";
 
+
 const HowItWorks = () => {
+  function useScreenSize(breakpoint) {
+    return useMediaQuery(breakpoint);
+  }
+  const isSmallScreen = useScreenSize('(min-width:899px)');
+
   const navigate = useNavigate();
 
   const navigateToEdu = () => {
@@ -20,14 +26,14 @@ const HowItWorks = () => {
 
   return (
     <>
-      <Grid container>
+      <Grid container sx={{alignContent:"center", alignItems:"center"}}>
         <Grid lg={12} xs={12}>
           <Typography variant="body1" color="black" align="start" ml={8} mt={5}>
             How the Vulcan Learning platform works
           </Typography>
         </Grid>
         <Grid lg={9}>
-          <item>
+        
             <Typography
               variant="body2"
               color="black"
@@ -36,19 +42,19 @@ const HowItWorks = () => {
               mt={10}
             >
               Our service connects Learners with Educators offering live
-              educational <br /> classes on a wide range of subjects. Here's how
+              educational classes on a wide range of subjects. Here's how
               it works:
             </Typography>
-          </item>
+            
         </Grid>
       </Grid>
 
-    
-      <Grid container>
-        <Grid lg={6} md={6} sm={12} justifyContent="center" alignItems="center">
-          <Box style={{  marginTop: "10px" }}>
+
+      <Grid container direction="row" sx={{ display:"flex", justifyContent:"center", alignItems:"center"}}>
+        <Grid lg={5} md={5} sm={12}   direction="column" sx={{ display:"flex", justifyContent:"center", alignItems:"center"}}>
+          <Box sx={{ mt: "10px" }}>
             <Grid lg={12} >
-              <item>
+              <Box>
                 <Typography
                   variant="h1"
                   color="black"
@@ -62,76 +68,74 @@ const HowItWorks = () => {
                   variant="h5"
                   color="primary"
                   align="start"
-                  ml={8}
-                  mt={5}
-                  mb={2}
+                // ml={8}
+                // mt={5}
+                // mb={2}
+                mt={10}
                 >
                   1. Find a course
                 </Typography>
                 <Typography variant="body3" color="black" align="start">
-                  <Box ml={8}>
-                    {" "}
-                    Explore our courses and pick one you want to take.
-                  </Box>
+
+                  Explore our courses and pick one you want to take.
+
                 </Typography>
                 <Box justifyContent="center" display="flex" mt={8} mb={5}>
                   <img src={arrow} alt="arrow" />
                 </Box>
-              </item>
+              </Box>
             </Grid>
             <Grid lg={12}>
-              <item>
+              <Box>
                 <Typography
                   variant="h5"
                   color="primary"
                   align="start"
-                  ml={8}
-                  mt={5}
-                  mb={2}
+                // ml={8}
+                // mt={5}
+                // mb={2}
                 >
                   2. Decide if it's right for you
                 </Typography>
                 <Typography variant="body3" color="black" align="start">
-                  <Box ml={8}>
-                    Check the course curriculum, class schedule, <br />{" "}
-                    instructor profile, and learner reviews to verify that{" "}
-                    <br /> the course is the right it for you.
-                  </Box>
+
+                  Check the course curriculum, class schedule, <br />{" "}
+                  instructor profile, and learner reviews to verify that{" "}
+                  <br /> the course is the right it for you.
+
                 </Typography>
                 <Box justifyContent="center" display="flex" mt={5} mb={5}>
                   <img src={arrow} alt="arrow" />
                 </Box>
-              </item>
+              </Box>
             </Grid>{" "}
           </Box>
           <Grid lg={12}>
-            <item>
+            <Box>
               <Typography
                 variant="h5"
                 color="primary"
                 align="start"
-                ml={8}
-                mt={5}
-                mb={2}
+
               >
                 3. Complete Enrollment
               </Typography>
               <Typography variant="body3" color="black" align="start">
-                <Box ml={8}>
-                  Choose among the available class schedules, and <br /> click
-                  on enroll. No application required. All you <br /> need to
-                  complete enrollment is successfully <br />
-                  checkout.
-                </Box>
+
+                Choose among the available class schedules, and <br /> click
+                on enroll. No application required. All you <br /> need to
+                complete enrollment is successfully <br />
+                checkout.
+
               </Typography>
-            </item>
+            </Box>
           </Grid>
 
           <Grid lg={12}>
-            <item>
+            <Box>
               <Box mt={6} mb={9} justifyContent="center" display="flex">
                 <Button
-                onClick={navigateToLearn}
+                  onClick={navigateToLearn}
                   variant="contained"
                   size="small"
                   style={{ textTransform: "capitalize" }}
@@ -139,15 +143,19 @@ const HowItWorks = () => {
                   Learner FAQ
                 </Button>
               </Box>
-            </item>
+            </Box>
           </Grid>
         </Grid>
 
-        {/* <Divider orientation="vertical"/> */}
+        <Grid lg={1} md={1}  direction="column" sx={{ display:"flex", justifyContent:"start", alignItems:"center"}}>
+          <Box sx={{ pb: 15 }}>
+            {isSmallScreen && <Divider orientation="horizontal" sx={{ border: "1px solid grey", height: "600px", width: "1px", }} />}
+          </Box>
+        </Grid>
 
-        <Grid lg={6}  md={6} sm={12} justifyContent="center" alignItems="center">
+        <Grid lg={5} md={5} sm={12} direction="column" sx={{ display:"flex", justifyContent:"center", alignItems:"center"}} >
           <Grid lg={12}>
-            <item>
+            <Box>
               <Typography
                 variant="h1"
                 color="black"
@@ -161,75 +169,76 @@ const HowItWorks = () => {
                 variant="h5"
                 color="primary"
                 align="start"
-                ml={8}
-                mt={5}
-                mb={2}
+                mt={10}
+              // ml={8}
+              // mt={5}
+              // mb={2}
               >
                 1. Create your course
               </Typography>
               <Typography variant="body3" color="black" align="start">
-                <Box ml={8}>
-                  {" "}
-                  Set up an Educator account and create the course <br />
-                  that you want to offer.{" "}
-                </Box>
+
+
+                Set up an Educator account and create the course <br />
+                that you want to offer.{" "}
+
               </Typography>
               <Box justifyContent="center" display="flex" mt={5} mb={5}>
                 <img src={arrow} alt="arrow" />
               </Box>
-            </item>
+            </Box>
           </Grid>
           <Grid lg={12}>
-            <item>
+            <Box>
               <Typography
                 variant="h5"
                 color="primary"
                 align="start"
-                ml={8}
-                mt={5}
-                mb={2}
+              // ml={8}
+              // mt={5}
+              // mb={2}
               >
                 2. Submit for approval
               </Typography>
               <Typography variant="body3" color="black" align="start">
                 {" "}
-                <Box ml={8}>
-                  Meet all the requirements and submit your course <br />
-                  for review. We will review your course application <br />
-                  thoroughly and get back to you with a decision.
-                </Box>
+
+                Meet all the requirements and submit your course <br />
+                for review. We will review your course application <br />
+                thoroughly and get back to you with a decision.
+
               </Typography>
               <Box justifyContent="center" display="flex" mt={5} mb={5}>
                 <img src={arrow} alt="arrow" />
               </Box>
-            </item>
+            </Box>
           </Grid>
           <Grid lg={12}>
-            <item>
+            <Box>
               <Typography
                 variant="h5"
                 color="primary"
                 align="start"
-                ml={8}
-                mt={5}
-                mb={2}
+              // ml={8}
+              // mt={5}
+              // mb={2}
               >
                 3. Make your courses available
               </Typography>
               <Typography variant="body3" color="black" align="start">
                 {" "}
-                <Box ml={8}>
-                  Finalize the class schedule and curriculum, pick <br />
-                  the start date, and publish your course.{" "}
-                </Box>
+
+                Finalize the class schedule and curriculum, pick <br />
+                the start date, and publish your course.{" "}
+
               </Typography>
-            </item>
+            </Box>
           </Grid>
           <Grid lg={12}>
-            <item>
+            <Box>
               <Box mt={12} mb={10} justifyContent="center" display="flex">
                 <Button
-                onClick={navigateToEdu}
+                  onClick={navigateToEdu}
                   variant="contained"
                   size="small"
                   style={{ textTransform: "capitalize" }}
@@ -237,7 +246,7 @@ const HowItWorks = () => {
                   Educator FAQ
                 </Button>
               </Box>
-            </item>
+            </Box>
           </Grid>
         </Grid>
       </Grid>
