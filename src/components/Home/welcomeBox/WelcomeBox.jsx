@@ -11,16 +11,7 @@ import { useNavigate } from "react-router-dom";
 import ModalComponent from '../../coursesScreen/modal/ModalComponent';
 
 
-const dividerStyle = {
-  height: "40px",
-  width: "2px",
-  backgroundColor: "black",
-  border: "none",
-  margin: "20px 0",
-  position: "relative !important",
-  opacity: "0.2 !important",
-  mb:"15px"
-}
+
 const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   height: 421,
@@ -29,7 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
   fontSize: 23,
   padding: 40,
   paddingTop: 20,
-  marginTop:40,
+  marginTop: 40,
   marginLeft: 180,
   display: "flex",
   flexDirection: "column",
@@ -53,97 +44,116 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 const WelcomeBox = () => {
+
+  // state 
+
   const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
-  const [isClicked, setIsClicked] = useState(true); // Initial state is false
+  const [isClicked, setIsClicked] = useState(true);
+
+  //  navigation hook declear 
   const navigate = useNavigate();
-  
+
+
+  //  toggle handle func   
+  const handleButtonClick = (val) => {
+    if (val.value === 1) {
+      setIsClicked(true);
+    } else {
+      setIsClicked(false);
+    }
+  }
+
+  // navigation handle func  
   const navigateToBecomeEdu = () => {
     navigate('/become-educator');
   };
-  const modalHandle=()=>{
+  const modalHandle = () => {
     setOpen(!open)
   }
 
-  const handleClick = () => {
-    setIsClicked(!isClicked);
+  // style for comp 
+  const myStyles = {
+    mainGrid: {
+      display: 'flex',
+      justifyContent: 'start',
+      alignItems: 'center',
+    },
+    item:{ borderRadius: '20px' },
+    subGrid:{ cursor: "pointer" },
+    subGridIconClicked:{ fontSize: "3.1875rem", color: 'blue' },
+    subGridIconNotClicked:{ fontSize: "3.1875rem" },
+    dividerAfterClick:{ opacity: 1, color: "blue" },
+    dividerbeforeClick:{opacity:0},
 
-  }
-  const styles = {
-    // pt: 8,
-    display: 'flex',
-    justifyContent: 'start',
-    alignItems: 'center',
+    dividerStyle :{
+      height: "40px",
+      width: "2px",
+      backgroundColor: "black",
+      border: "none",
+      margin: "20px 0",
+      position: "relative !important",
+      opacity: "0.2 !important",
+      mb: "15px"
+    },
+    boxDescription:{ fontFamily: "Inter", pt: "12px" },
+    textCapitalize: { textTransform: "capitalize" },
+
+    
+
   }
   return (
     <>
-    <ModalComponent open={open} setOpen={setOpen}/>
-
-      <Grid container item sx={styles}>
-        <Item sx={{borderRadius:'20px'}}>
-          <Grid sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-            <Grid onClick={handleClick} sx={{cursor:"pointer"}}>
-              {isClicked ? <CastForEducationIcon sx={{fontSize:"3.1875rem",color: 'blue'}} /> : <CastForEducationIcon sx={{fontSize:"3.1875rem"}}/>}
+    <ModalComponent open={open} setOpen={setOpen} />
+      <Grid container item sx={myStyles.mainGrid}>
+        <Item sx={myStyles.item}>
+          <Grid display= 'flex' justifyContent= 'space-around'  alignItems= 'center'>
+            <Grid onClick={(e) => handleButtonClick({ value: 1 })} sx={myStyles.subGrid}>
+              {isClicked ? <CastForEducationIcon sx={myStyles.subGridIconClicked} /> : <CastForEducationIcon sx={myStyles.subGridIconNotClicked} />}
               <Box>
                 <Typography variant='body5'>Teach</Typography>
                 {isClicked ?
-                  <Divider sx={{ opacity: 1, color: "blue" }} />
-                  : <Divider sx={{ opacity: 0 }} />}
+                  <Divider sx={myStyles.dividerAfterClick} />
+                  : <Divider sx={myStyles.dividerbeforeClick}/>
+                }
               </Box>
             </Grid>
-
-
-            <Divider sx={dividerStyle}   />
-
-            <Grid onClick={handleClick}  sx={{cursor:"pointer"}}>
-              {isClicked ? <LocalLibraryIcon sx={{fontSize:"3.1875rem"}}/> : <LocalLibraryIcon  sx={{fontSize:"3.1875rem", color: 'blue'}}/>}
+            <Divider sx={myStyles.dividerStyle} />
+            <Grid onClick={(e) => handleButtonClick({ value: 2 })} sx={myStyles.subGrid}>
+              {isClicked ? <LocalLibraryIcon sx={myStyles.subGridIconNotClicked} /> : <LocalLibraryIcon sx={myStyles.subGridIconClicked} />}
               <Box  >
                 <Typography variant='body5'>Learn</Typography>
                 {
-                  isClicked ? <Divider sx={{ opacity: 0 }} /> :
-                    <Divider sx={{ opacity: 1, color: "blue" }} />
+                  isClicked ? <Divider sx={myStyles.dividerbeforeClick} /> :
+                    <Divider sx={myStyles.dividerAfterClick} />
                 }
               </Box>
             </Grid>
           </Grid>
           {
             isClicked ? <>
-              {/* fontWeight: 0, p: 2, */}
-              <Typography variant="body2" sx={{
-                fontWeight: 0, 
-                // p: 2, 
-                textAlign: "center", // default alignment
-                "@media (max-width: 300px)": {
-                 textAlign: "left", // alignment for screen width less than or equal to 600px
-                },
-              }} >
+              <Typography variant="body2"  >
                 Become an Educator <br /> on the Vulcan Platform
               </Typography>
-              <Typography variant="body5" sx={{ fontFamily: "Inter", fontWeight: "", pt:"12px" }}>
+              <Typography variant="body5" sx={myStyles.boxDescription}>
                 Teach live online classes on any subject matter of your expertise. Keep 100% of the earnings.
               </Typography>
             </>
               :
               <>
-                <Typography variant="body2" align=" " sx={{ fontWeight: " ", }} >
+                <Typography variant="body2"  >
                   Enroll in a Course <br /> on the Vulcan Platform
                 </Typography>
-                <Typography variant="body5" sx={{ fontFamily: "Inter", fontWeight: "", pt:"12px" }}>
+                <Typography variant="body5" sx={myStyles.boxDescription}>
                   Learn directly from subject matter experts in live classes. Courses available soon.
                 </Typography>
               </>
           }
           <Box display="flex" justifyContent="center" mt={6}>
-            <Button onClick={isClicked ? navigateToBecomeEdu : modalHandle} variant="contained" style={{ textTransform: 'capitalize', }}>
+            <Button onClick={isClicked ? navigateToBecomeEdu : modalHandle} variant="contained" sx={myStyles.textCapitalize}>
               {isClicked ? "Sign Up To Teach" : "Get on Waitlist"}
             </Button>
           </Box>
-
-
         </Item>
-
-
       </Grid>
     </>
   )

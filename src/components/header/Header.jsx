@@ -11,7 +11,7 @@ import {Link } from 'react-router-dom';
 const Header = () => {
   return (
       
-    <Navbar collapseOnSelect expand="lg" className="Header_nav" >
+    <Navbar collapseOnSelect  expand="lg" className="Header_nav sticky-top" >
       <Container className='navbar___Header'>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <img src={logo} className=" img-fluid logoImage" alt="" />

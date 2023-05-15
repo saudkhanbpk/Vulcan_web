@@ -1,19 +1,49 @@
-import React, { useState } from "react";
-import "../CourcesScreen.scss";
+import React from "react";
+import "../CoursesScreen.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import { Grid, TextField, Typography } from "@mui/material";
+import { Grid, TextField, Typography, } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
-import { mainFont, specialFont } from "../../../theme/FontFamily";
+import { mainFont } from "../../../theme/FontFamily";
 
-
-const ModalComponent = ({ open, setOpen }) => {
-    // const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
+// const useStyles = makeStyles({
+//     joinWaitListTypo: {
+//         fontSize: "32", fontFamily: `${mainFont} !important`, paddingRight: "10px", fontWeight: "bold !important"
+//     },
+// });
+const ModalComponent = ({ open, setOpen, coursesModal }) => {
     const handleClose = () => setOpen(false);
 
-    const style = {
+    const styleWelcomeBoxModal = {
+        position: "absolute",
+        top: {
+            xs: 100,
+            sm: 100,
+            lg: 100
+        },
+        left: {
+            sm: 40,
+            md: 100,
+            lg: 180,
+        },
+
+        width: {
+            lg: 500,
+        },
+        height: 421,
+        bgcolor: "white",
+        border: "1px solid #000",
+        borderRadius: "20px",
+        boxShadow: 24,
+        p: 4,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-around",
+        alignItems: "center"
+    };
+
+    const styleCoursesScreenModal = {
         position: "absolute",
         top: { xs: 370, sm: 325, md: 325, lg: 470 },
         left: {
@@ -39,6 +69,12 @@ const ModalComponent = ({ open, setOpen }) => {
         p: 4,
     };
 
+    // const classes = useStyles();
+
+    const myStyles ={
+        typoHeading:{ fontSize: "32", fontFamily: `${mainFont} !important`, paddingRight: "10px", fontWeight: "bold !important" },
+        input:{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" },
+    }
 
     return (
         <>
@@ -50,10 +86,10 @@ const ModalComponent = ({ open, setOpen }) => {
                 aria-labelledby="keep-mounted-modal-title"
                 aria-describedby="keep-mounted-modal-description"
             >
-                <Box sx={style} >
-                    <Grid container >
+                <Box sx={coursesModal ? styleCoursesScreenModal : styleWelcomeBoxModal} >
+                    <Grid container display="flex" justifyItems="center" alignItems="center" >
                         <Grid
-                            item
+
                             xs={10}
                             md={10}
                             display="flex"
@@ -66,14 +102,15 @@ const ModalComponent = ({ open, setOpen }) => {
                                 id="keep-mounted-modal-title"
                                 variant="h5"
                                 component="h2"
-                                sx={{ fontSize:"32", fontFamily: `${mainFont} !important`, paddingRight: "10px", fontWeight: "bold !important" }}
+                                // className={classes.joinWaitListTypo}
+                                sx={myStyles.typoHeading}
                             >
                                 Join Waitlist
                             </Typography>
                         </Grid>
-                        <Grid item  
-                            xs={2} 
-                            md={2} 
+                        <Grid
+                            xs={2}
+                            md={2}
                             display="flex"
                             justifyContent="center"
                             alignItems="center">
@@ -86,7 +123,8 @@ const ModalComponent = ({ open, setOpen }) => {
                     </Grid>
 
                     <Box
-                        className="d-flex  flex-column align-items-center justify-content-center"
+                        // className="d-flex  flex-column align-items-center justify-content-center"
+                        sx={myStyles.input}
                         component="form"
                         noValidate
                         autoComplete="off"

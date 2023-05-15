@@ -1,5 +1,4 @@
 import React from "react";
-import "./HowItWorks.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { Divider, Grid, Typography, useMediaQuery } from "@mui/material";
@@ -16,19 +15,29 @@ const HowItWorks = () => {
   const navigate = useNavigate();
 
   const navigateToEdu = () => {
-    // 👇️ navigate to /contacts
+    // 👇️ navigate to /educator-faq
     navigate('/educator-faq');
   };
   const navigateToLearn = () => {
-    // 👇️ navigate to /contacts
+    // 👇️ navigate to /learner-faq
     navigate('/learner-faq');
   };
 
+  const myStyles={
+    heading:{ml:{lg:8, xs:2}, mt:{lg:5, xs:4}, },
+    description:{ml:{lg:8, xs:2}, mt:{lg:10, xs:4}, },
+    divider:{ border: "1px solid grey", height: "600px", width: "1px", },
+    
+
+  
+  }
+  
+
   return (
     <>
-      <Grid container sx={{alignContent:"center", alignItems:"center"}}>
+      <Grid container alignContent="center" alignItems="center">
         <Grid lg={12} xs={12}>
-          <Typography variant="body1" color="black" align="start" sx={{ml:{lg:8, xs:2}, mt:{lg:5, xs:4}, }} >
+          <Typography variant="body1" color="black" align="start" sx={myStyles.heading} >
             How the Vulcan Learning platform works
           </Typography>
         </Grid>
@@ -39,7 +48,7 @@ const HowItWorks = () => {
               color="black"
               align="start"
               
-              sx={{ml:{lg:8, xs:2}, mt:{lg:10, xs:4}, }}
+              sx={myStyles.description}
             >
               Our service connects Learners with Educators offering live
               educational classes on a wide range of subjects. Here's how
@@ -50,8 +59,8 @@ const HowItWorks = () => {
       </Grid>
 
 
-      <Grid container direction="row" sx={{ display:"flex", justifyContent:"center", alignItems:"center"}}>
-        <Grid lg={5} md={5} sm={12} xs={12}   direction="column" sx={{ display:"flex", justifyContent:"center", alignItems:"center", p:{xs:2}}}>
+      <Grid container direction="row" display="flex" justifyContent="center" alignItems="center">
+        <Grid lg={5} md={5} sm={12} xs={12}   direction="column" display="flex" justifyContent="center" alignItems="center" sx={{p:{xs:2}}}>
           <Box>
             <Grid lg={12} >
               <Box>
@@ -147,13 +156,13 @@ const HowItWorks = () => {
           </Grid>
         </Grid>
 
-        <Grid lg={1} md={1}  direction="column" sx={{ display:"flex", justifyContent:"start", alignItems:"center"}}>
+        <Grid lg={1} md={1}  direction="column" display="flex" justifyContent="start" alignItems="center">
           <Box sx={{ pb: 15 }}>
-            {isSmallScreen && <Divider orientation="horizontal" sx={{ border: "1px solid grey", height: "600px", width: "1px", }} />}
+            {isSmallScreen && <Divider orientation="horizontal" sx={myStyles.divider} />}
           </Box>
         </Grid>
 
-        <Grid lg={5} md={5} sm={12} xs={12} direction="column" sx={{ display:"flex", justifyContent:"center", alignItems:"center", p:{xs:2}}} >
+        <Grid lg={5} md={5} sm={12} xs={12} direction="column"  display="flex" justifyContent="center" alignItems="center" sx={{p:{xs:2}}} >
           <Grid lg={12}>
             <Box>
               <Typography
@@ -170,14 +179,10 @@ const HowItWorks = () => {
                 color="primary"
                 align="start"
                 mt={10}
-              // ml={8}
-              // mt={5}
-              // mb={2}
               >
                 1. Create your course
               </Typography>
               <Typography variant="body3" color="black" align="start">
-
 
                 Set up an Educator account and create the course <br />
                 that you want to offer.{" "}
@@ -194,15 +199,11 @@ const HowItWorks = () => {
                 variant="h5"
                 color="primary"
                 align="start"
-              // ml={8}
-              // mt={5}
-              // mb={2}
               >
                 2. Submit for approval
               </Typography>
               <Typography variant="body3" color="black" align="start">
-                {" "}
-
+  
                 Meet all the requirements and submit your course <br />
                 for review. We will review your course application <br />
                 thoroughly and get back to you with a decision.

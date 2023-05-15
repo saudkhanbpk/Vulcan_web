@@ -9,6 +9,7 @@ import ScrollToTop from "./scroll/ScrollToTop";
 
  
 function App() {
+  
   return (
     <div>
       <BrowserRouter>
@@ -17,6 +18,7 @@ function App() {
         <Router />
         <Footer />
       </BrowserRouter>
+      
     </div>
   );
 }

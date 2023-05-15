@@ -4,10 +4,13 @@ import WelcomeBox from '../welcomeBox/WelcomeBox';
 import { Box } from '@mui/material';
 
 const HomeScreen = () => {
-  return (
-    <Box sx={{
+  const myStyles={
+    box:{
       height: {xs: "150vh"}
-    }}
+    }
+  }
+  return (
+    <Box sx={myStyles.box}
      className='home'>
       <WelcomeBox  />
      
