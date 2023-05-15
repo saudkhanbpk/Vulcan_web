@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
 import "./BecomeEducator.scss";
 import { Box } from "@mui/system";
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import MoneyIcon from "../../assets/images/moneyIcon.png";
 import SharingIcon from "../../assets/images/sharingIcon.png";
 import TeachIcon from "../../assets/images/teachIcon.png";
 import { useNavigate } from "react-router-dom";
+import Grid from "@mui/material/Unstable_Grid2";
 
 const BecomeEducator = () => {
   const navigate = useNavigate();
@@ -55,10 +56,10 @@ const BecomeEducator = () => {
       fontWeight: 700,
       textAlign: "start",
     },
-    Sec2MainGrid: { display: "flex", justifyContent: "start", alignItems: "start" },
-    Sec2SubGrid:{ display: "flex", justifyContent: "center", alignItems: "center" },
-    subGridImgBox:{ width: "150px", height: "150px", },
-    subgridTypoHeading:{ fontSize: "32px", fontWeight: 700, textAlign: "center", marginTop: "40px",},
+    // Sec2MainGrid: { display: "flex", justifyContent: "start", alignItems: "start" },
+    // Sec2SubGrid:{ display: "flex", justifyContent: "center", alignItems: "center" },
+    subGridImgBox: { width: "150px", height: "150px", },
+    subgridTypoHeading: { fontSize: "32px", fontWeight: 700, textAlign: "center", marginTop: "40px", },
     subgridTypoDescription: { fontSize: "24px", fontWeight: 600, textAlign: "center", marginTop: "25px", }
 
 
@@ -66,14 +67,14 @@ const BecomeEducator = () => {
 
   return (
     <>
-    {/* Section 1 */}
-      <section className="bg-img">
+      {/* Section 1 */}
+      <div className="bg-img">
         <Grid
-          // container
+          container
           lg={6}
           sx={myStyles.Sec1MainGrid}
         >
-          <Box>
+          <Grid>
             <Typography
               sx={myStyles.boxTypo}
             >
@@ -86,19 +87,20 @@ const BecomeEducator = () => {
               Become an Educator on the Vulcan
               Platform. Enrich lives. Earn income.
             </Typography>
-          </Box>
-          <Box
-            justifyContent={"space-evenly"}
-            display={"flex"}
-            marginTop={"30px"}
-          >
+          </Grid>
+
+          <Grid display="flex" alignItems="center" justifyContent="space-around"   lg={12} md={12} sm={12} xs={6}>
+
             <Button
               variant="contained"
               size="small"
               sx={myStyles.textCapitalize}
             >
               Get Started
-            </Button>{" "}
+            </Button>
+
+
+
             <Button
               onClick={scrollToSection}
               variant="contained"
@@ -107,9 +109,11 @@ const BecomeEducator = () => {
             >
               Learn More
             </Button>
-          </Box>
+
+          </Grid>
+
         </Grid>
-      </section>
+      </div>
 
       {/* Section 2 */}
       <section >
@@ -123,8 +127,8 @@ const BecomeEducator = () => {
         </Box>
 
 
-        <Grid container mt={8} sx={myStyles.Sec2MainGrid}>
-          <Grid lg={4} sm={12} md={4} xs={12} p={2} direction="column" sx={myStyles.Sec2SubGrid}>
+        <Grid container mt={8} display="flex" justifyContent="center" alignItems="center">
+          <Grid lg={4} sm={12} md={4} xs={12} sx={{ height: { sm: "auto", xs: "auto", md: "371px", lg: "371px" }, }} display="flex" flexDirection="column" justifyContent="start" alignItems="center">
             <Box
               sx={myStyles.subGridImgBox}
             >
@@ -143,7 +147,7 @@ const BecomeEducator = () => {
             </Typography>
           </Grid>
 
-          <Grid lg={4} sm={12} md={4} xs={12} p={2} direction="column" sx={myStyles.Sec2SubGrid}>
+          <Grid lg={4} sm={12} md={4} xs={12} sx={{ height: "371px" }} display="flex" flexDirection="column" justifyContent="start" alignItems="center">
             <Box
               sx={myStyles.subGridImgBox}
             >
@@ -162,7 +166,7 @@ const BecomeEducator = () => {
               gain new skills, and advance their careers.
             </Typography>
           </Grid>
-          <Grid lg={4} sm={12} md={4} xs={12} p={2} direction="column" sx={myStyles.Sec2SubGrid}>
+          <Grid lg={4} sm={12} md={4} xs={12} sx={{ height: "371px" }} display="flex" flexDirection="column" justifyContent="start" alignItems="center">
             <Box
               sx={myStyles.subGridImgBox}
             >

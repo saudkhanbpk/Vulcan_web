@@ -1,19 +1,21 @@
-import React, { useState } from 'react'
-import {auth} from '../../config/config';
-import { createUserWithEmailAndPassword } from '@firebase/auth';
+import React from 'react';
+import './Login.scss'
+// import {auth} from '../../config/config';
+// import { createUserWithEmailAndPassword } from '@firebase/auth';
 
 const SignUp = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("");
 
-    const SignUp = (e) =>{
-        e.preventDefault();
-        createUserWithEmailAndPassword(auth, email, password)
-        .then(respounse=>console.log(respounse))
-        .then(err=>console.log(err));  
-    }
+    // const SignUp = (e) =>{
+    //     e.preventDefault();
+    //     createUserWithEmailAndPassword(auth, email, password)
+    //     .then(respounse=>console.log(respounse))
+    //     .then(err=>console.log(err));  
+    // }
   return (
-    <div>
+   <>
+    {/* <div>
         <h3>Create New Accout</h3>
         <form onSubmit={SignUp}>
         
@@ -36,7 +38,11 @@ const SignUp = () => {
         
         
         </form>
+    </div> */}
+    <div className="div">
+
     </div>
+   </>
   )
 }
 

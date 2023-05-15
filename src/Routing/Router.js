@@ -7,6 +7,8 @@ import HowItWorks from "../components/howItWorks/HowItWorks";
 import EducatorFaq from "../components/howItWorks/faq/EducatorFaq";
 import LearnerFaq from "../components/howItWorks/faq/LearnerFaq";
 import CoursesScreen from "../components/coursesScreen/CoursesScreen";
+import SignUp from "../components/auth/SignUp";
+import Login from "../components/auth/Login";
 
 const Router = () => {
   return (
@@ -23,6 +25,9 @@ const Router = () => {
         <Route exact path="/how-it-works" element={<HowItWorks />}></Route>
         <Route exact path="/educator-faq" element={<EducatorFaq />}></Route>
         <Route exact path="/learner-faq" element={<LearnerFaq />}></Route>
+        <Route exact path="/signup" element={<SignUp />}></Route>
+        <Route exact path="/login" element={<Login />}></Route>
+
         
       </Routes>
     </div>

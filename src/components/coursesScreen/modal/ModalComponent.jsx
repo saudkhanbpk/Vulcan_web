@@ -2,10 +2,11 @@ import React from "react";
 import "../CoursesScreen.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import { Grid, TextField, Typography, } from "@mui/material";
+import {  TextField, Typography, } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 import { mainFont } from "../../../theme/FontFamily";
+import Grid from '@mui/material/Unstable_Grid2';
 
 // const useStyles = makeStyles({
 //     joinWaitListTypo: {
