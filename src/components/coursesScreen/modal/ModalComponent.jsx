@@ -1,18 +1,13 @@
 import React from "react";
-import "../CoursesScreen.scss";
+import "../coursesScreen.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import {  TextField, Typography, } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
-import { mainFont } from "../../../theme/FontFamily";
+import { mainFont } from "../../../Theme/fontFamily";
 import Grid from '@mui/material/Unstable_Grid2';
 
-// const useStyles = makeStyles({
-//     joinWaitListTypo: {
-//         fontSize: "32", fontFamily: `${mainFont} !important`, paddingRight: "10px", fontWeight: "bold !important"
-//     },
-// });
 const ModalComponent = ({ open, setOpen, coursesModal }) => {
     const handleClose = () => setOpen(false);
 

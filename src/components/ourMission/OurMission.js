@@ -1,5 +1,5 @@
 import React from "react";
-import "./OurMission.scss";
+import "./ourMission.scss";
 import bringIm from "../../assets/images/bringimg.png";
 import { Box, Paper, Typography, useMediaQuery } from "@mui/material";
 import styled from "styled-components";

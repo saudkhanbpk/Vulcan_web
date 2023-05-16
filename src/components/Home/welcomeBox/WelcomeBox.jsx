@@ -1,5 +1,5 @@
 import React from 'react'
-import './WelcomeBox.scss';
+import './welcomeBox.scss';
 import Button from '@mui/material/Button'
 import { Box } from '@mui/system';
 import CastForEducationIcon from '@mui/icons-material/CastForEducation';
@@ -8,7 +8,7 @@ import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import { Divider, Paper, Typography } from '@mui/material';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
-import ModalComponent from '../../coursesScreen/modal/ModalComponent';
+// import ModalComponent from '../../coursesScreen/modal/ModalComponent';
 import Grid from '@mui/material/Unstable_Grid2';
 
 
@@ -30,7 +30,6 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
     height: 600,
     width: 500,
-    // borderRadius: `${20} !important`,
     fontSize: 16,
     padding: 30,
     paddingTop: 30,
@@ -103,7 +102,7 @@ const WelcomeBox = () => {
   }
   return (
     <>
-    <ModalComponent open={open} setOpen={setOpen} />
+    {/* <ModalComponent open={open} setOpen={setOpen} /> */}
       <Grid container item sx={myStyles.mainGrid}>
         <Item sx={myStyles.item}>
           <Grid display= 'flex' justifyContent= 'space-around'  alignItems= 'center'>
@@ -150,7 +149,7 @@ const WelcomeBox = () => {
           }
           <Box display="flex" justifyContent="center" mt={6}>
             <Button onClick={isClicked ? navigateToBecomeEdu : modalHandle} variant="contained" sx={myStyles.textCapitalize}>
-              {isClicked ? "Sign Up To Teach" : "Get on Waitlist"}
+              {isClicked ? "Sign Up To Teach" : "See Courses"}
             </Button>
           </Box>
         </Item>

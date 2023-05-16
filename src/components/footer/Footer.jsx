@@ -1,5 +1,5 @@
 import React from "react";
-import "./Footer.scss";
+// import "./footer.scss";
 import footerlogo from "../../assets/images/footerlogo.png";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { Typography, Box, } from "@mui/material";

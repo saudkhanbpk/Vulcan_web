@@ -1,6 +1,6 @@
 import React from 'react'
-import './HomeScreen.scss';
-import WelcomeBox from '../welcomeBox/WelcomeBox';
+import './homeScreen.scss';
+import WelcomeBox from '../WelcomeBox/welcomeBox';
 import { Box } from '@mui/material';
 
 const HomeScreen = () => {

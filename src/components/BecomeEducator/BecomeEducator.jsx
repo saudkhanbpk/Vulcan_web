@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import "./BecomeEducator.scss";
+import "./becomeEducator.scss";
 import { Box } from "@mui/system";
 import { Button, Typography } from "@mui/material";
 import MoneyIcon from "../../assets/images/moneyIcon.png";
