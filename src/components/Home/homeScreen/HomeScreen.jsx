@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 const HomeScreen = () => {
   const myStyles={
     box:{
-      height: {xs: "150vh"}
+      height: {xs: "150vh,"}
     }
   }
   return (

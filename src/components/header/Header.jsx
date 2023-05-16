@@ -10,7 +10,7 @@ import {Link, useNavigate } from 'react-router-dom';
  
 const Header = () => {
   
-  //  navigation hook declear 
+  //  navigation hook declare 
   const navigate = useNavigate();
 
   // navigation handle func  
