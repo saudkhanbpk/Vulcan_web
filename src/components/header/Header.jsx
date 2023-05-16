@@ -1,53 +1,114 @@
-import React from 'react'
-import './header.scss'
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import  logo  from "../../assets/images/Logo.png";
-import Button from '@mui/material/Button';
-import {Link, useNavigate } from 'react-router-dom';
+import React from "react";
+import "./header.scss";
+import logo from "../../assets/images/Logo.png";
+import Button from "@mui/material/Button";
+import { specialFont } from "./../../Theme/fontFamily";
 
- 
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+
 const Header = () => {
-  
-  //  navigation hook declear 
-  const navigate = useNavigate();
-
-  // navigation handle func  
- const navigateToLogin = () => {
-  navigate('/login');
-};
- // navigation handle func  
- const navigateToSignup = () => {
-  navigate('/signup');
-};
+  const navstyle = {
+    background: "white"
+  };
+  const logostyle = {
+    color: "blue",
+    fontStyle: "Audi",
+    fontSize: "35px"
+  };
+  const headingText = {
+    color: "black",
+    fontSize: "20px",
+    marginLeft: "10px",
+    borderRadius: "100px",
+    width: "150px",
+    display: "flex",
+    justifyContent: "center",
+    padding: "5px",
+    cursor: "pointer"
+  };
+  const log = {
+    marginLeft: "40px"
+  };
+  const toobar = {
+    width: "35%",
+    display: "flex",
+    justifyContent: "end",
+    alignItems: "center"
+  };
+  const becometext = {
+    color: "black",
+    fontSize: "20px",
+    marginLeft: "10px",
+    borderRadius: "100px",
+    display: "flex",
+    marginRight: "10px",
+    justifyContent: "center",
+    padding: "5px",
+    cursor: "pointer"
+  };
+  const lginbtn = {
+    fontsize: "16px",
+    color: "black",
+    fontWeight: "bold",
+    marginRight: "10px",
+    width: "85px"
+  };
+  const signbtn = {
+    fontsize: "16px",
+    color: "white",
+    fontWeight: "bold",
+    width: "85px",
+    backgroundColor: "blue"
+  };
+  const linkbox = {
+    display: "flex",
+    width: "80%",
+    alignItems: "center"
+  };
   return (
-      
-    <Navbar collapseOnSelect  expand="lg" className="Header_nav sticky-top" >
-      <Container className='navbar___Header'>
-        <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
-          <img src={logo} className=" img-fluid logoImage" alt="" />
-          <h4 className="VulLogo">Vulcan</h4>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/about" className="nav_liddd">About</Nav.Link>
-            <Nav.Link as={Link} to="/how-it-works" className="nav_liddd">How it Works</Nav.Link>
-            <Nav.Link as={Link} to="/courses" className="nav_liddd">Courses</Nav.Link>
-           
-          </Nav>
-          <Nav>
-            <Nav.Link as={Link} to="/become-educator" className="nav_liddd me-4">Become an Educator</Nav.Link>
-           <div className="">
-            <Button variant="outlined" size="small" color="common" className="me-4" onClick={navigateToLogin}>Log In </Button>
-            <Button variant="contained" size="small" className="me-1"  onClick={navigateToSignup}>Sign Up</Button>
-            </div>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  )
-}
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" style={navstyle}>
+        <Toolbar>
+          <img
+            src={logo}
+            alt=""
+            style={log}
+            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+          />
+          <Box style={linkbox}>
+            <Typography
+              variant="h4"
+              noWrap
+              href="/"
+              style={logostyle}
+              sx={{ fontFamily: `${specialFont} !important` }}
+            >
+              VulCan
+            </Typography>
+            <Typography variant="h6" noWrap href="/" style={headingText}>
+              About
+            </Typography>
+            <Typography variant="h6" noWrap href="/" style={headingText}>
+              How its works
+            </Typography>
+            <Typography variant="h6" noWrap href="/" style={headingText}>
+              Courses
+            </Typography>
+          </Box>
+          <Box style={toobar}>
+            <Typography variant="h6" noWrap href="/" style={becometext}>
+              Become an Educator
+            </Typography>
+            <Button style={lginbtn}>Log In</Button>
+            <Button style={signbtn}>Sign Up</Button>
+          </Box>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
+};
 
 export default Header;

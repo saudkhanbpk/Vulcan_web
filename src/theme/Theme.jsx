@@ -42,6 +42,12 @@ const theme = createTheme({
       lineHeight: 1.2,
       fontFamily: "'Inter', sans-serif",
     },
+    h6: {
+      fontSize: "24px",
+      fontWeight: "bold",
+      lineHeight: 1.2,
+      fontFamily: "'Inter', sans-serif",
+    },
     subtitle1: {
       fontSize: "24px",
       fontWeight: 600,
