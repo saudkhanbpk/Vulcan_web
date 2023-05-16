@@ -6,7 +6,7 @@ import BecomeEducator from "../components/BecomeEducator/becomeEducator";
 import HowItWorks from "../components/howItWorks/howItWorks";
 import EducatorFaq from "../components/howItWorks/Faq/educatorFaq";
 import LearnerFaq from "../components/howItWorks/Faq/learnerFaq";
-import CoursesScreen from "../components/CoursesScreen/coursesScreen";
+import CoursesScreen from "../components/coursesScreen/coursesScreen";
 import SignUp from "../components/Auth/signUp";
 import Login from "../components/Auth/login";
 

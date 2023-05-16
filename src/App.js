@@ -1,10 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
-import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
-import Router from "./Routing/Router";
+import Header from "./components/Header/header";
+import Footer from "./components/Footer/footer";
+import Router from "./Routing/router";
 import { BrowserRouter } from "react-router-dom";
-import ScrollToTop from "./scroll/ScrollToTop";
+import ScrollToTop from "./Scroll/scrollToTop";
  
 
  
