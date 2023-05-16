@@ -1,12 +1,14 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import OurMission from "./../components/ourMission/OurMission";
-import HomeScreen from "../components/Home/homeScreen/HomeScreen";
-import BecomeEducator from "../components/BecomeEducator/BecomeEducator";
-import HowItWorks from "../components/howItWorks/HowItWorks";
-import EducatorFaq from "../components/howItWorks/faq/EducatorFaq";
-import LearnerFaq from "../components/howItWorks/faq/LearnerFaq";
-import CoursesScreen from "../components/coursesScreen/CoursesScreen";
+import OurMission from "../components/OurMission/ourMission";
+import HomeScreen from "../components/Home/HomeScreen/homeScreen";
+import BecomeEducator from "../components/BecomeEducator/becomeEducator";
+import HowItWorks from "../components/howItWorks/howItWorks";
+import EducatorFaq from "../components/howItWorks/Faq/educatorFaq";
+import LearnerFaq from "../components/howItWorks/Faq/learnerFaq";
+import CoursesScreen from "../components/CoursesScreen/coursesScreen";
+import SignUp from "../components/Auth/signUp";
+import Login from "../components/Auth/login";
 
 const Router = () => {
   return (
@@ -23,6 +25,9 @@ const Router = () => {
         <Route exact path="/how-it-works" element={<HowItWorks />}></Route>
         <Route exact path="/educator-faq" element={<EducatorFaq />}></Route>
         <Route exact path="/learner-faq" element={<LearnerFaq />}></Route>
+        <Route exact path="/signup" element={<SignUp />}></Route>
+        <Route exact path="/login" element={<Login />}></Route>
+
         
       </Routes>
     </div>

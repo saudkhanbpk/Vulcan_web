@@ -1,9 +1,10 @@
 import React from "react";
-import "./OurMission.scss";
+import "./ourMission.scss";
 import bringIm from "../../assets/images/bringimg.png";
-import { Box, Grid, Paper, Typography, useMediaQuery } from "@mui/material";
+import { Box, Paper, Typography, useMediaQuery } from "@mui/material";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import Grid from "@mui/material/Unstable_Grid2";
 
   const Item = styled(Paper)(({ isSmallScreen }) => ({
   textAlign: 'start',
@@ -61,14 +62,14 @@ const OurMission = () => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6} >
             <Box p={3}>
-              <Typography align="start" variant="paragraph">
+              <Typography align="start" fontSize={24} variant="paragraph">
                 Education is a core pillar of our society. But the current system
                 hasn’t been working for everyone. It’s been plagued with ever
                 rising costs, long timeframes, unsatisfactory outcomes, and high
                 barriers to entry.
               </Typography>
               <Box mt={5}>
-                <Typography align="start" variant="paragraph">
+                <Typography align="start"  fontSize={24} variant="paragraph">
                   We asked the question: What would an education system that works
                   for everyone look like? The Vulcan Learning platform was the
                   answer.
@@ -85,7 +86,7 @@ const OurMission = () => {
 
 
           <Grid container spacing={2} displey = "flex" justifyContent="center" alignItems="center">
-            <Grid  item xs={12} sm={10} md={6} lg={4} display = 'flex' flexDirection = 'column' justifyContent = 'center'  alignItems = 'center'>
+            <Grid    xs={12} sm={10} md={6} lg={4} display = 'flex' flexDirection = 'column' justifyContent = 'center'  alignItems = 'center'>
               <Typography variant="body4" color="primary.main" sx={myStyles.boxTypoHeading}>
                 Univeral Access
               </Typography>
@@ -96,7 +97,7 @@ const OurMission = () => {
               </Item>
             </Grid>
 
-            <Grid item xs={11} sm={10} md={6} lg={4} display = 'flex' flexDirection ='column' justifyContent = 'center' alignItems = 'center' >
+            <Grid   xs={11} sm={10} md={6} lg={4} display = 'flex' flexDirection ='column' justifyContent = 'center' alignItems = 'center' >
               <Typography variant="body4" color="primary.main" sx={myStyles.boxTypoHeading}>
                 Best Educators
               </Typography>
@@ -107,7 +108,7 @@ const OurMission = () => {
               </Item>
             </Grid>
 
-            <Grid item xs={12} sm={10} md={6} lg={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <Grid   xs={12} sm={10} md={6} lg={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
               <Typography variant="body4" color="primary.main" sx={myStyles.boxTypoHeading}>
                 Personalized
               </Typography>

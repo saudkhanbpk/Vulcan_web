@@ -1,8 +1,9 @@
 import React from "react";
-import "./Footer.scss";
+// import "./footer.scss";
 import footerlogo from "../../assets/images/footerlogo.png";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import { Grid, Typography, Box, } from "@mui/material";
+import { Typography, Box, } from "@mui/material";
+import Grid from '@mui/material/Unstable_Grid2'
 
 
 
@@ -49,7 +50,7 @@ const Footer = () => {
       <Box sx={myStyles.mainBox}>
         <Grid container spcing={3}>
           {/* Sub Grid 1 */}
-          <Grid item xs={12} sm={12} md={12} lg={6}>
+          <Grid   xs={12} sm={12} md={12} lg={6}>
             <Box sx={myStyles.subGrid1Box}>
               <Box sx={{ cursor: "pointer" }}>
                 <img
@@ -75,7 +76,7 @@ const Footer = () => {
           </Grid>
 
           {/* Sub Grid 2 */}
-          <Grid item xs={10} sm={11} md={11} lg={5} mt={2} sx={myStyles.subGrid2} justifyContent="space-around" alignItems="center">
+          <Grid   xs={10} sm={11} md={11} lg={5} mt={2} sx={myStyles.subGrid2} justifyContent="space-around" alignItems="center">
             <Typography
               variant="h6"
               sx={myStyles.subGrid2Typo}
@@ -97,7 +98,7 @@ const Footer = () => {
           </Grid>
 
           {/* Sub Grid 3 */}
-          <Grid item xs={2} sm={1} md={1} lg={1}>
+          <Grid   xs={2} sm={1} md={1} lg={1}>
 
 
             <TwitterIcon fontSize="large" className="twticon"

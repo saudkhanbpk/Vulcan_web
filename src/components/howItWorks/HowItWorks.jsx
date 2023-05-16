@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import { Divider, Grid, Typography, useMediaQuery } from "@mui/material";
+import { Divider, Typography, useMediaQuery } from "@mui/material";
 import arrow from "../../assets/images/Arrow 3.png";
 import { useNavigate } from "react-router-dom";
-
+import Grid from '@mui/material/Unstable_Grid2';
 
 const HowItWorks = () => {
   function useScreenSize(breakpoint) {
@@ -59,10 +59,10 @@ const HowItWorks = () => {
       </Grid>
 
 
-      <Grid container direction="row" display="flex" justifyContent="center" alignItems="center">
-        <Grid lg={5} md={5} sm={12} xs={12}   direction="column" display="flex" justifyContent="center" alignItems="center" sx={{p:{xs:2}}}>
-          <Box>
-            <Grid lg={12} >
+      <Grid container  display="flex" justifyContent="center" alignItems="center">
+        
+          <Grid lg={5} md={5} sm={12} xs={12}  sx={{p:{xs:2}}}>
+            <Grid lg={12} flexDirection="row" display="flex" justifyContent="center" alignItems="center" >
               <Box>
                 <Typography
                   variant="h1"
@@ -118,8 +118,10 @@ const HowItWorks = () => {
                 </Box>
               </Box>
             </Grid>{" "}
-          </Box>
-          <Grid lg={12}>
+
+
+
+            <Grid lg={12}>
             <Box>
               <Typography
                 variant="h5"
@@ -162,7 +164,7 @@ const HowItWorks = () => {
           </Box>
         </Grid>
 
-        <Grid lg={5} md={5} sm={12} xs={12} direction="column"  display="flex" justifyContent="center" alignItems="center" sx={{p:{xs:2}}} >
+        <Grid lg={5} md={5} sm={12} xs={12}   sx={{p:{xs:2}}} >
           <Grid lg={12}>
             <Box>
               <Typography
@@ -227,7 +229,9 @@ const HowItWorks = () => {
                 {" "}
 
                 Finalize the class schedule and curriculum, pick <br />
-                the start date, and publish your course.{" "}
+                the start date, and publish your course.
+                <br/>
+                {" "}
 
               </Typography>
             </Box>

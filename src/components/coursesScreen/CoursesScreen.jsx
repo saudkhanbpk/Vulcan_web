@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-import "./CoursesScreen.scss";
+import "./coursesScreen.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
-import { specialFont } from "../../theme/FontFamily";
-import ModalComponent from "./modal/ModalComponent";
-
-
-
+import { specialFont } from "../../Theme/fontFamily";
+import ModalComponent from "./Modal/modalComponent";
 
 const CoursesScreen = () => {
 
   const [open, setOpen] = useState(false);
-
+  
   const modalHandle = () => {
     setOpen(!open)
   }

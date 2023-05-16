@@ -1,14 +1,26 @@
 import React from 'react'
-import './Header.scss'
+import './header.scss'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import  logo  from "../../assets/images/Logo.png";
 import Button from '@mui/material/Button';
-import {Link } from 'react-router-dom';
+import {Link, useNavigate } from 'react-router-dom';
 
-
+ 
 const Header = () => {
+  
+  //  navigation hook declear 
+  const navigate = useNavigate();
+
+  // navigation handle func  
+ const navigateToLogin = () => {
+  navigate('/login');
+};
+ // navigation handle func  
+ const navigateToSignup = () => {
+  navigate('/signup');
+};
   return (
       
     <Navbar collapseOnSelect  expand="lg" className="Header_nav sticky-top" >
@@ -28,8 +40,8 @@ const Header = () => {
           <Nav>
             <Nav.Link as={Link} to="/become-educator" className="nav_liddd me-4">Become an Educator</Nav.Link>
            <div className="">
-            <Button variant="outlined" size="small" color="common" className="me-4" >Log In </Button>
-            <Button variant="contained" size="small" className="me-1">Sign Up</Button>
+            <Button variant="outlined" size="small" color="common" className="me-4" onClick={navigateToLogin}>Log In </Button>
+            <Button variant="contained" size="small" className="me-1"  onClick={navigateToSignup}>Sign Up</Button>
             </div>
           </Nav>
         </Navbar.Collapse>
