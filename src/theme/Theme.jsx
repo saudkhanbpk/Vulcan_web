@@ -20,7 +20,7 @@ const theme = createTheme({
     primary: {
       main: "#0000FF",
     },
-    common: {
+    secondary: {
       main: "#000000", // replace with your custom white color value
     },
   },
@@ -86,7 +86,6 @@ const theme = createTheme({
       lineHeight: "22px",
       fontFamily: "Inter",
     },
-
   },
   components: {
     MuiButton: {
@@ -97,18 +96,17 @@ const theme = createTheme({
           border: "1px solid black",
           fontFamily: "Inter, sans-serif",
           fontWeight: 800,
-          height:"40px"
+          height: "40px",
         },
       },
     },
     MuiDivider: {
       styleOverrides: {
         root: {
-
-          borderColor: '#0000FF',
+          borderColor: "#0000FF",
           height: 1,
           width: 50,
-          margin: '16px 0',
+          margin: "16px 0",
           opacity: 1,
         },
       },
