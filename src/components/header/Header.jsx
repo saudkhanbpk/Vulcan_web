@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import  Grid  from '@mui/material/Unstable_Grid2';
 import logo from '../../assets/images/Logo.png'
 import { Button } from '@mui/material';
- import { specialFont } from './../../Theme/fontFamily';
+ import { specialFont } from '../../Theme/fontFamily';
  import { Hidden } from '@material-ui/core';
 import {
   AppBar,
