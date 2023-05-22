@@ -1,119 +1,118 @@
-
-
-.linear_back{
-    background-image: url(../../assets/images/backlinear.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 460px;
+.linear_back {
+  background-image: url(../../assets/images/backlinear.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 460px;
 }
-.teacher_back{
+.teacher_back {
+  background-image: url(../../assets/images/teacher.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 460px;
+  position: relative;
+  z-index: -1;
+  opacity: 3;
+}
+.teacher_back::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background: linear-gradient(
+    270deg,
+    rgba(255, 255, 255, 0) 11%,
+    rgba(255, 255, 255, 1.801558) 83%
+  );
+}
+.ourmiss {
+  position: relative;
+  left: 20%;
+  top: 20%;
+  .mission_heading {
+    color: #0000ff;
+    font-family: "Audiowide";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 51px;
+    position: relative;
+  }
+  .connection {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    white-space: nowrap;
+    margin-bottom: 0px;
+    z-index: 222;
+    position: relative;
+    line-height: 48px;
+  }
+}
+.Bring_row {
+  margin: 100px 0px;
+}
+.brigText {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+}
+.bring-paratext {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+}
+.Learn {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+}
+.cardssInfo {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 30px 10px;
+  height: 266px;
+  width: 414px;
+}
+.sub-heading {
+  color: #0000ff !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .mission_heading {
+    z-index: 2;
+  }
+}
+
+// ================================================
+.css-1ps6pg7-MuiPaper-root {
+  border-radius: 20px !important;
+}
+.sub-heading {
+  color: #0000ff !important;
+}
+.css-1p9lkro-MuiTypography-root {
+  position: relative;
+}
+@media only screen and(min-width: 200px) and(max-width: 768px) {
+  .teacher_back {
+    display: none;
+  }
+  .linear_back {
     background-image: url(../../assets/images/teacher.png);
     background-repeat: no-repeat;
     background-size: cover;
     height: 460px;
-    position: relative;
-    z-index: -1;
-    opacity: 3;
-    
-}
-.teacher_back::before{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100%;
-    background: linear-gradient(270deg, rgba(255, 255, 255, 0) 11%, rgba(255, 255, 255, 1.801558) 83%);
-}
-.ourmiss{
-position: relative;
-left: 20%;
-top: 20%;
-.mission_heading{
-    color: #0000FF;
-    font-family: 'Audiowide';
-font-style: normal;
-font-weight: 400;
-font-size: 40px;
-line-height: 51px;
-position: relative;
-}
-.connection{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 30px;
-white-space: nowrap;
-margin-bottom: 0px;
-z-index: 222;
-position: relative;
-line-height: 48px;
-}
-}
-.Bring_row{
-    margin: 100px 0px;
-}
-.brigText{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 40px;
-line-height: 48px;
-}
-.bring-paratext{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 24px;
-line-height: 29px;
-}
-.Learn{
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 40px;
-line-height: 48px;
-}
-.cardssInfo{    
-    border: 1px solid black;
-    border-radius: 20px;
-    padding: 30px 10px;
-    height: 266px;
-    width: 414px;
-
-}
-.sub-heading{
-    color: #0000FF !important;
-}
-
-@media screen and (max-width:1024px) {
-    .mission_heading{
-        z-index: 2;
-    }
-}
-
-// ================================================
-.css-1ps6pg7-MuiPaper-root{
-    border-radius: 20px !important;
-
-}
-.sub-heading{
-    color: #0000FF !important;
-}
-.css-1p9lkro-MuiTypography-root{
-    position: relative;
-}
-@media only screen and(min-width: 200px) and(max-width: 768px) {
-    .teacher_back{
-        display: none;
-    }
-    .linear_back{
-        background-image: url(../../assets/images/teacher.png);
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 460px;
-    }
-    .ourmiss{
-        left: 5%;
-    }
+  }
+  .ourmiss {
+    left: 5%;
+  }
 }
