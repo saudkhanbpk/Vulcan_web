@@ -1,15 +1,58 @@
 import React from "react";
 import "./header.scss";
-import logo from "../../assets/images/Logo.png";
-import Button from "@mui/material/Button";
-import { specialFont } from "./../../Theme/fontFamily";
+import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@mui/material';
+import  Grid  from '@mui/material/Unstable_Grid2';
+import logo from '../../assets/images/Logo.png'
+import { Button } from '@mui/material';
+ import { specialFont } from './../../Theme/fontFamily';
+ import { Hidden } from '@material-ui/core';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  useMediaQuery,
+  useTheme,
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  logo: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  drawer: {
+    width: 250,
+  },
+}));
+
 
 const Header = () => {
+
+  const classes = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setDrawerOpen(!drawerOpen);
+  };
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
+  };
+
+
   const navstyle = {
     background: "white"
   };
@@ -68,11 +111,52 @@ const Header = () => {
     width: "80%",
     alignItems: "center"
   };
+  const flexBoxx={
+    display:"flex"
+  }
+  const logombl={
+    display: "flex",
+  }
+  const toobarbor={
+    width: {xs: 0 , sm : 0 , md: 700},
+    border: "1px solid red"
+  }
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    
+    <div >
       <AppBar position="static" style={navstyle}>
-        <Toolbar>
-          <img
+        <Toolbar style={toobarbor} xs={0} md={8}>
+        <Typography variant="h6" className={classes.title}>
+        <Hidden  mdUp >
+        <Grid style={logombl}>
+            <img src={logo} alt="Logo" className={classes.logo} />
+            <Typography
+            variant="h4"
+            noWrap
+            href="/"
+            style={logostyle}
+            sx={{ fontFamily: `${specialFont} !important` }}
+          >
+            VulCan
+          </Typography>
+          </Grid>
+          </Hidden>
+
+          </Typography>
+          {isMobile ? (
+          <IconButton
+            edge="end"
+            aria-label="menu"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleDrawerToggle}
+            color="black"
+          >
+            <MenuIcon />
+          </IconButton>
+          ) : (
+            <Box style={flexBoxx}>
+            <img
             src={logo}
             alt=""
             style={log}
@@ -86,6 +170,7 @@ const Header = () => {
               style={logostyle}
               sx={{ fontFamily: `${specialFont} !important` }}
             >
+
               VulCan
             </Typography>
             <Typography variant="h6" noWrap href="/" style={headingText}>
@@ -99,15 +184,51 @@ const Header = () => {
             </Typography>
           </Box>
           <Box style={toobar}>
-            <Typography variant="h6" noWrap href="/" style={becometext}>
-              Become an Educator
-            </Typography>
-            <Button style={lginbtn}>Log In</Button>
-            <Button style={signbtn}>Sign Up</Button>
+                  <Typography variant="h6" noWrap href="/" style={becometext}>
+                    Become an Educator
+                  </Typography>
+                  <Button style={lginbtn}>Log In</Button>
+                  <Button style={signbtn}>Sign Up</Button>
+                </Box>
           </Box>
+            )}
+          <Drawer
+            anchor="left"
+            open={drawerOpen}
+            onClose={handleDrawerClose}
+          >
+            <div
+              className={classes.drawer}
+              role="presentation"
+              onClick={handleDrawerClose}
+              onKeyDown={handleDrawerClose}
+            >
+              <List>
+                <ListItem button>
+                  <ListItemText primary="About" />
+                </ListItem>
+                <ListItem button>
+                  <ListItemText primary="How it work" />
+                </ListItem>
+                <ListItem button>
+                  <ListItemText primary="Courses" />
+                </ListItem>
+                <ListItem button>
+                  <ListItemText primary="Become an Educator" />
+                </ListItem>
+                <ListItem button>
+                  <ListItemText primary="Log In" />
+                </ListItem>
+                <ListItem button>
+                  <ListItemText primary="Sign Up" />
+                </ListItem>
+              </List>
+            </div>
+          </Drawer>
+          
         </Toolbar>
       </AppBar>
-    </Box>
+    </div>
   );
 };
 
