@@ -17,6 +17,8 @@ const CoursesScreen = () => {
     <>
       <ModalComponent open={open} setOpen={setOpen} coursesModal={true} />
 
+
+      
       <div className="container-fluid">
         <div className="row">
           <div className="col-12 courses-bg-img">
