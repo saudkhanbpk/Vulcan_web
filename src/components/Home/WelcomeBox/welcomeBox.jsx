@@ -31,6 +31,7 @@ const Item = styled(Paper)(({ theme }) => ({
     height: 600,
     width: 500,
     fontSize: 16,
+  borderRadius: `${0} !important`,
     padding: 30,
     paddingTop: 30,
     marginLeft: 0,

@@ -105,13 +105,13 @@
 .css-1p9lkro-MuiTypography-root {
   position: relative;
 }
-@media only screen and(min-width: 200px) and(max-width: 768px) {
+@media only screen and(min-width: 200px) and(max-width: 767px) {
   .teacher_back {
     display: block;
     background-image: url(../../assets/images/teacher.png);
     background-repeat: no-repeat;
     background-size: contain;
-    height: 230px;
+    // height: 230px;
     width: 100%;
     position: relative;
     z-index: -1;
@@ -130,11 +130,12 @@
     // background-image: url(../../assets/images/teacher.png);
     // background-repeat: no-repeat;
     // background-size: cover;
-    height: 460px;
+    height: 260px;
     background-color: white;
   }
   .ourmiss {
     left: 5%;
+    top: 5%;
   }
   .brinaaimg{
     // padding: 20px;

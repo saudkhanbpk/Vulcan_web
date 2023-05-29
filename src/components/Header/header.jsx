@@ -73,7 +73,7 @@ const Header = () => {
     cursor: "pointer"
   };
   const log = {
-    marginLeft: "40px"
+    marginLeft: "40px",
   };
   const toobar = {
     width: "35%",
@@ -119,7 +119,6 @@ const Header = () => {
   }
   const toobarbor={
     width: {xs: 0 , sm : 0 , md: 700},
-    border: "1px solid red"
   }
   return (
     
@@ -161,6 +160,7 @@ const Header = () => {
             alt=""
             style={log}
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+           
           />
           <Box style={linkbox}>
             <Typography
