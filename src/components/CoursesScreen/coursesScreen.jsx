@@ -5,8 +5,7 @@ import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import ModalComponent from "./Modal/modalComponent";
 import { styles } from "./styles";
-import { useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import {  useMediaQuery, useTheme } from "@mui/material";
 
 const CoursesScreen = () => {
   const [open, setOpen] = useState(false);
