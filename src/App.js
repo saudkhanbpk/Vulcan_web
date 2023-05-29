@@ -8,14 +8,15 @@ import Navbar from "./components/Header/navbar";
 
 function App() {
   return (
-    <div>
-      <BrowserRouter>
+    <>
+    <BrowserRouter>
         <ScrollToTop />
         <Navbar />
         <Router />
         <Footer />
       </BrowserRouter>
-    </div>
+    </>
+  
   );
 }
 

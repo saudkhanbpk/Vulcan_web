@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import "./becomeEducator.scss";
 import { Box } from "@mui/system";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, useMediaQuery, useTheme } from "@mui/material";
 import MoneyIcon from "../../assets/images/moneyIcon.png";
 import SharingIcon from "../../assets/images/sharingIcon.png";
 import TeachIcon from "../../assets/images/teachIcon.png";
@@ -10,8 +10,8 @@ import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styles } from "./styles";
 
-import { useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+// import { useTheme } from '@material-ui/core/styles';
+// import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 
 const BecomeEducator = () => {

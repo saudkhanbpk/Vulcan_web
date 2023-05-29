@@ -1,12 +1,10 @@
 import React from "react";
 import "./homeScreen.scss";
 import WelcomeBox from "../WelcomeBox/welcomeBox";
-import { Box,Typography } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { styles } from "./styles";
-import backimGae from "../../../assets/images/backgroundImage.png";
 import Grid from '@mui/material/Unstable_Grid2';
-import { useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 
 const HomeScreen = () => {
   const theme = useTheme();

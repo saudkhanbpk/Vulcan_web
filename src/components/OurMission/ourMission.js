@@ -1,50 +1,42 @@
 import React from "react";
 import "./ourMission.scss";
 import bringIm from "../../assets/images/bringimg.png";
-import { Box, Paper, Typography, useMediaQuery } from "@mui/material";
-import styled from "styled-components";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
-import { styles } from "./styles";
-
-
-
-const Item = styled(Paper)(({ isSmallScreen }) => ({
-  textAlign: "start",
-  height: isSmallScreen ? 300 : 266,
-  width: isSmallScreen ? 350 : 414,
-  borderRadius: `${20} !important`,
-  fontSize: 24,
-  padding: 20,
-  border: "1px solid black",
-}));
-
+import { BannerContainer, Header, Image, Item, Paragraph, StyledBox, TextContainer, styles } from "./styles";
+import image from "../../assets/images/teacher.png";
+import image2 from "../../assets/images/onlineTeacher2.png";
+ 
 const OurMission = () => {
   const navigate = useNavigate();
 
   const isSmallScreen = useMediaQuery("(max-width: 390px)");
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   return (
     <>
-      <div className="container-fluid ">
-        <div className="row">
-          <div className="col-md-4 linear_back">
-            <div className="ourmiss">
-              <Box className="container" mt={5} mb={5}>
-                <Typography variant="h1" color="primary">
-                  Our Mission
-                </Typography>
-                <Typography align="start" variant="body2">
-                  Connecting learners directly with subject matter experts - in
-                  any subject.
-                </Typography>
-              </Box>
-            </div>
-          </div>
+      {/* <Box sx={{ bgcolor: "#fffff" }}> */}
+      <BannerContainer>
+        <TextContainer sx={{ flex: 1 }}>
+          <Header variant="h1" py={2}>
+            Our Mission
+          </Header>
+          <Paragraph variant="body2">
+            Connecting learners directly with subject matter experts - in any
+            subject.
+          </Paragraph>
+        </TextContainer>
 
-          <div className="col-md-8 teacher_back" />
-        </div>
-      </div>
+        <StyledBox sx={{ flex: 1 }}>
+          {isMobile ? (
+            <Image src={image2} alt="Banner" />
+          ) : (
+            <Image src={image} alt="Banner" />
+          )}
+        </StyledBox>
+      </BannerContainer>
+      {/* </Box> */}
 
       <Box m={6}>
         <Typography align="center">
@@ -59,12 +51,12 @@ const OurMission = () => {
         spacing={3}
         sx={styles.mainGrid1}
       >
-        <Grid item xs={12} sm={10} md={6} lg={6}>
-          <Box >
+        <Grid xs={12} sm={10} md={6} lg={6}>
+          <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
             <img src={bringIm} className="img-fluid brinaaimg" alt="" />
           </Box>
         </Grid>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
+        <Grid xs={12} sm={12} md={6} lg={6}>
           <Box p={3}>
             <Typography align="start" fontSize={24} variant="paragraph">
               Education is a core pillar of our society. But the current system

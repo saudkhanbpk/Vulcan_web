@@ -52,6 +52,21 @@ const Navbar = () => {
             Vulcan
           </Typography>
 
+          {/* Small Devices */}
+          <Box sx={styles.xsLogoMainBox}>
+            <Box sx={styles.xsLogo}>
+              <img src={logo} className=" img-fluid logoImage" alt="" />
+            </Box>
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              sx={styles.xsLogoName}
+            >
+              Vulcan
+            </Typography>
+          </Box>
+
           <Box sx={styles.menuIcon}>
             <IconButton
               size="large"
@@ -68,7 +83,7 @@ const Navbar = () => {
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: "bottom",
-                horizontal: "left",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
@@ -86,7 +101,7 @@ const Navbar = () => {
                 }}
               >
                 <Typography
-                  variant="body4"
+                  variant="body2"
                   sx={styles.capitalize}
                   textAlign="center"
                 >
@@ -100,7 +115,7 @@ const Navbar = () => {
                 }}
               >
                 <Typography
-                  variant="body4"
+                  variant="body2"
                   sx={styles.capitalize}
                   textAlign="center"
                 >
@@ -114,7 +129,7 @@ const Navbar = () => {
                 }}
               >
                 <Typography
-                  variant="body4"
+                  variant="body2"
                   sx={styles.capitalize}
                   textAlign="center"
                 >
@@ -128,7 +143,7 @@ const Navbar = () => {
                 }}
               >
                 <Typography
-                  variant="body4"
+                  variant="body2"
                   sx={styles.capitalize}
                   textAlign="center"
                 >
@@ -166,21 +181,6 @@ const Navbar = () => {
             </Menu>
           </Box>
 
-          {/* Small Devices */}
-          <Box sx={styles.xsLogoMainBox}>
-            <Box sx={styles.xsLogo}>
-              <img src={logo} className=" img-fluid logoImage" alt="" />
-            </Box>
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href=""
-              sx={styles.xsLogoName}
-            >
-              Vulcan
-            </Typography>
-          </Box>
           <Box sx={styles.xsMenuBox}>
             <Link as={Link} to="/about" className="nav_liddd">
               <NavLinksButton
