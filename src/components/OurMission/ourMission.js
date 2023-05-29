@@ -1,83 +1,13 @@
 import React from "react";
 import "./ourMission.scss";
 import bringIm from "../../assets/images/bringimg.png";
-import { Box, Hidden, Paper, Typography, useMediaQuery } from "@mui/material";
-import { styled } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
-import { styles } from "./styles";
+import { BannerContainer, Header, Image, Item, Paragraph, StyledBox, TextContainer, styles } from "./styles";
 import image from "../../assets/images/teacher.png";
 import image2 from "../../assets/images/onlineTeacher2.png";
-import { specialFont } from "../../Theme/fontFamily";
-// import { breakpoints } from "@mui/system";
-
-const Item = styled(Paper)(({ isSmallScreen }) => ({
-  textAlign: "start",
-  height: isSmallScreen ? 300 : 266,
-  width: isSmallScreen ? 350 : 414,
-  borderRadius: `${20} !important`,
-  fontSize: 24,
-  padding: 20,
-  border: "1px solid black",
-}));
-
-const BannerContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  flexDirection: "column",
-
-  [theme.breakpoints.up("md")]: {
-    flexDirection: "row",
-  },
-}));
-
-const TextContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  [theme.breakpoints.down("md")]: {
-    padding: theme.spacing(6),
-    paddingLeft: theme.spacing(3),
-  },
-  [theme.breakpoints.up("md")]: {
-    paddingLeft: theme.spacing(6),
-  },
-}));
-
-const Header = styled(Typography)(({ theme }) => ({
-  
-  marginBottom: theme.spacing(1),
-  fontFamily: `${specialFont} !important`,
-  color:theme.palette.primary.main,
-}));
-
-const Paragraph = styled(Typography)(({ theme }) => ({
-  marginBottom: theme.spacing(2),
-  fontWeight: "bold",
-}));
-
-const Image = styled("img")({
-  maxWidth: "100%",
-  height: "auto",
-});
-
-const StyledBox = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.up("md")]: {
-    position: "relative",
-    overflow: "hidden",
-    "&::before": {
-      content: '""',
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "50%", // Adjust the gradient width as needed
-      height: "100%",
-      backgroundImage: `linear-gradient(270deg,
-        rgba(255, 255, 255, 0) 11%,
-        rgba(255, 255, 255, 1.801558) 100%)`, // Adjust the colors as needed
-      zIndex: 1,
-    },
-  },
-}));
+ 
 const OurMission = () => {
   const navigate = useNavigate();
 
@@ -134,6 +64,7 @@ const OurMission = () => {
               rising costs, long timeframes, unsatisfactory outcomes, and high
               barriers to entry.
             </Typography>
+            
             <Box mt={5}>
               <Typography align="start" fontSize={24} variant="paragraph">
                 We asked the question: What would an education system that works
@@ -148,13 +79,13 @@ const OurMission = () => {
       <Box mt={10} mb={10}>
         <Typography align="center">Vulcan Learning Platform</Typography>
       </Box>
-
+      
       <Grid
         container
-        spacing={2}
         displey="flex"
         justifyContent="center"
         alignItems="center"
+        
       >
         <Grid
           xs={12}
@@ -175,13 +106,13 @@ const OurMission = () => {
           </Typography>
           <Item sx={styles.boxTypoDescription} isSmallScreen={isSmallScreen}>
             No GPA. No SAT. No assessment. No Application. Anyone can enroll in
-            a course on the Vulcan Learning platform. We won’t turn our backs on
+            a course on the Vulcan Learning platform. We  won’t turn our backs on
             learners.
           </Item>
         </Grid>
 
         <Grid
-          xs={11}
+          xs={12}
           sm={10}
           md={6}
           lg={4}
@@ -230,7 +161,6 @@ const OurMission = () => {
           </Item>
         </Grid>
       </Grid>
-
       <Box mt={5} mb={5} onClick={() => navigate("/how-it-works")}>
         <Typography sx={styles.linkText} variant="h4" align="center">
           Learn more about how the Vulcan Learning platform works

@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import "./coursesScreen.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import { Container, Typography, styled } from "@mui/material";
+import { Container, Typography, styled, useMediaQuery, useTheme } from "@mui/material";
 import ModalComponent from "./Modal/modalComponent";
 import { styles } from "./styles";
-import image from "../../assets/images/coursesBgImage.png";
+// import { useTheme } from '@material-ui/core/styles';
+// import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const CoursesScreen = () => {
   const [open, setOpen] = useState(false);
@@ -13,6 +14,8 @@ const CoursesScreen = () => {
   const modalHandle = () => {
     setOpen(!open);
   };
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('sm')); // Change breakpoint as needed
 
   const BannerContainer = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -47,7 +50,7 @@ const CoursesScreen = () => {
 
       <div className="container-fluid">
         <div className="row">
-          <div className="col-12 courses-bg-img">
+          <div className={`col-12 ${isDesktop ? "courses-bg-img ": null}`}>
             <div className="coming-soon">
               <Box>
                 <Typography
@@ -88,6 +91,9 @@ const CoursesScreen = () => {
               </Box>
             </div>
           </div>
+          <div className={`col-12 ${!isDesktop ? "courses-bg-img2 " :  null}`}>
+
+        </div>
         </div>
       </div>
 

@@ -1,5 +1,8 @@
 export const styles = {
-  mainBox: { backgroundColor: "blue", p: "20px", color: "white" },
+  mainBox: { backgroundColor: "blue", p: "20px", color: "white" ,
+  position : "relative",
+  top:"100%"
+},
   // Sub Grid 1
   subGrid1Box: { pt: 1, pb: 0, display: "flex" },
   subGrid1BoxTypo: {
