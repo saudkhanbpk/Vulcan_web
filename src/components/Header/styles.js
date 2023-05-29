@@ -16,7 +16,7 @@ export const styles = {
     lineHeight: "51px",
     textDecoration: "none",
   },
-  menuIcon: { flexGrow: 1, display: { xs: "flex", md: "none" } },
+  menuIcon: { flexGrow: 1, display: { xs: "flex", md: "none" }, justifyContent: {xs:"flex-end"} },
   menu: {
     display: { xs: "block", md: "none" },
   },

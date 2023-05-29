@@ -20,7 +20,7 @@ export const styles = {
     justifyContent: { lg: "space-around", md: "start" },
     alignItems: "center",
   },
-  subGrid2Typo: { margin: "10px", display: "inline-block", cursor: "pointer" },
+  subGrid2Typo: { margin: {lg:"10px",md:"10px",sm:"6px",xs:"6px"}, display: "inline-block", cursor: "pointer" },
 
   // Sub Grid 3
   subGrid3Icon: {

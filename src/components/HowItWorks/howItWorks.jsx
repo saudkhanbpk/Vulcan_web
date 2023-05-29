@@ -63,7 +63,7 @@ const HowItWorks = () => {
       <Grid container  display="flex" justifyContent="center" alignItems="center">
         
           <Grid lg={5} md={5} sm={12} xs={12}  sx={{p:{xs:2}}}>
-            <Grid lg={12} flexDirection="row" display="flex" justifyContent="" alignItems="center" >
+            <Grid lg={12}  >
               <Box>
                 <Typography
                   variant="h1"
@@ -159,7 +159,7 @@ const HowItWorks = () => {
           </Grid>
         </Grid>
 
-        <Grid lg={1} md={1}  direction="column" display="flex" justifyContent="start" alignItems="center">
+        <Grid lg={1} md={1}  direction="column" display="flex" justifyContent="center" alignItems="center">
           <Box sx={{ pb: 15 }}>
             {isSmallScreen && <Divider orientation="horizontal" sx={styles.divider} />}
           </Box>

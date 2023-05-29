@@ -5,7 +5,8 @@ export const styles = {
     fontWeight: "400",
     fontSize: "40px",
     fontFamily: `${specialFont}`,
+    pt: 8,
     pb: 8,
   },
-  typoDescription: { pr: 5, pl: 5, fontWeight: "400", fontSize: "20px", pb: 3 },
+  typoDescription: { pr: {sm:5}, pl: {sm:5}, fontWeight: "400", fontSize: "20px", pb: 3 },
 };
