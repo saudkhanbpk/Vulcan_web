@@ -5,6 +5,8 @@ import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import ModalComponent from "./Modal/modalComponent";
 import { styles } from "./styles";
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const CoursesScreen = () => {
   const [open, setOpen] = useState(false);
@@ -12,6 +14,8 @@ const CoursesScreen = () => {
   const modalHandle = () => {
     setOpen(!open);
   };
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('sm')); // Change breakpoint as needed
 
   return (
     <>
@@ -21,7 +25,7 @@ const CoursesScreen = () => {
       
       <div className="container-fluid">
         <div className="row">
-          <div className="col-12 courses-bg-img">
+          <div className={`col-12 ${isDesktop ? "courses-bg-img ": null}`}>
             <div className="coming-soon">
               <Box>
                 <Typography
@@ -62,6 +66,9 @@ const CoursesScreen = () => {
               </Box>
             </div>
           </div>
+          <div className={`col-12 ${!isDesktop ? "courses-bg-img2 " :  null}`}>
+
+        </div>
         </div>
       </div>
     </>

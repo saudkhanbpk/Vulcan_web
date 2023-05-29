@@ -5,11 +5,19 @@ import { Button, Typography } from "@mui/material";
 import MoneyIcon from "../../assets/images/moneyIcon.png";
 import SharingIcon from "../../assets/images/sharingIcon.png";
 import TeachIcon from "../../assets/images/teachIcon.png";
+import becomeimg from "../../assets/images/becomeEducatorBgImg.png";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styles } from "./styles";
 
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
+
 const BecomeEducator = () => {
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('sm')); // Change breakpoint as needed
+
   const navigate = useNavigate();
   const sectionRef = useRef(null);
 
@@ -24,13 +32,13 @@ const BecomeEducator = () => {
   return (
     <>
       {/* Section 1 */}
-      <div className="bg-img">
+      <div className={isDesktop ?"bg-img" : "bg-img2"} >
         <Grid container lg={6} sx={styles.Sec1MainGrid}>
           <Grid>
-            <Typography sx={styles.boxTypo}>
+            <Typography align="center" sx={styles.boxTypo}>
               Teach Live Classes Online
             </Typography>
-            <Typography sx={styles.boxContent}>
+            <Typography align="center" sx={styles.boxContent}>
               Become an Educator on the Vulcan Platform. Enrich lives. Earn
               income.
             </Typography>
@@ -38,6 +46,7 @@ const BecomeEducator = () => {
 
           <Grid
             display="flex"
+            flexDirection= {isDesktop ? "row":"column"}
             alignItems="center"
             justifyContent="space-around"
             lg={12}
@@ -45,7 +54,7 @@ const BecomeEducator = () => {
             sm={12}
             xs={12}
           >
-            <Button variant="contained" size="small" sx={styles.textCapitalize}>
+            <Button variant="contained"  size="small" sx={styles.textCapitalize}>
               Get Started
             </Button>
 
@@ -60,6 +69,11 @@ const BecomeEducator = () => {
           </Grid>
         </Grid>
       </div>
+      <Box >
+      {!isDesktop &&
+        <img src={becomeimg} width={"100%"}  alt=""/> 
+      }
+      </Box>
 
       {/* Section 2 */}
       <Box px={5}>

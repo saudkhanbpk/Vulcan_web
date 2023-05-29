@@ -6,6 +6,9 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styles } from "./styles";
+
+
+
 const Item = styled(Paper)(({ isSmallScreen }) => ({
   textAlign: "start",
   height: isSmallScreen ? 300 : 266,
@@ -57,7 +60,7 @@ const OurMission = () => {
         sx={styles.mainGrid1}
       >
         <Grid item xs={12} sm={10} md={6} lg={6}>
-          <Box>
+          <Box >
             <img src={bringIm} className="img-fluid brinaaimg" alt="" />
           </Box>
         </Grid>
@@ -83,13 +86,13 @@ const OurMission = () => {
       <Box mt={10} mb={10}>
         <Typography align="center">Vulcan Learning Platform</Typography>
       </Box>
-
+      
       <Grid
         container
-        spacing={2}
         displey="flex"
         justifyContent="center"
         alignItems="center"
+        
       >
         <Grid
           xs={12}
@@ -116,7 +119,7 @@ const OurMission = () => {
         </Grid>
 
         <Grid
-          xs={11}
+          xs={12}
           sm={10}
           md={6}
           lg={4}
@@ -165,7 +168,6 @@ const OurMission = () => {
           </Item>
         </Grid>
       </Grid>
-
       <Box mt={5} mb={5} onClick={() => navigate("/how-it-works")}>
         <Typography sx={styles.linkText} variant="h4" align="center">
           Learn more about how the Vulcan Learning platform works

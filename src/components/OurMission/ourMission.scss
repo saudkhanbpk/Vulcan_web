@@ -85,7 +85,10 @@
 .sub-heading {
   color: #0000ff !important;
 }
-
+.brinaaimg{
+  display: flex;
+  margin: auto;
+}
 @media screen and (max-width: 1024px) {
   .mission_heading {
     z-index: 2;
@@ -104,15 +107,37 @@
 }
 @media only screen and(min-width: 200px) and(max-width: 768px) {
   .teacher_back {
-    display: none;
-  }
-  .linear_back {
+    display: block;
     background-image: url(../../assets/images/teacher.png);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
+    height: 230px;
+    width: 100%;
+    position: relative;
+    z-index: -1;
+    opacity: 3;
+  }
+  .teacher_back::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background: transparent
+  }
+  .linear_back {
+    // background-image: url(../../assets/images/teacher.png);
+    // background-repeat: no-repeat;
+    // background-size: cover;
     height: 460px;
+    background-color: white;
   }
   .ourmiss {
     left: 5%;
+  }
+  .brinaaimg{
+    // padding: 20px;
+    margin-left: 8px;
   }
 }

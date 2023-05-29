@@ -11,7 +11,7 @@ export const styles = {
     pr: 3,
   },
   boxTypo: {
-    fontSize: { lg: "40px", sm: "33px", xs: "25px" },
+    fontSize: { lg: "40px", sm: "33px", xs: "30px" },
     marginTop: "40px",
     justifyContent: "center",
     fontWeight: 700,
