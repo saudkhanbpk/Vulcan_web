@@ -72,6 +72,7 @@ const OurMission = () => {
               rising costs, long timeframes, unsatisfactory outcomes, and high
               barriers to entry.
             </Typography>
+            
             <Box mt={5}>
               <Typography align="start" fontSize={24} variant="paragraph">
                 We asked the question: What would an education system that works
@@ -113,7 +114,7 @@ const OurMission = () => {
           </Typography>
           <Item sx={styles.boxTypoDescription} isSmallScreen={isSmallScreen}>
             No GPA. No SAT. No assessment. No Application. Anyone can enroll in
-            a course on the Vulcan Learning platform. We won’t turn our backs on
+            a course on the Vulcan Learning platform. We  won’t turn our backs on
             learners.
           </Item>
         </Grid>
