@@ -13,7 +13,7 @@ import Stack from "@mui/material/Stack";
 import logo from "../../assets/images/Logo.png";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { styles } from "./styles";
+import { styles,MenuStyle } from "./styles";
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -39,8 +39,8 @@ const Navbar = () => {
     <AppBar sx={styles.appBar} position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box sx={styles.logo}>
-            <img src={logo} className=" img-fluid logoImage" alt="" />
+          <Box sx={styles.logo}  >
+            <img src={logo}  className=" img-fluid logoImage" alt="" />
           </Box>
           <Typography
             noWrap
@@ -60,6 +60,7 @@ const Navbar = () => {
             <Typography
               variant="h5"
               noWrap
+              href="/"
               component="a"
               sx={styles.xsLogoName}
             >
@@ -75,15 +76,18 @@ const Navbar = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
+              
             >
               <MenuIcon />
             </IconButton>
-            <Menu
+            <MenuStyle
               id="menu-appbar"
+              
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "right",
+                
               }}
               keepMounted
               transformOrigin={{
@@ -93,12 +97,14 @@ const Navbar = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={styles.menu}
+              
             >
               <MenuItem
                 onClick={() => {
                   navigate("/about");
                   handleCloseNavMenu();
                 }}
+                
               >
                 <Typography
                   variant="body2"
@@ -178,7 +184,7 @@ const Navbar = () => {
                   </Button>
                 </MenuItem>
               </Box>
-            </Menu>
+            </MenuStyle>
           </Box>
 
           <Box sx={styles.xsMenuBox}>

@@ -1,5 +1,5 @@
+import { Menu,styled} from '@mui/material';
 import { specialFont } from "../../Theme/fontFamily";
-
 export const styles = {
   appBar: {
     backgroundColor: "white",
@@ -38,6 +38,8 @@ export const styles = {
     flexGrow: 1,
     fontFamily: `${specialFont} !important`,
     fontWeight: 700,
+
+
     letterSpacing: ".3rem",
     color: "inherit",
     textDecoration: "none",
@@ -47,3 +49,8 @@ export const styles = {
   rightBox: { flexGrow: 1, display: { xs: "none", md: "flex" } },
   rightBoxBecomeEdLink: { ml: 2, border: "none", textTransform: "capitalize" },
 };
+export const MenuStyle = styled(Menu)(({theme})=>({
+  [theme.breakpoints.down("sm")]:{
+    borderRadius: "30px ",
+  }
+}))
