@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./coursesScreen.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import { Container, Typography, styled, useMediaQuery, useTheme } from "@mui/material";
+import {  Typography,  useMediaQuery, useTheme } from "@mui/material";
 import ModalComponent from "./Modal/modalComponent";
 import { styles } from "./styles";
 
@@ -15,33 +15,6 @@ const CoursesScreen = () => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm')); // Change breakpoint as needed
 
-  const BannerContainer = styled(Box)(({ theme }) => ({
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    [theme.breakpoints.up("md")]: {
-      flexDirection: "row",
-    },
-  }));
-
-  // const Header = styled(Typography)(({ theme }) => ({
-  //   fontWeight: "bold",
-  //   marginBottom: theme.spacing(2),
-  // }));
-
-  // const Paragraph = styled(Typography)(({ theme }) => ({
-  //   marginBottom: theme.spacing(2),
-  // }));
-
-  const Image = styled("img")({
-    width: "100%",
-    height: "90vh",
-  });
-  const RightSide = styled(Box)(({ theme }) => ({
-    flex:1,
-    // zIndex:1,
-
-  }))
   return (
     <>
       <ModalComponent open={open} setOpen={setOpen} coursesModal={true} />

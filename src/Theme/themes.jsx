@@ -92,6 +92,7 @@ const theme = createTheme({
       lineHeight: "22px",
       fontFamily: "Inter",
     },
+    
   },
   components: {
     MuiButton: {

@@ -75,6 +75,7 @@ const Navbar = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
+              curser="pointer"
             >
               <MenuIcon />
             </IconButton>
@@ -94,92 +95,94 @@ const Navbar = () => {
               onClose={handleCloseNavMenu}
               sx={styles.menu}
             >
-              <MenuItem
-                onClick={() => {
-                  navigate("/about");
-                  handleCloseNavMenu();
-                }}
-              >
-                <Typography
-                  variant="body2"
-                  sx={styles.capitalize}
-                  textAlign="center"
+             
+                <MenuItem
+                  onClick={() => {
+                    navigate("/about");
+                    handleCloseNavMenu();
+                  }}
                 >
-                  About
-                </Typography>
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  navigate("/how-it-works");
-                  handleCloseNavMenu();
-                }}
-              >
-                <Typography
-                  variant="body2"
-                  sx={styles.capitalize}
-                  textAlign="center"
+                  <Typography
+                    variant="body2"
+                    sx={styles.capitalize}
+                    textAlign="center"
+                  >
+                    About
+                  </Typography>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    navigate("/how-it-works");
+                    handleCloseNavMenu();
+                  }}
                 >
-                  How it Works
-                </Typography>
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  navigate("/courses");
-                  handleCloseNavMenu();
-                }}
-              >
-                <Typography
-                  variant="body2"
-                  sx={styles.capitalize}
-                  textAlign="center"
+                  <Typography
+                    variant="body2"
+                    sx={styles.capitalize}
+                    textAlign="center"
+                  >
+                    How it Works
+                  </Typography>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    navigate("/courses");
+                    handleCloseNavMenu();
+                  }}
                 >
-                  Courses
-                </Typography>
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  navigate("/become-educator");
-                  handleCloseNavMenu();
-                }}
-              >
-                <Typography
-                  variant="body2"
-                  sx={styles.capitalize}
-                  textAlign="center"
+                  <Typography
+                    variant="body2"
+                    sx={styles.capitalize}
+                    textAlign="center"
+                  >
+                    Courses
+                  </Typography>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    navigate("/become-educator");
+                    handleCloseNavMenu();
+                  }}
                 >
-                  Become Educator
-                </Typography>
-              </MenuItem>
+                  <Typography
+                    variant="body2"
+                    sx={styles.capitalize}
+                    textAlign="center"
+                  >
+                    Become Educator
+                  </Typography>
+                </MenuItem>
 
-              <Box display="flex" justifyContent="space-around">
-                <MenuItem>
-                  <Button
-                    onClick={() => {
-                      navigate("/login");
-                      handleCloseNavMenu();
-                    }}
-                    variant="outlined"
-                    color="secondary"
-                    sx={styles.capitalize}
-                  >
-                    Log in
-                  </Button>
-                </MenuItem>
-                <MenuItem>
-                  <Button
-                    onClick={() => {
-                      navigate("/signup");
-                      handleCloseNavMenu();
-                    }}
-                    variant="contained"
-                    sx={styles.capitalize}
-                  >
-                    SignUp
-                  </Button>
-                </MenuItem>
-              </Box>
+                <Box display="flex" justifyContent="space-around">
+                  <MenuItem>
+                    <Button
+                      onClick={() => {
+                        navigate("/login");
+                        handleCloseNavMenu();
+                      }}
+                      variant="outlined"
+                      color="secondary"
+                      sx={styles.capitalize}
+                    >
+                      Log in
+                    </Button>
+                  </MenuItem>
+                  <MenuItem>
+                    <Button
+                      onClick={() => {
+                        navigate("/signup");
+                        handleCloseNavMenu();
+                      }}
+                      variant="contained"
+                      sx={styles.capitalize}
+                    >
+                      SignUp
+                    </Button>
+                  </MenuItem>
+                </Box>
+              
             </Menu>
-          </Box>
+            </Box>
 
           <Box sx={styles.xsMenuBox}>
             <Link as={Link} to="/about" className="nav_liddd">
