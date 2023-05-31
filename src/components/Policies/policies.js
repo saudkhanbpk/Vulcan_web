@@ -4,11 +4,12 @@ import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { FiberManualRecord as BulletIcon } from "@mui/icons-material";
 
 const MyList = () => {
+ 
   return (
-    <List>
+    <List sx={{width:"90%"}}>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Defame, abuse, harass in any form, harm, stalk, threaten or otherwise violate the legal rights (including without limitation rights of privacy and publicity) of others."
@@ -19,7 +20,7 @@ const MyList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Create, upload, post, send, receive or store any false, misleading, profane, defamatory, infringing, hateful, distasteful, obscene or unlawful topic, name, information, materials or content."
@@ -30,7 +31,7 @@ const MyList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Use the Site for any purpose that is in violation of local, state, national, or international law, including without limitation wage/hour and working condition laws and regulations."
@@ -41,7 +42,7 @@ const MyList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Create an account or accounts on the Site for fraudulent purposes, or for the purpose of misusing the Site, including without limitation misappropriating the Site or any information on the Site for your own commercial or pecuniary gain.
@@ -53,7 +54,7 @@ const MyList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Upload files that contain software or other content that violates the rights of any third party, including without limitation intellectual property rights or rights of privacy or publicity.          "
@@ -64,7 +65,7 @@ const MyList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Upload files that contain viruses, Trojan horses, worms, time bombs, spiders, cancel bots, corrupted files, or any other similar software, malware or content that may damage, interfere with, disrupt, impair, disable or otherwise overburden the operation of any device, computer system or network.          "
@@ -75,7 +76,7 @@ const MyList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Take any action that would undermine any aspect of the Site."
@@ -86,7 +87,7 @@ const MyList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Attempt to gain unauthorized access to the Site, other User accounts, or other device, computer system or networks connected to the Site.          "
@@ -97,7 +98,7 @@ const MyList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Advertise or offer to sell any goods or services for any commercial purpose on the Site that are not appropriate or relevant to the Site.          "
@@ -108,7 +109,7 @@ const MyList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Impersonate another person or allow any other person or entity to impersonate you or use your credentials to access the Site.          "
@@ -119,7 +120,7 @@ const MyList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Post the same content repeatedly or spam - spamming is strictly prohibited"
@@ -130,7 +131,7 @@ const MyList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Download, copy or transmit any file posted by another User that you know, or reasonably should know, cannot be legally published through the Site          "
@@ -141,7 +142,7 @@ const MyList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Access, download, or copy any information, content and/or materials from the Site through artificial means (including without limitation spiders, scrapers, hacking devices, computer programs, bots, web spoofing, URL rewriting or other such means).          "
@@ -152,7 +153,7 @@ const MyList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary=" Reproduce, duplicate, copy, sell, re-sell or exploit any information, materials or content on Site; or          "
@@ -163,7 +164,7 @@ const MyList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary=" Restrict or inhibit any other User from using and enjoying the Site         "
@@ -229,7 +230,7 @@ export default function Policies() {
           <Title variant="h5">2. Privacy Policy</Title>
           <Description variant="body3">
             Please refer to the Vulcan Privacy Policy at{" "}
-            <a href="/">https://www.vulcanlearninginstitute.com/privacy</a> for
+            <a style={{wordWrap: 'break-word'}} href="/">https://www.vulcanlearninginstitute.com/privacy</a> for
             information on how Vulcan collects, uses and discloses information
             about you.
           </Description>
@@ -448,7 +449,8 @@ export default function Policies() {
             third party verification service is inaccurate. When a third party
             verification service is used, you warrant that you will comply with
             the Fair Credit Reporting Act, 15 USC 1681. See
-            <a href="/">
+            <a style={{wordWrap: 'break-word'}} href="/">
+            
               {" "}
               http://www.consumer.ftc.gov/articles/pdf-0111-fair-credit-reporting-act.pdf{" "}
             </a>

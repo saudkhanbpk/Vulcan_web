@@ -5,13 +5,13 @@ import { specialFont } from "../../Theme/fontFamily";
 export const styles = {
    listItemText:{
       textAlign:"center",
-      fontSize: "20px",
+      fontSize: "16px",
       fontWeight: 400,
       fontFamily: "Inter",
    },
    heading:{
       fontFamily: `${specialFont} !important`,
-      fontSize: "40px",
+      fontSize: "30px",
       fontWeight: 400,
       lineHeight: "51px",
       textDecoration: "none",
@@ -22,13 +22,14 @@ export const MainContainer = styled(Box)(({ theme }) => ({
   justifyContent: "flex-start",
   alignItems: "center",
   flexDirection: "column",
-//   padding: theme.spacing(5),
+  //   padding: theme.spacing(5),
 }));
 export const MainSubContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "flex-start",
   alignItems: "center",
   flexDirection: "column",
+  width:"100%"
 //   padding: theme.spacing(5),
 }));
 
@@ -51,7 +52,11 @@ export const Description = styled(Typography)(({ theme }) => ({
    // variant="body3",
    color: "black",
    padding:theme.spacing(3),
-   textAlign: "center",
+   textAlign: "justify",
+   textAlignLast: "center",
+   fontSize:"16px",
+   width:"90%",
+   wordWrap: "wrap"
    
 }));
 

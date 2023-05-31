@@ -52,7 +52,6 @@ export const styles = {
 
 
     letterSpacing: ".3rem",
-    color: "inherit",
     textDecoration: "none",
     
   },
