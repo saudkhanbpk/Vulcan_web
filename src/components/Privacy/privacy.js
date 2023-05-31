@@ -13,10 +13,10 @@ import { FiberManualRecord as BulletIcon } from "@mui/icons-material";
 
 const InfoList = () => {
   return (
-    <List>
+    <List sx={{width: "90%"}}>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="registration information when you create a User account
@@ -28,7 +28,7 @@ const InfoList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="profile information, such as city and state, educational level or background, and educational subjects          "
@@ -39,7 +39,7 @@ const InfoList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="uploaded content (photographs, essays, lessons, etc.)"
@@ -50,7 +50,7 @@ const InfoList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="lesson recordings (if you have consented to recording of lessons)"
@@ -60,8 +60,8 @@ const InfoList = () => {
         />
       </ListItem>
       <ListItem>
-        <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+        <ListItemIcon sx={{ minWidth: "10px", padding: 0 }}>
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="video answers          "
@@ -72,7 +72,7 @@ const InfoList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="questions, comments, or other information when you communicate with us, by phone, email, or via third party social media sites, or participate in interactive features of the Service (including Customer Support messages and online tool chat messages)"
@@ -86,10 +86,10 @@ const InfoList = () => {
 };
 const InfoUsage = () => {
   return (
-    <List>
+    <List sx={{width: "90%"}}>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Account creation and to provide the Service, including without limitation, access to previous lessons, instructor-matching services, information about prospective instructors, and facilitating communication directly between students and instructors.          "
@@ -100,7 +100,7 @@ const InfoUsage = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="To process transactions and billing.          "
@@ -109,20 +109,10 @@ const InfoUsage = () => {
           }}
         />
       </ListItem>
+     
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
-        </ListItemIcon>
-        <ListItemText
-          primary=" "
-          primaryTypographyProps={{
-            sx: styles.listItemText,
-          }}
-        />
-      </ListItem>
-      <ListItem>
-        <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary=" For identification and authentication purposes."
@@ -133,7 +123,7 @@ const InfoUsage = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary=" To communicate with you concerning the Service, User requests, transactions, security, privacy and administrative issues relating to your use of the Service, and services that we think may be of interest to you."
@@ -144,7 +134,7 @@ const InfoUsage = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary=" Process and deliver contest and sweepstakes entries and rewards and verify eligibility."
@@ -156,7 +146,7 @@ const InfoUsage = () => {
 
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="Personalize and improve the Service and deliver and display targeted advertisements on our Service, content or features in the Service and on other sites or apps."
@@ -168,7 +158,7 @@ const InfoUsage = () => {
 
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="For administration of and troubleshooting regarding the System."
@@ -182,10 +172,10 @@ const InfoUsage = () => {
 };
 const RightToKnowList = () => {
   return (
-    <List>
+    <List sx={{width: "90%"}}>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="The categories of personal information we have collected about you."
@@ -196,7 +186,7 @@ const RightToKnowList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="The categories of sources from which the personal information is collected."
@@ -207,7 +197,7 @@ const RightToKnowList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="The business or commercial purpose for collecting your personal information."
@@ -218,7 +208,7 @@ const RightToKnowList = () => {
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="The categories of third parties with whom we have shared your personal information."
@@ -226,11 +216,10 @@ const RightToKnowList = () => {
             sx: styles.listItemText,
           }}
         />
-        <Description variant="body3"> and</Description>
       </ListItem>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
+          <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
         </ListItemIcon>
         <ListItemText
           primary="The speciﬁc pieces of personal information we have collected about you."
@@ -239,28 +228,8 @@ const RightToKnowList = () => {
           }}
         />
       </ListItem>
-      <ListItem>
-        <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
-        </ListItemIcon>
-        <ListItemText
-          primary=""
-          primaryTypographyProps={{
-            sx: styles.listItemText,
-          }}
-        />
-      </ListItem>
-      <ListItem>
-        <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
-          <BulletIcon sx={{ fontSize: "20px", color: "black" }} />
-        </ListItemIcon>
-        <ListItemText
-          primary=""
-          primaryTypographyProps={{
-            sx: styles.listItemText,
-          }}
-        />
-      </ListItem>
+     
+      
     </List>
   );
 };
