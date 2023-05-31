@@ -1,5 +1,5 @@
 import React from "react";
-import { Description, Heading, styles, MainContainer, Title } from "./styles";
+import { Description, Heading, styles, MainContainer, Title, MainSubContainer } from "./styles";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { FiberManualRecord as BulletIcon } from "@mui/icons-material";
 
@@ -181,7 +181,7 @@ export default function Policies() {
     <div>
       <MainContainer>
         <Heading variant="" sx={styles.heading}>Terms, Conditions, and Policies</Heading>
-        <MainContainer>
+        <MainSubContainer>
           <Description variant="body3">
             These Terms of Use (“Terms”) govern your use of the Vulcan website
             (“Site”) at www.vulcanlearninginstitute.com, any mobile device
@@ -812,7 +812,7 @@ export default function Policies() {
           </Description>
 
           {/* ================================================================================================= */}
-        </MainContainer>
+        </MainSubContainer>
       </MainContainer>
     </div>
   );
