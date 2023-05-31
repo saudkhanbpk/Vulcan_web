@@ -6,8 +6,6 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
 import logo from "../../assets/images/Logo.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -108,7 +106,7 @@ const Navbar = () => {
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: "bottom",
-                horizontal: "right",
+                // horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
@@ -118,6 +116,12 @@ const Navbar = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={styles.menu}
+              PaperProps={{
+                className: 'css-1ka5eyc-MuiPaper-root-MuiMenu-paper-MuiPopover-paper',
+                sx: {
+                  borderRadius: '20px !important',
+                },
+              }}
             >
               <Box
                 display="flex"
