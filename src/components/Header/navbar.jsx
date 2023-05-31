@@ -13,7 +13,8 @@ import Stack from "@mui/material/Stack";
 import logo from "../../assets/images/Logo.png";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { styles } from "./styles";
+import { styles,MenuStyle } from "./styles";
+import './navbar.scss';
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -26,6 +27,9 @@ const Navbar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+  const navigateToHome = () =>{
+    navigate("/");
+  }
 
   // Custom Button
   const NavLinksButton = styled(Button)(({ theme }) => ({
@@ -34,32 +38,39 @@ const Navbar = () => {
     fontWeight: "bold !important",
     lineHeight: "24px !important",
   }));
-
+  // const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  //   '&:hover': {
+  //     backgroundColor: theme.palette.primary.main, // Change this to your desired hover color
+  //   },
+  // }));
+  
   return (
     <AppBar sx={styles.appBar} position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box sx={styles.logo}>
-            <img src={logo} className=" img-fluid logoImage" alt="" />
+          <Box sx={styles.logo} onClick={navigateToHome} curser="pointer" >
+            <img src={logo}  className=" img-fluid logoImage" alt="" />
           </Box>
           <Typography
             noWrap
             component="a"
-            href="/"
+            onClick={navigateToHome}
             color="primary"
             sx={styles.logoTypo}
+            curser="pointer"
           >
             Vulcan
           </Typography>
 
           {/* Small Devices */}
           <Box sx={styles.xsLogoMainBox}>
-            <Box sx={styles.xsLogo}>
+            <Box sx={styles.xsLogo} onClick={navigateToHome}>
               <img src={logo} className=" img-fluid logoImage" alt="" />
             </Box>
             <Typography
               variant="h5"
               noWrap
+              onClick={navigateToHome}
               component="a"
               sx={styles.xsLogoName}
             >
@@ -79,12 +90,14 @@ const Navbar = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Menu
+            <MenuStyle
               id="menu-appbar"
+              
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "right",
+                
               }}
               keepMounted
               transformOrigin={{
@@ -94,9 +107,11 @@ const Navbar = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={styles.menu}
+              
             >
              
                 <MenuItem
+                className="menu-item" 
                   onClick={() => {
                     navigate("/about");
                     handleCloseNavMenu();
@@ -181,7 +196,7 @@ const Navbar = () => {
                   </MenuItem>
                 </Box>
               
-            </Menu>
+            </MenuStyle>
             </Box>
 
           <Box sx={styles.xsMenuBox}>

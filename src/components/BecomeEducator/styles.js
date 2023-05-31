@@ -9,13 +9,15 @@ export const styles = {
     position: "absolute",
     pl: 3,
     pr: 3,
+    
   },
   boxTypo: {
     fontSize: { lg: "40px", sm: "33px", xs: "30px" },
-    marginTop: "40px",
+    marginTop: "45px",
     justifyContent: "center",
     fontWeight: 700,
-    lineHeight: "48px",
+    lineHeight: "35px",
+   
   },
   boxContent: {
     fontSize: { lg: "26px", sm: "24px", xs: "18px" },
@@ -25,28 +27,36 @@ export const styles = {
   textCapitalize: { textTransform: "capitalize" },
 
   // Section 2 style
-  Sec2Box: { pt: "60px", pb: "10px" },
+  Sec2Box: { pt: "60px", pb: "0px" },
   Sec2Typo: {
     width: { lg: "900px" },
-    height: "44px",
+    height: "auto",
     lineHeight: "44px",
     fontSize: "36px",
     fontWeight: 700,
     textAlign: "start",
+   
+
   },
   // Sec2MainGrid: { display: "flex", justifyContent: "start", alignItems: "start" },
   // Sec2SubGrid:{ display: "flex", justifyContent: "center", alignItems: "center" },
-  subGridImgBox: { width: "150px", height: "150px" },
+  subGridImgBox: { width: "150px", height: "150px",marginTop:"0px", 
+ 
+},
   subgridTypoHeading: {
     fontSize: "32px",
     fontWeight: 700,
     textAlign: "center",
     marginTop: "40px",
+   
+
   },
   subgridTypoDescription: {
     fontSize: "24px",
     fontWeight: 600,
     textAlign: "center",
     marginTop: "25px",
+    height:"auto",
+   
   },
 };

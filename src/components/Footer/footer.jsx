@@ -44,12 +44,14 @@ const Footer = () => {
             justifyContent="space-around"
             alignItems="center"
           >
+             <Typography variant="h6" sx={styles.subGrid2Typo} onClick={()=>navigate('/policies')}>
+              Policies
+            </Typography>
+
             <Typography variant="h6" sx={styles.subGrid2Typo}  onClick={()=>navigate('/privacy')} >
               Privacy
             </Typography>
-            <Typography variant="h6" sx={styles.subGrid2Typo} onClick={()=>navigate('/policy')}>
-              Policy
-            </Typography>
+           
             <Typography variant="h6" sx={styles.subGrid2Typo} onClick={()=>navigate('/contact')}>
               Contact
             </Typography>

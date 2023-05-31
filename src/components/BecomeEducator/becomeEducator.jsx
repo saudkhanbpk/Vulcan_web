@@ -34,7 +34,7 @@ const BecomeEducator = () => {
       {/* Section 1 */}
       <div className={isDesktop ?"bg-img" : "bg-img2"} >
         <Grid container lg={6} sx={styles.Sec1MainGrid}>
-          <Grid>
+          <Grid >
             <Typography align="center" sx={styles.boxTypo}>
               Teach Live Classes Online
             </Typography>
@@ -46,7 +46,7 @@ const BecomeEducator = () => {
 
           <Grid
             display="flex"
-            flexDirection= {isDesktop ? "row":"column"}
+            flexDirection= "row"
             alignItems="center"
             justifyContent="space-around"
             lg={12}
@@ -96,12 +96,14 @@ const BecomeEducator = () => {
             md={4}
             xs={12}
             sx={{
-              height: { sm: "auto", xs: "auto", md: "371px", lg: "371px" },
+              height:  "auto" ,
             }}
             display="flex"
             flexDirection="column"
             justifyContent="start"
             alignItems="center"
+            marginTop={isDesktop ? "20px" : "0px"}
+
           >
             <Box sx={styles.subGridImgBox}>
               <img src={MoneyIcon} alt="dollar" />
@@ -123,11 +125,13 @@ const BecomeEducator = () => {
             sm={12}
             md={4}
             xs={12}
-            sx={{ height: "371px" }}
+            sx={{ height: "auto" }}
             display="flex"
             flexDirection="column"
             justifyContent="start"
             alignItems="center"
+            marginTop={isDesktop ? "0px" : "40px"}
+
           >
             <Box sx={styles.subGridImgBox}>
               <img src={SharingIcon} alt="" />
@@ -146,11 +150,13 @@ const BecomeEducator = () => {
             sm={12}
             md={4}
             xs={12}
-            sx={{ height: "371px" }}
+            sx={{ height: "auto" }}
             display="flex"
             flexDirection="column"
             justifyContent="start"
             alignItems="center"
+            marginTop={isDesktop ? "0px" : "40px"}
+
           >
             <Box sx={styles.subGridImgBox}>
               <img src={TeachIcon} alt="" />

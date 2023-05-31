@@ -178,7 +178,7 @@ const MyList = () => {
 
 export default function Policies() {
   return (
-    <>
+    <div>
       <MainContainer>
         <Heading variant="" sx={styles.heading}>Terms, Conditions, and Policies</Heading>
         <MainContainer>
@@ -814,6 +814,6 @@ export default function Policies() {
           {/* ================================================================================================= */}
         </MainContainer>
       </MainContainer>
-    </>
+    </div>
   );
 }

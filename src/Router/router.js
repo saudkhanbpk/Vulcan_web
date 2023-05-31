@@ -26,7 +26,7 @@ const Router = () => {
         <Route exact path="/signup" element={<SignUp />}></Route>
         <Route exact path="/login" element={<Login />}></Route>
         <Route exact path="/privacy" element={<Privacy />}></Route>
-        <Route exact path="/policy" element={<Policies />}></Route>
+        <Route exact path="/policies" element={<Policies />}></Route>
         <Route exact path="/contact" element={<Policies />}></Route>
       </Routes>
     </div>

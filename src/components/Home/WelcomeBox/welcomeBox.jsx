@@ -26,10 +26,10 @@ const Item = styled(Paper)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "space-evenly",
 
-  "@media (max-width: 480px)": {
+  "@media (max-width: 600px)": {
     textAlign: "center",
     height: 600,
-    width: 500,
+    width: 600,
     fontSize: 16,
   borderRadius: `${0} !important`,
     padding: 30,
@@ -62,6 +62,9 @@ const WelcomeBox = () => {
   // navigation handle func
   const navigateToBecomeEdu = () => {
     navigate("/become-educator");
+  };
+  const navigateToCourses = () => {
+    navigate("/courses");
   };
   const modalHandle = () => {
     setOpen(!open);
@@ -140,7 +143,7 @@ const WelcomeBox = () => {
           )}
           <Box display="flex" justifyContent="center" mt={6}>
             <Button
-              onClick={isClicked ? navigateToBecomeEdu : modalHandle}
+              onClick={isClicked ? navigateToBecomeEdu : navigateToCourses}
               variant="contained"
               sx={styles.textCapitalize}
             >

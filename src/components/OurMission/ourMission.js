@@ -48,11 +48,11 @@ const OurMission = () => {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        spacing={3}
+        // spacing={3}
         sx={styles.mainGrid1}
       >
-        <Grid xs={12} sm={10} md={6} lg={6}>
-          <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+        <Grid container xs={12} sm={10} md={6} lg={6}>
+          <Box display={"flex"}  justifyContent={"center"} alignItems={"center"}>
             <img src={bringIm} className="img-fluid brinaaimg" alt="" />
           </Box>
         </Grid>

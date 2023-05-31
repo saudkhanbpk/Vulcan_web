@@ -22,7 +22,7 @@ const CoursesScreen = () => {
       <div className="container-fluid">
         <div className="row">
           <div className={`col-12 ${isDesktop ? "courses-bg-img ": null}`}>
-            <div className="coming-soon">
+            <div className="coming-soon" style={{marginBottom:"40px"}} >
               <Box>
                 <Typography
                   color="primary"
@@ -51,7 +51,7 @@ const CoursesScreen = () => {
                   available
                 </Typography>
               </Box>
-              <Box display="flex" justifyContent="center">
+              <Box display="flex" justifyContent="center" pb={4}>
                 <Button
                   onClick={modalHandle}
                   variant="contained"
