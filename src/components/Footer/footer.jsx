@@ -5,8 +5,10 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import { Typography, Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styles } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Box sx={styles.mainBox}>
@@ -42,13 +44,15 @@ const Footer = () => {
             justifyContent="space-around"
             alignItems="center"
           >
-            <Typography variant="h6" sx={styles.subGrid2Typo}>
+             <Typography variant="h6" sx={styles.subGrid2Typo} onClick={()=>navigate('/policies')}>
+              Policies
+            </Typography>
+
+            <Typography variant="h6" sx={styles.subGrid2Typo}  onClick={()=>navigate('/privacy')} >
               Privacy
             </Typography>
-            <Typography variant="h6" sx={styles.subGrid2Typo}>
-              Policy
-            </Typography>
-            <Typography variant="h6" sx={styles.subGrid2Typo}>
+           
+            <Typography variant="h6" sx={styles.subGrid2Typo} onClick={()=>navigate('/contact')}>
               Contact
             </Typography>
           </Grid>

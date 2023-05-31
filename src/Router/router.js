@@ -9,6 +9,8 @@ import LearnerFaq from "../components/HowItWorks/Faq/learnerFaq";
 import CoursesScreen from "../components/CoursesScreen/coursesScreen";
 import SignUp from "../components/Auth/SignUp/signUp";
 import Login from "../components/Auth/Login/login";
+import Privacy from "../components/Privacy/privacy";
+import Policies from "../components/Policies/policies";
 
 const Router = () => {
   return (
@@ -23,6 +25,9 @@ const Router = () => {
         <Route exact path="/learner-faq" element={<LearnerFaq />}></Route>
         <Route exact path="/signup" element={<SignUp />}></Route>
         <Route exact path="/login" element={<Login />}></Route>
+        <Route exact path="/privacy" element={<Privacy />}></Route>
+        <Route exact path="/policies" element={<Policies />}></Route>
+        <Route exact path="/contact" element={<Policies />}></Route>
       </Routes>
     </div>
   );

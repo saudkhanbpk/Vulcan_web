@@ -63,6 +63,9 @@ const WelcomeBox = () => {
   const navigateToBecomeEdu = () => {
     navigate("/become-educator");
   };
+  const navigateToCourses = () => {
+    navigate("/courses");
+  };
   const modalHandle = () => {
     setOpen(!open);
   };
@@ -140,7 +143,7 @@ const WelcomeBox = () => {
           )}
           <Box display="flex" justifyContent="center" mt={6}>
             <Button
-              onClick={isClicked ? navigateToBecomeEdu : modalHandle}
+              onClick={isClicked ? navigateToBecomeEdu : navigateToCourses}
               variant="contained"
               sx={styles.textCapitalize}
             >

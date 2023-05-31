@@ -34,7 +34,7 @@ const BecomeEducator = () => {
       {/* Section 1 */}
       <div className={isDesktop ?"bg-img" : "bg-img2"} >
         <Grid container lg={6} sx={styles.Sec1MainGrid}>
-          <Grid>
+          <Grid >
             <Typography align="center" sx={styles.boxTypo}>
               Teach Live Classes Online
             </Typography>

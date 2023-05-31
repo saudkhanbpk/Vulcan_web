@@ -9,6 +9,7 @@ export const styles = {
     position: "absolute",
     pl: 3,
     pr: 3,
+    
   },
   boxTypo: {
     fontSize: { lg: "40px", sm: "33px", xs: "30px" },
@@ -16,6 +17,7 @@ export const styles = {
     justifyContent: "center",
     fontWeight: 700,
     lineHeight: "35px",
+   
   },
   boxContent: {
     fontSize: { lg: "26px", sm: "24px", xs: "18px" },

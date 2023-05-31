@@ -6,7 +6,7 @@ export const styles = {
     color: "blue",
     textTransform: "capitalize",
   },
-  logo: { display: { xs: "none", md: "flex" }, mr: 0, mb: 0 },
+  logo: { display: { xs: "none", md: "flex" }, mr: 0, mb: 0, curser:"pointer" },
   logoTypo: {
     mb: 0,
     display: { xs: "none", md: "flex" },
@@ -16,7 +16,11 @@ export const styles = {
     lineHeight: "51px",
     textDecoration: "none",
   },
-  menuIcon: { flexGrow: 1, display: { xs: "flex", md: "none" }, justifyContent: {xs:"flex-end"} },
+  menuIcon: {
+    flexGrow: 1,
+    display: { xs: "flex", md: "none" },
+    justifyContent: { xs: "flex-end" },
+  },
   menu: {
     display: { xs: "block", md: "none" },
   },
@@ -58,5 +62,6 @@ export const styles = {
 export const MenuStyle = styled(Menu)(({theme})=>({
   [theme.breakpoints.down("sm")]:{
     borderRadius: "30px ",
+   
   }
 }))
