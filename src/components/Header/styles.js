@@ -5,6 +5,7 @@ export const styles = {
     backgroundColor: "white",
     color: "blue",
     textTransform: "capitalize",
+    
   },
   logo: { display: { xs: "none", md: "flex" }, mr: 0, mb: 0, curser:"pointer" },
   logoTypo: {
@@ -20,12 +21,14 @@ export const styles = {
     flexGrow: 1,
     display: { xs: "flex", md: "none" },
     justifyContent: { xs: "flex-end" },
+    // border:"green 1px solid",
+  
   },
   menu: {
     display: { xs: "block", md: "none" },
-    // display: { xs: "flex", md: "flex" },
-    // justifyContent: {xs:"flex-Start"},
-    // alignItems:"center"
+    marginTop:"4px", 
+    // border:"red 1px solid",
+
   },
   capitalize: { 
     textTransform: "capitalize",

@@ -82,6 +82,7 @@ const Navbar = () => {
               variant="h5"
               noWrap
               onClick={navigateToHome}
+              color="primary"
               component="a"
               sx={styles.xsLogoName}
             >
@@ -123,68 +124,50 @@ const Navbar = () => {
                 flexDirection="column"
                 justifyContent="flex-start"
                 alignItems="flex-start"
-                sx={{ pl: "10px", pr: "10px" }}
+                sx={{ pl: "10px", pr: "10px",}}
               >
-                {/* <MenuItem
-                className="menu-item"
-                onClick={() => {
-                  navigate("/about");
-                  handleCloseNavMenu();
-                }}
-              > */}
-                <SmNavlink onClick={() => {
-                  navigate("/about");
-                  handleCloseNavMenu();
-                }} variant="body2">About</SmNavlink>
-                {/* </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  navigate("/how-it-works");
-                  handleCloseNavMenu();
-                }}
-              > */}
-                <SmNavlink  onClick={() => {
-                  navigate("/how-it-works");
-                  handleCloseNavMenu();
-                }} variant="body2">How it Works</SmNavlink>
-                {/* </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  navigate("/courses");
-                  handleCloseNavMenu();
-                }}
-              > */}
-                <SmNavlink  onClick={() => {
-                  navigate("/courses");
-                  handleCloseNavMenu();
-                }} variant="body2">Courses</SmNavlink>
-                {/* </MenuItem> */}
-                {/* <MenuItem
-                onClick={() => {
-                  navigate("/become-educator");
-                  handleCloseNavMenu();
-                }}
-              > */}
-                <SmNavlink  onClick={() => {
-                  navigate("/become-educator");
-                  handleCloseNavMenu();
-                }} variant="body2">Become Educator</SmNavlink>
-                {/* </MenuItem> */}
+                <SmNavlink
+                  onClick={() => {
+                    navigate("/about");
+                    handleCloseNavMenu();
+                  }}
+                  variant="body2"
+                >
+                  About
+                </SmNavlink>
+
+                <SmNavlink
+                  onClick={() => {
+                    navigate("/how-it-works");
+                    handleCloseNavMenu();
+                  }}
+                  variant="body2"
+                >
+                  How it Works
+                </SmNavlink>
+
+                <SmNavlink
+                  onClick={() => {
+                    navigate("/courses");
+                    handleCloseNavMenu();
+                  }}
+                  variant="body2"
+                >
+                  Courses
+                </SmNavlink>
+
+                <SmNavlink
+                  onClick={() => {
+                    navigate("/become-educator");
+                    handleCloseNavMenu();
+                  }}
+                  variant="body2"
+                >
+                  Become Educator
+                </SmNavlink>
               </Box>
 
               <Box display="flex" justifyContent="space-around" pt="20px">
-                {/* <MenuItem> */}
-                {/* <Button
-                    onClick={() => {
-                      navigate("/login");
-                      handleCloseNavMenu();
-                    }}
-                    variant="outlined"
-                    color="secondary"
-                    sx={styles.capitalize}
-                  >
-                    Log in
-                  </Button> */}
                 <AuthButton
                   onClick={() => {
                     navigate("/login");
@@ -193,18 +176,7 @@ const Navbar = () => {
                 >
                   Login
                 </AuthButton>
-                {/* </MenuItem>
-                <MenuItem> */}
-                {/* <Button
-                    onClick={() => {
-                      navigate("/signup");
-                      handleCloseNavMenu();
-                    }}
-                    variant="contained"
-                    sx={styles.capitalize}
-                  >
-                    SignUp
-                  </Button> */}
+
                 <AuthButton
                   onClick={() => {
                     navigate("/signup");
@@ -214,7 +186,6 @@ const Navbar = () => {
                 >
                   Sign Up
                 </AuthButton>
-                {/* </MenuItem> */}
               </Box>
             </MenuStyle>
           </Box>
@@ -231,7 +202,6 @@ const Navbar = () => {
           </Box>
 
           <Box
-            // sx={{ flexGrow: 0 }}
             display="flex"
             justifyContent="flex-end"
             alignItems="center"
@@ -241,16 +211,11 @@ const Navbar = () => {
               <Span onClick={() => navigate("/about")}>
                 <NavLink color="secondary"> Become Educator</NavLink>
               </Span>
-              {/* <Link as={Link} to="/login"> */}
-              {/* <Button
-                  variant="outlined"
-                  color="secondary"
-                  sx={styles.capitalize}
-                >
-                  Log in
-                </Button> */}
+
+
+              <Link as={Link} to="/login">
               <AuthButton>Login</AuthButton>
-              {/* </Link> */}
+              </Link>
 
               <Link as={Link} to="/signup">
                 <AuthButton signup="true">Sign Up</AuthButton>
@@ -264,12 +229,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-// const AuthButton = styled.button`{
-//   borderRadius: "30px",
-//   border: "1px solid black",
-//   fontFamily: "Inter, sans-serif",
-//   fontWeight: 800,
-//   height: "40px",
-// }
-// `
