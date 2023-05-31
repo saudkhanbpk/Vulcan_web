@@ -1,14 +1,17 @@
 export const styles = {
-  mainBox: { backgroundColor: "blue", p: "20px", color: "white" ,
-  position : "relative",
-  top:"100%"
-},
+  mainBox: {
+    backgroundColor: "blue",
+    p: "20px",
+    color: "white",
+    position: "relative",
+    top: "100%",
+  },
   // Sub Grid 1
   subGrid1Box: { pt: 1, pb: 0, display: "flex" },
   subGrid1BoxTypo: {
     fontSize: { lg: "30px", sm: "27px", xs: "21px" },
     fontWeight: "400",
-    marginTop: { lg: "4px", xs: "10px" },
+    marginTop: { lg: "4px", xs: "0" },
   },
   subGrid1Typo: {
     display: "inline-block",
@@ -23,20 +26,30 @@ export const styles = {
     justifyContent: { lg: "space-around", md: "start" },
     alignItems: "center",
   },
-  subGrid2Typo: { margin: {lg:"10px",md:"10px",sm:"6px",xs:"6px"}, display: "inline-block", cursor: "pointer" },
+  subGrid2Typo: {
+    margin: { lg: "10px", md: "10px", sm: "6px", xs: "6px" },
+    display: "inline-block",
+    cursor: "pointer",
+    fontSize: "18px !important",
+  },
 
   // Sub Grid 3
   subGrid3Icon: {
-    marginTop: "21px",
-    justifyContent: "center",
     display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "white",
-    width: "50px",
-    height: "50px",
-    padding: "10px",
+    width: {
+      lg:"50px",
+      sx:"35px"
+    },
+    height: {
+      lg:"50px",
+      sx:"35px"
+    },
+    padding: "5px",
     color: "blue",
     borderRadius: "10px",
     cursor: "pointer",
-    marginLeft: { lg: "60px", xs: "10px" },
   },
 };
