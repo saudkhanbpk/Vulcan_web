@@ -22,7 +22,14 @@ export const MainContainer = styled(Box)(({ theme }) => ({
   justifyContent: "flex-start",
   alignItems: "center",
   flexDirection: "column",
-  padding: theme.spacing(5),
+//   padding: theme.spacing(5),
+}));
+export const MainSubContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "flex-start",
+  alignItems: "center",
+  flexDirection: "column",
+//   padding: theme.spacing(5),
 }));
 
 export const Heading = styled(Typography)(({ theme }) => ({

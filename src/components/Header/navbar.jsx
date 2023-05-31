@@ -37,13 +37,20 @@ const Navbar = () => {
     fontSize: "20px !important",
     fontWeight: "bold !important",
     lineHeight: "24px !important",
+    '&:hover': {
+      backgroundColor: "transparent !important", // Change this to your desired hover color
+    },
+    '&::active': {
+      backgroundColor: "transparent !important", // Change this to your desired hover color
+    },
   }));
-  // const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  //   '&:hover': {
-  //     backgroundColor: theme.palette.primary.main, // Change this to your desired hover color
-  //   },
-  // }));
-  
+  const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
+    backgroundColor: '#f44336', // Change this to your desired background color
+    color: '#ffffff', // Change this to your desired text color
+    '&:hover': {
+      backgroundColor: '#ff7961', // Change this to your desired hover background color
+    },
+  }));
   return (
     <AppBar sx={styles.appBar} position="sticky">
       <Container maxWidth="xl">
@@ -58,6 +65,7 @@ const Navbar = () => {
             color="primary"
             sx={styles.logoTypo}
             curser="pointer"
+            // zIndex="1"
           >
             Vulcan
           </Typography>
@@ -78,6 +86,7 @@ const Navbar = () => {
             </Typography>
           </Box>
 
+              {/* Small Devices */}
           <Box sx={styles.menuIcon}>
             <IconButton
               size="large"
@@ -88,7 +97,7 @@ const Navbar = () => {
               color="inherit"
               curser="pointer"
             >
-              <MenuIcon />
+              <MenuIcon color="primary"/>
             </IconButton>
             <MenuStyle
               id="menu-appbar"
@@ -200,7 +209,7 @@ const Navbar = () => {
             </Box>
 
           <Box sx={styles.xsMenuBox}>
-            <Link as={Link} to="/about" className="nav_liddd">
+            <Link as={Link} to="/about" >
               <NavLinksButton
                 sx={styles.xsNavLinkBtn}
                 variant="text"

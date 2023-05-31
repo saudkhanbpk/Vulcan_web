@@ -3,6 +3,7 @@ import {
   Description,
   Heading,
   MainContainer,
+  MainSubContainer,
   Subtitle,
   Title,
   styles,
@@ -267,7 +268,7 @@ export default function privacy() {
   return (
     <MainContainer>
       <Heading variant="" sx={styles.heading}>Privacy Policy</Heading>
-      <MainContainer>
+      <MainSubContainer>
         <Description variant="body3">Effective on August 1, 2021</Description>
         <Description variant="body3">
           This Privacy Policy is designed to help you understand how Vulcan
@@ -639,7 +640,7 @@ export default function privacy() {
           Questions regarding this Privacy Policy should be directed to {""}
           <a href="/">info@vulcanlearninginstitute.com</a>
         </Description>
-      </MainContainer>
+      </MainSubContainer>
     </MainContainer>
   );
 }
