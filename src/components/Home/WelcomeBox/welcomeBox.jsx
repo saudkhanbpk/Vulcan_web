@@ -44,7 +44,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const WelcomeBox = () => {
   // state
 
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [isClicked, setIsClicked] = useState(true);
 
   //  navigation hook declear
@@ -66,9 +66,9 @@ const WelcomeBox = () => {
   const navigateToCourses = () => {
     navigate("/courses");
   };
-  const modalHandle = () => {
-    setOpen(!open);
-  };
+  // const modalHandle = () => {
+  //   setOpen(!open);
+  // };
 
   // style for comp
 

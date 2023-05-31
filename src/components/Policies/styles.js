@@ -22,7 +22,6 @@ export const MainContainer = styled(Box)(({ theme }) => ({
   justifyContent: "flex-start",
   alignItems: "center",
   flexDirection: "column",
-  //   padding: theme.spacing(5),
 }));
 export const MainSubContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -30,16 +29,14 @@ export const MainSubContainer = styled(Box)(({ theme }) => ({
   alignItems: "center",
   flexDirection: "column",
   width:"100%"
-//   padding: theme.spacing(5),
 }));
 
 export const Heading = styled(Typography)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.primary.main,
-  paddingTop: theme.spacing(3)
+  paddingTop: theme.spacing(5)
 }));
 export const Title = styled(Typography)(({ theme }) => ({
-  // variant="h5",
   color: "black",
   textAlign: "center",
   padding:theme.spacing(3),

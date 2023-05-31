@@ -2,16 +2,14 @@ import React from "react";
 // import "./footer.scss";
 import footerlogo from "../../assets/images/footerlogo.png";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import { Typography, Box, styled } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styles } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const navigate = useNavigate();
-  const FooterLinks = styled(Typography)(({theme})=>({
-
-  }))
+ 
   return (
     <>
       <Box sx={styles.mainBox}>
@@ -35,17 +33,18 @@ const Footer = () => {
               © 2023 Vulcan Learning Institute LLC
             </Typography>
           </Grid>
+
           {/* Sub Grid 2 */}
           <Grid
             xs={10}
             sm={11}
             md={11}
             lg={5}
-            // mt={2}
             sx={styles.subGrid2}
             display="flex"
             justifyContent="space-around"
             alignItems="center"
+            
           >
             <Typography
               variant="h6"

@@ -37,8 +37,7 @@ export const MainSubContainer = styled(Box)(({ theme }) => ({
 export const Heading = styled(Typography)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.primary.main,
-  // paddingTop: theme.spacing(3)
-  padding: "10px",
+  paddingTop: theme.spacing(5)
 }));
 export const Title = styled(Typography)(({ theme }) => ({
   color: "black",
