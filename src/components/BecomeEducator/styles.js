@@ -5,7 +5,7 @@ export const styles = {
     height: { lg: "294px", sm: "300px", xs: "350px" },
     borderRadius: "50px",
     backgroundColor: "rgba(255, 255, 255, 0.8)",
-    marginTop: -18,
+    marginTop: {lg:-18, sm:10},
     position: "absolute",
     pl: 3,
     pr: 3,

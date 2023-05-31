@@ -4,17 +4,17 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
 import logo from "../../assets/images/Logo.png";
-import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { styles,MenuStyle } from "./styles";
-import './navbar.scss';
+import { styles, MenuStyle, Span, NavLink } from "./styles";
+import "./navbar.scss";
+import { styled } from "@mui/system";
+// import styled from 'styled-components';
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -27,48 +27,51 @@ const Navbar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  const navigateToHome = () =>{
+  const navigateToHome = () => {
     navigate("/");
-  }
+  };
+  const AuthButton = styled("button")(({ theme, signup }) => ({
+    borderRadius: "30px",
+    border: "1px solid black",
+    fontFamily: "Inter, sans-serif",
+    fontWeight: 800,
+    height: "40px",
+    width: "80px",
+    background: signup ? theme.palette.primary.main : "#fff",
+    color: signup ? "#fff" : theme.palette.secondary,
 
-  // Custom Button
-  const NavLinksButton = styled(Button)(({ theme }) => ({
-    color: "secondary !important",
-    fontSize: "20px !important",
-    fontWeight: "bold !important",
-    lineHeight: "24px !important",
-    '&:hover': {
-      backgroundColor: "transparent !important", // Change this to your desired hover color
-    },
-    '&::active': {
-      backgroundColor: "transparent !important", // Change this to your desired hover color
+    [theme.breakpoints.down("md")]: {
+      fontSize: "16px",
     },
   }));
-  const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
-    backgroundColor: '#f44336', // Change this to your desired background color
-    color: '#ffffff', // Change this to your desired text color
-    '&:hover': {
-      backgroundColor: '#ff7961', // Change this to your desired hover background color
-    },
+
+  const SmNavlink = styled(Typography)(({ theme }) => ({
+    paddingTop: theme.spacing(2),
+    textTransform: "capitalize",
+    textAlign: "center",
   }));
   return (
     <AppBar sx={styles.appBar} position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box sx={styles.logo} onClick={navigateToHome} curser="pointer" >
-            <img src={logo}  className=" img-fluid logoImage" alt="" />
+          <Box sx={styles.logo} onClick={navigateToHome} curser="pointer">
+            <Span>
+              <img src={logo} className=" img-fluid logoImage" alt="" />
+            </Span>
           </Box>
-          <Typography
-            noWrap
-            component="a"
-            onClick={navigateToHome}
-            color="primary"
-            sx={styles.logoTypo}
-            curser="pointer"
-            // zIndex="1"
-          >
-            Vulcan
-          </Typography>
+          <Span>
+            <Typography
+              noWrap
+              component="a"
+              onClick={navigateToHome}
+              color="primary"
+              sx={styles.logoTypo}
+              curser="pointer"
+              // zIndex="1"
+            >
+              Vulcan
+            </Typography>
+          </Span>
 
           {/* Small Devices */}
           <Box sx={styles.xsLogoMainBox}>
@@ -86,7 +89,7 @@ const Navbar = () => {
             </Typography>
           </Box>
 
-              {/* Small Devices */}
+          {/* Small Devices */}
           <Box sx={styles.menuIcon}>
             <IconButton
               size="large"
@@ -97,16 +100,14 @@ const Navbar = () => {
               color="inherit"
               curser="pointer"
             >
-              <MenuIcon color="primary"/>
+              <MenuIcon color="primary" />
             </IconButton>
             <MenuStyle
               id="menu-appbar"
-              
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "right",
-                
               }}
               keepMounted
               transformOrigin={{
@@ -116,126 +117,117 @@ const Navbar = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={styles.menu}
-              
             >
-             
-                <MenuItem
-                className="menu-item" 
-                  onClick={() => {
-                    navigate("/about");
-                    handleCloseNavMenu();
-                  }}
-                >
-                  <Typography
-                    variant="body2"
-                    sx={styles.capitalize}
-                    textAlign="center"
-                  >
-                    About
-                  </Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    navigate("/how-it-works");
-                    handleCloseNavMenu();
-                  }}
-                >
-                  <Typography
-                    variant="body2"
-                    sx={styles.capitalize}
-                    textAlign="center"
-                  >
-                    How it Works
-                  </Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    navigate("/courses");
-                    handleCloseNavMenu();
-                  }}
-                >
-                  <Typography
-                    variant="body2"
-                    sx={styles.capitalize}
-                    textAlign="center"
-                  >
-                    Courses
-                  </Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    navigate("/become-educator");
-                    handleCloseNavMenu();
-                  }}
-                >
-                  <Typography
-                    variant="body2"
-                    sx={styles.capitalize}
-                    textAlign="center"
-                  >
-                    Become Educator
-                  </Typography>
-                </MenuItem>
+              <Box
+                display="flex"
+                flexDirection="column"
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                sx={{ pl: "10px", pr: "10px" }}
+              >
+                {/* <MenuItem
+                className="menu-item"
+                onClick={() => {
+                  navigate("/about");
+                  handleCloseNavMenu();
+                }}
+              > */}
+                <SmNavlink onClick={() => {
+                  navigate("/about");
+                  handleCloseNavMenu();
+                }} variant="body2">About</SmNavlink>
+                {/* </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  navigate("/how-it-works");
+                  handleCloseNavMenu();
+                }}
+              > */}
+                <SmNavlink  onClick={() => {
+                  navigate("/how-it-works");
+                  handleCloseNavMenu();
+                }} variant="body2">How it Works</SmNavlink>
+                {/* </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  navigate("/courses");
+                  handleCloseNavMenu();
+                }}
+              > */}
+                <SmNavlink  onClick={() => {
+                  navigate("/courses");
+                  handleCloseNavMenu();
+                }} variant="body2">Courses</SmNavlink>
+                {/* </MenuItem> */}
+                {/* <MenuItem
+                onClick={() => {
+                  navigate("/become-educator");
+                  handleCloseNavMenu();
+                }}
+              > */}
+                <SmNavlink  onClick={() => {
+                  navigate("/become-educator");
+                  handleCloseNavMenu();
+                }} variant="body2">Become Educator</SmNavlink>
+                {/* </MenuItem> */}
+              </Box>
 
-                <Box display="flex" justifyContent="space-around">
-                  <MenuItem>
-                    <Button
-                      onClick={() => {
-                        navigate("/login");
-                        handleCloseNavMenu();
-                      }}
-                      variant="outlined"
-                      color="secondary"
-                      sx={styles.capitalize}
-                    >
-                      Log in
-                    </Button>
-                  </MenuItem>
-                  <MenuItem>
-                    <Button
-                      onClick={() => {
-                        navigate("/signup");
-                        handleCloseNavMenu();
-                      }}
-                      variant="contained"
-                      sx={styles.capitalize}
-                    >
-                      SignUp
-                    </Button>
-                  </MenuItem>
-                </Box>
-              
+              <Box display="flex" justifyContent="space-around" pt="20px">
+                {/* <MenuItem> */}
+                {/* <Button
+                    onClick={() => {
+                      navigate("/login");
+                      handleCloseNavMenu();
+                    }}
+                    variant="outlined"
+                    color="secondary"
+                    sx={styles.capitalize}
+                  >
+                    Log in
+                  </Button> */}
+                <AuthButton
+                  onClick={() => {
+                    navigate("/login");
+                    handleCloseNavMenu();
+                  }}
+                >
+                  Login
+                </AuthButton>
+                {/* </MenuItem>
+                <MenuItem> */}
+                {/* <Button
+                    onClick={() => {
+                      navigate("/signup");
+                      handleCloseNavMenu();
+                    }}
+                    variant="contained"
+                    sx={styles.capitalize}
+                  >
+                    SignUp
+                  </Button> */}
+                <AuthButton
+                  onClick={() => {
+                    navigate("/signup");
+                    handleCloseNavMenu();
+                  }}
+                  signup="true"
+                >
+                  Sign Up
+                </AuthButton>
+                {/* </MenuItem> */}
+              </Box>
             </MenuStyle>
-            </Box>
-
+          </Box>
           <Box sx={styles.xsMenuBox}>
-            <Link as={Link} to="/about" >
-              <NavLinksButton
-                sx={styles.xsNavLinkBtn}
-                variant="text"
-                color="secondary"
-              >
-                About
-              </NavLinksButton>
-            </Link>
-            <Link as={Link} to="/how-it-works" className="nav_liddd">
-              <NavLinksButton
-                sx={styles.xsNavLinkBtn}
-                variant="text"
-                color="secondary"
-              >
-                How it Works
-              </NavLinksButton>
-            </Link>
-            <Link as={Link} to="/courses" className="nav_liddd">
-              <NavLinksButton
-                sx={styles.xsNavLinkBtn}
-                variant="text"
-                color="secondary"
-              >
-                Courses
-              </NavLinksButton>
-            </Link>
+            <Span onClick={() => navigate("/about")}>
+              <NavLink color="secondary">About</NavLink>
+            </Span>
+            <Span onClick={() => navigate("/how-it-works")}>
+              <NavLink color="secondary">How it Works</NavLink>
+            </Span>
+            <Span onClick={() => navigate("/courses")}>
+              <NavLink color="secondary">Courses</NavLink>
+            </Span>
           </Box>
 
           <Box
@@ -246,29 +238,22 @@ const Navbar = () => {
             sx={styles.rightBox}
           >
             <Stack direction="row" spacing={2}>
-              <Link as={Link} to="/become-educator" className="nav_liddd">
-                <NavLinksButton
-                  sx={styles.rightBoxBecomeEdLink}
-                  variant="text"
-                  color="secondary"
-                >
-                  Become Educator
-                </NavLinksButton>
-              </Link>
-              <Link as={Link} to="/login" className="nav_liddd">
-                <Button
+              <Span onClick={() => navigate("/about")}>
+                <NavLink color="secondary"> Become Educator</NavLink>
+              </Span>
+              {/* <Link as={Link} to="/login"> */}
+              {/* <Button
                   variant="outlined"
                   color="secondary"
                   sx={styles.capitalize}
                 >
                   Log in
-                </Button>
-              </Link>
+                </Button> */}
+              <AuthButton>Login</AuthButton>
+              {/* </Link> */}
 
-              <Link as={Link} to="/signup" className="nav_liddd">
-                <Button variant="contained" sx={styles.capitalize}>
-                  SignUp
-                </Button>
+              <Link as={Link} to="/signup">
+                <AuthButton signup="true">Sign Up</AuthButton>
               </Link>
             </Stack>
           </Box>
@@ -279,3 +264,12 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+// const AuthButton = styled.button`{
+//   borderRadius: "30px",
+//   border: "1px solid black",
+//   fontFamily: "Inter, sans-serif",
+//   fontWeight: 800,
+//   height: "40px",
+// }
+// `

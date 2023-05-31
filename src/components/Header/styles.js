@@ -1,4 +1,4 @@
-import { Menu,styled} from '@mui/material';
+import { Menu,Typography,styled} from '@mui/material';
 import { specialFont } from "../../Theme/fontFamily";
 export const styles = {
   appBar: {
@@ -23,6 +23,9 @@ export const styles = {
   },
   menu: {
     display: { xs: "block", md: "none" },
+    // display: { xs: "flex", md: "flex" },
+    // justifyContent: {xs:"flex-Start"},
+    // alignItems:"center"
   },
   capitalize: { 
     textTransform: "capitalize",
@@ -53,8 +56,10 @@ export const styles = {
     textDecoration: "none",
     
   },
-  xsMenuBox: { flexGrow: 1, display: { xs: "none", md: "flex" } },
-  xsNavLinkBtn: { ml: 4, border: "none", textTransform: "capitalize" },
+  xsMenuBox: { flexGrow: 1, display: { xs: "none", md: "flex",}, justifyContent:"space-around"  },
+  xsNavLinkBtn: {
+     ml: 4, border: "none", textTransform: "capitalize" 
+    },
   rightBox: { flexGrow: 1, display: { xs: "none", md: "flex" } },
   rightBoxBecomeEdLink: { ml: 2, border: "none", textTransform: "capitalize" },
 };
@@ -62,6 +67,16 @@ export const styles = {
 export const MenuStyle = styled(Menu)(({theme})=>({
   [theme.breakpoints.down("sm")]:{
     borderRadius: "30px ",
-   
   }
 }))
+export const NavLink = styled(Typography)(({ theme }) => ({
+  color: "secondary",
+  fontSize: "20px !important",
+  fontWeight: "bold !important",
+  lineHeight: "24px !important",
+  }));
+export const Span = styled("span")(({ theme }) => ({
+  cursor: "pointer",
+  display:"flex",
+  alignItems:"center"
+}));

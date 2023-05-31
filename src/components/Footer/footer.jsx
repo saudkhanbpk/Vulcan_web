@@ -5,7 +5,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import { Typography, Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styles } from "./styles";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Footer = () => {
           {/* Sub Grid 1 */}
           <Grid xs={12} sm={12} md={12} lg={6}>
             <Box sx={styles.subGrid1Box}>
-              <Box sx={{ cursor: "pointer" }}>
+              <Box sx={{ cursor: "pointer" }} onClick={() => navigate("/")}>
                 <img src={footerlogo} alt="" />
               </Box>
 
@@ -44,26 +44,44 @@ const Footer = () => {
             justifyContent="space-around"
             alignItems="center"
           >
-             <Typography variant="h6" sx={styles.subGrid2Typo} onClick={()=>navigate('/policies')}>
+            <Typography
+              variant="h6"
+              sx={styles.subGrid2Typo}
+              onClick={() => navigate("/policies")}
+            >
               Policies
             </Typography>
 
-            <Typography variant="h6" sx={styles.subGrid2Typo}  onClick={()=>navigate('/privacy')} >
+            <Typography
+              variant="h6"
+              sx={styles.subGrid2Typo}
+              onClick={() => navigate("/privacy")}
+            >
               Privacy
             </Typography>
-           
-            <Typography variant="h6" sx={styles.subGrid2Typo} onClick={()=>navigate('/contact')}>
+
+            <Typography
+              variant="h6"
+              sx={styles.subGrid2Typo}
+              onClick={() => navigate("/contact")}
+            >
               Contact
             </Typography>
           </Grid>
 
           {/* Sub Grid 3 */}
           <Grid xs={2} sm={1} md={1} lg={1}>
-            <TwitterIcon
-              fontSize="large"
-              className="twticon"
-              sx={styles.subGrid3Icon}
-            />
+            <Link
+              to="https://twitter.com/vulcaninstitute"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <TwitterIcon
+                fontSize="large"
+                className="twticon"
+                sx={styles.subGrid3Icon}
+              />
+            </Link>
           </Grid>
         </Grid>
       </Box>
