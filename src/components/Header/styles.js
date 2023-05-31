@@ -20,11 +20,15 @@ export const styles = {
   menu: {
     display: { xs: "block", md: "none" },
   },
-  capitalize: { textTransform: "capitalize" },
+  capitalize: { 
+    textTransform: "capitalize",
+   
+ },
   xsLogoMainBox: {
     display: { xs: "flex", md: "none" },
     justifyContent: { xs: "flex-end", md: "none" },
     mr: 1,
+   
   },
   xsLogo: {
     display: { xs: "flex", md: "none" },
@@ -43,12 +47,14 @@ export const styles = {
     letterSpacing: ".3rem",
     color: "inherit",
     textDecoration: "none",
+    
   },
   xsMenuBox: { flexGrow: 1, display: { xs: "none", md: "flex" } },
   xsNavLinkBtn: { ml: 4, border: "none", textTransform: "capitalize" },
   rightBox: { flexGrow: 1, display: { xs: "none", md: "flex" } },
   rightBoxBecomeEdLink: { ml: 2, border: "none", textTransform: "capitalize" },
 };
+
 export const MenuStyle = styled(Menu)(({theme})=>({
   [theme.breakpoints.down("sm")]:{
     borderRadius: "30px ",

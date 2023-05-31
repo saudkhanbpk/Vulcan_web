@@ -4,6 +4,7 @@ import WelcomeBox from "../WelcomeBox/welcomeBox";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { styles } from "./styles";
 import Grid from '@mui/material/Unstable_Grid2';
+import mobileImage from '../../../assets/images/backhome.png'
 
 
 const HomeScreen = () => {
@@ -26,8 +27,8 @@ const HomeScreen = () => {
       <Box component="div">
       <WelcomeBox />
       </Box>
-      <Box component="div" className="home" sx={{overflow: 'hidden'}}>
-        
+      <Box component="div" className="" sx={{overflow: 'hidden'}}>
+        <img src={mobileImage} width={"100%"} height={"auto"} alt=""  />
       </Box>
   </>
     )
