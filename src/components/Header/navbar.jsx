@@ -18,7 +18,6 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
-    console.log("event value :",event)
     setAnchorElNav(event.currentTarget);
   };
 
