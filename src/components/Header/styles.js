@@ -21,13 +21,11 @@ export const styles = {
     flexGrow: 1,
     display: { xs: "flex", md: "none" },
     justifyContent: { xs: "flex-end" },
-    // border:"green 1px solid",
   
   },
   menu: {
     display: { xs: "block", md: "none" },
     marginTop:"4px", 
-    // border:"red 1px solid",
 
   },
   capitalize: { 

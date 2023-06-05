@@ -10,10 +10,6 @@ import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styles } from "./styles";
 
-// import { useTheme } from '@material-ui/core/styles';
-// import useMediaQuery from '@material-ui/core/useMediaQuery';
-
-
 const BecomeEducator = () => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm')); // Change breakpoint as needed

@@ -8,5 +8,5 @@ export default function ScrollToTop() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  return <div>{/* <button>abc</button> */}</div>;
+  return <></>;
 }

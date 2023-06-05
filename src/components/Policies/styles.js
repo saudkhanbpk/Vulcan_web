@@ -43,7 +43,6 @@ export const Title = styled(Typography)(({ theme }) => ({
 }));
 
 export const Description = styled(Typography)(({ theme }) => ({
-  // variant="body3",
   color: "black",
   padding: theme.spacing(3),
   textAlign: "justify",
@@ -55,6 +54,5 @@ export const Description = styled(Typography)(({ theme }) => ({
 
 export const ItemText = styled(ListItemText)(({ theme }) => ({
   fontSize: "20px",
-  // fontWeight: 400,
   fontFamily: "Inter",
 }));

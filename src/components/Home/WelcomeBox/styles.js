@@ -1,3 +1,5 @@
+import { Paper, styled } from "@mui/material";
+
 export const styles = {
   mainGrid: {
     display: "flex",
@@ -24,3 +26,31 @@ export const styles = {
   boxDescription: { fontFamily: "Inter", pt: "12px" },
   textCapitalize: { textTransform: "capitalize" },
 };
+export const MyBox = styled(Paper)(({ theme }) => ({
+  textAlign: "center",
+  height: 421,
+  width: 500,
+  borderRadius: `${20} !important`,
+  fontSize: 23,
+  padding: 40,
+  paddingTop: 20,
+  marginTop: 40,
+  marginLeft: 180,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-evenly",
+
+  "@media (max-width: 600px)": {
+    textAlign: "center",
+    height: 600,
+    width: 600,
+    fontSize: 16,
+  borderRadius: `${0} !important`,
+    padding: 30,
+    paddingTop: 30,
+    marginLeft: 0,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+  },
+}));

@@ -14,7 +14,7 @@ const ModalComponent = ({ open, setOpen, coursesModal }) => {
   return (
     <>
       <Modal
-        justifyContent="center"
+        justifycontent="center"
         keepMounted
         open={open}
         onClose={handleClose}
@@ -38,17 +38,16 @@ const ModalComponent = ({ open, setOpen, coursesModal }) => {
               xs={10}
               md={10}
               display="flex"
-              justifyContent="center"
+              justifycontent="center"
               alignItems="center"
             >
               <Typography
                 display="flex"
-                justifyContent="center"
+                justifycontent="center"
                 alignItems="center"
                 id="keep-mounted-modal-title"
                 variant="h5"
                 component="h2"
-                // className={classes.joinWaitListTypo}
                 sx={styles.typoHeading}
               >
                 Join Waitlist
@@ -58,7 +57,7 @@ const ModalComponent = ({ open, setOpen, coursesModal }) => {
               xs={2}
               md={2}
               display="flex"
-              justifyContent="center"
+              justifycontent="center"
               alignItems="center"
             >
               <CloseIcon
@@ -70,7 +69,6 @@ const ModalComponent = ({ open, setOpen, coursesModal }) => {
           </Grid>
 
           <Box
-            // className="d-flex  flex-column align-items-center justify-content-center"
             sx={styles.input}
             component="form"
             noValidate
@@ -79,7 +77,7 @@ const ModalComponent = ({ open, setOpen, coursesModal }) => {
             <TextField
               className="m-4"
               display="flex"
-              justifyContent="center"
+              justifycontent="center"
               id="standard-basic"
               label="Email"
               InputLabelProps={{

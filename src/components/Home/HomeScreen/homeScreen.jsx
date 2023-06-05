@@ -9,12 +9,12 @@ import mobileImage from '../../../assets/images/backhome.png'
 
 const HomeScreen = () => {
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('sm')); // Change breakpoint as needed
+  const is_desktop = useMediaQuery(theme.breakpoints.up('sm')); // Change breakpoint as needed
 
  
   return (
     <Grid>
-    {isDesktop  ?
+    {is_desktop  ?
     (
 
       <Box sx={styles.box} className="home">

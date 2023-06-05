@@ -12,10 +12,10 @@ width: "100%"},
 
 
 
-export const Item = styled(Paper)(({ isSmallScreen }) => ({
+export const Item = styled(Paper)(({ is_small_screen }) => ({
   textAlign: "start",
-  height: isSmallScreen ? 300 : 266,
-  width: isSmallScreen ? 350 : 414,
+  height: is_small_screen ? 300 : 266,
+  width: is_small_screen ? 350 : 414,
   borderRadius: `${20} !important`,
   fontSize: 24,
   padding: 20,
@@ -70,11 +70,11 @@ export const StyledBox = styled(Box)(({ theme }) => ({
       position: "absolute",
       top: 0,
       left: 0,
-      width: "50%", // Adjust the gradient width as needed
+      width: "50%",  
       height: "100%",
       backgroundImage: `linear-gradient(270deg,
         rgba(255, 255, 255, 0) 11%,
-        rgba(255, 255, 255, 1.801558) 100%)`, // Adjust the colors as needed
+        rgba(255, 255, 255, 1.801558) 100%)`, 
       zIndex: 1,
     },
   },

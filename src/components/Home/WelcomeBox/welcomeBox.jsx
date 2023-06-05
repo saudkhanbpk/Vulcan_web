@@ -1,87 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import "./welcomeBox.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
-import { useState } from "react";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
-import { Divider, Paper, Typography } from "@mui/material";
-import styled from "styled-components";
+import { Divider,  Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-// import ModalComponent from '../../coursesScreen/modal/ModalComponent';
-import Grid from "@mui/material/Unstable_Grid2";
-import { styles } from "./styles";
-
-const Item = styled(Paper)(({ theme }) => ({
-  textAlign: "center",
-  height: 421,
-  width: 500,
-  borderRadius: `${20} !important`,
-  fontSize: 23,
-  padding: 40,
-  paddingTop: 20,
-  marginTop: 40,
-  marginLeft: 180,
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-evenly",
-
-  "@media (max-width: 600px)": {
-    textAlign: "center",
-    height: 600,
-    width: 600,
-    fontSize: 16,
-  borderRadius: `${0} !important`,
-    padding: 30,
-    paddingTop: 30,
-    marginLeft: 0,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-  },
-}));
+import Grid from "@mui/material/Grid";
+import { MyBox, styles } from "./styles";
 
 const WelcomeBox = () => {
-  // state
+  const [isClicked, setIsClicked] = useState("inactive");
 
-  // const [open, setOpen] = useState(false);
-  const [isClicked, setIsClicked] = useState(true);
-
-  //  navigation hook declear
-  const navigate = useNavigate();
-
-  //  toggle handle func
-  const handleButtonClick = (val) => {
-    if (val.value === 1) {
-      setIsClicked(true);
-    } else {
-      setIsClicked(false);
-    }
+  const toggleStatus = () => {
+    setIsClicked(isClicked === "inactive" ? "active" : "inactive");
   };
+  // navigation hook declear
+  const navigate = useNavigate();
 
   // navigation handle func
   const navigateToBecomeEdu = () => {
     navigate("/become-educator");
   };
+
   const navigateToCourses = () => {
     navigate("/courses");
   };
-  
-  // style for comp
 
+  // style for comp
   return (
     <>
       <Grid container item sx={styles.mainGrid}>
-        <Item sx={styles.item}>
+        <MyBox sx={styles.item}>
           <Grid
             display="flex"
             justifyContent="space-around"
             alignItems="center"
           >
-            <Grid
-              onClick={(e) => handleButtonClick({ value: 1 })}
-              sx={styles.subGrid}
-            >
+            <Grid 
+            onClick={toggleStatus} 
+            sx={styles.subGrid}>
               {isClicked ? (
                 <CastForEducationIcon sx={styles.subGridIconClicked} />
               ) : (
@@ -97,10 +55,9 @@ const WelcomeBox = () => {
               </Box>
             </Grid>
             <Divider sx={styles.dividerStyle} />
-            <Grid
-              onClick={(e) => handleButtonClick({ value: 2 })}
-              sx={styles.subGrid}
-            >
+            <Grid 
+            onClick={toggleStatus} 
+            sx={styles.subGrid}>
               {isClicked ? (
                 <LocalLibraryIcon sx={styles.subGridIconNotClicked} />
               ) : (
@@ -146,7 +103,7 @@ const WelcomeBox = () => {
               {isClicked ? "Sign Up To Teach" : "See Courses"}
             </Button>
           </Box>
-        </Item>
+        </MyBox>
       </Grid>
     </>
   );

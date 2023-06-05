@@ -5,7 +5,6 @@ import Router from "./Router/router";
 import { BrowserRouter } from "react-router-dom";
 import ScrollToTop from "./Scroll/scrollToTop";
 import Navbar from "./components/Header/navbar";
-import Privacy from "./components/Privacy/privacy";
 
 function App() {
   return (

@@ -11,12 +11,12 @@ import image2 from "../../assets/images/onlineTeacher2.png";
 const OurMission = () => {
   const navigate = useNavigate();
 
-  const isSmallScreen = useMediaQuery("(max-width: 390px)");
+  const is_small_screen_val = useMediaQuery("max-width: 390px");
+  const is_small_screen = is_small_screen_val.toString();
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   return (
     <>
-      {/* <Box sx={{ bgcolor: "#fffff" }}> */}
       <BannerContainer>
         <TextContainer sx={{ flex: 1 }}>
           <Header variant="h1" py={2}>
@@ -36,7 +36,6 @@ const OurMission = () => {
           )}
         </StyledBox>
       </BannerContainer>
-      {/* </Box> */}
 
       <Box m={6}>
         <Typography align="center">
@@ -47,18 +46,17 @@ const OurMission = () => {
         container
         display="flex"
         alignItems="center"
-        justifyContent="center"
-        // spacing={3}
+        justifycontent="center"
         sx={styles.mainGrid1}
       >
         <Grid container xs={12} sm={10} md={6} lg={6}>
-          <Box display={"flex"}  justifyContent={"center"} alignItems={"center"}>
+          <Box display={"flex"}  justifycontent={"center"} alignItems={"center"}>
             <img src={bringIm} className="img-fluid brinaaimg" alt="" />
           </Box>
         </Grid>
         <Grid xs={12} sm={12} md={6} lg={6}>
           <Box p={3}>
-            <Typography align="start" fontSize={24} variant="paragraph">
+            <Typography align="left" fontSize={24} variant="paragraph">
               Education is a core pillar of our society. But the current system
               hasn’t been working for everyone. It’s been plagued with ever
               rising costs, long timeframes, unsatisfactory outcomes, and high
@@ -66,7 +64,7 @@ const OurMission = () => {
             </Typography>
             
             <Box mt={5}>
-              <Typography align="start" fontSize={24} variant="paragraph">
+              <Typography align="left" fontSize={24} variant="paragraph">
                 We asked the question: What would an education system that works
                 for everyone look like? The Vulcan Learning platform was the
                 answer.
@@ -83,7 +81,7 @@ const OurMission = () => {
       <Grid
         container
         displey="flex"
-        justifyContent="center"
+        justifycontent="center"
         alignItems="center"
         
       >
@@ -94,7 +92,7 @@ const OurMission = () => {
           lg={4}
           display="flex"
           flexDirection="column"
-          justifyContent="center"
+          justifycontent="center"
           alignItems="center"
         >
           <Typography
@@ -104,7 +102,7 @@ const OurMission = () => {
           >
             Univeral Access
           </Typography>
-          <Item sx={styles.boxTypoDescription} isSmallScreen={isSmallScreen}>
+          <Item sx={styles.boxTypoDescription} is_small_screen={is_small_screen}>
             No GPA. No SAT. No assessment. No Application. Anyone can enroll in
             a course on the Vulcan Learning platform. We  won’t turn our backs on
             learners.
@@ -118,7 +116,7 @@ const OurMission = () => {
           lg={4}
           display="flex"
           flexDirection="column"
-          justifyContent="center"
+          justifycontent="center"
           alignItems="center"
         >
           <Typography
@@ -128,7 +126,7 @@ const OurMission = () => {
           >
             Best Educators
           </Typography>
-          <Item sx={styles.boxTypoDescription} isSmallScreen={isSmallScreen}>
+          <Item sx={styles.boxTypoDescription} is_small_screen={is_small_screen}>
             Our courses are taught by the top educators in a given field.
             Educators are vetted for demonstrated experience, skill, and
             character.
@@ -143,7 +141,7 @@ const OurMission = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
+            justifycontent: "center",
             alignItems: "center",
           }}
         >
@@ -154,7 +152,7 @@ const OurMission = () => {
           >
             Personalized
           </Typography>
-          <Item sx={styles.boxTypoDescription} isSmallScreen={isSmallScreen}>
+          <Item sx={styles.boxTypoDescription} is_small_screen={is_small_screen}>
             We offer a wide variety of courses with unique Educators, subjects,
             and teaching styles. This allows learners to choose the instructor,
             pace, and level that fits them best.

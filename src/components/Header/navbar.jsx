@@ -12,13 +12,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { styles, MenuStyle, Span, NavLink } from "./styles";
 import "./navbar.scss";
 import { styled } from "@mui/system";
-// import styled from 'styled-components';
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
+    console.log("event value :",event)
     setAnchorElNav(event.currentTarget);
   };
 
@@ -65,7 +65,6 @@ const Navbar = () => {
               color="primary"
               sx={styles.logoTypo}
               curser="pointer"
-              // zIndex="1"
             >
               Vulcan
             </Typography>
@@ -95,7 +94,7 @@ const Navbar = () => {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={(e)=>handleOpenNavMenu(e)}
               color="inherit"
               curser="pointer"
             >
@@ -104,10 +103,7 @@ const Navbar = () => {
             <MenuStyle
               id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                // horizontal: "right",
-              }}
+              // anchorOrigin={{   vertical: "bottom",   }}
               keepMounted
               transformOrigin={{
                 vertical: "top",

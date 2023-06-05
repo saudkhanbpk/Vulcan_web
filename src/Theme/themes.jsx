@@ -9,7 +9,6 @@ const theme = createTheme({
       lg: 1200,
       xl: 1536,
       xxl: 1920,
-      // Add your custom breakpoints here
       mobile: 360,
       tablet: 768,
       laptop: 1024,
@@ -21,11 +20,10 @@ const theme = createTheme({
       main: "#0000FF",
     },
     secondary: {
-      main: "#000000", // replace with your custom white color value
+      main: "#000000",  
     },
   },
   typography: {
-    // fontFamily: 'Inter, Arial',
 
     myVariant: {
       fontsize: "6rem",
@@ -75,7 +73,6 @@ const theme = createTheme({
     body3: {
       fontSize: "20px",
       fontWeight: 400,
-      // lineHeight: 1.2,
       fontFamily: "Inter",
     },
     body4: {
@@ -98,7 +95,6 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          // fontSize:"20px",
           borderRadius: "30px",
           border: "1px solid black",
           fontFamily: "Inter, sans-serif",
