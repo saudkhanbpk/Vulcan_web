@@ -66,15 +66,11 @@ const WelcomeBox = () => {
   const navigateToCourses = () => {
     navigate("/courses");
   };
-  // const modalHandle = () => {
-  //   setOpen(!open);
-  // };
-
+  
   // style for comp
 
   return (
     <>
-      {/* <ModalComponent open={open} setOpen={setOpen} /> */}
       <Grid container item sx={styles.mainGrid}>
         <Item sx={styles.item}>
           <Grid
