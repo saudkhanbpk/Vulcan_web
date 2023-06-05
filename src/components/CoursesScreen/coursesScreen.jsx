@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./coursesScreen.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import { Typography, styled, useMediaQuery, useTheme } from "@mui/material";
+import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import ModalComponent from "./Modal/modalComponent";
 import { styles } from "./styles";
 
