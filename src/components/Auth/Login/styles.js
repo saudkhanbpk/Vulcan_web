@@ -22,7 +22,7 @@ export const MainBox = styled(Box)(({ theme }) => ({
   height: "437px",
   backgroundColor: "white",
   paddingBottom: 5,
-  paddingTop: theme.spacing(5),
+  // paddingTop: theme.spacing(5),
   [theme.breakpoints.down("md")]: {},
 }));
 export const FormBox = styled(Box)(({ theme }) => ({

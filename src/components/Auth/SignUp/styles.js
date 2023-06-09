@@ -72,7 +72,7 @@ export const ChooseAccBox = styled(Box)(({ theme }) => ({
   },
 }));
 export const Heading = styled(Typography)(({ theme }) => ({
-  paddingTop: theme.spacing(4),
+  paddingTop: theme.spacing(1),
   paddingBottom: theme.spacing(2),
   color: theme.palette.primary.main,
   fontSize: "36px",
@@ -94,7 +94,7 @@ export const FormBox = styled(Typography)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "flex-start",
   alignItems: "center",
-  paddingTop: theme.spacing(2),
+  // paddingTop: theme.spacing(1),
   [theme.breakpoints.down("md")]: {},
 }));
 

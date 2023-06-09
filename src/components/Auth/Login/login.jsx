@@ -1,19 +1,13 @@
 import "./login.scss";
 
 import React from "react";
-import {
-  Box,
-  Modal,
-  Typography,
-  Link,
-  TextField,
-  Button,
-} from "@mui/material";
+import { Box, Modal, Typography, Link, TextField, Button } from "@mui/material";
 import { FormBox, MainBox, ModalBackgroundBox, SigUpTextLink } from "./styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-const LoginModal = ({ show, setShow }) => {
+import CloseIcon from "@mui/icons-material/Close";
 
+const LoginModal = ({ show, setShow }) => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -21,7 +15,9 @@ const LoginModal = ({ show, setShow }) => {
     },
     validationSchema: Yup.object({
       email: Yup.string().email("Invalid email address").required("Required"),
-      password: Yup.string("Required").min(6, "Must be 6 chatacters").required("Required"),
+      password: Yup.string("Required")
+        .min(6, "Must be 6 chatacters")
+        .required("Required"),
     }),
 
     onSubmit: (values) => {
@@ -31,18 +27,6 @@ const LoginModal = ({ show, setShow }) => {
     },
   });
   console.log(formik.errors);
-
-  const isPasswordValid = (password) => {
-    const specialCharacters = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
-    return specialCharacters.test(password);
-  };
-
-  const getPasswordError = () => {
-    if (formik.touched.password && !isPasswordValid(formik.values.password)) {
-      return 'Add Special Character';
-    }
-    return '';
-  };
   return (
     <>
       <Modal
@@ -51,64 +35,87 @@ const LoginModal = ({ show, setShow }) => {
         aria-labelledby="login-modal-title"
         aria-describedby="login-modal-description"
       >
-        <MainBox
-        >
+        <MainBox>
+          <Box
+            pb={1}
+            pt={1}
+            onClick={() => setShow(false)}
+            sx={{
+              position: "relative",
+              top: "9px",
+              right: "-142px",
+            }}
+          >
+            <CloseIcon />
+          </Box>
           <Typography
             variant="h1"
             px={4}
             pb={4}
-            pt={2}
+            // pt={2}
             color="primary"
             sx={{ fontSize: "36px" }}
           >
             Log In
           </Typography>
           <Box>
-            <SigUpTextLink variant="h6" sx={{ fontSize: "16px" }}>
+            <SigUpTextLink onClick={()=>alert("sign up")} variant="h6" sx={{ fontSize: "16px" }}>
               New? Create An Account
             </SigUpTextLink>
           </Box>
           <FormBox component="form" onSubmit={formik.handleSubmit} noValidate>
-            <TextField
-              id="email"
-              name="email"
-              label={(formik.touched.email && Boolean(formik.errors.email))?`${formik.errors.email}`:"Email"}
-              variant="standard"
-              onChange={formik.handleChange}
-              value={formik.values.email}
-              sx={{ pb: "22px" }}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              InputLabelProps={{
-                style: { fontSize: 16 },
-              }}
-              inputProps={{
-                style: { fontSize: 16 },
-              }}
-            />
-    
-            <TextField
-              id="password"
-              name="password"
-              // label={((formik.touched.password && Boolean(formik.errors.password))?`${formik.errors.password}`:"Password")?`${getPasswordError()}`:"Password"}
-              label={
-                formik.touched.password && Boolean(formik.errors.password)
-                  ? formik.errors.password
-                  : getPasswordError() || 'Password'
-              }
-              variant="standard"
-              type="password"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              sx={{ pb: "14px", pt: "5" }}
-              InputLabelProps={{
-                style: { color: getPasswordError() ? 'red' : undefined, fontSize: 16 },
-              }}
-              inputProps={{
-                style: { fontSize: 16 },
-              }}
-            />
-            {formik.errors.password ? "" :" "}
+            <Box sx={{ pb: "22px", pt: "20px" }}>
+              <TextField
+                id="email"
+                name="email"
+                label={
+                  formik.touched.email && Boolean(formik.errors.email)
+                    ? `${formik.errors.email}`
+                    : "Email"
+                }
+                variant="standard"
+                onChange={formik.handleChange}
+                value={formik.values.email}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                InputLabelProps={{
+                  style: { fontSize: 16 },
+                }}
+                inputProps={{
+                  style: { fontSize: 16 },
+                }}
+              />
+            </Box>
+            <Box sx={{ pb: "22px", pt: "10px" }}>
+              <TextField
+                id="password"
+                name="password"
+                // label={((formik.touched.password && Boolean(formik.errors.password))?`${formik.errors.password}`:"Password")?`${getPasswordError()}`:"Password"}
+                label={
+                  formik.touched.password && Boolean(formik.errors.password)
+                    ? formik.errors.password
+                    : "Password"
+                }
+                variant="standard"
+                type="password"
+                onChange={formik.handleChange}
+                value={formik.values.password}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                sx={{ pb: "14px", pt: "5" }}
+                InputLabelProps={{
+                  style: {
+                    //  color: getPasswordError() ? 'red' : undefined,
+                    fontSize: 16,
+                  },
+                }}
+                inputProps={{
+                  style: { fontSize: 16 },
+                }}
+              />
+            </Box>
+
+            {/* {formik.errors.password ? "" : " "} */}
 
             <Box pb={2}>
               <Link
@@ -116,8 +123,16 @@ const LoginModal = ({ show, setShow }) => {
                 variant="body2"
                 sx={{ textDecoration: "none", fontSize: "16px" }}
               >
-                Forgot password?
               </Link>
+              <Typography
+                variant="body2"
+                color={"primary"}
+                onClick={()=>alert("forgot password")}
+                sx={{ textDecoration: "none", fontSize: "16px" , cursor:"pointer" }}
+                >
+                  Forgot password?
+
+              </Typography>
             </Box>
 
             <Box>

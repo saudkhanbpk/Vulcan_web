@@ -9,9 +9,8 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import logo from "../../assets/images/Logo.png";
 import {  useNavigate } from "react-router-dom";
-import { styles, MenuStyle, Span, NavLink } from "./styles";
+import { styles, MenuStyle, Span, NavLink, SmNavlink, AuthButton } from "./styles";
 import "./navbar.scss";
-import { styled } from "@mui/system";
 import LoginModal from "../Auth/Login/login";
 import SignUpModal from "../Auth/SignUp/signUp";
 
@@ -31,35 +30,15 @@ const Navbar = () => {
   const navigateToHome = () => {
     navigate("/");
   };
-  const AuthButton = styled("button")(({ theme, signup }) => ({
-    borderRadius: "30px",
-    border: "1px solid black",
-    fontFamily: "Inter, sans-serif",
-    fontWeight: 800,
-    height: "40px",
-    width: "80px",
-    background: signup ? theme.palette.primary.main : "#fff",
-    color: signup ? "#fff" : theme.palette.secondary,
 
-    [theme.breakpoints.down("md")]: {
-      fontSize: "16px",
-    },
-  }));
-
-  const SmNavlink = styled(Typography)(({ theme }) => ({
-    paddingTop: theme.spacing(2),
-    textTransform: "capitalize",
-    textAlign: "center",
-  }));
   return (
     <AppBar sx={styles.appBar} position="sticky">
-        {
+       {
         show && <LoginModal show={show} setShow={setShow} />
         }
         {
         showSignUp && <SignUpModal show={showSignUp} setShow={setShowSignUp} />
-        
-      }
+        }
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={styles.logo} onClick={navigateToHome} curser="pointer">
