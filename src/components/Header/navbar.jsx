@@ -8,13 +8,17 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import logo from "../../assets/images/Logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { styles, MenuStyle, Span, NavLink } from "./styles";
 import "./navbar.scss";
 import { styled } from "@mui/system";
+import LoginModal from "../Auth/Login/login";
+import SignUpModal from "../Auth/SignUp/signUp";
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [show, setShow] = React.useState(false);
+  const [showSignUp, setShowSignUp] = React.useState(false);
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
@@ -49,6 +53,13 @@ const Navbar = () => {
   }));
   return (
     <AppBar sx={styles.appBar} position="sticky">
+        {
+        show && <LoginModal show={show} setShow={setShow} />
+        }
+        {
+        showSignUp && <SignUpModal show={showSignUp} setShow={setShowSignUp} />
+        
+      }
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={styles.logo} onClick={navigateToHome} curser="pointer">
@@ -165,11 +176,11 @@ const Navbar = () => {
                   Become Educator
                 </SmNavlink>
               </Box>
-
-              <Box display="flex" justifyContent="space-around" pt="20px">
+            {/* Small Screen */}
+              <Box display="flex" justifyContent="space-around"  pt="20px">
                 <AuthButton
                   onClick={() => {
-                    navigate("/login");
+                    setShow(!show)
                     handleCloseNavMenu();
                   }}
                 >
@@ -178,7 +189,7 @@ const Navbar = () => {
 
                 <AuthButton
                   onClick={() => {
-                    navigate("/signup");
+                    setShowSignUp(!showSignUp)
                     handleCloseNavMenu();
                   }}
                   signup="true"
@@ -212,17 +223,18 @@ const Navbar = () => {
               </Span>
 
 
-              <Link as={Link} to="/login">
-              <AuthButton>Login</AuthButton>
-              </Link>
+              {/* <Link as={Link} to="/login"> */}
+              <AuthButton  onClick={()=> setShow(!show)} >Login</AuthButton>
+              {/* </Link> */}
 
-              <Link as={Link} to="/signup">
-                <AuthButton signup="true">Sign Up</AuthButton>
-              </Link>
+              {/* <Link as={Link} to="/signup"> */}
+                <AuthButton signup="true" onClick={()=> setShowSignUp(!showSignUp)}>Sign Up</AuthButton>
+              {/* </Link> */}
             </Stack>
           </Box>
         </Toolbar>
       </Container>
+    
     </AppBar>
   );
 };
