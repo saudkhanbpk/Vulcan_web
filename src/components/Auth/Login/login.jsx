@@ -32,6 +32,17 @@ const LoginModal = ({ show, setShow }) => {
   });
   console.log(formik.errors);
 
+  const isPasswordValid = (password) => {
+    const specialCharacters = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
+    return specialCharacters.test(password);
+  };
+
+  const getPasswordError = () => {
+    if (formik.touched.password && !isPasswordValid(formik.values.password)) {
+      return 'Add Special Character';
+    }
+    return '';
+  };
   return (
     <>
       <Modal
@@ -61,7 +72,7 @@ const LoginModal = ({ show, setShow }) => {
             <TextField
               id="email"
               name="email"
-              label="Email"
+              label={(formik.touched.email && Boolean(formik.errors.email))?`${formik.errors.email}`:"Email"}
               variant="standard"
               onChange={formik.handleChange}
               value={formik.values.email}
@@ -78,7 +89,12 @@ const LoginModal = ({ show, setShow }) => {
             <TextField
               id="password"
               name="password"
-              label="Password"
+              // label={((formik.touched.password && Boolean(formik.errors.password))?`${formik.errors.password}`:"Password")?`${getPasswordError()}`:"Password"}
+              label={
+                formik.touched.password && Boolean(formik.errors.password)
+                  ? formik.errors.password
+                  : getPasswordError() || 'Password'
+              }
               variant="standard"
               type="password"
               onChange={formik.handleChange}
@@ -86,7 +102,7 @@ const LoginModal = ({ show, setShow }) => {
               error={formik.touched.password && Boolean(formik.errors.password)}
               sx={{ pb: "14px", pt: "5" }}
               InputLabelProps={{
-                style: { fontSize: 16 },
+                style: { color: getPasswordError() ? 'red' : undefined, fontSize: 16 },
               }}
               inputProps={{
                 style: { fontSize: 16 },

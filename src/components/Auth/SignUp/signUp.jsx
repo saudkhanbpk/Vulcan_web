@@ -19,7 +19,17 @@ const SignUpModal = ({ show, setShow }) => {
   const handleSelectButton = (e) => {
     setSelectedButton(!selectedButton);
   };
+  const isPasswordValid = (password) => {
+    const specialCharacters = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
+    return specialCharacters.test(password);
+  };
 
+  const getPasswordError = () => {
+    if (formik.touched.password && !isPasswordValid(formik.values.password)) {
+      return 'Add Special Character';
+    }
+    return '';
+  };
   const formik = useFormik({
     initialValues: {
       firstName:"",
@@ -100,7 +110,7 @@ const SignUpModal = ({ show, setShow }) => {
             <TextField
               id="firstName"
               name="firstName"
-              label="First Name"
+              label={(formik.touched.firstName && Boolean(formik.errors.firstName))?`${formik.errors.firstName}`:"First Name"}
               variant="standard"
               onChange={formik.handleChange}
               value={formik.values.firstName}
@@ -115,7 +125,7 @@ const SignUpModal = ({ show, setShow }) => {
             <TextField
               id="lastName"
               name="lastName"
-              label="Last Name"
+              label={(formik.touched.lastName && Boolean(formik.errors.lastName))?`${formik.errors.lastName}`:"Last Name"}
               variant="standard"
               // sx={{ pb: "12px" }}
               onChange={formik.handleChange}
@@ -131,7 +141,7 @@ const SignUpModal = ({ show, setShow }) => {
             <TextField
               id="email"
               name="email"
-              label="Email"
+              label={(formik.touched.email && Boolean(formik.errors.email))?`${formik.errors.email}`:"Email"}
               variant="standard"
               onChange={formik.handleChange}
               value={formik.values.email}
@@ -144,10 +154,10 @@ const SignUpModal = ({ show, setShow }) => {
                 style: { fontSize: 16 },
               }}
             />
-            <TextField
+            {/* <TextField
               id="password"
               name="password"
-              label="Password"
+              label={(formik.touched.password && Boolean(formik.errors.password))?`${formik.errors.password}`:"Password"}
               variant="standard"
               type="password"
               onChange={formik.handleChange}
@@ -155,7 +165,7 @@ const SignUpModal = ({ show, setShow }) => {
               error={formik.touched.password && Boolean(formik.errors.password)}
               // sx={{ pb: "12px" }}
               InputLabelProps={{
-                style: { fontSize: 16 },
+                style: { color: getPasswordError() ? 'red' : undefined, fontSize: 16 },
               }}
               inputProps={{
                 style: { fontSize: 16 },
@@ -164,7 +174,7 @@ const SignUpModal = ({ show, setShow }) => {
             <TextField
               id="reEnterPassword"
               name="reEnterPassword"
-              label="Re-Enter Password"
+              label={(formik.touched.reEnterPassword && Boolean(formik.errors.reEnterPassword))?`${formik.errors.reEnterPassword}`:"R-Eenter Password"}
               variant="standard"
               type="password"
               // sx={{ pb: "12px" }}
@@ -172,16 +182,68 @@ const SignUpModal = ({ show, setShow }) => {
               value={formik.values.reEnterPassword}
               error={formik.touched.reEnterPassword && Boolean(formik.errors.reEnterPassword)}
               InputLabelProps={{
-                style: { fontSize: 16 },
+                style: { color: getPasswordError() ? 'red' : undefined, fontSize: 16 },
               }}
               inputProps={{
                 style: { fontSize: 16 },
               }}
-            />
+            /> */}
+            <TextField
+  id="password"
+  name="password"
+  label={
+    formik.touched.password && Boolean(formik.errors.password)
+      ? formik.errors.password
+      : 'Password'
+  }
+  variant="standard"
+  type="password"
+  onChange={formik.handleChange}
+  value={formik.values.password}
+  error={formik.touched.password && Boolean(formik.errors.password)}
+  InputLabelProps={{
+    style: {
+      // color: formik.touched.password && formik.values.password !== formik.values.reEnterPassword ? 'red' : "blue",
+      fontSize: 16,
+    },
+  }}
+  inputProps={{
+    style: { fontSize: 16 },
+  }}
+/>
+
+<TextField
+  id="reEnterPassword"
+  name="reEnterPassword"
+  label={
+    formik.touched.reEnterPassword &&
+    formik.values.password !== formik.values.reEnterPassword
+      ? 'Passwords do not match'
+      : 'Re-enter Password'
+  }
+  variant="standard"
+  type="password"
+  onChange={formik.handleChange}
+  value={formik.values.reEnterPassword}
+  error={
+    formik.touched.reEnterPassword &&
+    formik.values.password !== formik.values.reEnterPassword
+  }
+  InputLabelProps={{
+    style: {
+      // color: formik.touched.reEnterPassword && formik.values.password !== formik.values.reEnterPassword ? 'red' : "blue",
+      fontSize: 16,
+    },
+  }}
+  inputProps={{
+    style: { fontSize: 16 },
+  }}
+/>
+
             <TextField
               id="phoneNumber"
               name="phoneNumber"
-              label="Phone Number"
+              label={(formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber))?`${formik.errors.phoneNumber}`:"Phone Number"}
               variant="standard"
               // sx={{ pb: "12px" }}
               onChange={formik.handleChange}
