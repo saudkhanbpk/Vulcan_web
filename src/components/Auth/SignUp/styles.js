@@ -105,6 +105,6 @@ export const ModalBackgroundBox = styled(Typography)(({ theme }) => ({
   width: "100%",
   height: "100%",
   backgroundColor: "rgba(0, 0, 0, 0.5)",
-  filter: "blur(4px)",
+  backdropFilter: "blur(5px)",
   [theme.breakpoints.down("md")]: {},
 }));
