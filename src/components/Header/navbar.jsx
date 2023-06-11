@@ -8,16 +8,42 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import logo from "../../assets/images/Logo.png";
-import {  useNavigate } from "react-router-dom";
-import { styles, MenuStyle, Span, NavLink, SmNavlink, AuthButton } from "./styles";
+import { useNavigate } from "react-router-dom";
+import {
+  styles,
+  MenuStyle,
+  Span,
+  NavLink,
+  SmNavlink,
+  AuthButton,
+} from "./styles";
 import "./navbar.scss";
 import LoginModal from "../Auth/Login/login";
 import SignUpModal from "../Auth/SignUp/signUp";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  openSignUpModal,
+  openLoginModal,
+} from "../../feature/Auth/authSlice";
 
 const Navbar = () => {
+  const showSignUpModal = useSelector((state) => state.auth.showSignUpModal);
+
+  const showLoginModal = useSelector((state) => state.auth.showLoginModal);
+
+  const dispatch = useDispatch();
+
+  const handleLoginButtonClick = () => {
+    dispatch(openLoginModal());
+    handleCloseNavMenu();
+  };
+
+  const handleSignUpButtonClick = () => {
+    dispatch(openSignUpModal());
+    handleCloseNavMenu();
+  };
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [show, setShow] = React.useState(false);
-  const [showSignUp, setShowSignUp] = React.useState(false);
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
@@ -33,12 +59,8 @@ const Navbar = () => {
 
   return (
     <AppBar sx={styles.appBar} position="sticky">
-       {
-        show && <LoginModal show={show} setShow={setShow} />
-        }
-        {
-        showSignUp && <SignUpModal show={showSignUp} setShow={setShowSignUp} />
-        }
+      {<SignUpModal show={showSignUpModal}/>}
+      {<LoginModal show={showLoginModal}/>}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={styles.logo} onClick={navigateToHome} curser="pointer">
@@ -83,7 +105,7 @@ const Navbar = () => {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={(e)=>handleOpenNavMenu(e)}
+              onClick={(e) => handleOpenNavMenu(e)}
               color="inherit"
               curser="pointer"
             >
@@ -102,9 +124,10 @@ const Navbar = () => {
               onClose={handleCloseNavMenu}
               sx={styles.menu}
               PaperProps={{
-                className: 'css-1ka5eyc-MuiPaper-root-MuiMenu-paper-MuiPopover-paper',
+                className:
+                  "css-1ka5eyc-MuiPaper-root-MuiMenu-paper-MuiPopover-paper",
                 sx: {
-                  borderRadius: '20px !important',
+                  borderRadius: "20px !important",
                 },
               }}
             >
@@ -113,7 +136,7 @@ const Navbar = () => {
                 flexDirection="column"
                 justifyContent="flex-start"
                 alignItems="flex-start"
-                sx={{ pl: "10px", pr: "10px",}}
+                sx={{ pl: "10px", pr: "10px" }}
               >
                 <SmNavlink
                   onClick={() => {
@@ -155,24 +178,11 @@ const Navbar = () => {
                   Become Educator
                 </SmNavlink>
               </Box>
-            {/* Small Screen */}
-              <Box display="flex" justifyContent="space-around"  pt="20px">
-                <AuthButton
-                  onClick={() => {
-                    setShow(!show)
-                    handleCloseNavMenu();
-                  }}
-                >
-                  Login
-                </AuthButton>
+              {/* Small Screen */}
+              <Box display="flex" justifyContent="space-around" pt="20px">
+                <AuthButton onClick={handleLoginButtonClick}>Login</AuthButton>
 
-                <AuthButton
-                  onClick={() => {
-                    setShowSignUp(!showSignUp)
-                    handleCloseNavMenu();
-                  }}
-                  signup="true"
-                >
+                <AuthButton onClick={handleSignUpButtonClick} signup="true">
                   Sign Up
                 </AuthButton>
               </Box>
@@ -197,23 +207,19 @@ const Navbar = () => {
             sx={styles.rightBox}
           >
             <Stack direction="row" spacing={2}>
-              <Span onClick={() => navigate("/about")}>
+              <Span onClick={() => navigate("/become-educator")}>
                 <NavLink color="secondary"> Become Educator</NavLink>
               </Span>
 
+              <AuthButton onClick={handleLoginButtonClick}>Login</AuthButton>
 
-              {/* <Link as={Link} to="/login"> */}
-              <AuthButton  onClick={()=> setShow(!show)} >Login</AuthButton>
-              {/* </Link> */}
-
-              {/* <Link as={Link} to="/signup"> */}
-                <AuthButton signup="true" onClick={()=> setShowSignUp(!showSignUp)}>Sign Up</AuthButton>
-              {/* </Link> */}
+              <AuthButton signup="true" onClick={handleSignUpButtonClick}>
+                Sign Up
+              </AuthButton>
             </Stack>
           </Box>
         </Toolbar>
       </Container>
-    
     </AppBar>
   );
 };

@@ -8,14 +8,25 @@ import TeachIcon from "../../assets/images/teachIcon.png";
 import becomeimg from "../../assets/images/becomeEducatorBgImg.png";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
+import { useSelector, useDispatch } from "react-redux";
+import { openSignUpModal } from '../../feature/Auth/authSlice';
 import { styles } from "./styles";
+import SignUpModal from "../Auth/SignUp/signUp";
+
 
 const BecomeEducator = () => {
+  const showSignUpModal = useSelector((state) => state.auth.showSignUpModal);
+  const dispatch = useDispatch();
+  const handleSignUpModalOpen = () => {
+    dispatch(openSignUpModal());
+  };
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm')); // Change breakpoint as needed
 
   const navigate = useNavigate();
   const sectionRef = useRef(null);
+
+
 
   const navigateToEdu = () => {
     navigate("/educator-faq");
@@ -28,7 +39,9 @@ const BecomeEducator = () => {
   return (
     <>
       {/* Section 1 */}
+      <SignUpModal show={showSignUpModal} setShow={handleSignUpModalOpen} />
       <div className={isDesktop ?"bg-img" : "bg-img2"} >
+        
         <Grid container lg={6} sx={styles.Sec1MainGrid}>
           <Grid >
             <Typography align="center" sx={styles.boxTypo}>
@@ -50,7 +63,12 @@ const BecomeEducator = () => {
             sm={12}
             xs={12}
           >
-            <Button variant="contained"  size="small" sx={styles.textCapitalize}>
+            <Button 
+            variant="contained"
+            size="small" 
+            onClick={handleSignUpModalOpen}
+            sx={styles.textCapitalize}
+            >
               Get Started
             </Button>
 

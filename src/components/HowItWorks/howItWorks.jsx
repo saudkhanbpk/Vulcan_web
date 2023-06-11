@@ -10,7 +10,8 @@ import { styles } from "./styles";
 
 const HowItWorks = () => {
    
-  const is_small_screen = useMediaQuery("(max-width: 899px)");
+  const isSmallScreen = useMediaQuery("(min-width: 899px)");
+
   const navigate = useNavigate();
 
   const navigateToEdu = () => {
@@ -125,7 +126,7 @@ const HowItWorks = () => {
           alignItems="center"
         >
           <Box sx={{ pb: 15 }}>
-            {is_small_screen && (
+            {isSmallScreen && (
               <Divider orientation="horizontal" sx={styles.divider} />
             )}
           </Box>

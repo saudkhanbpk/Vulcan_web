@@ -51,7 +51,7 @@ const OurMission = () => {
       >
         <Grid container xs={12} sm={10} md={6} lg={6}>
           <Box display={"flex"}  justifycontent={"center"} alignItems={"center"}>
-            <img src={bringIm} className="img-fluid brinaaimg" alt="" />
+            <img src={bringIm} className="img-fluid brinaaimg" alt="not found" />
           </Box>
         </Grid>
         <Grid xs={12} sm={12} md={6} lg={6}>

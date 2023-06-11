@@ -1,14 +1,17 @@
 export const styles = {
   Sec1MainGrid: {
-    marginRight: { lg: 45, md: 30, sm: 18, mobile: 2.3 },
+    // marginRight: { lg: 45, md: 30, sm: 18, mobile: 2.3 },
     width: { lg: "586px", md: "520px", sm: "510px", xs: "350px" },
     height: { lg: "294px", sm: "300px", xs: "350px" },
     borderRadius: "50px",
     backgroundColor: "rgba(255, 255, 255, 0.8)",
-    marginTop: {lg:-18, sm:10},
-    position: "absolute",
+    // marginTop: {lg:-18, sm:10},
+    // position: "absolute",
     pl: 3,
     pr: 3,
+    // display:"flex",
+    // justifyContent:"center",
+    // alignItems:"center"
     
   },
   boxTypo: {

@@ -20,7 +20,7 @@ export const MainBox = styled(Box)(({ theme }) => ({
   backgroundColor: "white",
   paddingBottom: 5,
   pt: 2,
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("md")]: {
     height: "723px",
   },
 }));
@@ -53,6 +53,7 @@ export const CreateAccButton = styled("button")(({ theme }) => ({
   color: "#fff",
   [theme.breakpoints.down("md")]: {
     fontSize: "16px",
+    marginTop:"30px"
     // backgroundColor:"white"
   },
 }));
@@ -64,7 +65,7 @@ export const ChooseAccBox = styled(Box)(({ theme }) => ({
   backgroundColor: "#D9D9D9",
   borderRadius: "30px",
   border: "none",
-  marginTop: theme.spacing(3),
+  marginTop: theme.spacing(2),
   marginBottom: theme.spacing(2),
   [theme.breakpoints.down("md")]: {
     flexDirection:"column",
@@ -73,7 +74,7 @@ export const ChooseAccBox = styled(Box)(({ theme }) => ({
 }));
 export const Heading = styled(Typography)(({ theme }) => ({
   paddingTop: theme.spacing(1),
-  paddingBottom: theme.spacing(2),
+  paddingBottom: theme.spacing(1),
   color: theme.palette.primary.main,
   fontSize: "36px",
   [theme.breakpoints.down("md")]: {},
@@ -87,7 +88,7 @@ export const SignInTextLink = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {},
 }));
 
-export const FormBox = styled(Typography)(({ theme }) => ({
+export const FormBox = styled(Box)(({ theme }) => ({
   width: "170px",
   height: "200px",
   display: "flex",
@@ -98,14 +99,14 @@ export const FormBox = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {},
 }));
 
-export const ModalBackgroundBox = styled(Typography)(({ theme }) => ({
+export const ModalBackgroundBox = styled(Box)(({ theme }) => ({
   position: "fixed",
   top: 0,
   left: 0,
   width: "100%",
   height: "100%",
-  backgroundColor: "rgba(0, 0, 0, 0.5)",
+  // backgroundColor: "rgba(0, 0, 0, 0.5)",
   backdropFilter: "blur(5px)",
-  zIndex: 9999,
+  zIndex:1100,
   [theme.breakpoints.down("md")]: {},
 }));

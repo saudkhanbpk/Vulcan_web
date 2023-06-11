@@ -6,6 +6,7 @@ export const styles = {
     justifyContent: "start",
     alignItems: "center",
   },
+
   item: { borderRadius: "20px" },
   subGrid: { cursor: "pointer" },
   subGridIconClicked: { fontSize: "3.1875rem", color: "blue" },
@@ -40,6 +41,20 @@ export const MyBox = styled(Paper)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "space-evenly",
 
+[theme.breakpoints.down('md')]:{
+  textAlign: "center",
+  height: 421,
+  width: 500,
+  borderRadius: `${20} !important`,
+  fontSize: 23,
+  padding: 40,
+  paddingTop: 20,
+  marginTop: 40,
+  marginLeft: 90,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-evenly",
+},
   "@media (max-width: 600px)": {
     textAlign: "center",
     height: 600,
