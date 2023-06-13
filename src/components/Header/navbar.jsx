@@ -18,30 +18,40 @@ import {
   AuthButton,
 } from "./styles";
 import "./navbar.scss";
-import LoginModal from "../Auth/Login/login";
-import SignUpModal from "../Auth/SignUp/signUp";
+// import LoginModal from "../Auth/Login/login";
+// import SignUpModal from "../Auth/SignUp/signUp";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  openSignUpModal,
-  openLoginModal,
-} from "../../feature/Auth/authSlice";
+import { 
+  // openSignUpModal,
+  // openLoginModal,
+  chooseModalLogin,
+  chooseModalSignUp } from "../../feature/Auth/authSlice";
+import Auth from "../Auth/auth";
 
 const Navbar = () => {
-  const showSignUpModal = useSelector((state) => state.auth.showSignUpModal);
-
-  const showLoginModal = useSelector((state) => state.auth.showLoginModal);
-
+  // const showSignUpModal = useSelector((state) => state.auth.showSignUpModal);
+  // const showLoginModal = useSelector((state) => state.auth.showLoginModal);
+  const chooseModal = useSelector((state) => state.auth.chooseModal);
   const dispatch = useDispatch();
 
   const handleLoginButtonClick = () => {
-    dispatch(openLoginModal());
+    dispatch(chooseModalLogin());
     handleCloseNavMenu();
   };
 
   const handleSignUpButtonClick = () => {
-    dispatch(openSignUpModal());
+    dispatch(chooseModalSignUp());
     handleCloseNavMenu();
   };
+  // const handleLoginButtonClick = () => {
+  //   dispatch(openLoginModal());
+  //   handleCloseNavMenu();
+  // };
+
+  // const handleSignUpButtonClick = () => {
+  //   dispatch(openSignUpModal());
+  //   handleCloseNavMenu();
+  // };
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
@@ -59,8 +69,11 @@ const Navbar = () => {
 
   return (
     <AppBar sx={styles.appBar} position="sticky">
-      {<SignUpModal show={showSignUpModal}/>}
-      {<LoginModal show={showLoginModal}/>}
+      {/* {<SignUpModal show={showSignUpModal}/>}
+      {<LoginModal show={showLoginModal}/>} */}
+      {/* {<Auth chooseModal={chooseModal}  showSignUpModal={showSignUpModal} showLoginModal={showLoginModal}/>} */}
+
+      {<Auth chooseModal={chooseModal}/>}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={styles.logo} onClick={navigateToHome} curser="pointer">

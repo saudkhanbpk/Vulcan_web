@@ -5,6 +5,7 @@ import Router from "./Router/router";
 import { BrowserRouter } from "react-router-dom";
 import ScrollToTop from "./Scroll/scrollToTop";
 import Navbar from "./components/Header/navbar";
+import Auth from "./components/Auth/auth";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <ScrollToTop />
         <Navbar />
         <Router />
+        {/* <Auth/> */}
         <Footer />
       </BrowserRouter>
     </>

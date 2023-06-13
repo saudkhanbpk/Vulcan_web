@@ -82,15 +82,11 @@ const SignUpModal = ({ show}) => {
       console.log("===========================");
     },
   });
-  console.log(formik.errors);
+  // console.log(formik.errors);
   const handleLoginButtonClick = () => {
     dispatch(openLoginModal());
-    // handleCloseNavMenu();
   };
-
-  // const SignInTextLink = styled(Typography)(({ theme }) => ({[theme.breakpoints.down("md")]: {}}))
-  // const SignInTextLink = styled(Typography)(({ theme }) => ({[theme.breakpoints.down("md")]: {}}))
-
+ 
   return (
     <>
       {showLoginModal && <LoginModal show={showLoginModal}/>}
@@ -303,7 +299,7 @@ const SignUpModal = ({ show}) => {
                   }}
                 />
 
-                <Box pt={1}>
+                <Box pt={{lg:3}}>
                   <CreateAccButton
                     type="submit"
                     variant="contained"

@@ -9,16 +9,18 @@ import becomeimg from "../../assets/images/becomeEducatorBgImg.png";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useSelector, useDispatch } from "react-redux";
-import { openSignUpModal } from '../../feature/Auth/authSlice';
+import { chooseModalSignUp, openSignUpModal } from '../../feature/Auth/authSlice';
 import { styles } from "./styles";
 import SignUpModal from "../Auth/SignUp/signUp";
+import Auth from "../Auth/auth";
 
 
 const BecomeEducator = () => {
-  const showSignUpModal = useSelector((state) => state.auth.showSignUpModal);
+  // const showSignUpModal = useSelector((state) => state.auth.showSignUpModal);
+  const chooseModal = useSelector((state)=>state.auth.chooseModal);
   const dispatch = useDispatch();
   const handleSignUpModalOpen = () => {
-    dispatch(openSignUpModal());
+    dispatch(chooseModalSignUp());
   };
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm')); // Change breakpoint as needed
@@ -39,7 +41,7 @@ const BecomeEducator = () => {
   return (
     <>
       {/* Section 1 */}
-      <SignUpModal show={showSignUpModal} setShow={handleSignUpModalOpen} />
+      {<Auth chooseModal={chooseModal}/>}
       <div className={isDesktop ?"bg-img" : "bg-img2"} >
         
         <Grid container lg={6} sx={styles.Sec1MainGrid}>

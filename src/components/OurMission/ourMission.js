@@ -13,7 +13,7 @@ const OurMission = () => {
 
   const is_small_screen_val = useMediaQuery("max-width: 390px");
   const is_small_screen = is_small_screen_val.toString();
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("xs"));
 
   return (
     <>
