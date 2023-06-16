@@ -94,8 +94,9 @@ import {
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
-    alignItems: "center",
-    // paddingTop: theme.spacing(1),
+    alignItems: "center", 
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
     [theme.breakpoints.down("md")]: {},
   }));
   

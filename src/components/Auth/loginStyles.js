@@ -32,5 +32,7 @@ export const LoginFormBox = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "flex-start",
   alignItems: "center",
+  paddingLeft: theme.spacing(4),
+  paddingRight: theme.spacing(4),
   [theme.breakpoints.down("md")]: {},
 }));

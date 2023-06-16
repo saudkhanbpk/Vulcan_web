@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Modal, Typography, TextField, Button } from "@mui/material";
+import { Box, Modal, Typography, TextField, Button, InputAdornment, IconButton } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./Auth.scss";
@@ -16,22 +16,34 @@ import {
 } from "./signUpStyles";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  closeModals,
-  //   openLoginModal,
-  //   openSignUpModal,
+  // closeModals,
   chooseModalLogin,
   chooseModalSignUp,
   closeChooseModal,
 } from "../../feature/Auth/authSlice";
 import { Link } from "react-router-dom";
 import { LoginFormBox, LoginMainBox, LoginSigUpTextLink } from "./loginStyles";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff  from "@material-ui/icons/VisibilityOff";
 function Auth({ chooseModal }) {
   
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
-  console.log(isOpenModal,"isopen mdal");
+  console.log(isOpenModal,"is open Modal");
   //   const [show, setshow] = useState(2);
   const [selectedButton, setSelectedButton] = useState(true);
   //   const showLoginModal = useSelector((state) => state.auth.showLoginModal);
+
+  // Visibility VisibilityOff
+  const [showPassword, setShowPassword] = useState(true);
+  const [showRePassword, setShowRePassword] = useState(true);
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const handleToggleRePasswordVisibility = () => {
+    setShowRePassword(!showRePassword);
+  };
+
   const dispatch = useDispatch();
   console.log(chooseModal);
 
@@ -95,6 +107,7 @@ function Auth({ chooseModal }) {
   //   };
   const handleLoginButtonClick = () => {
     dispatch(chooseModalLogin());
+    formik.resetForm();
   };
   //  ===================Login Logic=======================================
   //   const showSignUpModal = useSelector((state) => state.auth.showSignUpModal);
@@ -105,6 +118,8 @@ function Auth({ chooseModal }) {
   //   };
   const handleSignUpButtonClick = () => {
     dispatch(chooseModalSignUp());
+    loginFormik.resetForm();
+
   };
   //   const handleCloseModal = () => {
   //     dispatch(closeModals());
@@ -200,11 +215,10 @@ function Auth({ chooseModal }) {
                 InputLabelProps={{
                   style: { fontSize: 16 },
                 }}
-                inputProps={{
-                  // style: { fontSize: 18 },
-                  style: { fontSize: 18, width: 'calc(100% - 64px)', paddingLeft: '32px', paddingRight: '32px' },
-
+                InputProps={{
+                  style: { fontSize: 18, },
                 }}
+                fullWidth
               />
               <TextField
                 name="lastName"
@@ -223,10 +237,11 @@ function Auth({ chooseModal }) {
                 InputLabelProps={{
                   style: { fontSize: 16 },
                 }}
-                inputProps={{
-                  style: { fontSize: 18, width: 'calc(100% - 64px)', paddingLeft: '32px', paddingRight: '32px' },
+                InputProps={{
+                  style: { fontSize: 18, },
 
                 }}
+                fullWidth
               />
               <TextField
                 // id="email"
@@ -244,10 +259,12 @@ function Auth({ chooseModal }) {
                 InputLabelProps={{
                   style: { fontSize: 16 },
                 }}
-                inputProps={{
-                  style: { fontSize: 18, width: 'calc(100% - 64px)', paddingLeft: '32px', paddingRight: '32px' },
+                InputProps={{
+                  style: { fontSize: 18,},
 
                 }}
+                fullWidth
+
               />
 
               <TextField
@@ -260,7 +277,7 @@ function Auth({ chooseModal }) {
                     : "Password"
                 }
                 variant="standard"
-                type="password"
+                type={showPassword ? "password":"text"}
                 onChange={formik.handleChange}
                 value={formik.values.password}
                 error={
@@ -269,19 +286,28 @@ function Auth({ chooseModal }) {
                 }
                 InputLabelProps={{
                   style: {
-                    color:
-                      (formik.touched.password &&
-                        Boolean(formik.errors.password)) ||
-                      getPasswordError()
-                        ? "red"
-                        : undefined,
+                    // color:
+                    //   (formik.touched.password &&
+                    //     Boolean(formik.errors.password)) ||
+                    //   getPasswordError()
+                    //     ? "red"
+                    //     : undefined,
                     fontSize: 16,
                   },
                 }}
-                inputProps={{
-                  style: { fontSize: 18, width: 'calc(100% - 64px)', paddingLeft: '32px', paddingRight: '32px' },
+                InputProps={{
+                  style: { fontSize: 18 },
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={handleTogglePasswordVisibility}>
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
 
                 }}
+                fullWidth
+
               />
 
               <TextField
@@ -295,7 +321,7 @@ function Auth({ chooseModal }) {
                     : "Re-enter Password"
                 }
                 variant="standard"
-                type="password"
+                type={showRePassword ? "password":"text"}
                 onChange={formik.handleChange}
                 value={formik.values.reEnterPassword}
                 error={
@@ -307,10 +333,19 @@ function Auth({ chooseModal }) {
                     fontSize: 16,
                   },
                 }}
-                inputProps={{
-                  style: { fontSize: 18, width: 'calc(100% - 64px)', paddingLeft: '32px', paddingRight: '32px' },
+                InputProps={{
+                  style: { fontSize: 18 },
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={handleToggleRePasswordVisibility}>
+                        {showRePassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
 
                 }}
+                fullWidth
+
               />
 
               <TextField
@@ -333,10 +368,12 @@ function Auth({ chooseModal }) {
                 InputLabelProps={{
                   style: { fontSize: 16 },
                 }}
-                inputProps={{
-                  style: { fontSize: 18, width: 'calc(100% - 64px)', paddingLeft: '32px', paddingRight: '32px' },
+                InputProps={{
+                  style: { fontSize: 18 },
 
                 }}
+                fullWidth
+
               />
 
               <Box pt={3}>
@@ -398,45 +435,46 @@ function Auth({ chooseModal }) {
             </Box>
             <LoginFormBox
               component="form"
-              onSubmit={formik.handleSubmit}
+              onSubmit={loginFormik.handleSubmit}
               noValidate
             >
-              <Box sx={{ pb: "22px", pt: "20px" }}>
+              {/* <Box sx={{ pb: "22px", pt: "20px" }}> */}
                 <TextField
                   // id="email"
                   name="email"
                   label={
-                    formik.touched.email && Boolean(formik.errors.email)
-                      ? `${formik.errors.email}`
+                    loginFormik.touched.email && Boolean(loginFormik.errors.email)
+                      ? `${loginFormik.errors.email}`
                       : "Email"
                   }
                   variant="standard"
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
-                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  onChange={loginFormik.handleChange}
+                  value={loginFormik.values.email}
+                  error={loginFormik.touched.email && Boolean(loginFormik.errors.email)}
                   InputLabelProps={{
                     style: { fontSize: 16 },
                   }}
                   inputProps={{
                     style: { fontSize: 18 },
                   }}
+                  fullWidth
                 />
-              </Box>
-              <Box sx={{ pb: "22px", pt: "10px" }}>
+              {/* </Box> */}
+              {/* <Box sx={{ pb: "22px", pt: "10px" }}> */}
                 <TextField
                   // id="password"
                   name="password"
                   label={
-                    formik.touched.password && Boolean(formik.errors.password)
-                      ? formik.errors.password
+                    loginFormik.touched.password && Boolean(loginFormik.errors.password)
+                      ? loginFormik.errors.password
                       : "Password"
                   }
                   variant="standard"
-                  type="password"
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
+                  type={showPassword ? "password":"text"}
+                  onChange={loginFormik.handleChange}
+                  value={loginFormik.values.password}
                   error={
-                    formik.touched.password && Boolean(formik.errors.password)
+                    loginFormik.touched.password && Boolean(loginFormik.errors.password)
                   }
                   sx={{ pb: "14px", pt: "5" }}
                   InputLabelProps={{
@@ -444,11 +482,20 @@ function Auth({ chooseModal }) {
                       fontSize: 16,
                     },
                   }}
-                  inputProps={{
+                  InputProps={{
                     style: { fontSize: 18 },
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={handleTogglePasswordVisibility}>
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+  
                   }}
+                  fullWidth
                 />
-              </Box>
+              {/* </Box> */}
 
               <Box pb={2}>
                 <Link
