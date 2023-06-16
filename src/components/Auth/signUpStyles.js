@@ -105,7 +105,7 @@ import {
     left: 0,
     width: "100%",
     height: "100%",
-    // backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     backdropFilter: "blur(5px)",
     zIndex:1,
     [theme.breakpoints.down("md")]: {},
