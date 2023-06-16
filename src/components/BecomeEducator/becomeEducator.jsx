@@ -9,14 +9,12 @@ import becomeimg from "../../assets/images/becomeEducatorBgImg.png";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useSelector, useDispatch } from "react-redux";
-import { chooseModalSignUp, openSignUpModal } from '../../feature/Auth/authSlice';
+import { chooseModalSignUp} from '../../feature/Auth/authSlice';
 import { styles } from "./styles";
-import SignUpModal from "../Auth/SignUp/signUp";
 import Auth from "../Auth/auth";
 
 
 const BecomeEducator = () => {
-  // const showSignUpModal = useSelector((state) => state.auth.showSignUpModal);
   const chooseModal = useSelector((state)=>state.auth.chooseModal);
   const dispatch = useDispatch();
   const handleSignUpModalOpen = () => {

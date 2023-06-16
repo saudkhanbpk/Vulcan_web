@@ -29,9 +29,7 @@ function Auth({ chooseModal }) {
   
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
   console.log(isOpenModal,"is open Modal");
-  //   const [show, setshow] = useState(2);
   const [selectedButton, setSelectedButton] = useState(true);
-  //   const showLoginModal = useSelector((state) => state.auth.showLoginModal);
 
   // Visibility VisibilityOff
   const [showPassword, setShowPassword] = useState(true);
@@ -67,12 +65,12 @@ function Auth({ chooseModal }) {
     return specialCharacters.test(password);
   };
 
-  const getPasswordError = () => {
-    if (formik.touched.password && !isPasswordValid(formik.values.password)) {
-      return "Add Special Character";
-    }
-    return "";
-  };
+  // const getPasswordError = () => {
+  //   if (formik.touched.password && !isPasswordValid(formik.values.password)) {
+  //     return "Add Special Character";
+  //   }
+  //   return "";
+  // };
   const formik = useFormik({
     initialValues: {
       firstName: "",
