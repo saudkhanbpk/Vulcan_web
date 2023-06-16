@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid";
 import { MyBox, styles } from "./styles";
 
 const WelcomeBox = () => {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(true);
 
   const handleButtonClick = (val) => {
     if (val.value === 1) {
