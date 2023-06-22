@@ -96,7 +96,7 @@ const Contact = () => {
             label={
               formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
                 ? `${formik.errors.phoneNumber}`
-                : "Phone Number"
+                : "Phone Number (Optional)"
             }
             variant="standard"
             onChange={formik.handleChange}
@@ -126,6 +126,7 @@ const Contact = () => {
             variant="standard"
             onChange={formik.handleChange}
             value={formik.values.message}
+            placeholder="Type your message here"
             error={formik.touched.message && Boolean(formik.errors.message)}
             InputLabelProps={{
               style: { fontSize: 16 },

@@ -21,7 +21,7 @@ import {
   chooseModalSignUp,
   closeChooseModal,
 } from "../../feature/Auth/authSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginFormBox, LoginMainBox, LoginSigUpTextLink } from "./loginStyles";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff  from "@material-ui/icons/VisibilityOff";
@@ -34,7 +34,7 @@ function Auth({ chooseModal }) {
   // Visibility VisibilityOff
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
-
+  const navigate = useNavigate();
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -49,6 +49,7 @@ function Auth({ chooseModal }) {
     dispatch(closeChooseModal());
     formik.resetForm();
   };
+
 
   const handleButtonClick = (val) => {
     if (val.value === 1) {
@@ -187,7 +188,11 @@ function Auth({ chooseModal }) {
                 Student Account
               </AuthButton>
               <AuthButton
-                onClick={(e) => handleButtonClick({ value: 2 })}
+                onClick={(e) =>{ 
+                  handleButtonClick({ value: 2 })
+                  navigate('/educator-account');
+                  handleCloseModal()
+              }}
                 sx={{
                   background: selectedButton ? "#D9D9D9E5" : "#000FFF",
                   color: selectedButton ? "black" : "white",

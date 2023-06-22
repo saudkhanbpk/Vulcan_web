@@ -6,16 +6,17 @@ import { BrowserRouter } from "react-router-dom";
 import ScrollToTop from "./Scroll/scrollToTop";
 import Navbar from "./components/Header/navbar";
 import Auth from "./components/Auth/auth";
+import EducatorAccountMainPage from "./components/Auth/EducatorAccountMainPage/educatorAccountMainPage";
+import MultipleChoiceComponent from "./extra";
 
 function App() {
   return (
     <>
     <BrowserRouter>
         <ScrollToTop />
-        <Navbar />
         <Router />
-        {/* <Auth/> */}
-        <Footer />
+        {/* <EducatorAccountMainPage/> */}
+        {/* <MultipleChoiceComponent/> */}
       </BrowserRouter>
     </>
   
