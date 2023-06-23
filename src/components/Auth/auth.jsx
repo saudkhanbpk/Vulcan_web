@@ -190,7 +190,6 @@ function Auth({ chooseModal }) {
               <AuthButton
                 onClick={(e) =>{ 
                   handleButtonClick({ value: 2 })
-                  navigate('/educator-account');
                   handleCloseModal()
               }}
                 sx={{

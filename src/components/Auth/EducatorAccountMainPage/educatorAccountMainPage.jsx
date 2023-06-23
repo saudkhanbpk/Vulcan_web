@@ -5,8 +5,10 @@ import React, { useEffect, useState } from "react";
 import { specialFont } from "../../../Theme/fontFamily";
 import Steps from "./Steps/steps";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const EducatorAccountMainPage = () => {
+  const navigate = useNavigate();
   const [steps, setSteps] = useState(1);
   const step1Data= useSelector((state)=>state.auth.stepOneData);
   const step2Data= useSelector((state)=>state.auth.stepTwoData);
@@ -149,7 +151,7 @@ const EducatorAccountMainPage = () => {
             alignItems={"center"}
             justifyContent={"flex-end"}
           >
-            <ExitTypo variant="h6" color="primary">
+            <ExitTypo variant="h6" color="primary" onClick={()=>navigate("/")}>
               Exit
             </ExitTypo>
           </Grid>

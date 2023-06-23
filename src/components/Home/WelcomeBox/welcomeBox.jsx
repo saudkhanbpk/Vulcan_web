@@ -24,7 +24,7 @@ const WelcomeBox = () => {
 
   // navigation handle func
   const navigateToBecomeEdu = () => {
-    navigate("/become-educator");
+    navigate("/educator-account");
   };
 
   const navigateToCourses = () => {
