@@ -17,7 +17,6 @@ import Footer from "../components/Footer/footer";
 const Router = () => {
   const location = useLocation();
 
-  console.log(location.pathname);
   return (
     <div>
       {location.pathname !== "/educator-account" ? <Navbar /> : ""}

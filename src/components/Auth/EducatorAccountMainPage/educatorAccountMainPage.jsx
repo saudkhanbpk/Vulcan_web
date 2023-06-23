@@ -4,9 +4,12 @@ import { styled } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { specialFont } from "../../../Theme/fontFamily";
 import Steps from "./Steps/steps";
+import { useSelector } from "react-redux";
 
 const EducatorAccountMainPage = () => {
   const [steps, setSteps] = useState(1);
+  const step1Data= useSelector((state)=>state.auth.stepOneData);
+  const step2Data= useSelector((state)=>state.auth.stepTwoData);
   useEffect(()=>{
  
   },[steps])
@@ -162,7 +165,7 @@ const EducatorAccountMainPage = () => {
             </PreviousButton>
             ) : (
               
-              <ContinueButton variant="contained" onClick={handleInc}>
+              <ContinueButton disabled={!step1Data} variant="contained" onClick={handleInc}>
               Continue
             </ContinueButton>
             )}
@@ -170,7 +173,7 @@ const EducatorAccountMainPage = () => {
           <Grid>
             <Grid>
               {steps > 1 ? (
-                <ContinueButton variant="contained" onClick={handleInc}>
+                <ContinueButton  disabled={!step2Data} variant="contained" onClick={handleInc}>
                   Continue
                 </ContinueButton>
               ) : ""}

@@ -5,6 +5,9 @@ const initialState = {
   // showLoginModal: false,
   isOpenModal: false,
   chooseModal: 0,
+  stepOneData: "",
+  stepTwoData: "",
+
 };
 
 export const counterSlice = createSlice({
@@ -46,10 +49,26 @@ export const counterSlice = createSlice({
       state.chooseModal = 0;
       state.isOpenModal= false
     },
+    eduRegSteps: (state, action) => {
+      console.log("action value:", action);
+      if (action.payload.step === "1") {
+        return {
+          ...state,
+          stepOneData: action.payload.value
+        };
+      }
+      if (action.payload.step === "2") {
+        return {
+          ...state,
+          stepTwoData: action.payload.value
+        };
+      }
+      return state; // Return the current state if the conditions are not met
+    },
   },
 });
 
-export const { openLoginModal, openSignUpModal, closeModals, chooseModalLogin, chooseModalSignUp, closeChooseModal  } =
+export const { openLoginModal, openSignUpModal, closeModals, chooseModalLogin, chooseModalSignUp, closeChooseModal,eduRegSteps  } =
   counterSlice.actions;
 
 export default counterSlice.reducer;
