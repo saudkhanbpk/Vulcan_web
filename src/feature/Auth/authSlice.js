@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  // showSignUpModal: false,
+ 
   // showLoginModal: false,
   isOpenModal: false,
   chooseModal: 0,
-  stepOneData: "",
-  stepTwoData: "",
+  stepOneData: [],
+  stepTwoData: [],
 
 };
 
@@ -14,7 +14,7 @@ export const counterSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // openLoginModal: (state) => {
+  
     //   state.showLoginModal = true;
     //   state.showSignUpModal = false;
     //   console.log("Login accessed");
@@ -51,16 +51,23 @@ export const counterSlice = createSlice({
     },
     eduRegSteps: (state, action) => {
       console.log("action value:", action);
+      
+    
       if (action.payload.step === "1") {
         return {
           ...state,
-          stepOneData: action.payload.value
-        };
+          stepOneData: state.stepOneData.includes(action.payload.optionValue)
+            ? state.stepOneData.filter((value) => value !== action.payload.optionValue)
+            : [...state.stepOneData, action.payload.optionValue],
+        }
+        
       }
       if (action.payload.step === "2") {
         return {
           ...state,
-          stepTwoData: action.payload.value
+          stepTwoData: state.stepTwoData.includes(action.payload.optionValue)
+            ? state.stepTwoData.filter((value) => value !== action.payload.optionValue)
+            : [...state.stepTwoData, action.payload.optionValue],
         };
       }
       return state; // Return the current state if the conditions are not met
