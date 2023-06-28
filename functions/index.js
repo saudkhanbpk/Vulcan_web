@@ -1,14 +1,7 @@
-const {onRequest} = require("firebase-functions/v2/https");
+const {setGlobalOptions} = require("firebase-functions/v2");
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+setGlobalOptions({maxInstances: 10});
 
 
-exports.setupAccount = onRequest({cors: true}, (req, res) => {
-    // ...
-  });
+const setupAccount = require('./setupAccount');
+exports.setupAccount = setupAccount.setupAccount;
