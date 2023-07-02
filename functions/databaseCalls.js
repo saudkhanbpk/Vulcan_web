@@ -1,6 +1,18 @@
 const admin = require("firebase-admin");
 
-const db = admin.database().ref()
+const db = admin.database()
+
+exports.logUnauth = (tag) => {
+    db.ref(`unauth_logging`).update({
+        [Date.now()]:tag
+    })
+}
+
+exports.logUser = (uid, tag) => {
+    db.ref(`users_logging`).child(uid).update({
+        [Date.now()]:tag
+    });
+}
 
 exports.createUser = (uid, firstName, lastName, email, number, isEducator) => {
     db.ref(`users`).child(uid).update({
@@ -15,18 +27,6 @@ exports.createUser = (uid, firstName, lastName, email, number, isEducator) => {
     }).catch(error => {
         this.logUnauth(loggingConstants.createAccountError + `ID: ${uid}: ${error}`)
     });
-}
-
-exports.logUser = (uid, tag) => {
-    db.ref(`users_logging`).child(uid).update({
-        [Date.now()]:tag
-    });
-}
-
-exports.logUnauth = (tag) => {
-    db.ref(`unauth_logging`).update({
-        [Date.now()]:tag
-    })
 }
 
 exports.udateEmailVerified = (uid, isEmailVerified) => {
