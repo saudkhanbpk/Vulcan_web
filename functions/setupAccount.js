@@ -1,25 +1,31 @@
-const {onCall} = require("firebase-functions/v2/https");
+const {onCall} = require("firebase-functions/v2/https")
 const admin = require("firebase-admin");
 
-admin.initializeApp();
-db = admin.database().ref()
-
+const db = require('./databaseCalls');
 
 exports.setupAccount = onCall((request) => {
-
-  db = admin.database().ref()
-  
   const uid = request.auth.uid
-  const email = request.auth.token.email
-  const firstName = request.data.firstName
-  const lastName = request.data.lastName
-  const number = request.data.number || null
-  const emailVerified = false
-  const accountActive = true
-  const created = Date.now()
+  const { firstName, lastName, email, password, number, isEducator } = request.data
+
+  admin.auth().createUser({
+    email,
+    password
+  })
+  .then(currentUser => {
+    db.logUser(currentUser.uid, `ACTION: Firebase Account Created: ` + `ID: ${currentUser.email}`)
+
+    db.createUser(uid, firstName, lastName, email, number, isEducator)
+    .catch(error => {
+      db.logUser(currentUser.uid, `ERROR: Database Account Created: ` + `ID: ${uid}: ${error}`)
+    });
+  })
+  .catch(error => {
+    db.logUnauth(`ERROR: Firebase Account Created: ` + `Email: ${email}: ${error}`)
+
+    return { isSuccess: false,  errorMessage: error };
+  })
 
   return {
-    isSuccess: true,
-    errorDisplay: ""
-  };
-});
+    isSuccess: true
+  }
+})
