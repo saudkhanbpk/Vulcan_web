@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Modal,
@@ -24,22 +24,32 @@ import {
 } from "./signUpStyles";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  // closeModals,
   chooseModalLogin,
   chooseModalSignUp,
   closeChooseModal,
+  isUserExistMethod,
 } from "../../feature/Auth/authSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginFormBox, LoginMainBox, LoginSigUpTextLink } from "./loginStyles";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth, database } from "../../config/config";
+import { ref } from "firebase/database";
+import { set } from "firebase/database";
+
 function Auth({ chooseModal }) {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
-  console.log(isOpenModal, "is open Modal");
   const [selectedButton, setSelectedButton] = useState(true);
 
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
+
+  const navigate = useNavigate();
+
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -48,11 +58,11 @@ function Auth({ chooseModal }) {
   };
 
   const dispatch = useDispatch();
-  console.log(chooseModal);
 
   const handleCloseModal = () => {
     dispatch(closeChooseModal());
     formik.resetForm();
+    loginFormik.resetForm();
   };
 
   const handleButtonClick = (val) => {
@@ -70,12 +80,7 @@ function Auth({ chooseModal }) {
     return specialCharacters.test(password);
   };
 
-  // const getPasswordError = () => {
-  //   if (formik.touched.password && !isPasswordValid(formik.values.password)) {
-  //     return "Add Special Character";
-  //   }
-  //   return "";
-  // };
+  /////// Signup Formik call
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -98,16 +103,47 @@ function Auth({ chooseModal }) {
       phoneNumber: Yup.string(),
     }),
 
-    onSubmit: (values) => {
-      console.log("===========================");
-      console.log(values);
-      console.log("===========================");
+    onSubmit: async (values) => {
+      try {
+        // Create a new user with email and password
+        const { email, password, firstName, lastName, phoneNumber } = values;
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        // Access the newly created user
+        const user = userCredential.user;
+
+        // Store additional user data in Firebase Realtime Database
+        const userDataRef = ref(database, `users/${user.uid}`);
+        const userData = {
+          firstName,
+          lastName,
+          email,
+          phoneNumber,
+        };
+        await set(userDataRef, userData);
+
+        // Do something with the user, such as redirecting to a success page
+        console.log("Signup successful:", user);
+        if (user){
+          dispatch(isUserExistMethod);
+        }
+        // Navigate to home page
+        setTimeout(() => {
+          navigate("/");
+          handleCloseModal();
+        }, 0);
+      } catch (error) {
+        // Handle signup errors
+        console.error("Signup failed:", error.message);
+      }
     },
   });
-  console.log(formik.errors);
+  // console.log(formik.errors);
 
-  //     dispatch(openLoginModal());
-  //   };
   const handleLoginButtonClick = () => {
     dispatch(chooseModalLogin());
     formik.resetForm();
@@ -119,6 +155,7 @@ function Auth({ chooseModal }) {
     loginFormik.resetForm();
   };
 
+ 
   const loginFormik = useFormik({
     initialValues: {
       email: "",
@@ -131,20 +168,41 @@ function Auth({ chooseModal }) {
         .required("Password"),
     }),
 
-    onSubmit: (values) => {
-      console.log("===========================");
+    onSubmit: async (values) => {
+      console.log("============////////////////////================");
       console.log(values);
-      console.log("===========================");
-      console.log(loginFormik.errors);
+      console.log("==================.////////////////////.=========");
+
+      try {
+        const { email, password } = values;
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userCredential.user;
+        console.log("Login Successfully", user);
+
+        localStorage.setItem("userData", JSON.stringify(user));
+        
+        dispatch(isUserExistMethod(user))
+        setTimeout(() => {
+          navigate("/");
+          handleCloseModal();
+        }, 0);
+      } catch (err) {
+        console.log("Login Failed", err);
+      }
     },
   });
+
   return (
     <Box>
-      {chooseModal === 2 && isOpenModal ? (
-        <Box>
+      {chooseModal === "2" && isOpenModal ? (
+        <>
           <ModalBackgroundBox />
           <Modal
-            open={chooseModal}
+            open={isOpenModal}
             onClose={handleCloseModal}
             aria-labelledby="login-modal-title"
             aria-describedby="login-modal-description"
@@ -371,9 +429,8 @@ function Auth({ chooseModal }) {
                     type="submit"
                     variant="contained"
                     sx={{ width: "150px" }}
-                    onClick={() => console.log("Create Acc button Clicked!")}
                   >
-                    <Typography style={{ fontSize: "16px" }}>
+                    <Typography style={{ fontSize: "16px" }} >
                       Create Account
                     </Typography>
                   </CreateAccButton>
@@ -381,12 +438,12 @@ function Auth({ chooseModal }) {
               </FormBox>
             </MainBox>
           </Modal>
-        </Box>
-      ) : chooseModal === 1 && isOpenModal ? (
-        <Box>
+        </>
+      ) : chooseModal === "1" && isOpenModal ? (
+        <>
           <ModalBackgroundBox />
           <Modal
-            open={chooseModal}
+            open={isOpenModal}
             onClose={handleCloseModal}
             aria-labelledby="login-modal-title"
             aria-describedby="login-modal-description"
@@ -453,8 +510,7 @@ function Auth({ chooseModal }) {
                   }}
                   fullWidth
                 />
-                {/* </Box> */}
-                {/* <Box sx={{ pb: "22px", pt: "10px" }}> */}
+                
                 <TextField
                   // id="password"
                   name="password"
@@ -490,7 +546,6 @@ function Auth({ chooseModal }) {
                   }}
                   fullWidth
                 />
-                {/* </Box> */}
 
                 <Box pb={2}>
                   <Link
@@ -517,7 +572,6 @@ function Auth({ chooseModal }) {
                     type="submit"
                     variant="contained"
                     sx={{ width: "150px" }}
-                    onClick={() => console.log("Sign In Clicked!")}
                   >
                     Log In
                   </Button>
@@ -525,7 +579,7 @@ function Auth({ chooseModal }) {
               </LoginFormBox>
             </LoginMainBox>
           </Modal>
-        </Box>
+        </>
       ) : null}
     </Box>
   );

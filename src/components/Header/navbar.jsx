@@ -20,22 +20,39 @@ import {
 import "./navbar.scss";
 
 import { useDispatch, useSelector } from "react-redux";
-import { 
-  
+import {
   chooseModalLogin,
-  chooseModalSignUp } from "../../feature/Auth/authSlice";
+  chooseModalSignUp,
+  isUserExistMethodFalse,
+} from "../../feature/Auth/authSlice";
 import Auth from "../Auth/auth";
+import { auth } from "../../config/config";
+
 
 const Navbar = () => {
-
-  const chooseModal = useSelector((state) => state.auth.chooseModal);
   const dispatch = useDispatch();
+  const chooseModal = useSelector((state) => state.auth.chooseModal);
+  const user = useSelector((state) => state.auth.user);
 
+  React.useEffect(() => {
+    console.log(user);
+  }, [user]);
   const handleLoginButtonClick = () => {
     dispatch(chooseModalLogin());
     handleCloseNavMenu();
   };
+  const handleLogout = () => {
+    auth.signOut()
+    .then(() => {
+      console.log('User signed out successfully');
+      localStorage.clear()
+      dispatch(isUserExistMethodFalse());
 
+    })
+    .catch((error) => {
+      console.error('Error signing out:', error);
+    });
+};
   const handleSignUpButtonClick = () => {
     dispatch(chooseModalSignUp());
     handleCloseNavMenu();
@@ -57,8 +74,7 @@ const Navbar = () => {
 
   return (
     <AppBar sx={styles.appBar} position="sticky">
-    
-      {<Auth chooseModal={chooseModal}/>}
+      {<Auth chooseModal={chooseModal} />}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={styles.logo} onClick={navigateToHome} curser="pointer">
@@ -177,11 +193,21 @@ const Navbar = () => {
               </Box>
               {/* Small Screen */}
               <Box display="flex" justifyContent="space-around" pt="20px">
-                <AuthButton onClick={handleLoginButtonClick}>Login</AuthButton>
+                {user.uid ? (
+                  <AuthButton signup="true" onClick={handleLogout}>
+                    Logout
+                  </AuthButton>
+                ) : (
+                  <>
+                    <AuthButton onClick={handleLoginButtonClick}>
+                      Login
+                    </AuthButton>
 
-                <AuthButton onClick={handleSignUpButtonClick} signup="true">
-                  Sign Up
-                </AuthButton>
+                    <AuthButton onClick={handleSignUpButtonClick} signup="true">
+                      Sign Up
+                    </AuthButton>
+                  </>
+                )}
               </Box>
             </MenuStyle>
           </Box>
@@ -208,11 +234,19 @@ const Navbar = () => {
                 <NavLink color="secondary"> Become Educator</NavLink>
               </Span>
 
-              <AuthButton onClick={handleLoginButtonClick}>Login</AuthButton>
+              {user.uid ? (
+                <AuthButton signup="true" onClick={handleLogout}>Logout</AuthButton>
+              ) : (
+                <>
+                  <AuthButton onClick={handleLoginButtonClick}>
+                    Login
+                  </AuthButton>
 
-              <AuthButton signup="true" onClick={handleSignUpButtonClick}>
-                Sign Up
-              </AuthButton>
+                  <AuthButton signup="true" onClick={handleSignUpButtonClick}>
+                    Sign Up
+                  </AuthButton>
+                </>
+              )}
             </Stack>
           </Box>
         </Toolbar>

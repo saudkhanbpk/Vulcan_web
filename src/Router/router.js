@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import OurMission from "../components/OurMission/ourMission";
 import HomeScreen from "../components/Home/HomeScreen/homeScreen";
@@ -13,9 +13,20 @@ import Contact from "../components/Contact/contact";
 import EducatorAccountMainPage from "../components/Auth/EducatorAccountMainPage/educatorAccountMainPage";
 import Navbar from "../components/Header/navbar";
 import Footer from "../components/Footer/footer";
+import { isUserExistMethod } from "../feature/Auth/authSlice";
+import { useDispatch } from "react-redux";
 
 const Router = () => {
   const location = useLocation();
+  const dispatch=useDispatch()
+  
+useEffect(() => {
+  const userData = localStorage.getItem("userData");
+  const user = JSON.parse(userData);
+if(user){
+  dispatch(isUserExistMethod(user))
+}
+}, [Router])
 
   return (
     <div>

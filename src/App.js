@@ -3,6 +3,7 @@ import "./App.scss";
 import Router from "./Router/router";
 import { BrowserRouter } from "react-router-dom";
 import ScrollToTop from "./Scroll/scrollToTop";
+import Extra from "./extra/extra";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <ScrollToTop />
         <Router />
       </BrowserRouter>
+      {/* <Extra/> */}
     </>
   );
 }
