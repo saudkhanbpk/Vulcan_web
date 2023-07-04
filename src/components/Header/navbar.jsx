@@ -34,9 +34,6 @@ const Navbar = () => {
   const chooseModal = useSelector((state) => state.auth.chooseModal);
   const user = useSelector((state) => state.auth.user);
 
-  React.useEffect(() => {
-    console.log(user);
-  }, [user]);
   const handleLoginButtonClick = () => {
     dispatch(chooseModalLogin());
     handleCloseNavMenu();

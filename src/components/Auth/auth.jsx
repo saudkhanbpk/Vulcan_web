@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Modal,
@@ -126,12 +126,14 @@ function Auth({ chooseModal }) {
         };
         await set(userDataRef, userData);
 
-        // Do something with the user, such as redirecting to a success page
-        console.log("Signup successful:", user);
-        localStorage.setItem("userData", JSON.stringify(user));
-
+        const {email:userEmail, displayName, uid}= userCredential.user;
+        let payload={email:userEmail,displayName,uid};
+        // console.log("Login Successfully", payload);
         
-          dispatch(isUserExistMethod(user));
+        localStorage.setItem("userData", JSON.stringify(payload));
+        
+        //   dispatch(isUserExistMethod(user));
+        dispatch(isUserExistMethod(payload))
         
         // Navigate to home page
         setTimeout(() => {
@@ -144,7 +146,6 @@ function Auth({ chooseModal }) {
       }
     },
   });
-  // console.log(formik.errors);
 
   const handleLoginButtonClick = () => {
     dispatch(chooseModalLogin());
@@ -171,23 +172,20 @@ function Auth({ chooseModal }) {
     }),
 
     onSubmit: async (values) => {
-      console.log("============////////////////////================");
-      console.log(values);
-      console.log("==================.////////////////////.=========");
-
-      try {
+          try {
         const { email, password } = values;
         const userCredential = await signInWithEmailAndPassword(
           auth,
           email,
           password
         );
-        const user = userCredential.user;
-        console.log("Login Successfully", user);
+        //Serialized Data
+        const {email:userEmail,displayName,uid}= userCredential.user;
+        let payload={email:userEmail,displayName,uid}
 
-        localStorage.setItem("userData", JSON.stringify(user));
+        localStorage.setItem("userData", JSON.stringify(payload));
         
-        dispatch(isUserExistMethod(user))
+        dispatch(isUserExistMethod(payload))
         setTimeout(() => {
           navigate("/");
           handleCloseModal();
@@ -467,7 +465,6 @@ function Auth({ chooseModal }) {
                 variant="h1"
                 px={4}
                 pb={4}
-                // pt={2}
                 color="primary"
                 sx={{ fontSize: "36px" }}
               >
@@ -487,9 +484,7 @@ function Auth({ chooseModal }) {
                 onSubmit={loginFormik.handleSubmit}
                 noValidate
               >
-                {/* <Box sx={{ pb: "22px", pt: "20px" }}> */}
                 <TextField
-                  // id="email"
                   name="email"
                   label={
                     loginFormik.touched.email &&
@@ -514,7 +509,6 @@ function Auth({ chooseModal }) {
                 />
                 
                 <TextField
-                  // id="password"
                   name="password"
                   label={
                     loginFormik.touched.password &&

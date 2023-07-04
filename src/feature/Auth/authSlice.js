@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  // showLoginModal: false,
   isOpenModal: false,
   chooseModal: "0",
   stepOneData: [],
@@ -13,26 +12,6 @@ export const counterSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    //   state.showLoginModal = true;
-    //   state.showSignUpModal = false;
-    //   console.log("Login accessed");
-    //   console.log("Login Status", state.showLoginModal);
-    //   console.log("Sign Up Status", state.showSignUpModal);
-    // },
-    // openSignUpModal: (state) => {
-    //   state.showSignUpModal = true;
-    //   state.showLoginModal = false;
-    //   console.log("Sign Up accessed");
-    //   console.log("Login Status", state.showLoginModal);
-    //   console.log("Sign Up Status", state.showSignUpModal);
-    // },
-    // closeModals: (state) => {
-    //   state.showLoginModal = false;
-    //   state.showSignUpModal = false;
-    //   console.log("CloseModal accessed");
-    //   console.log("Login Status", state.showLoginModal);
-    //   console.log("Sign Up Status", state.showSignUpModal);
-    // },
     chooseModalLogin: (state) => {
       state.chooseModal = "1";
       state.isOpenModal = true;
@@ -45,17 +24,8 @@ export const counterSlice = createSlice({
       state.chooseModal = "0";
       state.isOpenModal = false;
     },
-    // closeChooseModal: (state) => {
-    //   return {
-    //     ...state,
-    //     chooseModal: "0",
-    //     isOpenModal: false
-    //   };
-    // },
-    
+      
     eduRegSteps: (state, action) => {
-      console.log("action value:", action);
-
       if (action.payload.step === "1") {
         return {
           ...state,
@@ -80,23 +50,12 @@ export const counterSlice = createSlice({
     },
 
     isUserExistMethod: (state, action) => {
-      console.log("Redux user",action.payload);
       const newUser = action.payload;
       state.user = newUser;
     },
-    // isUserExistMethod: (state, action) => {
-    //   console.log("Redux user", action.payload);
-    //   const newUser = action.payload;
-    //   return {
-    //     ...state,
-    //     user: newUser,
-    //   };
-    // },  
-    
+
     isUserExistMethodFalse: (state) => {
-      // const newUser = action.payload;
       state.user = {};
-      // console.log(newUser);
     },
   },
 });
