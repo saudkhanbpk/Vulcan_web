@@ -45,6 +45,14 @@ export const counterSlice = createSlice({
       state.chooseModal = "0";
       state.isOpenModal = false;
     },
+    // closeChooseModal: (state) => {
+    //   return {
+    //     ...state,
+    //     chooseModal: "0",
+    //     isOpenModal: false
+    //   };
+    // },
+    
     eduRegSteps: (state, action) => {
       console.log("action value:", action);
 
@@ -76,7 +84,14 @@ export const counterSlice = createSlice({
       const newUser = action.payload;
       state.user = newUser;
     },
-    
+    // isUserExistMethod: (state, action) => {
+    //   console.log("Redux user", action.payload);
+    //   const newUser = action.payload;
+    //   return {
+    //     ...state,
+    //     user: newUser,
+    //   };
+    // },  
     
     isUserExistMethodFalse: (state) => {
       // const newUser = action.payload;

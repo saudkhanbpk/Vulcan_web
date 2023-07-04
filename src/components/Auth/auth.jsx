@@ -128,9 +128,11 @@ function Auth({ chooseModal }) {
 
         // Do something with the user, such as redirecting to a success page
         console.log("Signup successful:", user);
-        if (user){
-          dispatch(isUserExistMethod);
-        }
+        localStorage.setItem("userData", JSON.stringify(user));
+
+        
+          dispatch(isUserExistMethod(user));
+        
         // Navigate to home page
         setTimeout(() => {
           navigate("/");
