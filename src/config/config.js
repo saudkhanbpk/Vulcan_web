@@ -4,16 +4,30 @@ import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { getDatabase} from "firebase/database";
 
+let firebaseConfig;
 
+if (process.env.NODE_ENV === 'production') {
+  firebaseConfig = {
+    apiKey: process.env.REACT_APP_FIREBASE_PROD_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_PROD_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_FIREBASE_PROD_DATABASE_URL,
+    projectId: process.env.REACT_APP_FIREBASE_PROD_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_PROD_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_PROD_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_PROD_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_PROD_MEASUREMENT_ID
+  };
+} else {
+  firebaseConfig = {
+    apiKey: process.env.REACT_APP_FIREBASE_DEV_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_DEV_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_DEV_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_DEV_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_DEV_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_DEV_APP_ID
+  };
+}
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCwOCBGoaaOAblZheXi9sa1EzQ-9Y-T3RY",
-  authDomain: "vulcan-web-1a194.firebaseapp.com",
-  projectId: "vulcan-web-1a194",
-  storageBucket: "vulcan-web-1a194.appspot.com",
-  messagingSenderId: "541964008236",
-  appId: "1:541964008236:web:e542881a6083f240c00a89"
-};
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const database = getDatabase();
@@ -21,15 +35,4 @@ export const db = getFirestore(app);
 export const storage = getStorage(app);
 export const auth = getAuth(app);
 
-// const dataRef = ref(database, "path/to/data");
-// set(dataRef, { key: "value" });
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCdtFR-6FUJm44ak3XGSjLzST79EJxF5M0",
-//   authDomain: "vulcan-v2-dev.firebaseapp.com",
-//   projectId: "vulcan-v2-dev",
-//   storageBucket: "vulcan-v2-dev.appspot.com",
-//   messagingSenderId: "403132433922",
-//   appId: "1:403132433922:web:e4a6136fda6eed4b4b891b",
-//   measurementId: "G-2J4XMB2D6B",
-// };

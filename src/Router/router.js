@@ -18,15 +18,15 @@ import { useDispatch } from "react-redux";
 
 const Router = () => {
   const location = useLocation();
-  const dispatch=useDispatch()
-  
-useEffect(() => {
-  const userData = localStorage.getItem("userData");
-  const user = JSON.parse(userData);
-if(user){
-  dispatch(isUserExistMethod(user))
-}
-}, [Router])
+  //   const dispatch=useDispatch()
+
+  // useEffect(() => {
+  //   const userData = localStorage.getItem("userData");
+  //   const user = JSON.parse(userData);
+  // if(user){
+  //   dispatch(isUserExistMethod(user))
+  // }
+  // }, [Router])
 
   return (
     <div>
@@ -51,11 +51,8 @@ if(user){
           path="/educator-account"
           element={<EducatorAccountMainPage />}
         ></Route>
-    
       </Routes>
-      {
-          location.pathname !== "/educator-account" ? <Footer  /> : ""
-        }
+      {location.pathname !== "/educator-account" ? <Footer /> : ""}
     </div>
   );
 };

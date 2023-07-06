@@ -106,33 +106,18 @@ function Auth({ chooseModal }) {
     onSubmit: async (values) => {
       try {
         // Create a new user with email and password
-        const { email, password, firstName, lastName, phoneNumber } = values;
+        const { email, password } = values;
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           email,
           password
         );
 
-        // Access the newly created user
-        const user = userCredential.user;
-
-        // Store additional user data in Firebase Realtime Database
-        const userDataRef = ref(database, `users/${user.uid}`);
-        const userData = {
-          firstName,
-          lastName,
-          email,
-          phoneNumber,
-        };
-        await set(userDataRef, userData);
-
         const {email:userEmail, displayName, uid}= userCredential.user;
         let payload={email:userEmail,displayName,uid};
-        // console.log("Login Successfully", payload);
         
         localStorage.setItem("userData", JSON.stringify(payload));
         
-        //   dispatch(isUserExistMethod(user));
         dispatch(isUserExistMethod(payload))
         
         // Navigate to home page
@@ -212,11 +197,11 @@ function Auth({ chooseModal }) {
                 onClick={handleCloseModal}
                 sx={{
                   position: "relative",
-                  top: "9px",
+                  top: "9px !important",
                   right: {
-                    md: "-187px",
-                    sm: "-159px",
-                    xs: "-159px",
+                    md: "-187px !important",
+                    sm: "-159px !important",
+                    xs: "-159px !important",
                   },
                 }}
               >

@@ -17,6 +17,7 @@
     "bootstrap": "^5.2.3",
     "firebase": "^9.21.0",
     "formik": "^2.4.1",
+    "netlify-cli": "^15.8.0",
     "node-sass": "^7.0.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
@@ -30,11 +31,12 @@
     "yup": "^1.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "set \"NODE_ENV=development\" && react-scripts start",
+    "build": "set \"NODE_ENV=production\" && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
+  }, 
+  
   "eslintConfig": {
     "extends": [
       "react-app",
