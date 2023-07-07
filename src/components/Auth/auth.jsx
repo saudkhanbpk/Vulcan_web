@@ -37,9 +37,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth, database } from "../../config/config";
-import { ref } from "firebase/database";
-import { set } from "firebase/database";
+import { auth,  } from "../../config/config";
 
 function Auth({ chooseModal }) {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
@@ -112,7 +110,9 @@ function Auth({ chooseModal }) {
           email,
           password
         );
-
+          console.log("-----------------------------------")
+          console.log(userCredential)
+          console.log("----------------------------------")
         const {email:userEmail, displayName, uid}= userCredential.user;
         let payload={email:userEmail,displayName,uid};
         

@@ -18,7 +18,6 @@ export const FeatureFlagsProvider = ({ children }) => {
         flag2: true,
       });
     }
-
     setIsLoading(false);
   }, []);
 

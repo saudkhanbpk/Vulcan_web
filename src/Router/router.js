@@ -18,15 +18,15 @@ import { useDispatch } from "react-redux";
 
 const Router = () => {
   const location = useLocation();
-  //   const dispatch=useDispatch()
+    const dispatch=useDispatch()
 
-  // useEffect(() => {
-  //   const userData = localStorage.getItem("userData");
-  //   const user = JSON.parse(userData);
-  // if(user){
-  //   dispatch(isUserExistMethod(user))
-  // }
-  // }, [Router])
+  useEffect(() => {
+    const userData = localStorage.getItem("userData");
+    const user = JSON.parse(userData);
+  if(user){
+    dispatch(isUserExistMethod(user))
+  }
+  }, [Router])
 
   return (
     <div>
