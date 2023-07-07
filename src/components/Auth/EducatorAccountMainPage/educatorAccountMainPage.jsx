@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Steps from "./Steps/steps";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ContinueButton, ExitTypo, Footer, Header, LogoTypo, MainBox, PreviousButton, Span, StepsTypo, styles } from "./styles";
+import { ContinueButton, ExitTypo, Footer, Header, LogoTypo, MainBox, PreviousButton, Span, StepsTypo } from "./styles";
 import ProgressBar from "./progressbar";
 import { incrementSteps, decrementSteps  } from "../../../feature/progressBar/progressSlice";
  
@@ -63,7 +63,7 @@ const dispatch = useDispatch ();
                   color={"primary"}
                   variant="h4"
                   onClick={() => navigate("/")}
-                  sx={styles.logoTypo}
+                
                 >
                   Vulcan
                 </LogoTypo>

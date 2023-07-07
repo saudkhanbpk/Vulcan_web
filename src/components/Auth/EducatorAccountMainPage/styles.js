@@ -2,18 +2,6 @@ import { styled } from "@mui/system";
 import { specialFont } from "../../../Theme/fontFamily";
 import { Box, Button, Typography } from "@mui/material";
 
-export const styles = {
-  
-  logoTypo: {
-    mb: 0,
-    display: { xs: "none", md: "flex" },
-    fontFamily: `${specialFont} !important`,
-    fontSize: "40px",
-    fontWeight: 400,
-    lineHeight: "51px",
-    textDecoration: "none",
-  },
-};
 export const Span = styled("span")(({ theme }) => ({
     cursor: "pointer",
     display:"flex",
@@ -63,10 +51,10 @@ export const Span = styled("span")(({ theme }) => ({
 
   export const ExitTypo = styled(Typography)(({ theme }) => ({
     curser: "pointer",
+    fontWight:"700 !important",
     paddingRight: theme.spacing(2),
     [theme.breakpoints.down("md")]: {
       fontSize: "25px",
-      // padding: theme.spacing(1),
     },
     [theme.breakpoints.down("sm")]: {
       fontSize: "18px",
@@ -75,9 +63,12 @@ export const Span = styled("span")(({ theme }) => ({
 
   export const LogoTypo = styled(Typography)(({ theme }) => ({
     fontFamily: `${specialFont} !important`,
-    fontWeight: 400,
-    // margin:theme.spacing(2),
+    fontWight:"700 !important",
     textDecoration: "none",
+    mb: 0,
+    display: {md: "flex" },
+    fontSize: "40px",
+    lineHeight: "51px",
     [theme.breakpoints.down("md")]: {
       fontSize: "25px",
       padding: theme.spacing(1),
