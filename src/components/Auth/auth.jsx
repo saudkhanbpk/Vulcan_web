@@ -186,11 +186,13 @@ function Auth({ chooseModal }) {
       {chooseModal === "2" && isOpenModal ? (
         <>
           <ModalBackgroundBox />
-          <Modal
+       
+        <Modal
             open={isOpenModal}
             onClose={handleCloseModal}
             aria-labelledby="login-modal-title"
             aria-describedby="login-modal-description"
+            sx={{ display:"flex", alignItems:"center", justifyContent:"center"}}
           >
             <MainBox>
               <Box
@@ -199,9 +201,9 @@ function Auth({ chooseModal }) {
                   position: "relative",
                   top: "9px !important",
                   right: {
-                    md: "-187px !important",
-                    sm: "-159px !important",
-                    xs: "-159px !important",
+                    md: "-187px",
+                    sm: "-159px",
+                    xs: "-159px",
                   },
                 }}
               >
@@ -423,6 +425,7 @@ function Auth({ chooseModal }) {
               </FormBox>
             </MainBox>
           </Modal>
+       
         </>
       ) : chooseModal === "1" && isOpenModal ? (
         <>
@@ -432,6 +435,8 @@ function Auth({ chooseModal }) {
             onClose={handleCloseModal}
             aria-labelledby="login-modal-title"
             aria-describedby="login-modal-description"
+            sx={{ display:"flex", alignItems:"center", justifyContent:"center"}}
+
           >
             <LoginMainBox>
               <Box
