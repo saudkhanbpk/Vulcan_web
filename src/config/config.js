@@ -5,8 +5,6 @@ import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
 let firebaseConfig;
-// console.log(process.env);
-console.log(process.env.REACT_APP_FIREBASE_DEV_MEASUREMENT_ID);
 
 if (process.env.NODE_ENV === "production") {
   firebaseConfig = {
