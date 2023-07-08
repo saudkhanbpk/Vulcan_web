@@ -14,7 +14,7 @@ export const FeatureFlagsProvider = ({ children }) => {
       });
     } else {
       setFeatures({
-        flag1: true,
+        showCourses: false,
         flag2: true,
       });
     }

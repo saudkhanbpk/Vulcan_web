@@ -15,18 +15,21 @@ import Navbar from "../components/Header/navbar";
 import Footer from "../components/Footer/footer";
 import { isUserExistMethod } from "../feature/Auth/authSlice";
 import { useDispatch } from "react-redux";
+import { FeatureFlags } from "../contexts/FeatureFlags";
+import NewPageSample from "../components/CoursesScreen/NewPageSample";
 
 const Router = () => {
   const location = useLocation();
-    const dispatch=useDispatch()
+  const dispatch = useDispatch();
+  const { features } = React.useContext(FeatureFlags);
 
   useEffect(() => {
     const userData = localStorage.getItem("userData");
     const user = JSON.parse(userData);
-  if(user){
-    dispatch(isUserExistMethod(user))
-  }
-  }, [Router])
+    if (user) {
+      dispatch(isUserExistMethod(user));
+    }
+  }, [Router]);
 
   return (
     <div>
@@ -34,7 +37,11 @@ const Router = () => {
       <Routes>
         <Route exact path="/" element={<HomeScreen />}></Route>
         <Route exact path="/about" element={<OurMission />}></Route>
-        <Route exact path="/courses" element={<CoursesScreen />}></Route>
+        {features.showCourses ? (
+          <Route exact path="/courses" element={<CoursesScreen />}></Route>
+        ) : (
+          <Route exact path="/courses" element={<NewPageSample />}></Route>
+        )}
         <Route
           exact
           path="/become-educator"
