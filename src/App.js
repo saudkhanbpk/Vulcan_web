@@ -3,7 +3,6 @@ import "./App.scss";
 import Router from "./Router/router";
 import { BrowserRouter } from "react-router-dom";
 import ScrollToTop from "./Scroll/scrollToTop";
-import useAuthentication from "./components/Header/onAuthStateChange";
 
 function App() {
 
