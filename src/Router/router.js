@@ -20,7 +20,6 @@ import NewPageSample from "../components/CoursesScreen/NewPageSample";
 
 const Router = () => {
   const location = useLocation();
-  const dispatch = useDispatch();
   const { features } = React.useContext(FeatureFlags);
 
  

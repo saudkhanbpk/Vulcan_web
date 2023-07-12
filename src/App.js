@@ -7,13 +7,12 @@ import useAuthentication from "./components/Header/onAuthStateChange";
 
 function App() {
 
-  // const {  loading } = useAuthentication();
+  
   return (
     <>
       <BrowserRouter>
         <ScrollToTop />
-     {/* {loading ? <h1> Loading ...</h1> : <Router />} */}
-     <Router />
+        <Router />
       </BrowserRouter>
     </>
   );
