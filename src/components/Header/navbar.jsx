@@ -32,7 +32,6 @@ import useAuthentication from "./onAuthStateChange";
 const Navbar = () => {
   const dispatch = useDispatch();
   const chooseModal = useSelector((state) => state.auth.chooseModal);
-  // const user = useSelector((state) => state.auth.user);
 
   const { user, loading } = useAuthentication();
 
@@ -45,7 +44,6 @@ const Navbar = () => {
       .signOut()
       .then(() => {
         console.log("User signed out successfully");
-        // localStorage.clear()
         dispatch(isUserExistMethodFalse());
       })
       .catch((error) => {
