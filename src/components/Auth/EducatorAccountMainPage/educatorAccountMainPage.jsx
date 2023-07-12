@@ -49,7 +49,6 @@ const dispatch = useDispatch ();
           <Grid lg={2} md={2} sm={3} xs={3}>
             <Box
               sx={{
-                // borderRight: "1px solid grey",
                 borderRight: "1px solid rgba(128, 128, 128, 0.5)",
 
                 height: "70px",
@@ -138,4 +137,3 @@ const dispatch = useDispatch ();
 
 export default EducatorAccountMainPage;
 
-// https://www.udemy.com/home/teaching/onboarding/teaching-experience

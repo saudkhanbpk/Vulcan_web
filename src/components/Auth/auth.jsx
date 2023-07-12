@@ -37,7 +37,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth,  } from "../../config/config";
+import { auth } from "../../config/config";
 
 function Auth({ chooseModal }) {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
@@ -103,30 +103,27 @@ function Auth({ chooseModal }) {
 
     onSubmit: async (values) => {
       try {
-        // Create a new user with email and password
         const { email, password } = values;
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           email,
           password
         );
-          console.log("-----------------------------------")
-          console.log(userCredential)
-          console.log("----------------------------------")
-        const {email:userEmail, displayName, uid}= userCredential.user;
-        let payload={email:userEmail,displayName,uid};
-        
-        localStorage.setItem("userData", JSON.stringify(payload));
-        
-        dispatch(isUserExistMethod(payload))
-        
-        // Navigate to home page
+        console.log("-----------------------------------");
+        console.log(userCredential);
+        console.log("----------------------------------");
+        const { email: userEmail, displayName, uid } = userCredential.user;
+        let payload = { email: userEmail, displayName, uid };
+
+        // localStorage.setItem("userData", JSON.stringify(payload));
+
+        dispatch(isUserExistMethod(payload));
+
         setTimeout(() => {
           navigate("/");
           handleCloseModal();
         }, 0);
       } catch (error) {
-        // Handle signup errors
         console.error("Signup failed:", error.message);
       }
     },
@@ -143,7 +140,6 @@ function Auth({ chooseModal }) {
     loginFormik.resetForm();
   };
 
- 
   const loginFormik = useFormik({
     initialValues: {
       email: "",
@@ -157,20 +153,19 @@ function Auth({ chooseModal }) {
     }),
 
     onSubmit: async (values) => {
-          try {
+      try {
         const { email, password } = values;
         const userCredential = await signInWithEmailAndPassword(
           auth,
           email,
           password
         );
-        //Serialized Data
-        const {email:userEmail,displayName,uid}= userCredential.user;
-        let payload={email:userEmail,displayName,uid}
+        const { email: userEmail, displayName, uid } = userCredential.user;
+        let payload = { email: userEmail, displayName, uid };
 
-        localStorage.setItem("userData", JSON.stringify(payload));
-        
-        dispatch(isUserExistMethod(payload))
+        // localStorage.setItem("userData", JSON.stringify(payload));
+
+        dispatch(isUserExistMethod(payload));
         setTimeout(() => {
           navigate("/");
           handleCloseModal();
@@ -186,13 +181,17 @@ function Auth({ chooseModal }) {
       {chooseModal === "2" && isOpenModal ? (
         <>
           <ModalBackgroundBox />
-       
-        <Modal
+
+          <Modal
             open={isOpenModal}
             onClose={handleCloseModal}
             aria-labelledby="login-modal-title"
             aria-describedby="login-modal-description"
-            sx={{ display:"flex", alignItems:"center", justifyContent:"center"}}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
             <MainBox>
               <Box
@@ -287,7 +286,6 @@ function Auth({ chooseModal }) {
                   fullWidth
                 />
                 <TextField
-                  // id="email"
                   name="email"
                   sx={{ mt: "6px" }}
                   label={
@@ -309,7 +307,6 @@ function Auth({ chooseModal }) {
                 />
 
                 <TextField
-                  // id="password"
                   name="password"
                   sx={{ mt: "6px" }}
                   label={
@@ -327,12 +324,6 @@ function Auth({ chooseModal }) {
                   }
                   InputLabelProps={{
                     style: {
-                      // color:
-                      //   (formik.touched.password &&
-                      //     Boolean(formik.errors.password)) ||
-                      //   getPasswordError()
-                      //     ? "red"
-                      //     : undefined,
                       fontSize: 16,
                     },
                   }}
@@ -350,7 +341,6 @@ function Auth({ chooseModal }) {
                 />
 
                 <TextField
-                  // id="reEnterPassword"
                   name="reEnterPassword"
                   sx={{ mt: "6px" }}
                   label={
@@ -386,7 +376,6 @@ function Auth({ chooseModal }) {
                 />
 
                 <TextField
-                  // id="phoneNumber"
                   name="phoneNumber"
                   sx={{ mt: "6px" }}
                   label={
@@ -417,7 +406,7 @@ function Auth({ chooseModal }) {
                     variant="contained"
                     sx={{ width: "150px" }}
                   >
-                    <Typography style={{ fontSize: "16px" }} >
+                    <Typography style={{ fontSize: "16px" }}>
                       Create Account
                     </Typography>
                   </CreateAccButton>
@@ -425,7 +414,6 @@ function Auth({ chooseModal }) {
               </FormBox>
             </MainBox>
           </Modal>
-       
         </>
       ) : chooseModal === "1" && isOpenModal ? (
         <>
@@ -435,8 +423,11 @@ function Auth({ chooseModal }) {
             onClose={handleCloseModal}
             aria-labelledby="login-modal-title"
             aria-describedby="login-modal-description"
-            sx={{ display:"flex", alignItems:"center", justifyContent:"center"}}
-
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
             <LoginMainBox>
               <Box
@@ -497,7 +488,7 @@ function Auth({ chooseModal }) {
                   }}
                   fullWidth
                 />
-                
+
                 <TextField
                   name="password"
                   label={

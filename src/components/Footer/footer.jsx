@@ -143,16 +143,6 @@ const Footer = () => {
                     </span>
                   }
                 />
-
-                {/*
-                <FormControlLabel
-                  control={<Switch defaultChecked />}
-                  label={
-                    <span style={{ fontSize: "20px", }}>
-                      Label 3
-                    </span>
-                  }
-                /> */}
               </FormGroup>
             </MainBox>
           </Modal>

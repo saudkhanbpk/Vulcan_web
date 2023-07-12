@@ -18,11 +18,10 @@ const BecomeEducator = () => {
   const chooseModal = useSelector((state)=>state.auth.chooseModal);
   const dispatch = useDispatch();
   const handleSignUpModalOpen = () => {
-    // dispatch(chooseModalSignUp());
     navigate('/educator-account')
   };
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('sm')); // Change breakpoint as needed
+  const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));  
 
   const navigate = useNavigate();
   const sectionRef = useRef(null);

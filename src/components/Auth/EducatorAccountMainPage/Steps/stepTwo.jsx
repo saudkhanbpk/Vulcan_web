@@ -21,10 +21,7 @@ function StepTwo() {
     { id: 3, text: "Other" },
   ];
 
-  // const handleOptionChange = (event) => {
-  //   let value = event.target.value;
-  //   dispatch(eduRegSteps({ value, step: "2" }));
-  // };
+ 
   const handleOptionChange = (e, optionValue) => {
     console.log("event check", e.target.value)
     dispatch(eduRegSteps({optionValue, step: "2"}))

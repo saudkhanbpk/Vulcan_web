@@ -27,29 +27,31 @@ import {
 } from "../../feature/Auth/authSlice";
 import Auth from "../Auth/auth";
 import { auth } from "../../config/config";
-
+import useAuthentication from "./onAuthStateChange";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const chooseModal = useSelector((state) => state.auth.chooseModal);
-  const user = useSelector((state) => state.auth.user);
+  // const user = useSelector((state) => state.auth.user);
+
+  const { user, loading } = useAuthentication();
 
   const handleLoginButtonClick = () => {
     dispatch(chooseModalLogin());
     handleCloseNavMenu();
   };
   const handleLogout = () => {
-    auth.signOut()
-    .then(() => {
-      console.log('User signed out successfully');
-      localStorage.clear()
-      dispatch(isUserExistMethodFalse());
-
-    })
-    .catch((error) => {
-      console.error('Error signing out:', error);
-    });
-};
+    auth
+      .signOut()
+      .then(() => {
+        console.log("User signed out successfully");
+        // localStorage.clear()
+        dispatch(isUserExistMethodFalse());
+      })
+      .catch((error) => {
+        console.error("Error signing out:", error);
+      });
+  };
   const handleSignUpButtonClick = () => {
     dispatch(chooseModalSignUp());
     handleCloseNavMenu();
@@ -190,19 +192,26 @@ const Navbar = () => {
               </Box>
               {/* Small Screen */}
               <Box display="flex" justifyContent="space-around" pt="20px">
-                {user.uid ? (
-                  <AuthButton signup="true" onClick={handleLogout}>
-                    Logout
-                  </AuthButton>
-                ) : (
+                {loading && (
                   <>
-                    <AuthButton onClick={handleLoginButtonClick}>
-                      Login
-                    </AuthButton>
+                    {user ? (
+                      <AuthButton signup="true" onClick={handleLogout}>
+                        Logout
+                      </AuthButton>
+                    ) : (
+                      <>
+                        <AuthButton onClick={handleLoginButtonClick}>
+                          Login
+                        </AuthButton>
 
-                    <AuthButton onClick={handleSignUpButtonClick} signup="true">
-                      Sign Up
-                    </AuthButton>
+                        <AuthButton
+                          onClick={handleSignUpButtonClick}
+                          signup="true"
+                        >
+                          Sign Up
+                        </AuthButton>
+                      </>
+                    )}
                   </>
                 )}
               </Box>
@@ -231,8 +240,10 @@ const Navbar = () => {
                 <NavLink color="secondary"> Become Educator</NavLink>
               </Span>
 
-              {user.uid ? (
-                <AuthButton signup="true" onClick={handleLogout}>Logout</AuthButton>
+              {user ? (
+                <AuthButton signup="true" onClick={handleLogout}>
+                  Logout
+                </AuthButton>
               ) : (
                 <>
                   <AuthButton onClick={handleLoginButtonClick}>

@@ -5,7 +5,6 @@ import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { styles } from "./styles";
 import Grid from '@mui/material/Unstable_Grid2';
 import mobileImage from '../../../assets/images/backhome.png'
-// import LoginModal from "src/components/Auth/Login/login.jsx";
 
 
 const HomeScreen = () => {
@@ -15,12 +14,11 @@ const HomeScreen = () => {
     setOpen(!open);
   };
   const theme = useTheme();
-  const is_desktop = useMediaQuery(theme.breakpoints.up('sm')); // Change breakpoint as needed
+  const is_desktop = useMediaQuery(theme.breakpoints.up('sm')); 
 
  
   return (
     <>
-    {/* <LoginModal open={open} setOpen={setOpen}   /> */}
     <Grid>
     {is_desktop  ?
     (

@@ -5,7 +5,6 @@ import { FormBox, Heading, MainBox, SendMessage, styles } from "./styles";
 import { Box, TextField, Typography } from "@mui/material";
 
 const Contact = () => {
-  ///flags
 
   const formik = useFormik({
     initialValues: {
@@ -34,7 +33,6 @@ const Contact = () => {
 
   return (
     <Box sx={{ height: "100vh" }}>
-      {/* //////////    Flag Applied   //////////// */}
 
       <Box
         sx={styles.main}
@@ -68,7 +66,6 @@ const Contact = () => {
             />
 
             <TextField
-              // id="email"
               name="email"
               sx={{ mt: "6px" }}
               label={
@@ -90,7 +87,6 @@ const Contact = () => {
             />
 
             <TextField
-              // id="phoneNumber"
               name="phoneNumber"
               sx={{ mt: "6px" }}
               label={
@@ -113,7 +109,6 @@ const Contact = () => {
               fullWidth
             />
             <TextField
-              // id="phoneNumber"
               name="message"
               multiline
               rows={4}

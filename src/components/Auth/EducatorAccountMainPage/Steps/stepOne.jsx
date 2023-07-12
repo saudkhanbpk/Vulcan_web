@@ -24,7 +24,6 @@ function StepOne() {
     { id: 3, text: "Tutor" },
     { id: 4, text: "Other" },
   ];
-// console.log(step01Data)
  
   const handleOptionChange = (e, optionValue) => {
     console.log("event check",e.target.value)

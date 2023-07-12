@@ -23,13 +23,15 @@ const Router = () => {
   const dispatch = useDispatch();
   const { features } = React.useContext(FeatureFlags);
 
-  useEffect(() => {
-    const userData = localStorage.getItem("userData");
-    const user = JSON.parse(userData);
-    if (user) {
-      dispatch(isUserExistMethod(user));
-    }
-  }, [Router]);
+  // useEffect(() => {
+  //   const userData = localStorage.getItem("userData");
+  //   const user = JSON.parse(userData);
+  //   if (user) {
+  //     dispatch(isUserExistMethod(user));
+  //     dispatch(isUserExistMethod(user));
+
+  //   }
+  // }, [Router]);
 
   return (
     <div>

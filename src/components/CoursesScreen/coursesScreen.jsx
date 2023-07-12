@@ -13,7 +13,7 @@ const CoursesScreen = () => {
     setOpen(!open);
   };
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up("sm")); // Change breakpoint as needed
+  const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));  
  
   return (
     <>
