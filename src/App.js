@@ -5,8 +5,6 @@ import { BrowserRouter } from "react-router-dom";
 import ScrollToTop from "./Scroll/scrollToTop";
 
 function App() {
-
-  
   return (
     <>
       <BrowserRouter>
