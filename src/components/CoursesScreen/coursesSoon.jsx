@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import "./coursesScreen.scss";
+import "./coursesSoon.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import ModalComponent from "./Modal/modalComponent";
 import { styles } from "./styles";
 
-const CoursesScreen = () => {
+const CoursesSoon = () => {
   const [open, setOpen] = useState(false);
 
   const modalHandle = () => {
@@ -71,4 +71,4 @@ const CoursesScreen = () => {
   );
 };
 
-export default CoursesScreen;
+export default CoursesSoon;

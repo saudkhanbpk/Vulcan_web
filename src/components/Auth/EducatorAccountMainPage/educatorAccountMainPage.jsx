@@ -19,13 +19,13 @@ import ProgressBar from "./progressbar";
 import {
   incrementSteps,
   decrementSteps,
-} from "../../../feature/progressBar/progressSlice";
+} from "../../../feature/Auth/educatorStepsSlice";
 
 const EducatorAccountMainPage = () => {
   const navigate = useNavigate();
   const [steps, setSteps] = useState(1);
   const dispatch = useDispatch();
-  const step1Data = useSelector((state) => state.auth.stepOneData);
+  const step1Data = useSelector((state) => state.educatorSteps.stepOneData);
 
   useEffect(() => {}, [steps]);
 

@@ -20,7 +20,7 @@ export const Header = styled(Box)((theme) => ({
   background: "white",
   zIndex: 50,
   boxShadow:
-    "0px 4px 4px rgba(0, 0, 0, 0.25), 0px -4px 4px rgba(0, 0, 0, 0.25)", // Add boxShadow for top and bottom shadows
+    "0px 4px 4px rgba(0, 0, 0, 0.25), 0px -4px 4px rgba(0, 0, 0, 0.25)",  
 }));
 
 export const ContinueButton = styled(Button)((theme) => ({

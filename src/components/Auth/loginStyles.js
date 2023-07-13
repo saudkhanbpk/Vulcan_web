@@ -1,9 +1,4 @@
 import { Box, Typography, styled } from "@mui/material";
-// export const loginStyles = {
-//   main: {
-//     height: "100vh",
-//   },
-// };
 export const LoginSigUpTextLink = styled(Typography)(({ theme }) => ({
   fontSize: "16px",
   color: theme.palette.primary.main,
@@ -22,7 +17,6 @@ export const LoginMainBox = styled(Box)(({ theme }) => ({
   height: "437px",
   backgroundColor: "white",
   paddingBottom: 5,
-  // paddingTop: theme.spacing(5),
   [theme.breakpoints.down("md")]: {},
 }));
 export const LoginFormBox = styled(Box)(({ theme }) => ({

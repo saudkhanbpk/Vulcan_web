@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import OurMission from "../components/OurMission/ourMission";
 import HomeScreen from "../components/Home/HomeScreen/homeScreen";
@@ -6,17 +6,15 @@ import BecomeEducator from "../components/BecomeEducator/becomeEducator";
 import HowItWorks from "../components/HowItWorks/howItWorks";
 import EducatorFaq from "../components/HowItWorks/Faq/educatorFaq";
 import LearnerFaq from "../components/HowItWorks/Faq/learnerFaq";
-import CoursesScreen from "../components/CoursesScreen/coursesScreen";
 import Privacy from "../components/Privacy/privacy";
 import Policies from "../components/Policies/policies";
 import Contact from "../components/Contact/contact";
 import EducatorAccountMainPage from "../components/Auth/EducatorAccountMainPage/educatorAccountMainPage";
 import Navbar from "../components/Header/navbar";
 import Footer from "../components/Footer/footer";
-import { isUserExistMethod } from "../feature/Auth/authSlice";
-import { useDispatch } from "react-redux";
 import { FeatureFlags } from "../contexts/FeatureFlags";
-import NewPageSample from "../components/CoursesScreen/NewPageSample";
+import { Courses } from "../components/CoursesScreen/courses";
+import CoursesSoon from "../components/CoursesScreen/coursesSoon";
 
 const Router = () => {
   const location = useLocation();
@@ -29,9 +27,9 @@ const Router = () => {
         <Route exact path="/" element={<HomeScreen />}></Route>
         <Route exact path="/about" element={<OurMission />}></Route>
         {features.showCourses ? (
-          <Route exact path="/courses" element={<CoursesScreen />}></Route>
+          <Route exact path="/courses" element={<CoursesSoon />}></Route>
         ) : (
-          <Route exact path="/courses" element={<NewPageSample />}></Route>
+          <Route exact path="/courses" element={<Courses />}></Route>
         )}
         <Route
           exact

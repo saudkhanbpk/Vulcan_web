@@ -27,7 +27,6 @@ import {
   chooseModalLogin,
   chooseModalSignUp,
   closeChooseModal,
-  isUserExistMethod,
 } from "../../feature/Auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginFormBox, LoginMainBox, LoginSigUpTextLink } from "./loginStyles";
@@ -63,13 +62,12 @@ function Auth({ chooseModal }) {
     loginFormik.resetForm();
   };
 
+  //Student & Teacher acc changing functionality
   const handleButtonClick = (val) => {
     if (val.value === 1) {
       setSelectedButton(true);
-      console.log("Student acc btn clicked");
     } else {
       setSelectedButton(false);
-      console.log("Educator acc btn clicked");
     }
   };
 
@@ -109,20 +107,11 @@ function Auth({ chooseModal }) {
           email,
           password
         );
-        console.log("-----------------------------------");
-        console.log(userCredential);
-        console.log("----------------------------------");
-        const { email: userEmail, displayName, uid } = userCredential.user;
-        let payload = { email: userEmail, displayName, uid };
-
-        dispatch(isUserExistMethod(payload));
-
-        setTimeout(() => {
-          navigate("/");
-          handleCloseModal();
-        }, 0);
+        navigate("/");
+        handleCloseModal();
       } catch (error) {
-        console.error("Signup failed:", error.message);
+        //for future testing and debuging purposes i'm leaving this as comment
+        // console.error("Signup failed:", error.message);
       }
     },
   });
@@ -158,16 +147,11 @@ function Auth({ chooseModal }) {
           email,
           password
         );
-        const { email: userEmail, displayName, uid } = userCredential.user;
-        let payload = { email: userEmail, displayName, uid };
-
-        dispatch(isUserExistMethod(payload));
-        setTimeout(() => {
-          navigate("/");
-          handleCloseModal();
-        }, 0);
+        navigate("/");
+        handleCloseModal();
       } catch (err) {
-        console.log("Login Failed", err);
+        //for future testing and debuging purposes i'm leaving this as comment
+        // console.alert("Login Failed", err);
       }
     },
   });

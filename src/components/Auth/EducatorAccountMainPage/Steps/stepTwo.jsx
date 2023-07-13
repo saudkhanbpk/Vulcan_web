@@ -9,9 +9,9 @@ import {
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { useSelector, useDispatch } from "react-redux";
-import { eduRegSteps } from "../../../../feature/Auth/authSlice";
+import { eduRegSteps } from "../../../../feature/Auth/educatorStepsSlice";
 function StepTwo() {
-  const step2Data = useSelector((state) => state.auth.stepTwoData);
+  const step2Data = useSelector((state) => state.educatorSteps.stepTwoData);
   const dispatch = useDispatch();
 
   const options = [
@@ -22,7 +22,6 @@ function StepTwo() {
   ];
 
   const handleOptionChange = (e, optionValue) => {
-    console.log("event check", e.target.value);
     dispatch(eduRegSteps({ optionValue, step: "2" }));
   };
   const ChoiceTypo = styled(Typography)(({ theme }) => ({
@@ -31,7 +30,6 @@ function StepTwo() {
     letterSpacing: "-.02rem",
     fontSize: "16px",
   }));
-  console.log("step2:", step2Data);
 
   return (
     <Box sx={{ height: "100vh" }}>

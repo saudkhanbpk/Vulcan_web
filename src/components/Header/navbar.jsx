@@ -23,7 +23,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   chooseModalLogin,
   chooseModalSignUp,
-  isUserExistMethodFalse,
 } from "../../feature/Auth/authSlice";
 import Auth from "../Auth/auth";
 import { auth } from "../../config/config";
@@ -33,22 +32,14 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const chooseModal = useSelector((state) => state.auth.chooseModal);
 
-  const { user, loading } = useAuthentication();
+  const { user } = useAuthentication();
 
   const handleLoginButtonClick = () => {
     dispatch(chooseModalLogin());
     handleCloseNavMenu();
   };
   const handleLogout = () => {
-    auth
-      .signOut()
-      .then(() => {
-        console.log("User signed out successfully");
-        dispatch(isUserExistMethodFalse());
-      })
-      .catch((error) => {
-        console.error("Error signing out:", error);
-      });
+    auth.signOut();
   };
   const handleSignUpButtonClick = () => {
     dispatch(chooseModalSignUp());
@@ -190,26 +181,19 @@ const Navbar = () => {
               </Box>
               {/* Small Screen */}
               <Box display="flex" justifyContent="space-around" pt="20px">
-                {loading && (
+                {user ? (
+                  <AuthButton signup="true" onClick={handleLogout}>
+                    Logout
+                  </AuthButton>
+                ) : (
                   <>
-                    {user ? (
-                      <AuthButton signup="true" onClick={handleLogout}>
-                        Logout
-                      </AuthButton>
-                    ) : (
-                      <>
-                        <AuthButton onClick={handleLoginButtonClick}>
-                          Login
-                        </AuthButton>
+                    <AuthButton onClick={handleLoginButtonClick}>
+                      Login
+                    </AuthButton>
 
-                        <AuthButton
-                          onClick={handleSignUpButtonClick}
-                          signup="true"
-                        >
-                          Sign Up
-                        </AuthButton>
-                      </>
-                    )}
+                    <AuthButton onClick={handleSignUpButtonClick} signup="true">
+                      Sign Up
+                    </AuthButton>
                   </>
                 )}
               </Box>

@@ -4,7 +4,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { useSelector } from "react-redux";
 
 export default function ProgressBar() {
-  const steps = useSelector((state) => state.progressBar.steps);
+  const steps = useSelector((state) => state.educatorSteps.steps);
   const progressPercentage = (steps - 1) * 50;
 
   return (

@@ -39,7 +39,6 @@ const Footer = () => {
       ...prevFeatures,
       showCourses: !prevFeatures.showCourses,
     }));
-    console.log("Show Courses", showCourses);
   };
   const handleToggleFlag2 = () => {
     // Update the showCourses flag value
@@ -47,7 +46,6 @@ const Footer = () => {
       ...prevFeatures,
       flag2: !prevFeatures.flag2,
     }));
-    console.log("Flag 2 ", flag2);
   };
 
   useEffect(() => {

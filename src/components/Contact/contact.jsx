@@ -22,13 +22,9 @@ const Contact = () => {
     }),
 
     onSubmit: (values) => {
-      console.log("===========================");
-      console.log(values);
-      console.log("===========================");
+     //handle values
     },
   });
-
-  console.log(formik.errors);
 
   return (
     <Box sx={{ height: "100vh" }}>
@@ -142,7 +138,7 @@ const Contact = () => {
                 type="submit"
                 variant="contained"
                 sx={{ width: "150px" }}
-                onClick={() => console.log("Send Message button Clicked!")}
+                onClick={null}
               >
                 <Typography style={{ fontSize: "16px" }}>
                   Send Message

@@ -49,7 +49,6 @@ export const CreateAccButton = styled("button")(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     fontSize: "16px",
     marginTop: "30px",
-    // backgroundColor:"white"
   },
 }));
 

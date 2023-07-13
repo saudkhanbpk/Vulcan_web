@@ -9,10 +9,10 @@ import {
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { useDispatch, useSelector } from "react-redux";
-import { eduRegSteps } from "../../../../feature/Auth/authSlice";
+import { eduRegSteps } from "../../../../feature/Auth/educatorStepsSlice";
 
 function StepOne() {
-  const step1Data = useSelector((state) => state.auth.stepOneData);
+  const step1Data = useSelector((state) => state.educatorSteps.stepOneData);
   const dispatch = useDispatch();
 
   const options = [
@@ -24,7 +24,6 @@ function StepOne() {
   ];
 
   const handleOptionChange = (e, optionValue) => {
-    console.log("event check", e.target.value);
     dispatch(eduRegSteps({ optionValue, step: "1" }));
   };
 
@@ -35,7 +34,6 @@ function StepOne() {
     fontSize: "16px",
   }));
 
-  console.log("step1:", step1Data);
   return (
     <Box sx={{ height: "100vh" }}>
       <Grid container>
