@@ -24,7 +24,7 @@ export const counterSlice = createSlice({
       state.chooseModal = "0";
       state.isOpenModal = false;
     },
-      
+
     eduRegSteps: (state, action) => {
       if (action.payload.step === "1") {
         return {

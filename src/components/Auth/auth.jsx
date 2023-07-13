@@ -115,7 +115,6 @@ function Auth({ chooseModal }) {
         const { email: userEmail, displayName, uid } = userCredential.user;
         let payload = { email: userEmail, displayName, uid };
 
-
         dispatch(isUserExistMethod(payload));
 
         setTimeout(() => {
@@ -161,7 +160,6 @@ function Auth({ chooseModal }) {
         );
         const { email: userEmail, displayName, uid } = userCredential.user;
         let payload = { email: userEmail, displayName, uid };
-
 
         dispatch(isUserExistMethod(payload));
         setTimeout(() => {

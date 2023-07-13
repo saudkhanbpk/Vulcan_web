@@ -1,39 +1,45 @@
-import { Box} from "@mui/material";
+import { Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import React, { useEffect, useState } from "react";
 import Steps from "./Steps/steps";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ContinueButton, ExitTypo, Footer, Header, LogoTypo, MainBox, PreviousButton, Span, StepsTypo } from "./styles";
+import {
+  ContinueButton,
+  ExitTypo,
+  Footer,
+  Header,
+  LogoTypo,
+  MainBox,
+  PreviousButton,
+  Span,
+  StepsTypo,
+} from "./styles";
 import ProgressBar from "./progressbar";
-import { incrementSteps, decrementSteps  } from "../../../feature/progressBar/progressSlice";
- 
+import {
+  incrementSteps,
+  decrementSteps,
+} from "../../../feature/progressBar/progressSlice";
 
 const EducatorAccountMainPage = () => {
   const navigate = useNavigate();
   const [steps, setSteps] = useState(1);
-const dispatch = useDispatch ();
+  const dispatch = useDispatch();
   const step1Data = useSelector((state) => state.auth.stepOneData);
 
-  
   useEffect(() => {}, [steps]);
-
- 
 
   const handleDec = () => {
     if (steps > 1) {
       setSteps(steps - 1);
-      dispatch(decrementSteps())
-
+      dispatch(decrementSteps());
     }
   };
 
   const handleInc = () => {
-    
     if (steps >= 1 && steps < 2) {
-      dispatch(incrementSteps())
+      dispatch(incrementSteps());
       setSteps(steps + 1);
-
     }
   };
 
@@ -62,7 +68,6 @@ const dispatch = useDispatch ();
                   color={"primary"}
                   variant="h4"
                   onClick={() => navigate("/")}
-                
                 >
                   Vulcan
                 </LogoTypo>
@@ -136,4 +141,3 @@ const dispatch = useDispatch ();
 };
 
 export default EducatorAccountMainPage;
-

@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import {
   Box,
   Typography,
@@ -21,10 +21,9 @@ function StepTwo() {
     { id: 3, text: "Other" },
   ];
 
- 
   const handleOptionChange = (e, optionValue) => {
-    console.log("event check", e.target.value)
-    dispatch(eduRegSteps({optionValue, step: "2"}))
+    console.log("event check", e.target.value);
+    dispatch(eduRegSteps({ optionValue, step: "2" }));
   };
   const ChoiceTypo = styled(Typography)(({ theme }) => ({
     fontWeight: 700,
@@ -32,7 +31,7 @@ function StepTwo() {
     letterSpacing: "-.02rem",
     fontSize: "16px",
   }));
-  console.log("step2:", step2Data)
+  console.log("step2:", step2Data);
 
   return (
     <Box sx={{ height: "100vh" }}>

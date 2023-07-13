@@ -5,12 +5,8 @@ import StepTwo from "./stepTwo";
 import StepOne from "./stepOne";
 
 const Steps = ({ steps }) => {
-  
- 
-   const TopHeadingBox = styled(Box)(({ theme }) => ({
-    [theme.breakpoints.down('sm')]:{
-  
-      }
+  const TopHeadingBox = styled(Box)(({ theme }) => ({
+    [theme.breakpoints.down("sm")]: {},
   }));
   const TopHeading = styled(Typography)(({ theme }) => ({
     marginTop: 12,
@@ -19,30 +15,29 @@ const Steps = ({ steps }) => {
     fontSize: "2.2rem",
     lineHeight: 1.25,
     letterSpacing: "-.05rem",
-    [theme.breakpoints.down('sm')]:{
-    fontSize: "2rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "2rem",
+    },
+  }));
+  const Description = styled(Typography)(({ theme }) => ({}));
 
-    }
-  }));
-  const Description = styled(Typography)(({ theme }) => ({
-  }));
-  
   const DescriptionBox = styled(Box)(({ theme }) => ({
     maxWidth: "70%",
     paddingTop: 32,
-    [theme.breakpoints.down('sm')]:{
+    [theme.breakpoints.down("sm")]: {
       maxWidth: "100%",
-  
-      }
+    },
   }));
 
   return (
     <>
       {steps === 1 && (
         <Box p={3} sx={{ height: "100vh" }}>
-        <TopHeadingBox>
-        <TopHeading variant="" mt={5}>Teaching Experience</TopHeading>
-        </TopHeadingBox>
+          <TopHeadingBox>
+            <TopHeading variant="" mt={5}>
+              Teaching Experience
+            </TopHeading>
+          </TopHeadingBox>
           <DescriptionBox>
             <Description variant="body">
               Udemy courses are video-based experiences that give students the
@@ -63,9 +58,11 @@ const Steps = ({ steps }) => {
       )}
       {steps === 2 && (
         <Box p={3} sx={{ height: "100vh" }}>
-           <TopHeadingBox>
-        <TopHeading variant="" mt={5}>Teaching Medium</TopHeading>
-        </TopHeadingBox>
+          <TopHeadingBox>
+            <TopHeading variant="" mt={5}>
+              Teaching Medium
+            </TopHeading>
+          </TopHeadingBox>
           <DescriptionBox>
             <Description variant="body">
               Udemy courses are video-based experiences that give students the
@@ -74,13 +71,12 @@ const Steps = ({ steps }) => {
               knowledge into an online course that improves student lives.
             </Description>
           </DescriptionBox>
-         
-            <Box sx={{ maxWidth: "100%" }} pt={5}>
-            <Typography variant="h6" pb={2}>
-            What mediums have you taught in?
 
+          <Box sx={{ maxWidth: "100%" }} pt={5}>
+            <Typography variant="h6" pb={2}>
+              What mediums have you taught in?
             </Typography>
-          
+
             <StepTwo />
           </Box>
         </Box>

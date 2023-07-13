@@ -40,12 +40,12 @@ export const styles = {
     alignItems: "center",
     backgroundColor: "white",
     width: {
-      lg:"50px",
-      sx:"35px"
+      lg: "50px",
+      sx: "35px",
     },
     height: {
-      lg:"50px",
-      sx:"35px"
+      lg: "50px",
+      sx: "35px",
     },
     padding: "5px",
     color: "blue",

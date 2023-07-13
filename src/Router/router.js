@@ -22,8 +22,6 @@ const Router = () => {
   const location = useLocation();
   const { features } = React.useContext(FeatureFlags);
 
- 
-
   return (
     <div>
       {location.pathname !== "/educator-account" ? <Navbar /> : ""}

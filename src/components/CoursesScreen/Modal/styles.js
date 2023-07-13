@@ -15,7 +15,7 @@ export const styles = {
   },
   styleCoursesScreenModal: {
     position: "absolute",
-    top: { xs: "50% ", sm: "50% ", md: "50% ", lg: "50% "},
+    top: { xs: "50% ", sm: "50% ", md: "50% ", lg: "50% " },
     left: {
       xs: 195,
       sm: 400,

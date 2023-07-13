@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
-import { Divider,  Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import { MyBox, styles } from "./styles";
@@ -41,9 +41,10 @@ const WelcomeBox = () => {
             justifyContent="space-around"
             alignItems="center"
           >
-            <Grid 
-            onClick={(e) => handleButtonClick({ value: 1 })}
-            sx={styles.subGrid}>
+            <Grid
+              onClick={(e) => handleButtonClick({ value: 1 })}
+              sx={styles.subGrid}
+            >
               {isClicked ? (
                 <CastForEducationIcon sx={styles.subGridIconClicked} />
               ) : (
@@ -59,9 +60,10 @@ const WelcomeBox = () => {
               </Box>
             </Grid>
             <Divider sx={styles.dividerStyle} />
-            <Grid 
-            onClick={(e) => handleButtonClick({ value: 2 })}
-            sx={styles.subGrid}>
+            <Grid
+              onClick={(e) => handleButtonClick({ value: 2 })}
+              sx={styles.subGrid}
+            >
               {isClicked ? (
                 <LocalLibraryIcon sx={styles.subGridIconNotClicked} />
               ) : (

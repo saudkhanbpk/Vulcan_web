@@ -5,7 +5,6 @@ import { FormBox, Heading, MainBox, SendMessage, styles } from "./styles";
 import { Box, TextField, Typography } from "@mui/material";
 
 const Contact = () => {
-
   const formik = useFormik({
     initialValues: {
       fullName: "",
@@ -33,7 +32,6 @@ const Contact = () => {
 
   return (
     <Box sx={{ height: "100vh" }}>
-
       <Box
         sx={styles.main}
         mt={-5}

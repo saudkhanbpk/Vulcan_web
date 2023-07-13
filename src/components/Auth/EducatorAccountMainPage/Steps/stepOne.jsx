@@ -11,11 +11,9 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { useDispatch, useSelector } from "react-redux";
 import { eduRegSteps } from "../../../../feature/Auth/authSlice";
 
-
 function StepOne() {
   const step1Data = useSelector((state) => state.auth.stepOneData);
-  const dispatch=useDispatch()
-
+  const dispatch = useDispatch();
 
   const options = [
     { id: 0, text: "Professor at a college / university" },
@@ -24,10 +22,10 @@ function StepOne() {
     { id: 3, text: "Tutor" },
     { id: 4, text: "Other" },
   ];
- 
+
   const handleOptionChange = (e, optionValue) => {
-    console.log("event check",e.target.value)
-    dispatch(eduRegSteps({optionValue, step: "1"}))
+    console.log("event check", e.target.value);
+    dispatch(eduRegSteps({ optionValue, step: "1" }));
   };
 
   const ChoiceTypo = styled(Typography)(({ theme }) => ({
@@ -37,8 +35,7 @@ function StepOne() {
     fontSize: "16px",
   }));
 
-
-  console.log("step1:", step1Data)
+  console.log("step1:", step1Data);
   return (
     <Box sx={{ height: "100vh" }}>
       <Grid container>
@@ -56,10 +53,10 @@ function StepOne() {
                     value={option.text.toString()}
                     sx={{
                       "& .Mui-checked": {
-                        color: "#1c1d1f", 
+                        color: "#1c1d1f",
                       },
                     }}
-                    color="primary" 
+                    color="primary"
                   />
                 }
                 label={<ChoiceTypo variant="body1">{option.text}</ChoiceTypo>}

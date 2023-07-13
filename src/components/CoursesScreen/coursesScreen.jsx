@@ -13,8 +13,8 @@ const CoursesScreen = () => {
     setOpen(!open);
   };
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));  
- 
+  const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
+
   return (
     <>
       <ModalComponent open={open} setOpen={setOpen} coursesModal={true} />
