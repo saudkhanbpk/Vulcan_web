@@ -502,7 +502,7 @@ function Auth({ chooseModal }) {
                     loginFormik.touched.email &&
                     Boolean(loginFormik.errors.email)
                       ? loginFormik.errors.email
-                      : "Password"
+                      : "Email"
                   }
                   variant="standard"
                   type="email"
