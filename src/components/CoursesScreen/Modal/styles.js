@@ -15,7 +15,7 @@ export const styles = {
   },
   styleCoursesScreenModal: {
     position: "absolute",
-    top: { xs: "50% ", sm: "50% ", md: "50% ", lg: "50% "},
+    top: { xs: "50% ", sm: "50% ", md: "50% ", lg: "50% " },
     left: {
       xs: 195,
       sm: 400,
@@ -33,7 +33,6 @@ export const styles = {
     },
     height: 305,
     bgcolor: "white",
-    // border: "2px solid #000",
     borderRadius: "30px",
     boxShadow: 24,
     p: 4,
@@ -56,7 +55,6 @@ export const styles = {
     },
     height: 421,
     bgcolor: "white",
-    // border: "1px solid #000",
     borderRadius: "20px",
     boxShadow: 24,
     p: 4,

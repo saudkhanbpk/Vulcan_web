@@ -8,12 +8,44 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import logo from "../../assets/images/Logo.png";
-import { Link, useNavigate } from "react-router-dom";
-import { styles, MenuStyle, Span, NavLink } from "./styles";
+import { useNavigate } from "react-router-dom";
+import {
+  styles,
+  MenuStyle,
+  Span,
+  NavLink,
+  SmNavlink,
+  AuthButton,
+} from "./styles";
 import "./navbar.scss";
-import { styled } from "@mui/system";
+
+import { useDispatch, useSelector } from "react-redux";
+import {
+  chooseModalLogin,
+  chooseModalSignUp,
+} from "../../feature/Auth/authSlice";
+import Auth from "../Auth/auth";
+import { auth } from "../../config/config";
+import useAuthentication from "./onAuthStateChange";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const chooseModal = useSelector((state) => state.auth.chooseModal);
+
+  const { user } = useAuthentication();
+
+  const handleLoginButtonClick = () => {
+    dispatch(chooseModalLogin());
+    handleCloseNavMenu();
+  };
+  const handleLogout = () => {
+    auth.signOut();
+  };
+  const handleSignUpButtonClick = () => {
+    dispatch(chooseModalSignUp());
+    handleCloseNavMenu();
+  };
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
 
@@ -27,28 +59,10 @@ const Navbar = () => {
   const navigateToHome = () => {
     navigate("/");
   };
-  const AuthButton = styled("button")(({ theme, signup }) => ({
-    borderRadius: "30px",
-    border: "1px solid black",
-    fontFamily: "Inter, sans-serif",
-    fontWeight: 800,
-    height: "40px",
-    width: "80px",
-    background: signup ? theme.palette.primary.main : "#fff",
-    color: signup ? "#fff" : theme.palette.secondary,
 
-    [theme.breakpoints.down("md")]: {
-      fontSize: "16px",
-    },
-  }));
-
-  const SmNavlink = styled(Typography)(({ theme }) => ({
-    paddingTop: theme.spacing(2),
-    textTransform: "capitalize",
-    textAlign: "center",
-  }));
   return (
     <AppBar sx={styles.appBar} position="sticky">
+      {<Auth chooseModal={chooseModal} />}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={styles.logo} onClick={navigateToHome} curser="pointer">
@@ -93,7 +107,7 @@ const Navbar = () => {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={(e)=>handleOpenNavMenu(e)}
+              onClick={(e) => handleOpenNavMenu(e)}
               color="inherit"
               curser="pointer"
             >
@@ -102,7 +116,6 @@ const Navbar = () => {
             <MenuStyle
               id="menu-appbar"
               anchorEl={anchorElNav}
-              // anchorOrigin={{   vertical: "bottom",   }}
               keepMounted
               transformOrigin={{
                 vertical: "top",
@@ -112,9 +125,10 @@ const Navbar = () => {
               onClose={handleCloseNavMenu}
               sx={styles.menu}
               PaperProps={{
-                className: 'css-1ka5eyc-MuiPaper-root-MuiMenu-paper-MuiPopover-paper',
+                className:
+                  "css-1ka5eyc-MuiPaper-root-MuiMenu-paper-MuiPopover-paper",
                 sx: {
-                  borderRadius: '20px !important',
+                  borderRadius: "20px !important",
                 },
               }}
             >
@@ -123,7 +137,7 @@ const Navbar = () => {
                 flexDirection="column"
                 justifyContent="flex-start"
                 alignItems="flex-start"
-                sx={{ pl: "10px", pr: "10px",}}
+                sx={{ pl: "10px", pr: "10px" }}
               >
                 <SmNavlink
                   onClick={() => {
@@ -165,26 +179,23 @@ const Navbar = () => {
                   Become Educator
                 </SmNavlink>
               </Box>
-
+              {/* Small Screen */}
               <Box display="flex" justifyContent="space-around" pt="20px">
-                <AuthButton
-                  onClick={() => {
-                    navigate("/login");
-                    handleCloseNavMenu();
-                  }}
-                >
-                  Login
-                </AuthButton>
+                {user ? (
+                  <AuthButton signup="true" onClick={handleLogout}>
+                    Logout
+                  </AuthButton>
+                ) : (
+                  <>
+                    <AuthButton onClick={handleLoginButtonClick}>
+                      Login
+                    </AuthButton>
 
-                <AuthButton
-                  onClick={() => {
-                    navigate("/signup");
-                    handleCloseNavMenu();
-                  }}
-                  signup="true"
-                >
-                  Sign Up
-                </AuthButton>
+                    <AuthButton onClick={handleSignUpButtonClick} signup="true">
+                      Sign Up
+                    </AuthButton>
+                  </>
+                )}
               </Box>
             </MenuStyle>
           </Box>
@@ -207,18 +218,25 @@ const Navbar = () => {
             sx={styles.rightBox}
           >
             <Stack direction="row" spacing={2}>
-              <Span onClick={() => navigate("/about")}>
+              <Span onClick={() => navigate("/become-educator")}>
                 <NavLink color="secondary"> Become Educator</NavLink>
               </Span>
 
+              {user ? (
+                <AuthButton signup="true" onClick={handleLogout}>
+                  Logout
+                </AuthButton>
+              ) : (
+                <>
+                  <AuthButton onClick={handleLoginButtonClick}>
+                    Login
+                  </AuthButton>
 
-              <Link as={Link} to="/login">
-              <AuthButton>Login</AuthButton>
-              </Link>
-
-              <Link as={Link} to="/signup">
-                <AuthButton signup="true">Sign Up</AuthButton>
-              </Link>
+                  <AuthButton signup="true" onClick={handleSignUpButtonClick}>
+                    Sign Up
+                  </AuthButton>
+                </>
+              )}
             </Stack>
           </Box>
         </Toolbar>

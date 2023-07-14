@@ -8,11 +8,19 @@ import TeachIcon from "../../assets/images/teachIcon.png";
 import becomeimg from "../../assets/images/becomeEducatorBgImg.png";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
+import { useSelector, useDispatch } from "react-redux";
+import { chooseModalSignUp } from "../../feature/Auth/authSlice";
 import { styles } from "./styles";
+import Auth from "../Auth/auth";
 
 const BecomeEducator = () => {
+  const chooseModal = useSelector((state) => state.auth.chooseModal);
+  const dispatch = useDispatch();
+  const handleSignUpModalOpen = () => {
+    navigate("/educator-account");
+  };
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('sm')); // Change breakpoint as needed
+  const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
 
   const navigate = useNavigate();
   const sectionRef = useRef(null);
@@ -28,9 +36,10 @@ const BecomeEducator = () => {
   return (
     <>
       {/* Section 1 */}
-      <div className={isDesktop ?"bg-img" : "bg-img2"} >
+      {<Auth chooseModal={chooseModal} />}
+      <div className={isDesktop ? "bg-img" : "bg-img2"}>
         <Grid container lg={6} sx={styles.Sec1MainGrid}>
-          <Grid >
+          <Grid>
             <Typography align="center" sx={styles.boxTypo}>
               Teach Live Classes Online
             </Typography>
@@ -42,7 +51,7 @@ const BecomeEducator = () => {
 
           <Grid
             display="flex"
-            flexDirection= "row"
+            flexDirection="row"
             alignItems="center"
             justifyContent="space-around"
             lg={12}
@@ -50,7 +59,12 @@ const BecomeEducator = () => {
             sm={12}
             xs={12}
           >
-            <Button variant="contained"  size="small" sx={styles.textCapitalize}>
+            <Button
+              variant="contained"
+              size="small"
+              onClick={handleSignUpModalOpen}
+              sx={styles.textCapitalize}
+            >
               Get Started
             </Button>
 
@@ -65,11 +79,7 @@ const BecomeEducator = () => {
           </Grid>
         </Grid>
       </div>
-      <Box >
-      {!isDesktop &&
-        <img src={becomeimg} width={"100%"}  alt=""/> 
-      }
-      </Box>
+      <Box>{!isDesktop && <img src={becomeimg} width={"100%"} alt="" />}</Box>
 
       {/* Section 2 */}
       <Box px={5}>
@@ -92,14 +102,13 @@ const BecomeEducator = () => {
             md={4}
             xs={12}
             sx={{
-              height:  "auto" ,
+              height: "auto",
             }}
             display="flex"
             flexDirection="column"
             justifyContent="start"
             alignItems="center"
             marginTop={isDesktop ? "20px" : "0px"}
-
           >
             <Box sx={styles.subGridImgBox}>
               <img src={MoneyIcon} alt="dollar" />
@@ -127,7 +136,6 @@ const BecomeEducator = () => {
             justifyContent="start"
             alignItems="center"
             marginTop={isDesktop ? "0px" : "40px"}
-
           >
             <Box sx={styles.subGridImgBox}>
               <img src={SharingIcon} alt="" />
@@ -152,7 +160,6 @@ const BecomeEducator = () => {
             justifyContent="start"
             alignItems="center"
             marginTop={isDesktop ? "0px" : "40px"}
-
           >
             <Box sx={styles.subGridImgBox}>
               <img src={TeachIcon} alt="" />

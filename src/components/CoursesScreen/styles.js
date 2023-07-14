@@ -8,5 +8,11 @@ export const styles = {
     pt: 8,
     pb: 5,
   },
-  typoDescription: { pr: {sm:5}, pl: {sm:5}, fontWeight: "400", fontSize: "20px", pb: 3 },
+  typoDescription: {
+    pr: { sm: 5 },
+    pl: { sm: 5 },
+    fontWeight: "400",
+    fontSize: "20px",
+    pb: 3,
+  },
 };

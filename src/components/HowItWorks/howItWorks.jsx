@@ -9,8 +9,8 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { styles } from "./styles";
 
 const HowItWorks = () => {
-   
-  const is_small_screen = useMediaQuery("(max-width: 899px)");
+  const isSmallScreen = useMediaQuery("(min-width: 899px)");
+
   const navigate = useNavigate();
 
   const navigateToEdu = () => {
@@ -125,7 +125,7 @@ const HowItWorks = () => {
           alignItems="center"
         >
           <Box sx={{ pb: 15 }}>
-            {is_small_screen && (
+            {isSmallScreen && (
               <Divider orientation="horizontal" sx={styles.divider} />
             )}
           </Box>
@@ -134,12 +134,7 @@ const HowItWorks = () => {
         <Grid lg={5} md={5} sm={12} xs={12} sx={{ p: { xs: 2 } }}>
           <Grid lg={12}>
             <Box>
-              <Typography
-                variant="h1"
-                color="black"
-                align="center"
-                mt={10}
-              >
+              <Typography variant="h1" color="black" align="center" mt={10}>
                 Educators
               </Typography>
               <Typography variant="h5" color="primary" align="left" mt={10}>

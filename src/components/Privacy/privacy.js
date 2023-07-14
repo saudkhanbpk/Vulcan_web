@@ -13,7 +13,7 @@ import { FiberManualRecord as BulletIcon } from "@mui/icons-material";
 
 const InfoList = () => {
   return (
-    <List sx={{width: "90%"}}>
+    <List sx={{ width: "90%" }}>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
           <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
@@ -86,7 +86,7 @@ const InfoList = () => {
 };
 const InfoUsage = () => {
   return (
-    <List sx={{width: "90%"}}>
+    <List sx={{ width: "90%" }}>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
           <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
@@ -109,7 +109,7 @@ const InfoUsage = () => {
           }}
         />
       </ListItem>
-     
+
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
           <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
@@ -172,7 +172,7 @@ const InfoUsage = () => {
 };
 const RightToKnowList = () => {
   return (
-    <List sx={{width: "90%"}}>
+    <List sx={{ width: "90%" }}>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
           <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
@@ -228,15 +228,15 @@ const RightToKnowList = () => {
           }}
         />
       </ListItem>
-     
-      
     </List>
   );
 };
 export default function privacy() {
   return (
     <MainContainer>
-      <Heading variant="" sx={styles.heading}>Privacy Policy</Heading>
+      <Heading variant="" sx={styles.heading}>
+        Privacy Policy
+      </Heading>
       <MainSubContainer>
         <Description variant="body3">Effective on August 1, 2021</Description>
         <Description variant="body3">

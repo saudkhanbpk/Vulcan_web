@@ -1,5 +1,5 @@
 import React from "react";
-import "../coursesScreen.scss";
+import "../coursesSoon.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { TextField, Typography } from "@mui/material";
@@ -68,12 +68,7 @@ const ModalComponent = ({ open, setOpen, coursesModal }) => {
             </Grid>
           </Grid>
 
-          <Box
-            sx={styles.input}
-            component="form"
-            noValidate
-            autoComplete="off"
-          >
+          <Box sx={styles.input} component="form" noValidate autoComplete="off">
             <TextField
               className="m-4"
               display="flex"

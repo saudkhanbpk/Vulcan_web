@@ -20,11 +20,10 @@ const theme = createTheme({
       main: "#0000FF",
     },
     secondary: {
-      main: "#000000",  
+      main: "#000000",
     },
   },
   typography: {
-
     myVariant: {
       fontsize: "6rem",
     },
@@ -89,7 +88,6 @@ const theme = createTheme({
       lineHeight: "22px",
       fontFamily: "Inter",
     },
-    
   },
   components: {
     MuiButton: {

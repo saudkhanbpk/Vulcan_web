@@ -1,12 +1,18 @@
 import React from "react";
-import { Description, Heading, styles, MainContainer, Title, MainSubContainer } from "./styles";
+import {
+  Description,
+  Heading,
+  styles,
+  MainContainer,
+  Title,
+  MainSubContainer,
+} from "./styles";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { FiberManualRecord as BulletIcon } from "@mui/icons-material";
 
 const MyList = () => {
- 
   return (
-    <List sx={{width:"90%"}}>
+    <List sx={{ width: "90%" }}>
       <ListItem>
         <ListItemIcon sx={{ minWidth: "20px", padding: 0 }}>
           <BulletIcon sx={{ fontSize: "10px", color: "black" }} />
@@ -181,7 +187,9 @@ export default function Policies() {
   return (
     <>
       <MainContainer>
-        <Heading variant="" sx={styles.heading}>Terms, Conditions, and Policies</Heading>
+        <Heading variant="" sx={styles.heading}>
+          Terms, Conditions, and Policies
+        </Heading>
         <MainSubContainer>
           <Description variant="body3">
             These Terms of Use (“Terms”) govern your use of the Vulcan website
@@ -230,9 +238,11 @@ export default function Policies() {
           <Title variant="h5">2. Privacy Policy</Title>
           <Description variant="body3">
             Please refer to the Vulcan Privacy Policy at{" "}
-            <a style={{wordWrap: 'break-word'}} href="/">https://www.vulcanlearninginstitute.com/privacy</a> for
-            information on how Vulcan collects, uses and discloses information
-            about you.
+            <a style={{ wordWrap: "break-word" }} href="/">
+              https://www.vulcanlearninginstitute.com/privacy
+            </a>{" "}
+            for information on how Vulcan collects, uses and discloses
+            information about you.
           </Description>
 
           {/* ================================================================================================= */}
@@ -449,8 +459,7 @@ export default function Policies() {
             third party verification service is inaccurate. When a third party
             verification service is used, you warrant that you will comply with
             the Fair Credit Reporting Act, 15 USC 1681. See
-            <a style={{wordWrap: 'break-word'}} href="/">
-            
+            <a style={{ wordWrap: "break-word" }} href="/">
               {" "}
               http://www.consumer.ftc.gov/articles/pdf-0111-fair-credit-reporting-act.pdf{" "}
             </a>
