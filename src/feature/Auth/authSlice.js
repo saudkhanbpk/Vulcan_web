@@ -17,6 +17,10 @@ export const counterSlice = createSlice({
       state.chooseModal = "2";
       state.isOpenModal = true;
     },
+    chooseModalResetPass: (state) => {
+      state.chooseModal = "3";
+      state.isOpenModal = true;
+    },
     closeChooseModal: (state) => {
       state.chooseModal = "0";
       state.isOpenModal = false;
@@ -24,7 +28,7 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { chooseModalLogin, chooseModalSignUp, closeChooseModal } =
+export const { chooseModalLogin, chooseModalSignUp, closeChooseModal, chooseModalResetPass } =
   counterSlice.actions;
 
 export default counterSlice.reducer;

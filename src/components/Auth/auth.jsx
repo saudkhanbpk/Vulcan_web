@@ -25,6 +25,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   chooseModalLogin,
+  chooseModalResetPass,
   chooseModalSignUp,
   closeChooseModal,
 } from "../../feature/Auth/authSlice";
@@ -35,16 +36,23 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  getAuth,
+  sendPasswordResetEmail,
+  fetchSignInMethodsForEmail,
 } from "firebase/auth";
-import { auth } from "../../config/config";
+
+import { ResetPassFormBox, ResetPassMainBox } from "./resetPassStyles";
 
 function Auth({ chooseModal }) {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
-  const [selectedButton, setSelectedButton] = useState(true);
 
+  const [selectedButton, setSelectedButton] = useState(true);
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
+  const [showMessage, setShowMessage] = useState(false);
 
+  const auth = getAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleTogglePasswordVisibility = () => {
@@ -54,12 +62,11 @@ function Auth({ chooseModal }) {
     setShowRePassword(!showRePassword);
   };
 
-  const dispatch = useDispatch();
-
   const handleCloseModal = () => {
     dispatch(closeChooseModal());
     formik.resetForm();
     loginFormik.resetForm();
+    resetPassFormik.resetForm();
   };
 
   //Student & Teacher acc changing functionality
@@ -76,6 +83,19 @@ function Auth({ chooseModal }) {
     return specialCharacters.test(password);
   };
 
+  const handleLoginButtonClick = () => {
+    dispatch(chooseModalLogin());
+    formik.resetForm();
+  };
+  const handleResetPassButtonClick = () => {
+    dispatch(chooseModalResetPass());
+    resetPassFormik.resetForm();
+  };
+
+  const handleSignUpButtonClick = () => {
+    dispatch(chooseModalSignUp());
+    loginFormik.resetForm();
+  };
   /////// Signup Formik call
   const formik = useFormik({
     initialValues: {
@@ -116,17 +136,6 @@ function Auth({ chooseModal }) {
     },
   });
 
-  const handleLoginButtonClick = () => {
-    dispatch(chooseModalLogin());
-    formik.resetForm();
-  };
-  //  ===================Login Logic=======================================
-
-  const handleSignUpButtonClick = () => {
-    dispatch(chooseModalSignUp());
-    loginFormik.resetForm();
-  };
-
   const loginFormik = useFormik({
     initialValues: {
       email: "",
@@ -153,6 +162,48 @@ function Auth({ chooseModal }) {
         //for future testing and debuging purposes i'm leaving this as comment
         // console.alert("Login Failed", err);
       }
+    },
+  });
+
+  const validationSchemaForResetPass = Yup.object().shape({
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email")
+      .test("email-exists", "Email does not exist", async function (value) {
+        if (!value) return true; // Skip validation if the email field is empty
+
+        // Check if the email exists in Firebase
+        try {
+          const signInMethods = await fetchSignInMethodsForEmail(auth, value);
+          return signInMethods.length > 0; // Email exists if sign-in methods are returned
+        } catch (error) {
+          return false; // Email does not exist
+        }
+      }),
+  });
+  const resetPassFormik = useFormik({
+    initialValues: {
+      email: "",
+    },
+
+    validationSchema: validationSchemaForResetPass,
+    onSubmit: async (values) => {
+      const { email } = values;
+      await sendPasswordResetEmail(auth, email)
+        .then(() => {
+          console.log("Password reset email sent!");
+          setShowMessage(true);
+
+          // Set showMessage to false after 5 seconds
+          setTimeout(() => {
+            setShowMessage(false);
+          }, 8000);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // Handle the error
+        });
     },
   });
 
@@ -450,20 +501,24 @@ function Auth({ chooseModal }) {
                   label={
                     loginFormik.touched.email &&
                     Boolean(loginFormik.errors.email)
-                      ? `${loginFormik.errors.email}`
-                      : "Email"
+                      ? loginFormik.errors.email
+                      : "Password"
                   }
                   variant="standard"
+                  type="email"
                   onChange={loginFormik.handleChange}
                   value={loginFormik.values.email}
                   error={
                     loginFormik.touched.email &&
                     Boolean(loginFormik.errors.email)
                   }
+                  sx={{ pb: "14px", pt: "5" }}
                   InputLabelProps={{
-                    style: { fontSize: 16 },
+                    style: {
+                      fontSize: 16,
+                    },
                   }}
-                  inputProps={{
+                  InputProps={{
                     style: { fontSize: 18 },
                   }}
                   fullWidth
@@ -513,7 +568,7 @@ function Auth({ chooseModal }) {
                   <Typography
                     variant="body2"
                     color={"primary"}
-                    onClick={() => alert("forgot password")}
+                    onClick={handleResetPassButtonClick}
                     sx={{
                       textDecoration: "none",
                       fontSize: "16px",
@@ -535,6 +590,121 @@ function Auth({ chooseModal }) {
                 </Box>
               </LoginFormBox>
             </LoginMainBox>
+          </Modal>
+        </>
+      ) : chooseModal === "3" && isOpenModal ? (
+        <>
+          <ModalBackgroundBox />
+          <Modal
+            open={isOpenModal}
+            onClose={handleCloseModal}
+            aria-labelledby="login-modal-title"
+            aria-describedby="login-modal-description"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ResetPassMainBox>
+              <Box
+                px={2}
+                onClick={handleCloseModal}
+                sx={{
+                  position: "relative",
+                  top: "9px",
+                  right: "-142px",
+                }}
+              >
+                <CloseIcon />
+              </Box>
+              <Typography
+                variant="h1"
+                p={2}
+                color="primary"
+                sx={{ fontSize: "30px" }}
+              >
+                Reset Password
+              </Typography>
+
+              <ResetPassFormBox
+                component="form"
+                onSubmit={resetPassFormik.handleSubmit}
+                noValidate
+              >
+                <TextField
+                  name="email"
+                  sx={{ mt: "6px" }}
+                  label={
+                    resetPassFormik.touched.email &&
+                    Boolean(resetPassFormik.errors.email)
+                      ? `${resetPassFormik.errors.email}`
+                      : "Email"
+                  }
+                  variant="standard"
+                  onChange={resetPassFormik.handleChange}
+                  value={resetPassFormik.values.email}
+                  error={
+                    resetPassFormik.touched.email &&
+                    Boolean(resetPassFormik.errors.email)
+                  }
+                  InputLabelProps={{
+                    style: { fontSize: 16 },
+                  }}
+                  InputProps={{
+                    style: { fontSize: 18 },
+                  }}
+                  fullWidth
+                />
+                <Box pt={2}>
+                  {showMessage ? (
+                    <Typography
+                      variant="body2"
+                      color={"secondary"}
+                      sx={{
+                        textDecoration: "none",
+                        fontSize: "16px",
+                        cursor: "pointer",
+                        textAlign: "center",
+                      }}
+                    >
+                      Email Sent! Click on the link in the email to reset your
+                      password and then log in.
+                    </Typography>
+                  ) : (
+                    <></>
+                  )}
+                </Box>
+
+                <Box p={2}>
+                  <Box mt={3}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      mt={4}
+                      sx={{ width: "200px" }}
+                      disabled={resetPassFormik.isSubmitting}
+                    >
+                      Reset Password
+                    </Button>
+                  </Box>
+                  <Typography
+                    variant="h1"
+                    color={"primary"}
+                    pt={4}
+                    onClick={handleLoginButtonClick}
+                    sx={{
+                      textDecoration: "none",
+                      fontSize: "30px",
+                      cursor: "pointer",
+                      textAlign: "center",
+                    }}
+                  >
+                    Login
+                  </Typography>
+                </Box>
+              </ResetPassFormBox>
+            </ResetPassMainBox>
           </Modal>
         </>
       ) : null}
