@@ -42,6 +42,7 @@ import {
 } from "firebase/auth";
 
 import { ResetPassFormBox, ResetPassMainBox } from "./resetPassStyles";
+import { mainFont } from "../../Theme/fontFamily";
 
 function Auth({ chooseModal }) {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
@@ -50,6 +51,7 @@ function Auth({ chooseModal }) {
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
+  const [initialClick, setInitialClick] = useState(false);
 
   const auth = getAuth();
   const dispatch = useDispatch();
@@ -200,8 +202,8 @@ function Auth({ chooseModal }) {
           }, 8000);
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
+          // const errorCode = error.code;
+          // const errorMessage = error.message;
           // Handle the error
         });
     },
@@ -211,8 +213,8 @@ function Auth({ chooseModal }) {
     <Box>
       {chooseModal === "2" && isOpenModal ? (
         <>
+          {/* Sign Up Modal */}
           <ModalBackgroundBox />
-
           <Modal
             open={isOpenModal}
             onClose={handleCloseModal}
@@ -222,6 +224,7 @@ function Auth({ chooseModal }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+            
             }}
           >
             <MainBox>
@@ -448,6 +451,7 @@ function Auth({ chooseModal }) {
         </>
       ) : chooseModal === "1" && isOpenModal ? (
         <>
+          {/* Sign in Modal */}
           <ModalBackgroundBox />
           <Modal
             open={isOpenModal}
@@ -594,6 +598,7 @@ function Auth({ chooseModal }) {
         </>
       ) : chooseModal === "3" && isOpenModal ? (
         <>
+          {/* Reset Password Modal */}
           <ModalBackgroundBox />
           <Modal
             open={isOpenModal}
@@ -683,9 +688,14 @@ function Auth({ chooseModal }) {
                       variant="contained"
                       mt={4}
                       sx={{ width: "200px" }}
-                      disabled={resetPassFormik.isSubmitting}
+                      onClick={()=>setInitialClick(true)}
+                      disabled={
+                        resetPassFormik.isSubmitting ||
+                        !!resetPassFormik.errors.email ||
+                        !resetPassFormik.values.email
+                      }
                     >
-                      Reset Password
+                      {initialClick ? 'Resend Email' : 'Reset Password'}
                     </Button>
                   </Box>
                   <Typography
@@ -698,6 +708,7 @@ function Auth({ chooseModal }) {
                       fontSize: "30px",
                       cursor: "pointer",
                       textAlign: "center",
+                      fontFamily:`${mainFont}`
                     }}
                   >
                     Login
