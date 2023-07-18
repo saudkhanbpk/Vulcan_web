@@ -3,7 +3,7 @@ import "./coursesSoon.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { Typography, useMediaQuery, useTheme } from "@mui/material";
-import ModalComponent from "./Modal/modalComponent";
+import ModalComponent from "../../components/CoursesScreen/Modal/modalComponent";
 import { styles } from "./styles";
 
 const CoursesSoon = () => {

@@ -7,6 +7,7 @@ const useAuthentication = () => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
+      localStorage.setItem("userDetail",JSON.stringify(user))
       setUser(user);
       setLoading(false);
     });
@@ -18,3 +19,4 @@ const useAuthentication = () => {
 };
 
 export default useAuthentication;
+

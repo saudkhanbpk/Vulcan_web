@@ -68,11 +68,7 @@ export const styles = {
   rightBoxBecomeEdLink: { ml: 2, border: "none", textTransform: "capitalize" },
 };
 
-export const MenuStyle = styled(Menu)(({ theme }) => ({
-  [theme.breakpoints.down("sm")]: {
-    borderRadius: "30px ",
-  },
-}));
+
 export const NavLink = styled(Typography)(({ theme }) => ({
   color: "secondary",
   fontSize: "20px !important",
@@ -103,4 +99,9 @@ export const SmNavlink = styled(Typography)(({ theme }) => ({
   paddingTop: theme.spacing(2),
   textTransform: "capitalize",
   textAlign: "center",
+}));
+export const MenuStyle = styled(Menu)(({ theme }) => ({
+  [theme.breakpoints.down("sm")]: {
+    borderRadius: "30px ",
+  },
 }));

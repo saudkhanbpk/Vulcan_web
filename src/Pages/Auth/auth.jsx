@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import "./Auth.scss";
+import "./Styles/Auth.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import {
   AuthButton,
@@ -21,16 +21,14 @@ import {
   MainBox,
   ModalBackgroundBox,
   SignInTextLink,
-} from "./signUpStyles";
+} from "./Styles/signUpStyles";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  chooseModalLogin,
-  chooseModalResetPass,
-  chooseModalSignUp,
-  closeChooseModal,
-} from "../../feature/Auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { LoginFormBox, LoginMainBox, LoginSigUpTextLink } from "./loginStyles";
+import {
+  LoginFormBox,
+  LoginMainBox,
+  LoginSigUpTextLink,
+} from "./Styles/loginStyles";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import {
@@ -41,8 +39,14 @@ import {
   fetchSignInMethodsForEmail,
 } from "firebase/auth";
 
-import { ResetPassFormBox, ResetPassMainBox } from "./resetPassStyles";
+import { ResetPassFormBox, ResetPassMainBox } from "./Styles/resetPassStyles";
 import { mainFont } from "../../Theme/fontFamily";
+import {
+  chooseModalLogin,
+  chooseModalResetPass,
+  chooseModalSignUp,
+  closeChooseModal,
+} from "../../feature/Auth/authSlice";
 
 function Auth({ chooseModal }) {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
@@ -52,6 +56,8 @@ function Auth({ chooseModal }) {
   const [showRePassword, setShowRePassword] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
   const [initialClick, setInitialClick] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailExists, setEmailExists] = useState(false);
 
   const auth = getAuth();
   const dispatch = useDispatch();
@@ -124,11 +130,7 @@ function Auth({ chooseModal }) {
     onSubmit: async (values) => {
       try {
         const { email, password } = values;
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        await createUserWithEmailAndPassword(auth, email, password);
         navigate("/");
         handleCloseModal();
       } catch (error) {
@@ -153,11 +155,7 @@ function Auth({ chooseModal }) {
     onSubmit: async (values) => {
       try {
         const { email, password } = values;
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        await signInWithEmailAndPassword(auth, email, password);
         navigate("/");
         handleCloseModal();
       } catch (err) {
@@ -209,6 +207,24 @@ function Auth({ chooseModal }) {
     },
   });
 
+
+  // ...
+  
+  const checkEmail = async (email) => {
+    const auth = getAuth();
+    
+    try {
+      const result = await fetchSignInMethodsForEmail(auth, email);
+      const exists = result.length > 0;
+      
+      setValidEmail(loginFormik.errors.email ? false : true);
+      setEmailExists(exists);
+    } catch (error) {
+      console.error("Error checking email existence:", error);
+      // Handle the error appropriately
+    }
+  };
+  
   return (
     <Box>
       {chooseModal === "2" && isOpenModal ? (
@@ -224,7 +240,6 @@ function Auth({ chooseModal }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-            
             }}
           >
             <MainBox>
@@ -511,6 +526,7 @@ function Auth({ chooseModal }) {
                   variant="standard"
                   type="email"
                   onChange={loginFormik.handleChange}
+                  onBlur={(e) => checkEmail(e.target.value)}
                   value={loginFormik.values.email}
                   error={
                     loginFormik.touched.email &&
@@ -588,6 +604,7 @@ function Auth({ chooseModal }) {
                     type="submit"
                     variant="contained"
                     sx={{ width: "150px" }}
+                    disabled={!loginFormik.values.email || !validEmail || !emailExists}
                   >
                     Log In
                   </Button>
@@ -688,14 +705,14 @@ function Auth({ chooseModal }) {
                       variant="contained"
                       mt={4}
                       sx={{ width: "200px" }}
-                      onClick={()=>setInitialClick(true)}
+                      onClick={() => setInitialClick(true)}
                       disabled={
                         resetPassFormik.isSubmitting ||
                         !!resetPassFormik.errors.email ||
                         !resetPassFormik.values.email
                       }
                     >
-                      {initialClick ? 'Resend Email' : 'Reset Password'}
+                      {initialClick ? "Resend Email" : "Reset Password"}
                     </Button>
                   </Box>
                   <Typography
@@ -708,7 +725,7 @@ function Auth({ chooseModal }) {
                       fontSize: "30px",
                       cursor: "pointer",
                       textAlign: "center",
-                      fontFamily:`${mainFont}`
+                      fontFamily: `${mainFont}`,
                     }}
                   >
                     Login

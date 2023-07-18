@@ -24,10 +24,9 @@ import {
   chooseModalLogin,
   chooseModalSignUp,
 } from "../../feature/Auth/authSlice";
-import Auth from "../Auth/auth";
-import { auth } from "../../config/config";
 import useAuthentication from "./onAuthStateChange";
-// import { ResetPassword } from "../Auth/ResetPassword/resetPassword";
+import Auth from "../../Pages/Auth/auth";
+import ProfileDropdown from "../ProfileDropdown/profileDropdown";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -38,9 +37,6 @@ const Navbar = () => {
   const handleLoginButtonClick = () => {
     dispatch(chooseModalLogin());
     handleCloseNavMenu();
-  };
-  const handleLogout = () => {
-    auth.signOut();
   };
   const handleSignUpButtonClick = () => {
     dispatch(chooseModalSignUp());
@@ -183,9 +179,7 @@ const Navbar = () => {
               {/* Small Screen */}
               <Box display="flex" justifyContent="space-around" pt="20px">
                 {user ? (
-                  <AuthButton signup="true" onClick={handleLogout}>
-                    Logout
-                  </AuthButton>
+                  <ProfileDropdown />
                 ) : (
                   <>
                     <AuthButton onClick={handleLoginButtonClick}>
@@ -224,9 +218,7 @@ const Navbar = () => {
               </Span>
 
               {user ? (
-                <AuthButton signup="true" onClick={handleLogout}>
-                  Logout
-                </AuthButton>
+                <ProfileDropdown />
               ) : (
                 <>
                   <AuthButton onClick={handleLoginButtonClick}>

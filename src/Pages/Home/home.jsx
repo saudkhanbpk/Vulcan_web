@@ -1,17 +1,13 @@
-import React, { useState } from "react";
-import "./homeScreen.scss";
-import WelcomeBox from "../WelcomeBox/welcomeBox";
+import React from "react";
+import "./home.scss";
+import WelcomeBox from "../../components/WelcomeBox/welcomeBox";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { styles } from "./styles";
 import Grid from "@mui/material/Unstable_Grid2";
-import mobileImage from "../../../assets/images/backhome.png";
+import mobileImage from "../../assets/images/backhome.png";
 
 const HomeScreen = () => {
-  const [open, setOpen] = useState(false);
-
-  const modalHandle = () => {
-    setOpen(!open);
-  };
+   
   const theme = useTheme();
   const is_desktop = useMediaQuery(theme.breakpoints.up("sm"));
 

@@ -5,7 +5,6 @@ import { Divider, Typography, useMediaQuery } from "@mui/material";
 import arrow from "../../assets/images/Arrow 3.png";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
-
 import { styles } from "./styles";
 
 const HowItWorks = () => {

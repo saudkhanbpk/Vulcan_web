@@ -6,7 +6,7 @@ import {
   MainContainer,
   Title,
   MainSubContainer,
-} from "./styles";
+} from "./styles.js";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { FiberManualRecord as BulletIcon } from "@mui/icons-material";
 

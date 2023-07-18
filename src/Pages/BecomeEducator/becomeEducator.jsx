@@ -8,14 +8,14 @@ import TeachIcon from "../../assets/images/teachIcon.png";
 import becomeimg from "../../assets/images/becomeEducatorBgImg.png";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
-import { useSelector, useDispatch } from "react-redux";
-import { chooseModalSignUp } from "../../feature/Auth/authSlice";
+import { useSelector } from "react-redux";
+ 
 import { styles } from "./styles";
-import Auth from "../Auth/auth";
+import Auth from "../../Pages/Auth/auth";
 
 const BecomeEducator = () => {
   const chooseModal = useSelector((state) => state.auth.chooseModal);
-  const dispatch = useDispatch();
+ 
   const handleSignUpModalOpen = () => {
     navigate("/educator-account");
   };
