@@ -56,7 +56,6 @@ const Navbar = () => {
   const navigateToHome = () => {
     navigate("/");
   };
-
   return (
     <AppBar sx={styles.appBar} position="sticky">
       {<Auth chooseModal={chooseModal} />}

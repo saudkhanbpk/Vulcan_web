@@ -22,7 +22,7 @@ const Contact = () => {
     }),
 
     onSubmit: (values) => {
-     //handle values
+      //handle values
     },
   });
 

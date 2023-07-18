@@ -7,7 +7,6 @@ import Grid from "@mui/material/Unstable_Grid2";
 import mobileImage from "../../assets/images/backhome.png";
 
 const HomeScreen = () => {
-   
   const theme = useTheme();
   const is_desktop = useMediaQuery(theme.breakpoints.up("sm"));
 

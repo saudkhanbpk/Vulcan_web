@@ -9,18 +9,14 @@ import { styles } from "./styles";
 
 const HowItWorks = () => {
   const isSmallScreen = useMediaQuery("(min-width: 899px)");
-
   const navigate = useNavigate();
 
   const navigateToEdu = () => {
-    //  navigate to /educator-faq
     navigate("/educator-faq");
   };
   const navigateToLearn = () => {
-    //  navigate to /learner-faq
     navigate("/learner-faq");
   };
-
   return (
     <>
       <Grid container alignContent="center" alignItems="center">

@@ -57,8 +57,6 @@ const Router = () => {
           <Route path={"/dashboard"} element={<Dashboard />} />
           <Route path={"/profile"} element={<Profile />} />
         </Route>
-        
-
       </Routes>
       {location.pathname !== "/educator-account" ? <Footer /> : ""}
     </div>

@@ -42,11 +42,13 @@ import {
 import { ResetPassFormBox, ResetPassMainBox } from "./Styles/resetPassStyles";
 import { mainFont } from "../../Theme/fontFamily";
 import {
+  ModalTypes,
   chooseModalLogin,
   chooseModalResetPass,
   chooseModalSignUp,
   closeChooseModal,
 } from "../../feature/Auth/authSlice";
+// import { ModalTypes } from "./path/to/your/redux/slice";
 
 function Auth({ chooseModal }) {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
@@ -207,16 +209,15 @@ function Auth({ chooseModal }) {
     },
   });
 
-
   // ...
-  
+
   const checkEmail = async (email) => {
     const auth = getAuth();
-    
+
     try {
       const result = await fetchSignInMethodsForEmail(auth, email);
       const exists = result.length > 0;
-      
+
       setValidEmail(loginFormik.errors.email ? false : true);
       setEmailExists(exists);
     } catch (error) {
@@ -224,10 +225,10 @@ function Auth({ chooseModal }) {
       // Handle the error appropriately
     }
   };
-  
+
   return (
     <Box>
-      {chooseModal === "2" && isOpenModal ? (
+      {chooseModal === ModalTypes.SIGNUP && isOpenModal ? (
         <>
           {/* Sign Up Modal */}
           <ModalBackgroundBox />
@@ -464,7 +465,7 @@ function Auth({ chooseModal }) {
             </MainBox>
           </Modal>
         </>
-      ) : chooseModal === "1" && isOpenModal ? (
+      ) : chooseModal === ModalTypes.LOGIN && isOpenModal ? (
         <>
           {/* Sign in Modal */}
           <ModalBackgroundBox />
@@ -604,7 +605,9 @@ function Auth({ chooseModal }) {
                     type="submit"
                     variant="contained"
                     sx={{ width: "150px" }}
-                    disabled={!loginFormik.values.email || !validEmail || !emailExists}
+                    disabled={
+                      !loginFormik.values.email || !validEmail || !emailExists
+                    }
                   >
                     Log In
                   </Button>
@@ -613,7 +616,7 @@ function Auth({ chooseModal }) {
             </LoginMainBox>
           </Modal>
         </>
-      ) : chooseModal === "3" && isOpenModal ? (
+      ) : chooseModal === ModalTypes.RESET_PASSWORD && isOpenModal ? (
         <>
           {/* Reset Password Modal */}
           <ModalBackgroundBox />
