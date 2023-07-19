@@ -8,9 +8,7 @@ export const FeatureFlagsProvider = ({ children }) => {
 
   useEffect(() => {
     if (process.env.NODE_ENV === "production") {
-      setFeatures({
-        
-      });
+      setFeatures({});
     } else {
       setFeatures({
         showCourses: false,

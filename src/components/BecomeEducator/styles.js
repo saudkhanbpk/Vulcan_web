@@ -4,7 +4,6 @@ export const styles = {
     height: { lg: "294px", sm: "300px", xs: "350px" },
     borderRadius: "50px",
     backgroundColor: "rgba(255, 255, 255, 0.8)",
-
     pl: 3,
     pr: 3,
   },

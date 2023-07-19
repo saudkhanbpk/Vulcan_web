@@ -15,7 +15,6 @@ import Footer from "../components/Footer/footer";
 import { FeatureFlags } from "../contexts/FeatureFlags";
 import { Courses } from "../components/CoursesScreen/courses";
 import CoursesSoon from "../components/CoursesScreen/coursesSoon";
- 
 
 const Router = () => {
   const location = useLocation();

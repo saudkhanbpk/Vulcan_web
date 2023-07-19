@@ -225,7 +225,6 @@ function Auth({ chooseModal }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-            
             }}
           >
             <MainBox>
@@ -689,14 +688,14 @@ function Auth({ chooseModal }) {
                       variant="contained"
                       mt={4}
                       sx={{ width: "200px" }}
-                      onClick={()=>setInitialClick(true)}
+                      onClick={() => setInitialClick(true)}
                       disabled={
                         resetPassFormik.isSubmitting ||
                         !!resetPassFormik.errors.email ||
                         !resetPassFormik.values.email
                       }
                     >
-                      {initialClick ? 'Resend Email' : 'Reset Password'}
+                      {initialClick ? "Resend Email" : "Reset Password"}
                     </Button>
                   </Box>
                   <Typography
@@ -709,7 +708,7 @@ function Auth({ chooseModal }) {
                       fontSize: "30px",
                       cursor: "pointer",
                       textAlign: "center",
-                      fontFamily:`${mainFont}`
+                      fontFamily: `${mainFont}`,
                     }}
                   >
                     Login
