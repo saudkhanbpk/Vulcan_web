@@ -9,8 +9,8 @@ export const styles = {
 
   item: { borderRadius: "20px" },
   subGrid: { cursor: "pointer" },
-  subGridIconClicked: { fontSize: "3.1875rem", color: "blue" },
-  subGridIconNotClicked: { fontSize: "3.1875rem" },
+  subGridIconClicked: { fontSize: "3.1875rem !important", color: "blue" },
+  subGridIconNotClicked: { fontSize: "3.1875rem !important" },
   dividerAfterClick: { opacity: 1, color: "blue" },
   dividerbeforeClick: { opacity: 0 },
 
