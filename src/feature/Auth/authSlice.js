@@ -1,8 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export const ModalTypes = {
+  LOGIN: "login",
+  SIGNUP: "signup",
+  RESET_PASSWORD: "resetPassword",
+};
+
 const initialState = {
   isOpenModal: false,
-  chooseModal: "0",
+  chooseModal: null,
 };
 
 export const counterSlice = createSlice({
@@ -10,25 +16,29 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     chooseModalLogin: (state) => {
-      state.chooseModal = "1";
+      state.chooseModal = ModalTypes.LOGIN;
       state.isOpenModal = true;
     },
     chooseModalSignUp: (state) => {
-      state.chooseModal = "2";
+      state.chooseModal = ModalTypes.SIGNUP;
       state.isOpenModal = true;
     },
     chooseModalResetPass: (state) => {
-      state.chooseModal = "3";
+      state.chooseModal = ModalTypes.RESET_PASSWORD;
       state.isOpenModal = true;
     },
     closeChooseModal: (state) => {
-      state.chooseModal = "0";
+      state.chooseModal = null;
       state.isOpenModal = false;
     },
   },
 });
 
-export const { chooseModalLogin, chooseModalSignUp, closeChooseModal, chooseModalResetPass } =
-  counterSlice.actions;
+export const {
+  chooseModalLogin,
+  chooseModalSignUp,
+  closeChooseModal,
+  chooseModalResetPass,
+} = counterSlice.actions;
 
 export default counterSlice.reducer;

@@ -24,6 +24,7 @@ import {
 } from "./signUpStyles";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  ModalTypes,
   chooseModalLogin,
   chooseModalResetPass,
   chooseModalSignUp,
@@ -211,7 +212,7 @@ function Auth({ chooseModal }) {
 
   return (
     <Box>
-      {chooseModal === "2" && isOpenModal ? (
+      {chooseModal === ModalTypes.SIGNUP && isOpenModal ? (
         <>
           {/* Sign Up Modal */}
           <ModalBackgroundBox />
@@ -449,7 +450,7 @@ function Auth({ chooseModal }) {
             </MainBox>
           </Modal>
         </>
-      ) : chooseModal === "1" && isOpenModal ? (
+      ) : chooseModal === ModalTypes.LOGIN && isOpenModal ? (
         <>
           {/* Sign in Modal */}
           <ModalBackgroundBox />
@@ -596,7 +597,7 @@ function Auth({ chooseModal }) {
             </LoginMainBox>
           </Modal>
         </>
-      ) : chooseModal === "3" && isOpenModal ? (
+      ) : chooseModal === ModalTypes.RESET_PASSWORD && isOpenModal ? (
         <>
           {/* Reset Password Modal */}
           <ModalBackgroundBox />
