@@ -13,9 +13,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <FeatureFlagsProvider>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
       </FeatureFlagsProvider>
     </Provider>
   </React.StrictMode>

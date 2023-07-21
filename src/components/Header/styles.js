@@ -80,6 +80,14 @@ export const Span = styled("span")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
 }));
+export const AboutSpan = styled("span")(({ theme }) => ({
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  position: "relative", /* Ensure the parent is relative to position the arrow */
+}));
+
+ 
 export const AuthButton = styled("button")(({ theme, signup }) => ({
   borderRadius: "30px",
   border: "1px solid black",
@@ -96,6 +104,7 @@ export const AuthButton = styled("button")(({ theme, signup }) => ({
 }));
 
 export const SmNavlink = styled(Typography)(({ theme }) => ({
+  color:"#00000",
   paddingTop: theme.spacing(2),
   textTransform: "capitalize",
   textAlign: "center",

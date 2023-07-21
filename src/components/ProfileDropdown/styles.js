@@ -1,4 +1,4 @@
-import { Menu, Typography, styled } from "@mui/material";
+import { IconButton, Menu, Typography, styled } from "@mui/material";
 
 export const AuthButton = styled("button")(({ theme, signup }) => ({
     borderRadius: "30px",
@@ -19,11 +19,10 @@ export const AuthButton = styled("button")(({ theme, signup }) => ({
     paddingTop: theme.spacing(2),
     textTransform: "capitalize",
     textAlign: "center",
-    // curser:"pointer"
   }));
  export  const MenuStyle = styled(Menu)(({ theme }) => ({
     display: { xs: "block", md: "none" },
-    marginTop: "4px",
+    marginTop: "8px",
     [theme.breakpoints.down("sm")]: {
       borderRadius: "30px ",
     },
@@ -33,3 +32,21 @@ export const AuthButton = styled("button")(({ theme, signup }) => ({
     display: "flex",
     alignItems: "center",
   }));
+  export const IconButtonStyle = styled(IconButton)(({ theme }) => ({
+    '&:hover': {
+      backgroundColor: 'transparent',  
+    },
+  }));
+
+  export const AboutDownArrow = styled('span')(({ theme }) => ({
+    position: "absolute",
+    top: "50%",
+    transform: "translateY(-50%) rotate(45deg)",
+    width: 0,
+    height: 0,
+    borderLeft: "6px solid transparent",
+    borderRight: "6px solid transparent",
+    borderTop: `6px solid ${theme === "secondary" ? "black" : "white"}`, 
+    pointerEvents: "none", 
+  }));
+  

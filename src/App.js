@@ -8,8 +8,8 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <ScrollToTop />
-        <Router />
+          <ScrollToTop />
+          <Router />
       </BrowserRouter>
     </>
   );

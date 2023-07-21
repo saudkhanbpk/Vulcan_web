@@ -8,7 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import logo from "../../assets/images/Logo.png";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import {
   styles,
   MenuStyle,
@@ -16,9 +16,10 @@ import {
   NavLink,
   SmNavlink,
   AuthButton,
+  AboutSpan,
+  
 } from "./styles";
 import "./navbar.scss";
-
 import { useDispatch, useSelector } from "react-redux";
 import {
   chooseModalLogin,
@@ -26,11 +27,14 @@ import {
 } from "../../feature/Auth/authSlice";
 import useAuthentication from "./onAuthStateChange";
 import Auth from "../../Pages/Auth/auth";
-import ProfileDropdown from "../ProfileDropdown/profileDropdown";
+import ProfileDropdown, { ProfileDropdownSmallScreen, AboutDropDown } from "../ProfileDropdown/profileDropdown";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+
   const chooseModal = useSelector((state) => state.auth.chooseModal);
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+
 
   const { user } = useAuthentication();
 
@@ -42,21 +46,21 @@ const Navbar = () => {
     dispatch(chooseModalSignUp());
     handleCloseNavMenu();
   };
-
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
+       setAnchorElNav(event.currentTarget) 
   };
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+    setAnchorElNav(null)
   };
   const navigateToHome = () => {
     navigate("/");
   };
   return (
+    
+
     <AppBar sx={styles.appBar} position="sticky">
       {<Auth chooseModal={chooseModal} />}
       <Container maxWidth="xl">
@@ -135,15 +139,15 @@ const Navbar = () => {
                 alignItems="flex-start"
                 sx={{ pl: "10px", pr: "10px" }}
               >
-                <SmNavlink
-                  onClick={() => {
-                    navigate("/about");
-                    handleCloseNavMenu();
-                  }}
-                  variant="body2"
-                >
-                  About
-                </SmNavlink>
+                {/* small screen */}
+                <AboutSpan display={"flex"}>
+                  <SmNavlink
+                    variant="body2"
+                  >
+                    About
+                  </SmNavlink>
+                  <AboutDropDown handleCloseNavMenu={handleCloseNavMenu}/>
+                </AboutSpan>
 
                 <SmNavlink
                   onClick={() => {
@@ -178,7 +182,7 @@ const Navbar = () => {
               {/* Small Screen */}
               <Box display="flex" justifyContent="space-around" pt="20px">
                 {user ? (
-                  <ProfileDropdown />
+                  <ProfileDropdownSmallScreen handleCloseNavMenu={handleCloseNavMenu}/>
                 ) : (
                   <>
                     <AuthButton onClick={handleLoginButtonClick}>
@@ -194,6 +198,7 @@ const Navbar = () => {
             </MenuStyle>
           </Box>
           <Box sx={styles.xsMenuBox}>
+            {/* Large Screen */}
             <Span onClick={() => navigate("/about")}>
               <NavLink color="secondary">About</NavLink>
             </Span>
@@ -234,6 +239,8 @@ const Navbar = () => {
         </Toolbar>
       </Container>
     </AppBar>
+  
+
   );
 };
 
