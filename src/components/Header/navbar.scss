@@ -13,20 +13,20 @@
   font-family: Inter;
   letter-spacing: 0.00938em;
   color: #000000;
-  font-size: 20px !important;
-  font-weight: bold !important;
-  line-height: 24px !important;
+  font-size: 20px!important;
+  font-weight: bold!important;
+  line-height: 24px!important;
   outline: none;
   border: none;
 }
-.menuitems {
+.menuitems{
   background-color: transparent;
   margin: 0;
   font-family: Inter;
   color: #000000;
-  font-size: 18px !important;
-  font-weight: bold !important;
-  line-height: 18px !important;
+  font-size: 18px!important;
+  font-weight: bold!important;
+  line-height: 18px!important;
   outline: none;
   border: none;
 }
@@ -40,8 +40,6 @@
   background-color: white;
   min-width: 150px;
   border-radius: 30px;
-  border:"none";
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .dropdown-content a {
   color: black;
@@ -49,9 +47,7 @@
   text-decoration: none;
   display: block;
 }
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
+.dropdown-content a:hover {background-color: #f1f1f1}
 .dropdown:hover .dropdown-content {
   display: block;
 }

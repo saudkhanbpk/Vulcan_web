@@ -1,16 +1,19 @@
 import React from 'react'
+import { Box, Typography } from "@mui/material";
 
 export const Courses = () => {
     return (
-        <div
-          style={{
-            height: "100vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <h1>Comming Soon!</h1>
-        </div>
+      <Box
+      sx={{
+        height: "100vh",
+        display: "flex",
+        flexDirection:"column",
+        justifyContent: "Center",
+        alignItems: "center",
+      }}
+    >
+      <Typography variant="h1" color={"primary"}>Courses</Typography>
+      <Typography variant="h5">Comming soon!</Typography>
+      </Box>
       );
 }
