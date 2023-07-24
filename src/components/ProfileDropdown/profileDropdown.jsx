@@ -3,27 +3,33 @@ import { IconButton, Box } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../config/config";
-import { AuthButton, IconButtonStyle, MenuStyle, SmNavlink, Span, AboutDownArrow } from "./styles";
+import {
+  AuthButton,
+  IconButtonStyle,
+  MenuStyle,
+  SmNavlink,
+  Span,
+  AboutDownArrow,
+} from "./styles";
 import "./styles.scss";
 import { Nav } from "react-bootstrap";
- 
 
 const ProfileDropdown = () => {
- 
   const handleLogout = () => {
     auth.signOut();
   };
   return (
     <>
-        <div className="dropdown">
+      <div className="dropdown">
         <div className="dropbtn">
           <IconButton
             size="large"
             edge="end"
             aria-controls="profile-menu"
             aria-haspopup="true"
-            >
+          >
             <AccountCircleIcon />
+            {/* <AccountCircleIcon /> */}
           </IconButton>
         </div>
         <div className="dropdown-content">
@@ -48,10 +54,9 @@ const ProfileDropdown = () => {
 
 export default ProfileDropdown;
 
-export const ProfileDropdownSmallScreen = ({handleCloseNavMenu}) => {
+export const ProfileDropdownSmallScreen = ({ handleCloseNavMenu }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
-  
 
   const handleClick = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -61,19 +66,22 @@ export const ProfileDropdownSmallScreen = ({handleCloseNavMenu}) => {
   };
   const handleClose = () => {
     setAnchorElNav(null);
-    handleCloseNavMenu()
-    };
+    handleCloseNavMenu();
+  };
   return (
     <>
-      <IconButton
-        size="large"
-        edge="end"
-        aria-controls="profile-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-        <AccountCircleIcon />
-      </IconButton>
+      <Box>
+        <IconButton
+          size="large"
+          edge="end"
+          aria-controls="profile-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          <AccountCircleIcon />
+        </IconButton>
+        <AboutDownArrow theme="secondary" />
+      </Box>
       <MenuStyle
         id="menu-appbar"
         anchorEl={anchorElNav}
@@ -135,7 +143,7 @@ export const ProfileDropdownSmallScreen = ({handleCloseNavMenu}) => {
   );
 };
 
-export const AboutDropDown = ({handleCloseNavMenu}) => {
+export const AboutDropDown = ({ handleCloseNavMenu }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
 
@@ -143,12 +151,10 @@ export const AboutDropDown = ({handleCloseNavMenu}) => {
     setAnchorElNav(event.currentTarget);
   };
 
-
   const handleClose = () => {
-    // dispatch(handleMenu(null));
-    handleCloseNavMenu()
+    handleCloseNavMenu();
     setAnchorElNav(null);
-    };
+  };
   return (
     <>
       <div>

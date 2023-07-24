@@ -27,7 +27,7 @@ import {
 } from "../../feature/Auth/authSlice";
 import useAuthentication from "./onAuthStateChange";
 import Auth from "../../Pages/Auth/auth";
-import ProfileDropdown, { ProfileDropdownSmallScreen, AboutDropDown } from "../ProfileDropdown/profileDropdown";
+import ProfileDropdown, { ProfileDropdownSmallScreen } from "../ProfileDropdown/profileDropdown";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -146,7 +146,6 @@ const Navbar = () => {
                   >
                     About
                   </SmNavlink>
-                  <AboutDropDown handleCloseNavMenu={handleCloseNavMenu}/>
                 </AboutSpan>
 
                 <SmNavlink

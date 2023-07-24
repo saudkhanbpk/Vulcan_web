@@ -40,13 +40,14 @@ export const AuthButton = styled("button")(({ theme, signup }) => ({
 
   export const AboutDownArrow = styled('span')(({ theme }) => ({
     position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%) rotate(45deg)",
+    top: "83%",
+    transform: "translateY(-50%) ",
     width: 0,
     height: 0,
     borderLeft: "6px solid transparent",
     borderRight: "6px solid transparent",
     borderTop: `6px solid ${theme === "secondary" ? "black" : "white"}`, 
     pointerEvents: "none", 
+
   }));
   
