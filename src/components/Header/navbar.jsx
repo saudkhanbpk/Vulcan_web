@@ -143,6 +143,10 @@ const Navbar = () => {
                 <AboutSpan display={"flex"}>
                   <SmNavlink
                     variant="body2"
+                    onClick={() => {
+                      navigate("/about");
+                      handleCloseNavMenu();
+                    }}
                   >
                     About
                   </SmNavlink>
