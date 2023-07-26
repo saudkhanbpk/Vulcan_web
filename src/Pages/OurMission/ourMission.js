@@ -19,11 +19,9 @@ import image2 from "../../assets/images/onlineTeacher2.png";
 
 const OurMission = () => {
   const navigate = useNavigate();
-
   const is_small_screen_val = useMediaQuery("max-width: 390px");
   const is_small_screen = is_small_screen_val.toString();
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("xs"));
-
   return (
     <>
       <BannerContainer>
@@ -36,7 +34,6 @@ const OurMission = () => {
             subject.
           </Paragraph>
         </TextContainer>
-
         <StyledBox sx={{ flex: 1 }}>
           {isMobile ? (
             <Image src={image2} alt="Banner" />

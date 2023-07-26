@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import "./Auth.scss";
+import "./Styles/Auth.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import {
   AuthButton,
@@ -21,17 +21,14 @@ import {
   MainBox,
   ModalBackgroundBox,
   SignInTextLink,
-} from "./signUpStyles";
+} from "./Styles/signUpStyles";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  ModalTypes,
-  chooseModalLogin,
-  chooseModalResetPass,
-  chooseModalSignUp,
-  closeChooseModal,
-} from "../../feature/Auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { LoginFormBox, LoginMainBox, LoginSigUpTextLink } from "./loginStyles";
+import {
+  LoginFormBox,
+  LoginMainBox,
+  LoginSigUpTextLink,
+} from "./Styles/loginStyles";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import {
@@ -42,8 +39,16 @@ import {
   fetchSignInMethodsForEmail,
 } from "firebase/auth";
 
-import { ResetPassFormBox, ResetPassMainBox } from "./resetPassStyles";
+import { ResetPassFormBox, ResetPassMainBox } from "./Styles/resetPassStyles";
 import { mainFont } from "../../Theme/fontFamily";
+import {
+  ModalTypes,
+  chooseModalLogin,
+  chooseModalResetPass,
+  chooseModalSignUp,
+  closeChooseModal,
+} from "../../feature/Auth/authSlice";
+import { ShowErrorToast, ShowSuccessToast } from "../../components/Toast/toast";
 
 function Auth({ chooseModal }) {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
@@ -53,11 +58,26 @@ function Auth({ chooseModal }) {
   const [showRePassword, setShowRePassword] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
   const [initialClick, setInitialClick] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailExists, setEmailExists] = useState(false);
+  const [errorToast, setErrorToast] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
 
   const auth = getAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const checkEmail = async (email) => {
+    const auth = getAuth();
+
+    try {
+      const result = await fetchSignInMethodsForEmail(auth, email);
+      const exists = result.length > 0;
+
+      setValidEmail(loginFormik.errors.email ? false : true);
+      setEmailExists(exists);
+    } catch (error) {}
+  };
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -92,6 +112,7 @@ function Auth({ chooseModal }) {
   };
   const handleResetPassButtonClick = () => {
     dispatch(chooseModalResetPass());
+    setInitialClick(false);
     resetPassFormik.resetForm();
   };
 
@@ -125,17 +146,10 @@ function Auth({ chooseModal }) {
     onSubmit: async (values) => {
       try {
         const { email, password } = values;
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        await createUserWithEmailAndPassword(auth, email, password);
         navigate("/");
         handleCloseModal();
-      } catch (error) {
-        //for future testing and debuging purposes i'm leaving this as comment
-        // console.error("Signup failed:", error.message);
-      }
+      } catch (error) {}
     },
   });
 
@@ -154,16 +168,23 @@ function Auth({ chooseModal }) {
     onSubmit: async (values) => {
       try {
         const { email, password } = values;
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        await signInWithEmailAndPassword(auth, email, password);
+        ShowSuccessToast("User Logged In Sucessfully", {
+          autoClose: 3000,
+          theme: "light",
+        });
         navigate("/");
         handleCloseModal();
-      } catch (err) {
-        //for future testing and debuging purposes i'm leaving this as comment
-        // console.alert("Login Failed", err);
+      } catch (error) {
+        if (error.code === "auth/INVALID_PASSWORD") {
+          setErrorToast(
+            "Invalid password. Please check your password and try again."
+          );
+          ShowErrorToast(errorToast);
+        } else {
+          setErrorToast("Please try again later.");
+          ShowErrorToast(errorToast);
+        }
       }
     },
   });
@@ -194,21 +215,21 @@ function Auth({ chooseModal }) {
       const { email } = values;
       await sendPasswordResetEmail(auth, email)
         .then(() => {
-          console.log("Password reset email sent!");
           setShowMessage(true);
+          setEmailSent(true);
+          ShowSuccessToast("Email Sent!");
+
 
           // Set showMessage to false after 5 seconds
           setTimeout(() => {
             setShowMessage(false);
           }, 8000);
         })
-        .catch((error) => {
-          // const errorCode = error.code;
-          // const errorMessage = error.message;
-          // Handle the error
-        });
+        .catch((error) => {});
     },
   });
+
+  // ...
 
   return (
     <Box>
@@ -483,6 +504,12 @@ function Auth({ chooseModal }) {
                 pb={4}
                 color="primary"
                 sx={{ fontSize: "36px" }}
+                onClick={() =>
+                  ShowSuccessToast("User Logged In Sucessfully", {
+                    autoClose: 3000,
+                    theme: "light",
+                  })
+                }
               >
                 Log In
               </Typography>
@@ -511,6 +538,7 @@ function Auth({ chooseModal }) {
                   variant="standard"
                   type="email"
                   onChange={loginFormik.handleChange}
+                  onBlur={(e) => checkEmail(e.target.value)}
                   value={loginFormik.values.email}
                   error={
                     loginFormik.touched.email &&
@@ -588,6 +616,9 @@ function Auth({ chooseModal }) {
                     type="submit"
                     variant="contained"
                     sx={{ width: "150px" }}
+                    // disabled={
+                    //   !loginFormik.values.email || !validEmail || !emailExists
+                    // }
                   >
                     Log In
                   </Button>
@@ -661,7 +692,8 @@ function Auth({ chooseModal }) {
                   }}
                   fullWidth
                 />
-                <Box pt={2}>
+                {/* If you don't like the toast message, we will show this message instead toast  */}
+                {/* <Box pt={2}>
                   {showMessage ? (
                     <Typography
                       variant="body2"
@@ -679,7 +711,7 @@ function Auth({ chooseModal }) {
                   ) : (
                     <></>
                   )}
-                </Box>
+                </Box> */}
 
                 <Box p={2}>
                   <Box mt={3}>
@@ -689,30 +721,27 @@ function Auth({ chooseModal }) {
                       mt={4}
                       sx={{ width: "200px" }}
                       onClick={() => setInitialClick(true)}
-                      disabled={
-                        resetPassFormik.isSubmitting ||
-                        !!resetPassFormik.errors.email ||
-                        !resetPassFormik.values.email
-                      }
                     >
                       {initialClick ? "Resend Email" : "Reset Password"}
                     </Button>
                   </Box>
-                  <Typography
-                    variant="h1"
-                    color={"primary"}
-                    pt={4}
-                    onClick={handleLoginButtonClick}
-                    sx={{
-                      textDecoration: "none",
-                      fontSize: "30px",
-                      cursor: "pointer",
-                      textAlign: "center",
-                      fontFamily: `${mainFont}`,
-                    }}
-                  >
-                    Login
-                  </Typography>
+                  {emailSent ? (
+                    <Typography
+                      variant="h1"
+                      color="primary"
+                      pt={4}
+                      onClick={handleLoginButtonClick}
+                      sx={{
+                        textDecoration: "none",
+                        fontSize: "30px",
+                        cursor: "pointer",
+                        textAlign: "center",
+                        fontFamily: `${mainFont}`,
+                      }}
+                    >
+                      Login
+                    </Typography>
+                  ) : null}
                 </Box>
               </ResetPassFormBox>
             </ResetPassMainBox>

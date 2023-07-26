@@ -8,7 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import logo from "../../assets/images/Logo.png";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import {
   styles,
   MenuStyle,
@@ -16,22 +16,25 @@ import {
   NavLink,
   SmNavlink,
   AuthButton,
+  AboutSpan,
+  
 } from "./styles";
 import "./navbar.scss";
-
 import { useDispatch, useSelector } from "react-redux";
 import {
   chooseModalLogin,
   chooseModalSignUp,
 } from "../../feature/Auth/authSlice";
-import Auth from "../Auth/auth";
-import { auth } from "../../config/config";
 import useAuthentication from "./onAuthStateChange";
-// import { ResetPassword } from "../Auth/ResetPassword/resetPassword";
+import Auth from "../../Pages/Auth/auth";
+import ProfileDropdown, { ProfileDropdownSmallScreen } from "../ProfileDropdown/profileDropdown";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+
   const chooseModal = useSelector((state) => state.auth.chooseModal);
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+
 
   const { user } = useAuthentication();
 
@@ -39,29 +42,25 @@ const Navbar = () => {
     dispatch(chooseModalLogin());
     handleCloseNavMenu();
   };
-  const handleLogout = () => {
-    auth.signOut();
-  };
   const handleSignUpButtonClick = () => {
     dispatch(chooseModalSignUp());
     handleCloseNavMenu();
   };
-
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
+       setAnchorElNav(event.currentTarget) 
   };
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+    setAnchorElNav(null)
   };
   const navigateToHome = () => {
     navigate("/");
   };
-
   return (
+    
+
     <AppBar sx={styles.appBar} position="sticky">
       {<Auth chooseModal={chooseModal} />}
       <Container maxWidth="xl">
@@ -140,15 +139,18 @@ const Navbar = () => {
                 alignItems="flex-start"
                 sx={{ pl: "10px", pr: "10px" }}
               >
-                <SmNavlink
-                  onClick={() => {
-                    navigate("/about");
-                    handleCloseNavMenu();
-                  }}
-                  variant="body2"
-                >
-                  About
-                </SmNavlink>
+                {/* small screen */}
+                <AboutSpan display={"flex"}>
+                  <SmNavlink
+                    variant="body2"
+                    onClick={() => {
+                      navigate("/about");
+                      handleCloseNavMenu();
+                    }}
+                  >
+                    About
+                  </SmNavlink>
+                </AboutSpan>
 
                 <SmNavlink
                   onClick={() => {
@@ -183,9 +185,7 @@ const Navbar = () => {
               {/* Small Screen */}
               <Box display="flex" justifyContent="space-around" pt="20px">
                 {user ? (
-                  <AuthButton signup="true" onClick={handleLogout}>
-                    Logout
-                  </AuthButton>
+                  <ProfileDropdownSmallScreen handleCloseNavMenu={handleCloseNavMenu}/>
                 ) : (
                   <>
                     <AuthButton onClick={handleLoginButtonClick}>
@@ -201,6 +201,7 @@ const Navbar = () => {
             </MenuStyle>
           </Box>
           <Box sx={styles.xsMenuBox}>
+            {/* Large Screen */}
             <Span onClick={() => navigate("/about")}>
               <NavLink color="secondary">About</NavLink>
             </Span>
@@ -224,9 +225,7 @@ const Navbar = () => {
               </Span>
 
               {user ? (
-                <AuthButton signup="true" onClick={handleLogout}>
-                  Logout
-                </AuthButton>
+                <ProfileDropdown />
               ) : (
                 <>
                   <AuthButton onClick={handleLoginButtonClick}>
@@ -243,6 +242,8 @@ const Navbar = () => {
         </Toolbar>
       </Container>
     </AppBar>
+  
+
   );
 };
 

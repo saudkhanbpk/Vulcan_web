@@ -54,7 +54,7 @@ const Contact = () => {
                 style: { fontSize: 16 },
               }}
               InputProps={{
-                style: { fontSize: 18 },
+                style: { fontSize: 18, background: "transparent" },
               }}
               fullWidth
             />

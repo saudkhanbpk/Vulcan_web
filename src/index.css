@@ -12,7 +12,26 @@ body {
   margin: 0;
   padding: 0;
 }
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+
+/* Textfield autofill background color */
+.css-1x51dt5-MuiInputBase-input-MuiInput-input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+
+}
+
+.blue-toast {
+  background-color: #0000FF; /* Blue color */
+  color: #ffffff; /* Text color for the toast */
+}
+/* Override the progress bar color */
+.Toastify__progress-bar {
+  background: #0000FF !important;
+}
+
+/* Override the tick color */
+.Toastify__progress-bar--success {
+  background: #0000FF !important;
+}
+.css-1pux6rn-MuiButtonBase-root-MuiIconButton-root{
+  margin-right:none !important;
 }

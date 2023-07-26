@@ -13,7 +13,7 @@ import {
 import Grid from "@mui/material/Unstable_Grid2";
 import { styles } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
-import { ModalBackgroundBox } from "../Contact/styles";
+import { ModalBackgroundBox } from "../../Pages/Contact/styles";
 import { FeatureFlags } from "../../contexts/FeatureFlags";
 
 const Footer = () => {

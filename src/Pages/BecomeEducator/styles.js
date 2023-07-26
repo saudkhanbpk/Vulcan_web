@@ -20,7 +20,6 @@ export const styles = {
     marginTop: "30px",
   },
   textCapitalize: { textTransform: "capitalize" },
-
   // Section 2 style
   Sec2Box: { pt: "60px", pb: "0px" },
   Sec2Typo: {
@@ -31,7 +30,6 @@ export const styles = {
     fontWeight: 700,
     textAlign: "start",
   },
-
   subGridImgBox: { width: "150px", height: "150px", marginTop: "0px" },
   subgridTypoHeading: {
     fontSize: "32px",

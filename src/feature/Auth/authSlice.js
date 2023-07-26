@@ -39,6 +39,7 @@ export const {
   chooseModalSignUp,
   closeChooseModal,
   chooseModalResetPass,
+  handleMenu
 } = counterSlice.actions;
 
 export default counterSlice.reducer;
