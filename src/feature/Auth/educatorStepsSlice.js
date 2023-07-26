@@ -22,32 +22,32 @@ export const educatorStepsSlice = createSlice({
       }
     },
     eduRegSteps: (state, action) => {
-        if (action.payload.step === "1") {
-          return {
-            ...state,
-            stepOneData: state.stepOneData.includes(action.payload.optionValue)
-              ? state.stepOneData.filter(
-                  (value) => value !== action.payload.optionValue
-                )
-              : [...state.stepOneData, action.payload.optionValue],
-          };
-        }
-        if (action.payload.step === "2") {
-          return {
-            ...state,
-            stepTwoData: state.stepTwoData.includes(action.payload.optionValue)
-              ? state.stepTwoData.filter(
-                  (value) => value !== action.payload.optionValue
-                )
-              : [...state.stepTwoData, action.payload.optionValue],
-          };
-        }
-        return state;
-      },
+      if (action.payload.step === "1") {
+        return {
+          ...state,
+          stepOneData: state.stepOneData.includes(action.payload.optionValue)
+            ? state.stepOneData.filter(
+                (value) => value !== action.payload.optionValue
+              )
+            : [...state.stepOneData, action.payload.optionValue],
+        };
+      }
+      if (action.payload.step === "2") {
+        return {
+          ...state,
+          stepTwoData: state.stepTwoData.includes(action.payload.optionValue)
+            ? state.stepTwoData.filter(
+                (value) => value !== action.payload.optionValue
+              )
+            : [...state.stepTwoData, action.payload.optionValue],
+        };
+      }
+      return state;
+    },
   },
 });
 
-  
-  export const { incrementSteps, decrementSteps, eduRegSteps,} = educatorStepsSlice.actions;
+export const { incrementSteps, decrementSteps, eduRegSteps } =
+  educatorStepsSlice.actions;
 
 export default educatorStepsSlice.reducer;
