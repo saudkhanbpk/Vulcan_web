@@ -32,3 +32,6 @@ body {
 .Toastify__progress-bar--success {
   background: #0000FF !important;
 }
+.css-1pux6rn-MuiButtonBase-root-MuiIconButton-root{
+  margin-right:none !important;
+}
