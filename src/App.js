@@ -6,7 +6,6 @@ import ScrollToTop from "./Scroll/scrollToTop";
 import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
-  console.log('App .js')
   return (
     <>
       <BrowserRouter>
