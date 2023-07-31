@@ -7,16 +7,22 @@ const useAuthentication = () => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      localStorage.setItem("userDetail",JSON.stringify(user))
-      setUser(user);
-      setLoading(false);
+      if (user) {
+        setUser(user);
+        setLoading(false);
+      } else {
+        setUser(null);
+        setLoading(false);
+      }
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [user]);
 
-  return { user, loading };
+  return {
+    user,
+    loading,
+  };
 };
 
 export default useAuthentication;
-

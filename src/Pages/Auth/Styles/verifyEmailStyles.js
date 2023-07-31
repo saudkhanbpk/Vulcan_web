@@ -1,6 +1,6 @@
 import { Box, styled } from "@mui/material";
 
-export const ResetPassMainBox = styled(Box)(({ theme }) => ({
+export const VerifyEmailMainBox = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -14,7 +14,7 @@ export const ResetPassMainBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {},
 }));
 
-export const ResetPassFormBox = styled(Box)(({ theme }) => ({
+export const VerifyEmailFormBox = styled(Box)(({ theme }) => ({
   width: "100%",
   height: "auto",
   display: "flex",
