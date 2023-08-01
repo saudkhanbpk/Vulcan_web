@@ -4,14 +4,19 @@ export const ModalTypes = {
   LOGIN: "login",
   SIGNUP: "signup",
   RESET_PASSWORD: "resetPassword",
+  EMAIL_VERIFICATION: "emailVerification",
 };
 
 const initialState = {
   isOpenModal: false,
   chooseModal: null,
+  isEmailVerified: false,
+  isVerifyingEmail: false,
+  verificationError: null,
+  selectIsEmailVerified: false,
 };
 
-export const counterSlice = createSlice({
+export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
@@ -27,19 +32,23 @@ export const counterSlice = createSlice({
       state.chooseModal = ModalTypes.RESET_PASSWORD;
       state.isOpenModal = true;
     },
+    chooseModalEmailVerify: (state) => {
+      state.chooseModal = ModalTypes.EMAIL_VERIFICATION;
+      state.isOpenModal = true;
+    },
     closeChooseModal: (state) => {
       state.chooseModal = null;
       state.isOpenModal = false;
     },
-  },
+},
 });
 
 export const {
   chooseModalLogin,
   chooseModalSignUp,
-  closeChooseModal,
   chooseModalResetPass,
-  handleMenu
-} = counterSlice.actions;
+  chooseModalEmailVerify,
+  closeChooseModal,
+} = authSlice.actions;
 
-export default counterSlice.reducer;
+export default authSlice.reducer;

@@ -1,15 +1,18 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.scss";
 import Router from "./Router/router";
 import { BrowserRouter } from "react-router-dom";
 import ScrollToTop from "./Scroll/scrollToTop";
+import { AuthProvider } from "./contexts/AuthContext";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.scss";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-          <ScrollToTop />
-          <Router />
+        <AuthProvider>
+          <ScrollToTop/>
+          <Router/>
+        </AuthProvider>
       </BrowserRouter>
     </>
   );

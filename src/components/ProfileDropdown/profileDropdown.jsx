@@ -63,6 +63,7 @@ export const ProfileDropdownSmallScreen = ({ handleCloseNavMenu }) => {
   };
   const handleLogout = () => {
     auth.signOut();
+    
   };
   const handleClose = () => {
     setAnchorElNav(null);
