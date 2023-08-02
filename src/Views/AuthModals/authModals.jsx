@@ -5,7 +5,7 @@ import "./authModals.scss";
 
 import { useSelector } from "react-redux";
 
-import { ModalTypes } from "../../Infrastructure/authSlice";
+import { ModalTypes } from "../../Infrastructure/States/authModalsSlice";
 
 import { VerifyEmail } from "../Common/AuthModals/VerifyEmail/verifyEmail";
 import { ResetPassword } from "../Common/AuthModals/ResetPassword/resetPassword";

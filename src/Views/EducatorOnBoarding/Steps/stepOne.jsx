@@ -9,7 +9,7 @@ import {
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { useDispatch, useSelector } from "react-redux";
-import { eduRegSteps } from "../../../Infrastructure/educatorStepsSlice";
+import { eduRegSteps } from "../../../Infrastructure/States/educatorStepsSlice";
 
 function StepOne() {
   const step1Data = useSelector((state) => state.educatorSteps.stepOneData);

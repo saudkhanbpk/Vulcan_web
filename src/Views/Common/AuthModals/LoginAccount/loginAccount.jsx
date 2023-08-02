@@ -23,7 +23,7 @@ import {
   chooseModalResetPass,
   chooseModalSignUp,
   closeChooseModal,
-} from "../../../../Infrastructure/authSlice";
+} from "../../../../Infrastructure/States/authModalsSlice";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
@@ -32,7 +32,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { ShowErrorToast, ShowSuccessToast } from "../../Toast/toast";
-import { useAuthValue } from "../../../../Infrastructure/authContext";
+import { useAuthValue } from "../../../../Infrastructure/States/authContext";
 
 export const LoginAccount = () => {
 

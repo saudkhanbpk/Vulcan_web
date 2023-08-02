@@ -19,7 +19,7 @@ import ProgressBar from "./progressbar";
 import {
   incrementSteps,
   decrementSteps,
-} from "../../Infrastructure/educatorStepsSlice";
+} from "../../Infrastructure/States/educatorStepsSlice";
 
 const EducatorAccountMainPage = () => {
   const navigate = useNavigate();

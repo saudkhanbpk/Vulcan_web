@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { auth } from './config';
+import { auth } from '../config';
 
 const AuthContext = React.createContext();
 

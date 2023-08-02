@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { VerifyEmailFormBox, VerifyEmailMainBox } from "./verifyEmailStyles";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
-import { closeChooseModal } from "../../../../Infrastructure/authSlice";
-import { useAuthValue } from "../../../../Infrastructure/authContext";
+import { closeChooseModal } from "../../../../Infrastructure/States/authModalsSlice";
+import { useAuthValue } from "../../../../Infrastructure/States/authContext";
 import { getAuth, sendEmailVerification } from "firebase/auth";
 export const VerifyEmail = () => {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
@@ -40,9 +40,6 @@ export const VerifyEmail = () => {
         .then(() => {
           if (currentUser?.emailVerified) {
             clearInterval(interval);
-            setTimeout(() => {
-              handleCloseModal();
-            }, 8000);
           }
         })
         .catch((err) => {

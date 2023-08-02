@@ -24,8 +24,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   chooseModalLogin,
   chooseModalSignUp,
-} from "../../../Infrastructure/authSlice";
-import useAuthentication from "../../../Infrastructure/onAuthStateChange";
+} from "../../../Infrastructure/States/authModalsSlice";
+import useAuthentication from "../../../Infrastructure/States/onAuthStateChange";
 import ProfileDropdown, { ProfileDropdownSmallScreen } from "../ProfileDropdown/profileDropdown";
 import AuthModals from "../../AuthModals/authModals";
 
