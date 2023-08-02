@@ -8,7 +8,7 @@ import LearnerFaq from "../../Views/Faq/learnerFaq";
 import Privacy from "../../Views/Privacy/privacy";
 import Policies from "../../Views//Policies/policies";
 import Contact from "../../Views//Contact/contact";
-import EducatorAccountMainPage from "../../Views/Common/Auth/EducatorAccountMainPage/educatorAccountMainPage";
+import EducatorAccountMainPage from "../../Views/EducatorOnBoarding/EducatorAccountMainPage/educatorAccountMainPage";
 import Navbar from "../../Views/Common/Header/navbar";
 import Footer from "../../Views/Common/Footer/footer";
 import { FeatureFlags } from "../../Infrastructure/featureFlags";
