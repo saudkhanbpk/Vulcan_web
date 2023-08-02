@@ -4,9 +4,9 @@ import "./index.css";
 import App from "./App";
 import { ThemeProvider } from "@mui/material";
 import theme from "./Infrastructure/Theme/themes.jsx";
-import { store } from "./Infrastructure/App/store";
+import { store } from "./Infrastructure/store";
 import { Provider } from "react-redux";
-import { FeatureFlagsProvider } from "./Infrastructure/Contexts/FeatureFlags";
+import { FeatureFlagsProvider } from "./Infrastructure/featureFlags";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

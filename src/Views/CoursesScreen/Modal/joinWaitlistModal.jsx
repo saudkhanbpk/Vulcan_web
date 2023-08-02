@@ -8,7 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styles } from "./styles";
 
-const ModalComponent = ({ open, setOpen, coursesModal }) => {
+const EmailModal = ({ open, setOpen, coursesModal }) => {
   const handleClose = () => setOpen(false);
 
   return (
@@ -102,4 +102,4 @@ const ModalComponent = ({ open, setOpen, coursesModal }) => {
   );
 };
 
-export default ModalComponent;
+export default EmailModal;

@@ -2,7 +2,7 @@ import React from "react";
 import { IconButton, Box } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../../../Infrastructure/Config/config";
+import { auth } from "../../../Infrastructure/config";
 import {
   AuthButton,
   IconButtonStyle,

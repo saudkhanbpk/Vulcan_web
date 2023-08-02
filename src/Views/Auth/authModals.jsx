@@ -1,19 +1,19 @@
 import React from "react";
 import { Box } from "@mui/material";
 
-import "./Styles/Auth.scss";
+import "./authModals.scss";
 
 import { useSelector } from "react-redux";
 
-import { ModalTypes } from "../../Infrastructure/Feature/Auth/authSlice";
+import { ModalTypes } from "../../Infrastructure/authSlice";
 
-import { VerifyEmail } from "../Common/Modals/VerifyEmail/verifyEmail";
-import { ResetPassword } from "../Common/Modals/ResetPassword/resetPassword";
-import { CreateAccount } from "../Common/Modals/CreateAccount/createAccount";
-import { LoginAccount } from "../Common/Modals/LoginAccount/loginAccount";
-import { ModalBackgroundBox } from "./Styles/authStyles";
+import { VerifyEmail } from "../Common/AuthModals/VerifyEmail/verifyEmail";
+import { ResetPassword } from "../Common/AuthModals/ResetPassword/resetPassword";
+import { CreateAccount } from "../Common/AuthModals/CreateAccount/createAccount";
+import { LoginAccount } from "../Common/AuthModals/LoginAccount/loginAccount";
+import { ModalBackgroundBox } from "./authModalsStyles";
 
-function Auth({ chooseModal }) {
+function AuthModals({ chooseModal }) {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
 
   return (
@@ -49,4 +49,4 @@ function Auth({ chooseModal }) {
   </>
   );
 }
-export default Auth;
+export default AuthModals;

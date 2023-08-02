@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
-import ScrollToTop from "./Infrastructure/Scroll/scrollToTop";
-import { AuthProvider } from "./Infrastructure/Contexts/AuthContext";
+import ScrollToTop from "./Infrastructure/scrollToTop";
+import { AuthProvider } from "./Infrastructure/authContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 import Router from "./Infrastructure/Router/router";

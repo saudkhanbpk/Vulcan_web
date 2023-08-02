@@ -14,7 +14,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { styles } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 import { ModalBackgroundBox } from "../../Contact/styles";
-import { FeatureFlags } from "../../../Infrastructure/Contexts/FeatureFlags";
+import { FeatureFlags } from "../../../Infrastructure/featureFlags";
 
 const Footer = () => {
   const navigate = useNavigate();

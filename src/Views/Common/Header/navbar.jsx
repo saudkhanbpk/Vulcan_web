@@ -24,10 +24,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   chooseModalLogin,
   chooseModalSignUp,
-} from "../../../Infrastructure/Feature/Auth/authSlice";
-import useAuthentication from "./onAuthStateChange";
-import Auth from "../../Auth/auth";
+} from "../../../Infrastructure/authSlice";
+import useAuthentication from "../../../Infrastructure/onAuthStateChange";
 import ProfileDropdown, { ProfileDropdownSmallScreen } from "../ProfileDropdown/profileDropdown";
+import AuthModals from "../../Auth/authModals";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ const Navbar = () => {
     
 
     <AppBar sx={styles.appBar} position="sticky">
-      {<Auth chooseModal={chooseModal} />}
+      {<AuthModals chooseModal={chooseModal} />}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={styles.logo} onClick={navigateToHome} curser="pointer">

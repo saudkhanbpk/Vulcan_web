@@ -3,8 +3,8 @@ import "./coursesSoon.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { Typography, useMediaQuery, useTheme } from "@mui/material";
-import ModalComponent from "../../Views/Common/CoursesScreen/Modal/modalComponent";
 import { styles } from "./styles";
+import EmailModal from "../CoursesScreen/Modal/joinWaitlistModal";
 
 const CoursesSoon = () => {
   const [open, setOpen] = useState(false);
@@ -17,7 +17,7 @@ const CoursesSoon = () => {
 
   return (
     <>
-      <ModalComponent open={open} setOpen={setOpen} coursesModal={true} />
+      <EmailModal open={open} setOpen={setOpen} coursesModal={true} />
 
       <div className="container-fluid">
         <div className="row">

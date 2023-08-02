@@ -1,4 +1,4 @@
-import { mainFont } from "../../../../Infrastructure/Theme/fontFamily";
+import { mainFont } from "../../../Infrastructure/Theme/fontFamily";
 
 export const styles = {
   typoHeading: {

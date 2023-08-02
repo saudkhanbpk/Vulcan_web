@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === "production") {
     storageBucket: process.env.REACT_APP_FIREBASE_DEV_STORAGE_BUCKET,
     messagingSenderId: process.env.REACT_APP_FIREBASE_DEV_MESSAGING_SENDER_ID,
     appId: process.env.REACT_APP_FIREBASE_DEV_APP_ID,
-    measurementId: process.env.REACT_APP_FIREBASE_DEV_MEASUREMENT_ID,    
+    measurementId: process.env.REACT_APP_FIREBASE_DEV_MEASUREMENT_ID,
   };
 }
 export const app = initializeApp(firebaseConfig);

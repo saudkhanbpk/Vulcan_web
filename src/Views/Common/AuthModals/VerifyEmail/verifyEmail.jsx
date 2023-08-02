@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { VerifyEmailFormBox, VerifyEmailMainBox } from "./verifyEmailStyles";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
-import { closeChooseModal } from "../../../../Infrastructure/Feature/Auth/authSlice";
-import { useAuthValue } from "../../../../Infrastructure/Contexts/AuthContext";
+import { closeChooseModal } from "../../../../Infrastructure/authSlice";
+import { useAuthValue } from "../../../../Infrastructure/authContext";
 import { getAuth, sendEmailVerification } from "firebase/auth";
 export const VerifyEmail = () => {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);

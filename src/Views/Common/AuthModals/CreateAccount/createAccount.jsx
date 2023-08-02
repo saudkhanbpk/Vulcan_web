@@ -19,7 +19,7 @@ import {
   chooseModalEmailVerify,
   chooseModalLogin,
   closeChooseModal,
-} from "../../../../Infrastructure/Feature/Auth/authSlice";
+} from "../../../../Infrastructure/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   AuthButton,
@@ -34,7 +34,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { useNavigate } from "react-router-dom";
-import { useAuthValue } from "../../../../Infrastructure/Contexts/AuthContext";
+import { useAuthValue } from "../../../../Infrastructure/authContext";
 
 export const CreateAccount = () => {
   const auth = getAuth();

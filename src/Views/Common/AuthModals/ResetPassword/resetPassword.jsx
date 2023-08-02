@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   chooseModalLogin,
   closeChooseModal,
-} from "../../../../Infrastructure/Feature/Auth/authSlice";
+} from "../../../../Infrastructure/authSlice";
 import { useFormik } from "formik";
 import {
   fetchSignInMethodsForEmail,

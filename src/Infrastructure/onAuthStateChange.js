@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { auth } from "../../../Infrastructure/Config/config";
+import { auth } from "./config";
 
 const useAuthentication = () => {
   const [user, setUser] = useState(null);

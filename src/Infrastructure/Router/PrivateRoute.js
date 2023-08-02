@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { chooseModalLogin } from "../Feature/Auth/authSlice";
-import useAuthentication from "../../Views/Common/Header/onAuthStateChange";
+import { chooseModalLogin } from "../authSlice";
+import useAuthentication from "../onAuthStateChange";
 import { Box, CircularProgress } from "@mui/material";
 
 export const PrivateOutlet = (props) => {

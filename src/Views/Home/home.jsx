@@ -1,6 +1,6 @@
 import React from "react";
 import "./home.scss";
-import WelcomeBox from "../Common/WelcomeBox/welcomeBox";
+import WelcomeBox from "./WelcomeBox/welcomeBox";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { styles } from "./styles";
 import Grid from "@mui/material/Unstable_Grid2";
