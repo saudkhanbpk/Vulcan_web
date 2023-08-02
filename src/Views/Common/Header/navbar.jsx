@@ -27,7 +27,7 @@ import {
 } from "../../../Infrastructure/authSlice";
 import useAuthentication from "../../../Infrastructure/onAuthStateChange";
 import ProfileDropdown, { ProfileDropdownSmallScreen } from "../ProfileDropdown/profileDropdown";
-import AuthModals from "../../Auth/authModals";
+import AuthModals from "../../AuthModals/authModals";
 
 const Navbar = () => {
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { specialFont } from "../../../Infrastructure/Theme/fontFamily";
+import { specialFont } from "../../Infrastructure/Theme/fontFamily";
 import { Box, Button, Typography } from "@mui/material";
 
 export const Span = styled("span")(({ theme }) => ({
