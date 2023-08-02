@@ -1,6 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { chooseModalLogin } from "../States/authModalsSlice";
+import {
+  chooseModalEmailVerify,
+  chooseModalLogin,
+} from "../States/authModalsSlice";
 import useAuthentication from "../States/onAuthStateChange";
 import { Box, CircularProgress } from "@mui/material";
 
@@ -27,6 +30,8 @@ export const PrivateOutlet = (props) => {
   if (!user) {
     dispatch(chooseModalLogin());
     return <Navigate to="/" />;
+  } else if (!user?.emailVerified) {
+    dispatch(chooseModalEmailVerify());
   } else {
     return (
       <>

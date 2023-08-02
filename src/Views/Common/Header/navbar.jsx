@@ -8,7 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import logo from "../../../Assets/Images/Logo.png";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   styles,
   MenuStyle,
@@ -17,7 +17,6 @@ import {
   SmNavlink,
   AuthButton,
   AboutSpan,
-  
 } from "./styles";
 import "./navbar.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +25,9 @@ import {
   chooseModalSignUp,
 } from "../../../Infrastructure/States/authModalsSlice";
 import useAuthentication from "../../../Infrastructure/States/onAuthStateChange";
-import ProfileDropdown, { ProfileDropdownSmallScreen } from "../ProfileDropdown/profileDropdown";
+import ProfileDropdown, {
+  ProfileDropdownSmallScreen,
+} from "../ProfileDropdown/profileDropdown";
 import AuthModals from "../../AuthModals/authModals";
 
 const Navbar = () => {
@@ -34,7 +35,6 @@ const Navbar = () => {
 
   const chooseModal = useSelector((state) => state.auth.chooseModal);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-
 
   const { user } = useAuthentication();
 
@@ -49,18 +49,16 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
-       setAnchorElNav(event.currentTarget) 
+    setAnchorElNav(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
+    setAnchorElNav(null);
   };
   const navigateToHome = () => {
     navigate("/");
   };
   return (
-    
-
     <AppBar sx={styles.appBar} position="sticky">
       {<AuthModals chooseModal={chooseModal} />}
       <Container maxWidth="xl">
@@ -185,7 +183,9 @@ const Navbar = () => {
               {/* Small Screen */}
               <Box display="flex" justifyContent="space-around" pt="20px">
                 {user ? (
-                  <ProfileDropdownSmallScreen handleCloseNavMenu={handleCloseNavMenu}/>
+                  <ProfileDropdownSmallScreen
+                    handleCloseNavMenu={handleCloseNavMenu}
+                  />
                 ) : (
                   <>
                     <AuthButton onClick={handleLoginButtonClick}>
@@ -242,8 +242,6 @@ const Navbar = () => {
         </Toolbar>
       </Container>
     </AppBar>
-  
-
   );
 };
 

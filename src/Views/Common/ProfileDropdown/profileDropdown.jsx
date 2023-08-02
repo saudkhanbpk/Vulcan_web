@@ -13,10 +13,42 @@ import {
 } from "./styles";
 import "./styles.scss";
 import { Nav } from "react-bootstrap";
+import useAuthentication from "../../../Infrastructure/States/onAuthStateChange";
+import { useDispatch } from "react-redux";
+import {
+  chooseModalEmailVerify,
+  chooseModalLogin,
+} from "../../../Infrastructure/States/authModalsSlice";
 
 const ProfileDropdown = () => {
+  const dispatch = useDispatch();
+  const { user } = useAuthentication();
+
   const handleLogout = () => {
     auth.signOut();
+  };
+
+  const handleDashboardClick = async () => {
+    if (user) {
+      if (!user?.emailVerified) {
+        dispatch(chooseModalEmailVerify());
+      } else {
+        window.location.href = "/dashboard";
+      }
+    } else {
+      dispatch(chooseModalLogin());
+    }
+  };
+  const handleProfileClick = async () => {
+    if (user) {
+      if (!user?.emailVerified) {
+        dispatch(chooseModalEmailVerify());
+      } else {
+        window.location.href = "/profile";
+      }
+    } else {
+      dispatch(chooseModalLogin());
+    }
   };
   return (
     <>
@@ -34,10 +66,18 @@ const ProfileDropdown = () => {
         </div>
         <div className="dropdown-content">
           <Nav className="flex-column">
-            <Nav.Link as={Link} to="/dashboard" className="menuitems">
+            <Nav.Link
+              as={Link}
+              onClick={handleDashboardClick}
+              className="menuitems"
+            >
               Dashboard
             </Nav.Link>
-            <Nav.Link as={Link} to="/profile" className="menuitems">
+            <Nav.Link
+              as={Link}
+              onClick={handleProfileClick}
+              className="menuitems"
+            >
               Profile
             </Nav.Link>
           </Nav>
@@ -63,7 +103,6 @@ export const ProfileDropdownSmallScreen = ({ handleCloseNavMenu }) => {
   };
   const handleLogout = () => {
     auth.signOut();
-    
   };
   const handleClose = () => {
     setAnchorElNav(null);
