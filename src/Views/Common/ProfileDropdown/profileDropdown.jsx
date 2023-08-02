@@ -33,6 +33,7 @@ const ProfileDropdown = () => {
       if (!user?.emailVerified) {
         dispatch(chooseModalEmailVerify());
       } else {
+        
         window.location.href = "/dashboard";
       }
     } else {

@@ -1,22 +1,26 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { VerifyEmailFormBox, VerifyEmailMainBox } from "./verifyEmailStyles";
+import { VerifyEmailFormBox, VerifyEmailMainBox, customStyles } from "./verifyEmailStyles";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { closeChooseModal } from "../../../../Infrastructure/States/authModalsSlice";
 import { useAuthValue } from "../../../../Infrastructure/States/authContext";
 import { getAuth, sendEmailVerification } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 export const VerifyEmail = () => {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
   const [time, setTime] = useState(60);
 
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
   const handleCloseModal = () => {
     dispatch(closeChooseModal());
   };
   const handleVerifiedEmailAction = () => {
-    handleCloseModal();  
+    handleCloseModal();
+    navigate('/dashboard')
+    
   };
   const resendEmailVerification = () => {
     sendEmailVerification(auth.currentUser)
@@ -62,15 +66,7 @@ export const VerifyEmail = () => {
     return () => clearInterval(interval);
   }, [timeActive, time, setTimeActive]);
 
-  const customStyles = {
-    backdrop: {
-      backgroundColor: 'transparent', 
-    },
-  modal:{
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }}
+  
   return (
     <Box>
       {/* Email Verification Modal */}
@@ -115,6 +111,7 @@ export const VerifyEmail = () => {
               alignItems={"center"}
             >
               <Box pt={2} pb={2}>
+
                 {/* Display email verification status */}
                 {currentUser?.emailVerified ? (
                   <Typography

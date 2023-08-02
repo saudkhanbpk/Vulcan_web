@@ -1,5 +1,15 @@
 import { Box, styled } from "@mui/material";
 
+export const customStyles = {
+  backdrop: {
+    backgroundColor: 'transparent', 
+  },
+modal:{
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}}
+
 export const VerifyEmailMainBox = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
