@@ -12,7 +12,7 @@ const ErrorContainer = styled(Container)(({ theme }) => ({
 }));
 
 const ErrorCode = styled(Typography)(({ theme }) => ({
-  fontSize: "8rem",
+  fontSize: "6rem",
   color: "#0000FF",
 }));
 

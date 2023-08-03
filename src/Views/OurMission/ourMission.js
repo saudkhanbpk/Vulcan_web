@@ -1,5 +1,5 @@
 import React from "react";
-import "./ourMission.scss";
+import "./ourMission.css";
 import bringIm from "../../Assets/Images/bringimg.png";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";

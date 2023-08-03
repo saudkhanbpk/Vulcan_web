@@ -18,7 +18,7 @@ import {
   AuthButton,
   AboutSpan,
 } from "./styles";
-import "./navbar.scss";
+import "./navbar.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   chooseModalLogin,

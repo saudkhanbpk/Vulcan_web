@@ -1,6 +1,10 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { VerifyEmailFormBox, VerifyEmailMainBox, customStyles } from "./verifyEmailStyles";
+import {
+  VerifyEmailFormBox,
+  VerifyEmailMainBox,
+  customStyles,
+} from "./verifyEmailStyles";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { closeChooseModal } from "../../../../Infrastructure/States/authModalsSlice";
@@ -12,15 +16,17 @@ export const VerifyEmail = () => {
   const [time, setTime] = useState(60);
 
   const dispatch = useDispatch();
-
+  const selectedRoute = useSelector(
+    (state) => state.auth.selectedRouteBeforeVerified
+  );
   const navigate = useNavigate();
   const handleCloseModal = () => {
     dispatch(closeChooseModal());
   };
+ 
   const handleVerifiedEmailAction = () => {
     handleCloseModal();
-    navigate('/dashboard')
-    
+    navigate("/dashboard");
   };
   const resendEmailVerification = () => {
     sendEmailVerification(auth.currentUser)
@@ -43,6 +49,7 @@ export const VerifyEmail = () => {
         ?.reload()
         .then(() => {
           if (currentUser?.emailVerified) {
+            selectedRoute && navigate(selectedRoute);
             clearInterval(interval);
           }
         })
@@ -50,7 +57,11 @@ export const VerifyEmail = () => {
           alert(err.message);
         });
     }, 1000);
-  }, [currentUser]);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [currentUser, selectedRoute, navigate]);
 
   useEffect(() => {
     let interval = null;
@@ -66,7 +77,6 @@ export const VerifyEmail = () => {
     return () => clearInterval(interval);
   }, [timeActive, time, setTimeActive]);
 
-  
   return (
     <Box>
       {/* Email Verification Modal */}
@@ -111,7 +121,6 @@ export const VerifyEmail = () => {
               alignItems={"center"}
             >
               <Box pt={2} pb={2}>
-
                 {/* Display email verification status */}
                 {currentUser?.emailVerified ? (
                   <Typography

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
 
-import "./authModals.scss";
+import "./authModals.css";
 
 import { useSelector } from "react-redux";
 

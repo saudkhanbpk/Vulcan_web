@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./welcomeBox.scss";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";

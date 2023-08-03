@@ -14,6 +14,7 @@ const initialState = {
   isVerifyingEmail: false,
   verificationError: null,
   selectIsEmailVerified: false,
+  selectedRouteBeforeVerified:''
 };
 
 export const authSlice = createSlice({
@@ -40,6 +41,9 @@ export const authSlice = createSlice({
       state.chooseModal = null;
       state.isOpenModal = false;
     },
+    setSelectedRoute: (state,action) => {
+      state.selectedRouteBeforeVerified = action.payload;
+    },
 },
 });
 
@@ -49,6 +53,7 @@ export const {
   chooseModalResetPass,
   chooseModalEmailVerify,
   closeChooseModal,
+  setSelectedRoute
 } = authSlice.actions;
 
 export default authSlice.reducer;

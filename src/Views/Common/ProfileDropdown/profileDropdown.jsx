@@ -11,12 +11,14 @@ import {
   Span,
   AboutDownArrow,
 } from "./styles";
-import "./styles.scss";
+import "./styles.css";
 import { Nav } from "react-bootstrap";
 
 const ProfileDropdown = () => {
+  const navigate = useNavigate();
   const handleLogout = () => {
     auth.signOut();
+    navigate('/');
   };
   
   return (
@@ -63,6 +65,7 @@ export const ProfileDropdownSmallScreen = ({ handleCloseNavMenu }) => {
   };
   const handleLogout = () => {
     auth.signOut();
+    navigate('/')
     
   };
   const handleClose = () => {

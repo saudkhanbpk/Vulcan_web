@@ -1,5 +1,5 @@
 import React from "react";
-import "./modal.scss";
+import "./modal.css";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { TextField, Typography } from "@mui/material";
