@@ -14,19 +14,18 @@
   margin-right: 40px;
   width: 500px;
   height: 500px;
-  .coming-soon h4 {
-    font-family: "Inter";
-    margin-top: 50px;
-    font-weight: 700;
-    text-align: center;
-  }
-  .coming-soon p {
-    margin-top: 50px;
-
-    text-align: center;
-  }
 }
+.coming-soon h4 {
+  font-family: "Inter";
+  margin-top: 50px;
+  font-weight: 700;
+  text-align: center;
+}
+.coming-soon p {
+  margin-top: 50px;
 
+  text-align: center;
+}
 .css-1jwukhy {
   background: white;
   top: 441px !important;
@@ -59,7 +58,7 @@
     align-items: center;
   }
   .courses-bg-img2 {
-  background-image: url("../../../Assets/Images/coursesBgImage.png");
+    background-image: url("../../../Assets/Images/coursesBgImage.png");
 
     height: 400px;
     width: 100%;

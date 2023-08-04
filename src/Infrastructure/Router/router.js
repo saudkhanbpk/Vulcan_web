@@ -17,7 +17,8 @@ import CoursesSoon from "../../Views/CoursesPage/coursesSoon";
 import HomeScreen from "../../Views/Home/home";
 import { Dashboard } from "../../Views/Dashboard/dashboard.jsx";
 import { Profile } from "../../Views/Profile/profile";
-import { PrivateOutlet } from "./PrivateRoute";
+import { PrivateOutlet } from "./privateRoute";
+import Error404 from "../../Views/Common/Error404/error404";
 
 const Router = () => {
   const location = useLocation();
@@ -52,10 +53,13 @@ const Router = () => {
           path="/educator-account"
           element={<EducatorAccountMainPage />}
         />
+
         <Route element={<PrivateOutlet />}>
           <Route path={"/dashboard"} element={<Dashboard />} />
           <Route path={"/profile"} element={<Profile />} />
         </Route>
+
+        <Route path="*" element={<Error404 />} />
       </Routes>
       {location.pathname !== "/educator-account" ? <Footer /> : ""}
     </div>

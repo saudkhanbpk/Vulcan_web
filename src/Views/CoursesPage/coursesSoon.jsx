@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./coursesSoon.scss";
+import "./coursesSoon.css";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { Typography, useMediaQuery, useTheme } from "@mui/material";

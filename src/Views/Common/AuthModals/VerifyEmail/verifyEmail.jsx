@@ -1,22 +1,32 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { VerifyEmailFormBox, VerifyEmailMainBox } from "./verifyEmailStyles";
+import {
+  VerifyEmailFormBox,
+  VerifyEmailMainBox,
+  customStyles,
+} from "./verifyEmailStyles";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { closeChooseModal } from "../../../../Infrastructure/States/authModalsSlice";
 import { useAuthValue } from "../../../../Infrastructure/States/authContext";
 import { getAuth, sendEmailVerification } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 export const VerifyEmail = () => {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
   const [time, setTime] = useState(60);
 
   const dispatch = useDispatch();
-
+  const selectedRoute = useSelector(
+    (state) => state.auth.selectedRouteBeforeVerified
+  );
+  const navigate = useNavigate();
   const handleCloseModal = () => {
     dispatch(closeChooseModal());
   };
+ 
   const handleVerifiedEmailAction = () => {
-    handleCloseModal();  
+    handleCloseModal();
+    navigate("/dashboard");
   };
   const resendEmailVerification = () => {
     sendEmailVerification(auth.currentUser)
@@ -32,13 +42,15 @@ export const VerifyEmail = () => {
   const auth = getAuth();
   const user = auth.currentUser;
 
-  const userEmailAddress = user?.email || "test1@vulcanlearninginstitute.com";
+  const userEmailAddress = user?.email;
+  
   useEffect(() => {
     const interval = setInterval(() => {
       currentUser
         ?.reload()
         .then(() => {
           if (currentUser?.emailVerified) {
+            selectedRoute && navigate(selectedRoute);
             clearInterval(interval);
           }
         })
@@ -46,7 +58,11 @@ export const VerifyEmail = () => {
           alert(err.message);
         });
     }, 1000);
-  }, [currentUser]);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [currentUser, selectedRoute, navigate]);
 
   useEffect(() => {
     let interval = null;
@@ -62,15 +78,6 @@ export const VerifyEmail = () => {
     return () => clearInterval(interval);
   }, [timeActive, time, setTimeActive]);
 
-  const customStyles = {
-    backdrop: {
-      backgroundColor: 'transparent', 
-    },
-  modal:{
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }}
   return (
     <Box>
       {/* Email Verification Modal */}

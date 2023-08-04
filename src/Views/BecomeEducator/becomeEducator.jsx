@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import "./becomeEducator.scss";
+import "./becomeEducator.css";
 import { Box } from "@mui/system";
 import { Button, Typography, useMediaQuery, useTheme } from "@mui/material";
 import MoneyIcon from "../../Assets/Images/moneyIcon.png";
@@ -11,7 +11,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { useSelector } from "react-redux";
 
 import { styles } from "./styles";
-import Auth from "../../Views/AuthModals/authModals";
+import Auth from "../../Views/Common/AuthModals/authModals";
 
 const BecomeEducator = () => {
   const chooseModal = useSelector((state) => state.auth.chooseModal);
