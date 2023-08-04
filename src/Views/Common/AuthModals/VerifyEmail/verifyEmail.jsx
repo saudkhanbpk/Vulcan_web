@@ -42,7 +42,8 @@ export const VerifyEmail = () => {
   const auth = getAuth();
   const user = auth.currentUser;
 
-  const userEmailAddress = user?.email || "test1@vulcanlearninginstitute.com";
+  const userEmailAddress = user?.email;
+  
   useEffect(() => {
     const interval = setInterval(() => {
       currentUser

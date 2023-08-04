@@ -33,10 +33,10 @@ export const PrivateOutlet = (props) => {
   if (!user) {
     dispatch(chooseModalLogin());
     return navigate("/");
-  } else if (!user.emailVerified) {
+  } else if (!user.emailVerified && location.pathname==="/dashboard" ) {
     dispatch(setSelectedRoute(location.pathname));
     dispatch(chooseModalEmailVerify());
-    return navigate("/");  
+    return navigate("/");
   } else {
     return (
       <>

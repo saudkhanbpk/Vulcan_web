@@ -8,7 +8,7 @@ import {
 } from "./styles";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { auth } from "../../../../Infrastructure/config";
+import { auth } from "../../../../../Infrastructure/config";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export const ProfileDropdownSmallScreen = ({ handleCloseNavMenu }) => {

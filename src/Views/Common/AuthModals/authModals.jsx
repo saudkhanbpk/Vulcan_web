@@ -5,13 +5,13 @@ import "./authModals.css";
 
 import { useSelector } from "react-redux";
 
-import { ModalTypes } from "../../Infrastructure/States/authModalsSlice";
 
-import { VerifyEmail } from "../Common/AuthModals/VerifyEmail/verifyEmail";
-import { ResetPassword } from "../Common/AuthModals/ResetPassword/resetPassword";
-import { CreateAccount } from "../Common/AuthModals/CreateAccount/createAccount";
-import { LoginAccount } from "../Common/AuthModals/LoginAccount/loginAccount";
+import { VerifyEmail } from "./VerifyEmail/verifyEmail";
+import { ResetPassword } from "./ResetPassword/resetPassword";
+import { CreateAccount } from "./CreateAccount/createAccount";
+import { LoginAccount } from "./LoginAccount/loginAccount";
 import { ModalBackgroundBox } from "./authModalsStyles";
+import { ModalTypes } from "../../../Infrastructure/States/authModalsSlice";
 
 function AuthModals({ chooseModal }) {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);

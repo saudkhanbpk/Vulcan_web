@@ -14,36 +14,26 @@ import {
   LoginSigUpTextLink,
 } from "./loginAccountStyles";
 import CloseIcon from "@mui/icons-material/Close";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  chooseModalEmailVerify,
   chooseModalResetPass,
   chooseModalSignUp,
   closeChooseModal,
 } from "../../../../Infrastructure/States/authModalsSlice";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import {
-    getAuth,
-  sendEmailVerification,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ShowErrorToast, ShowSuccessToast } from "../../Toast/toast";
-import { useAuthValue } from "../../../../Infrastructure/States/authContext";
 
 export const LoginAccount = () => {
-
   const auth = getAuth();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
-  const { setTimeActive } = useAuthValue();
   const [errorToast, setErrorToast] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
-
 
   const handleCloseModal = () => {
     dispatch(closeChooseModal());
@@ -74,23 +64,11 @@ export const LoginAccount = () => {
     onSubmit: async (values) => {
       try {
         const { email, password } = values;
-        await signInWithEmailAndPassword(auth, email, password).then(() => {
-          if (!auth.currentUser.emailVerified) {
-            sendEmailVerification(auth.currentUser)
-              .then(() => {
-                setTimeActive(true);
-                dispatch(chooseModalEmailVerify());
-              })
-              .catch((err) => alert(err.message));
-          } else {
-            navigate("/");
-          }
-        });
+        await signInWithEmailAndPassword(auth, email, password);
         ShowSuccessToast("User Logged In Sucessfully", {
           autoClose: 3000,
           theme: "light",
         });
-        navigate("/");
         handleCloseModal();
       } catch (error) {
         if (error.code === "auth/INVALID_PASSWORD") {
@@ -107,10 +85,10 @@ export const LoginAccount = () => {
   });
   const customStyles = {
     backdrop: {
-      backgroundColor: 'transparent', // Set the backdrop background color to transparent
+      backgroundColor: "transparent", // Set the backdrop background color to transparent
     },
   };
-  
+
   return (
     <Box>
       {/* Log in Modal */}
@@ -125,7 +103,7 @@ export const LoginAccount = () => {
           justifyContent: "center",
         }}
         BackdropProps={{
-          sx: customStyles.backdrop, // Apply custom styles to the backdrop
+          sx: customStyles.backdrop,
         }}
       >
         <LoginMainBox>

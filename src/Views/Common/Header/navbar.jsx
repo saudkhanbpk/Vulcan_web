@@ -25,9 +25,9 @@ import {
   chooseModalSignUp,
 } from "../../../Infrastructure/States/authModalsSlice";
 import useAuthentication from "../../../Infrastructure/States/onAuthStateChange";
-import AuthModals from "../../AuthModals/authModals";
-import { ProfileDropdownSmallScreen } from "../Dropdowns/ProfileDropdownSmallScreen/profileDropdownSmallScreen";
-import ProfileDropdown from "../Dropdowns/ProfileDropdown/profileDropdown";
+import AuthModals from "../../Common/AuthModals/authModals";
+import { ProfileDropdownSmallScreen } from "./Dropdowns/ProfileDropdownSmallScreen/profileDropdownSmallScreen";
+import ProfileDropdown from "./Dropdowns/ProfileDropdown/profileDropdown";
 
 const Navbar = () => {
   const dispatch = useDispatch();
