@@ -332,7 +332,7 @@ export const CreateAccount = () => {
               label={
                 formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
                   ? `${formik.errors.phoneNumber}`
-                  : "Phone Number"
+                  : "Phone Number (Optional)"
               }
               variant="standard"
               onChange={formik.handleChange}
