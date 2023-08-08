@@ -393,41 +393,35 @@ export const Profile = () => {
                 </Grid>
               </Grid>
             </FormBox>
-            <Grid container mt={3}>
-              <Grid lg={2} md={6} sm={6} xs={6}>
+                 <Grid container mt={3}>
+              <Grid lg={2} md={2} sm={6} xs={6}>
                 <Box
-                  width="70%"
+                  width="90%"
                   margin="0 auto"
                   display={"flex"}
                   alignItems={"center"}
                   justifyContent={"center"}
                 >
-                  <Button
-                    variant="contained"
-                    onClick={() => setEditPassword(false)}
-                  >
+                  <Button variant="contained" onClick={handleSaveClick}>
                     Cancel
                   </Button>
                 </Box>
               </Grid>
 
-              <Grid lg={2} md={6} sm={6} xs={6}>
+              <Grid lg={2} md={2} sm={6} xs={6}>
                 <Box
-                  width="70%"
+                  width="90%"
                   margin="0 auto"
                   display={"flex"}
                   alignItems={"center"}
                   justifyContent={"center"}
                 >
-                  <Button
-                    variant="contained"
-                    onClick={() => setEditPassword(false)}
-                  >
+                  <Button variant="contained" onClick={handleSaveClick}>
                     Update
                   </Button>
                 </Box>
               </Grid>
-              <Grid lg={8}></Grid>
+              <Grid lg={6} md={6} sm={6} xs={6}></Grid>
             </Grid>
           </>
         )}
