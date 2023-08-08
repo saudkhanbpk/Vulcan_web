@@ -23,20 +23,14 @@ import {
 } from "./styles";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useFormik } from "formik";
+
 export const Profile = () => {
-  // const [fullName, setFullName] = useState("John Doe");
-  // const [email, setEmail] = useState("johndoe@example.com");
-  // const [password, setPassword] = useState("********");
-  // const [lastUpdated, setLastUpdated] = useState("2023-08-07");
+
   const [editName, setEditName] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
   const [showOldPassword, setShowOldPassword] = useState(true);
   const [showNewPassword, setShowNewPassword] = useState(true);
   const [showReEnterPassword, setShowResetPassword] = useState(true);
-
-  // const [firstName, setFirstName] = useState("Ayaz");
-  // const [lastName, setLastName] = useState("Khan");
-  // const [state, setState] = useState("");
 
   const handleEditClick = () => {
     setEditName(true);
@@ -56,14 +50,6 @@ export const Profile = () => {
   const reEnterPasswordVisibility = () => {
     setShowResetPassword(!showReEnterPassword);
   };
-
-  // const handleEditName = () => {
-  //   // Handle edit full name logic here
-  // };
-
-  // const handleEditPassword = () => {
-  //   // Handle edit password logic here
-  // };
   const passwordFormik = useFormik({
     initialValues: {
       oldPassword: "",
