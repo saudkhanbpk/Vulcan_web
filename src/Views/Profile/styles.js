@@ -1,8 +1,10 @@
 import { Box, Typography, styled } from "@mui/material";
 
 export const MainBox = styled(Typography)(({ theme }) => ({
-  height: "100vh",
+  maxHeight: "110vh",
   alignItems: "flex-start",
+  paddingTop: theme.spacing(5),
+  marginBottom: theme.spacing(20),
   [theme.breakpoints.down("md")]: {
     height: "100vh",
   },
@@ -13,7 +15,6 @@ export const TextLabel = styled(Typography)(({ theme }) => ({
   color: "black",
   [theme.breakpoints.down("md")]: {
   fontSize: 12,
-
   },
 }));
 export const TextValue = styled(Typography)(({ theme }) => ({
@@ -25,17 +26,12 @@ export const TextValue = styled(Typography)(({ theme }) => ({
 }));
 export const TextButton = styled(Typography)(({ theme }) => ({
   fontSize: 14,
-  color: "red",
+  color: "#0000FF",
   paddingRight: theme.spacing(1),
   [theme.breakpoints.down("md")]: {
   fontSize: 12,
 
   },
-}));
-export const Heading = styled(Typography)(({ theme }) => ({
-  fontSize: 36,
-  color: "black",
-
 }));
 export const HeadingBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -71,8 +67,5 @@ export const FormBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {},
 }));
 export const OldPassBox = styled(Box)(({ theme }) => ({
-  width: "85%",
-  [theme.breakpoints.down("md")]: {
-    width: "70%",
-  },
+  width: "100%",
 }));
