@@ -7,3 +7,6 @@ setGlobalOptions({maxInstances: 10})
 
 const setupAccount = require('./setupAccount')
 exports.setupAccount = setupAccount.setupAccount
+
+const updateAccountInfo = require('./updateAccountInfo')
+exports.updateAccountInfo = updateAccountInfo.updateAccountInfo
