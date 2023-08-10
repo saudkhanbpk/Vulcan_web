@@ -23,22 +23,44 @@ import {
 } from "./styles";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useFormik } from "formik";
+import useAuthentication from "../../Infrastructure/States/onAuthStateChange";
+import {
+  updateProfile,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  updatePassword,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { ShowErrorToast, ShowSuccessToast } from "../Common/Toast/toast";
 
 export const Profile = () => {
+  const [showEditName, setShowEditName] = useState(false);
+  const [showEditPass, setShowEditPass] = useState(false);
 
-  const [editName, setEditName] = useState(false);
-  const [editPassword, setEditPassword] = useState(false);
   const [showOldPassword, setShowOldPassword] = useState(true);
   const [showNewPassword, setShowNewPassword] = useState(true);
   const [showReEnterPassword, setShowResetPassword] = useState(true);
+  const { user, updateUserDisplayName } = useAuthentication();
 
-  const handleEditClick = () => {
-    setEditName(true);
+  const userFullName = user?.displayName;
+  const userEmail = user?.email;
+  const navigate = useNavigate();
+
+  const handleOpen = ({ prop }) => {
+    if (prop === "name") {
+      setShowEditName(true);
+      setShowEditPass(false);
+    } else if (prop === "password") {
+      setShowEditPass(true);
+      setShowEditName(false);
+    }
   };
 
-  const handleSaveClick = () => {
-    setEditName(false);
+  const handleClose = () => {
+    setShowEditName(false);
+    setShowEditPass(false);
   };
+
   const oldPasswordVisibility = () => {
     setShowOldPassword(!showOldPassword);
   };
@@ -50,6 +72,7 @@ export const Profile = () => {
   const reEnterPasswordVisibility = () => {
     setShowResetPassword(!showReEnterPassword);
   };
+
   const passwordFormik = useFormik({
     initialValues: {
       oldPassword: "",
@@ -67,16 +90,68 @@ export const Profile = () => {
         .min(6, "Must be 6 chatacters")
         .required("Password"),
     }),
+    onSubmit: async (values) => {
+      const { newPassword, reEnterPassword, oldPassword } = values;
+      if (!user) {
+        return;
+      }
+      try {
+        const credential = EmailAuthProvider.credential(
+          user.email,
+          oldPassword
+        );
+        await reauthenticateWithCredential(user, credential);
+
+        // Check if new passwords match
+        if (newPassword !== reEnterPassword) {
+          ShowErrorToast("New passwords don't match");
+          return;
+        }
+
+        // Update password
+        await updatePassword(user, newPassword);
+        ShowSuccessToast("Password updated successfully");
+        handleClose();
+      } catch (error) {
+        if (error.code === "auth/wrong-password") {
+          ShowErrorToast("Incorrect old password. Please check and try again.");
+        } else {
+          ShowErrorToast(error.message);
+        }
+      }
+    },
   });
   const nameFormik = useFormik({
     initialValues: {
-      firstName:"",
-      lastName:""
+      firstName: "",
+      lastName: "",
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required("First Name"),
       lastName: Yup.string().required("Last Name"),
-    })
+    }),
+    onSubmit: async (values) => {
+      const { firstName, lastName } = values;
+      if (nameFormik.isValid) {
+        try {
+          if (user) {
+            await updateProfile(user, {
+              displayName: `${firstName} ${lastName}`,
+            }).catch((error) => {
+              console.error("Error updating display name:", error.message);
+            });
+            updateUserDisplayName({
+              ...user,
+              displayName: `${firstName} ${lastName}`,
+            });
+            navigate("/profile");
+            handleClose();
+          }
+        } catch (error) {
+          console.error("Error updating name:", error);
+        }
+      }
+    },
   });
   return (
     <MainBox>
@@ -86,32 +161,32 @@ export const Profile = () => {
         </Typography>
       </HeadingBox>
       <Box pr={3} pl={3}>
-        <>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          pt={4}
+          pb={4}
+        >
+          <TextLabel>Full Name</TextLabel>
+          <TextValue>{userFullName}</TextValue>
+          {/* <Stack direction="row" alignItems={"center"} onClick={handleNameEdit}> */}
           <Stack
             direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            pt={4}
-            pb={4}
+            alignItems={"center"}
+            onClick={() => handleOpen({ prop: "name" })}
           >
-            <TextLabel>Full Name</TextLabel>
-            <TextValue>Ayaz Khan</TextValue>
-            <Stack
-              direction="row"
-              alignItems={"center"}
-              onClick={handleEditClick}
-            >
-              <TextButton>Edit</TextButton>
-              <AboutDownArrow theme="secondary" />
-            </Stack>
+            <TextButton>Edit</TextButton>
+            <AboutDownArrow theme="secondary" />
           </Stack>
-        </>
-        {editName && (
-          <>
+        </Stack>
+
+        {showEditName && (
+          <Box>
             <Box
               display={"flex"}
               justifyContent={"flex-end"}
-              onClick={handleSaveClick}
+              onClick={handleClose}
             >
               <AboutDownArrowUp theme="secondary" />
             </Box>
@@ -178,38 +253,38 @@ export const Profile = () => {
                   </Box>
                 </Grid>
               </Grid>
-            </FormBox>
-            <Grid container mt={3}>
-              <Grid lg={2} md={2} sm={6} xs={6}>
-                <Box
-                  width="90%"
-                  margin="0 auto"
-                  display={"flex"}
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                >
-                  <Button variant="contained" onClick={handleSaveClick}>
-                    Cancel
-                  </Button>
-                </Box>
-              </Grid>
+              <Grid container mt={3}>
+                <Grid lg={2} md={2} sm={6} xs={6}>
+                  <Box
+                    width="90%"
+                    margin="0 auto"
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                  >
+                    <Button variant="contained" onClick={handleClose}>
+                      Cancel
+                    </Button>
+                  </Box>
+                </Grid>
 
-              <Grid lg={2} md={2} sm={6} xs={6}>
-                <Box
-                  width="90%"
-                  margin="0 auto"
-                  display={"flex"}
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                >
-                  <Button variant="contained" onClick={handleSaveClick}>
-                    Update
-                  </Button>
-                </Box>
+                <Grid lg={2} md={2} sm={6} xs={6}>
+                  <Box
+                    width="90%"
+                    margin="0 auto"
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                  >
+                    <Button type="submit" variant="contained">
+                      Update
+                    </Button>
+                  </Box>
+                </Grid>
+                <Grid lg={6} md={6} sm={6} xs={6}></Grid>
               </Grid>
-              <Grid lg={6} md={6} sm={6} xs={6}></Grid>
-            </Grid>
-          </>
+            </FormBox>
+          </Box>
         )}
         <hr />
       </Box>
@@ -222,42 +297,40 @@ export const Profile = () => {
           pb={4}
         >
           <TextLabel>Email</TextLabel>
-          <TextValue>azkhan03139@gmail.com</TextValue>
+          <TextValue>{userEmail}</TextValue>
           <Box></Box>
         </Stack>
         <hr />
       </Box>
       <Box pr={3} pl={3}>
-        <>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          pt={4}
+          pb={4}
+        >
+          <TextLabel>Password</TextLabel>
           <Stack
             direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            pt={4}
-            pb={4}
+            alignItems={"center"}
+            // onClick={handlePasswordEditClick}
+            onClick={() => handleOpen({ prop: "password" })}
           >
-            <TextLabel>Password</TextLabel>
-            {/* <TextValue>Last updated on: 05/16/2022</TextValue> */}
-            <Stack
-              direction="row"
-              alignItems={"center"}
-              onClick={() => setEditPassword(true)}
-            >
-              <TextButton>Edit</TextButton>
-              <AboutDownArrow theme="secondary" />
-            </Stack>
+            <TextButton>Edit</TextButton>
+            <AboutDownArrow theme="secondary" />
           </Stack>
-        </>
-        {editPassword && (
-          <>
+        </Stack>
+
+        {showEditPass && (
+          <Box>
             <Box
               display={"flex"}
               justifyContent={"flex-end"}
-              onClick={() => setEditPassword(false)}
+              onClick={handleClose}
             >
               <AboutDownArrowUp theme="secondary" />
             </Box>
-
             <FormBox
               component="form"
               onSubmit={passwordFormik.handleSubmit}
@@ -392,38 +465,38 @@ export const Profile = () => {
                   </Box>
                 </Grid>
               </Grid>
-            </FormBox>
-                 <Grid container mt={3}>
-              <Grid lg={2} md={2} sm={6} xs={6}>
-                <Box
-                  width="90%"
-                  margin="0 auto"
-                  display={"flex"}
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                >
-                  <Button variant="contained" onClick={handleSaveClick}>
-                    Cancel
-                  </Button>
-                </Box>
-              </Grid>
+              <Grid container mt={3}>
+                <Grid lg={2} md={2} sm={6} xs={6}>
+                  <Box
+                    width="90%"
+                    margin="0 auto"
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                  >
+                    <Button variant="contained" onClick={handleClose}>
+                      Cancel
+                    </Button>
+                  </Box>
+                </Grid>
 
-              <Grid lg={2} md={2} sm={6} xs={6}>
-                <Box
-                  width="90%"
-                  margin="0 auto"
-                  display={"flex"}
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                >
-                  <Button variant="contained" onClick={handleSaveClick}>
-                    Update
-                  </Button>
-                </Box>
+                <Grid lg={2} md={2} sm={6} xs={6}>
+                  <Box
+                    width="90%"
+                    margin="0 auto"
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                  >
+                    <Button type="submit" variant="contained">
+                      Update
+                    </Button>
+                  </Box>
+                </Grid>
+                <Grid lg={6} md={6} sm={6} xs={6}></Grid>
               </Grid>
-              <Grid lg={6} md={6} sm={6} xs={6}></Grid>
-            </Grid>
-          </>
+            </FormBox>
+          </Box>
         )}
         <hr />
       </Box>

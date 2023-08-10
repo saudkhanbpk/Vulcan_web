@@ -1,9 +1,9 @@
 import { Box, Typography, styled } from "@mui/material";
 
-export const MainBox = styled(Typography)(({ theme }) => ({
+export const MainBox = styled(Box)(({ theme }) => ({
   maxHeight: "110vh",
   alignItems: "flex-start",
-  paddingTop: theme.spacing(5),
+  padding: theme.spacing(5),
   marginBottom: theme.spacing(20),
   [theme.breakpoints.down("md")]: {
     height: "100vh",
@@ -48,7 +48,7 @@ export const AboutDownArrow = styled("span")(({ theme }) => ({
   height: 0,
   borderLeft: "6px solid transparent",
   borderRight: "6px solid transparent",
-  borderTop: `6px solid red`,
+  borderTop: `6px solid #0000FF`,
   pointerEvents: "none",
 }));
 export const AboutDownArrowUp = styled("span")(({ theme }) => ({
@@ -59,7 +59,7 @@ export const AboutDownArrowUp = styled("span")(({ theme }) => ({
   height: 0,
   borderLeft: "6px solid transparent",
   borderRight: "6px solid transparent",
-  borderTop: `6px solid red`,
+  borderTop: `6px solid #0000FF`,
   pointerEvents: "none",
 }));
 export const FormBox = styled(Box)(({ theme }) => ({

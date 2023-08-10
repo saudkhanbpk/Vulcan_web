@@ -11,8 +11,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
 import { ShowErrorToast, ShowSuccessToast } from "../../Toast/toast";
 import {
@@ -35,9 +35,9 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { useNavigate } from "react-router-dom";
 import { useAuthValue } from "../../../../Infrastructure/States/authContext";
+import { auth } from "../../../../Infrastructure/config";
 
 export const CreateAccount = () => {
-  const auth = getAuth();
   const dispatch = useDispatch();
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
   const [selectedButton, setSelectedButton] = useState(true);
@@ -46,6 +46,7 @@ export const CreateAccount = () => {
   const { setTimeActive } = useAuthValue();
 
   const navigate = useNavigate();
+  
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -69,10 +70,19 @@ export const CreateAccount = () => {
     }),
 
     onSubmit: async (values) => {
-      const { email, password } = values;
+      const { email, password, firstName, lastName } = values;
 
       await createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
+        .then((userCredential) => {
+          const user = userCredential.user;
+
+          if (user) {
+            updateProfile(user, {
+              displayName: `${firstName} ${lastName}`,
+            }).catch((error) => {
+              console.error("Error updating display name:", error.message);
+            });
+          }
           ShowSuccessToast("Account created successfully!");
           if (!auth.currentUser.emailVerified) {
             sendEmailVerification(auth.currentUser)
@@ -85,6 +95,7 @@ export const CreateAccount = () => {
             navigate("/");
           }
         })
+
         .catch((error) => {
           if (error.code === "auth/email-already-in-use") {
             ShowErrorToast("Email already exists, Try another Email!");
@@ -109,6 +120,7 @@ export const CreateAccount = () => {
     dispatch(chooseModalLogin());
     formik.resetForm();
   };
+
   //Student & Teacher acc changing functionality
   const handleButtonClick = (val) => {
     if (val.value === 1) {
@@ -129,10 +141,10 @@ export const CreateAccount = () => {
   };
   const customStyles = {
     backdrop: {
-      backgroundColor: 'transparent', // Set the backdrop background color to transparent
+      backgroundColor: "transparent", // Set the backdrop background color to transparent
     },
   };
- 
+
   return (
     <Box>
       {/* Sign Up Modal */}

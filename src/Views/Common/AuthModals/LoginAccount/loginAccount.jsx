@@ -12,6 +12,7 @@ import {
   LoginFormBox,
   LoginMainBox,
   LoginSigUpTextLink,
+  styles,
 } from "./loginAccountStyles";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
@@ -71,7 +72,7 @@ export const LoginAccount = () => {
         });
         handleCloseModal();
       } catch (error) {
-        if (error.code === "auth/INVALID_PASSWORD") {
+        if (error.code===400 && error.message === "INVALID_PASSWORD") {
           setErrorToast(
             "Invalid password. Please check your password and try again."
           );
@@ -83,11 +84,6 @@ export const LoginAccount = () => {
       }
     },
   });
-  const customStyles = {
-    backdrop: {
-      backgroundColor: "transparent", // Set the backdrop background color to transparent
-    },
-  };
 
   return (
     <Box>
@@ -103,7 +99,7 @@ export const LoginAccount = () => {
           justifyContent: "center",
         }}
         BackdropProps={{
-          sx: customStyles.backdrop,
+          sx: styles.backdrop,
         }}
       >
         <LoginMainBox>
