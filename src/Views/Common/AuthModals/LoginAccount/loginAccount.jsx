@@ -66,17 +66,21 @@ export const LoginAccount = () => {
       try {
         const { email, password } = values;
         await signInWithEmailAndPassword(auth, email, password);
-        ShowSuccessToast("User Logged In Sucessfully", {
+        ShowSuccessToast("User Logged In Sucessfully.", {
           autoClose: 3000,
           theme: "light",
         });
         handleCloseModal();
       } catch (error) {
-        if (error.code===400 && error.message === "INVALID_PASSWORD") {
+        // console.log(error);
+        if (error.code === "auth/wrong-password") {
           setErrorToast(
             "Invalid password. Please check your password and try again."
           );
           ShowErrorToast(errorToast);
+        } else if (error.code === "auth/too-many-requests") {
+          const errorMessage = error?.error?.message || "Too many requests try some time later.";
+          ShowErrorToast(errorMessage);
         } else {
           setErrorToast("Please try again later.");
           ShowErrorToast(errorToast);

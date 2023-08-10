@@ -50,15 +50,19 @@ export const Profile = () => {
     if (prop === "name") {
       setShowEditName(true);
       setShowEditPass(false);
+      // passwordFormik.resetForm();
     } else if (prop === "password") {
       setShowEditPass(true);
       setShowEditName(false);
+      // nameFormik.resetForm();
     }
   };
 
   const handleClose = () => {
     setShowEditName(false);
     setShowEditPass(false);
+    // passwordFormik.resetForm();
+    // nameFormik.resetForm();
   };
 
   const oldPasswordVisibility = () => {
@@ -112,6 +116,7 @@ export const Profile = () => {
         await updatePassword(user, newPassword);
         ShowSuccessToast("Password updated successfully");
         handleClose();
+        passwordFormik.resetForm();
       } catch (error) {
         if (error.code === "auth/wrong-password") {
           ShowErrorToast("Incorrect old password. Please check and try again.");
@@ -146,6 +151,8 @@ export const Profile = () => {
             });
             navigate("/profile");
             handleClose();
+            nameFormik.resetForm();
+
           }
         } catch (error) {
           console.error("Error updating name:", error);
