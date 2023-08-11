@@ -12,11 +12,12 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 import {
   AboutDownArrow,
-  AboutDownArrowUp,
+  AboutUpArrow,
   FormBox,
   HeadingBox,
   MainBox,
   OldPassBox,
+  Span,
   TextButton,
   TextLabel,
   TextValue,
@@ -36,11 +37,10 @@ import { ShowErrorToast, ShowSuccessToast } from "../Common/Toast/toast";
 export const Profile = () => {
   const [showEditName, setShowEditName] = useState(false);
   const [showEditPass, setShowEditPass] = useState(false);
-
   const [showOldPassword, setShowOldPassword] = useState(true);
   const [showNewPassword, setShowNewPassword] = useState(true);
   const [showReEnterPassword, setShowResetPassword] = useState(true);
-  const { user, updateUserDisplayName } = useAuthentication();
+  const { user } = useAuthentication();
 
   const userFullName = user?.displayName;
   const userEmail = user?.email;
@@ -81,13 +81,13 @@ export const Profile = () => {
     },
     validationSchema: Yup.object({
       oldPassword: Yup.string()
-        .min(6, "Must be 6 chatacters")
+        .min(6, "Must be 6 characters")
         .required("Password"),
       newPassword: Yup.string()
-        .min(6, "Must be 6 chatacters")
+        .min(6, "Must be 6 characters")
         .required("Password"),
       reEnterPassword: Yup.string()
-        .min(6, "Must be 6 chatacters")
+        .min(6, "Must be 6 characters")
         .required("Password"),
     }),
     onSubmit: async (values) => {
@@ -132,19 +132,17 @@ export const Profile = () => {
       lastName: Yup.string().required("Last Name"),
     }),
     onSubmit: async (values) => {
-      const { firstName, lastName } = values;
+      //we will use it in future
+      // const { firstName, lastName } = values;
       if (nameFormik.isValid) {
         try {
           if (user) {
-            await updateProfile(user, {
-              displayName: `${firstName} ${lastName}`,
-            }).catch((error) => {
-              console.error("Error updating display name:", error.message);
-            });
-            updateUserDisplayName({
-              ...user,
-              displayName: `${firstName} ${lastName}`,
-            });
+            //we will use it in future
+            // await updateProfile(user, {
+            //   displayName: `${firstName} ${lastName}`,
+            // }).catch((error) => {
+            //   console.error("Error updating display name:", error.message);
+            // });
             navigate("/profile");
             handleClose();
             nameFormik.resetForm();
@@ -170,28 +168,41 @@ export const Profile = () => {
           pt={4}
           pb={4}
         >
+          <TextLabel>Email</TextLabel>
+          <TextValue>{userEmail}</TextValue>
+          <Box></Box>
+        </Stack>
+        <hr />
+      </Box>
+      <Box pr={3} pl={3}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          pt={4}
+          pb={4}
+        >
           <TextLabel>Full Name</TextLabel>
           <TextValue>{userFullName}</TextValue>
-          <Stack
-            direction="row"
-            alignItems={"center"}
-            onClick={() => handleOpen({ prop: "name" })}
-          >
-            <TextButton>Edit</TextButton>
-            <AboutDownArrow theme="secondary" />
-          </Stack>
+          <Span direction="row" alignItems={"center"}>
+            <TextButton
+              curser="pointer"
+              onClick={() => handleOpen({ prop: "name" })}
+            >
+              Edit
+            </TextButton>
+            {!showEditName ? (
+              <AboutDownArrow theme="secondary" />
+            ) : (
+              <Span onClick={handleClose}>
+                <AboutUpArrow theme="secondary" />
+              </Span>
+            )}
+          </Span>
         </Stack>
 
         {showEditName && (
           <Box>
-            <Box
-              display={"flex"}
-              justifyContent={"flex-end"}
-              onClick={handleClose}
-            >
-              <AboutDownArrowUp theme="secondary" />
-            </Box>
-
             <FormBox
               component="form"
               onSubmit={nameFormik.handleSubmit}
@@ -297,40 +308,26 @@ export const Profile = () => {
           pt={4}
           pb={4}
         >
-          <TextLabel>Email</TextLabel>
-          <TextValue>{userEmail}</TextValue>
-          <Box></Box>
-        </Stack>
-        <hr />
-      </Box>
-      <Box pr={3} pl={3}>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          pt={4}
-          pb={4}
-        >
           <TextLabel>Password</TextLabel>
-          <Stack
-            direction="row"
-            alignItems={"center"}
-            onClick={() => handleOpen({ prop: "password" })}
-          >
-            <TextButton>Edit</TextButton>
-            <AboutDownArrow theme="secondary" />
-          </Stack>
+          <Span direction="row" alignItems={"center"}>
+            <TextButton
+              curser="pointer"
+              onClick={() => handleOpen({ prop: "password" })}
+            >
+              Edit
+            </TextButton>
+            {!showEditPass ? (
+              <AboutDownArrow theme="secondary" />
+            ) : (
+              <Span onClick={handleClose}>
+                <AboutUpArrow theme="secondary" />
+              </Span>
+            )}
+          </Span>
         </Stack>
 
         {showEditPass && (
           <Box>
-            <Box
-              display={"flex"}
-              justifyContent={"flex-end"}
-              onClick={handleClose}
-            >
-              <AboutDownArrowUp theme="secondary" />
-            </Box>
             <FormBox
               component="form"
               onSubmit={passwordFormik.handleSubmit}

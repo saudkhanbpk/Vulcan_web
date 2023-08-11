@@ -79,6 +79,7 @@ export const Span = styled("span")(({ theme }) => ({
   cursor: "pointer",
   display: "flex",
   alignItems: "center",
+
 }));
 export const AboutSpan = styled("span")(({ theme }) => ({
   cursor: "pointer",

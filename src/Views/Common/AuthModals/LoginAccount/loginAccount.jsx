@@ -33,7 +33,6 @@ export const LoginAccount = () => {
   const auth = getAuth();
   const dispatch = useDispatch();
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
-  // const [errorToast, setErrorToast] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
 
   const handleCloseModal = () => {
@@ -58,7 +57,7 @@ export const LoginAccount = () => {
     validationSchema: Yup.object({
       email: Yup.string().email("Invalid email address").required("Email"),
       password: Yup.string()
-        .min(6, "Must be 6 chatacters")
+        .min(6, "Must be 6 characters")
         .required("Password"),
     }),
 

@@ -50,8 +50,10 @@ export const AboutDownArrow = styled("span")(({ theme }) => ({
   borderRight: "6px solid transparent",
   borderTop: `6px solid #0000FF`,
   pointerEvents: "none",
+  curser:"pointer",
+
 }));
-export const AboutDownArrowUp = styled("span")(({ theme }) => ({
+export const AboutUpArrow = styled("span")(({ theme }) => ({
   position: "relative",
   top: "74%",
   transform: "translateX(-50%) rotate(180deg)",
@@ -61,6 +63,7 @@ export const AboutDownArrowUp = styled("span")(({ theme }) => ({
   borderRight: "6px solid transparent",
   borderTop: `6px solid #0000FF`,
   pointerEvents: "none",
+  curser:"pointer",
 }));
 export const FormBox = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -68,4 +71,10 @@ export const FormBox = styled(Box)(({ theme }) => ({
 }));
 export const OldPassBox = styled(Box)(({ theme }) => ({
   width: "100%",
+}));
+export const Span = styled("span")(({ theme }) => ({
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  padding: theme.spacing(1)
 }));
