@@ -33,7 +33,7 @@ export const LoginAccount = () => {
   const auth = getAuth();
   const dispatch = useDispatch();
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
-  const [errorToast, setErrorToast] = useState(false);
+  // const [errorToast, setErrorToast] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
 
   const handleCloseModal = () => {
@@ -72,18 +72,18 @@ export const LoginAccount = () => {
         });
         handleCloseModal();
       } catch (error) {
-        // console.log(error);
-        if (error.code === "auth/wrong-password") {
-          setErrorToast(
+          if (error.code === "auth/wrong-password") {
+          ShowErrorToast(
             "Invalid password. Please check your password and try again."
           );
-          ShowErrorToast(errorToast);
+        } else if (error.code === "auth/user-not-found") {
+          ShowErrorToast("User not found! Try another email.");
         } else if (error.code === "auth/too-many-requests") {
-          const errorMessage = error?.error?.message || "Too many requests try some time later.";
+          const errorMessage =
+            error?.error?.message || "Too many requests try again later.";
           ShowErrorToast(errorMessage);
         } else {
-          setErrorToast("Please try again later.");
-          ShowErrorToast(errorToast);
+          ShowErrorToast("Please try again later.");
         }
       }
     },

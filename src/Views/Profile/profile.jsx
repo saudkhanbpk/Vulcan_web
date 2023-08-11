@@ -50,19 +50,15 @@ export const Profile = () => {
     if (prop === "name") {
       setShowEditName(true);
       setShowEditPass(false);
-      // passwordFormik.resetForm();
     } else if (prop === "password") {
       setShowEditPass(true);
       setShowEditName(false);
-      // nameFormik.resetForm();
     }
   };
 
   const handleClose = () => {
     setShowEditName(false);
     setShowEditPass(false);
-    // passwordFormik.resetForm();
-    // nameFormik.resetForm();
   };
 
   const oldPasswordVisibility = () => {
@@ -152,7 +148,6 @@ export const Profile = () => {
             navigate("/profile");
             handleClose();
             nameFormik.resetForm();
-
           }
         } catch (error) {
           console.error("Error updating name:", error);
@@ -177,7 +172,6 @@ export const Profile = () => {
         >
           <TextLabel>Full Name</TextLabel>
           <TextValue>{userFullName}</TextValue>
-          {/* <Stack direction="row" alignItems={"center"} onClick={handleNameEdit}> */}
           <Stack
             direction="row"
             alignItems={"center"}
@@ -321,7 +315,6 @@ export const Profile = () => {
           <Stack
             direction="row"
             alignItems={"center"}
-            // onClick={handlePasswordEditClick}
             onClick={() => handleOpen({ prop: "password" })}
           >
             <TextButton>Edit</TextButton>
