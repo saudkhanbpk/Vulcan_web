@@ -6,7 +6,7 @@ initializeApp()
 setGlobalOptions({maxInstances: 10})
 
 const setupAccount = require('./setupAccount')
-exports.setupAccount = setupAccount.setupAccount
+exports.createaccount = setupAccount.setupAccount
 
 const updateAccountInfo = require('./updateAccountInfo')
-exports.updateAccountInfo = updateAccountInfo.updateAccountInfo
+exports.updateaccount = updateAccountInfo.updateAccountInfo
