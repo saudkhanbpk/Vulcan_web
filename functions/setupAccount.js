@@ -13,19 +13,24 @@ exports.setupAccount = onCall((request) => {
   db.logUser(currentUser.uid, `ACTION: Firebase Account Created: ` + `ID: ${currentUser.email}`)
 
   db.ref(`users`).child(uid).update({
-    "first_name": firstName,
-    "last_name": lastName,
-    "email": email,
-    "email_verified": false,
-    "number": number,
-    "is_educator": isEducator,
     "account_active": true,
-    "created": Date.now()
-  }).catch(error => {
+    "created": Date.now(),
+    "email_verified": false,
+    "is_educator": isEducator
+  })
+  .then(
+    db.ref(`users`).child(uid).child("profile").update({
+      "first_name": firstName,
+      "last_name": lastName,
+      "email": email,
+      "number": number
+    })
+  )
+  .catch(error => {
       dbCalls.logUser("ERROR: ACCOUNT INFO ERROR" + `ID: ${uid}: ${error}`)
       isSuccess = false
       errorMessage = "Account Error"
-  });
+  })
 
   return {isSuccess: isSuccess, errorMessage: errorMessage}
 })

@@ -8,7 +8,7 @@ exports.updateAccountInfo = onCall((request) => {
   var errorMessage = null
   const uid = request.auth.uid
   const email = request.auth.token.email
-  const { firstName, lastName, number, isEducator } = request.data
+  const { firstName, lastName, number } = request.data
 
     try {
 
@@ -27,12 +27,6 @@ exports.updateAccountInfo = onCall((request) => {
         if (number) {
             db.ref(`users`).child(uid).update({
                 "number": number
-            })
-        }
-
-        if (isEducator) {
-            db.ref(`users`).child(uid).update({
-                "is_educator": isEducator
             })
         }
 
