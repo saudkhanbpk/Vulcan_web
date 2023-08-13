@@ -1,7 +1,7 @@
 const {setGlobalOptions} = require("firebase-functions/v2")
-const admin = require("firebase-admin")
+const { initializeApp } = require('firebase-admin/app')
 
-admin.initializeApp()
+initializeApp()
 
 setGlobalOptions({maxInstances: 10})
 

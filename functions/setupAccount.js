@@ -1,6 +1,7 @@
 const { onCall } = require("firebase-functions/v2/https")
+const { getDatabase } = require('firebase-admin/database')
 
-const db = admin.database()
+const db = getDatabase()
 const dbCalls = require('./databaseCalls')
 
 exports.setupAccount = onCall((request) => {
