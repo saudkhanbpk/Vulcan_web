@@ -13,7 +13,7 @@ import {
   Span,
   TextButton,
   TextLabel,
-} from "../../../Profile/styles";
+} from "../../styles";
 
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -26,7 +26,7 @@ import {
   reauthenticateWithCredential,
   updatePassword,
 } from "firebase/auth";
-import { ShowErrorToast, ShowSuccessToast } from "../../Toast/toast";
+import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
 
 export const PasswordBox = ({
   handleOpen,

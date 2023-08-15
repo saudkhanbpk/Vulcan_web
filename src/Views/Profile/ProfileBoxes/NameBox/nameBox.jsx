@@ -7,7 +7,7 @@ import {
   TextButton,
   TextLabel,
   TextValue,
-} from "../../../Profile/styles";
+} from "../../styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";

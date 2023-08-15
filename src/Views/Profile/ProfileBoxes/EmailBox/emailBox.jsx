@@ -1,6 +1,6 @@
 import { Box, Stack } from '@mui/material'
 import React from 'react'
-import { TextLabel, TextValue } from '../../../Profile/styles'
+import { TextLabel, TextValue } from '../../styles'
 
 export const EmailBox = ({userEmail}) => {
   return (

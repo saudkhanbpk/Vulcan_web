@@ -2,9 +2,9 @@ import { Typography } from "@mui/material";
 import React, { useState } from "react";
 import { HeadingBox, MainBox, } from "./styles";
 import useAuthentication from "../../Infrastructure/States/onAuthStateChange";
-import { NameBox } from "../Common/ProfileBoxs/NameBox/nameBox";
-import { PasswordBox } from "../Common/ProfileBoxs/PasswordBox/passwordBox";
-import { EmailBox } from "../Common/ProfileBoxs/EmailBox/emailBox";
+import { NameBox } from "./ProfileBoxes/NameBox/nameBox";
+import { PasswordBox } from "./ProfileBoxes/PasswordBox/passwordBox";
+import { EmailBox } from "./ProfileBoxes/EmailBox/emailBox";
 
 export const Profile = () => {
   const [showEditName, setShowEditName] = useState(false);
