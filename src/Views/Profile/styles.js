@@ -14,14 +14,14 @@ export const TextLabel = styled(Typography)(({ theme }) => ({
   textAlign: "center",
   color: "black",
   [theme.breakpoints.down("md")]: {
-  fontSize: 12,
+    fontSize: 12,
   },
 }));
 export const TextValue = styled(Typography)(({ theme }) => ({
   fontSize: 16,
   color: "grey",
   [theme.breakpoints.down("md")]: {
-  fontSize: 12,
+    fontSize: 12,
   },
 }));
 export const TextButton = styled(Typography)(({ theme }) => ({
@@ -29,8 +29,7 @@ export const TextButton = styled(Typography)(({ theme }) => ({
   color: "#0000FF",
   paddingRight: theme.spacing(1),
   [theme.breakpoints.down("md")]: {
-  fontSize: 12,
-
+    fontSize: 12,
   },
 }));
 export const HeadingBox = styled(Box)(({ theme }) => ({
@@ -39,31 +38,6 @@ export const HeadingBox = styled(Box)(({ theme }) => ({
   alignItems: "center",
   marginRight: "24px",
   marginLeft: "24px",
-}));
-export const AboutDownArrow = styled("span")(({ theme }) => ({
-  position: "relative",
-  top: "74%",
-  transform: "translateY(-50%) ",
-  width: 0,
-  height: 0,
-  borderLeft: "6px solid transparent",
-  borderRight: "6px solid transparent",
-  borderTop: `6px solid #0000FF`,
-  pointerEvents: "none",
-  curser:"pointer",
-
-}));
-export const AboutUpArrow = styled("span")(({ theme }) => ({
-  position: "relative",
-  top: "74%",
-  transform: "translateX(-50%) rotate(180deg)",
-  width: 0,
-  height: 0,
-  borderLeft: "6px solid transparent",
-  borderRight: "6px solid transparent",
-  borderTop: `6px solid #0000FF`,
-  pointerEvents: "none",
-  curser:"pointer",
 }));
 export const FormBox = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -76,5 +50,5 @@ export const Span = styled("span")(({ theme }) => ({
   cursor: "pointer",
   display: "flex",
   alignItems: "center",
-  padding: theme.spacing(1)
+  padding: theme.spacing(1),
 }));

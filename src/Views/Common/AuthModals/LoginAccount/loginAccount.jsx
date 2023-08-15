@@ -60,7 +60,6 @@ export const LoginAccount = () => {
         .min(6, "Must be 6 characters")
         .required("Password"),
     }),
-
     onSubmit: async (values) => {
       try {
         const { email, password } = values;

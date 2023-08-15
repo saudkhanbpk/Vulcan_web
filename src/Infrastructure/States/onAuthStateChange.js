@@ -4,7 +4,6 @@ import { auth } from "../config";
 const useAuthentication = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -22,5 +21,4 @@ const useAuthentication = () => {
     loading,
   };
 };
-
 export default useAuthentication;

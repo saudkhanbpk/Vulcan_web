@@ -46,7 +46,6 @@ export const CreateAccount = () => {
   const { setTimeActive } = useAuthValue();
 
   const navigate = useNavigate();
-  
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -68,14 +67,11 @@ export const CreateAccount = () => {
         .required("Re Enter Password."),
       phoneNumber: Yup.string(),
     }),
-
     onSubmit: async (values) => {
       const { email, password, firstName, lastName } = values;
-
       await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-
           if (user) {
             updateProfile(user, {
               displayName: `${firstName} ${lastName}`,
@@ -95,7 +91,6 @@ export const CreateAccount = () => {
             navigate("/");
           }
         })
-
         .catch((error) => {
           if (error.code === "auth/email-already-in-use") {
             ShowErrorToast("Email already exists, Try another Email!");
@@ -120,7 +115,6 @@ export const CreateAccount = () => {
     dispatch(chooseModalLogin());
     formik.resetForm();
   };
-
   //Student & Teacher acc changing functionality
   const handleButtonClick = (val) => {
     if (val.value === 1) {
@@ -144,7 +138,6 @@ export const CreateAccount = () => {
       backgroundColor: "transparent", // Set the backdrop background color to transparent
     },
   };
-
   return (
     <Box>
       {/* Sign Up Modal */}
@@ -268,7 +261,6 @@ export const CreateAccount = () => {
               }}
               fullWidth
             />
-
             <TextField
               name="password"
               sx={{ mt: "6px" }}
@@ -302,7 +294,6 @@ export const CreateAccount = () => {
               }}
               fullWidth
             />
-
             <TextField
               name="reEnterPassword"
               sx={{ mt: "6px" }}
@@ -337,7 +328,6 @@ export const CreateAccount = () => {
               }}
               fullWidth
             />
-
             <TextField
               name="phoneNumber"
               sx={{ mt: "6px" }}
@@ -360,7 +350,6 @@ export const CreateAccount = () => {
               }}
               fullWidth
             />
-
             <Box pt={3}>
               <CreateAccButton
                 type="submit"
