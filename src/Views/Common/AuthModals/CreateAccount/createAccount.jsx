@@ -12,7 +12,6 @@ import * as Yup from "yup";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
-  updateProfile,
 } from "firebase/auth";
 import { ShowErrorToast, ShowSuccessToast } from "../../Toast/toast";
 import {
@@ -68,17 +67,9 @@ export const CreateAccount = () => {
       phoneNumber: Yup.string(),
     }),
     onSubmit: async (values) => {
-      const { email, password, firstName, lastName } = values;
+      const { email, password } = values;
       await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          const user = userCredential.user;
-          if (user) {
-            updateProfile(user, {
-              displayName: `${firstName} ${lastName}`,
-            }).catch((error) => {
-              console.error("Error updating display name:", error.message);
-            });
-          }
           ShowSuccessToast("Account created successfully!");
           if (!auth.currentUser.emailVerified) {
             sendEmailVerification(auth.currentUser)
