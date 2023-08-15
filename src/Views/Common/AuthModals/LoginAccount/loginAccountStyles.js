@@ -1,4 +1,9 @@
 import { Box, Typography, styled } from "@mui/material";
+export const styles={
+  backdrop: {
+    backgroundColor: "transparent", // Set the backdrop background color to transparent
+  },
+}
 export const LoginSigUpTextLink = styled(Typography)(({ theme }) => ({
   fontSize: "16px",
   color: theme.palette.primary.main,

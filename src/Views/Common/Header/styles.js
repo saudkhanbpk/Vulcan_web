@@ -67,8 +67,6 @@ export const styles = {
   rightBox: { flexGrow: 1, display: { xs: "none", md: "flex" } },
   rightBoxBecomeEdLink: { ml: 2, border: "none", textTransform: "capitalize" },
 };
-
-
 export const NavLink = styled(Typography)(({ theme }) => ({
   color: "secondary",
   fontSize: "20px !important",
@@ -84,10 +82,8 @@ export const AboutSpan = styled("span")(({ theme }) => ({
   cursor: "pointer",
   display: "flex",
   alignItems: "center",
-  position: "relative",  
+  position: "relative",
 }));
-
- 
 export const AuthButton = styled("button")(({ theme, signup }) => ({
   borderRadius: "30px",
   border: "1px solid black",
@@ -102,9 +98,8 @@ export const AuthButton = styled("button")(({ theme, signup }) => ({
     fontSize: "16px",
   },
 }));
-
 export const SmNavlink = styled(Typography)(({ theme }) => ({
-  color:"#00000",
+  color: "#00000",
   paddingTop: theme.spacing(2),
   textTransform: "capitalize",
   textAlign: "center",

@@ -12,6 +12,7 @@ import {
   LoginFormBox,
   LoginMainBox,
   LoginSigUpTextLink,
+  styles,
 } from "./loginAccountStyles";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
@@ -32,7 +33,6 @@ export const LoginAccount = () => {
   const auth = getAuth();
   const dispatch = useDispatch();
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
-  const [errorToast, setErrorToast] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
 
   const handleCloseModal = () => {
@@ -57,37 +57,35 @@ export const LoginAccount = () => {
     validationSchema: Yup.object({
       email: Yup.string().email("Invalid email address").required("Email"),
       password: Yup.string()
-        .min(6, "Must be 6 chatacters")
+        .min(6, "Must be 6 characters")
         .required("Password"),
     }),
-
     onSubmit: async (values) => {
       try {
         const { email, password } = values;
         await signInWithEmailAndPassword(auth, email, password);
-        ShowSuccessToast("User Logged In Sucessfully", {
+        ShowSuccessToast("User Logged In Sucessfully.", {
           autoClose: 3000,
           theme: "light",
         });
         handleCloseModal();
       } catch (error) {
-        if (error.code === "auth/INVALID_PASSWORD") {
-          setErrorToast(
+          if (error.code === "auth/wrong-password") {
+          ShowErrorToast(
             "Invalid password. Please check your password and try again."
           );
-          ShowErrorToast(errorToast);
+        } else if (error.code === "auth/user-not-found") {
+          ShowErrorToast("User not found! Try another email.");
+        } else if (error.code === "auth/too-many-requests") {
+          const errorMessage =
+            error?.error?.message || "Too many requests try again later.";
+          ShowErrorToast(errorMessage);
         } else {
-          setErrorToast("Please try again later.");
-          ShowErrorToast(errorToast);
+          ShowErrorToast("Please try again later.");
         }
       }
     },
   });
-  const customStyles = {
-    backdrop: {
-      backgroundColor: "transparent", // Set the backdrop background color to transparent
-    },
-  };
 
   return (
     <Box>
@@ -103,7 +101,7 @@ export const LoginAccount = () => {
           justifyContent: "center",
         }}
         BackdropProps={{
-          sx: customStyles.backdrop,
+          sx: styles.backdrop,
         }}
       >
         <LoginMainBox>

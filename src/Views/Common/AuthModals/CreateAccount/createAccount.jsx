@@ -11,7 +11,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   sendEmailVerification,
 } from "firebase/auth";
 import { ShowErrorToast, ShowSuccessToast } from "../../Toast/toast";
@@ -35,9 +34,9 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { useNavigate } from "react-router-dom";
 import { useAuthValue } from "../../../../Infrastructure/States/authContext";
+import { auth } from "../../../../Infrastructure/config";
 
 export const CreateAccount = () => {
-  const auth = getAuth();
   const dispatch = useDispatch();
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
   const [selectedButton, setSelectedButton] = useState(true);
@@ -67,12 +66,10 @@ export const CreateAccount = () => {
         .required("Re Enter Password."),
       phoneNumber: Yup.string(),
     }),
-
     onSubmit: async (values) => {
       const { email, password } = values;
-
       await createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
+        .then((userCredential) => {
           ShowSuccessToast("Account created successfully!");
           if (!auth.currentUser.emailVerified) {
             sendEmailVerification(auth.currentUser)
@@ -129,10 +126,9 @@ export const CreateAccount = () => {
   };
   const customStyles = {
     backdrop: {
-      backgroundColor: 'transparent', // Set the backdrop background color to transparent
+      backgroundColor: "transparent", // Set the backdrop background color to transparent
     },
   };
- 
   return (
     <Box>
       {/* Sign Up Modal */}
@@ -256,7 +252,6 @@ export const CreateAccount = () => {
               }}
               fullWidth
             />
-
             <TextField
               name="password"
               sx={{ mt: "6px" }}
@@ -290,7 +285,6 @@ export const CreateAccount = () => {
               }}
               fullWidth
             />
-
             <TextField
               name="reEnterPassword"
               sx={{ mt: "6px" }}
@@ -325,14 +319,13 @@ export const CreateAccount = () => {
               }}
               fullWidth
             />
-
             <TextField
               name="phoneNumber"
               sx={{ mt: "6px" }}
               label={
                 formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
                   ? `${formik.errors.phoneNumber}`
-                  : "Phone Number"
+                  : "Phone Number (Optional)"
               }
               variant="standard"
               onChange={formik.handleChange}
@@ -348,7 +341,6 @@ export const CreateAccount = () => {
               }}
               fullWidth
             />
-
             <Box pt={3}>
               <CreateAccButton
                 type="submit"

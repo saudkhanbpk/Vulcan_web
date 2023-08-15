@@ -29,6 +29,7 @@ if (process.env.NODE_ENV === "production") {
     measurementId: process.env.REACT_APP_FIREBASE_DEV_MEASUREMENT_ID,
   };
 }
+
 export const app = initializeApp(firebaseConfig);
 export const database = getDatabase();
 export const db = getFirestore(app);
