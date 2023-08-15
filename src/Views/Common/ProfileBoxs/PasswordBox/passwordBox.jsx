@@ -46,13 +46,13 @@ export const PasswordBox = ({
     validationSchema: Yup.object({
       oldPassword: Yup.string()
         .min(6, "Must be 6 characters")
-        .required("Password"),
+        .required("Old Password"),
       newPassword: Yup.string()
         .min(6, "Must be 6 characters")
-        .required("Password"),
+        .required("New Password"),
       reEnterPassword: Yup.string()
         .min(6, "Must be 6 characters")
-        .required("Password"),
+        .required("Re-Enter Password"),
     }),
     onSubmit: async (values) => {
       const { newPassword, reEnterPassword, oldPassword } = values;
