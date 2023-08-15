@@ -64,12 +64,12 @@ export const PasswordBox = ({
           user.email,
           oldPassword
         );
-        await reauthenticateWithCredential(user, credential);
         // Check if new passwords match
         if (newPassword !== reEnterPassword) {
           ShowErrorToast("New passwords don't match");
           return;
         }
+        await reauthenticateWithCredential(user, credential);
         // Update password
         await updatePassword(user, newPassword);
         ShowSuccessToast("Password updated successfully");
