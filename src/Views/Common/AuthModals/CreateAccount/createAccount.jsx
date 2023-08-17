@@ -21,30 +21,64 @@ import {
 } from "../../../../Infrastructure/States/authModalsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  AuthButton,
   ChooseAccBox,
   CreateAccButton,
   FormBox,
   Heading,
   MainBox,
   SignUpTextLink,
+  StyledToggleButtonGroup,
+  ToggleBtn,
 } from "./createAccountStyles";
 import CloseIcon from "@mui/icons-material/Close";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { useNavigate } from "react-router-dom";
 import { useAuthValue } from "../../../../Infrastructure/States/authContext";
-import { auth } from "../../../../Infrastructure/config";
+import { app, auth } from "../../../../Infrastructure/config";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 export const CreateAccount = () => {
+  const functions = getFunctions(app);
+  const setupAccountFunction = httpsCallable(functions, "createaccount");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
-  const [selectedButton, setSelectedButton] = useState(true);
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
+
+  const [isEducator, setIsEducator] = useState("student");
   const { setTimeActive } = useAuthValue();
 
-  const navigate = useNavigate();
+  const handleCloseModal = () => {
+    dispatch(closeChooseModal());
+    formik.resetForm();
+  };
+  const handleLoginButtonClick = () => {
+    dispatch(chooseModalLogin());
+    formik.resetForm();
+  };
+  const handleChange = (event, newAlignment) => {
+    if (newAlignment !== null) {
+      setIsEducator(newAlignment);
+    }
+  };
+  const isPasswordValid = (password) => {
+    const specialCharacters = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
+    return specialCharacters.test(password);
+  };
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const handleToggleRePasswordVisibility = () => {
+    setShowRePassword(!showRePassword);
+  };
+  const customStyles = {
+    backdrop: {
+      backgroundColor: "transparent", // Set the backdrop background color to transparent
+    },
+  };
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -53,6 +87,7 @@ export const CreateAccount = () => {
       password: "",
       reEnterPassword: "",
       phoneNumber: "",
+      isEducator: isEducator,
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required("First Name"),
@@ -69,7 +104,28 @@ export const CreateAccount = () => {
     onSubmit: async (values) => {
       const { email, password } = values;
       await createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
+          console.log("-----------------------------");
+          const requestData = {
+            firstName: values.firstName,
+            lastName: values.lastName,
+            number: values.phoneNumber,
+            isEducator: isEducator
+          };
+          
+          // Call the cloud function
+          setupAccountFunction(requestData)
+            .then(result => {
+              // Handle the result here if needed
+              console.log("Cloud Function executed successfully:", result.data);
+            })
+            .catch(error => {
+              // Handle errors here
+              console.error("Error calling Cloud Function:", error);
+            });
+          
+          console.log("-----------------------------");
+
           ShowSuccessToast("Account created successfully!");
           if (!auth.currentUser.emailVerified) {
             sendEmailVerification(auth.currentUser)
@@ -98,37 +154,6 @@ export const CreateAccount = () => {
         });
     },
   });
-  const handleCloseModal = () => {
-    dispatch(closeChooseModal());
-    formik.resetForm();
-  };
-  const handleLoginButtonClick = () => {
-    dispatch(chooseModalLogin());
-    formik.resetForm();
-  };
-  //Student & Teacher acc changing functionality
-  const handleButtonClick = (val) => {
-    if (val.value === 1) {
-      setSelectedButton(true);
-    } else {
-      setSelectedButton(false);
-    }
-  };
-  const isPasswordValid = (password) => {
-    const specialCharacters = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
-    return specialCharacters.test(password);
-  };
-  const handleTogglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-  const handleToggleRePasswordVisibility = () => {
-    setShowRePassword(!showRePassword);
-  };
-  const customStyles = {
-    backdrop: {
-      backgroundColor: "transparent", // Set the backdrop background color to transparent
-    },
-  };
   return (
     <Box>
       {/* Sign Up Modal */}
@@ -167,30 +192,23 @@ export const CreateAccount = () => {
               Already have an account? Log In
             </SignUpTextLink>
           </Box>
-
-          <ChooseAccBox>
-            <AuthButton
-              onClick={(e) => handleButtonClick({ value: 1 })}
-              sx={{
-                background: selectedButton ? "#000FFF" : "#D9D9D9E5",
-                color: selectedButton ? "white" : "black",
-              }}
-            >
-              Student Account
-            </AuthButton>
-            <AuthButton
-              onClick={(e) => {
-                handleButtonClick({ value: 2 });
-              }}
-              sx={{
-                background: selectedButton ? "#D9D9D9E5" : "#000FFF",
-                color: selectedButton ? "black" : "white",
-              }}
-            >
-              Educator Account
-            </AuthButton>
-          </ChooseAccBox>
           <FormBox component="form" onSubmit={formik.handleSubmit} noValidate>
+            <ChooseAccBox>
+              <StyledToggleButtonGroup
+                color="primary"
+                value={isEducator}
+                exclusive
+                onChange={handleChange}
+                aria-label="Platform"
+              >
+                <ToggleBtn type="button" value="student">
+                  Student Account
+                </ToggleBtn>
+                <ToggleBtn type="button" value="educator">
+                  Educator Account
+                </ToggleBtn>
+              </StyledToggleButtonGroup>
+            </ChooseAccBox>
             <TextField
               name="firstName"
               label={
@@ -264,6 +282,7 @@ export const CreateAccount = () => {
               type={showPassword ? "password" : "text"}
               onChange={formik.handleChange}
               value={formik.values.password}
+              autoComplete="new-password"
               error={
                 formik.touched.password &&
                 !isPasswordValid(formik.values.password)
@@ -298,6 +317,7 @@ export const CreateAccount = () => {
               type={showRePassword ? "password" : "text"}
               onChange={formik.handleChange}
               value={formik.values.reEnterPassword}
+              autoComplete="new-Password"
               error={
                 formik.touched.reEnterPassword &&
                 formik.values.password !== formik.values.reEnterPassword
