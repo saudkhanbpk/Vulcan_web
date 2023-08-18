@@ -46,7 +46,6 @@ export const CreateAccount = () => {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
-
   const [isEducator, setIsEducator] = useState("student");
   const { setTimeActive } = useAuthValue();
 
@@ -114,14 +113,14 @@ export const CreateAccount = () => {
           };
           
           // Call the cloud function
-          setupAccountFunction(requestData)
+          await setupAccountFunction(requestData)
             .then(result => {
               // Handle the result here if needed
               console.log("Cloud Function executed successfully:", result.data);
             })
             .catch(error => {
               // Handle errors here
-              console.error("Error calling Cloud Function:", error);
+              console.error("Error calling Cloud Function:", error.message);
             });
           
           console.log("-----------------------------");

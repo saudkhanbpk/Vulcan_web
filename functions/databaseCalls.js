@@ -2,6 +2,10 @@ const admin = require("firebase-admin");
 
 const db = admin.database();
 
+const loggingConstants = {
+  createAccountError: "CREATE_ACCOUNT_ERROR: ",
+};
+
 exports.logUnauth = (tag) => {
   db.ref(`unauth_logging`).update({
     [Date.now()]: tag,
@@ -100,7 +104,7 @@ exports.updateEnrolled = (
 exports.addWaitlist = (uid, courseId, email) => {
   try {
     db.ref(`waitlist/${courseId}`).push().update({
-      added: firebase.database.ServerValue.TIMESTAMP,
+      added: admin.database.ServerValue.TIMESTAMP,
       email: email,
       uid: uid,
     });
@@ -117,7 +121,7 @@ exports.addWaitlist = (uid, courseId, email) => {
 exports.logNotFound = (url) => {
   try {
     db.ref(`not_found`).push().update({
-      at: firebase.database.ServerValue.TIMESTAMP,
+      at: admin.database.ServerValue.TIMESTAMP,
       url: url,
       local_date: Date.now(),
     });

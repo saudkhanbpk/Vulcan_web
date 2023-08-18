@@ -36,9 +36,6 @@ export const StyledToggleButtonGroup = styled(ToggleButtonGroup)(
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
     },
-    [theme.breakpoints.down("xs")]: {
-      flexDirection: "column",
-    },
   })
 );
 export const ToggleBtn = styled(ToggleButton)(({ theme }) => ({
@@ -51,6 +48,8 @@ export const ToggleBtn = styled(ToggleButton)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     fontSize: "14px",
     marginBottom: theme.spacing(1),
+    border: "1px solid black",
+    borderLeft: "1px solid black !important",
   },
 
   "&:hover": {
@@ -66,7 +65,7 @@ export const ToggleBtn = styled(ToggleButton)(({ theme }) => ({
   },
   "&.MuiToggleButtonGroup-grouped": {
     borderRadius: "30px !important",
-  }, 
+  },
 }));
 export const ChooseAccBox = styled(Box)(({ theme }) => ({
   display: "flex",
