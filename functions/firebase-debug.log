@@ -1,39 +1,39 @@
-[debug] [2023-08-18T05:40:46.567Z] ----------------------------------------------------------------------
-[debug] [2023-08-18T05:40:46.571Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only functions
-[debug] [2023-08-18T05:40:46.573Z] CLI Version:   12.4.8
-[debug] [2023-08-18T05:40:46.573Z] Platform:      win32
-[debug] [2023-08-18T05:40:46.574Z] Node Version:  v18.17.0
-[debug] [2023-08-18T05:40:46.576Z] Time:          Fri Aug 18 2023 10:40:46 GMT+0500 (Pakistan Standard Time)
-[debug] [2023-08-18T05:40:46.577Z] ----------------------------------------------------------------------
+[debug] [2023-08-18T05:48:56.044Z] ----------------------------------------------------------------------
+[debug] [2023-08-18T05:48:56.048Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only functions
+[debug] [2023-08-18T05:48:56.049Z] CLI Version:   12.4.8
+[debug] [2023-08-18T05:48:56.050Z] Platform:      win32
+[debug] [2023-08-18T05:48:56.051Z] Node Version:  v18.17.0
+[debug] [2023-08-18T05:48:56.052Z] Time:          Fri Aug 18 2023 10:48:56 GMT+0500 (Pakistan Standard Time)
+[debug] [2023-08-18T05:48:56.052Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2023-08-18T05:40:46.779Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-08-18T05:40:46.779Z] > authorizing via signed-in user (pakistan03479@gmail.com)
+[debug] [2023-08-18T05:48:56.258Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-18T05:48:56.259Z] > authorizing via signed-in user (pakistan03479@gmail.com)
 [info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
-[debug] [2023-08-18T05:40:46.804Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-08-18T05:40:46.809Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
-[debug] [2023-08-18T05:40:46.836Z] [hub] writing locator at C:\Users\Ayaz\AppData\Local\Temp\hub-vulcan-v2-dev.json
-[debug] [2023-08-18T05:40:46.900Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-08-18T05:40:46.901Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-08-18T05:40:46.901Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[debug] [2023-08-18T05:48:56.277Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-18T05:48:56.277Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2023-08-18T05:48:56.295Z] [hub] writing locator at C:\Users\Ayaz\AppData\Local\Temp\hub-vulcan-v2-dev.json
+[debug] [2023-08-18T05:48:56.324Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-18T05:48:56.324Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-18T05:48:56.324Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
 [warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, firestore, database, hosting, pubsub, storage {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, firestore, database, hosting, pubsub, storage\u001b[22m"}}
-[debug] [2023-08-18T05:40:46.910Z] defaultcredentials: writing to file C:\Users\Ayaz\AppData\Roaming\firebase\pakistan03479_gmail_com_application_default_credentials.json
-[debug] [2023-08-18T05:40:46.920Z] Setting GAC to C:\Users\Ayaz\AppData\Roaming\firebase\pakistan03479_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\Ayaz\\AppData\\Roaming\\firebase\\pakistan03479_gmail_com_application_default_credentials.json"}}
-[debug] [2023-08-18T05:40:46.925Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig [none]
-[debug] [2023-08-18T05:40:47.991Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig 200
-[debug] [2023-08-18T05:40:47.992Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig {"projectId":"vulcan-v2-dev","databaseURL":"https://vulcan-v2-dev-default-rtdb.firebaseio.com","storageBucket":"vulcan-v2-dev.appspot.com","locationId":"us-central"}
-[debug] [2023-08-18T05:40:48.024Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-08-18T05:40:48.024Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2023-08-18T05:40:48.024Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Ayaz\\.cache\\firebase\\emulators\\ui-v1.11.7\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Ayaz\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.7\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[debug] [2023-08-18T05:48:56.332Z] defaultcredentials: writing to file C:\Users\Ayaz\AppData\Roaming\firebase\pakistan03479_gmail_com_application_default_credentials.json
+[debug] [2023-08-18T05:48:56.337Z] Setting GAC to C:\Users\Ayaz\AppData\Roaming\firebase\pakistan03479_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\Ayaz\\AppData\\Roaming\\firebase\\pakistan03479_gmail_com_application_default_credentials.json"}}
+[debug] [2023-08-18T05:48:56.340Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig [none]
+[debug] [2023-08-18T05:48:57.360Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig 200
+[debug] [2023-08-18T05:48:57.361Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig {"projectId":"vulcan-v2-dev","databaseURL":"https://vulcan-v2-dev-default-rtdb.firebaseio.com","storageBucket":"vulcan-v2-dev.appspot.com","locationId":"us-central"}
+[debug] [2023-08-18T05:48:57.408Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-18T05:48:57.409Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-08-18T05:48:57.409Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Ayaz\\.cache\\firebase\\emulators\\ui-v1.11.7\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Ayaz\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.7\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
 [info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
-[debug] [2023-08-18T05:40:48.243Z] Web / API server started at 127.0.0.1:4000
+[debug] [2023-08-18T05:48:57.853Z] Web / API server started at 127.0.0.1:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
-[debug] [2023-08-18T05:40:48.244Z] Web / API server started at ::1:4000
+[debug] [2023-08-18T05:48:57.855Z] Web / API server started at ::1:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
 [info] i  functions: Watching "F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\" for Cloud Functions..."}}
-[debug] [2023-08-18T05:40:48.318Z] Validating nodejs source
+[debug] [2023-08-18T05:48:57.957Z] Validating nodejs source
 [warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
 [warn] !  functions: Please note that there will be breaking changes when you upgrade. 
-[debug] [2023-08-18T05:40:51.772Z] > [functions] package.json contents: {
+[debug] [2023-08-18T05:48:59.881Z] > [functions] package.json contents: {
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
@@ -56,34 +56,8 @@
   },
   "private": true
 }
-[debug] [2023-08-18T05:40:51.773Z] Building nodejs source
-[debug] [2023-08-18T05:40:51.774Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[debug] [2023-08-18T05:48:59.882Z] Building nodejs source
+[debug] [2023-08-18T05:48:59.883Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
 [warn] !  functions: Your requested "node" version "16" doesn't match your global version "18". Using node@18 from host. 
-[debug] [2023-08-18T05:40:51.779Z] Could not find functions.yaml. Must use http discovery
-[debug] [2023-08-18T05:40:51.794Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
-[info] Serving at port 8816
-
-[debug] [2023-08-18T05:40:52.561Z] Got response code 400; body Failed to generate manifest from function source: Error: Cannot find module 'firebase-admin/app'
-Require stack:
-- F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\index.js
-- F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\firebase-functions\lib\runtime\loader.js
-- F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\firebase-functions\lib\bin\firebase-functions.js
-[info] shutdown requested via /__/quitquitquit
-
-[error] !!  functions: Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error"}}
-[info] 
-┌─────────────────────────────────────────────────────────────┐
-│ ✔  All emulators ready! It is now safe to connect your app. │
-│ i  View Emulator UI at http://127.0.0.1:4000/               │
-└─────────────────────────────────────────────────────────────┘
-
-┌───────────┬────────────────┬─────────────────────────────────┐
-│ Emulator  │ Host:Port      │ View in Emulator UI             │
-├───────────┼────────────────┼─────────────────────────────────┤
-│ Functions │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions │
-└───────────┴────────────────┴─────────────────────────────────┘
-  Emulator Hub running at 127.0.0.1:4400
-  Other reserved ports: 4500
-
-Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
- 
+[debug] [2023-08-18T05:48:59.886Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T05:48:59.899Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'

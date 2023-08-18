@@ -104,6 +104,7 @@ export const CreateAccount = () => {
       const { email, password } = values;
       await createUserWithEmailAndPassword(auth, email, password)
         .then(async (userCredential) => {
+          
           console.log("-----------------------------");
           const requestData = {
             firstName: values.firstName,
