@@ -11,7 +11,7 @@ exports.setupAccount = onCall((request) => {
   const email = request.auth.token.email
   const { firstName, lastName, number, isEducator } = request.data
 
-  db.logUser(currentUser.uid, `ACTION: Firebase Account Created: ` + `ID: ${currentUser.email}`)
+  db.logUser(uid, `ACTION: Firebase Account Created: ` + `ID: ${email}`)
 
   db.ref(`users`).child(uid).update({
     "account_active": true,
