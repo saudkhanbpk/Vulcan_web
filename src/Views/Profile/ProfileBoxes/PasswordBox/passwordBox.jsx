@@ -56,9 +56,6 @@ export const PasswordBox = ({
     }),
     onSubmit: async (values) => {
       const { newPassword, reEnterPassword, oldPassword } = values;
-      if (!user) {
-        return;
-      }
       try {
         const credential = EmailAuthProvider.credential(
           user.email,
@@ -71,8 +68,7 @@ export const PasswordBox = ({
         }
         await reauthenticateWithCredential(user, credential);
         // Update password
-        await updatePassword(user, newPassword);
-        ShowSuccessToast("Password updated successfully");
+        await updatePassword(user, newPassword).then(()=>ShowSuccessToast('Password updated successfully'));
         handleClose();
         passwordFormik.resetForm();
       } catch (error) {

@@ -1,24 +1,20 @@
-const admin = require("firebase-admin");
+const admin = require("firebase-admin")  
 
-const db = admin.database();
-
-// const loggingConstants = {
-//   createAccountError: "CREATE_ACCOUNT_ERROR: ",
-// };
+const db = admin.database()  
 
 exports.logUnauth = (tag) => {
   db.ref(`unauth_logging`).update({
     [Date.now()]: tag,
-  });
-};
+  })  
+}  
 
 exports.logUser = (uid, tag) => {
   db.ref(`users_logging`)
     .child(uid)
     .update({
       [Date.now()]: tag,
-    });
-};
+    })  
+}  
 
 // exports.createUser = (uid, firstName, lastName, email, number, isEducator) => {
 //     db.ref(`users`).child(uid).update({
@@ -32,7 +28,7 @@ exports.logUser = (uid, tag) => {
 //         "created": Date.now()
 //     }).catch(error => {
 //         this.logUnauth(loggingConstants.createAccountError + `ID: ${uid}: ${error}`)
-//     });
+//     })  
 // }
 
 // exports.udateEmailVerified = (uid, isEmailVerified) => {
@@ -76,7 +72,7 @@ exports.logUser = (uid, tag) => {
 //         db.ref(`users_logging`).child(uid).update({
 //             [Date.now()]: "ERROR: Course Cancel DB Update: " + error
 //         })
-//     });
+//     })  
 // }
 
 // exports.addWaitlist = (uid, courseId, email) => {

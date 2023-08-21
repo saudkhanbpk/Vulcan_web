@@ -29,6 +29,7 @@ import {
   SignUpTextLink,
   StyledToggleButtonGroup,
   ToggleBtn,
+  styles,
 } from "./createAccountStyles";
 import CloseIcon from "@mui/icons-material/Close";
 import Visibility from "@material-ui/icons/Visibility";
@@ -44,7 +45,7 @@ export const CreateAccount = () => {
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
-  const [isEducator, setIsEducator] = useState("student");
+  const [isEducator, setIsEducator] = useState(false);
   const { setTimeActive } = useAuthValue();
 
   const handleCloseModal = () => {
@@ -70,12 +71,27 @@ export const CreateAccount = () => {
   const handleToggleRePasswordVisibility = () => {
     setShowRePassword(!showRePassword);
   };
-  const customStyles = {
-    backdrop: {
-      backgroundColor: "transparent",
-    },
+  const handleRegistrationError = (error) => {
+    if (!error) {
+      return; // Do nothing if there's no error
+    }
+    let errorMessage = "An unexpected error occurred. Please try again later.";
+    switch (error.code) {
+      case "auth/email-already-in-use":
+        errorMessage = "Email already exists. Please try another email.";
+        break;
+      case "auth/weak-password":
+        errorMessage = "Weak password. Please choose a stronger one.";
+        break;
+      case "auth/user-token-expired":
+        errorMessage = "User session expired. Please log in again.";
+        dispatch(chooseModalLogin());
+        break;
+      default:
+        ShowErrorToast(error);
+    }
+    ShowErrorToast(errorMessage);
   };
-
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -122,18 +138,7 @@ export const CreateAccount = () => {
           navigate("/");
         }
       } catch (error) {
-        if (error.code === "auth/email-already-in-use") {
-          ShowErrorToast("Email already exists. Please try another email.");
-        } else if (error.code === "auth/weak-password") {
-          ShowErrorToast("Weak password. Please choose a stronger one.");
-        } else if (error.code === "auth/user-token-expired") {
-          ShowErrorToast("User session expired. Please log in again.");
-          dispatch(chooseModalLogin());
-        } else {
-          ShowErrorToast(
-            `An unexpected error occurred. Please try again later. ${error}`
-          );
-        }
+        handleRegistrationError(error);
       }
     },
   });
@@ -151,7 +156,7 @@ export const CreateAccount = () => {
           justifyContent: "center",
         }}
         BackdropProps={{
-          sx: customStyles.backdrop, // Apply custom styles to the backdrop
+          sx: styles.backdrop, // Apply custom styles to the backdrop
         }}
       >
         <MainBox>
@@ -184,10 +189,10 @@ export const CreateAccount = () => {
                 onChange={handleChange}
                 aria-label="Platform"
               >
-                <ToggleBtn type="button" value="student">
+                <ToggleBtn type="button" value={false}>
                   Student Account
                 </ToggleBtn>
-                <ToggleBtn type="button" value="educator">
+                <ToggleBtn type="button" value={true}>
                   Educator Account
                 </ToggleBtn>
               </StyledToggleButtonGroup>
