@@ -11,7 +11,7 @@ exports.setupAccount = onCall((request) => {
   const email = request.auth.token.email
   const { firstName, lastName, number, isEducator } = request.data
 
-  db.logUser(uid, `ACTION: Firebase Account Created: ` + `ID: ${email}`)
+  dbCalls.logUser(uid, `ACTION: Firebase Account Created: ID: ${email}`)
 
   db.ref(`users`).child(uid).update({
     "account_active": true,
@@ -28,7 +28,7 @@ exports.setupAccount = onCall((request) => {
     })
   )
   .catch(error => {
-      dbCalls.logUser("ERROR: ACCOUNT INFO ERROR" + `ID: ${uid}: ${error}`)
+      dbCalls.logUser(uid, `ERROR: ACCOUNT INFO ERROR ID: ${uid}: ${error}`)
       isSuccess = false
       errorMessage = "Account Error"
   })
