@@ -1,39 +1,37 @@
-[debug] [2023-08-18T05:48:56.044Z] ----------------------------------------------------------------------
-[debug] [2023-08-18T05:48:56.048Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only functions
-[debug] [2023-08-18T05:48:56.049Z] CLI Version:   12.4.8
-[debug] [2023-08-18T05:48:56.050Z] Platform:      win32
-[debug] [2023-08-18T05:48:56.051Z] Node Version:  v18.17.0
-[debug] [2023-08-18T05:48:56.052Z] Time:          Fri Aug 18 2023 10:48:56 GMT+0500 (Pakistan Standard Time)
-[debug] [2023-08-18T05:48:56.052Z] ----------------------------------------------------------------------
+[debug] [2023-08-18T06:38:51.228Z] ----------------------------------------------------------------------
+[debug] [2023-08-18T06:38:51.230Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2023-08-18T06:38:51.231Z] CLI Version:   12.4.8
+[debug] [2023-08-18T06:38:51.232Z] Platform:      win32
+[debug] [2023-08-18T06:38:51.232Z] Node Version:  v16.20.2
+[debug] [2023-08-18T06:38:51.233Z] Time:          Fri Aug 18 2023 11:38:51 GMT+0500 (Pakistan Standard Time)
+[debug] [2023-08-18T06:38:51.234Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2023-08-18T05:48:56.258Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-08-18T05:48:56.259Z] > authorizing via signed-in user (pakistan03479@gmail.com)
+[debug] [2023-08-18T06:38:51.395Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-18T06:38:51.396Z] > authorizing via signed-in user (pakistan03479@gmail.com)
 [info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
-[debug] [2023-08-18T05:48:56.277Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-08-18T05:48:56.277Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
-[debug] [2023-08-18T05:48:56.295Z] [hub] writing locator at C:\Users\Ayaz\AppData\Local\Temp\hub-vulcan-v2-dev.json
-[debug] [2023-08-18T05:48:56.324Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-08-18T05:48:56.324Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-08-18T05:48:56.324Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[debug] [2023-08-18T06:38:51.431Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-18T06:38:51.432Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2023-08-18T06:38:51.461Z] [hub] writing locator at C:\Users\Ayaz\AppData\Local\Temp\hub-vulcan-v2-dev.json
+[debug] [2023-08-18T06:38:51.516Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-18T06:38:51.517Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-18T06:38:51.517Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
 [warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, firestore, database, hosting, pubsub, storage {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, firestore, database, hosting, pubsub, storage\u001b[22m"}}
-[debug] [2023-08-18T05:48:56.332Z] defaultcredentials: writing to file C:\Users\Ayaz\AppData\Roaming\firebase\pakistan03479_gmail_com_application_default_credentials.json
-[debug] [2023-08-18T05:48:56.337Z] Setting GAC to C:\Users\Ayaz\AppData\Roaming\firebase\pakistan03479_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\Ayaz\\AppData\\Roaming\\firebase\\pakistan03479_gmail_com_application_default_credentials.json"}}
-[debug] [2023-08-18T05:48:56.340Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig [none]
-[debug] [2023-08-18T05:48:57.360Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig 200
-[debug] [2023-08-18T05:48:57.361Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig {"projectId":"vulcan-v2-dev","databaseURL":"https://vulcan-v2-dev-default-rtdb.firebaseio.com","storageBucket":"vulcan-v2-dev.appspot.com","locationId":"us-central"}
-[debug] [2023-08-18T05:48:57.408Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-08-18T05:48:57.409Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2023-08-18T05:48:57.409Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Ayaz\\.cache\\firebase\\emulators\\ui-v1.11.7\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Ayaz\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.7\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[debug] [2023-08-18T06:38:51.539Z] defaultcredentials: writing to file C:\Users\Ayaz\AppData\Roaming\firebase\pakistan03479_gmail_com_application_default_credentials.json
+[debug] [2023-08-18T06:38:51.549Z] Setting GAC to C:\Users\Ayaz\AppData\Roaming\firebase\pakistan03479_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\Ayaz\\AppData\\Roaming\\firebase\\pakistan03479_gmail_com_application_default_credentials.json"}}
+[debug] [2023-08-18T06:38:51.554Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig [none]
+[debug] [2023-08-18T06:38:52.305Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig 200
+[debug] [2023-08-18T06:38:52.305Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig {"projectId":"vulcan-v2-dev","databaseURL":"https://vulcan-v2-dev-default-rtdb.firebaseio.com","storageBucket":"vulcan-v2-dev.appspot.com","locationId":"us-central"}
+[debug] [2023-08-18T06:38:52.372Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-18T06:38:52.373Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-08-18T06:38:52.373Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Ayaz\\.cache\\firebase\\emulators\\ui-v1.11.7\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Ayaz\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.7\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
 [info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
-[debug] [2023-08-18T05:48:57.853Z] Web / API server started at 127.0.0.1:4000
+[debug] [2023-08-18T06:38:52.707Z] Web / API server started at 127.0.0.1:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
-[debug] [2023-08-18T05:48:57.855Z] Web / API server started at ::1:4000
+[debug] [2023-08-18T06:38:52.708Z] Web / API server started at ::1:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
 [info] i  functions: Watching "F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\" for Cloud Functions..."}}
-[debug] [2023-08-18T05:48:57.957Z] Validating nodejs source
-[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
-[warn] !  functions: Please note that there will be breaking changes when you upgrade. 
-[debug] [2023-08-18T05:48:59.881Z] > [functions] package.json contents: {
+[debug] [2023-08-18T06:38:52.971Z] Validating nodejs source
+[debug] [2023-08-18T06:38:56.837Z] > [functions] package.json contents: {
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
@@ -49,15 +47,1598 @@
   "main": "index.js",
   "dependencies": {
     "firebase-admin": "^10.0.2",
-    "firebase-functions": "^3.18.0"
+    "firebase-functions": "^4.4.1"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0"
   },
   "private": true
 }
-[debug] [2023-08-18T05:48:59.882Z] Building nodejs source
-[debug] [2023-08-18T05:48:59.883Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
-[warn] !  functions: Your requested "node" version "16" doesn't match your global version "18". Using node@18 from host. 
-[debug] [2023-08-18T05:48:59.886Z] Could not find functions.yaml. Must use http discovery
-[debug] [2023-08-18T05:48:59.899Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[debug] [2023-08-18T06:38:56.837Z] Building nodejs source
+[debug] [2023-08-18T06:38:56.838Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T06:38:56.861Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T06:38:56.879Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8303
+
+[debug] [2023-08-18T06:38:57.954Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[info] +  functions[us-central1-createaccount]: http function initialized (http://127.0.0.1:5001/vulcan-v2-dev/us-central1/createaccount). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/vulcan-v2-dev/us-central1/createaccount)."}}
+[info] +  functions[us-central1-updateaccount]: http function initialized (http://127.0.0.1:5001/vulcan-v2-dev/us-central1/updateaccount). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/vulcan-v2-dev/us-central1/updateaccount)."}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬────────────────┬─────────────────────────────────┐
+│ Emulator  │ Host:Port      │ View in Emulator UI             │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Functions │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions │
+└───────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2023-08-18T07:04:37.223Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T07:04:38.242Z] Validating nodejs source
+[debug] [2023-08-18T07:04:42.340Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T07:04:42.340Z] Building nodejs source
+[debug] [2023-08-18T07:04:42.341Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T07:04:42.345Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T07:04:42.361Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8807
+
+[debug] [2023-08-18T07:04:43.834Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T07:05:46.303Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T07:05:47.312Z] Validating nodejs source
+[debug] [2023-08-18T07:05:50.583Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T07:05:50.584Z] Building nodejs source
+[debug] [2023-08-18T07:05:50.584Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T07:05:50.587Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T07:05:50.602Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8806
+
+[debug] [2023-08-18T07:05:51.528Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T07:07:29.790Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T07:07:30.798Z] Validating nodejs source
+[debug] [2023-08-18T07:07:34.379Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T07:07:34.380Z] Building nodejs source
+[debug] [2023-08-18T07:07:34.380Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T07:07:34.383Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T07:07:34.397Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8902
+
+[debug] [2023-08-18T07:07:35.404Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T07:09:44.736Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\databaseCalls.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\databaseCalls.js changed, reloading triggers"}}
+[debug] [2023-08-18T07:09:45.788Z] Validating nodejs source
+[debug] [2023-08-18T07:09:50.985Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T07:09:50.986Z] Building nodejs source
+[debug] [2023-08-18T07:09:50.986Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T07:09:50.988Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T07:09:51.002Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8722
+
+[debug] [2023-08-18T07:09:52.197Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T07:10:01.149Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T07:10:02.160Z] Validating nodejs source
+[debug] [2023-08-18T07:10:04.688Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T07:10:04.688Z] Building nodejs source
+[debug] [2023-08-18T07:10:04.688Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T07:10:04.691Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T07:10:04.703Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8459
+
+[debug] [2023-08-18T07:10:05.628Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T07:12:18.179Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T07:12:19.192Z] Validating nodejs source
+[debug] [2023-08-18T07:12:21.742Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T07:12:21.742Z] Building nodejs source
+[debug] [2023-08-18T07:12:21.742Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T07:12:21.746Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T07:12:21.759Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8794
+
+[debug] [2023-08-18T07:12:23.051Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T07:12:30.682Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T07:12:31.693Z] Validating nodejs source
+[debug] [2023-08-18T07:12:35.556Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T07:12:35.557Z] Building nodejs source
+[debug] [2023-08-18T07:12:35.557Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T07:12:35.561Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T07:12:35.579Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8650
+
+[debug] [2023-08-18T07:12:36.582Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T07:15:08.190Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T07:15:08.382Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T07:15:08.543Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T07:15:08.736Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T07:15:08.845Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T07:15:09.857Z] Validating nodejs source
+[debug] [2023-08-18T07:15:13.341Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T07:15:13.341Z] Building nodejs source
+[debug] [2023-08-18T07:15:13.341Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T07:15:13.344Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T07:15:13.357Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8695
+
+[debug] [2023-08-18T07:15:14.426Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T08:01:23.782Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T08:01:24.797Z] Validating nodejs source
+[debug] [2023-08-18T08:01:28.019Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T08:01:28.020Z] Building nodejs source
+[debug] [2023-08-18T08:01:28.020Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T08:01:28.025Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T08:01:28.038Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8521
+
+[debug] [2023-08-18T08:01:29.294Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:11:37.189Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:11:37.312Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:11:38.317Z] Validating nodejs source
+[debug] [2023-08-18T09:11:41.494Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:11:41.495Z] Building nodejs source
+[debug] [2023-08-18T09:11:41.495Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:11:41.500Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:11:41.514Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8846
+
+[debug] [2023-08-18T09:11:43.015Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:14:13.185Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\databaseCalls.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\databaseCalls.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:14:14.187Z] Validating nodejs source
+[debug] [2023-08-18T09:14:18.031Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:14:18.031Z] Building nodejs source
+[debug] [2023-08-18T09:14:18.031Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:14:18.034Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:14:18.045Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8791
+
+[debug] [2023-08-18T09:14:19.053Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:16:39.233Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:16:40.240Z] Validating nodejs source
+[debug] [2023-08-18T09:16:43.681Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:16:43.681Z] Building nodejs source
+[debug] [2023-08-18T09:16:43.681Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:16:43.684Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:16:43.697Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8802
+
+[debug] [2023-08-18T09:16:44.654Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:17:45.842Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:17:46.844Z] Validating nodejs source
+[debug] [2023-08-18T09:17:50.382Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:17:50.382Z] Building nodejs source
+[debug] [2023-08-18T09:17:50.382Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:17:50.385Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:17:50.397Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[debug] [2023-08-18T09:17:50.668Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:17:50.784Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[info] Serving at port 8388
+
+[debug] [2023-08-18T09:17:51.455Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:17:51.789Z] Validating nodejs source
+[debug] [2023-08-18T09:17:55.970Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:17:55.971Z] Building nodejs source
+[debug] [2023-08-18T09:17:55.971Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:17:55.974Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:17:55.986Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8465
+
+[debug] [2023-08-18T09:17:56.894Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:19:08.634Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:19:08.751Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:19:09.756Z] Validating nodejs source
+[debug] [2023-08-18T09:19:12.827Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:19:12.827Z] Building nodejs source
+[debug] [2023-08-18T09:19:12.827Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:19:12.830Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:19:12.844Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8235
+
+[debug] [2023-08-18T09:19:13.928Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:23:12.694Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\databaseCalls.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\databaseCalls.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:23:13.706Z] Validating nodejs source
+[debug] [2023-08-18T09:23:17.439Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:23:17.439Z] Building nodejs source
+[debug] [2023-08-18T09:23:17.440Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:23:17.442Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:23:17.454Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8183
+
+[debug] [2023-08-18T09:23:18.372Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:23:54.307Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:23:55.017Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:23:56.032Z] Validating nodejs source
+[debug] [2023-08-18T09:23:58.879Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:23:58.880Z] Building nodejs source
+[debug] [2023-08-18T09:23:58.880Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:23:58.882Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:23:58.894Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8215
+
+[debug] [2023-08-18T09:23:59.843Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:25:46.062Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:25:46.310Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:25:46.520Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:25:46.717Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:25:47.723Z] Validating nodejs source
+[debug] [2023-08-18T09:25:52.380Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:25:52.380Z] Building nodejs source
+[debug] [2023-08-18T09:25:52.380Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:25:52.382Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:25:52.395Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8128
+
+[debug] [2023-08-18T09:25:53.476Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:32:24.401Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:32:24.731Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:32:24.903Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:32:25.912Z] Validating nodejs source
+[debug] [2023-08-18T09:32:28.960Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:32:28.960Z] Building nodejs source
+[debug] [2023-08-18T09:32:28.960Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:32:28.963Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:32:28.983Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8948
+
+[debug] [2023-08-18T09:32:29.883Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:34:02.077Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:34:03.080Z] Validating nodejs source
+[debug] [2023-08-18T09:34:09.491Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:34:09.491Z] Building nodejs source
+[debug] [2023-08-18T09:34:09.491Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:34:09.493Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:34:09.505Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8647
+
+[debug] [2023-08-18T09:34:10.409Z] Got response code 400; body Failed to generate manifest from function source: SyntaxError: Cannot use import statement outside a module
+[info] shutdown requested via /__/quitquitquit
+
+[error] !!  functions: Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error"}}
+[debug] [2023-08-18T09:38:07.222Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:38:08.228Z] Validating nodejs source
+[debug] [2023-08-18T09:38:11.767Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:38:11.767Z] Building nodejs source
+[debug] [2023-08-18T09:38:11.767Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:38:11.770Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:38:11.782Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8682
+
+[debug] [2023-08-18T09:38:12.955Z] Got response code 400; body Failed to generate manifest from function source: SyntaxError: Cannot use import statement outside a module
+[info] shutdown requested via /__/quitquitquit
+
+[error] !!  functions: Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error"}}
+[debug] [2023-08-18T09:38:14.505Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:38:15.513Z] Validating nodejs source
+[debug] [2023-08-18T09:38:18.986Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:38:18.986Z] Building nodejs source
+[debug] [2023-08-18T09:38:18.987Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:38:18.991Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:38:19.003Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8499
+
+[debug] [2023-08-18T09:38:19.911Z] Got response code 400; body Failed to generate manifest from function source: SyntaxError: Cannot use import statement outside a module
+[info] shutdown requested via /__/quitquitquit
+
+[error] !!  functions: Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error"}}
+[debug] [2023-08-18T09:38:38.310Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:38:39.322Z] Validating nodejs source
+[debug] [2023-08-18T09:38:41.966Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:38:41.966Z] Building nodejs source
+[debug] [2023-08-18T09:38:41.967Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:38:41.973Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:38:41.984Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8709
+
+[debug] [2023-08-18T09:38:42.829Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:40:41.326Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:40:42.334Z] Validating nodejs source
+[debug] [2023-08-18T09:40:46.223Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:40:46.224Z] Building nodejs source
+[debug] [2023-08-18T09:40:46.224Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:40:46.229Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:40:46.242Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8994
+
+[debug] [2023-08-18T09:40:47.131Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:43:01.578Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\updateAccountInfo.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\updateAccountInfo.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:43:01.675Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\updateAccountInfo.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\updateAccountInfo.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:43:02.681Z] Validating nodejs source
+[debug] [2023-08-18T09:43:08.505Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:43:08.506Z] Building nodejs source
+[debug] [2023-08-18T09:43:08.506Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:43:08.509Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:43:08.522Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8524
+
+[debug] [2023-08-18T09:43:09.547Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:47:03.920Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\databaseCalls.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\databaseCalls.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:47:04.943Z] Validating nodejs source
+[debug] [2023-08-18T09:47:15.016Z] checkFunctionsSDKVersion was unable to fetch information from NPM Error: spawnSync C:\WINDOWS\system32\cmd.exe ETIMEDOUT
+    at Object.spawnSync (node:internal/child_process:1119:20)
+    at Object.spawnSync (node:child_process:847:24)
+    at Function.spawnSync [as sync] (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\index.js:26:23)
+    at Object.getLatestSDKVersion (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\versioning.js:54:25)
+    at Object.checkFunctionsSDKVersion (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\versioning.js:74:32)
+    at Delegate.validate (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\index.js:84:20)
+    at FunctionsEmulator.discoverTriggers (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulator.js:296:35)
+    at async FunctionsEmulator.loadTriggers (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulator.js:325:34)
+[debug] [2023-08-18T09:47:15.017Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:47:15.017Z] Building nodejs source
+[debug] [2023-08-18T09:47:15.017Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:47:15.019Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:47:15.033Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8596
+
+[debug] [2023-08-18T09:47:16.100Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:47:18.062Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:47:18.395Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:47:18.563Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:47:18.792Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:47:19.800Z] Validating nodejs source
+[debug] [2023-08-18T09:47:29.887Z] checkFunctionsSDKVersion was unable to fetch information from NPM Error: spawnSync C:\WINDOWS\system32\cmd.exe ETIMEDOUT
+    at Object.spawnSync (node:internal/child_process:1119:20)
+    at Object.spawnSync (node:child_process:847:24)
+    at Function.spawnSync [as sync] (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\index.js:26:23)
+    at Object.getLatestSDKVersion (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\versioning.js:54:25)
+    at Object.checkFunctionsSDKVersion (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\versioning.js:74:32)
+    at Delegate.validate (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\index.js:84:20)
+    at FunctionsEmulator.discoverTriggers (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulator.js:296:35)
+    at async FunctionsEmulator.loadTriggers (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulator.js:325:34)
+[debug] [2023-08-18T09:47:29.890Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:47:29.891Z] Building nodejs source
+[debug] [2023-08-18T09:47:29.891Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:47:29.910Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:47:29.930Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8054
+
+[debug] [2023-08-18T09:47:30.897Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T09:56:17.685Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T09:56:18.695Z] Validating nodejs source
+[debug] [2023-08-18T09:56:22.869Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T09:56:22.869Z] Building nodejs source
+[debug] [2023-08-18T09:56:22.869Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T09:56:22.874Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T09:56:22.887Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8602
+
+[debug] [2023-08-18T09:56:23.781Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"platform":"gcfv1","labels":{},"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T10:00:42.196Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T10:00:42.370Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T10:00:43.371Z] Validating nodejs source
+[debug] [2023-08-18T10:00:47.743Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T10:00:47.743Z] Building nodejs source
+[debug] [2023-08-18T10:00:47.743Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T10:00:47.746Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T10:00:47.759Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[debug] [2023-08-18T10:00:47.768Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[info] Serving at port 8533
+
+[debug] [2023-08-18T10:00:48.771Z] Validating nodejs source
+[debug] [2023-08-18T10:00:52.881Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T10:00:52.881Z] Building nodejs source
+[debug] [2023-08-18T10:00:52.881Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T10:00:52.884Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2023-08-18T10:00:52.887Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T10:00:52.898Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[info] Serving at port 8334
+
+[debug] [2023-08-18T10:00:53.786Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T10:03:12.563Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T10:03:12.701Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T10:03:13.724Z] Validating nodejs source
+[debug] [2023-08-18T10:03:19.243Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T10:03:19.244Z] Building nodejs source
+[debug] [2023-08-18T10:03:19.244Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T10:03:19.247Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T10:03:19.259Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8533
+
+[debug] [2023-08-18T10:03:20.382Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T10:57:24.432Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T10:57:25.478Z] Validating nodejs source
+[debug] [2023-08-18T10:57:30.285Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T10:57:30.287Z] Building nodejs source
+[debug] [2023-08-18T10:57:30.289Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T10:57:30.298Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T10:57:30.318Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8778
+
+[debug] [2023-08-18T10:57:32.220Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T10:57:43.679Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T10:57:44.692Z] Validating nodejs source
+[debug] [2023-08-18T10:57:48.339Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T10:57:48.340Z] Building nodejs source
+[debug] [2023-08-18T10:57:48.340Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T10:57:48.342Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T10:57:48.353Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8392
+
+[debug] [2023-08-18T10:57:49.212Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T10:58:05.178Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T10:58:05.308Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T10:58:05.702Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T10:58:05.861Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T10:58:06.876Z] Validating nodejs source
+[debug] [2023-08-18T10:58:10.073Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T10:58:10.073Z] Building nodejs source
+[debug] [2023-08-18T10:58:10.074Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T10:58:10.076Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T10:58:10.088Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8463
+
+[debug] [2023-08-18T10:58:11.019Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T11:00:22.137Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T11:00:22.256Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T11:00:22.369Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T11:00:22.550Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T11:00:22.810Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T11:00:23.814Z] Validating nodejs source
+[debug] [2023-08-18T11:00:27.945Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T11:00:27.945Z] Building nodejs source
+[debug] [2023-08-18T11:00:27.945Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T11:00:27.947Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T11:00:27.962Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8058
+
+[debug] [2023-08-18T11:00:29.472Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T11:00:43.592Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T11:00:43.716Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T11:00:44.723Z] Validating nodejs source
+[debug] [2023-08-18T11:00:47.277Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T11:00:47.277Z] Building nodejs source
+[debug] [2023-08-18T11:00:47.277Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T11:00:47.279Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T11:00:47.291Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8901
+
+[debug] [2023-08-18T11:00:48.424Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T11:02:03.673Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T11:02:04.694Z] Validating nodejs source
+[debug] [2023-08-18T11:02:07.917Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T11:02:07.917Z] Building nodejs source
+[debug] [2023-08-18T11:02:07.917Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T11:02:07.919Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T11:02:07.934Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8602
+
+[debug] [2023-08-18T11:02:08.914Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T11:08:32.040Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\updateAccountInfo.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\updateAccountInfo.js changed, reloading triggers"}}
+[debug] [2023-08-18T11:08:33.053Z] Validating nodejs source
+[debug] [2023-08-18T11:08:36.361Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T11:08:36.361Z] Building nodejs source
+[debug] [2023-08-18T11:08:36.362Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T11:08:36.364Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T11:08:36.376Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8091
+
+[debug] [2023-08-18T11:08:37.353Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T11:09:14.911Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T11:09:15.914Z] Validating nodejs source
+[debug] [2023-08-18T11:09:18.461Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T11:09:18.461Z] Building nodejs source
+[debug] [2023-08-18T11:09:18.461Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T11:09:18.464Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T11:09:18.474Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8044
+
+[debug] [2023-08-18T11:09:19.349Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T11:10:33.252Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T11:10:33.450Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T11:10:33.637Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[debug] [2023-08-18T11:10:34.639Z] Validating nodejs source
+[debug] [2023-08-18T11:10:37.926Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T11:10:37.927Z] Building nodejs source
+[debug] [2023-08-18T11:10:37.927Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T11:10:37.929Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T11:10:37.940Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[debug] [2023-08-18T11:10:37.948Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[info] Serving at port 8990
+
+[debug] [2023-08-18T11:10:38.959Z] Validating nodejs source
+[debug] [2023-08-18T11:10:41.510Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T11:10:41.510Z] Building nodejs source
+[debug] [2023-08-18T11:10:41.510Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T11:10:41.514Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2023-08-18T11:10:41.516Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T11:10:41.525Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[debug] [2023-08-18T11:10:41.534Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\setupAccount.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\setupAccount.js changed, reloading triggers"}}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[info] Serving at port 8377
+
+[debug] [2023-08-18T11:10:42.409Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-18T11:10:42.545Z] Validating nodejs source
+[debug] [2023-08-18T11:10:45.957Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-18T11:10:45.957Z] Building nodejs source
+[debug] [2023-08-18T11:10:45.957Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-18T11:10:45.959Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-18T11:10:45.970Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8389
+
+[debug] [2023-08-18T11:10:46.826Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}

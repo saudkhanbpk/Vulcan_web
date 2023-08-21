@@ -1,18 +1,13 @@
 import { Box, Button, Stack, TextField } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import React from "react";
-import {
-  FormBox,
-  Span,
-  TextButton,
-  TextLabel,
-  TextValue,
-} from "../../styles";
+import { FormBox, Span, TextButton, TextLabel, TextValue } from "../../styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "../../../../Infrastructure/config";
 export const NameBox = ({
   userFullName,
   handleOpen,
@@ -20,7 +15,6 @@ export const NameBox = ({
   showEditName,
   user,
 }) => {
-  const navigate = useNavigate();
   const nameFormik = useFormik({
     initialValues: {
       firstName: "",
@@ -30,17 +24,25 @@ export const NameBox = ({
       firstName: Yup.string().required("First Name"),
       lastName: Yup.string().required("Last Name"),
     }),
-    onSubmit: async (values) => {
-      if (nameFormik.isValid) {
-        try {
-          if (user) {
-            navigate("/profile");
-            handleClose();
-            nameFormik.resetForm();
-          }
-        } catch (error) {
-          console.error("Error updating name:", error);
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        const { firstName, lastName } = values;
+        if (!nameFormik.isValid) {
+          return; // Exit early if form is not valid
         }
+        if (!user) {
+          return; // Exit early if user is not logged in
+        }
+        const updateProfile = httpsCallable(functions, "updateaccount");
+        const requestData = {
+          firstName: firstName,
+          lastName: lastName,
+        };
+        await updateProfile(requestData);
+        handleClose();
+        nameFormik.resetForm();
+      } finally {
+        setSubmitting(false); // Ensure form submission is complete
       }
     },
   });
@@ -75,7 +77,6 @@ export const NameBox = ({
           </Span>
         )}
       </Stack>
-
       {showEditName && (
         <Box>
           <FormBox

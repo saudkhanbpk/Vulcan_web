@@ -35,12 +35,10 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { useNavigate } from "react-router-dom";
 import { useAuthValue } from "../../../../Infrastructure/States/authContext";
-import { app, auth } from "../../../../Infrastructure/config";
-import { getFunctions, httpsCallable } from "firebase/functions";
+import { functions, auth } from "../../../../Infrastructure/config";
+import { httpsCallable } from "firebase/functions";
 
 export const CreateAccount = () => {
-  const functions = getFunctions(app);
-  const setupAccountFunction = httpsCallable(functions, "createaccount");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
@@ -74,7 +72,7 @@ export const CreateAccount = () => {
   };
   const customStyles = {
     backdrop: {
-      backgroundColor: "transparent", // Set the backdrop background color to transparent
+      backgroundColor: "transparent",
     },
   };
 
@@ -101,57 +99,42 @@ export const CreateAccount = () => {
       phoneNumber: Yup.string(),
     }),
     onSubmit: async (values) => {
-      const { email, password } = values;
-      await createUserWithEmailAndPassword(auth, email, password)
-        .then(async (userCredential) => {
-          
-          console.log("-----------------------------");
-          const requestData = {
-            firstName: values.firstName,
-            lastName: values.lastName,
-            number: values.phoneNumber,
-            isEducator: isEducator
-          };
-          
-          // Call the cloud function
-          await setupAccountFunction(requestData)
-            .then(result => {
-              // Handle the result here if needed
-              console.log("Cloud Function executed successfully:", result.data);
-            })
-            .catch(error => {
-              // Handle errors here
-              console.error("Error calling Cloud Function:", error.message);
-            });
-          
-          console.log("-----------------------------");
-
-          ShowSuccessToast("Account created successfully!");
-          if (!auth.currentUser.emailVerified) {
-            sendEmailVerification(auth.currentUser)
-              .then(() => {
-                setTimeActive(true);
-                dispatch(chooseModalEmailVerify());
-              })
-              .catch((err) => alert(err.message));
-          } else {
-            navigate("/");
-          }
-        })
-        .catch((error) => {
-          if (error.code === "auth/email-already-in-use") {
-            ShowErrorToast("Email already exists, Try another Email!");
-          } else if (error.code === "auth/weak-password") {
-            ShowErrorToast("Weak password, please choose a stronger one!");
-          } else if (error.code === "auth/user-token-expired)") {
-            ShowErrorToast("User has been expired please login again");
-            dispatch(chooseModalLogin());
-          } else {
-            ShowErrorToast(
-              "An unexpected error occurred. Please try again later."
-            );
-          }
-        });
+      try {
+        const { email, password, firstName, lastName, phoneNumber } = values;
+        await createUserWithEmailAndPassword(auth, email, password);
+        const requestData = {
+          firstName: firstName,
+          lastName: lastName,
+          number: phoneNumber,
+          isEducator: isEducator,
+        };
+        if (!formik.isValid) {
+          return; // Exit early if form is not valid
+        }
+        const createUser = httpsCallable(functions, "createaccount");
+        await createUser(requestData);
+        ShowSuccessToast("Account created successfully!");
+        if (!auth.currentUser.emailVerified) {
+          await sendEmailVerification(auth.currentUser);
+          setTimeActive(true);
+          dispatch(chooseModalEmailVerify());
+        } else {
+          navigate("/");
+        }
+      } catch (error) {
+        if (error.code === "auth/email-already-in-use") {
+          ShowErrorToast("Email already exists. Please try another email.");
+        } else if (error.code === "auth/weak-password") {
+          ShowErrorToast("Weak password. Please choose a stronger one.");
+        } else if (error.code === "auth/user-token-expired") {
+          ShowErrorToast("User session expired. Please log in again.");
+          dispatch(chooseModalLogin());
+        } else {
+          ShowErrorToast(
+            `An unexpected error occurred. Please try again later. ${error}`
+          );
+        }
+      }
     },
   });
   return (

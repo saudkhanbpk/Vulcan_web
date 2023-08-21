@@ -1,11 +1,10 @@
 import { Typography } from "@mui/material";
 import React, { useState } from "react";
-import { HeadingBox, MainBox, } from "./styles";
+import { HeadingBox, MainBox } from "./styles";
 import useAuthentication from "../../Infrastructure/States/onAuthStateChange";
 import { NameBox } from "./ProfileBoxes/NameBox/nameBox";
 import { PasswordBox } from "./ProfileBoxes/PasswordBox/passwordBox";
 import { EmailBox } from "./ProfileBoxes/EmailBox/emailBox";
-
 export const Profile = () => {
   const [showEditName, setShowEditName] = useState(false);
   const [showEditPass, setShowEditPass] = useState(false);

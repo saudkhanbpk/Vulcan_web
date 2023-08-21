@@ -2,9 +2,9 @@ const admin = require("firebase-admin");
 
 const db = admin.database();
 
-const loggingConstants = {
-  createAccountError: "CREATE_ACCOUNT_ERROR: ",
-};
+// const loggingConstants = {
+//   createAccountError: "CREATE_ACCOUNT_ERROR: ",
+// };
 
 exports.logUnauth = (tag) => {
   db.ref(`unauth_logging`).update({
