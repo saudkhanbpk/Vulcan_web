@@ -1,41 +1,35 @@
-const { onCall } = require("firebase-functions/v2/https")
-const { getDatabase } = require('firebase-admin/database')
-
-const db = getDatabase()
-const dbCalls = require('./databaseCalls')
+const { onCall } = require("firebase-functions/v2/https");
+const { getDatabase } = require("firebase-admin/database");
+const db = getDatabase();
+const dbCalls = require("./databaseCalls");
 
 exports.updateAccountInfo = onCall((request) => {
-  var isSuccess = true
-  var errorMessage = null
-  const uid = request.auth.uid
-  const email = request.auth.token.email
-  const { firstName, lastName, number } = request.data
+  let isSuccess = true;
+  let errorMessage = null;
+  const uid = request.auth.uid;
+  const { firstName, lastName, number } = request.data;
+  try {
+    const profileUpdates = {};
 
-    try {
-
-        if (firstName) {
-            db.ref(`users`).child(uid).update({
-                "first_name": firstName
-            })
-        }
-
-        if (lastName) {
-            db.ref(`users`).child(uid).update({
-                "last_name": lastName
-            })
-        }
-
-        if (number) {
-            db.ref(`users`).child(uid).update({
-                "number": number
-            })
-        }
-
-    } catch(error) {
-        dbCalls.logUser("ERROR: Update Account: " + error)
-        isSuccess = false
-        errorMessage = "Account Update Error"
+    if (firstName) {
+      profileUpdates.first_name = firstName;
     }
 
-  return {isSuccess: isSuccess, errorMessage: errorMessage}
-})
+    if (lastName) {
+      profileUpdates.last_name = lastName;
+    }
+
+    if (number) {
+      profileUpdates.number = number;
+    }
+
+    if (Object.keys(profileUpdates).length > 0) {
+      db.ref(`users/${uid}/profile`).update(profileUpdates);
+    }
+  } catch (error) {
+    dbCalls.logUser("ERROR: Update Account: " + error);
+    isSuccess = false;
+    errorMessage = "Account Update Error: " + error.message; // Improved error message
+  }
+  return { isSuccess: isSuccess, errorMessage: errorMessage };
+});

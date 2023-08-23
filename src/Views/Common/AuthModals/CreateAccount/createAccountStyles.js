@@ -1,7 +1,16 @@
-import { Box, Typography, styled } from "@mui/material";
+import {
+  Box,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+  styled,
+} from "@mui/material";
 export const styles = {
   main: {
     height: "100vh",
+  },
+  backdrop: {
+    backgroundColor: "transparent",
   },
 };
 export const MainBox = styled(Box)(({ theme }) => ({
@@ -18,41 +27,46 @@ export const MainBox = styled(Box)(({ theme }) => ({
   pt: 2,
   [theme.breakpoints.down("md")]: {
     height: "723px",
-    
   },
 }));
-export const AuthButton = styled("button")(({ theme }) => ({
-  borderRadius: "30px",
+export const StyledToggleButtonGroup = styled(ToggleButtonGroup)(
+  ({ theme }) => ({
+    display: "flex",
+    flexDirection: "row",
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+    },
+  })
+);
+export const ToggleBtn = styled(ToggleButton)(({ theme }) => ({
   border: "none",
   fontFamily: "Inter, sans-serif",
   fontWeight: 800,
   position: "relative",
   height: "41px",
   width: "200px",
-
   [theme.breakpoints.down("md")]: {
-    fontSize: "16px",
+    fontSize: "14px",
     marginBottom: theme.spacing(1),
+    border: "1px solid black",
+    borderLeft: "1px solid black !important",
+  },
+
+  "&:hover": {
+    backgroundColor: "transparent",
+  },
+  "&.Mui-selected": {
+    backgroundColor: "#000FFF",
+    color: "white",
+    boxShadow: "none",
+    "&:hover": {
+      backgroundColor: "#000FFF",
+    },
+  },
+  "&.MuiToggleButtonGroup-grouped": {
+    borderRadius: "30px !important",
   },
 }));
-
-export const CreateAccButton = styled("button")(({ theme }) => ({
-  borderRadius: "30px",
-  border: "1px solid black",
-  fontFamily: "Inter, sans-serif",
-  fontWeight: 800,
-  position: "relative",
-
-  height: "41px",
-  width: "200px",
-  background: theme.palette.primary.main,
-  color: "#fff",
-  [theme.breakpoints.down("md")]: {
-    fontSize: "16px",
-    marginTop: "30px",
-  },
-}));
-
 export const ChooseAccBox = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
@@ -67,6 +81,22 @@ export const ChooseAccBox = styled(Box)(({ theme }) => ({
     backgroundColor: "white",
   },
 }));
+export const CreateAccButton = styled("button")(({ theme }) => ({
+  borderRadius: "30px",
+  border: "1px solid black",
+  fontFamily: "Inter, sans-serif",
+  fontWeight: 800,
+  position: "relative",
+  height: "41px",
+  width: "200px",
+  background: theme.palette.primary.main,
+  color: "#fff",
+  [theme.breakpoints.down("md")]: {
+    fontSize: "16px",
+    marginTop: "30px",
+  },
+}));
+
 export const Heading = styled(Typography)(({ theme }) => ({
   paddingTop: theme.spacing(1),
   paddingBottom: theme.spacing(1),

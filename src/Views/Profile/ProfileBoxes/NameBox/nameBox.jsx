@@ -1,18 +1,16 @@
 import { Box, Button, Stack, TextField } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import React from "react";
-import {
-  FormBox,
-  Span,
-  TextButton,
-  TextLabel,
-  TextValue,
-} from "../../styles";
+import React, { useEffect, useState } from "react";
+import { FormBox, Span, TextButton, TextLabel, TextValue } from "../../styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "../../../../Infrastructure/config";
+import { getAuth } from "firebase/auth";
+import { getDatabase, onValue, ref } from "firebase/database";
+import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
 export const NameBox = ({
   userFullName,
   handleOpen,
@@ -20,27 +18,56 @@ export const NameBox = ({
   showEditName,
   user,
 }) => {
-  const navigate = useNavigate();
+  const auth = getAuth();
+  const db = getDatabase();
+  const uid = auth.currentUser.uid;
+  const userRef = ref(db, `users/${uid}/profile`);
+  const [userProfile, setUserProfile] = useState({
+    first_name: "",
+    last_name: "",
+  });
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        onValue(userRef, (snapshot) => {
+          const userData = snapshot.val();
+          if (userData) {
+            setUserProfile(userData);
+          }
+        });
+      } catch (error) {
+        ShowErrorToast("Something wrong try again.");
+      }
+    };
+    fetchUserProfile();
+  }, []);
   const nameFormik = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
     },
     validationSchema: Yup.object({
-      firstName: Yup.string().required("First Name"),
-      lastName: Yup.string().required("Last Name"),
+      firstName: Yup.string(),
+      lastName: Yup.string(),
     }),
-    onSubmit: async (values) => {
-      if (nameFormik.isValid) {
-        try {
-          if (user) {
-            navigate("/profile");
-            handleClose();
-            nameFormik.resetForm();
-          }
-        } catch (error) {
-          console.error("Error updating name:", error);
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        const { firstName, lastName } = values;
+        if (!nameFormik.isValid) {
+          return; // Exit early if form is not valid
         }
+        const updateProfile = httpsCallable(functions, "updateaccount");
+        const requestData = {
+          firstName: firstName,
+          lastName: lastName,
+        };
+        await updateProfile(requestData).then(() =>
+          ShowSuccessToast("Full name updated sucessfully.")
+        );
+        handleClose();
+        nameFormik.resetForm();
+      } finally {
+        setSubmitting(false); // Ensure form submission is complete
       }
     },
   });
@@ -54,7 +81,9 @@ export const NameBox = ({
         pb={4}
       >
         <TextLabel>Full Name</TextLabel>
-        <TextValue>{userFullName}</TextValue>
+        <TextValue>
+          {userProfile.first_name} {userProfile.last_name}
+        </TextValue>
         {!showEditName ? (
           <Span
             direction="row"
@@ -75,7 +104,6 @@ export const NameBox = ({
           </Span>
         )}
       </Stack>
-
       {showEditName && (
         <Box>
           <FormBox

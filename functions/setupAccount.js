@@ -4,6 +4,7 @@ const { getDatabase } = require('firebase-admin/database')
 const db = getDatabase()
 const dbCalls = require('./databaseCalls')
 
+
 exports.setupAccount = onCall((request) => {
   var isSuccess = true
   var errorMessage = null

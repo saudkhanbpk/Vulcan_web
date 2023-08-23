@@ -1,0 +1,493 @@
+[debug] [2023-08-22T07:54:30.192Z] ----------------------------------------------------------------------
+[debug] [2023-08-22T07:54:30.196Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2023-08-22T07:54:30.197Z] CLI Version:   12.4.8
+[debug] [2023-08-22T07:54:30.198Z] Platform:      win32
+[debug] [2023-08-22T07:54:30.198Z] Node Version:  v16.20.2
+[debug] [2023-08-22T07:54:30.202Z] Time:          Tue Aug 22 2023 12:54:30 GMT+0500 (Pakistan Standard Time)
+[debug] [2023-08-22T07:54:30.203Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-22T07:54:30.491Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-22T07:54:30.493Z] > authorizing via signed-in user (pakistan03479@gmail.com)
+[debug] [2023-08-22T07:54:31.229Z] openjdk version "11.0.18" 2023-01-17 LTS
+[debug] [2023-08-22T07:54:31.231Z] 
+OpenJDK Runtime Environment Microsoft-7208460 (build 11.0.18+10-LTS)
+OpenJDK 64-Bit Server VM Microsoft-7208460 (build 11.0.18+10-LTS, mixed mode)
+
+[debug] [2023-08-22T07:54:31.284Z] Parsed Java major version: 11
+[info] i  emulators: Starting emulators: functions, database {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions, database"}}
+[debug] [2023-08-22T07:54:31.327Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-22T07:54:31.328Z] [database] Database Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-22T07:54:31.329Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"database":[{"address":"127.0.0.1","family":"IPv4","port":9000}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2023-08-22T07:54:31.390Z] [hub] writing locator at C:\Users\Ayaz\AppData\Local\Temp\hub-vulcan-v2-dev.json
+[debug] [2023-08-22T07:54:31.438Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-22T07:54:31.439Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-22T07:54:31.439Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"database":[{"address":"127.0.0.1","family":"IPv4","port":9000}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, firestore, hosting, pubsub, storage {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, firestore, hosting, pubsub, storage\u001b[22m"}}
+[debug] [2023-08-22T07:54:31.458Z] defaultcredentials: writing to file C:\Users\Ayaz\AppData\Roaming\firebase\pakistan03479_gmail_com_application_default_credentials.json
+[debug] [2023-08-22T07:54:31.465Z] Setting GAC to C:\Users\Ayaz\AppData\Roaming\firebase\pakistan03479_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\Ayaz\\AppData\\Roaming\\firebase\\pakistan03479_gmail_com_application_default_credentials.json"}}
+[debug] [2023-08-22T07:54:31.471Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig [none]
+[debug] [2023-08-22T07:54:32.346Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig 200
+[debug] [2023-08-22T07:54:32.347Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig {"projectId":"vulcan-v2-dev","databaseURL":"https://vulcan-v2-dev-default-rtdb.firebaseio.com","storageBucket":"vulcan-v2-dev.appspot.com","locationId":"us-central"}
+[debug] [2023-08-22T07:54:32.380Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev [none]
+[debug] [2023-08-22T07:54:33.117Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev 200
+[debug] [2023-08-22T07:54:33.117Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev {"projectId":"vulcan-v2-dev","projectNumber":"403132433922","displayName":"vulcan-V2-dev","name":"projects/vulcan-v2-dev","resources":{"hostingSite":"vulcan-v2-dev","realtimeDatabaseInstance":"vulcan-v2-dev-default-rtdb","storageBucket":"vulcan-v2-dev.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_d982ec3d-05a3-4f08-bf49-5ba28307edaf"}
+[debug] [2023-08-22T07:54:33.118Z] database rules config:  []
+[warn] !  database: Did not find a Realtime Database rules file specified in a firebase.json config file. The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration. {"metadata":{"emulator":{"name":"database"},"message":"Did not find a Realtime Database rules file specified in a firebase.json config file. The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration."}}
+[debug] [2023-08-22T07:54:33.126Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2023-08-22T07:54:33.126Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-22T07:54:33.127Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
+[debug] [2023-08-22T07:54:33.127Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","C:\\Users\\Ayaz\\.cache\\firebase\\emulators\\firebase-database-emulator-v4.11.2.jar","--host","127.0.0.1","--port",9000,"--single_project_mode","Warning","--functions_emulator_host","127.0.0.1","--functions_emulator_port",5001],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Ayaz\\\\.cache\\\\firebase\\\\emulators\\\\firebase-database-emulator-v4.11.2.jar\",\"--host\",\"127.0.0.1\",\"--port\",9000,\"--single_project_mode\",\"Warning\",\"--functions_emulator_host\",\"127.0.0.1\",\"--functions_emulator_port\",5001],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
+[debug] [2023-08-22T07:54:36.327Z] WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by io.netty.util.internal.ReflectionUtil (file:/C:/Users/Ayaz/.cache/firebase/emulators/firebase-database-emulator-v4.11.2.jar) to field sun.nio.ch.SelectorImpl.selectedKeys
+WARNING: Please consider reporting this to the maintainers of io.netty.util.internal.ReflectionUtil
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release {"metadata":{"emulator":{"name":"database"},"message":"WARNING: An illegal reflective access operation has occurred\r\nWARNING: Illegal reflective access by io.netty.util.internal.ReflectionUtil (file:/C:/Users/Ayaz/.cache/firebase/emulators/firebase-database-emulator-v4.11.2.jar) to field sun.nio.ch.SelectorImpl.selectedKeys\r\nWARNING: Please consider reporting this to the maintainers of io.netty.util.internal.ReflectionUtil\r\nWARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations\r\nWARNING: All illegal access operations will be denied in a future release"}}
+[debug] [2023-08-22T07:54:36.328Z] 
+ {"metadata":{"emulator":{"name":"database"},"message":"\r\n"}}
+[debug] [2023-08-22T07:54:38.702Z] 12:54:38.689 [NamespaceSystem-akka.actor.default-dispatcher-6] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+ {"metadata":{"emulator":{"name":"database"},"message":"12:54:38.689 [NamespaceSystem-akka.actor.default-dispatcher-6] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started\r\n"}}
+[debug] [2023-08-22T07:54:39.406Z] 12:54:39.401 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:9000
+ {"metadata":{"emulator":{"name":"database"},"message":"12:54:39.401 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:9000\r\n"}}
+[debug] [2023-08-22T07:54:40.340Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-22T07:54:40.340Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-08-22T07:54:40.340Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Ayaz\\.cache\\firebase\\emulators\\ui-v1.11.7\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Ayaz\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.7\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2023-08-22T07:54:42.924Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2023-08-22T07:54:42.925Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[info] i  functions: Watching "F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\" for Cloud Functions..."}}
+[debug] [2023-08-22T07:54:43.187Z] Validating nodejs source
+[debug] [2023-08-22T07:54:53.295Z] checkFunctionsSDKVersion was unable to fetch information from NPM Error: spawnSync C:\WINDOWS\system32\cmd.exe ETIMEDOUT
+    at Object.spawnSync (node:internal/child_process:1119:20)
+    at Object.spawnSync (node:child_process:847:24)
+    at Function.spawnSync [as sync] (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\index.js:26:23)
+    at Object.getLatestSDKVersion (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\versioning.js:54:25)
+    at Object.checkFunctionsSDKVersion (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\versioning.js:74:32)
+    at Delegate.validate (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\index.js:84:20)
+    at FunctionsEmulator.discoverTriggers (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulator.js:296:35)
+    at async FunctionsEmulator.loadTriggers (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulator.js:325:34)
+    at async FunctionsEmulator.connect (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulator.js:262:13)
+    at async Object.startAll (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\controller.js:562:13)
+[debug] [2023-08-22T07:54:53.297Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-22T07:54:53.297Z] Building nodejs source
+[debug] [2023-08-22T07:54:53.299Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-22T07:54:53.307Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-22T07:54:53.380Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8914
+
+[debug] [2023-08-22T07:54:56.893Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[info] +  functions[us-central1-createaccount]: http function initialized (http://127.0.0.1:5001/vulcan-v2-dev/us-central1/createaccount). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/vulcan-v2-dev/us-central1/createaccount)."}}
+[info] +  functions[us-central1-updateaccount]: http function initialized (http://127.0.0.1:5001/vulcan-v2-dev/us-central1/updateaccount). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/vulcan-v2-dev/us-central1/updateaccount)."}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬────────────────┬─────────────────────────────────┐
+│ Emulator  │ Host:Port      │ View in Emulator UI             │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Functions │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Database  │ 127.0.0.1:9000 │ http://127.0.0.1:4000/database  │
+└───────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2023-08-22T07:55:04.963Z] 12:55:04.957 [NamespaceSystem-akka.actor.default-dispatcher-9] INFO com.firebase.core.namespace.NamespaceActor - vulcan-v2-dev successfully activated FBKV (SurveyIdle(0)) wait: 808ms, init: 0ms
+ {"metadata":{"emulator":{"name":"database"},"message":"12:55:04.957 [NamespaceSystem-akka.actor.default-dispatcher-9] INFO com.firebase.core.namespace.NamespaceActor - vulcan-v2-dev successfully activated FBKV (SurveyIdle(0)) wait: 808ms, init: 0ms\r\n"}}
+[debug] [2023-08-22T09:14:42.711Z] ----------------------------------------------------------------------
+[debug] [2023-08-22T09:14:42.716Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2023-08-22T09:14:42.717Z] CLI Version:   12.4.8
+[debug] [2023-08-22T09:14:42.718Z] Platform:      win32
+[debug] [2023-08-22T09:14:42.718Z] Node Version:  v16.20.2
+[debug] [2023-08-22T09:14:42.721Z] Time:          Tue Aug 22 2023 14:14:42 GMT+0500 (Pakistan Standard Time)
+[debug] [2023-08-22T09:14:42.721Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-22T09:14:43.192Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-22T09:14:43.193Z] > authorizing via signed-in user (pakistan03479@gmail.com)
+[debug] [2023-08-22T09:14:43.943Z] openjdk version "11.0.18" 2023-01-17 LTS
+[debug] [2023-08-22T09:14:43.944Z] 
+OpenJDK Runtime Environment Microsoft-7208460 (build 11.0.18+10-LTS)
+OpenJDK 64-Bit Server VM Microsoft-7208460 (build 11.0.18+10-LTS, mixed mode)
+
+[debug] [2023-08-22T09:14:44.031Z] Parsed Java major version: 11
+[info] i  emulators: Starting emulators: functions, database {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions, database"}}
+[debug] [2023-08-22T09:14:44.084Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-22T09:14:44.085Z] [database] Database Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-22T09:14:44.086Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"database":[{"address":"127.0.0.1","family":"IPv4","port":9000}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[warn] !  emulators: It seems that you are running multiple instances of the emulator suite for project vulcan-v2-dev. This may result in unexpected behavior. 
+[debug] [2023-08-22T09:14:44.134Z] [hub] writing locator at C:\Users\Ayaz\AppData\Local\Temp\hub-vulcan-v2-dev.json
+[debug] [2023-08-22T09:14:44.202Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-22T09:14:44.203Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-22T09:14:44.203Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"database":[{"address":"127.0.0.1","family":"IPv4","port":9000}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, firestore, hosting, pubsub, storage {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, firestore, hosting, pubsub, storage\u001b[22m"}}
+[debug] [2023-08-22T09:14:44.248Z] defaultcredentials: writing to file C:\Users\Ayaz\AppData\Roaming\firebase\pakistan03479_gmail_com_application_default_credentials.json
+[debug] [2023-08-22T09:14:44.253Z] Setting GAC to C:\Users\Ayaz\AppData\Roaming\firebase\pakistan03479_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\Ayaz\\AppData\\Roaming\\firebase\\pakistan03479_gmail_com_application_default_credentials.json"}}
+[debug] [2023-08-22T09:14:44.256Z] > refreshing access token with scopes: []
+[debug] [2023-08-22T09:14:44.260Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-08-22T09:14:44.261Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-08-22T09:14:46.781Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-08-22T09:14:46.781Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-08-22T09:14:47.933Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig [none]
+[debug] [2023-08-22T09:14:49.053Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig 200
+[debug] [2023-08-22T09:14:49.054Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev/adminSdkConfig {"projectId":"vulcan-v2-dev","databaseURL":"https://vulcan-v2-dev-default-rtdb.firebaseio.com","storageBucket":"vulcan-v2-dev.appspot.com","locationId":"us-central"}
+[debug] [2023-08-22T09:14:49.085Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev [none]
+[debug] [2023-08-22T09:14:49.951Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev 200
+[debug] [2023-08-22T09:14:49.952Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/vulcan-v2-dev {"projectId":"vulcan-v2-dev","projectNumber":"403132433922","displayName":"vulcan-V2-dev","name":"projects/vulcan-v2-dev","resources":{"hostingSite":"vulcan-v2-dev","realtimeDatabaseInstance":"vulcan-v2-dev-default-rtdb","storageBucket":"vulcan-v2-dev.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_d982ec3d-05a3-4f08-bf49-5ba28307edaf"}
+[debug] [2023-08-22T09:14:49.953Z] database rules config:  []
+[warn] !  database: Did not find a Realtime Database rules file specified in a firebase.json config file. The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration. {"metadata":{"emulator":{"name":"database"},"message":"Did not find a Realtime Database rules file specified in a firebase.json config file. The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration."}}
+[debug] [2023-08-22T09:14:49.960Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2023-08-22T09:14:49.960Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-22T09:14:49.961Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
+[debug] [2023-08-22T09:14:49.961Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","C:\\Users\\Ayaz\\.cache\\firebase\\emulators\\firebase-database-emulator-v4.11.2.jar","--host","127.0.0.1","--port",9000,"--single_project_mode","Warning","--functions_emulator_host","127.0.0.1","--functions_emulator_port",5001],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Ayaz\\\\.cache\\\\firebase\\\\emulators\\\\firebase-database-emulator-v4.11.2.jar\",\"--host\",\"127.0.0.1\",\"--port\",9000,\"--single_project_mode\",\"Warning\",\"--functions_emulator_host\",\"127.0.0.1\",\"--functions_emulator_port\",5001],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
+[debug] [2023-08-22T09:14:52.897Z] WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by io.netty.util.internal.ReflectionUtil (file:/C:/Users/Ayaz/.cache/firebase/emulators/firebase-database-emulator-v4.11.2.jar) to field sun.nio.ch.SelectorImpl.selectedKeys
+WARNING: Please consider reporting this to the maintainers of io.netty.util.internal.ReflectionUtil
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release {"metadata":{"emulator":{"name":"database"},"message":"WARNING: An illegal reflective access operation has occurred\r\nWARNING: Illegal reflective access by io.netty.util.internal.ReflectionUtil (file:/C:/Users/Ayaz/.cache/firebase/emulators/firebase-database-emulator-v4.11.2.jar) to field sun.nio.ch.SelectorImpl.selectedKeys\r\nWARNING: Please consider reporting this to the maintainers of io.netty.util.internal.ReflectionUtil\r\nWARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations\r\nWARNING: All illegal access operations will be denied in a future release"}}
+[debug] [2023-08-22T09:14:52.898Z] 
+ {"metadata":{"emulator":{"name":"database"},"message":"\r\n"}}
+[debug] [2023-08-22T09:14:55.356Z] 14:14:55.352 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+ {"metadata":{"emulator":{"name":"database"},"message":"14:14:55.352 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started\r\n"}}
+[debug] [2023-08-22T09:14:55.910Z] 14:14:55.896 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:9000
+ {"metadata":{"emulator":{"name":"database"},"message":"14:14:55.896 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:9000\r\n"}}
+[debug] [2023-08-22T09:14:56.701Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-22T09:14:56.701Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-08-22T09:14:56.702Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Ayaz\\.cache\\firebase\\emulators\\ui-v1.11.7\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Ayaz\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.7\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2023-08-22T09:15:01.186Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2023-08-22T09:15:01.186Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[info] i  functions: Watching "F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\" for Cloud Functions..."}}
+[debug] [2023-08-22T09:15:01.251Z] Validating nodejs source
+[debug] [2023-08-22T09:15:11.343Z] checkFunctionsSDKVersion was unable to fetch information from NPM Error: spawnSync C:\WINDOWS\system32\cmd.exe ETIMEDOUT
+    at Object.spawnSync (node:internal/child_process:1119:20)
+    at Object.spawnSync (node:child_process:847:24)
+    at Function.spawnSync [as sync] (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\index.js:26:23)
+    at Object.getLatestSDKVersion (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\versioning.js:54:25)
+    at Object.checkFunctionsSDKVersion (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\versioning.js:74:32)
+    at Delegate.validate (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\index.js:84:20)
+    at FunctionsEmulator.discoverTriggers (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulator.js:296:35)
+    at async FunctionsEmulator.loadTriggers (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulator.js:325:34)
+    at async FunctionsEmulator.connect (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulator.js:262:13)
+    at async Object.startAll (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\controller.js:562:13)
+[debug] [2023-08-22T09:15:11.345Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-22T09:15:11.355Z] Building nodejs source
+[debug] [2023-08-22T09:15:11.356Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-22T09:15:11.366Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-22T09:15:11.389Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8967
+
+[debug] [2023-08-22T09:15:17.942Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[info] +  functions[us-central1-createaccount]: http function initialized (http://127.0.0.1:5001/vulcan-v2-dev/us-central1/createaccount). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/vulcan-v2-dev/us-central1/createaccount)."}}
+[info] +  functions[us-central1-updateaccount]: http function initialized (http://127.0.0.1:5001/vulcan-v2-dev/us-central1/updateaccount). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/vulcan-v2-dev/us-central1/updateaccount)."}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬────────────────┬─────────────────────────────────┐
+│ Emulator  │ Host:Port      │ View in Emulator UI             │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Functions │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Database  │ 127.0.0.1:9000 │ http://127.0.0.1:4000/database  │
+└───────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2023-08-22T09:15:45.756Z] 14:15:45.759 [NamespaceSystem-akka.actor.default-dispatcher-6] INFO com.firebase.core.namespace.NamespaceActor - vulcan-v2-dev successfully activated FBKV (SurveyIdle(0)) wait: 784ms, init: 0ms
+ {"metadata":{"emulator":{"name":"database"},"message":"14:15:45.759 [NamespaceSystem-akka.actor.default-dispatcher-6] INFO com.firebase.core.namespace.NamespaceActor - vulcan-v2-dev successfully activated FBKV (SurveyIdle(0)) wait: 784ms, init: 0ms\r\n"}}
+[debug] [2023-08-22T09:37:06.540Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\updateAccountInfo.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\updateAccountInfo.js changed, reloading triggers"}}
+[debug] [2023-08-22T09:37:07.560Z] Validating nodejs source
+[debug] [2023-08-22T09:37:17.667Z] checkFunctionsSDKVersion was unable to fetch information from NPM Error: spawnSync C:\WINDOWS\system32\cmd.exe ETIMEDOUT
+    at Object.spawnSync (node:internal/child_process:1119:20)
+    at Object.spawnSync (node:child_process:847:24)
+    at Function.spawnSync [as sync] (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\index.js:26:23)
+    at Object.getLatestSDKVersion (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\versioning.js:54:25)
+    at Object.checkFunctionsSDKVersion (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\versioning.js:74:32)
+    at Delegate.validate (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\index.js:84:20)
+    at FunctionsEmulator.discoverTriggers (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulator.js:296:35)
+    at async FunctionsEmulator.loadTriggers (C:\Users\Ayaz\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\functionsEmulator.js:325:34)
+[debug] [2023-08-22T09:37:17.672Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-22T09:37:17.673Z] Building nodejs source
+[debug] [2023-08-22T09:37:17.675Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-22T09:37:17.696Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-22T09:37:17.739Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8999
+
+[debug] [2023-08-22T09:37:19.801Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-22T09:38:06.875Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\updateAccountInfo.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\updateAccountInfo.js changed, reloading triggers"}}
+[debug] [2023-08-22T09:38:07.878Z] Validating nodejs source
+[debug] [2023-08-22T09:38:17.333Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-22T09:38:17.333Z] Building nodejs source
+[debug] [2023-08-22T09:38:17.334Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-22T09:38:17.338Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-22T09:38:17.353Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8255
+
+[debug] [2023-08-22T09:38:18.847Z] Got response code 400; body Failed to generate manifest from function source: SyntaxError: Unexpected token '.'
+[info] shutdown requested via /__/quitquitquit
+
+[error] !!  functions: Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error"}}
+[debug] [2023-08-22T09:38:25.920Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\updateAccountInfo.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\updateAccountInfo.js changed, reloading triggers"}}
+[debug] [2023-08-22T09:38:26.921Z] Validating nodejs source
+[debug] [2023-08-22T09:38:35.773Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-22T09:38:35.773Z] Building nodejs source
+[debug] [2023-08-22T09:38:35.773Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-22T09:38:35.780Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-22T09:38:35.794Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8161
+
+[debug] [2023-08-22T09:38:37.377Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-22T09:41:04.733Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\updateAccountInfo.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\updateAccountInfo.js changed, reloading triggers"}}
+[debug] [2023-08-22T09:41:05.738Z] Validating nodejs source
+[debug] [2023-08-22T09:41:15.549Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-22T09:41:15.549Z] Building nodejs source
+[debug] [2023-08-22T09:41:15.549Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-22T09:41:15.552Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-22T09:41:15.565Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8449
+
+[debug] [2023-08-22T09:41:17.115Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-22T09:42:56.556Z] Functions emulator received unknown request at path /
+[debug] [2023-08-22T09:42:56.682Z] Functions emulator received unknown request at path /favicon.ico
+[debug] [2023-08-22T10:11:03.069Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\updateAccountInfo.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\updateAccountInfo.js changed, reloading triggers"}}
+[debug] [2023-08-22T10:11:04.070Z] Validating nodejs source
+[debug] [2023-08-22T10:11:11.194Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-22T10:11:11.194Z] Building nodejs source
+[debug] [2023-08-22T10:11:11.194Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-22T10:11:11.197Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-22T10:11:11.213Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8516
+
+[debug] [2023-08-22T10:11:12.698Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[debug] [2023-08-22T10:13:25.289Z] File F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\updateAccountInfo.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File F:\\Tutorials\\TechCreators\\VulcanWeb\\vulcan-web\\functions\\updateAccountInfo.js changed, reloading triggers"}}
+[debug] [2023-08-22T10:13:26.303Z] Validating nodejs source
+[debug] [2023-08-22T10:13:33.026Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.4.1"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2023-08-22T10:13:33.026Z] Building nodejs source
+[debug] [2023-08-22T10:13:33.026Z] Failed to find version of module node: reached end of search path F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules
+[info] +  functions: Using node@16 from host. 
+[debug] [2023-08-22T10:13:33.043Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-08-22T10:13:33.060Z] Found firebase-functions binary at 'F:\Tutorials\TechCreators\VulcanWeb\vulcan-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8638
+
+[debug] [2023-08-22T10:13:34.408Z] Got response from /__/functions.yaml {"endpoints":{"createaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createaccount"},"updateaccount":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateaccount"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: createaccount, updateaccount. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createaccount, updateaccount."}}
+[warn] !  ui: Fatal error occurred: 
+   Emulator UI has exited with code: 1073807364, 
+   stopping all running emulators {"metadata":{"emulator":{"name":"ui"},"message":"Fatal error occurred: \n   Emulator UI has exited with code: 1073807364, \n   stopping all running emulators"}}
+[info] i  ui: Stopping Emulator UI {"metadata":{"emulator":{"name":"ui"},"message":"Stopping Emulator UI"}}

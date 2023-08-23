@@ -28,9 +28,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ShowErrorToast, ShowSuccessToast } from "../../Toast/toast";
+import { getDatabase, ref, update } from "firebase/database";
 
 export const LoginAccount = () => {
   const auth = getAuth();
+  const db = getDatabase();
   const dispatch = useDispatch();
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
   const [showPassword, setShowPassword] = useState(true);
@@ -49,6 +51,28 @@ export const LoginAccount = () => {
   const handleResetPassButtonClick = () => {
     dispatch(chooseModalResetPass());
   };
+  const handleAuthenticationError = (error) => {
+    if (!error) {
+      return; // Do nothing if there's no error
+    }
+    let errorMessage = "Please try again later.";
+    switch (error.code) {
+      case "auth/wrong-password":
+        errorMessage =
+          "Invalid password. Please check your password and try again.";
+        break;
+      case "auth/user-not-found":
+        errorMessage = "User not found! Try another email.";
+        break;
+      case "auth/too-many-requests":
+        errorMessage =
+          error?.error?.message || "Too many requests. Please try again later.";
+        break;
+      default:
+        ShowErrorToast(error);
+    }
+    ShowErrorToast(errorMessage);
+  };
   const loginFormik = useFormik({
     initialValues: {
       email: "",
@@ -63,30 +87,26 @@ export const LoginAccount = () => {
     onSubmit: async (values) => {
       try {
         const { email, password } = values;
-        await signInWithEmailAndPassword(auth, email, password);
-        ShowSuccessToast("User Logged In Sucessfully.", {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userCredential.user;
+        const userRef = ref(db, `users/${user.uid}`);
+        await update(userRef, {
+          email_verified: user.emailVerified,
+        });
+        ShowSuccessToast("User Logged In Successfully.", {
           autoClose: 3000,
           theme: "light",
         });
         handleCloseModal();
       } catch (error) {
-          if (error.code === "auth/wrong-password") {
-          ShowErrorToast(
-            "Invalid password. Please check your password and try again."
-          );
-        } else if (error.code === "auth/user-not-found") {
-          ShowErrorToast("User not found! Try another email.");
-        } else if (error.code === "auth/too-many-requests") {
-          const errorMessage =
-            error?.error?.message || "Too many requests try again later.";
-          ShowErrorToast(errorMessage);
-        } else {
-          ShowErrorToast("Please try again later.");
-        }
+        handleAuthenticationError(error);
       }
     },
   });
-
   return (
     <Box>
       {/* Log in Modal */}
@@ -200,7 +220,6 @@ export const LoginAccount = () => {
               }}
               fullWidth
             />
-
             <Box pb={2}>
               <Link
                 href="#"
@@ -220,7 +239,6 @@ export const LoginAccount = () => {
                 Forgot password?
               </Typography>
             </Box>
-
             <Box>
               <Button type="submit" variant="contained" sx={{ width: "150px" }}>
                 Log In
