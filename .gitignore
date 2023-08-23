@@ -31,4 +31,4 @@ functions/ui-debug.log
 
 firebase-debug.log
 functions/firebase-debug.log
-# *.log
+*.log
