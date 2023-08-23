@@ -1,17 +1,17 @@
-const { onCall } = require("firebase-functions/v2/https");
-const { getDatabase } = require("firebase-admin/database");
+const { onCall } = require("firebase-functions/v2/https") 
+const { getDatabase } = require("firebase-admin/database") 
 
-const db = getDatabase();
-const dbCalls = require("./databaseCalls");
+const db = getDatabase() 
+const dbCalls = require("./databaseCalls") 
 
 exports.setupAccount = onCall((request) => {
-  var isSuccess = true;
-  var errorMessage = null;
-  const uid = request.auth.uid;
-  const email = request.auth.token.email;
-  const { firstName, lastName, number, isEducator } = request.data;
+  var isSuccess = true 
+  var errorMessage = null 
+  const uid = request.auth.uid 
+  const email = request.auth.token.email 
+  const { firstName, lastName, number, isEducator } = request.data 
 
-  dbCalls.logUser(uid, `ACTION: Firebase Account Created: ID: ${email}`);
+  dbCalls.logUser(uid, `ACTION: Firebase Account Created: ID: ${email}`) 
 
   db.ref(`users`)
     .child(uid)
@@ -30,9 +30,9 @@ exports.setupAccount = onCall((request) => {
       })
     )
     .catch((error) => {
-      dbCalls.logUser(uid, `ERROR: ACCOUNT INFO ERROR ID: ${uid}: ${error}`);
-      isSuccess = false;
-      errorMessage = "Account Error";
-    });
-  return { isSuccess: isSuccess, errorMessage: errorMessage };
-});
+      dbCalls.logUser(uid, `ERROR: ACCOUNT INFO ERROR ID: ${uid}: ${error}`) 
+      isSuccess = false 
+      errorMessage = "Account Error" 
+    }) 
+  return { isSuccess: isSuccess, errorMessage: errorMessage } 
+}) 
