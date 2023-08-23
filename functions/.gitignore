@@ -2,8 +2,15 @@
 node_modules/
 
 # Ignore specific log files
-# *.log
+*.log
 
 database-debug.log
 firebase-debug.log
 ui-debug.log
+firebase-debug.log
+#firebase-debug.log
+.firebase-debug.log
+/firebase-debug.log
+./firebase-debug.log
+*firebase-debug.log
+/ui-debug.log
