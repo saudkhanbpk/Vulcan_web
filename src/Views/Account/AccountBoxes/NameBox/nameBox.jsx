@@ -9,7 +9,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
 import { getAuth } from "firebase/auth";
-import { getDatabase, onValue, ref } from "firebase/database";
+import { getDatabase, off, onValue, ref } from "firebase/database";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
 export const NameBox = ({
   userFullName,
@@ -26,21 +26,47 @@ export const NameBox = ({
     first_name: "",
     last_name: "",
   });
+  // useEffect(() => {
+  //   const fetchUserProfile = async () => {
+  //     try {
+  //       onValue(userRef, (snapshot) => {
+  //         const userData = snapshot.val();
+  //         if (userData) {
+  //           setUserProfile(userData);
+  //         }
+  //       });
+  //     } catch (error) {
+  //       ShowErrorToast("Something wrong try again.");
+  //     }
+  //   };
+  //   fetchUserProfile();
+  // }, [userRef]);
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        onValue(userRef, (snapshot) => {
+        const callback = (snapshot) => {
           const userData = snapshot.val();
           if (userData) {
             setUserProfile(userData);
+            // Unsubscribe from the listener when data is received
+            off(userRef, 'value', callback);
           }
-        });
+        };
+
+        // Subscribe to the listener
+        onValue(userRef, callback);
+
+        // Return the cleanup function to unsubscribe when the component unmounts
+        return () => {
+          off(userRef, 'value', callback);
+        };
       } catch (error) {
         ShowErrorToast("Something wrong try again.");
       }
     };
+
     fetchUserProfile();
-  }, []);
+  }, [userRef]);
   const nameFormik = useFormik({
     initialValues: {
       firstName: "",

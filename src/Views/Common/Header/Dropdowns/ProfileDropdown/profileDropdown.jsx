@@ -14,7 +14,7 @@ const ProfileDropdown = () => {
     auth.signOut();
     if (
       location.pathname === "/dashboard" ||
-      location.pathname === "/profile"
+      location.pathname === "/account"
     ) {
       navigate("/");
     }
@@ -38,8 +38,8 @@ const ProfileDropdown = () => {
             <Nav.Link as={Link} to="/dashboard" className="menuitems">
               Dashboard
             </Nav.Link>
-            <Nav.Link as={Link} to="/profile" className="menuitems">
-              Profile
+            <Nav.Link as={Link} to="/account" className="menuitems">
+              Account
             </Nav.Link>
           </Nav>
           <Box display="flex" justifyContent="center" py="10px">

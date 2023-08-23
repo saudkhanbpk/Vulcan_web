@@ -2,11 +2,11 @@ import { Typography } from "@mui/material";
 import React, { useState } from "react";
 import { HeadingBox, MainBox } from "./styles";
 import useAuthentication from "../../Infrastructure/States/onAuthStateChange";
-import { NameBox } from "./ProfileBoxes/NameBox/nameBox";
-import { PasswordBox } from "./ProfileBoxes/PasswordBox/passwordBox";
-import { EmailBox } from "./ProfileBoxes/EmailBox/emailBox";
-import { NumberBox } from "./ProfileBoxes/NumberBox/numberBox";
-export const Profile = () => {
+import { NameBox } from "./AccountBoxes/NameBox/nameBox";
+import { PasswordBox } from "./AccountBoxes/PasswordBox/passwordBox";
+import { EmailBox } from "./AccountBoxes/EmailBox/emailBox";
+import { NumberBox } from "./AccountBoxes/NumberBox/numberBox";
+export const Account = () => {
   const [showEditName, setShowEditName] = useState(false);
   const [showEditPass, setShowEditPass] = useState(false);
   const [showEditNumber, setShowEditNumber] = useState(false);
@@ -37,7 +37,7 @@ export const Profile = () => {
     <MainBox>
       <HeadingBox p={5}>
         <Typography variant="h1" color={"primary"}>
-          Profile
+          Account
         </Typography>
       </HeadingBox>
       <EmailBox userEmail={userEmail} />

@@ -9,7 +9,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
 import { getAuth } from "firebase/auth";
-import { getDatabase, onValue, ref } from "firebase/database";
+import { getDatabase, off, onValue, ref } from "firebase/database";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
 export const NumberBox = ({ handleOpen, handleClose, showEditNumber }) => {
   const auth = getAuth();
@@ -20,21 +20,42 @@ export const NumberBox = ({ handleOpen, handleClose, showEditNumber }) => {
     number: "",
   });
 
+  // useEffect(() => {
+  //   const fetchUserProfile = async () => {
+  //     try {
+  //       onValue(userRef, (snapshot) => {
+  //         const userData = snapshot.val();
+  //         if (userData) {
+  //           setUserProfile(userData);
+  //         }
+  //       });
+  //     } catch (error) {
+  //       ShowErrorToast("Something wrong, try again.");
+  //     }
+  //   };
+  //   fetchUserProfile();
+  // }, []);
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        onValue(userRef, (snapshot) => {
+        const callback = (snapshot) => {
           const userData = snapshot.val();
           if (userData) {
             setUserProfile(userData);
+            off(userRef, 'value', callback);
           }
-        });
+        };
+        onValue(userRef, callback);
+        return () => {
+          off(userRef, 'value', callback);
+        };
       } catch (error) {
         ShowErrorToast("Something wrong, try again.");
       }
     };
+
     fetchUserProfile();
-  }, []);
+  }, [userRef]);
 
   const numberFormik = useFormik({
     initialValues: {
