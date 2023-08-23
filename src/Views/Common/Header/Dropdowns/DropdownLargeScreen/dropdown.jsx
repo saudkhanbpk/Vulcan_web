@@ -7,7 +7,7 @@ import { AuthButton } from "./styles";
 import "./styles.css";
 import { Nav } from "react-bootstrap";
 
-const ProfileDropdown = () => {
+const Dropdown = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const handleLogout = () => {
@@ -53,4 +53,4 @@ const ProfileDropdown = () => {
   );
 };
 
-export default ProfileDropdown;
+export default Dropdown;

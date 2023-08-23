@@ -21,26 +21,11 @@ export const NameBox = ({
   const auth = getAuth();
   const db = getDatabase();
   const uid = auth.currentUser.uid;
-  const userRef = ref(db, `users/${uid}/profile`);
+  const userRef = ref(db, `users/${uid}/account`);
   const [userProfile, setUserProfile] = useState({
     first_name: "",
     last_name: "",
   });
-  // useEffect(() => {
-  //   const fetchUserProfile = async () => {
-  //     try {
-  //       onValue(userRef, (snapshot) => {
-  //         const userData = snapshot.val();
-  //         if (userData) {
-  //           setUserProfile(userData);
-  //         }
-  //       });
-  //     } catch (error) {
-  //       ShowErrorToast("Something wrong try again.");
-  //     }
-  //   };
-  //   fetchUserProfile();
-  // }, [userRef]);
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {

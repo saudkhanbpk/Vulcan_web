@@ -11,7 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../../../../Infrastructure/config";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-export const ProfileDropdownSmallScreen = ({ handleCloseNavMenu }) => {
+export const DropdownSmallScreen = ({ handleCloseNavMenu }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
   const location = useLocation();

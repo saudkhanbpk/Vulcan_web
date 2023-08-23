@@ -24,7 +24,7 @@ exports.updateAccountInfo = onCall((request) => {
     }
 
     if (Object.keys(profileUpdates).length > 0) {
-      db.ref(`users/${uid}/profile`).update(profileUpdates);
+      db.ref(`users/${uid}/account`).update(profileUpdates);
     }
   } catch (error) {
     dbCalls.logUser("ERROR: Update Account: " + error);
