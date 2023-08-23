@@ -21,7 +21,7 @@ export const NameBox = ({
   const auth = getAuth();
   const db = getDatabase();
   const uid = auth.currentUser.uid;
-  const userRef = ref(db, "users/" + uid);
+  const userRef = ref(db, `users/${uid}/profile`);
   const [userProfile, setUserProfile] = useState({
     first_name: "",
     last_name: "",
@@ -33,8 +33,6 @@ export const NameBox = ({
           const userData = snapshot.val();
           if (userData) {
             setUserProfile(userData);
-          } else {
-            ShowErrorToast("User data not found");
           }
         });
       } catch (error) {
@@ -49,8 +47,8 @@ export const NameBox = ({
       lastName: "",
     },
     validationSchema: Yup.object({
-      firstName: Yup.string().required("First Name"),
-      lastName: Yup.string().required("Last Name"),
+      firstName: Yup.string(),
+      lastName: Yup.string(),
     }),
     onSubmit: async (values, { setSubmitting }) => {
       try {

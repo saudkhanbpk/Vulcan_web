@@ -7,13 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import {
-  FormBox,
-  OldPassBox,
-  Span,
-  TextButton,
-  TextLabel,
-} from "../../styles";
+import { FormBox, OldPassBox, Span, TextButton, TextLabel } from "../../styles";
 
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -68,7 +62,9 @@ export const PasswordBox = ({
         }
         await reauthenticateWithCredential(user, credential);
         // Update password
-        await updatePassword(user, newPassword).then(()=>ShowSuccessToast('Password updated successfully'));
+        await updatePassword(user, newPassword).then(() =>
+          ShowSuccessToast("Password updated successfully")
+        );
         handleClose();
         passwordFormik.resetForm();
       } catch (error) {
@@ -127,7 +123,7 @@ export const PasswordBox = ({
             noValidate
           >
             <Grid container>
-              <Grid lg={12} md={12} sm={12} xs={12}>
+              <Grid lg={5} md={12} sm={12} xs={12}>
                 <OldPassBox width="100%" margin="0 auto">
                   <TextField
                     name="oldPassword"
@@ -169,6 +165,7 @@ export const PasswordBox = ({
                   />
                 </OldPassBox>
               </Grid>
+              <Grid lg={7}></Grid>
               <Grid lg={5} md={12} sm={12} xs={12}>
                 <Box width="100%" margin="0 auto">
                   <TextField
