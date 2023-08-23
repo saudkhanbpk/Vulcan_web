@@ -11,7 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../../../../Infrastructure/config";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-export const ProfileDropdownSmallScreen = ({ handleCloseNavMenu }) => {
+export const DropdownSmallScreen = ({ handleCloseNavMenu }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,7 +24,7 @@ export const ProfileDropdownSmallScreen = ({ handleCloseNavMenu }) => {
     auth.signOut();
     if (
       location.pathname === "/dashboard" ||
-      location.pathname === "/profile"
+      location.pathname === "/account"
     ) {
       navigate("/");
     }
@@ -88,12 +88,12 @@ export const ProfileDropdownSmallScreen = ({ handleCloseNavMenu }) => {
             <Span>
               <SmNavlink
                 onClick={() => {
-                  navigate("/profile");
+                  navigate("/account");
                   handleClose();
                 }}
                 variant="body2"
               >
-                Profile
+                Account
               </SmNavlink>
             </Span>
           </Box>

@@ -16,9 +16,9 @@ import { Courses } from "../../Views/CoursesScreen/courses";
 import CoursesSoon from "../../Views/CoursesPage/coursesSoon";
 import HomeScreen from "../../Views/Home/home";
 import { Dashboard } from "../../Views/Dashboard/dashboard.jsx";
-import { Profile } from "../../Views/Profile/profile";
 import { PrivateOutlet } from "./privateRoute";
 import Error404 from "../../Views/Common/Error404/error404";
+import { Account } from "../../Views/Account/account";
 
 const Router = () => {
   const location = useLocation();
@@ -47,7 +47,6 @@ const Router = () => {
         <Route exact path="/privacy" element={<Privacy />} />
         <Route exact path="/policies" element={<Policies />} />
         <Route exact path="/contact" element={<Contact />} />
-        <Route exact path="/contact" element={<Profile />} />
         <Route
           exact
           path="/educator-account"
@@ -56,7 +55,7 @@ const Router = () => {
 
         <Route element={<PrivateOutlet />}>
           <Route path={"/dashboard"} element={<Dashboard />} />
-          <Route path={"/profile"} element={<Profile />} />
+          <Route path={"/account"} element={<Account />} />
         </Route>
 
         <Route path="*" element={<Error404 />} />

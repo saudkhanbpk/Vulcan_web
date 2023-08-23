@@ -26,8 +26,8 @@ import {
 } from "../../../Infrastructure/States/authModalsSlice";
 import useAuthentication from "../../../Infrastructure/States/onAuthStateChange";
 import AuthModals from "../../Common/AuthModals/authModals";
-import { ProfileDropdownSmallScreen } from "./Dropdowns/ProfileDropdownSmallScreen/profileDropdownSmallScreen";
-import ProfileDropdown from "./Dropdowns/ProfileDropdown/profileDropdown";
+import { DropdownSmallScreen } from "./Dropdowns/DropdownSmallScreen/dropdownSmallScreen";
+import Dropdown from "./Dropdowns/DropdownLargeScreen/dropdown";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -79,7 +79,7 @@ const Navbar = () => {
               Vulcan
             </Typography>
           </Span>
-
+          
           {/* Small Devices */}
           <Box sx={styles.xsLogoMainBox}>
             <Box sx={styles.xsLogo} onClick={navigateToHome}>
@@ -182,7 +182,7 @@ const Navbar = () => {
               {/* Small Screen */}
               <Box display="flex" justifyContent="space-around" pt="20px">
                 {user ? (
-                  <ProfileDropdownSmallScreen
+                  <DropdownSmallScreen
                     handleCloseNavMenu={handleCloseNavMenu}
                   />
                 ) : (
@@ -224,7 +224,7 @@ const Navbar = () => {
               </Span>
 
               {user ? (
-                <ProfileDropdown />
+                <Dropdown />
               ) : (
                 <>
                   <AuthButton onClick={handleLoginButtonClick}>

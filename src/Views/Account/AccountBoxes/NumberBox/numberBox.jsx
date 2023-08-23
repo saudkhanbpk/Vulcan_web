@@ -9,33 +9,36 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
 import { getAuth } from "firebase/auth";
-import { getDatabase, onValue, ref } from "firebase/database";
+import { getDatabase, off, onValue, ref } from "firebase/database";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
 export const NumberBox = ({ handleOpen, handleClose, showEditNumber }) => {
   const auth = getAuth();
   const db = getDatabase();
   const uid = auth.currentUser.uid;
-  const userRef = ref(db, `users/${uid}/profile`);
+  const userRef = ref(db, `users/${uid}/account`);
   const [userProfile, setUserProfile] = useState({
     number: "",
   });
-
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        onValue(userRef, (snapshot) => {
+        const callback = (snapshot) => {
           const userData = snapshot.val();
           if (userData) {
             setUserProfile(userData);
+            off(userRef, "value", callback);
           }
-        });
+        };
+        onValue(userRef, callback);
+        return () => {
+          off(userRef, "value", callback);
+        };
       } catch (error) {
         ShowErrorToast("Something wrong, try again.");
       }
     };
     fetchUserProfile();
-  }, []);
-
+  }, [userRef]);
   const numberFormik = useFormik({
     initialValues: {
       number: userProfile.number,

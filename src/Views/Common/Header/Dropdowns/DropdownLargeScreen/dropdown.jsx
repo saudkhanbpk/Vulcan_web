@@ -7,14 +7,14 @@ import { AuthButton } from "./styles";
 import "./styles.css";
 import { Nav } from "react-bootstrap";
 
-const ProfileDropdown = () => {
+const Dropdown = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const handleLogout = () => {
     auth.signOut();
     if (
       location.pathname === "/dashboard" ||
-      location.pathname === "/profile"
+      location.pathname === "/account"
     ) {
       navigate("/");
     }
@@ -38,8 +38,8 @@ const ProfileDropdown = () => {
             <Nav.Link as={Link} to="/dashboard" className="menuitems">
               Dashboard
             </Nav.Link>
-            <Nav.Link as={Link} to="/profile" className="menuitems">
-              Profile
+            <Nav.Link as={Link} to="/account" className="menuitems">
+              Account
             </Nav.Link>
           </Nav>
           <Box display="flex" justifyContent="center" py="10px">
@@ -53,4 +53,4 @@ const ProfileDropdown = () => {
   );
 };
 
-export default ProfileDropdown;
+export default Dropdown;
