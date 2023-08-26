@@ -1,5 +1,6 @@
 const { onCall } = require("firebase-functions/v2/https")  
-const { getDatabase } = require("firebase-admin/database")  
+const { getDatabase } = require("firebase-admin/database")
+
 const db = getDatabase()  
 const dbCalls = require("./databaseCalls")  
 
@@ -28,8 +29,8 @@ exports.updateAccountInfo = onCall((request) => {
     }
   } catch (error) {
     dbCalls.logUser("ERROR: Update Account: " + error)  
-    isSuccess = false  
-    errorMessage = "Account Update Error: " + error.message   // Improved error message
+    isSuccess = false
+    errorMessage = error
   }
   return { isSuccess: isSuccess, errorMessage: errorMessage }  
 })  

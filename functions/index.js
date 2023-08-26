@@ -10,3 +10,6 @@ exports.createaccount = setupAccount.setupAccount
 
 const updateAccountInfo = require('./updateAccountInfo')
 exports.updateaccount = updateAccountInfo.updateAccountInfo
+
+const updateExperienceStep = require('./updateExperienceStep')
+exports.updateexperiencestep = updateExperienceStep.updateExperienceStep
