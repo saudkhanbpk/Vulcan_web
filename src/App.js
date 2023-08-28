@@ -4,6 +4,7 @@ import { AuthProvider } from "./Infrastructure/States/authContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Router from "./Infrastructure/Router/router";
+// import EducatorAccountMainPage from "./Views/EducatorOnBoarding/educatorAccountMainPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <AuthProvider>
           <ScrollToTop/>
           <Router/>
+          {/* <EducatorAccountMainPage/> */}
         </AuthProvider>
       </BrowserRouter>
     </>

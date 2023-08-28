@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export default function ProgressBar() {
   const steps = useSelector((state) => state.educatorSteps.steps);
-  const progressPercentage = (steps - 1) * 50;
+  const progressPercentage = (steps - 1) * 25;
 
   return (
     <Box sx={{ width: "100%" }}>

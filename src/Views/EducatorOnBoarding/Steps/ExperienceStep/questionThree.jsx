@@ -6,35 +6,43 @@ import {
   FormGroup,
   Checkbox,
 } from "@mui/material";
-import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { useSelector, useDispatch } from "react-redux";
-import { eduRegSteps } from "../../../Infrastructure/States/educatorStepsSlice";
-function StepTwo() {
+import { eduRegSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
+import { ChoiceTypo } from "../../styles";
+function QuestionThree() {
   const step2Data = useSelector((state) => state.educatorSteps.stepTwoData);
   const dispatch = useDispatch();
 
   const options = [
-    { id: 0, text: "In Person" },
-    { id: 1, text: "Live Online" },
-    { id: 2, text: "Pre-recorded Online" },
-    { id: 3, text: "Other" },
+    { id: 0, text: "0-1" },
+    { id: 1, text: "1-5" },
+    { id: 2, text: "5-10" },
+    { id: 3, text: "10+" },
   ];
 
   const handleOptionChange = (e, optionValue) => {
-    dispatch(eduRegSteps({ optionValue, step: "2" }));
+    dispatch(eduRegSteps({ optionValue, step: "3" }));
   };
-  const ChoiceTypo = styled(Typography)(({ theme }) => ({
-    fontWeight: 700,
-    lineHeight: 1.2,
-    letterSpacing: "-.02rem",
-    fontSize: "16px",
-  }));
 
   return (
-    <Box sx={{ height: "100vh" }}>
+    <Box
+      sx={{
+        height: {
+          lg: "100vh",
+          md: "50vh",
+          sm: "50vh",
+          xs: "50vh",
+        },
+      }}
+    >
+      <Box sx={{ height: { lg: "100px", md: "100px" } }}>
+        <Typography variant="h6" pb={2}>
+          Approximately how many total years of teaching experience do you have?
+        </Typography>
+      </Box>
       <Grid container>
-        <Grid lg={5} md={5} sm={10} xs={12}>
+        <Grid lg={12} md={12} sm={12} xs={12}>
           <FormGroup>
             {options.map((option) => (
               <FormControlLabel
@@ -60,4 +68,4 @@ function StepTwo() {
   );
 }
 
-export default StepTwo;
+export default QuestionThree;

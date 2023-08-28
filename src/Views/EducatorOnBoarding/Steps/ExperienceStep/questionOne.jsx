@@ -9,9 +9,9 @@ import {
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { useDispatch, useSelector } from "react-redux";
-import { eduRegSteps } from "../../../Infrastructure/States/educatorStepsSlice";
+import { eduRegSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
 
-function StepOne() {
+function QuestionOne() {
   const step1Data = useSelector((state) => state.educatorSteps.stepOneData);
   const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ function StepOne() {
   ];
 
   const handleOptionChange = (e, optionValue) => {
-    dispatch(eduRegSteps({ optionValue, step: "1" }));
+    dispatch(eduRegSteps({ optionValue, step: "2" }));
   };
 
   const ChoiceTypo = styled(Typography)(({ theme }) => ({
@@ -35,9 +35,28 @@ function StepOne() {
   }));
 
   return (
-    <Box sx={{ height: "100vh" }}>
-      <Grid container>
-        <Grid lg={5} md={5} sm={10} xs={12}>
+    <Box
+      sx={{
+        height: {
+          lg: "100vh",
+          md: "50vh",
+          sm: "50vh",
+          xs: "50vh",
+        },
+      }}
+    >
+      <Box sx={{ height: { lg: "100px", md: "100px" } }}>
+        <Typography variant="h6" pb={2}>
+          What teaching roles have you occupied?
+        </Typography>
+      </Box>
+      <Grid
+        container
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent="center"
+      >
+        <Grid lg={12} md={12} sm={12} xs={12}>
           <FormGroup>
             {options.map((option) => (
               <FormControlLabel
@@ -68,4 +87,4 @@ function StepOne() {
   );
 }
 
-export default StepOne;
+export default QuestionOne;

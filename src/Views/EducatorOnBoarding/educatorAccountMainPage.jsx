@@ -1,50 +1,27 @@
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Steps from "./Steps/steps";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  ContinueButton,
   ExitTypo,
-  Footer,
   Header,
   LogoTypo,
-  MainBox,
-  PreviousButton,
+  EduMainBox,
   Span,
   StepsTypo,
 } from "./styles";
 import ProgressBar from "./progressbar";
-import {
-  incrementSteps,
-  decrementSteps,
-} from "../../Infrastructure/States/educatorStepsSlice";
+import { useSelector } from "react-redux";
 
 const EducatorAccountMainPage = () => {
   const navigate = useNavigate();
-  const [steps, setSteps] = useState(1);
-  const dispatch = useDispatch();
-  const step1Data = useSelector((state) => state.educatorSteps.stepOneData);
-
-  useEffect(() => {}, [steps]);
-
-  const handleDec = () => {
-    if (steps > 1) {
-      setSteps(steps - 1);
-      dispatch(decrementSteps());
-    }
+  const steps = useSelector((state) => state.educatorSteps.steps);
+  const handleClick = () => {
+    navigate("/");
   };
-
-  const handleInc = () => {
-    if (steps >= 1 && steps < 2) {
-      dispatch(incrementSteps());
-      setSteps(steps + 1);
-    }
-  };
-
   return (
-    <MainBox>
+    <EduMainBox>
       <Header alignItems={"center"}>
         <Grid
           container
@@ -56,7 +33,6 @@ const EducatorAccountMainPage = () => {
             <Box
               sx={{
                 borderRight: "1px solid rgba(128, 128, 128, 0.5)",
-
                 height: "70px",
               }}
               display={"Flex"}
@@ -87,7 +63,7 @@ const EducatorAccountMainPage = () => {
             sm={6}
             xs={6}
           >
-            <StepsTypo variant="h6">Step {steps} of 2</StepsTypo>
+            <StepsTypo variant="h6">Step {steps} of 4</StepsTypo>
           </Grid>
           <Grid
             lg={2}
@@ -99,11 +75,7 @@ const EducatorAccountMainPage = () => {
             justifyContent={"flex-end"}
           >
             <Span>
-              <ExitTypo
-                variant="h6"
-                color="primary"
-                onClick={() => navigate("/")}
-              >
+              <ExitTypo variant="h6" color="primary" onClick={handleClick}>
                 Exit
               </ExitTypo>
             </Span>
@@ -111,32 +83,8 @@ const EducatorAccountMainPage = () => {
         </Grid>
         <ProgressBar />
       </Header>
-      <Steps steps={steps} />
-      <Footer>
-        <Grid container justifyContent={"space-between"} p={2}>
-          <Grid>
-            {steps > 1 ? (
-              <PreviousButton variant="contained" onClick={handleDec}>
-                Previous
-              </PreviousButton>
-            ) : (
-              <></>
-            )}
-          </Grid>
-          <Grid>
-            <Grid>
-              <ContinueButton
-                disabled={!step1Data.length > 0}
-                variant="contained"
-                onClick={handleInc}
-              >
-                Continue
-              </ContinueButton>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Footer>
-    </MainBox>
+      <Steps controlSteps={steps} />
+    </EduMainBox>
   );
 };
 
