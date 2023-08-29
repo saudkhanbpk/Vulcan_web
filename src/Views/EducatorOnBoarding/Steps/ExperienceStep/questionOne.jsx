@@ -3,16 +3,15 @@ import {
   Box,
   Typography,
   FormControlLabel,
-  FormGroup,
-  Checkbox,
+  FormControl,
+  RadioGroup,
+  Radio,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { eduRegSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
 
 function QuestionOne() {
-  const step1Data = useSelector((state) => state.educatorSteps.stepOneData);
   const dispatch = useDispatch();
 
   const options = [
@@ -50,39 +49,27 @@ function QuestionOne() {
           What teaching roles have you occupied?
         </Typography>
       </Box>
-      <Grid
-        container
-        display={"flex"}
-        alignItems={"center"}
-        justifyContent="center"
-      >
-        <Grid lg={12} md={12} sm={12} xs={12}>
-          <FormGroup>
-            {options.map((option) => (
-              <FormControlLabel
-                key={option.id}
-                control={
-                  <Checkbox
-                    checked={step1Data.includes(option.text.toString())}
-                    onChange={(e) =>
-                      handleOptionChange(e, option.text.toString())
-                    }
-                    value={option.text.toString()}
-                    sx={{
-                      "& .Mui-checked": {
-                        color: "#1c1d1f",
-                      },
-                    }}
-                    color="primary"
-                  />
-                }
-                label={<ChoiceTypo variant="body1">{option.text}</ChoiceTypo>}
-                sx={{ border: "1px solid #1c1d1f", p: 1, m: "3px" }}
-              />
-            ))}
-          </FormGroup>
-        </Grid>
-      </Grid>
+      <FormControl fullWidth>
+            <RadioGroup
+              onChange={(e) => handleOptionChange(e.target.value)}
+            >
+              {options.map((option) => (
+                <FormControlLabel
+                  fullWidth
+                  key={option.id}
+                  value={option.text.toString()}
+                  control={<Radio />}
+                  label={<ChoiceTypo>{option.text}</ChoiceTypo>}
+                  sx={{
+                    width: "100%",
+                    border: "1px solid #1c1d1f",
+                    p: 1,
+                    m: "3px",
+                  }}
+                />
+              ))}
+            </RadioGroup>
+          </FormControl>
     </Box>
   );
 }

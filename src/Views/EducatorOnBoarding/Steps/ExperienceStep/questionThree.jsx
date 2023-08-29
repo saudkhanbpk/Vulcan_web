@@ -3,15 +3,14 @@ import {
   Box,
   Typography,
   FormControlLabel,
-  FormGroup,
-  Checkbox,
+  FormControl,
+  RadioGroup,
+  Radio,
 } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { eduRegSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { ChoiceTypo } from "../../styles";
 function QuestionThree() {
-  const step2Data = useSelector((state) => state.educatorSteps.stepTwoData);
   const dispatch = useDispatch();
 
   const options = [
@@ -41,29 +40,26 @@ function QuestionThree() {
           Approximately how many total years of teaching experience do you have?
         </Typography>
       </Box>
-      <Grid container>
-        <Grid lg={12} md={12} sm={12} xs={12}>
-          <FormGroup>
-            {options.map((option) => (
-              <FormControlLabel
-                key={option.id}
-                control={
-                  <Checkbox
-                    checked={step2Data.includes(option.text.toString())}
-                    onChange={(e) =>
-                      handleOptionChange(e, option.text.toString())
-                    }
-                    value={option.text.toString()}
-                    sx={{ color: "#1c1d1f" }}
-                  />
-                }
-                label={<ChoiceTypo variant="body1">{option.text}</ChoiceTypo>}
-                sx={{ border: "1px solid #1c1d1f", p: 1, m: "3px" }}
-              />
-            ))}
-          </FormGroup>
-        </Grid>
-      </Grid>
+      <FormControl fullWidth>
+            <RadioGroup
+              onChange={(e) => handleOptionChange(e.target.value)}
+            >
+              {options.map((option) => (
+                <FormControlLabel
+                  key={option.id}
+                  value={option.text.toString()}
+                  control={<Radio />}
+                  label={<ChoiceTypo>{option.text}</ChoiceTypo>}
+                  sx={{
+                    width: "100%",
+                    border: "1px solid #1c1d1f",
+                    p: 1,
+                    m: "3px",
+                  }}
+                />
+              ))}
+            </RadioGroup>
+          </FormControl>
     </Box>
   );
 }

@@ -41,16 +41,16 @@ export const CreateAccountStep = ({ controlSteps }) => {
       phoneNumber: "",
     },
     validationSchema: Yup.object({
-      firstName: Yup.string().required("First Name"),
-      lastName: Yup.string().required("Last Name"),
-      email: Yup.string().email("Invalid email address").required("Email"),
-      password: Yup.string()
-        .min(6, "Must be 6 characters")
-        .required("Password"),
-      reEnterPassword: Yup.string()
-        .oneOf([Yup.ref("password"), null], "Passwords must match")
-        .required("Re Enter Password."),
-      phoneNumber: Yup.string(),
+      // firstName: Yup.string().required("First Name"),
+      // lastName: Yup.string().required("Last Name"),
+      // email: Yup.string().email("Invalid email address").required("Email"),
+      // password: Yup.string()
+      //   .min(6, "Must be 6 characters")
+      //   .required("Password"),
+      // reEnterPassword: Yup.string()
+      //   .oneOf([Yup.ref("password"), null], "Passwords must match")
+      //   .required("Re Enter Password."),
+      // phoneNumber: Yup.string(),
     }),
     onSubmit: async (values) => {
       dispatch(incrementSteps());
@@ -79,7 +79,6 @@ export const CreateAccountStep = ({ controlSteps }) => {
       // } catch (error) {
       //   handleRegistrationError(error);
       // }
-
     },
   });
   const handleToggleRePasswordVisibility = () => {
@@ -99,158 +98,170 @@ export const CreateAccountStep = ({ controlSteps }) => {
           Create Account
         </TopHeading>
       </TopHeadingBox>
-      <FormBoxEdu component="form" onSubmit={formik.handleSubmit} noValidate>
-        <Box p={4}>
-          <TextField
-            name="firstName"
-            label={
-              formik.touched.firstName && Boolean(formik.errors.firstName)
-                ? `${formik.errors.firstName}`
-                : "First Name"
-            }
-            variant="standard"
-            onChange={formik.handleChange}
-            value={formik.values.firstName}
-            error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-            InputLabelProps={{
-              style: { fontSize: 16 },
-            }}
-            InputProps={{
-              style: { fontSize: 18 },
-            }}
-            fullWidth
-          />
-          <TextField
-            name="lastName"
-            sx={{ mt: "6px" }}
-            label={
-              formik.touched.lastName && Boolean(formik.errors.lastName)
-                ? `${formik.errors.lastName}`
-                : "Last Name"
-            }
-            variant="standard"
-            onChange={formik.handleChange}
-            value={formik.values.lastName}
-            error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-            InputLabelProps={{
-              style: { fontSize: 16 },
-            }}
-            InputProps={{
-              style: { fontSize: 18 },
-            }}
-            fullWidth
-          />
-          <TextField
-            name="email"
-            sx={{ mt: "6px" }}
-            label={
-              formik.touched.email && Boolean(formik.errors.email)
-                ? `${formik.errors.email}`
-                : "Email"
-            }
-            variant="standard"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            InputLabelProps={{
-              style: { fontSize: 16 },
-            }}
-            InputProps={{
-              style: { fontSize: 18 },
-            }}
-            fullWidth
-          />
-          <TextField
-            name="password"
-            sx={{ mt: "6px" }}
-            label={
-              formik.touched.password && Boolean(formik.errors.password)
-                ? formik.errors.password
-                : "Password"
-            }
-            variant="standard"
-            type={showPassword ? "password" : "text"}
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            autoComplete="new-password"
-            error={
-              formik.touched.password &&
-              !isPasswordValid(formik.values.password)
-            }
-            InputLabelProps={{
-              style: {
-                fontSize: 16,
-              },
-            }}
-            InputProps={{
-              style: { fontSize: 18 },
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleTogglePasswordVisibility}>
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            fullWidth
-          />
-          <TextField
-            name="reEnterPassword"
-            sx={{ mt: "6px" }}
-            label={
-              formik.touched.reEnterPassword &&
-              formik.values.password !== formik.values.reEnterPassword
-                ? "Passwords do not match"
-                : "Re-enter Password"
-            }
-            variant="standard"
-            type={showRePassword ? "password" : "text"}
-            onChange={formik.handleChange}
-            value={formik.values.reEnterPassword}
-            autoComplete="new-Password"
-            error={
-              formik.touched.reEnterPassword &&
-              formik.values.password !== formik.values.reEnterPassword
-            }
-            InputLabelProps={{
-              style: {
-                fontSize: 16,
-              },
-            }}
-            InputProps={{
-              style: { fontSize: 18 },
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleToggleRePasswordVisibility}>
-                    {showRePassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            fullWidth
-          />
-          <TextField
-            name="phoneNumber"
-            sx={{ mt: "6px" }}
-            label={
-              formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
-                ? `${formik.errors.phoneNumber}`
-                : "Phone Number (Optional)"
-            }
-            variant="standard"
-            onChange={formik.handleChange}
-            value={formik.values.phoneNumber}
-            error={
-              formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
-            }
-            InputLabelProps={{
-              style: { fontSize: 16 },
-            }}
-            InputProps={{
-              style: { fontSize: 18 },
-            }}
-            fullWidth
-          />
+
+      <Box component="form" onSubmit={formik.handleSubmit} noValidate>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <FormBoxEdu p={4}>
+            <TextField
+              name="firstName"
+              label={
+                formik.touched.firstName && Boolean(formik.errors.firstName)
+                  ? `${formik.errors.firstName}`
+                  : "First Name"
+              }
+              variant="standard"
+              onChange={formik.handleChange}
+              value={formik.values.firstName}
+              error={
+                formik.touched.firstName && Boolean(formik.errors.firstName)
+              }
+              InputLabelProps={{
+                style: { fontSize: 16 },
+              }}
+              InputProps={{
+                style: { fontSize: 18 },
+              }}
+              fullWidth
+            />
+            <TextField
+              name="lastName"
+              sx={{ mt: "6px" }}
+              label={
+                formik.touched.lastName && Boolean(formik.errors.lastName)
+                  ? `${formik.errors.lastName}`
+                  : "Last Name"
+              }
+              variant="standard"
+              onChange={formik.handleChange}
+              value={formik.values.lastName}
+              error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+              InputLabelProps={{
+                style: { fontSize: 16 },
+              }}
+              InputProps={{
+                style: { fontSize: 18 },
+              }}
+              fullWidth
+            />
+            <TextField
+              name="email"
+              sx={{ mt: "6px" }}
+              label={
+                formik.touched.email && Boolean(formik.errors.email)
+                  ? `${formik.errors.email}`
+                  : "Email"
+              }
+              variant="standard"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              InputLabelProps={{
+                style: { fontSize: 16 },
+              }}
+              InputProps={{
+                style: { fontSize: 18 },
+              }}
+              fullWidth
+            />
+            <TextField
+              name="password"
+              sx={{ mt: "6px" }}
+              label={
+                formik.touched.password && Boolean(formik.errors.password)
+                  ? formik.errors.password
+                  : "Password"
+              }
+              variant="standard"
+              type={showPassword ? "password" : "text"}
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              autoComplete="new-password"
+              error={
+                formik.touched.password &&
+                !isPasswordValid(formik.values.password)
+              }
+              InputLabelProps={{
+                style: {
+                  fontSize: 16,
+                },
+              }}
+              InputProps={{
+                style: { fontSize: 18 },
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleTogglePasswordVisibility}>
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              fullWidth
+            />
+            <TextField
+              name="reEnterPassword"
+              sx={{ mt: "6px" }}
+              label={
+                formik.touched.reEnterPassword &&
+                formik.values.password !== formik.values.reEnterPassword
+                  ? "Passwords do not match"
+                  : "Re-enter Password"
+              }
+              variant="standard"
+              type={showRePassword ? "password" : "text"}
+              onChange={formik.handleChange}
+              value={formik.values.reEnterPassword}
+              autoComplete="new-Password"
+              error={
+                formik.touched.reEnterPassword &&
+                formik.values.password !== formik.values.reEnterPassword
+              }
+              InputLabelProps={{
+                style: {
+                  fontSize: 16,
+                },
+              }}
+              InputProps={{
+                style: { fontSize: 18 },
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleToggleRePasswordVisibility}>
+                      {showRePassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              fullWidth
+            />
+            <TextField
+              name="phoneNumber"
+              sx={{ mt: "6px" }}
+              label={
+                formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
+                  ? `${formik.errors.phoneNumber}`
+                  : "Phone Number (Optional)"
+              }
+              variant="standard"
+              onChange={formik.handleChange}
+              value={formik.values.phoneNumber}
+              error={
+                formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
+              }
+              InputLabelProps={{
+                style: { fontSize: 16 },
+              }}
+              InputProps={{
+                style: { fontSize: 18 },
+              }}
+              fullWidth
+            />
+          </FormBoxEdu>
         </Box>
         <Footer>
           <Grid container justifyContent={"space-between"} p={2}>
@@ -276,7 +287,7 @@ export const CreateAccountStep = ({ controlSteps }) => {
             </Grid>
           </Grid>
         </Footer>
-      </FormBoxEdu>
+      </Box>
     </Box>
   );
 };

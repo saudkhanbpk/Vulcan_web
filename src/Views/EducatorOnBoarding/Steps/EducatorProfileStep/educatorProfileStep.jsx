@@ -1,21 +1,71 @@
-import { Avatar, Box, IconButton, Stack, TextField } from "@mui/material";
+import { Box, Stack, TextField } from "@mui/material";
+import "react-quill/dist/quill.snow.css";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import React from "react";
-import EditIcon from "@mui/icons-material/Edit";
-import ProfileImage from "../../../../Assets/Images/profile.png";
+import React, { useState } from "react";
 import {
   decrementSteps,
   resetSteps,
 } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { AboutMe, ContinueButton, Footer, FullName, PreviousButton, TitleText } from "../../styles";
+import {
+  AboutMe,
+  ContinueButton,
+  Footer,
+  FullName,
+  PreviousButton,
+  TitleText,
+} from "../../styles";
+import ReactQuill from "react-quill";
+import { UploadAvatar } from "./uploadAvatar";
 
 export const EducatorProfileStep = () => {
   const steps = useSelector((state) => state.educatorSteps.steps);
-  
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [{ size: [] }],
+      [{ font: [] }],
+      [{ align: ["right", "center", "justify"] }],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link", "image"],
+      [{ color: ["red", "#785412"] }],
+      [{ background: ["red", "#785412"] }],
+    ],
+  };
+
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "link",
+    "color",
+    "image",
+    "background",
+    "align",
+    "size",
+    "font",
+  ];
+
+  const [code, setCode] = useState("");
+  const [contentLength, setContentLength] = useState(code.length);
+
+  const handleProcedureContentChange = (content, delta, source, editor) => {
+    if (content.length <= 2000) {
+      setCode(content);
+      setContentLength(content.length);
+    }
+  };
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleDec = () => {
     if (steps > 1) {
       dispatch(decrementSteps());
@@ -28,7 +78,7 @@ export const EducatorProfileStep = () => {
   };
   return (
     <>
-      <Box height={{ sm: "120vh", lg: "100vh", xs: "130vh" }} pt={18}>
+      <Box height={{ sm: "120vh", lg: "130vh", xs: "130vh" }} pt={18}>
         <Grid container>
           <Grid lg={1} md={0} sm={0} xs={0}></Grid>
           <Grid
@@ -37,6 +87,7 @@ export const EducatorProfileStep = () => {
             sm={12}
             xs={12}
             p={{ lg: 5, md: 5, sm: 5, xs: 5 }}
+            mb={20}
             display={"flex"}
             flexDirection={"column"}
             justifyContent={"flex-start"}
@@ -49,19 +100,16 @@ export const EducatorProfileStep = () => {
             <AboutMe pt={10} color={"primary"} mb={3}>
               About Me
             </AboutMe>
-            <TextField
-              id="outlined-multiline-static"
-              label="Message"
-              multiline
-              rows={6}
-              InputLabelProps={{
-                style: { fontSize: 16 },
-              }}
-              InputProps={{
-                style: { fontSize: 18 },
-              }}
-              fullWidth
+           <Box mt={5}>
+           <ReactQuill
+              theme="snow"
+              modules={modules}
+              formats={formats}
+              value={code}
+              onChange={handleProcedureContentChange}
+              
             />
+           </Box>
           </Grid>
           <Grid
             p={{ lg: 5, md: 5, sm: 5, xs: 5 }}
@@ -75,7 +123,7 @@ export const EducatorProfileStep = () => {
             <Box>
               <Stack direction="row" spacing={2}>
                 <Box position="relative">
-                  <Avatar
+                  {/* <Avatar
                     alt="Remy Sharp"
                     src={ProfileImage}
                     sx={{ width: 150, height: 150 }}
@@ -92,7 +140,8 @@ export const EducatorProfileStep = () => {
                     }}
                   >
                     <EditIcon />
-                  </IconButton>
+                  </IconButton> */}
+                  <UploadAvatar />
                 </Box>
               </Stack>
               <TextField

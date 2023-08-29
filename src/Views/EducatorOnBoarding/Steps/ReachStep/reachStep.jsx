@@ -1,11 +1,11 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
-import QuestionTwo from "./questionTwo";
-import QuestionOne from "./questionOne";
 import {
   ContinueButton,
   Footer,
   PreviousButton,
+  QuestionFormBox,
+  QuestionName,
   TopHeading,
   TopHeadingBox,
 } from "../../styles";
@@ -14,6 +14,7 @@ import {
   decrementSteps,
   incrementSteps,
 } from "../../../../Infrastructure/States/educatorStepsSlice";
+import { useFormik } from "formik";
 
 export const ReachStep = () => {
   const steps = useSelector((state) => state.educatorSteps.steps);
@@ -30,9 +31,40 @@ export const ReachStep = () => {
       dispatch(incrementSteps());
     }
   };
+
+  const optionsQ1 = [
+    { id: 0, text: "Link 1" },
+    { id: 1, text: "Link 2" },
+    { id: 2, text: "Link 3" },
+  ];
+  const optionsQ2 = [
+    { id: 0, text: "Link 1" },
+    { id: 1, text: "Link 2" },
+    { id: 2, text: "Link 3" },
+  ];
+
+  const initialValues = {
+    linksQ1: optionsQ1.reduce(
+      (acc, option) => ({ ...acc, [option.id]: "" }),
+      {}
+    ),
+    linksQ2: optionsQ2.reduce(
+      (acc, option) => ({ ...acc, [option.id]: "" }),
+      {}
+    ),
+  };
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit:(values) => {
+      dispatch(incrementSteps());
+      console.log("Links for Question 1:", values.linksQ1);
+      console.log("Links for Question 2:", values.linksQ2);
+
+  }})
   return (
     <>
-      <Box pt={16}>
+      <form  onSubmit={formik.handleSubmit} >
         <TopHeadingBox>
           <TopHeading variant="" mt={5} ml={3}>
             Reach
@@ -55,7 +87,56 @@ export const ReachStep = () => {
                   lg: 5,
                 }}
               >
-                <QuestionOne />
+                {/* <QuestionOne /> */}
+                <Box
+                  sx={{
+                    height: {
+                      lg: "100vh",
+                      md: "50vh",
+                      sm: "50vh",
+                      xs: "50vh",
+                    },
+                  }}
+                >
+                  <Box sx={{ height: { lg: "100px", md: "100px" } }}>
+                    <QuestionName variant="h6" py={3}>
+                      Have you taught on any teaching platforms? (Udemy,
+                      Skillshare, Wyzant, etc)
+                    </QuestionName>
+                  </Box>
+                  <Grid
+                    container
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent="center"
+                  >
+                    <Grid lg={12} md={12} sm={12} xs={12}>
+                      <QuestionFormBox>
+                        {optionsQ1.map((option) => (
+                          <TextField
+                            key={option.id}
+                            label={option.text}
+                            variant="outlined"
+                            placeholder="Paste your link"
+                            onChange={(e) => {
+                              formik.handleChange(e);
+                              formik.values.linksQ1[option.id] = e.target.value;
+                            }}
+                            value={formik.values.linksQ1[option.id]}
+                            sx={{ m: "3px" }}
+                            InputLabelProps={{
+                              style: { fontSize: 16 },
+                            }}
+                            InputProps={{
+                              style: { fontSize: 18 },
+                            }}
+                            fullWidth
+                          />
+                        ))}
+                      </QuestionFormBox>
+                    </Grid>
+                  </Grid>
+                </Box>
               </Box>
             </Box>
           </Grid>
@@ -70,12 +151,47 @@ export const ReachStep = () => {
                   lg: 5,
                 }}
               >
-                <QuestionTwo />
+                {/* <QuestionTwo /> */}
+                <Box sx={{ height: "100vh" }}>
+                  <Box sx={{ height: { lg: "100px", md: "100px" } }}>
+                    <Typography variant="h6" py={3}>
+                      Do you have any social media where you post educational
+                      content? (Youtube, Tik Tok, Twitter, etc)
+                    </Typography>
+                  </Box>
+                  <Grid container>
+                    <Grid lg={12} md={12} sm={12} xs={12}>
+                      <QuestionFormBox>
+                        {optionsQ2.map((option) => (
+                          <TextField
+                            key={option.id}
+                            label={option.text}
+                            variant="outlined"
+                            placeholder="Paste your link"
+                            onChange={(e) => {
+                              formik.handleChange(e);
+                              formik.values.linksQ2[option.id] = e.target.value;
+                            }}
+                            value={formik.values.linksQ2[option.id]}
+                            sx={{ m: "3px" }}
+                            InputLabelProps={{
+                              style: { fontSize: 16 },
+                            }}
+                            InputProps={{
+                              style: { fontSize: 18 },
+                            }}
+                            fullWidth
+                          />
+                        ))}
+                      </QuestionFormBox>
+                    </Grid>
+                  </Grid>
+                </Box>
               </Box>
             </Box>
           </Grid>
         </Grid>
-      </Box>
+      </form>
       <Footer>
         <Grid container justifyContent={"space-between"} p={2}>
           <Grid>
@@ -90,7 +206,6 @@ export const ReachStep = () => {
           <Grid>
             <Grid>
               <ContinueButton
-                // disabled={!step1Data.length > 0}
                 variant="contained"
                 onClick={handleInc}
               >
