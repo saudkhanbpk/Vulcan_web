@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
 import QuestionTwo from "./questionTwo";
 import QuestionOne from "./questionOne";
@@ -15,9 +15,14 @@ import {
   TopHeading,
   TopHeadingBox,
 } from "../../styles";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 export const ExperienceStep = () => {
   const steps = useSelector((state) => state.educatorSteps.steps);
+  const step2Q1Data = useSelector((state) => state.educatorSteps.step2Q1Data);
+  const step2Q2Data = useSelector((state) => state.educatorSteps.step2Q3Data);
+  const step2Q3Data = useSelector((state) => state.educatorSteps.step2Q3Data);
+
   const dispatch = useDispatch();
   const handleDec = () => {
     if (steps > 1) {
@@ -80,7 +85,8 @@ export const ExperienceStep = () => {
           <Grid>
             <Grid>
               <ContinueButton
-                // disabled={!step1Data.length > 0}
+                // disabled={!(step2Q1Data && step2Q2Data && step2Q3Data) > 0}
+                disabled={!step2Q1Data || !step2Q2Data || !step2Q3Data}
                 variant="contained"
                 onClick={handleInc}
               >

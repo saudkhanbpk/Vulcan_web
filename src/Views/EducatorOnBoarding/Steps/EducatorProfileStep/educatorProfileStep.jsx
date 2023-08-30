@@ -18,9 +18,17 @@ import {
 } from "../../styles";
 import ReactQuill from "react-quill";
 import { UploadAvatar } from "./uploadAvatar";
+import DialogBox from "./dialogBox";
 
 export const EducatorProfileStep = () => {
+  const name = "John wick";
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [code, setCode] = useState("");
+  const [open, setOpen] = React.useState(false);
   const steps = useSelector((state) => state.educatorSteps.steps);
+  const [contentLength, setContentLength] = useState(code.length);
+
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -52,32 +60,29 @@ export const EducatorProfileStep = () => {
     "size",
     "font",
   ];
-
-  const [code, setCode] = useState("");
-  const [contentLength, setContentLength] = useState(code.length);
-
-  const handleProcedureContentChange = (content, delta, source, editor) => {
+  const handleProcedureContentChange = (content) => {
     if (content.length <= 2000) {
       setCode(content);
       setContentLength(content.length);
     }
   };
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const handleDec = () => {
     if (steps > 1) {
       dispatch(decrementSteps());
     }
   };
-
-  const handleInc = () => {
-    navigate("/");
-    dispatch(resetSteps());
+  const handleClick = () => {
+    if (contentLength <= 2000) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+      navigate("/");
+      dispatch(resetSteps());
+    }
   };
   return (
     <>
+      <DialogBox open={open} setOpen={setOpen} />
       <Box height={{ sm: "120vh", lg: "130vh", xs: "130vh" }} pt={18}>
         <Grid container>
           <Grid lg={1} md={0} sm={0} xs={0}></Grid>
@@ -96,20 +101,20 @@ export const EducatorProfileStep = () => {
             <TitleText color={"primary"} pb={2}>
               Educator
             </TitleText>
-            <FullName color={"secondary"}>Ayaz Khan</FullName>
+            <FullName color={"secondary"}>{name}</FullName>
             <AboutMe pt={10} color={"primary"} mb={3}>
               About Me
             </AboutMe>
-           <Box mt={5}>
-           <ReactQuill
-              theme="snow"
-              modules={modules}
-              formats={formats}
-              value={code}
-              onChange={handleProcedureContentChange}
-              
-            />
-           </Box>
+            <Box mt={5}>
+              <ReactQuill
+                theme="snow"
+                modules={modules}
+                formats={formats}
+                value={code}
+                onChange={handleProcedureContentChange}
+                style={{ height: "300px" }}
+              />
+            </Box>
           </Grid>
           <Grid
             p={{ lg: 5, md: 5, sm: 5, xs: 5 }}
@@ -123,24 +128,6 @@ export const EducatorProfileStep = () => {
             <Box>
               <Stack direction="row" spacing={2}>
                 <Box position="relative">
-                  {/* <Avatar
-                    alt="Remy Sharp"
-                    src={ProfileImage}
-                    sx={{ width: 150, height: 150 }}
-                  />
-                  <IconButton
-                    aria-label="Edit"
-                    size="small"
-                    sx={{
-                      position: "absolute",
-                      bottom: 0,
-                      right: 0,
-                      color: "blue",
-                      bgcolor: "white",
-                    }}
-                  >
-                    <EditIcon />
-                  </IconButton> */}
                   <UploadAvatar />
                 </Box>
               </Stack>
@@ -202,6 +189,7 @@ export const EducatorProfileStep = () => {
           <Grid lg={1} md={0} sm={0} xs={0}></Grid>
         </Grid>
       </Box>
+
       <Footer>
         <Grid container justifyContent={"space-between"} p={2}>
           <Grid>
@@ -216,11 +204,11 @@ export const EducatorProfileStep = () => {
           <Grid>
             <Grid>
               <ContinueButton
-                // disabled={!step1Data.length > 0}
                 variant="contained"
-                onClick={handleInc}
+                onClick={handleClick}
+                width={steps === 4 ? "100px" : "0px"}
               >
-                Continue
+                {steps === 4 ? " Finish " : "Continue"}
               </ContinueButton>
             </Grid>
           </Grid>

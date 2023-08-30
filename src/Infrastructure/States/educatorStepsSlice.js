@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  stepOneData: [],
-  stepTwoData: [],
-  stepThreeData: [],
-  stepFourData: [],
-
   steps: 1,
+  step2Q1Data: [],
+  step2Q2Data: [],
+  step2Q3Data: "",
+  reachStepQ1: [],
+  reachStepQ2: [],
 };
 
 export const educatorStepsSlice = createSlice({
@@ -18,13 +18,12 @@ export const educatorStepsSlice = createSlice({
         state.steps = state.steps + 1;
       }
     },
-
     decrementSteps: (state) => {
       if (state.steps <= 4) {
         state.steps = state.steps - 1;
       }
     },
-    resetSteps: (state)=>{
+    resetSteps: (state) => {
       if (state.steps <= 4) {
         state.steps = 1;
       }
@@ -33,45 +32,46 @@ export const educatorStepsSlice = createSlice({
       if (action.payload.step === "1") {
         return {
           ...state,
-          stepOneData: state.stepOneData.includes(action.payload.optionValue)
-            ? state.stepOneData.filter(
+          step2Q1Data: state.step2Q1Data.includes(action.payload.optionValue)
+            ? state.step2Q1Data.filter(
                 (value) => value !== action.payload.optionValue
               )
-            : [...state.stepOneData, action.payload.optionValue],
+            : [...state.step2Q1Data, action.payload.optionValue],
         };
       }
       if (action.payload.step === "2") {
         return {
           ...state,
-          stepTwoData: state.stepTwoData.includes(action.payload.optionValue)
-            ? state.stepTwoData.filter(
+          step2Q2Data: state.step2Q2Data.includes(action.payload.optionValue)
+            ? state.step2Q2Data.filter(
                 (value) => value !== action.payload.optionValue
               )
-            : [...state.stepTwoData, action.payload.optionValue],
+            : [...state.step2Q2Data, action.payload.optionValue],
         };
       }
       if (action.payload.step === "3") {
+        console.log(action.payload, "Step 3");
         return {
           ...state,
-          stepThreeData: state.stepThreeData.includes(
-            action.payload.optionValue
-          )
-            ? state.stepThreeData.filter(
-                (value) => value !== action.payload.optionValue
-              )
-            : [...state.stepThreeData, action.payload.optionValue],
+          step2Q3Data: action.payload.optionValue, // Update to only store the selected value
         };
       }
-      if (action.payload.step === "4") {
+      return state;
+    },
+    reachSteps: (state, action) => {
+      if (action.payload.question === "1") {
+        console.log(action.payload, "link 1");
         return {
           ...state,
-          stepThreeData: state.stepThreeData.includes(
-            action.payload.optionValue
-          )
-            ? state.stepThreeData.filter(
-                (value) => value !== action.payload.optionValue
-              )
-            : [...state.stepThreeData, action.payload.optionValue],
+          reachStepQ1: state.linksQ1,
+        };
+      }
+      if (action.payload.question === "2") {
+        console.log(action.payload, "link 2");
+
+        return {
+          ...state,
+          reachStepQ2: state.linksQ2,
         };
       }
       return state;
@@ -79,7 +79,12 @@ export const educatorStepsSlice = createSlice({
   },
 });
 
-export const { incrementSteps, decrementSteps, eduRegSteps, resetSteps } =
-  educatorStepsSlice.actions;
+export const {
+  incrementSteps,
+  decrementSteps,
+  eduRegSteps,
+  resetSteps,
+  reachSteps,
+} = educatorStepsSlice.actions;
 
 export default educatorStepsSlice.reducer;

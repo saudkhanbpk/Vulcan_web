@@ -1,4 +1,4 @@
-import { Box, Grid, TextField, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import React from "react";
 import {
   ContinueButton,
@@ -13,8 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   decrementSteps,
   incrementSteps,
+  reachSteps,
 } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { useFormik } from "formik";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 export const ReachStep = () => {
   const steps = useSelector((state) => state.educatorSteps.steps);
@@ -25,46 +27,41 @@ export const ReachStep = () => {
       dispatch(decrementSteps());
     }
   };
-
-  const handleInc = () => {
-    if (steps >= 1 && steps < 4) {
-      dispatch(incrementSteps());
-    }
-  };
-
-  const optionsQ1 = [
+  const Q1Options = [
     { id: 0, text: "Link 1" },
     { id: 1, text: "Link 2" },
     { id: 2, text: "Link 3" },
   ];
-  const optionsQ2 = [
+  const Q2Options = [
     { id: 0, text: "Link 1" },
     { id: 1, text: "Link 2" },
     { id: 2, text: "Link 3" },
   ];
-
   const initialValues = {
-    linksQ1: optionsQ1.reduce(
-      (acc, option) => ({ ...acc, [option.id]: "" }),
-      {}
-    ),
-    linksQ2: optionsQ2.reduce(
-      (acc, option) => ({ ...acc, [option.id]: "" }),
-      {}
-    ),
+    linksQ1: {},
+    linksQ2: {},
   };
+  Q1Options.forEach((option) => {
+    initialValues.linksQ1[option.id] = "";
+  });
+  Q2Options.forEach((option) => {
+    initialValues.linksQ2[option.id] = "";
+  });
 
   const formik = useFormik({
     initialValues,
-    onSubmit:(values) => {
-      dispatch(incrementSteps());
-      console.log("Links for Question 1:", values.linksQ1);
-      console.log("Links for Question 2:", values.linksQ2);
-
-  }})
+    onSubmit: (values) => {
+      const { linksQ1, linksQ2 } = values;
+      if (steps >= 1 && steps < 4) {
+        dispatch(incrementSteps());
+      }
+      dispatch(reachSteps({ linksQ1, question: "one" }));
+      dispatch(reachSteps({ linksQ2, question: "two" }));
+    },
+  });
   return (
-    <>
-      <form  onSubmit={formik.handleSubmit} >
+    <Box mt={14}>
+      <form onSubmit={formik.handleSubmit}>
         <TopHeadingBox>
           <TopHeading variant="" mt={5} ml={3}>
             Reach
@@ -112,7 +109,7 @@ export const ReachStep = () => {
                   >
                     <Grid lg={12} md={12} sm={12} xs={12}>
                       <QuestionFormBox>
-                        {optionsQ1.map((option) => (
+                        {Q1Options.map((option) => (
                           <TextField
                             key={option.id}
                             label={option.text}
@@ -140,6 +137,7 @@ export const ReachStep = () => {
               </Box>
             </Box>
           </Grid>
+
           <Grid lg={6} md={6} sm={10} xs={10}>
             <Box
               p={{
@@ -162,7 +160,7 @@ export const ReachStep = () => {
                   <Grid container>
                     <Grid lg={12} md={12} sm={12} xs={12}>
                       <QuestionFormBox>
-                        {optionsQ2.map((option) => (
+                        {Q2Options.map((option) => (
                           <TextField
                             key={option.id}
                             label={option.text}
@@ -191,30 +189,31 @@ export const ReachStep = () => {
             </Box>
           </Grid>
         </Grid>
-      </form>
-      <Footer>
-        <Grid container justifyContent={"space-between"} p={2}>
-          <Grid>
-            {steps > 1 ? (
-              <PreviousButton variant="contained" onClick={handleDec}>
-                Previous
-              </PreviousButton>
-            ) : (
-              <></>
-            )}
-          </Grid>
-          <Grid>
+        {/* </form> */}
+        <Footer>
+          <Grid container justifyContent={"space-between"} p={2}>
             <Grid>
-              <ContinueButton
-                variant="contained"
-                onClick={handleInc}
-              >
-                Continue
-              </ContinueButton>
+              {steps > 1 ? (
+                <PreviousButton variant="contained" onClick={handleDec}>
+                  Previous
+                </PreviousButton>
+              ) : (
+                <></>
+              )}
+            </Grid>
+            <Grid>
+              <Grid>
+                <ContinueButton
+                  variant="contained"
+                  type="submit"
+                >
+                  Continue
+                </ContinueButton>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Footer>
-    </>
+        </Footer>
+      </form>
+    </Box>
   );
 };

@@ -3,17 +3,16 @@ import {
   Box,
   Typography,
   FormControlLabel,
-  FormControl,
-  RadioGroup,
-  Radio,
+  FormGroup,
+  Checkbox,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { eduRegSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
 
 function QuestionOne() {
   const dispatch = useDispatch();
-
+  const step2Q1Data = useSelector((state) => state.educatorSteps.step2Q1Data);
   const options = [
     { id: 0, text: "Professor at a college / university" },
     { id: 1, text: "Teacher at K-12 School" },
@@ -23,7 +22,7 @@ function QuestionOne() {
   ];
 
   const handleOptionChange = (e, optionValue) => {
-    dispatch(eduRegSteps({ optionValue, step: "2" }));
+    dispatch(eduRegSteps({ optionValue, step: "1" }));
   };
 
   const ChoiceTypo = styled(Typography)(({ theme }) => ({
@@ -34,43 +33,44 @@ function QuestionOne() {
   }));
 
   return (
+  <>
     <Box
-      sx={{
-        height: {
-          lg: "100vh",
-          md: "50vh",
-          sm: "50vh",
-          xs: "50vh",
-        },
-      }}
-    >
-      <Box sx={{ height: { lg: "100px", md: "100px" } }}>
-        <Typography variant="h6" pb={2}>
-          What teaching roles have you occupied?
-        </Typography>
-      </Box>
-      <FormControl fullWidth>
-            <RadioGroup
-              onChange={(e) => handleOptionChange(e.target.value)}
-            >
-              {options.map((option) => (
-                <FormControlLabel
-                  fullWidth
-                  key={option.id}
-                  value={option.text.toString()}
-                  control={<Radio />}
-                  label={<ChoiceTypo>{option.text}</ChoiceTypo>}
-                  sx={{
-                    width: "100%",
-                    border: "1px solid #1c1d1f",
-                    p: 1,
-                    m: "3px",
-                  }}
-                />
-              ))}
-            </RadioGroup>
-          </FormControl>
+    sx={{
+      height: {
+        lg: "100vh",
+        md: "50vh",
+        sm: "50vh",
+        xs: "50vh",
+      },
+    }}
+  >
+    <Box sx={{ height: { lg: "100px", md: "100px" } }}>
+      <Typography variant="h6" pb={2}>
+        Approximately how many total years of teaching experience do you have?
+      </Typography>
     </Box>
+
+        <FormGroup>
+          {options.map((option) => (
+            <FormControlLabel
+              key={option.id}
+              control={
+                <Checkbox
+                  checked={step2Q1Data.includes(option.text.toString())}
+                  onChange={(e) =>
+                    handleOptionChange(e, option.text.toString())
+                  }
+                  value={option.text.toString()}
+                  sx={{ color: "#1c1d1f" }}
+                />
+              }
+              label={<ChoiceTypo variant="body1">{option.text}</ChoiceTypo>}
+              sx={{ border: "1px solid #1c1d1f", p: 1, m: "3px" }}
+            />
+          ))}
+        </FormGroup>
+  </Box>
+  </>
   );
 }
 
