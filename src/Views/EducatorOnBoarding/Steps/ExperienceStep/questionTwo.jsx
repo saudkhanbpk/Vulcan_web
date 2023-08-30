@@ -8,10 +8,9 @@ import {
   Radio,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { eduRegSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
 function QuestionTwo() {
-  const step2Data = useSelector((state) => state.educatorSteps.stepTwoData);
   const dispatch = useDispatch();
 
   const options = [
