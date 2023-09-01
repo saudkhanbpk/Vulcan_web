@@ -45,7 +45,8 @@ export const NameBox = ({
           off(userRef, 'value', callback);
         };
       } catch (error) {
-        ShowErrorToast("Something wrong try again.");
+        ShowErrorToast(`Something wrong try again.`);
+        
       }
     };
 

@@ -16,21 +16,20 @@ import { getAuth } from "firebase/auth";
 import DialogBox from "../Common/Dialog/dialogBox";
 
 const BecomeEducator = () => {
-
   const auth = getAuth();
   const uid = auth.currentUser ? auth.currentUser.uid : null;
   const [isEducator, setIsEducator] = useState(false);
   const { data } = useSelector((state) => state.userData);
   const chooseModal = useSelector((state) => state.auth.chooseModal);
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const message = "Student accounts cannot be an Educator";
 
   const navigateToBecomeEdu = () => {
     navigate("/educator-account");
   };
-  const handleStudentSignUpAsEducator = () => {
-    setOpen(true)
-  };
+  // const handleStudentSignUpAsEducator = () => {
+  //   setOpen(true);
+  // };
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
 
@@ -80,11 +79,7 @@ const BecomeEducator = () => {
             <Button
               variant="contained"
               size="small"
-              onClick={
-                isEducator
-                  ? navigateToBecomeEdu
-                  : handleStudentSignUpAsEducator
-              }
+              onClick={navigateToBecomeEdu}
               sx={styles.textCapitalize}
             >
               Get Started

@@ -71,7 +71,7 @@ export const CreateAccountStep = ({ controlSteps }) => {
 
     onSubmit: async (values) => {
       try {
-        const { email, password, firstName, lastName, phoneNumber } = values;
+        const { email, password } = values;
 
         await createUserWithEmailAndPassword(auth, email, password).then(() => {
           ShowSuccessToast("Account created successfully!");

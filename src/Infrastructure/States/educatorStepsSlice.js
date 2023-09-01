@@ -53,20 +53,20 @@ export const educatorStepsSlice = createSlice({
         console.log(action.payload, "Step 3");
         return {
           ...state,
-          step2Q3Data: action.payload.optionValue, // Update to only store the selected value
+          step2Q3Data: action.payload.optionValue,
         };
       }
       return state;
     },
     reachSteps: (state, action) => {
-      if (action.payload.question === "1") {
+      if (action.payload.question === "one") {
         console.log(action.payload, "link 1");
         return {
           ...state,
           reachStepQ1: state.linksQ1,
         };
       }
-      if (action.payload.question === "2") {
+      if (action.payload.question === "two") {
         console.log(action.payload, "link 2");
 
         return {

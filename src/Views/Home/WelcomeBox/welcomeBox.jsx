@@ -19,7 +19,7 @@ const WelcomeBox = () => {
   const navigate = useNavigate();
   const [isClicked, setIsClicked] = useState(true);
   const [open, setOpen] = useState(false);
-  const [isEducator, setIsEducator] = useState(false);
+  const [isEducator, setIsEducator] = useState(null);
   const { data } = useSelector((state) => state.userData);
   const message = "Student accounts cannot be an Educator";
 
@@ -33,9 +33,9 @@ const WelcomeBox = () => {
   const navigateToBecomeEdu = () => {
     navigate("/educator-account");
   };
-  const handleStudentSignUpAsEducator = () => {
-    setOpen(true);
-  };
+  // const handleStudentSignUpAsEducator = () => {
+  //   setOpen(true);
+  // };
 
   const navigateToCourses = () => {
     navigate("/courses");
@@ -45,9 +45,9 @@ const WelcomeBox = () => {
     dispatch(fetchUserData(uid));
     if (data) {
       setIsEducator(data[uid]?.is_educator || false);
-      console.log(data)
+      console.log(data);
     }
-  }, [data, dispatch, uid]);
+  }, []);
   return (
     <>
       <DialogBox open={open} setOpen={setOpen} message={message} />
@@ -122,11 +122,7 @@ const WelcomeBox = () => {
             {isClicked ? (
               !isEducator ? (
                 <Button
-                  onClick={
-                    isEducator
-                      ? navigateToBecomeEdu
-                      : handleStudentSignUpAsEducator
-                  }
+                  onClick={navigateToBecomeEdu}
                   variant="contained"
                   sx={styles.textCapitalize}
                 >
