@@ -120,7 +120,6 @@ const WelcomeBox = () => {
 
           <Box display="flex" justifyContent="center" mt={6} height={40}>
             {isClicked ? (
-              // !data[uid]?.is_educator ? (
               !isEducator ? (
                 <Button
                   onClick={

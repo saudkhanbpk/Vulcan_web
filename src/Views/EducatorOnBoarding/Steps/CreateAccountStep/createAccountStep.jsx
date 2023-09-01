@@ -76,24 +76,9 @@ export const CreateAccountStep = ({ controlSteps }) => {
         await createUserWithEmailAndPassword(auth, email, password).then(() => {
           ShowSuccessToast("Account created successfully!");
         });
-
-        const requestData = {
-          firstName: firstName,
-          lastName: lastName,
-          number: phoneNumber,
-        };
         if (!formik.isValid) {
           return;
         }
-        // const createUser = httpsCallable(functions, "createaccount");
-        // await createUser(requestData);
-        // if (!auth.currentUser.emailVerified) {
-        //   await sendEmailVerification(auth.currentUser);
-        //   setTimeActive(true);
-        //   dispatch(chooseModalEmailVerify());
-        // } else {
-        //   Navigate("/");
-        // }
         dispatch(incrementSteps());
       } catch (error) {
         handleRegistrationError(error);
