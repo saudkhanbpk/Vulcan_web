@@ -13,9 +13,7 @@ exports.setupAccount = onCall((request) => {
 
   dbCalls.logUser(uid, `ACTION: Firebase Account Created: ID: ${email}`) 
 
-  db.ref(`users`)
-    .child(uid)
-    .update({
+  db.ref(`users`).child(uid).update({
       account_active: true,
       created: Date.now(),
       email_verified: false,
@@ -32,7 +30,7 @@ exports.setupAccount = onCall((request) => {
     .catch((error) => {
       dbCalls.logUser(uid, `ERROR: ACCOUNT INFO ERROR ID: ${uid}: ${error}`) 
       isSuccess = false 
-      errorMessage = "Account Error" 
+      errorMessage = error
     }) 
   return { isSuccess: isSuccess, errorMessage: errorMessage } 
 }) 
