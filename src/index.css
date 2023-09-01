@@ -38,3 +38,10 @@ body {
 .css-1pux6rn-MuiButtonBase-root-MuiIconButton-root {
   margin-right: 0 !important;
 }
+.css-e53awj-MuiStack-root{
+  justify-content: center;
+  align-items: center;
+}
+.css-1rshsu9-MuiGrid2-root  {
+  margin-bottom: 80px !important;
+}

@@ -75,6 +75,7 @@ const Navbar = () => {
               color="primary"
               sx={styles.logoTypo}
               curser="pointer"
+              className="logo-vulcan"
             >
               Vulcan
             </Typography>

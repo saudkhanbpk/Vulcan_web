@@ -47,19 +47,19 @@ function QuestionThree() {
             <RadioGroup
             onChange={handleOptionChange}
             value={step2Q3Data}
-              // onChange={(e) => handleOptionChange(e.target.value)}
             >
               {options.map((option) => (
                 <FormControlLabel
                   key={option.id}
                   value={option.text}
-                  control={<Radio />}
+                  control={<Radio size="medium" />}
                   label={<ChoiceTypo>{option.text}</ChoiceTypo>}
                   sx={{
                     width: "100%",
                     border: "1px solid #1c1d1f",
                     p: 1,
                     m: "3px",
+                    height:"76px"
                   }}
                 />
               ))}

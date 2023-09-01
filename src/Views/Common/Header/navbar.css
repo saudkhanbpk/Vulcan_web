@@ -51,3 +51,7 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
+.logo-vulcan:hover{
+  color: #0000FF;
+
+}

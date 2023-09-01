@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   decrementSteps,
@@ -10,6 +10,7 @@ import {
   InputAdornment,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
@@ -27,17 +28,17 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
 import useAuthentication from "../../../../Infrastructure/States/onAuthStateChange";
-import { specialFont } from "../../../../Infrastructure/Theme/fontFamily";
+import { fetchUserData } from "../../../../Infrastructure/States/userDataSlice";
 
 export const CreateAccountStep = ({ controlSteps }) => {
   const auth = getAuth();
+  const uid = auth.currentUser ? auth.currentUser.uid : null;
   const { user } = useAuthentication();
-  console.log(user);
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
   const steps = useSelector((state) => state.educatorSteps.steps);
-
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   const handleDec = () => {
     if (steps > 1) {
       dispatch(decrementSteps());
@@ -129,6 +130,10 @@ export const CreateAccountStep = ({ controlSteps }) => {
     const specialCharacters = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
     return specialCharacters.test(password);
   };
+
+  useEffect(() => {
+    dispatch(fetchUserData(uid));
+  }, [dispatch, uid]);
 
   return (
     <>
@@ -318,9 +323,14 @@ export const CreateAccountStep = ({ controlSteps }) => {
                 flexDirection: "column",
                 alignItems: "center",
               }}
+              p={5}
             >
-              <Typography variant="body1" color="initial">
-                Educator Account Successfully Created
+              <Typography
+                variant={isSmallScreen ? "body2" : "body1"}
+                color="initial"
+                textAlign={"center"}
+              >
+                Educator Account Created Successfully Move to Next Step.
               </Typography>
             </Box>
           )}

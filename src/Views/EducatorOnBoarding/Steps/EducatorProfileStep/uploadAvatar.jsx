@@ -1,28 +1,22 @@
-import { Box, IconButton, Modal } from "@mui/material";
+import { IconButton, Modal, Box } from "@mui/material";
 import React, { useState } from "react";
 import Avatar from "react-avatar-edit";
 import EditIcon from "@mui/icons-material/Edit";
 import ProfileImage from "../../../../Assets/Images/vector.png";
+import { AvatarBox } from "../../styles";
 
-export const UploadAvatar = () => {
+export const UploadAvatar = ({ onUpload }) => {
   const [preview, setPreview] = useState(null);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 300,
-    height: 300,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-    display: "flex",
+  const handleClose = () => {
+    if (preview) {
+      onUpload(preview);
+    }
+    setOpen(false);
   };
+
   const onClose = () => {
     setPreview(null);
   };
@@ -39,8 +33,7 @@ export const UploadAvatar = () => {
         aria-describedby="modal-modal-description"
         sx={{ overflow: "hidden" }}
       >
-        <Box
-          sx={style}
+        <AvatarBox
           display={"flex"}
           justifyContent={"center"}
           alignItems={"center"}
@@ -52,14 +45,21 @@ export const UploadAvatar = () => {
             onCrop={onCrop}
             onClose={onClose}
           />
-        </Box>
+        </AvatarBox>
       </Modal>
-      <img
-        src={preview ? preview : ProfileImage}
-        height={200}
-        width={200}
-        alt="Preview"
-      />
+
+      <Box
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <img
+          src={preview ? preview : ProfileImage}
+          height={200}
+          width={200}
+          alt="Preview"
+          style={{}}
+        />
+      </Box>
+
       <IconButton
         aria-label="Edit"
         size="small"

@@ -18,16 +18,25 @@ import {
 } from "../../styles";
 import ReactQuill from "react-quill";
 import { UploadAvatar } from "./uploadAvatar";
-import DialogBox from "./dialogBox";
+// import DialogBox from "./dialogBox";
+import { useFormik } from "formik";
 
 export const EducatorProfileStep = () => {
   const name = "John wick";
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [code, setCode] = useState("");
-  const [open, setOpen] = React.useState(false);
   const steps = useSelector((state) => state.educatorSteps.steps);
-  const [contentLength, setContentLength] = useState(code.length);
+  // const [code, setCode] = useState("");
+  const [open, setOpen] = React.useState(false);
+  // const [contentLength, setContentLength] = useState(code.length);
+
+  // const handleProcedureContentChange = (content) => {
+  //   // if (content.length <= 2000) {
+
+  //     setCode(content);
+  //     setContentLength(content.length);
+  //   // }
+  // };
 
   const modules = {
     toolbar: [
@@ -60,30 +69,69 @@ export const EducatorProfileStep = () => {
     "size",
     "font",
   ];
-  const handleProcedureContentChange = (content) => {
-    if (content.length <= 2000) {
-      setCode(content);
-      setContentLength(content.length);
-    }
-  };
+
   const handleDec = () => {
     if (steps > 1) {
       dispatch(decrementSteps());
     }
   };
-  const handleClick = () => {
-    if (contentLength <= 2000) {
-      setOpen(true);
-    } else {
-      setOpen(false);
-      navigate("/");
-      dispatch(resetSteps());
-    }
+  // const handleClick = () => {
+  //   if (contentLength <= 2000) {
+  //     setOpen(true);
+  //   } else {
+  //     setOpen(false);
+  //     navigate("/");
+  //     dispatch(resetSteps());
+  //   }
+  // };
+  const handleAvatarUpload = (imageDataURL) => {
+    formik.setFieldValue("avatar", imageDataURL);
   };
+
+  const formik = useFormik({
+    initialValues: {
+      content: "",
+      websiteLink: "",
+      youtubeLink: "",
+      twitterLink: "",
+      tiktokLink: "",
+      avatar: "",
+    },
+    onSubmit: (values) => {
+      const {
+        content,
+        websiteLink,
+        youtubeLink,
+        twitterLink,
+        tiktokLink,
+        avatar,
+      } = values;
+      console.log(
+        content,
+        websiteLink,
+        youtubeLink,
+        twitterLink,
+        tiktokLink,
+        avatar
+      );
+      if (content.length <= 2000) {
+        setOpen(true);
+      } else {
+        setOpen(false);
+        navigate("/");
+        dispatch(resetSteps());
+      }
+    },
+  });
   return (
     <>
-      <DialogBox open={open} setOpen={setOpen} />
-      <Box height={{ sm: "120vh", lg: "130vh", xs: "130vh" }} pt={18}>
+      {/* <DialogBox open={open} setOpen={setOpen} /> */}
+      <Box
+        component={"form"}
+        onSubmit={formik.handleSubmit}
+        height={{ sm: "120vh", lg: "130vh", xs: "130vh" }}
+        pt={18}
+      >
         <Grid container>
           <Grid lg={1} md={0} sm={0} xs={0}></Grid>
           <Grid
@@ -105,13 +153,15 @@ export const EducatorProfileStep = () => {
             <AboutMe pt={10} color={"primary"} mb={3}>
               About Me
             </AboutMe>
-            <Box mt={5}>
+            <Box mt={5} sx={{ width: { xs: { width: "100%" } } }}>
               <ReactQuill
                 theme="snow"
                 modules={modules}
                 formats={formats}
-                value={code}
-                onChange={handleProcedureContentChange}
+                value={formik.values.content} // Use formik's value
+                onChange={(content) => {
+                  formik.setFieldValue("content", content); // Update Formik's field value
+                }}
                 style={{ height: "300px" }}
               />
             </Box>
@@ -128,7 +178,7 @@ export const EducatorProfileStep = () => {
             <Box>
               <Stack direction="row" spacing={2}>
                 <Box position="relative">
-                  <UploadAvatar />
+                  <UploadAvatar onUpload={handleAvatarUpload} />
                 </Box>
               </Stack>
               <TextField
@@ -136,6 +186,7 @@ export const EducatorProfileStep = () => {
                 sx={{ mt: "6px" }}
                 label={"Website Link"}
                 variant="standard"
+                {...formik.getFieldProps("websiteLink")}
                 InputLabelProps={{
                   style: { fontSize: 16 },
                 }}
@@ -149,6 +200,7 @@ export const EducatorProfileStep = () => {
                 sx={{ mt: "6px" }}
                 label={"Youtube Link"}
                 variant="standard"
+                {...formik.getFieldProps("youtubeLink")}
                 InputLabelProps={{
                   style: { fontSize: 16 },
                 }}
@@ -162,6 +214,7 @@ export const EducatorProfileStep = () => {
                 sx={{ mt: "6px" }}
                 label={"Twitter Link"}
                 variant="standard"
+                {...formik.getFieldProps("twitterLink")}
                 InputLabelProps={{
                   style: { fontSize: 16 },
                 }}
@@ -176,6 +229,7 @@ export const EducatorProfileStep = () => {
                 sx={{ mt: "6px" }}
                 label={"Tik Tak Link"}
                 variant="standard"
+                {...formik.getFieldProps("tiktokLink")}
                 InputLabelProps={{
                   style: { fontSize: 16 },
                 }}
@@ -188,32 +242,33 @@ export const EducatorProfileStep = () => {
           </Grid>
           <Grid lg={1} md={0} sm={0} xs={0}></Grid>
         </Grid>
-      </Box>
 
-      <Footer>
-        <Grid container justifyContent={"space-between"} p={2}>
-          <Grid>
-            {steps > 1 ? (
-              <PreviousButton variant="contained" onClick={handleDec}>
-                Previous
-              </PreviousButton>
-            ) : (
-              <></>
-            )}
-          </Grid>
-          <Grid>
+        <Footer>
+          <Grid container justifyContent={"space-between"} p={2}>
             <Grid>
-              <ContinueButton
-                variant="contained"
-                onClick={handleClick}
-                width={steps === 4 ? "100px" : "0px"}
-              >
-                {steps === 4 ? " Finish " : "Continue"}
-              </ContinueButton>
+              {steps > 1 ? (
+                <PreviousButton variant="contained" onClick={handleDec}>
+                  Previous
+                </PreviousButton>
+              ) : (
+                <></>
+              )}
+            </Grid>
+            <Grid>
+              <Grid>
+                <ContinueButton
+                  variant="contained"
+                  // onClick={handleClick}
+                  type="submit"
+                  width={steps === 4 ? "100px" : "0px"}
+                >
+                  {steps === 4 ? " Finish " : "Continue"}
+                </ContinueButton>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Footer>
+        </Footer>
+      </Box>
     </>
   );
 };
