@@ -18,12 +18,12 @@ import {
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 export const ExperienceStep = () => {
+  const dispatch = useDispatch();
   const steps = useSelector((state) => state.educatorSteps.steps);
   const step2Q1Data = useSelector((state) => state.educatorSteps.step2Q1Data);
-  const step2Q2Data = useSelector((state) => state.educatorSteps.step2Q3Data);
+  const step2Q2Data = useSelector((state) => state.educatorSteps.step2Q2Data);
   const step2Q3Data = useSelector((state) => state.educatorSteps.step2Q3Data);
 
-  const dispatch = useDispatch();
   const handleDec = () => {
     if (steps > 1) {
       dispatch(decrementSteps());
@@ -31,9 +31,14 @@ export const ExperienceStep = () => {
   };
   const handleInc = () => {
     if (steps >= 1 && steps < 4) {
-      dispatch(incrementSteps());
+      if (step2Q1Data.length > 0 && step2Q2Data.length > 0) {
+        dispatch(incrementSteps());
+      } else {
+        alert("Please select at least one option");
+      }
     }
   };
+
   return (
     <>
       <Box pt={14}>
@@ -85,8 +90,9 @@ export const ExperienceStep = () => {
           <Grid>
             <Grid>
               <ContinueButton
-                // disabled={!(step2Q1Data && step2Q2Data && step2Q3Data) > 0}
-                disabled={!step2Q1Data || !step2Q2Data || !step2Q3Data}
+                disabled={
+                  !((step2Q2Data.length > 0 && step2Q1Data.length > 0) && step2Q3Data.trim() !== "")
+                }
                 variant="contained"
                 onClick={handleInc}
               >

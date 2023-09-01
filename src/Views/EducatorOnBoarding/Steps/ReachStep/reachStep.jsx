@@ -19,9 +19,9 @@ import { useFormik } from "formik";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 export const ReachStep = () => {
-  const steps = useSelector((state) => state.educatorSteps.steps);
-
+  
   const dispatch = useDispatch();
+  const steps = useSelector((state) => state.educatorSteps.steps);
   const handleDec = () => {
     if (steps > 1) {
       dispatch(decrementSteps());
@@ -84,7 +84,6 @@ export const ReachStep = () => {
                   lg: 5,
                 }}
               >
-                {/* <QuestionOne /> */}
                 <Box
                   sx={{
                     height: {
@@ -149,7 +148,6 @@ export const ReachStep = () => {
                   lg: 5,
                 }}
               >
-                {/* <QuestionTwo /> */}
                 <Box sx={{ height: "100vh" }}>
                   <Box sx={{ height: { lg: "100px", md: "100px" } }}>
                     <Typography variant="h6" py={3}>
@@ -189,7 +187,6 @@ export const ReachStep = () => {
             </Box>
           </Grid>
         </Grid>
-        {/* </form> */}
         <Footer>
           <Grid container justifyContent={"space-between"} p={2}>
             <Grid>
@@ -203,10 +200,7 @@ export const ReachStep = () => {
             </Grid>
             <Grid>
               <Grid>
-                <ContinueButton
-                  variant="contained"
-                  type="submit"
-                >
+                <ContinueButton variant="contained" type="submit">
                   Continue
                 </ContinueButton>
               </Grid>

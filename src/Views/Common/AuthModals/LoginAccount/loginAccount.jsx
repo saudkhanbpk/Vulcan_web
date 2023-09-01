@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   LoginFormBox,
   LoginMainBox,
@@ -29,11 +29,9 @@ import * as Yup from "yup";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ShowErrorToast, ShowSuccessToast } from "../../Toast/toast";
 import { getDatabase, ref, update } from "firebase/database";
-import { fetchUserData } from "../../../../Infrastructure/States/userDataSlice";
 
 export const LoginAccount = () => {
   const auth = getAuth();
-  const uid = auth.currentUser ? auth.currentUser.uid : null;
   const db = getDatabase();
   const dispatch = useDispatch();
   const isOpenModal = useSelector((state) => state.auth.isOpenModal);
@@ -55,7 +53,7 @@ export const LoginAccount = () => {
   };
   const handleAuthenticationError = (error) => {
     if (!error) {
-      return; // Do nothing if there's no error
+      return;
     }
     let errorMessage = "Please try again later.";
     switch (error.code) {
@@ -109,9 +107,6 @@ export const LoginAccount = () => {
       }
     },
   });
-  useEffect(() => {
-    dispatch(fetchUserData(uid));
-  }, [dispatch, uid]);
   return (
     <Box>
       {/* Log in Modal */}

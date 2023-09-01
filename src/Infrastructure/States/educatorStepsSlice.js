@@ -7,6 +7,7 @@ const initialState = {
   step2Q3Data: "",
   reachStepQ1: [],
   reachStepQ2: [],
+  educatorStepData:[]
 };
 
 export const educatorStepsSlice = createSlice({
@@ -50,7 +51,6 @@ export const educatorStepsSlice = createSlice({
         };
       }
       if (action.payload.step === "3") {
-        console.log(action.payload, "Step 3");
         return {
           ...state,
           step2Q3Data: action.payload.optionValue,
@@ -60,15 +60,12 @@ export const educatorStepsSlice = createSlice({
     },
     reachSteps: (state, action) => {
       if (action.payload.question === "one") {
-        console.log(action.payload, "link 1");
         return {
           ...state,
           reachStepQ1: state.linksQ1,
         };
       }
       if (action.payload.question === "two") {
-        console.log(action.payload, "link 2");
-
         return {
           ...state,
           reachStepQ2: state.linksQ2,
@@ -76,6 +73,13 @@ export const educatorStepsSlice = createSlice({
       }
       return state;
     },
+    educatorProfileStep: (state, action)=>{
+      console.log(action.payload)
+      return {
+        ...state,
+        educatorStepData: action.payload.optionValue,
+      };
+    }
   },
 });
 
@@ -85,6 +89,7 @@ export const {
   eduRegSteps,
   resetSteps,
   reachSteps,
+  educatorProfileStep
 } = educatorStepsSlice.actions;
 
 export default educatorStepsSlice.reducer;

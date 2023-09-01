@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Typography,
@@ -26,7 +26,8 @@ function QuestionThree() {
     let optionValue= e.target.value
     dispatch(eduRegSteps({ optionValue, step: "3" }));
   };
-
+  useEffect(() => {
+  }, [step2Q3Data]);
   return (
     <Box
       sx={{

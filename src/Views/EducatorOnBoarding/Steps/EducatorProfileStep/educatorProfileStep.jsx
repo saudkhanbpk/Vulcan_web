@@ -1,15 +1,17 @@
 import { Box, Stack, TextField } from "@mui/material";
 import "react-quill/dist/quill.snow.css";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import React, { useState } from "react";
+import React from "react";
 import {
   decrementSteps,
+  eduRegSteps,
   resetSteps,
 } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   AboutMe,
+  ContentErrorMessage,
   ContinueButton,
   Footer,
   FullName,
@@ -18,26 +20,16 @@ import {
 } from "../../styles";
 import ReactQuill from "react-quill";
 import { UploadAvatar } from "./uploadAvatar";
-// import DialogBox from "./dialogBox";
-import { useFormik } from "formik";
 
+import { useFormik } from "formik";
 export const EducatorProfileStep = () => {
+
   const name = "John wick";
+  const message = "About me text must be 200-2000 characters";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const steps = useSelector((state) => state.educatorSteps.steps);
-  // const [code, setCode] = useState("");
   const [open, setOpen] = React.useState(false);
-  // const [contentLength, setContentLength] = useState(code.length);
-
-  // const handleProcedureContentChange = (content) => {
-  //   // if (content.length <= 2000) {
-
-  //     setCode(content);
-  //     setContentLength(content.length);
-  //   // }
-  // };
-
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -51,7 +43,6 @@ export const EducatorProfileStep = () => {
       [{ background: ["red", "#785412"] }],
     ],
   };
-
   const formats = [
     "header",
     "bold",
@@ -69,70 +60,50 @@ export const EducatorProfileStep = () => {
     "size",
     "font",
   ];
-
   const handleDec = () => {
     if (steps > 1) {
       dispatch(decrementSteps());
     }
   };
-  // const handleClick = () => {
-  //   if (contentLength <= 2000) {
-  //     setOpen(true);
-  //   } else {
-  //     setOpen(false);
-  //     navigate("/");
-  //     dispatch(resetSteps());
-  //   }
-  // };
   const handleAvatarUpload = (imageDataURL) => {
     formik.setFieldValue("avatar", imageDataURL);
   };
-
   const formik = useFormik({
     initialValues: {
       content: "",
       websiteLink: "",
       youtubeLink: "",
       twitterLink: "",
-      tiktokLink: "",
+      linkedinLink: "",
       avatar: "",
     },
     onSubmit: (values) => {
-      const {
-        content,
-        websiteLink,
-        youtubeLink,
-        twitterLink,
-        tiktokLink,
-        avatar,
-      } = values;
-      console.log(
-        content,
-        websiteLink,
-        youtubeLink,
-        twitterLink,
-        tiktokLink,
-        avatar
-      );
-      if (content.length <= 2000) {
-        setOpen(true);
-      } else {
+      const { content } = values;
+      if (content.length >= 200 && content.length <= 2000) {
         setOpen(false);
         navigate("/");
+        dispatch(eduRegSteps(values));
         dispatch(resetSteps());
+      } else {
+        setOpen(true);
       }
     },
   });
   return (
     <>
-      {/* <DialogBox open={open} setOpen={setOpen} /> */}
       <Box
         component={"form"}
         onSubmit={formik.handleSubmit}
         height={{ sm: "120vh", lg: "130vh", xs: "130vh" }}
         pt={18}
       >
-        <Grid container>
+        <Grid
+          container
+          display={{ lg: "flex" }}
+          flexDirection={{ lg: "column", md: "column-reverse" }}
+          justifyContent={"flex-start"}
+          alignItems={"flex-start"}
+        >
           <Grid lg={1} md={0} sm={0} xs={0}></Grid>
           <Grid
             lg={6}
@@ -141,7 +112,7 @@ export const EducatorProfileStep = () => {
             xs={12}
             p={{ lg: 5, md: 5, sm: 5, xs: 5 }}
             mb={20}
-            display={"flex"}
+            display={{ lg: "flex" }}
             flexDirection={"column"}
             justifyContent={"flex-start"}
             alignItems={"flex-start"}
@@ -153,17 +124,31 @@ export const EducatorProfileStep = () => {
             <AboutMe pt={10} color={"primary"} mb={3}>
               About Me
             </AboutMe>
-            <Box mt={5} sx={{ width: { xs: { width: "100%" } } }}>
+            <Box
+              mt={5}
+              display={"flex"}
+              flexDirection={"column"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              sx={{ width: { xs: { width: "100%" } } }}
+            >
               <ReactQuill
                 theme="snow"
                 modules={modules}
                 formats={formats}
-                value={formik.values.content} // Use formik's value
+                value={formik.values.content}
                 onChange={(content) => {
-                  formik.setFieldValue("content", content); // Update Formik's field value
+                  formik.setFieldValue("content", content);
                 }}
                 style={{ height: "300px" }}
               />
+            </Box>
+            <Box my={10} width={"100%"}>
+              {!open ? (
+                ""
+              ) : (
+                <ContentErrorMessage>{message}</ContentErrorMessage>
+              )}
             </Box>
           </Grid>
           <Grid
@@ -223,13 +208,12 @@ export const EducatorProfileStep = () => {
                 }}
                 fullWidth
               />
-
               <TextField
-                name="tiktokLink"
+                name="linkedinLink"
                 sx={{ mt: "6px" }}
-                label={"Tik Tak Link"}
+                label={"LinkedIn Link"}
                 variant="standard"
-                {...formik.getFieldProps("tiktokLink")}
+                {...formik.getFieldProps("linkedinLink")}
                 InputLabelProps={{
                   style: { fontSize: 16 },
                 }}
@@ -242,7 +226,6 @@ export const EducatorProfileStep = () => {
           </Grid>
           <Grid lg={1} md={0} sm={0} xs={0}></Grid>
         </Grid>
-
         <Footer>
           <Grid container justifyContent={"space-between"} p={2}>
             <Grid>
@@ -258,7 +241,6 @@ export const EducatorProfileStep = () => {
               <Grid>
                 <ContinueButton
                   variant="contained"
-                  // onClick={handleClick}
                   type="submit"
                   width={steps === 4 ? "100px" : "0px"}
                 >

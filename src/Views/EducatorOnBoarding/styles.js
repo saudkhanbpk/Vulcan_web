@@ -84,6 +84,7 @@ export const Footer = styled(Box)(({ theme }) => ({
   bottom: "0px",
   boxShadow: "0px -4px 4px rgba(0, 0, 0, 0.25)",
   background: "white",
+  zIndex: "1",
 }));
 
 export const TitleText = styled(Typography)((theme) => ({
@@ -181,7 +182,12 @@ export const SignUpTextLink = styled(Typography)(({ theme }) => ({
   cursor: "pointer",
   [theme.breakpoints.down("md")]: {},
 }));
-
+export const ContentErrorMessage = styled("p")(({ theme }) => ({
+  textAlign: "end",
+  fontWeight: "bold",
+  color: "red",
+  fontStyle: "italic",
+}));
 export const FormBox = styled(Box)(({ theme }) => ({
   width: "50%",
   display: "flex",
@@ -232,7 +238,7 @@ export const FormBoxEdu = styled(Box)(({ theme }) => ({
     width: "100%",
   },
 }));
-export const AvatarBox = styled(Box)((theme)=>({
+export const AvatarBox = styled(Box)((theme) => ({
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -243,4 +249,4 @@ export const AvatarBox = styled(Box)((theme)=>({
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
-}))
+}));

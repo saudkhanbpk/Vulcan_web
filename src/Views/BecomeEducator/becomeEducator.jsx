@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import "./becomeEducator.css";
 import { Box } from "@mui/system";
 import { Button, Typography, useMediaQuery, useTheme } from "@mui/material";
@@ -12,29 +12,19 @@ import { useSelector } from "react-redux";
 
 import { styles } from "./styles";
 import Auth from "../../Views/Common/AuthModals/authModals";
-import { getAuth } from "firebase/auth";
-import DialogBox from "../Common/Dialog/dialogBox";
 
 const BecomeEducator = () => {
-  const auth = getAuth();
-  const uid = auth.currentUser ? auth.currentUser.uid : null;
-  const [isEducator, setIsEducator] = useState(false);
-  const { data } = useSelector((state) => state.userData);
+  const theme = useTheme();
+  const navigate = useNavigate();
+  const sectionRef = useRef(null);
+  const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
   const chooseModal = useSelector((state) => state.auth.chooseModal);
-  const [open, setOpen] = useState(false);
-  const message = "Student accounts cannot be an Educator";
+
 
   const navigateToBecomeEdu = () => {
     navigate("/educator-account");
   };
-  // const handleStudentSignUpAsEducator = () => {
-  //   setOpen(true);
-  // };
-  const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
-
-  const navigate = useNavigate();
-  const sectionRef = useRef(null);
+ 
 
   const navigateToEdu = () => {
     navigate("/educator-faq");
@@ -44,15 +34,9 @@ const BecomeEducator = () => {
     sectionRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  useEffect(() => {
-    if (data) {
-      setIsEducator(data[uid]?.is_educator || false);
-    }
-  }, []);
   return (
     <>
       {/* Section 1 */}
-      <DialogBox open={open} setOpen={setOpen} message={message} />
       {<Auth chooseModal={chooseModal} />}
       <div className={isDesktop ? "bg-img" : "bg-img2"}>
         <Grid container lg={6} sx={styles.Sec1MainGrid}>

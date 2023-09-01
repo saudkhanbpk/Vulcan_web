@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Typography,
@@ -6,9 +6,9 @@ import {
   FormGroup,
   Checkbox,
 } from "@mui/material";
-import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { eduRegSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
+import { ChoiceTypo } from "../../styles";
 
 function QuestionOne() {
   const dispatch = useDispatch();
@@ -24,14 +24,8 @@ function QuestionOne() {
   const handleOptionChange = (e, optionValue) => {
     dispatch(eduRegSteps({ optionValue, step: "1" }));
   };
-
-  const ChoiceTypo = styled(Typography)(({ theme }) => ({
-    fontWeight: 700,
-    lineHeight: 1.2,
-    letterSpacing: "-.02rem",
-    fontSize: "16px",
-  }));
-
+  useEffect(() => {
+  }, [step2Q1Data]);
   return (
   <>
     <Box

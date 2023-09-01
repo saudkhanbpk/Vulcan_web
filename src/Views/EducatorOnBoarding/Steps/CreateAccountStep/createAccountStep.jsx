@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   decrementSteps,
@@ -28,11 +28,9 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
 import useAuthentication from "../../../../Infrastructure/States/onAuthStateChange";
-import { fetchUserData } from "../../../../Infrastructure/States/userDataSlice";
 
 export const CreateAccountStep = ({ controlSteps }) => {
   const auth = getAuth();
-  const uid = auth.currentUser ? auth.currentUser.uid : null;
   const { user } = useAuthentication();
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(true);
@@ -93,7 +91,7 @@ export const CreateAccountStep = ({ controlSteps }) => {
   };
   const handleRegistrationError = (error) => {
     if (!error) {
-      return; // Do nothing if there's no error
+      return;
     }
     let errorMessage = "An unexpected error occurred. Please try again later.";
     switch (error.code) {
@@ -116,10 +114,6 @@ export const CreateAccountStep = ({ controlSteps }) => {
     return specialCharacters.test(password);
   };
 
-  useEffect(() => {
-    dispatch(fetchUserData(uid));
-  }, [dispatch, uid]);
-
   return (
     <>
       <Box pt={14}>
@@ -128,7 +122,6 @@ export const CreateAccountStep = ({ controlSteps }) => {
             {!user ? "  Create Account" : ""}
           </TopHeading>
         </TopHeadingBox>
-
         <Box component="form" onSubmit={formik.handleSubmit} noValidate>
           {!user ? (
             <Box

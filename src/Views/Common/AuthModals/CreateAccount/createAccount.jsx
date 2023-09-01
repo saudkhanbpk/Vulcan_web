@@ -117,9 +117,9 @@ export const CreateAccount = () => {
     onSubmit: async (values) => {
       try {
         const { email, password, firstName, lastName, phoneNumber } = values;
-        await createUserWithEmailAndPassword(auth, email, password).then(()=>{
+        await createUserWithEmailAndPassword(auth, email, password).then(() => {
           ShowSuccessToast("Account created successfully!");
-          });
+        });
         const requestData = {
           firstName: firstName,
           lastName: lastName,

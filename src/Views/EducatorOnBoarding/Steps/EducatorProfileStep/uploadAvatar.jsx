@@ -7,7 +7,6 @@ import { AvatarBox } from "../../styles";
 
 export const UploadAvatar = ({ onUpload }) => {
   const [preview, setPreview] = useState(null);
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -16,11 +15,9 @@ export const UploadAvatar = ({ onUpload }) => {
     }
     setOpen(false);
   };
-
   const onClose = () => {
     setPreview(null);
   };
-
   const onCrop = (view) => {
     setPreview(view);
   };
@@ -59,7 +56,6 @@ export const UploadAvatar = ({ onUpload }) => {
           style={{}}
         />
       </Box>
-
       <IconButton
         aria-label="Edit"
         size="small"

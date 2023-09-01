@@ -6,10 +6,11 @@ export const fetchUserData = createAsyncThunk(
   async (uid) => {
 
     const db = getDatabase();
-    const userRef = ref(db, `users/${uid}/`);
     try {
+      const userRef = ref(db, `users/${uid}/`);
       const snapshot = await get(userRef);
       const userData = snapshot.val();
+      
       return userData;
     } catch (error) {
       throw new Error('Failed to fetch user data');

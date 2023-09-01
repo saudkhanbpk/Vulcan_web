@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
@@ -7,21 +7,10 @@ import { Divider, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import { MyBox, styles } from "./styles";
-import DialogBox from "../../Common/Dialog/dialogBox";
-import { useDispatch, useSelector } from "react-redux";
-import { getAuth } from "firebase/auth";
-import { fetchUserData } from "../../../Infrastructure/States/userDataSlice";
 
-const WelcomeBox = () => {
-  const auth = getAuth();
-  const uid = auth.currentUser ? auth.currentUser.uid : null;
-  const dispatch = useDispatch();
+  const WelcomeBox = () => {
   const navigate = useNavigate();
   const [isClicked, setIsClicked] = useState(true);
-  const [open, setOpen] = useState(false);
-  const [isEducator, setIsEducator] = useState(null);
-  const { data } = useSelector((state) => state.userData);
-  const message = "Student accounts cannot be an Educator";
 
   const handleButtonClick = (val) => {
     if (val.value === 1) {
@@ -33,24 +22,12 @@ const WelcomeBox = () => {
   const navigateToBecomeEdu = () => {
     navigate("/educator-account");
   };
-  // const handleStudentSignUpAsEducator = () => {
-  //   setOpen(true);
-  // };
 
   const navigateToCourses = () => {
     navigate("/courses");
   };
-
-  useEffect(() => {
-    dispatch(fetchUserData(uid));
-    if (data) {
-      setIsEducator(data[uid]?.is_educator || false);
-      console.log(data);
-    }
-  }, []);
   return (
     <>
-      <DialogBox open={open} setOpen={setOpen} message={message} />
       <Grid container item sx={styles.mainGrid}>
         <MyBox sx={styles.item}>
           <Grid
@@ -120,15 +97,13 @@ const WelcomeBox = () => {
 
           <Box display="flex" justifyContent="center" mt={6} height={40}>
             {isClicked ? (
-              !isEducator ? (
-                <Button
-                  onClick={navigateToBecomeEdu}
-                  variant="contained"
-                  sx={styles.textCapitalize}
-                >
-                  Sign Up To Teach
-                </Button>
-              ) : null
+              <Button
+                onClick={navigateToBecomeEdu}
+                variant="contained"
+                sx={styles.textCapitalize}
+              >
+                Sign Up To Teach
+              </Button>
             ) : (
               <Button
                 onClick={navigateToCourses}
