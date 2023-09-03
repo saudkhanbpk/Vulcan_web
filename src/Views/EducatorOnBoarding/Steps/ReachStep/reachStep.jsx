@@ -1,4 +1,4 @@
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import React from "react";
 import {
   ContinueButton,
@@ -19,7 +19,6 @@ import { useFormik } from "formik";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 export const ReachStep = () => {
-  
   const dispatch = useDispatch();
   const steps = useSelector((state) => state.educatorSteps.steps);
   const handleDec = () => {
@@ -47,7 +46,6 @@ export const ReachStep = () => {
   Q2Options.forEach((option) => {
     initialValues.linksQ2[option.id] = "";
   });
-
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
@@ -60,10 +58,10 @@ export const ReachStep = () => {
     },
   });
   return (
-    <Box mt={14}>
+    <Box mt={14} height="100vh">
       <form onSubmit={formik.handleSubmit}>
         <TopHeadingBox>
-          <TopHeading variant="" mt={5} ml={3}>
+          <TopHeading>
             Reach
           </TopHeading>
         </TopHeadingBox>
@@ -74,116 +72,69 @@ export const ReachStep = () => {
           alignItems={"center"}
         >
           <Grid lg={6} md={6} sm={10} xs={10}>
-            <Box
-              p={{
-                lg: 3,
-              }}
-            >
-              <Box
-                pt={{
-                  lg: 5,
-                }}
-              >
-                <Box
-                  sx={{
-                    height: {
-                      lg: "100vh",
-                      md: "50vh",
-                      sm: "50vh",
-                      xs: "50vh",
-                    },
-                  }}
-                >
-                  <Box sx={{ height: { lg: "100px", md: "100px" } }}>
-                    <QuestionName variant="h6" py={3}>
-                      Have you taught on any teaching platforms? (Udemy,
-                      Skillshare, Wyzant, etc)
-                    </QuestionName>
-                  </Box>
-                  <Grid
-                    container
-                    display={"flex"}
-                    alignItems={"center"}
-                    justifyContent="center"
-                  >
-                    <Grid lg={12} md={12} sm={12} xs={12}>
-                      <QuestionFormBox>
-                        {Q1Options.map((option) => (
-                          <TextField
-                            key={option.id}
-                            label={option.text}
-                            variant="outlined"
-                            placeholder="Paste your link"
-                            onChange={(e) => {
-                              formik.handleChange(e);
-                              formik.values.linksQ1[option.id] = e.target.value;
-                            }}
-                            value={formik.values.linksQ1[option.id]}
-                            sx={{ m: "3px" }}
-                            InputLabelProps={{
-                              style: { fontSize: 16 },
-                            }}
-                            InputProps={{
-                              style: { fontSize: 18 },
-                            }}
-                            fullWidth
-                          />
-                        ))}
-                      </QuestionFormBox>
-                    </Grid>
-                  </Grid>
-                </Box>
+            <Box p={3}>
+              <Box m={1} sx={{ height: { lg: "100px", md: "100px" } }}>
+                <QuestionName variant="h6">
+                  Have you taught on any teaching platforms? (Udemy, Skillshare,
+                  Wyzant, etc)
+                </QuestionName>
               </Box>
+              <QuestionFormBox>
+                {Q1Options.map((option) => (
+                  <TextField
+                    key={option.id}
+                    label={option.text}
+                    variant="outlined"
+                    placeholder="Paste your link"
+                    onChange={(e) => {
+                      formik.handleChange(e);
+                      formik.values.linksQ1[option.id] = e.target.value;
+                    }}
+                    value={formik.values.linksQ1[option.id]}
+                    sx={{ m: "3px" }}
+                    InputLabelProps={{
+                      style: { fontSize: 16 },
+                    }}
+                    InputProps={{
+                      style: { fontSize: 18 },
+                    }}
+                    fullWidth
+                  />
+                ))}
+              </QuestionFormBox>
             </Box>
           </Grid>
-
           <Grid lg={6} md={6} sm={10} xs={10}>
-            <Box
-              p={{
-                lg: 3,
-              }}
-            >
-              <Box
-                pt={{
-                  lg: 5,
-                }}
-              >
-                <Box sx={{ height: "100vh" }}>
-                  <Box sx={{ height: { lg: "100px", md: "100px" } }}>
-                    <Typography variant="h6" py={3}>
-                      Do you have any social media where you post educational
-                      content? (Youtube, Tik Tok, Twitter, etc)
-                    </Typography>
-                  </Box>
-                  <Grid container>
-                    <Grid lg={12} md={12} sm={12} xs={12}>
-                      <QuestionFormBox>
-                        {Q2Options.map((option) => (
-                          <TextField
-                            key={option.id}
-                            label={option.text}
-                            variant="outlined"
-                            placeholder="Paste your link"
-                            onChange={(e) => {
-                              formik.handleChange(e);
-                              formik.values.linksQ2[option.id] = e.target.value;
-                            }}
-                            value={formik.values.linksQ2[option.id]}
-                            sx={{ m: "3px" }}
-                            InputLabelProps={{
-                              style: { fontSize: 16 },
-                            }}
-                            InputProps={{
-                              style: { fontSize: 18 },
-                            }}
-                            fullWidth
-                          />
-                        ))}
-                      </QuestionFormBox>
-                    </Grid>
-                  </Grid>
-                </Box>
+            <Box p={3}>
+              <Box m={1} sx={{ height: { lg: "100px", md: "100px" } }}>
+                <QuestionName variant="h6">
+                  Do you have any social media where you post educational
+                  content? (Youtube, Tik Tok, Twitter, etc)
+                </QuestionName>
               </Box>
+              <QuestionFormBox>
+                {Q2Options.map((option) => (
+                  <TextField
+                    key={option.id}
+                    label={option.text}
+                    variant="outlined"
+                    placeholder="Paste your link"
+                    onChange={(e) => {
+                      formik.handleChange(e);
+                      formik.values.linksQ2[option.id] = e.target.value;
+                    }}
+                    value={formik.values.linksQ2[option.id]}
+                    sx={{ m: "3px" }}
+                    InputLabelProps={{
+                      style: { fontSize: 16 },
+                    }}
+                    InputProps={{
+                      style: { fontSize: 18 },
+                    }}
+                    fullWidth
+                  />
+                ))}
+              </QuestionFormBox>
             </Box>
           </Grid>
         </Grid>

@@ -135,10 +135,10 @@ export const EducatorProfileStep = () => {
                 onChange={(content) => {
                   formik.setFieldValue("content", content);
                 }}
-                style={{ height: "300px", marginTop:"40px" }}
+                style={{ height: "300px", marginTop: "40px" }}
               />
             </Box>
-            <Box my={10} width={"100%"}>
+            <Box width={"100%"} my={12}>
               {!open ? (
                 ""
               ) : (

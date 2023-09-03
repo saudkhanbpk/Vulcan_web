@@ -7,11 +7,7 @@ export const Span = styled("span")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
 }));
-export const EduMainBox = styled(Box)((theme) => ({
-  // height: "100vh",
-  // width: "100%",
-  // paddingTop: "100px",
-}));
+export const EduMainBox = styled(Box)((theme) => ({}));
 export const Header = styled(Box)((theme) => ({
   height: "70px",
   width: "100%",
@@ -22,7 +18,6 @@ export const Header = styled(Box)((theme) => ({
   boxShadow:
     "0px 4px 4px rgba(0, 0, 0, 0.25), 0px -4px 4px rgba(0, 0, 0, 0.25)",
 }));
-
 export const ContinueButton = styled(Button)((theme) => ({
   borderRadius: "0px",
   textTransform: "capitalize",
@@ -35,7 +30,6 @@ export const PreviousButton = styled(Button)((theme) => ({
   border: "none",
   height: "50px",
 }));
-
 export const StepsTypo = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   lineHeight: 1.4,
@@ -48,7 +42,6 @@ export const StepsTypo = styled(Typography)(({ theme }) => ({
     fontSize: "16px",
   },
 }));
-
 export const ExitTypo = styled(Typography)(({ theme }) => ({
   curser: "pointer",
   fontWight: "700 !important",
@@ -60,7 +53,6 @@ export const ExitTypo = styled(Typography)(({ theme }) => ({
     fontSize: "18px",
   },
 }));
-
 export const LogoTypo = styled(Typography)(({ theme }) => ({
   fontFamily: `${specialFont} !important`,
   fontWight: "700 !important",
@@ -86,7 +78,6 @@ export const Footer = styled(Box)(({ theme }) => ({
   background: "white",
   zIndex: "1",
 }));
-
 export const TitleText = styled(Typography)((theme) => ({
   fontSize: "16px",
   fontFamily: specialFont,
@@ -99,11 +90,11 @@ export const FullName = styled(Typography)((theme) => ({
   fontSize: "28px",
 }));
 export const TopHeadingBox = styled(Box)(({ theme }) => ({
+  padding:theme.spacing(3),
   [theme.breakpoints.down("sm")]: {},
 }));
 export const TopHeading = styled(Typography)(({ theme }) => ({
   marginTop: 12,
-
   fontWeight: 700,
   fontSize: "2.2rem",
   lineHeight: 1.25,
@@ -113,7 +104,6 @@ export const TopHeading = styled(Typography)(({ theme }) => ({
   },
 }));
 export const Description = styled(Typography)(({ theme }) => ({}));
-
 export const DescriptionBox = styled(Box)(({ theme }) => ({
   maxWidth: "70%",
   paddingTop: 32,
@@ -122,17 +112,18 @@ export const DescriptionBox = styled(Box)(({ theme }) => ({
   },
 }));
 export const QuestionName = styled(Typography)(({ theme }) => ({
+  padding:theme.spacing(1),
+  fontSize: "24px",
   [theme.breakpoints.down("md")]: {
-    fontSize: "26px",
+    fontSize: "20px",
   },
   [theme.breakpoints.down("sm")]: {
-    fontSize: "22px",
-  },
-  [theme.breakpoints.down("xs")]: {
     fontSize: "18px",
   },
+  [theme.breakpoints.down("xs")]: {
+    fontSize: "16px",
+  },
 }));
-
 export const styles = {
   main: {
     height: "100vh",
@@ -167,7 +158,6 @@ export const CreateAccButton = styled("button")(({ theme }) => ({
     marginTop: "30px",
   },
 }));
-
 export const Heading = styled(Typography)(({ theme }) => ({
   paddingTop: theme.spacing(1),
   paddingBottom: theme.spacing(1),
@@ -175,7 +165,6 @@ export const Heading = styled(Typography)(({ theme }) => ({
   fontSize: "36px",
   [theme.breakpoints.down("md")]: {},
 }));
-
 export const SignUpTextLink = styled(Typography)(({ theme }) => ({
   fontSize: "16px",
   color: theme.palette.primary.main,
@@ -210,15 +199,14 @@ export const ChoiceTypo = styled(Typography)(({ theme }) => ({
   letterSpacing: "-.02rem",
   fontSize: "16px",
 }));
-
 export const QuestionFormBox = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  paddingTop: theme.spacing(3),
-  paddingLeft: theme.spacing(4),
-  paddingRight: theme.spacing(4),
+  padding: theme.spacing(2),
+  // paddingLeft: theme.spacing(4),
+  // paddingRight: theme.spacing(4),
   [theme.breakpoints.down("md")]: {
     width: "80%",
   },
@@ -240,7 +228,7 @@ export const FormBoxEdu = styled(Box)(({ theme }) => ({
 }));
 export const AvatarBox = styled(Box)((theme) => ({
   position: "absolute",
-  borderRadius:"30px",
+  borderRadius: "30px",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -248,5 +236,5 @@ export const AvatarBox = styled(Box)((theme) => ({
   height: 400,
   bgcolor: "background.paper",
   boxShadow: 24,
-  backgroundColor:"white"
+  backgroundColor: "white",
 }));

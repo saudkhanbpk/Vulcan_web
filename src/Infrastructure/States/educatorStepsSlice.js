@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  steps: 1,
+  steps: 4,
   experienceStepQ1: [],
   experienceStepQ2: [],
   experienceStepQ3: "",
@@ -30,7 +30,7 @@ export const educatorStepsSlice = createSlice({
       }
     },
     experienceSteps: (state, action) => {
-      if (action.payload.step === "1") {
+      if (action.payload.step === "one") {
         return {
           ...state,
           experienceStepQ1: state.experienceStepQ1.includes(action.payload.optionValue)
@@ -40,7 +40,7 @@ export const educatorStepsSlice = createSlice({
             : [...state.experienceStepQ1, action.payload.optionValue],
         };
       }
-      if (action.payload.step === "2") {
+      if (action.payload.step === "two") {
         return {
           ...state,
           experienceStepQ2: state.experienceStepQ2.includes(action.payload.optionValue)
@@ -50,7 +50,7 @@ export const educatorStepsSlice = createSlice({
             : [...state.experienceStepQ2, action.payload.optionValue],
         };
       }
-      if (action.payload.step === "3") {
+      if (action.payload.step === "three") {
         return {
           ...state,
           experienceStepQ3: action.payload.optionValue,

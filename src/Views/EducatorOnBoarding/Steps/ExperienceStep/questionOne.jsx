@@ -1,18 +1,19 @@
 import React, { useEffect } from "react";
 import {
   Box,
-  Typography,
   FormControlLabel,
   FormGroup,
   Checkbox,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { experienceSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
-import { ChoiceTypo } from "../../styles";
+import { ChoiceTypo, QuestionName } from "../../styles";
 
 function QuestionOne() {
   const dispatch = useDispatch();
-  const experienceStepQ1 = useSelector((state) => state.educatorSteps.experienceStepQ1);
+  const experienceStepQ1 = useSelector(
+    (state) => state.educatorSteps.experienceStepQ1
+  );
   const options = [
     { id: 0, text: "Professor at a college / university" },
     { id: 1, text: "Teacher at K-12 School" },
@@ -20,30 +21,28 @@ function QuestionOne() {
     { id: 3, text: "Tutor" },
     { id: 4, text: "Other" },
   ];
-
   const handleOptionChange = (e, optionValue) => {
-    dispatch(experienceSteps({ optionValue, step: "1" }));
+    dispatch(experienceSteps({ optionValue, step: "one" }));
   };
-  useEffect(() => {
-  }, [experienceStepQ1]);
+  useEffect(() => {}, [experienceStepQ1]);
   return (
-  <>
-    <Box
-    sx={{
-      height: {
-        lg: "100vh",
-        md: "50vh",
-        sm: "50vh",
-        xs: "50vh",
-      },
-    }}
-  >
-    <Box sx={{ height: { lg: "100px", md: "100px" } }}>
-      <Typography variant="h6" pb={2}>
-        Approximately how many total years of teaching experience do you have?
-      </Typography>
-    </Box>
-
+    <>
+      <Box
+        sx={{
+          height: {
+            lg: "100vh",
+            md: "50vh",
+            sm: "50vh",
+            xs: "50vh",
+          },
+        }}
+      >
+        <Box sx={{ height: { lg: "100px", md: "100px" } }}>
+          <QuestionName variant="h6">
+            Approximately how many total years of teaching experience do you
+            have?
+          </QuestionName>
+        </Box>
         <FormGroup>
           {options.map((option) => (
             <FormControlLabel
@@ -63,8 +62,8 @@ function QuestionOne() {
             />
           ))}
         </FormGroup>
-  </Box>
-  </>
+      </Box>
+    </>
   );
 }
 

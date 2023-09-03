@@ -1,33 +1,28 @@
 import React, { useEffect } from "react";
 import {
   Box,
-  Typography,
   FormControlLabel,
   FormGroup,
   Checkbox,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { experienceSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
-import { ChoiceTypo } from "../../styles";
+import { ChoiceTypo, QuestionName } from "../../styles";
 
 function QuestionTwo() {
   const dispatch = useDispatch();
   const experienceStepQ2 = useSelector((state) => state.educatorSteps.experienceStepQ2);
   useEffect(() => {
   }, [experienceStepQ2]);
-
   const options = [
     { id: 0, text: "In Person" },
     { id: 1, text: "Live Online" },
     { id: 2, text: "Pre-recorded Online" },
     { id: 3, text: "Other" },
   ];
-
   const handleOptionChange = (e, optionValue) => {
-    dispatch(experienceSteps({ optionValue, step: "2" }));
+    dispatch(experienceSteps({ optionValue, step: "two" }));
   };
-
-
   return (
     <Box
       sx={{
@@ -40,11 +35,10 @@ function QuestionTwo() {
       }}
     >
       <Box sx={{ height: { lg: "100px", md: "100px" } }}>
-        <Typography variant="h6" pb={2}>
+          <QuestionName variant="h6">
           Approximately how many total years of teaching experience do you have?
-        </Typography>
-      </Box>
-
+          </QuestionName>
+          </Box>
       <FormGroup>
         {options.map((option) => (
           <FormControlLabel
