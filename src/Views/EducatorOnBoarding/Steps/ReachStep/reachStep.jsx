@@ -73,7 +73,7 @@ export const ReachStep = () => {
         >
           <Grid lg={6} md={6} sm={10} xs={10}>
             <Box p={3}>
-              <Box m={1} sx={{ height: { lg: "100px", md: "100px" } }}>
+              <Box my={1} sx={{ height: { lg: "100px", md: "100px" } }}>
                 <QuestionName variant="h6">
                   Have you taught on any teaching platforms? (Udemy, Skillshare,
                   Wyzant, etc)
@@ -106,7 +106,7 @@ export const ReachStep = () => {
           </Grid>
           <Grid lg={6} md={6} sm={10} xs={10}>
             <Box p={3}>
-              <Box m={1} sx={{ height: { lg: "100px", md: "100px" } }}>
+              <Box my={1} sx={{ height: { lg: "100px", md: "100px" } }}>
                 <QuestionName variant="h6">
                   Do you have any social media where you post educational
                   content? (Youtube, Tik Tok, Twitter, etc)
