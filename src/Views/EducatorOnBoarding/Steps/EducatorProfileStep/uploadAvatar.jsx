@@ -4,6 +4,7 @@ import Avatar from "react-avatar-edit";
 import EditIcon from "@mui/icons-material/Edit";
 import ProfileImage from "../../../../Assets/Images/vector.png";
 import { AvatarBox } from "../../styles";
+import CheckIcon from "@mui/icons-material/Check";
 
 export const UploadAvatar = ({ onUpload }) => {
   const [preview, setPreview] = useState(null);
@@ -37,17 +38,27 @@ export const UploadAvatar = ({ onUpload }) => {
         >
           <Avatar
             alt="Remy Sharp"
-            width={250}
-            height={250}
+            width={260}
+            height={260}
             onCrop={onCrop}
             onClose={onClose}
           />
+          <Box
+            style={{
+              borderRadius: "50%",
+              position: "absolute",
+              bottom: "10px",
+              right: "10px",
+              background: "#0000FF",
+              padding: "3px",
+            }}
+            onClick={handleClose}
+          >
+            <CheckIcon style={{ color: "#FFFFFF" }} />
+          </Box>
         </AvatarBox>
       </Modal>
-
-      <Box
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-      >
+      <Box display="flex" justifyContent="center" alignItems="center">
         <img
           src={preview ? preview : ProfileImage}
           height={200}

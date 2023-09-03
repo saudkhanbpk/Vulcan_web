@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   steps: 1,
-  step2Q1Data: [],
-  step2Q2Data: [],
-  step2Q3Data: "",
+  experienceStepQ1: [],
+  experienceStepQ2: [],
+  experienceStepQ3: "",
   reachStepQ1: [],
   reachStepQ2: [],
   educatorStepData:[]
@@ -29,31 +29,31 @@ export const educatorStepsSlice = createSlice({
         state.steps = 1;
       }
     },
-    eduRegSteps: (state, action) => {
+    experienceSteps: (state, action) => {
       if (action.payload.step === "1") {
         return {
           ...state,
-          step2Q1Data: state.step2Q1Data.includes(action.payload.optionValue)
-            ? state.step2Q1Data.filter(
+          experienceStepQ1: state.experienceStepQ1.includes(action.payload.optionValue)
+            ? state.experienceStepQ1.filter(
                 (value) => value !== action.payload.optionValue
               )
-            : [...state.step2Q1Data, action.payload.optionValue],
+            : [...state.experienceStepQ1, action.payload.optionValue],
         };
       }
       if (action.payload.step === "2") {
         return {
           ...state,
-          step2Q2Data: state.step2Q2Data.includes(action.payload.optionValue)
-            ? state.step2Q2Data.filter(
+          experienceStepQ2: state.experienceStepQ2.includes(action.payload.optionValue)
+            ? state.experienceStepQ2.filter(
                 (value) => value !== action.payload.optionValue
               )
-            : [...state.step2Q2Data, action.payload.optionValue],
+            : [...state.experienceStepQ2, action.payload.optionValue],
         };
       }
       if (action.payload.step === "3") {
         return {
           ...state,
-          step2Q3Data: action.payload.optionValue,
+          experienceStepQ3: action.payload.optionValue,
         };
       }
       return state;
@@ -86,7 +86,7 @@ export const educatorStepsSlice = createSlice({
 export const {
   incrementSteps,
   decrementSteps,
-  eduRegSteps,
+  experienceSteps,
   resetSteps,
   reachSteps,
   educatorProfileStep

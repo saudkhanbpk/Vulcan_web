@@ -8,12 +8,12 @@ import {
   Radio,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { eduRegSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
+import { experienceSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { ChoiceTypo } from "../../styles";
 
 function QuestionThree() {
   const dispatch = useDispatch();
-  const step2Q3Data = useSelector((state) => state.educatorSteps.step2Q3Data);
+  const experienceStepQ3 = useSelector((state) => state.educatorSteps.experienceStepQ3);
   
   const options = [
     { id: 0, text: "0-1" },
@@ -24,10 +24,10 @@ function QuestionThree() {
 
   const handleOptionChange = (e) => {
     let optionValue= e.target.value
-    dispatch(eduRegSteps({ optionValue, step: "3" }));
+    dispatch(experienceSteps({ optionValue, step: "3" }));
   };
   useEffect(() => {
-  }, [step2Q3Data]);
+  }, [experienceStepQ3]);
   return (
     <Box
       sx={{
@@ -47,7 +47,7 @@ function QuestionThree() {
       <FormControl fullWidth>
             <RadioGroup
             onChange={handleOptionChange}
-            value={step2Q3Data}
+            value={experienceStepQ3}
             >
               {options.map((option) => (
                 <FormControlLabel

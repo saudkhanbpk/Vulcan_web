@@ -4,7 +4,7 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import React from "react";
 import {
   decrementSteps,
-  eduRegSteps,
+  experienceSteps,
   resetSteps,
 } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,10 +20,9 @@ import {
 } from "../../styles";
 import ReactQuill from "react-quill";
 import { UploadAvatar } from "./uploadAvatar";
-
 import { useFormik } from "formik";
-export const EducatorProfileStep = () => {
 
+export const EducatorProfileStep = () => {
   const name = "John wick";
   const message = "About me text must be 200-2000 characters";
   const dispatch = useDispatch();
@@ -82,7 +81,7 @@ export const EducatorProfileStep = () => {
       if (content.length >= 200 && content.length <= 2000) {
         setOpen(false);
         navigate("/");
-        dispatch(eduRegSteps(values));
+        dispatch(experienceSteps(values));
         dispatch(resetSteps());
       } else {
         setOpen(true);
@@ -99,14 +98,12 @@ export const EducatorProfileStep = () => {
       >
         <Grid
           container
-          display={{ lg: "flex" }}
-          flexDirection={{ lg: "column", md: "column-reverse" }}
+          display={"flex"}
           justifyContent={"flex-start"}
           alignItems={"flex-start"}
         >
-          <Grid lg={1} md={0} sm={0} xs={0}></Grid>
           <Grid
-            lg={6}
+            lg={7}
             md={12}
             sm={12}
             xs={12}
@@ -116,22 +113,20 @@ export const EducatorProfileStep = () => {
             flexDirection={"column"}
             justifyContent={"flex-start"}
             alignItems={"flex-start"}
+            order={{ lg: 1, md: 2, sm: 2, xs: 2 }}
           >
-            <TitleText color={"primary"} pb={2}>
-              Educator
-            </TitleText>
-            <FullName color={"secondary"}>{name}</FullName>
-            <AboutMe pt={10} color={"primary"} mb={3}>
-              About Me
-            </AboutMe>
             <Box
-              mt={5}
               display={"flex"}
               flexDirection={"column"}
-              justifyContent={"center"}
-              alignItems={"center"}
-              sx={{ width: { xs: { width: "100%" } } }}
+              sx={{ width: "100%" }}
             >
+              <TitleText color={"primary"} pb={2}>
+                Educator
+              </TitleText>
+              <FullName color={"secondary"}>{name}</FullName>
+              <AboutMe pt={10} color={"primary"} mb={3}>
+                About Me
+              </AboutMe>
               <ReactQuill
                 theme="snow"
                 modules={modules}
@@ -140,7 +135,7 @@ export const EducatorProfileStep = () => {
                 onChange={(content) => {
                   formik.setFieldValue("content", content);
                 }}
-                style={{ height: "300px" }}
+                style={{ height: "300px", marginTop:"40px" }}
               />
             </Box>
             <Box my={10} width={"100%"}>
@@ -153,14 +148,17 @@ export const EducatorProfileStep = () => {
           </Grid>
           <Grid
             p={{ lg: 5, md: 5, sm: 5, xs: 5 }}
-            lg={4}
+            lg={5}
             md={12}
             sm={12}
             xs={12}
             display={"flex"}
             flexDirection={"column"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            order={{ lg: 2, md: 1, sm: 1, xs: 1 }}
           >
-            <Box>
+            <Box maxWidth={{ md: "70%", lg: "100%", xlg: "100%" }}>
               <Stack direction="row" spacing={2}>
                 <Box position="relative">
                   <UploadAvatar onUpload={handleAvatarUpload} />
@@ -224,7 +222,6 @@ export const EducatorProfileStep = () => {
               />
             </Box>
           </Grid>
-          <Grid lg={1} md={0} sm={0} xs={0}></Grid>
         </Grid>
         <Footer>
           <Grid container justifyContent={"space-between"} p={2}>

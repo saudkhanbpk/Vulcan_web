@@ -7,14 +7,14 @@ import {
   Checkbox,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { eduRegSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
+import { experienceSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { ChoiceTypo } from "../../styles";
+
 function QuestionTwo() {
   const dispatch = useDispatch();
-  const step2Q2Data = useSelector((state) => state.educatorSteps.step2Q2Data);
-
+  const experienceStepQ2 = useSelector((state) => state.educatorSteps.experienceStepQ2);
   useEffect(() => {
-  }, [step2Q2Data]);
+  }, [experienceStepQ2]);
 
   const options = [
     { id: 0, text: "In Person" },
@@ -24,7 +24,7 @@ function QuestionTwo() {
   ];
 
   const handleOptionChange = (e, optionValue) => {
-    dispatch(eduRegSteps({ optionValue, step: "2" }));
+    dispatch(experienceSteps({ optionValue, step: "2" }));
   };
 
 
@@ -51,7 +51,7 @@ function QuestionTwo() {
             key={option.id}
             control={
               <Checkbox
-                checked={step2Q2Data.includes(option.text.toString())}
+                checked={experienceStepQ2.includes(option.text.toString())}
                 onChange={(e) => handleOptionChange(e, option.text.toString())}
                 value={option.text.toString()}
                 sx={{ color: "#1c1d1f" }}
