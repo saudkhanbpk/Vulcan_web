@@ -33,7 +33,6 @@ export const NameBox = ({
           const userData = snapshot.val();
           if (userData) {
             setUserProfile(userData);
-            // Unsubscribe from the listener when data is received
             off(userRef, 'value', callback);
           }
         };
@@ -46,7 +45,8 @@ export const NameBox = ({
           off(userRef, 'value', callback);
         };
       } catch (error) {
-        ShowErrorToast("Something wrong try again.");
+        ShowErrorToast(`Something wrong try again.`);
+        
       }
     };
 
@@ -78,7 +78,7 @@ export const NameBox = ({
         handleClose();
         nameFormik.resetForm();
       } finally {
-        setSubmitting(false); // Ensure form submission is complete
+        setSubmitting(false);
       }
     },
   });

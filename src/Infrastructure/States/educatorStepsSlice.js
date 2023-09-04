@@ -1,9 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  stepOneData: [],
-  stepTwoData: [],
-  steps: 1,
+  steps: 4,
+  experienceStepQ1: [],
+  experienceStepQ2: [],
+  experienceStepQ3: "",
+  reachStepQ1: [],
+  reachStepQ2: [],
+  educatorStepData:[]
 };
 
 export const educatorStepsSlice = createSlice({
@@ -11,43 +15,81 @@ export const educatorStepsSlice = createSlice({
   initialState,
   reducers: {
     incrementSteps: (state) => {
-      if (state.steps < 3) {
+      if (state.steps <= 4) {
         state.steps = state.steps + 1;
       }
     },
-
     decrementSteps: (state) => {
-      if (state.steps < 3) {
+      if (state.steps <= 4) {
         state.steps = state.steps - 1;
       }
     },
-    eduRegSteps: (state, action) => {
-      if (action.payload.step === "1") {
+    resetSteps: (state) => {
+      if (state.steps <= 4) {
+        state.steps = 1;
+      }
+    },
+    experienceSteps: (state, action) => {
+      if (action.payload.step === "one") {
         return {
           ...state,
-          stepOneData: state.stepOneData.includes(action.payload.optionValue)
-            ? state.stepOneData.filter(
+          experienceStepQ1: state.experienceStepQ1.includes(action.payload.optionValue)
+            ? state.experienceStepQ1.filter(
                 (value) => value !== action.payload.optionValue
               )
-            : [...state.stepOneData, action.payload.optionValue],
+            : [...state.experienceStepQ1, action.payload.optionValue],
         };
       }
-      if (action.payload.step === "2") {
+      if (action.payload.step === "two") {
         return {
           ...state,
-          stepTwoData: state.stepTwoData.includes(action.payload.optionValue)
-            ? state.stepTwoData.filter(
+          experienceStepQ2: state.experienceStepQ2.includes(action.payload.optionValue)
+            ? state.experienceStepQ2.filter(
                 (value) => value !== action.payload.optionValue
               )
-            : [...state.stepTwoData, action.payload.optionValue],
+            : [...state.experienceStepQ2, action.payload.optionValue],
+        };
+      }
+      if (action.payload.step === "three") {
+        return {
+          ...state,
+          experienceStepQ3: action.payload.optionValue,
         };
       }
       return state;
     },
+    reachSteps: (state, action) => {
+      if (action.payload.question === "one") {
+        return {
+          ...state,
+          reachStepQ1: state.linksQ1,
+        };
+      }
+      if (action.payload.question === "two") {
+        return {
+          ...state,
+          reachStepQ2: state.linksQ2,
+        };
+      }
+      return state;
+    },
+    educatorProfileStep: (state, action)=>{
+      console.log(action.payload)
+      return {
+        ...state,
+        educatorStepData: action.payload.optionValue,
+      };
+    }
   },
 });
 
-export const { incrementSteps, decrementSteps, eduRegSteps } =
-  educatorStepsSlice.actions;
+export const {
+  incrementSteps,
+  decrementSteps,
+  experienceSteps,
+  resetSteps,
+  reachSteps,
+  educatorProfileStep
+} = educatorStepsSlice.actions;
 
 export default educatorStepsSlice.reducer;

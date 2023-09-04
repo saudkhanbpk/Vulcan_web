@@ -10,8 +10,8 @@ function App() {
     <>
       <BrowserRouter>
         <AuthProvider>
-          <ScrollToTop/>
-          <Router/>
+          <ScrollToTop />
+          <Router />
         </AuthProvider>
       </BrowserRouter>
     </>

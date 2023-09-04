@@ -117,7 +117,9 @@ export const CreateAccount = () => {
     onSubmit: async (values) => {
       try {
         const { email, password, firstName, lastName, phoneNumber } = values;
-        await createUserWithEmailAndPassword(auth, email, password);
+        await createUserWithEmailAndPassword(auth, email, password).then(() => {
+          ShowSuccessToast("Account created successfully!");
+        });
         const requestData = {
           firstName: firstName,
           lastName: lastName,
@@ -129,7 +131,6 @@ export const CreateAccount = () => {
         }
         const createUser = httpsCallable(functions, "createaccount");
         await createUser(requestData);
-        ShowSuccessToast("Account created successfully!");
         if (!auth.currentUser.emailVerified) {
           await sendEmailVerification(auth.currentUser);
           setTimeActive(true);

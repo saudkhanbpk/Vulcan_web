@@ -53,7 +53,7 @@ export const LoginAccount = () => {
   };
   const handleAuthenticationError = (error) => {
     if (!error) {
-      return; // Do nothing if there's no error
+      return;
     }
     let errorMessage = "Please try again later.";
     switch (error.code) {
@@ -169,6 +169,7 @@ export const LoginAccount = () => {
               }
               variant="standard"
               type="email"
+              autoComplete="username"
               onChange={loginFormik.handleChange}
               value={loginFormik.values.email}
               error={
@@ -198,6 +199,7 @@ export const LoginAccount = () => {
               type={showPassword ? "password" : "text"}
               onChange={loginFormik.handleChange}
               value={loginFormik.values.password}
+              autoComplete="current-password"
               error={
                 loginFormik.touched.password &&
                 Boolean(loginFormik.errors.password)

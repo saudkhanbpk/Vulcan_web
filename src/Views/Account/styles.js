@@ -4,7 +4,7 @@ export const MainBox = styled(Box)(({ theme }) => ({
   maxHeight: "110vh",
   alignItems: "flex-start",
   padding: theme.spacing(5),
-  marginBottom: theme.spacing(20),
+  marginBottom: theme.spacing(40),
   [theme.breakpoints.down("md")]: {
     height: "100vh",
   },

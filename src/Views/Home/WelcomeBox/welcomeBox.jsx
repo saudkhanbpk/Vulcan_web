@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import { MyBox, styles } from "./styles";
 
-const WelcomeBox = () => {
+  const WelcomeBox = () => {
+  const navigate = useNavigate();
   const [isClicked, setIsClicked] = useState(true);
 
   const handleButtonClick = (val) => {
@@ -18,10 +19,6 @@ const WelcomeBox = () => {
       setIsClicked(false);
     }
   };
-  // navigation hook declear
-  const navigate = useNavigate();
-
-  // navigation handle func
   const navigateToBecomeEdu = () => {
     navigate("/educator-account");
   };
@@ -29,8 +26,6 @@ const WelcomeBox = () => {
   const navigateToCourses = () => {
     navigate("/courses");
   };
-
-  // style for comp
   return (
     <>
       <Grid container item sx={styles.mainGrid}>
@@ -99,14 +94,25 @@ const WelcomeBox = () => {
               </Typography>
             </>
           )}
-          <Box display="flex" justifyContent="center" mt={6}>
-            <Button
-              onClick={isClicked ? navigateToBecomeEdu : navigateToCourses}
-              variant="contained"
-              sx={styles.textCapitalize}
-            >
-              {isClicked ? "Sign Up To Teach" : "See Courses"}
-            </Button>
+
+          <Box display="flex" justifyContent="center" mt={6} height={40}>
+            {isClicked ? (
+              <Button
+                onClick={navigateToBecomeEdu}
+                variant="contained"
+                sx={styles.textCapitalize}
+              >
+                Sign Up To Teach
+              </Button>
+            ) : (
+              <Button
+                onClick={navigateToCourses}
+                variant="contained"
+                sx={styles.textCapitalize}
+              >
+                See Courses
+              </Button>
+            )}
           </Box>
         </MyBox>
       </Grid>

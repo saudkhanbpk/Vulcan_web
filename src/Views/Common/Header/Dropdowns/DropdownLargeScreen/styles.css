@@ -19,6 +19,9 @@
   align-items: center;
   text-align: center;
 }
+.menuitems:hover{
+  color: #0000FF;
+}
 .dropdown {
   position: relative;
   display: inline-block;

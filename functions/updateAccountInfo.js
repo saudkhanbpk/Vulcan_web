@@ -10,8 +10,8 @@ exports.updateAccountInfo = onCall((request) => {
   const uid = request.auth.uid  
   const { firstName, lastName, number } = request.data  
   try {
-    const profileUpdates = {}  
-
+    const profileUpdates = {}
+    
     if (firstName) {
       profileUpdates.first_name = firstName  
     }

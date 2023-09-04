@@ -7,7 +7,7 @@ import {
 } from "../States/authModalsSlice";
 import useAuthentication from "../States/onAuthStateChange";
 import { Box, CircularProgress } from "@mui/material";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 export const PrivateOutlet = (props) => {
   const dispatch = useDispatch();
@@ -15,25 +15,23 @@ export const PrivateOutlet = (props) => {
   const { user, loading } = useAuthentication();
   const navigate = useNavigate();
   const location = useLocation();
-  const style = {
-    display: "flex",
-    height: "100vh",
-    justifyContent: "center",
-    alignItems: "center",
-  };
-
   if (loading) {
     return (
-      <Box sx={style}>
+      <Box
+        display="flex"
+        height="100vh"
+        justifyContent="center"
+        alignItems="center"
+      >
         <CircularProgress />
       </Box>
     );
   }
-  
+
   if (!user) {
     dispatch(chooseModalLogin());
     return navigate("/");
-  } else if (!user.emailVerified && location.pathname==="/dashboard" ) {
+  } else if (!user.emailVerified && location.pathname === "/dashboard") {
     dispatch(setSelectedRoute(location.pathname));
     dispatch(chooseModalEmailVerify());
     return navigate("/");

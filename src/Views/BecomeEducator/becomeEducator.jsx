@@ -14,16 +14,17 @@ import { styles } from "./styles";
 import Auth from "../../Views/Common/AuthModals/authModals";
 
 const BecomeEducator = () => {
-  const chooseModal = useSelector((state) => state.auth.chooseModal);
-
-  const handleSignUpModalOpen = () => {
-    navigate("/educator-account");
-  };
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
-
   const navigate = useNavigate();
   const sectionRef = useRef(null);
+  const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
+  const chooseModal = useSelector((state) => state.auth.chooseModal);
+
+
+  const navigateToBecomeEdu = () => {
+    navigate("/educator-account");
+  };
+ 
 
   const navigateToEdu = () => {
     navigate("/educator-faq");
@@ -62,7 +63,7 @@ const BecomeEducator = () => {
             <Button
               variant="contained"
               size="small"
-              onClick={handleSignUpModalOpen}
+              onClick={navigateToBecomeEdu}
               sx={styles.textCapitalize}
             >
               Get Started
@@ -124,7 +125,7 @@ const BecomeEducator = () => {
               </Typography>
             </Box>
           </Grid>
-          
+
           <Grid
             lg={4}
             sm={12}
