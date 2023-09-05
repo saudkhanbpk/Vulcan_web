@@ -99,6 +99,7 @@ export const EducatorProfileStep = () => {
           setOpen(false);
           navigate("/");
           dispatch(resetSteps());
+          window.location.reload();
         } catch (error) {
           ShowErrorToast(error);
         }

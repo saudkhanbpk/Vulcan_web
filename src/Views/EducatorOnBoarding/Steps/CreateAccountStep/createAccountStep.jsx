@@ -28,6 +28,8 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
 import useAuthentication from "../../../../Infrastructure/States/onAuthStateChange";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "../../../../Infrastructure/config";
 
 export const CreateAccountStep = ({ controlSteps }) => {
   const auth = getAuth();
@@ -66,17 +68,23 @@ export const CreateAccountStep = ({ controlSteps }) => {
         .required("Re Enter Password."),
       phoneNumber: Yup.string(),
     }),
-
     onSubmit: async (values) => {
       try {
-        const { email, password } = values;
-
+        const { email, password,firstName,lastName,phoneNumber  } = values;
         await createUserWithEmailAndPassword(auth, email, password).then(() => {
           ShowSuccessToast("Account created successfully!");
         });
+        const requestData = {
+          firstName: firstName,
+          lastName: lastName,
+          number: phoneNumber,
+          isEducator: true,
+        };
         if (!formik.isValid) {
           return;
         }
+        const createUser = httpsCallable(functions, "createaccount");
+        await createUser(requestData);
         dispatch(incrementSteps());
       } catch (error) {
         handleRegistrationError(error);

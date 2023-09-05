@@ -19,6 +19,7 @@ const EducatorAccountMainPage = () => {
   const steps = useSelector((state) => state.educatorSteps.steps);
   const handleClick = () => {
     navigate("/");
+    window.location.reload();
   };
   return (
     <EduMainBox>
@@ -43,7 +44,10 @@ const EducatorAccountMainPage = () => {
                 <LogoTypo
                   color={"primary"}
                   variant="h4"
-                  onClick={() => navigate("/")}
+                  onClick={() => {
+                    navigate("/");
+                    window.location.reload();
+                  }}
                 >
                   Vulcan
                 </LogoTypo>

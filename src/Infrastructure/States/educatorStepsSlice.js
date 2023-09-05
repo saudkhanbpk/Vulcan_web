@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  steps: 4,
+  steps: 1,
   experienceStep: {
     professor: false,
     teacher: false,
