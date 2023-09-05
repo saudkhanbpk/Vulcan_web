@@ -35,7 +35,6 @@ export const NumberBox = ({ handleOpen, handleClose, showEditNumber }) => {
         };
       } catch (error) {
         ShowErrorToast(`Something wrong, try again.${error}`);
-        console.log(error)
       }
     };
     fetchUserProfile();
