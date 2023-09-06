@@ -12,14 +12,17 @@ import {
   StepsTypo,
 } from "./styles";
 import ProgressBar from "./progressbar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { resetExperienceStepValues, resetSteps } from "../../Infrastructure/States/educatorStepsSlice";
 
 const EducatorAccountMainPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const steps = useSelector((state) => state.educatorSteps.steps);
   const handleClick = () => {
+    dispatch(resetExperienceStepValues());
+    dispatch(resetSteps());
     navigate("/");
-    window.location.reload();
   };
   return (
     <EduMainBox>
@@ -44,10 +47,7 @@ const EducatorAccountMainPage = () => {
                 <LogoTypo
                   color={"primary"}
                   variant="h4"
-                  onClick={() => {
-                    navigate("/");
-                    window.location.reload();
-                  }}
+                  onClick={handleClick}
                 >
                   Vulcan
                 </LogoTypo>

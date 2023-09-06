@@ -12,7 +12,7 @@ const initialState = {
     liveOnline: false,
     recordedOnline: false,
     mediumOther: false,
-    years:""
+    years: "",
   },
 };
 export const educatorStepsSlice = createSlice({
@@ -45,6 +45,18 @@ export const educatorStepsSlice = createSlice({
       }
       return state;
     },
+    resetExperienceStepValues: (state) => {
+      state.experienceStep.professor = false;
+      state.experienceStep.teacher = false;
+      state.experienceStep.independent = false;
+      state.experienceStep.tutor = false;
+      state.experienceStep.experienceOther = false;
+      state.experienceStep.inPerson = false;
+      state.experienceStep.liveOnline = false;
+      state.experienceStep.recordedOnline = false;
+      state.experienceStep.mediumOther = false;
+      state.experienceStep.years = "";
+    },
   },
 });
 export const {
@@ -52,7 +64,6 @@ export const {
   decrementSteps,
   experienceSteps,
   resetSteps,
-  reachSteps,
-  educatorProfileStep,
+  resetExperienceStepValues
 } = educatorStepsSlice.actions;
 export default educatorStepsSlice.reducer;

@@ -4,6 +4,7 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import React from "react";
 import {
   decrementSteps,
+  resetExperienceStepValues,
   resetSteps,
 } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -90,6 +91,7 @@ export const EducatorProfileStep = () => {
     onSubmit: async (values) => {
       const { aboutMe } = values;
       if (aboutMe.length >= 200 && aboutMe.length <= 2000) {
+        console.log(values);
         try {
           const updateEducatorStep = httpsCallable(
             functions,
@@ -99,7 +101,7 @@ export const EducatorProfileStep = () => {
           setOpen(false);
           navigate("/");
           dispatch(resetSteps());
-          window.location.reload();
+          dispatch(resetExperienceStepValues());
         } catch (error) {
           ShowErrorToast(error);
         }
