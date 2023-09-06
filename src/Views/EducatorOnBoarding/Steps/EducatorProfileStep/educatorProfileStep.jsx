@@ -66,7 +66,7 @@ export const EducatorProfileStep = () => {
       try {
         const updateEducatorStep = httpsCallable(
           functions,
-          "updatereducatorprofile"
+          "updateeducatorprofile"
         );
         await updateEducatorStep(formik.values);
         dispatch(decrementSteps());
@@ -93,7 +93,7 @@ export const EducatorProfileStep = () => {
         try {
           const updateEducatorStep = httpsCallable(
             functions,
-            "updatereducatorprofile"
+            "updateeducatorprofile"
           );
           await updateEducatorStep(values);
           setOpen(false);
