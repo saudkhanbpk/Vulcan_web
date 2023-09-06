@@ -18,4 +18,4 @@ const updateReachStep = require('./updateReachStep')
 exports.updatereachstep = updateReachStep.updateReachStep
 
 const updateEducatorProfile = require('./updateEducatorProfile')
-exports.updateeducatorprofile = updateEducatorProfile.updateEducatorProfile
+exports.updatereducatorprofile = updateEducatorProfile.updateEducatorProfile

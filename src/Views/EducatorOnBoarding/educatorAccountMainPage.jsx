@@ -13,7 +13,10 @@ import {
 } from "./styles";
 import ProgressBar from "./progressbar";
 import { useDispatch, useSelector } from "react-redux";
-import { resetExperienceStepValues, resetSteps } from "../../Infrastructure/States/educatorStepsSlice";
+import {
+  resetExperienceStepValues,
+  resetSteps,
+} from "../../Infrastructure/States/educatorStepsSlice";
 
 const EducatorAccountMainPage = () => {
   const navigate = useNavigate();
@@ -44,11 +47,7 @@ const EducatorAccountMainPage = () => {
               alignItems={"center"}
             >
               <Span>
-                <LogoTypo
-                  color={"primary"}
-                  variant="h4"
-                  onClick={handleClick}
-                >
+                <LogoTypo color={"primary"} variant="h4" onClick={handleClick}>
                   Vulcan
                 </LogoTypo>
               </Span>
