@@ -25,3 +25,6 @@ firebase-debug.log
 /firebase-debug.log
 ./firebase-debug.log
 firebase-debug
+
+storage.rules
+database.rules.json
