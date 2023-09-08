@@ -1,62 +1,64 @@
-import React, { useEffect } from "react";
-import {
-  Box,
-  FormControlLabel,
-  FormGroup,
-  Checkbox,
-} from "@mui/material";
+import React from "react";
+import { Box, FormControlLabel, FormGroup, Checkbox } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { experienceSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { ChoiceTypo, QuestionName } from "../../styles";
 
 function QuestionTwo() {
   const dispatch = useDispatch();
-  const experienceStepQ2 = useSelector((state) => state.educatorSteps.experienceStepQ2);
-  useEffect(() => {
-  }, [experienceStepQ2]);
+  const experienceStep = useSelector(
+    (state) => state.educatorSteps.experienceStep
+  );
+
   const options = [
-    { id: 0, text: "In Person" },
-    { id: 1, text: "Live Online" },
-    { id: 2, text: "Pre-recorded Online" },
-    { id: 3, text: "Other" },
+    { name: "professor", label: "Professor at a college / university" },
+    { name: "teacher", label: "Teacher at K-12 School" },
+    { name: "independent", label: "Independent Instructor" },
+    { name: "tutor", label: "Tutor" },
+    { name: "experienceOther", label: "Other" },
   ];
-  const handleOptionChange = (e, optionValue) => {
-    dispatch(experienceSteps({ optionValue, step: "two" }));
-  };
   return (
-    <Box
-      sx={{
-        height: {
-          lg: "100vh",
-          md: "50vh",
-          sm: "50vh",
-          xs: "50vh",
-        },
-      }}
-    >
-      <Box sx={{ height: { lg: "100px", md: "100px" } }}>
+    <>
+      <Box
+        sx={{
+          height: {
+            lg: "100vh",
+            md: "50vh",
+            sm: "50vh",
+            xs: "50vh",
+          },
+        }}
+      >
+        <Box sx={{ height: { lg: "100px", md: "100px" } }}>
           <QuestionName variant="h6">
-          Approximately how many total years of teaching experience do you have?
+            Approximately how many total years of teaching experience do you
+            have?
           </QuestionName>
-          </Box>
-      <FormGroup>
-        {options.map((option) => (
-          <FormControlLabel
-            key={option.id}
-            control={
-              <Checkbox
-                checked={experienceStepQ2.includes(option.text.toString())}
-                onChange={(e) => handleOptionChange(e, option.text.toString())}
-                value={option.text.toString()}
-                sx={{ color: "#1c1d1f" }}
-              />
-            }
-            label={<ChoiceTypo variant="body1">{option.text}</ChoiceTypo>}
-            sx={{ border: "1px solid #1c1d1f", p: 1, m: "3px" }}
-          />
-        ))}
-      </FormGroup>
-    </Box>
+        </Box>
+        <FormGroup>
+          {options.map((option, index) => (
+            <FormControlLabel
+              key={index}
+              control={
+                <Checkbox
+                  checked={experienceStep[option.name]}
+                  onChange={(e) => {
+                    const { name, checked } = e.target;
+                    dispatch(
+                      experienceSteps({ name, checked, question: "one" })
+                    );
+                  }}
+                  sx={{ color: "#1c1d1f" }}
+                  name={option.name}
+                />
+              }
+              label={<ChoiceTypo variant="body1">{option.label}</ChoiceTypo>}
+              sx={{ border: "1px solid #1c1d1f", p: 1, m: "3px" }}
+            />
+          ))}
+        </FormGroup>
+      </Box>
+    </>
   );
 }
 

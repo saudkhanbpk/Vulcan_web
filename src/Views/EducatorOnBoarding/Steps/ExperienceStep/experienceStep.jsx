@@ -1,7 +1,5 @@
 import { Box } from "@mui/material";
 import React from "react";
-import QuestionTwo from "./questionTwo";
-import QuestionOne from "./questionOne";
 import QuestionThree from "./questionThree";
 import {
   decrementSteps,
@@ -16,25 +14,44 @@ import {
   TopHeadingBox,
 } from "../../styles";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import QuestionOne from "./questionOne";
+import QuestionTwo from "./questionTwo";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "../../../../Infrastructure/config";
+import { ShowErrorToast } from "../../../Common/Toast/toast";
 
 export const ExperienceStep = () => {
   const dispatch = useDispatch();
   const steps = useSelector((state) => state.educatorSteps.steps);
-  const experienceStepQ1 = useSelector((state) => state.educatorSteps.experienceStepQ1);
-  const experienceStepQ2 = useSelector((state) => state.educatorSteps.experienceStepQ2);
-  const experienceStepQ3 = useSelector((state) => state.educatorSteps.experienceStepQ3);
-
-  const handleDec = () => {
+  const experienceStep = useSelector(
+    (state) => state.educatorSteps.experienceStep
+  );
+  const handleDec = async () => {
     if (steps > 1) {
-      dispatch(decrementSteps());
+      try {
+        const updateexperiences = httpsCallable(
+          functions,
+          "updateexperiencestep"
+        );
+        await updateexperiences(experienceStep);
+        dispatch(decrementSteps());
+      } catch (error) {
+        ShowErrorToast(error)
+        
+      }
     }
   };
-  const handleInc = () => {
+  const handleInc = async () => {
     if (steps >= 1 && steps < 4) {
-      if (experienceStepQ1.length > 0 && experienceStepQ2.length > 0) {
+      try {
+        const updateexperiences = httpsCallable(
+          functions,
+          "updateexperiencestep"
+        );
+        await updateexperiences(experienceStep);
         dispatch(incrementSteps());
-      } else {
-        alert("Please select at least one option");
+      } catch (error) {
+        ShowErrorToast(error)
       }
     }
   };
@@ -56,14 +73,14 @@ export const ExperienceStep = () => {
           <Grid lg={4} md={6} sm={10} xs={10}>
             <Box p={3} sx={{ height: "100vh" }}>
               <Box sx={{ maxWidth: "100%" }} pt={5}>
-                <QuestionTwo />
+                <QuestionOne />
               </Box>
             </Box>
           </Grid>
           <Grid lg={4} md={6} sm={10} xs={10}>
             <Box p={3} sx={{ height: "100vh" }}>
               <Box sx={{ maxWidth: "100%" }} pt={5}>
-                <QuestionOne />
+                <QuestionTwo />
               </Box>
             </Box>
           </Grid>
@@ -91,7 +108,18 @@ export const ExperienceStep = () => {
             <Grid>
               <ContinueButton
                 disabled={
-                  !((experienceStepQ2.length > 0 && experienceStepQ1.length > 0) && experienceStepQ3.trim() !== "")
+                  !(
+                    (experienceStep.inPerson ||
+                      experienceStep.liveOnline ||
+                      experienceStep.recordedOnline ||
+                      experienceStep.mediumOther) &&
+                    (experienceStep.professor ||
+                      experienceStep.teacher ||
+                      experienceStep.independent ||
+                      experienceStep.experienceOther ||
+                      experienceStep.tutor) &&
+                    experienceStep.years.trim() !== ""
+                  )
                 }
                 variant="contained"
                 onClick={handleInc}

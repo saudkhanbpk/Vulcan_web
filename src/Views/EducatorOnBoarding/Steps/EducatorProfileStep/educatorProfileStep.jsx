@@ -4,7 +4,7 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import React from "react";
 import {
   decrementSteps,
-  experienceSteps,
+  resetExperienceStepValues,
   resetSteps,
 } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,9 @@ import {
 import ReactQuill from "react-quill";
 import { UploadAvatar } from "./uploadAvatar";
 import { useFormik } from "formik";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "../../../../Infrastructure/config";
+import { ShowErrorToast } from "../../../Common/Toast/toast";
 
 export const EducatorProfileStep = () => {
   const name = "John wick";
@@ -59,9 +62,18 @@ export const EducatorProfileStep = () => {
     "size",
     "font",
   ];
-  const handleDec = () => {
+  const handleDec = async () => {
     if (steps > 1) {
-      dispatch(decrementSteps());
+      try {
+        const updateEducatorStep = httpsCallable(
+          functions,
+          "updateeducatorprofile"
+        );
+        await updateEducatorStep(formik.values);
+        dispatch(decrementSteps());
+      } catch (error) {
+        ShowErrorToast(error);
+      }
     }
   };
   const handleAvatarUpload = (imageDataURL) => {
@@ -69,20 +81,30 @@ export const EducatorProfileStep = () => {
   };
   const formik = useFormik({
     initialValues: {
-      content: "",
-      websiteLink: "",
-      youtubeLink: "",
-      twitterLink: "",
-      linkedinLink: "",
+      aboutMe: "",
+      website: "",
+      youtube: "",
+      twitter: "",
+      linkedin: "",
       avatar: "",
     },
-    onSubmit: (values) => {
-      const { content } = values;
-      if (content.length >= 200 && content.length <= 2000) {
-        setOpen(false);
-        navigate("/");
-        dispatch(experienceSteps(values));
-        dispatch(resetSteps());
+    onSubmit: async (values) => {
+      const { aboutMe } = values;
+      if (aboutMe.length >= 200 && aboutMe.length <= 2000) {
+        console.log(values);
+        try {
+          const updateEducatorStep = httpsCallable(
+            functions,
+            "updateeducatorprofile"
+          );
+          await updateEducatorStep(values);
+          setOpen(false);
+          navigate("/");
+          dispatch(resetSteps());
+          dispatch(resetExperienceStepValues());
+        } catch (error) {
+          ShowErrorToast(error);
+        }
       } else {
         setOpen(true);
       }
@@ -131,9 +153,9 @@ export const EducatorProfileStep = () => {
                 theme="snow"
                 modules={modules}
                 formats={formats}
-                value={formik.values.content}
-                onChange={(content) => {
-                  formik.setFieldValue("content", content);
+                value={formik.values.aboutMe}
+                onChange={(aboutMe) => {
+                  formik.setFieldValue("aboutMe", aboutMe);
                 }}
                 style={{ height: "300px", marginTop: "40px" }}
               />
@@ -169,7 +191,7 @@ export const EducatorProfileStep = () => {
                 sx={{ mt: "6px" }}
                 label={"Website Link"}
                 variant="standard"
-                {...formik.getFieldProps("websiteLink")}
+                {...formik.getFieldProps("website")}
                 InputLabelProps={{
                   style: { fontSize: 16 },
                 }}
@@ -183,7 +205,7 @@ export const EducatorProfileStep = () => {
                 sx={{ mt: "6px" }}
                 label={"Youtube Link"}
                 variant="standard"
-                {...formik.getFieldProps("youtubeLink")}
+                {...formik.getFieldProps("youtube")}
                 InputLabelProps={{
                   style: { fontSize: 16 },
                 }}
@@ -197,7 +219,7 @@ export const EducatorProfileStep = () => {
                 sx={{ mt: "6px" }}
                 label={"Twitter Link"}
                 variant="standard"
-                {...formik.getFieldProps("twitterLink")}
+                {...formik.getFieldProps("twitter")}
                 InputLabelProps={{
                   style: { fontSize: 16 },
                 }}
@@ -211,7 +233,7 @@ export const EducatorProfileStep = () => {
                 sx={{ mt: "6px" }}
                 label={"LinkedIn Link"}
                 variant="standard"
-                {...formik.getFieldProps("linkedinLink")}
+                {...formik.getFieldProps("linkedin")}
                 InputLabelProps={{
                   style: { fontSize: 16 },
                 }}

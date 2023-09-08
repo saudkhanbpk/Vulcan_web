@@ -6,17 +6,11 @@ export const ModalTypes = {
   RESET_PASSWORD: "resetPassword",
   EMAIL_VERIFICATION: "emailVerification",
 };
-
 const initialState = {
   isOpenModal: false,
   chooseModal: null,
-  isEmailVerified: false,
-  isVerifyingEmail: false,
-  verificationError: null,
-  selectIsEmailVerified: false,
   selectedRouteBeforeVerified:''
 };
-
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -46,7 +40,6 @@ export const authSlice = createSlice({
     },
 },
 });
-
 export const {
   chooseModalLogin,
   chooseModalSignUp,
@@ -55,5 +48,4 @@ export const {
   closeChooseModal,
   setSelectedRoute
 } = authSlice.actions;
-
 export default authSlice.reducer;
