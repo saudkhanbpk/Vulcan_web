@@ -21,6 +21,7 @@ exports.updateEducatorProfile = onCall(async (request) => {
       educatorProfile.avatar = avatar 
       const result = await uploadImageAndSaveLink({
         base64Image: avatar,
+        uid: uid
       }) 
       if (result.imageUrl) {
         educatorProfile.avatar = result.imageUrl 
@@ -42,7 +43,7 @@ exports.updateEducatorProfile = onCall(async (request) => {
       educatorProfile.linkedin = linkedin 
     }
 
-    db.ref(`users/${uid}/educator/educator_profile`).update(educatorProfile) 
+    db.ref(`users/${uid}/educator/profile`).update(educatorProfile) 
   } catch (error) {
     dbCalls.logUser("ERROR: Update Educator Profile Step: " + error) 
     isSuccess = false 

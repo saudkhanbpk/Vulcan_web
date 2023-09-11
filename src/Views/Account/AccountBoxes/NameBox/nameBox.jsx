@@ -36,10 +36,8 @@ export const NameBox = ({
             off(userRef, 'value', callback);
           }
         };
-
         // Subscribe to the listener
         onValue(userRef, callback);
-
         // Return the cleanup function to unsubscribe when the component unmounts
         return () => {
           off(userRef, 'value', callback);
@@ -93,7 +91,7 @@ export const NameBox = ({
       >
         <TextLabel>Full Name</TextLabel>
         <TextValue>
-          {userProfile.first_name} {userProfile.last_name}
+          {userProfile.first_name.charAt(0).toUpperCase() + userProfile.first_name.slice(1)} {userProfile.last_name.charAt(0).toUpperCase() + userProfile.last_name.slice(1)}
         </TextValue>
         {!showEditName ? (
           <Span

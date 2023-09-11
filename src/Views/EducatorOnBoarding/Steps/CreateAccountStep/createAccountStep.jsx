@@ -70,7 +70,7 @@ export const CreateAccountStep = ({ controlSteps }) => {
     }),
     onSubmit: async (values) => {
       try {
-        const { email, password,firstName,lastName,phoneNumber  } = values;
+        const { email, password, firstName, lastName, phoneNumber } = values;
         await createUserWithEmailAndPassword(auth, email, password).then(() => {
           ShowSuccessToast("Account created successfully!");
         });
@@ -121,7 +121,6 @@ export const CreateAccountStep = ({ controlSteps }) => {
     const specialCharacters = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
     return specialCharacters.test(password);
   };
-
   return (
     <>
       <Box pt={14}>
@@ -197,6 +196,7 @@ export const CreateAccountStep = ({ controlSteps }) => {
                   variant="standard"
                   onChange={formik.handleChange}
                   value={formik.values.email}
+                  autoComplete="username"
                   error={formik.touched.email && Boolean(formik.errors.email)}
                   InputLabelProps={{
                     style: { fontSize: 16 },

@@ -10,7 +10,6 @@ export const fetchUserData = createAsyncThunk(
       const userRef = ref(db, `users/${uid}/`);
       const snapshot = await get(userRef);
       const userData = snapshot.val();
-      
       return userData;
     } catch (error) {
       throw new Error('Failed to fetch user data');
@@ -21,7 +20,7 @@ export const fetchUserData = createAsyncThunk(
 const userDataSlice = createSlice({
   name: 'userData',
   initialState: {
-    data: {},
+    data: null,
     loading: false,
     error: null,
   },
@@ -33,7 +32,7 @@ const userDataSlice = createSlice({
       })
       .addCase(fetchUserData.fulfilled, (state, action) => {
         state.loading = false;
-        state.data[action.meta.arg] = action.payload;
+        state.data = action.payload;
       })
       .addCase(fetchUserData.rejected, (state, action) => {
         state.loading = false;

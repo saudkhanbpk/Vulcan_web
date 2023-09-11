@@ -1,4 +1,4 @@
-import { IconButton, Modal, Box } from "@mui/material";
+import { Modal, Box } from "@mui/material";
 import React, { useState } from "react";
 import Avatar from "react-avatar-edit";
 import EditIcon from "@mui/icons-material/Edit";
@@ -64,12 +64,9 @@ export const UploadAvatar = ({ onUpload }) => {
           height={200}
           width={200}
           alt="Preview"
-          style={{}}
         />
       </Box>
-      <IconButton
-        aria-label="Edit"
-        size="small"
+      <Box
         onClick={handleOpen}
         sx={{
           position: "absolute",
@@ -77,10 +74,13 @@ export const UploadAvatar = ({ onUpload }) => {
           right: 0,
           color: "blue",
           bgcolor: "white",
+          borderRadius:"50%",
+          border: "1px solid grey",
         }}
+        p={0.5}
       >
         <EditIcon />
-      </IconButton>
+      </Box>
     </div>
   );
 };

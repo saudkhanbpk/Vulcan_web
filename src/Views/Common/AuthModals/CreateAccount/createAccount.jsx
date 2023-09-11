@@ -73,7 +73,7 @@ export const CreateAccount = () => {
   };
   const handleRegistrationError = (error) => {
     if (!error) {
-      return; // Do nothing if there's no error
+      return;
     }
     let errorMessage = "An unexpected error occurred. Please try again later.";
     switch (error.code) {
@@ -127,7 +127,7 @@ export const CreateAccount = () => {
           isEducator: isEducator,
         };
         if (!formik.isValid) {
-          return; // Exit early if form is not valid
+          return;
         }
         const createUser = httpsCallable(functions, "createaccount");
         await createUser(requestData);
@@ -157,7 +157,7 @@ export const CreateAccount = () => {
           justifyContent: "center",
         }}
         BackdropProps={{
-          sx: styles.backdrop, // Apply custom styles to the backdrop
+          sx: styles.backdrop,
         }}
       >
         <MainBox>

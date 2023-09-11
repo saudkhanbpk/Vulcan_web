@@ -11,8 +11,8 @@ import { experienceSteps } from "../../../../Infrastructure/States/educatorSteps
 import { ChoiceTypo, QuestionName } from "../../styles";
 
 function QuestionThree() {
-
   const dispatch = useDispatch();
+  const question3 = "Approximately how many total years of teaching experience do you have?";
   const years = useSelector(
     (state) => state.educatorSteps.experienceStep.years
   );
@@ -38,9 +38,7 @@ function QuestionThree() {
       }}
     >
       <Box sx={{ height: { lg: "100px", md: "100px" } }}>
-        <QuestionName variant="h6">
-        Approximately how many total years of teaching experience do you have?
-        </QuestionName>
+        <QuestionName variant="h6">{question3}</QuestionName>
       </Box>
       <FormControl fullWidth>
         <RadioGroup onChange={handleOptionChange} value={years}>

@@ -13,7 +13,7 @@ function QuestionOne() {
     { name: "inPerson", label: "In Person" },
     { name: "liveOnline", label: "Live Online" },
     { name: "recordedOnline", label: "Pre-recorded Online" },
-    { name: "mediumOther", label: "Others" },
+    { name: "mediumOther", label: "Other" },
   ];
   return (
     <Box
