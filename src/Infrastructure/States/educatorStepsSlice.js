@@ -1,15 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  steps: 4,
-  experienceStepQ1: [],
-  experienceStepQ2: [],
-  experienceStepQ3: "",
-  reachStepQ1: [],
-  reachStepQ2: [],
-  educatorStepData:[]
+  steps: 1,
+  experienceStep: {
+    professor: false,
+    teacher: false,
+    independent: false,
+    tutor: false,
+    experienceOther: false,
+    inPerson: false,
+    liveOnline: false,
+    recordedOnline: false,
+    mediumOther: false,
+    years: "",
+  },
 };
-
 export const educatorStepsSlice = createSlice({
   name: "educatorSteps",
   initialState,
@@ -30,66 +35,35 @@ export const educatorStepsSlice = createSlice({
       }
     },
     experienceSteps: (state, action) => {
-      if (action.payload.step === "one") {
-        return {
-          ...state,
-          experienceStepQ1: state.experienceStepQ1.includes(action.payload.optionValue)
-            ? state.experienceStepQ1.filter(
-                (value) => value !== action.payload.optionValue
-              )
-            : [...state.experienceStepQ1, action.payload.optionValue],
-        };
+      const { name, checked, question } = action.payload;
+      if (question === "one") {
+        state.experienceStep[name] = checked;
       }
-      if (action.payload.step === "two") {
-        return {
-          ...state,
-          experienceStepQ2: state.experienceStepQ2.includes(action.payload.optionValue)
-            ? state.experienceStepQ2.filter(
-                (value) => value !== action.payload.optionValue
-              )
-            : [...state.experienceStepQ2, action.payload.optionValue],
-        };
-      }
-      if (action.payload.step === "three") {
-        return {
-          ...state,
-          experienceStepQ3: action.payload.optionValue,
-        };
+      if (question === "three") {
+        const { optionValue } = action.payload;
+        state.experienceStep.years = optionValue;
       }
       return state;
     },
-    reachSteps: (state, action) => {
-      if (action.payload.question === "one") {
-        return {
-          ...state,
-          reachStepQ1: state.linksQ1,
-        };
-      }
-      if (action.payload.question === "two") {
-        return {
-          ...state,
-          reachStepQ2: state.linksQ2,
-        };
-      }
-      return state;
+    resetExperienceStepValues: (state) => {
+      state.experienceStep.professor = false;
+      state.experienceStep.teacher = false;
+      state.experienceStep.independent = false;
+      state.experienceStep.tutor = false;
+      state.experienceStep.experienceOther = false;
+      state.experienceStep.inPerson = false;
+      state.experienceStep.liveOnline = false;
+      state.experienceStep.recordedOnline = false;
+      state.experienceStep.mediumOther = false;
+      state.experienceStep.years = "";
     },
-    educatorProfileStep: (state, action)=>{
-      console.log(action.payload)
-      return {
-        ...state,
-        educatorStepData: action.payload.optionValue,
-      };
-    }
   },
 });
-
 export const {
   incrementSteps,
   decrementSteps,
   experienceSteps,
   resetSteps,
-  reachSteps,
-  educatorProfileStep
+  resetExperienceStepValues
 } = educatorStepsSlice.actions;
-
 export default educatorStepsSlice.reducer;

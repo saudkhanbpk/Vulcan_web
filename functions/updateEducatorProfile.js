@@ -1,51 +1,54 @@
-const { onCall } = require("firebase-functions/v2/https")  
-const { getDatabase } = require("firebase-admin/database")
+const { getDatabase } = require("firebase-admin/database") 
+const { onCall } = require("firebase-functions/v2/https") 
+const db = getDatabase() 
+const dbCalls = require("./databaseCalls") 
+const { uploadImageAndSaveLink } = require("./uploadImageAndSaveLink") 
 
-const db = getDatabase()  
-const dbCalls = require("./databaseCalls")  
+exports.updateEducatorProfile = onCall(async (request) => {
+  let isSuccess = true 
+  let errorMessage = null 
+  const uid = request.auth.uid 
 
-exports.updateEducatorProfile = onCall((request) => {
+  const { aboutMe, avatar, website, youtube, twitter, linkedin } = request.data 
 
-    let isSuccess = true
-    let errorMessage = null
-    const uid = request.auth.uid
+  try {
+    const educatorProfile = {} 
 
-    const { aboutMe, avatar, website, youtube, twitter, linkedin } = request.data
-
-    try {
-        const educatorProfile = {}
-
-        if (aboutMe) {
-            educatorProfile.about_me = aboutMe
-        }
-
-        if (avatar) {
-            educatorProfile.avatar = avatar
-        }
-
-        if (website) {
-            educatorProfile.website = website
-        }
-
-        if (youtube) {
-            educatorProfile.youtube = youtube
-        }
-
-        if (twitter) {
-            educatorProfile.twitter = twitter
-        }
-
-        if (linkedin) {
-            educatorProfile.linkedin = linkedin
-        }
-
-        db.ref(`users/${uid}/educator/educator_profile`).update(educatorProfile)
-
-    } catch (error) {
-        dbCalls.logUser("ERROR: Update Educator Profile Step: " + error)  
-        isSuccess = false
-        errorMessage = error
+    if (aboutMe) {
+      educatorProfile.about_me = aboutMe 
+    }
+    if (avatar) {
+      educatorProfile.avatar = avatar 
+      const result = await uploadImageAndSaveLink({
+        base64Image: avatar,
+        uid: uid
+      }) 
+      if (result.imageUrl) {
+        educatorProfile.avatar = result.imageUrl 
+      }
+    }
+    if (website) {
+      educatorProfile.website = website 
     }
 
-    return { isSuccess: isSuccess, errorMessage: errorMessage }  
-})  
+    if (youtube) {
+      educatorProfile.youtube = youtube 
+    }
+
+    if (twitter) {
+      educatorProfile.twitter = twitter 
+    }
+
+    if (linkedin) {
+      educatorProfile.linkedin = linkedin 
+    }
+
+    db.ref(`users/${uid}/educator/profile`).update(educatorProfile) 
+  } catch (error) {
+    dbCalls.logUser("ERROR: Update Educator Profile Step: " + error) 
+    isSuccess = false 
+    errorMessage = error 
+  }
+
+  return { isSuccess: isSuccess, errorMessage: errorMessage } 
+}) 

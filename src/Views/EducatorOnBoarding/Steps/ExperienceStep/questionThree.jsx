@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Box,
   FormControlLabel,
@@ -12,8 +12,9 @@ import { ChoiceTypo, QuestionName } from "../../styles";
 
 function QuestionThree() {
   const dispatch = useDispatch();
-  const experienceStepQ3 = useSelector(
-    (state) => state.educatorSteps.experienceStepQ3
+  const question3 = "Approximately how many total years of teaching experience do you have?";
+  const years = useSelector(
+    (state) => state.educatorSteps.experienceStep.years
   );
   const options = [
     { id: 0, text: "0-1" },
@@ -23,9 +24,8 @@ function QuestionThree() {
   ];
   const handleOptionChange = (e) => {
     let optionValue = e.target.value;
-    dispatch(experienceSteps({ optionValue, step: "three" }));
+    dispatch(experienceSteps({ optionValue, question: "three" }));
   };
-  useEffect(() => {}, [experienceStepQ3]);
   return (
     <Box
       sx={{
@@ -38,12 +38,10 @@ function QuestionThree() {
       }}
     >
       <Box sx={{ height: { lg: "100px", md: "100px" } }}>
-        <QuestionName variant="h6">
-          Approximately how many total years of teaching experience do you have?
-        </QuestionName>
+        <QuestionName variant="h6">{question3}</QuestionName>
       </Box>
       <FormControl fullWidth>
-        <RadioGroup onChange={handleOptionChange} value={experienceStepQ3}>
+        <RadioGroup onChange={handleOptionChange} value={years}>
           {options.map((option) => (
             <FormControlLabel
               key={option.id}

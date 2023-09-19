@@ -9,7 +9,6 @@ import mobileImage from "../../Assets/Images/backhome.png";
 const HomeScreen = () => {
   const theme = useTheme();
   const is_desktop = useMediaQuery(theme.breakpoints.up("sm"));
-
   return (
     <>
       <Grid>

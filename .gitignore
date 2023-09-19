@@ -54,3 +54,7 @@ firebase-debug.log
 firebase-debug
 /database-debug.log
 .database-debug.log
+.storage.rules
+/storage.rules
+storage.rules
+database.rules.json

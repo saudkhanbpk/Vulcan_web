@@ -13,57 +13,55 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   decrementSteps,
   incrementSteps,
-  reachSteps,
 } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { useFormik } from "formik";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "../../../../Infrastructure/config";
+import { ShowErrorToast } from "../../../Common/Toast/toast";
 
 export const ReachStep = () => {
   const dispatch = useDispatch();
   const steps = useSelector((state) => state.educatorSteps.steps);
-  const handleDec = () => {
+  const handleDec = async () => {
     if (steps > 1) {
-      dispatch(decrementSteps());
+      try {
+        const updateReachStep = httpsCallable(functions, "updatereachstep");
+        await updateReachStep(formik.values);
+        dispatch(decrementSteps());
+      } catch (error) {
+        ShowErrorToast(error);
+      }
     }
   };
-  const Q1Options = [
-    { id: 0, text: "Link 1" },
-    { id: 1, text: "Link 2" },
-    { id: 2, text: "Link 3" },
-  ];
-  const Q2Options = [
-    { id: 0, text: "Link 1" },
-    { id: 1, text: "Link 2" },
-    { id: 2, text: "Link 3" },
-  ];
   const initialValues = {
-    linksQ1: {},
-    linksQ2: {},
+    platformLink1: "",
+    platformLink2: "",
+    platformLink3: "",
+    socialLink1: "",
+    socialLink2: "",
+    socialLink3: "",
   };
-  Q1Options.forEach((option) => {
-    initialValues.linksQ1[option.id] = "";
-  });
-  Q2Options.forEach((option) => {
-    initialValues.linksQ2[option.id] = "";
-  });
   const formik = useFormik({
     initialValues,
-    onSubmit: (values) => {
-      const { linksQ1, linksQ2 } = values;
+    onSubmit: async (values) => {
       if (steps >= 1 && steps < 4) {
-        dispatch(incrementSteps());
+        try {
+          const updateReachStep = httpsCallable(functions, "updatereachstep");
+          await updateReachStep(values);
+          dispatch(incrementSteps());
+        } catch (error) {
+          ShowErrorToast(error);
+        }
       }
-      dispatch(reachSteps({ linksQ1, question: "one" }));
-      dispatch(reachSteps({ linksQ2, question: "two" }));
     },
   });
+
   return (
     <Box mt={14} height="100vh">
       <form onSubmit={formik.handleSubmit}>
         <TopHeadingBox>
-          <TopHeading>
-            Reach
-          </TopHeading>
+          <TopHeading>Reach</TopHeading>
         </TopHeadingBox>
         <Grid
           container
@@ -80,27 +78,54 @@ export const ReachStep = () => {
                 </QuestionName>
               </Box>
               <QuestionFormBox>
-                {Q1Options.map((option) => (
-                  <TextField
-                    key={option.id}
-                    label={option.text}
-                    variant="outlined"
-                    placeholder="Paste your link"
-                    onChange={(e) => {
-                      formik.handleChange(e);
-                      formik.values.linksQ1[option.id] = e.target.value;
-                    }}
-                    value={formik.values.linksQ1[option.id]}
-                    sx={{ m: "3px" }}
-                    InputLabelProps={{
-                      style: { fontSize: 16 },
-                    }}
-                    InputProps={{
-                      style: { fontSize: 18 },
-                    }}
-                    fullWidth
-                  />
-                ))}
+                <TextField
+                  name="platformLink1"
+                  label="Link 1"
+                  variant="outlined"
+                  placeholder="Paste your link"
+                  onChange={formik.handleChange}
+                  value={formik.values.platformLink1}
+                  sx={{ m: "3px" }}
+                  InputLabelProps={{
+                    style: { fontSize: 16 },
+                  }}
+                  InputProps={{
+                    style: { fontSize: 18 },
+                  }}
+                  fullWidth
+                />
+                <TextField
+                  name="platformLink2"
+                  label="Link 2"
+                  variant="outlined"
+                  placeholder="Paste your link"
+                  onChange={formik.handleChange}
+                  value={formik.values.platformLink2}
+                  sx={{ m: "3px" }}
+                  InputLabelProps={{
+                    style: { fontSize: 16 },
+                  }}
+                  InputProps={{
+                    style: { fontSize: 18 },
+                  }}
+                  fullWidth
+                />
+                <TextField
+                  name="platformLink3"
+                  label="Link 3"
+                  variant="outlined"
+                  placeholder="Paste your link"
+                  onChange={formik.handleChange}
+                  value={formik.values.platformLink3}
+                  sx={{ m: "3px" }}
+                  InputLabelProps={{
+                    style: { fontSize: 16 },
+                  }}
+                  InputProps={{
+                    style: { fontSize: 18 },
+                  }}
+                  fullWidth
+                />
               </QuestionFormBox>
             </Box>
           </Grid>
@@ -113,27 +138,54 @@ export const ReachStep = () => {
                 </QuestionName>
               </Box>
               <QuestionFormBox>
-                {Q2Options.map((option) => (
-                  <TextField
-                    key={option.id}
-                    label={option.text}
-                    variant="outlined"
-                    placeholder="Paste your link"
-                    onChange={(e) => {
-                      formik.handleChange(e);
-                      formik.values.linksQ2[option.id] = e.target.value;
-                    }}
-                    value={formik.values.linksQ2[option.id]}
-                    sx={{ m: "3px" }}
-                    InputLabelProps={{
-                      style: { fontSize: 16 },
-                    }}
-                    InputProps={{
-                      style: { fontSize: 18 },
-                    }}
-                    fullWidth
-                  />
-                ))}
+                <TextField
+                  name="socialLink1"
+                  label="Link 1"
+                  variant="outlined"
+                  placeholder="Paste your link"
+                  onChange={formik.handleChange}
+                  value={formik.values.socialLink1}
+                  sx={{ m: "3px" }}
+                  InputLabelProps={{
+                    style: { fontSize: 16 },
+                  }}
+                  InputProps={{
+                    style: { fontSize: 18 },
+                  }}
+                  fullWidth
+                />
+                <TextField
+                  name="socialLink2"
+                  label="Link 2"
+                  variant="outlined"
+                  placeholder="Paste your link"
+                  onChange={formik.handleChange}
+                  value={formik.values.socialLink2}
+                  sx={{ m: "3px" }}
+                  InputLabelProps={{
+                    style: { fontSize: 16 },
+                  }}
+                  InputProps={{
+                    style: { fontSize: 18 },
+                  }}
+                  fullWidth
+                />
+                <TextField
+                  name="socialLink3"
+                  label="Link 3"
+                  variant="outlined"
+                  placeholder="Paste your link"
+                  onChange={formik.handleChange}
+                  value={formik.values.socialLink3}
+                  sx={{ m: "3px" }}
+                  InputLabelProps={{
+                    style: { fontSize: 16 },
+                  }}
+                  InputProps={{
+                    style: { fontSize: 18 },
+                  }}
+                  fullWidth
+                />
               </QuestionFormBox>
             </Box>
           </Grid>

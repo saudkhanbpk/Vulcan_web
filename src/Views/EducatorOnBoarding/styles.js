@@ -171,10 +171,9 @@ export const SignUpTextLink = styled(Typography)(({ theme }) => ({
   cursor: "pointer",
   [theme.breakpoints.down("md")]: {},
 }));
-export const ContentErrorMessage = styled("p")(({ theme }) => ({
+export const CharacterCount = styled("p")(({ theme }) => ({
   textAlign: "end",
   fontWeight: "bold",
-  color: "red",
   fontStyle: "italic",
 }));
 export const FormBox = styled(Box)(({ theme }) => ({
