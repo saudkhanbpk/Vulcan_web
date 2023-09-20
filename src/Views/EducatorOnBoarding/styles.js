@@ -174,7 +174,6 @@ export const SignUpTextLink = styled(Typography)(({ theme }) => ({
 export const CharacterCount = styled("p")(({ theme }) => ({
   textAlign: "end",
   fontWeight: "bold",
-  fontStyle: "italic",
 }));
 export const FormBox = styled(Box)(({ theme }) => ({
   width: "50%",

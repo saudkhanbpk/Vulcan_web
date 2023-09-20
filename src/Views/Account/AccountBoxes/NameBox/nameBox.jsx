@@ -21,11 +21,12 @@ export const NameBox = ({
   const auth = getAuth();
   const db = getDatabase();
   const uid = auth.currentUser.uid;
-  const userRef = ref(db, `users/${uid}/account`);
   const [userProfile, setUserProfile] = useState({
     first_name: "",
     last_name: "",
   });
+  
+  const userRef = ref(db, `users/${uid}/account`);
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -43,8 +44,7 @@ export const NameBox = ({
           off(userRef, 'value', callback);
         };
       } catch (error) {
-        ShowErrorToast(`Something wrong try again.`);
-        
+        ShowErrorToast(`Something wrong try again.`); 
       }
     };
 

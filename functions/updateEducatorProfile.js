@@ -1,54 +1,53 @@
-const { getDatabase } = require("firebase-admin/database") 
-const { onCall } = require("firebase-functions/v2/https") 
-const db = getDatabase() 
-const dbCalls = require("./databaseCalls") 
-const { uploadImageAndSaveLink } = require("./uploadImageAndSaveLink") 
+const { getDatabase } = require("firebase-admin/database")  
+const { onCall } = require("firebase-functions/v2/https")  
+const dbCalls = require("./databaseCalls")  
+const { uploadImageAndSaveLink } = require("./uploadImageAndSaveLink")  
 
 exports.updateEducatorProfile = onCall(async (request) => {
-  let isSuccess = true 
-  let errorMessage = null 
-  const uid = request.auth.uid 
-
-  const { aboutMe, avatar, website, youtube, twitter, linkedin } = request.data 
-
+  const db = getDatabase()  
+  let isSuccess = true  
+  let errorMessage = null  
+  const uid = request.auth.uid  
+  const { aboutMe, avatar, website, youtube, twitter, linkedin } = request.data  
   try {
-    const educatorProfile = {} 
+    const educatorProfile = {}  
 
     if (aboutMe) {
-      educatorProfile.about_me = aboutMe 
+      educatorProfile.about_me = aboutMe  
     }
     if (avatar) {
-      educatorProfile.avatar = avatar 
+      educatorProfile.avatar = avatar  
       const result = await uploadImageAndSaveLink({
         base64Image: avatar,
-        uid: uid
-      }) 
-      if (result.imageUrl) {
-        educatorProfile.avatar = result.imageUrl 
+        uid: uid,
+      })  
+      if (result?.imageUrl) {
+        educatorProfile.avatar = result?.imageUrl  
       }
     }
     if (website) {
-      educatorProfile.website = website 
+      educatorProfile.website = website  
     }
-
     if (youtube) {
-      educatorProfile.youtube = youtube 
+      educatorProfile.youtube = youtube  
     }
-
     if (twitter) {
-      educatorProfile.twitter = twitter 
+      educatorProfile.twitter = twitter  
     }
-
     if (linkedin) {
-      educatorProfile.linkedin = linkedin 
+      educatorProfile.linkedin = linkedin  
     }
-
-    db.ref(`users/${uid}/educator/profile`).update(educatorProfile) 
+    // Update educator profile
+    db.ref(`users/${uid}/educator/profile`).update(educatorProfile)  
+    // Set onboarding_complete to true after successful profile update
+    // db.ref(`users/${uid}/educator`).update({ "onboarding_complete": true })  
+    db.ref(`users/${uid}/educator`).update({
+      onboarding_complete: true // You can initialize it to false if needed
+    })
   } catch (error) {
-    dbCalls.logUser("ERROR: Update Educator Profile Step: " + error) 
-    isSuccess = false 
-    errorMessage = error 
+    dbCalls.logUser("ERROR: Update Educator Profile Step: " + error)  
+    isSuccess = false  
+    errorMessage = error  
   }
-
-  return { isSuccess: isSuccess, errorMessage: errorMessage } 
-}) 
+  return { isSuccess: isSuccess, errorMessage: errorMessage }  
+})  

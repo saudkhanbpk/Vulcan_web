@@ -7,7 +7,7 @@ const dbCalls = require("./databaseCalls")
 exports.updateExperienceStep = onCall((request) => {
   let isSuccess = true  
   let errorMessage = null  
-  const uid = request.auth.uid  
+  const uid = request.auth.uid
   const { professor, teacher, independent, tutor, experienceOther, inPerson, liveOnline, recordedOnline, mediumOther, years} = request.data  
   try {
     const experience = {}  

@@ -136,13 +136,11 @@ export const EducatorProfileStep = () => {
     const textWithoutTags = html.replace(/(<([^>]+)>)/gi, "");
     return textWithoutTags.length;
   }
-
   const handleAboutMeChange = (value) => {
     const currentCharacterCount = countCharactersWithoutTags(value);
     setCharacterCount(currentCharacterCount);
     formik.setFieldValue("aboutMe", value);
   };
-
   useEffect(() => {
     dispatch(fetchUserData(uid));
   }, [dispatch, uid]);
@@ -203,7 +201,7 @@ export const EducatorProfileStep = () => {
                   style={{ height: "300px", marginTop: "40px" }}
                 />
               </Box>
-              <Box width={"100%"} my={12}>
+              <Box width={"100%"} my={10}>
                 <CharacterCount>
                   Character Count: {characterCount}
                 </CharacterCount>

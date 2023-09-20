@@ -73,14 +73,14 @@ export const ExperienceStep = () => {
           <Grid lg={4} md={6} sm={10} xs={10}>
             <Box p={3} sx={{ height: "100vh" }}>
               <Box sx={{ maxWidth: "100%" }} pt={5}>
-                <QuestionOne />
+              <QuestionTwo />
               </Box>
             </Box>
           </Grid>
           <Grid lg={4} md={6} sm={10} xs={10}>
             <Box p={3} sx={{ height: "100vh" }}>
               <Box sx={{ maxWidth: "100%" }} pt={5}>
-                <QuestionTwo />
+                <QuestionOne />
               </Box>
             </Box>
           </Grid>
