@@ -25,13 +25,14 @@ exports.setupAccount = onCall((request) => {
         last_name: lastName,
         email: email,
         number: number,
-      })
+      }),
     )
     .catch((error) => {
       dbCalls.logUser(uid, `ERROR: ACCOUNT INFO ERROR ID: ${uid}: ${error}`) 
       isSuccess = false 
       errorMessage = error
     })
+    //set onboarding_complete to false when start onboarding process
     db.ref(`users/${uid}/educator`).set({
       onboarding_complete: false
     })

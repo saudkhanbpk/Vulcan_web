@@ -1,62 +1,41 @@
-import React, { useEffect, useState } from "react"  
-import Button from "@mui/material/Button"  
-import { Box } from "@mui/system"  
-import CastForEducationIcon from "@mui/icons-material/CastForEducation"  
-import LocalLibraryIcon from "@mui/icons-material/LocalLibrary"  
-import { Divider, Typography } from "@mui/material"  
-import { useNavigate } from "react-router-dom"  
-import Grid from "@mui/material/Grid"  
-import { MyBox, styles } from "./styles"  
-import { getAuth } from "firebase/auth"  
-import { getDatabase, off, onValue, ref } from "firebase/database"  
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
+import { Box } from "@mui/system";
+import CastForEducationIcon from "@mui/icons-material/CastForEducation";
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import {  Divider, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import { MyBox, styles } from "./styles";
+import DialogBox from "../../Common/DialogBox/dialogBox";
 
 const WelcomeBox = () => {
-  const auth = getAuth()  
-  const db = getDatabase()  
-  const uid = auth?.currentUser?.uid  
-  const userRef = ref(db, `users/${uid}/educator`)
-
-  const navigate = useNavigate()  
-  const [isClicked, setIsClicked] = useState(true)
-  const [userData, setUserData] = useState()
-  console.log('data',userData)
-
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const callback = (snapshot) => {
-          const data = snapshot.val()  
-          if (data) {
-            setUserData(data)  
-            off(userRef, "value", callback)  
-          }
-        }
-        onValue(userRef, callback)  
-        return () => {
-          off(userRef, "value", callback)  
-        }
-      } catch (error) {}
-    }  
-
-    fetchUserProfile()  
-  }, [userRef])  
+  const navigate = useNavigate();
+  const message = "Educator Onboarding Complete";
+  const [isClicked, setIsClicked] = useState(true);
+  const [onboarded, setOnboarded] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const handleButtonClick = (val) => {
     if (val.value === 1) {
-      setIsClicked(true)  
+      setIsClicked(true);
     } else {
-      setIsClicked(false)  
+      setIsClicked(false);
     }
-  }  
+  };
   const navigateToBecomeEdu = () => {
-    navigate("/educator-account")  
-  }  
-
+    if (onboarded) {
+      setOpen(true);
+    } else {
+      navigate("/educator-account");
+    }
+  };
   const navigateToCourses = () => {
-    navigate("/courses")  
-  }  
+    navigate("/courses");
+  };
   return (
     <>
+      <DialogBox open={open} setOpen={setOpen} message={message} />
       <Grid container item sx={styles.mainGrid}>
         <MyBox sx={styles.item}>
           <Grid
@@ -146,7 +125,7 @@ const WelcomeBox = () => {
         </MyBox>
       </Grid>
     </>
-  )  
-}  
+  );
+};
 
-export default WelcomeBox  
+export default WelcomeBox;

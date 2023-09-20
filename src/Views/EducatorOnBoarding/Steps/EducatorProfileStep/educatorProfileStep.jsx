@@ -34,6 +34,7 @@ export const EducatorProfileStep = () => {
   const uid = auth.currentUser.uid;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loaderValue, setLoaderValue] = useState(false);
   const message = "!About me text must be 200-2000 character";
   const maxCharacters = 2000;
   const minCharacters = 200;
@@ -64,8 +65,10 @@ export const EducatorProfileStep = () => {
     onSubmit: async (values) => {
       if (characterCount < minCharacters || characterCount > maxCharacters) {
         setOpen(true);
+        setLoaderValue(false);
       } else {
         try {
+          setLoaderValue(true)
           const updateEducatorStep = httpsCallable(
             functions,
             "updateeducatorprofile"
@@ -150,7 +153,7 @@ export const EducatorProfileStep = () => {
   }, [formik.values.aboutMe]);
   return (
     <>
-      {loading ? (
+      {loading || loaderValue? (
         <Loader />
       ) : (
         <Box

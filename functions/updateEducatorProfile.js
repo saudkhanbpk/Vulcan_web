@@ -40,9 +40,8 @@ exports.updateEducatorProfile = onCall(async (request) => {
     // Update educator profile
     db.ref(`users/${uid}/educator/profile`).update(educatorProfile)  
     // Set onboarding_complete to true after successful profile update
-    // db.ref(`users/${uid}/educator`).update({ "onboarding_complete": true })  
     db.ref(`users/${uid}/educator`).update({
-      onboarding_complete: true // You can initialize it to false if needed
+      onboarding_complete: true
     })
   } catch (error) {
     dbCalls.logUser("ERROR: Update Educator Profile Step: " + error)  
