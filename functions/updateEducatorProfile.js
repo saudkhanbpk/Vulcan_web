@@ -32,7 +32,7 @@ exports.updateEducatorProfile = onCall(async (request) => {
       educatorProfile.youtube = youtube  
     }
     if (twitter) {
-      educatorProfile.twitter = twitter  
+      educatorProfile.twitter = twitter
     }
     if (linkedin) {
       educatorProfile.linkedin = linkedin  
