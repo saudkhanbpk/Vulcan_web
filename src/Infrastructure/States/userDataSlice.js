@@ -1,24 +1,27 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getDatabase, ref, get } from 'firebase/database';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getDatabase, ref, onValue } from "firebase/database";
 
 export const fetchUserData = createAsyncThunk(
-  'userData/fetchUserData',
+  "userData/fetchUserData",
   async (uid) => {
-
     const db = getDatabase();
     try {
       const userRef = ref(db, `users/${uid}/`);
-      const snapshot = await get(userRef);
-      const userData = snapshot.val();
-      return userData;
+      return new Promise((resolve, reject) => {
+        onValue(userRef, (snapshot) => {
+          const userData = snapshot.val();
+          resolve(userData);
+        }, (error) => {
+          reject(error);
+        });
+      });
     } catch (error) {
-      throw new Error('Failed to fetch user data');
+      throw new Error("Failed to fetch user data");
     }
   }
 );
-
 const userDataSlice = createSlice({
-  name: 'userData',
+  name: "userData",
   initialState: {
     data: null,
     loading: false,
@@ -40,5 +43,7 @@ const userDataSlice = createSlice({
       });
   },
 });
-
+export const {
+  setUserData,
+} = userDataSlice.actions;
 export default userDataSlice.reducer;

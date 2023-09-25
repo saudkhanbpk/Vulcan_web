@@ -1,18 +1,26 @@
 import { Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HeadingBox, MainBox } from "./styles";
-import useAuthentication from "../../Infrastructure/States/onAuthStateChange";
 import { NameBox } from "./AccountBoxes/NameBox/nameBox";
 import { PasswordBox } from "./AccountBoxes/PasswordBox/passwordBox";
 import { EmailBox } from "./AccountBoxes/EmailBox/emailBox";
 import { NumberBox } from "./AccountBoxes/NumberBox/numberBox";
+import { useDispatch, useSelector } from "react-redux";
+import { Loader } from "../Common/loader";
+import { fetchUserData } from "../../Infrastructure/States/userDataSlice";
+import { getAuth } from "firebase/auth";
 export const Account = () => {
+  const auth = getAuth();
+  const dispatch = useDispatch();
+  const uid = auth?.currentUser?.uid;
   const [showEditName, setShowEditName] = useState(false);
   const [showEditPass, setShowEditPass] = useState(false);
   const [showEditNumber, setShowEditNumber] = useState(false);
-  const { user } = useAuthentication();
-  const userFullName = user?.displayName;
-  const userEmail = user?.email;
+  const loading = useSelector((state) => state.userData.loading);
+  const userData = useSelector((state) => state.userData.data);  
+  useEffect(() => {
+    dispatch(fetchUserData(uid));
+  }, [dispatch, uid]);
   const handleOpen = ({ prop }) => {
     if (prop === "name") {
       setShowEditName(true);
@@ -40,26 +48,31 @@ export const Account = () => {
           Account
         </Typography>
       </HeadingBox>
-      <EmailBox userEmail={userEmail} />
-      <NameBox
-        userFullName={userFullName}
-        handleOpen={handleOpen}
-        handleClose={handleClose}
-        showEditName={showEditName}
-        user={user}
-      />
-      <NumberBox
-        handleOpen={handleOpen}
-        handleClose={handleClose}
-        showEditNumber={showEditNumber}
-        user={user}
-      />
-      <PasswordBox
-        handleOpen={handleOpen}
-        handleClose={handleClose}
-        showEditPass={showEditPass}
-        user={user}
-      />
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <EmailBox userData={userData} />
+          <NameBox
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+            showEditName={showEditName}
+            userData={userData}
+          />
+          <NumberBox
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+            showEditNumber={showEditNumber}
+            userData={userData}
+          />
+          <PasswordBox
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+            showEditPass={showEditPass}
+            userData={userData}
+          />
+        </>
+      )}
     </MainBox>
   );
 };

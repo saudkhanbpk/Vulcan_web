@@ -1,6 +1,6 @@
 import { Box, Button, Stack, TextField } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FormBox, Span, TextButton, TextLabel, TextValue } from "../../styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -8,40 +8,12 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
-import { getAuth } from "firebase/auth";
-import { getDatabase, off, onValue, ref } from "firebase/database";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
-export const NumberBox = ({ handleOpen, handleClose, showEditNumber }) => {
-  const auth = getAuth();
-  const db = getDatabase();
-  const uid = auth.currentUser.uid;
-  const userRef = ref(db, `users/${uid}/account`);
-  const [userProfile, setUserProfile] = useState({
-    number: "",
-  });
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const callback = (snapshot) => {
-          const userData = snapshot.val();
-          if (userData) {
-            setUserProfile(userData);
-            off(userRef, "value", callback);
-          }
-        };
-        onValue(userRef, callback);
-        return () => {
-          off(userRef, "value", callback);
-        };
-      } catch (error) {
-        ShowErrorToast(`Something wrong, try again.${error}`);
-      }
-    };
-    fetchUserProfile();
-  }, [userRef]);
+export const NumberBox = ({ handleOpen, handleClose, showEditNumber, userData }) => {
+  const number = userData?.account?.number; 
   const numberFormik = useFormik({
     initialValues: {
-      number: userProfile.number,
+      number: "",
     },
     validationSchema: Yup.object({
       number: Yup.string().required("Phone number is required"),
@@ -68,7 +40,7 @@ export const NumberBox = ({ handleOpen, handleClose, showEditNumber }) => {
   });
   return (
     <>
-      {userProfile.number && (
+      {number && (
         <Box pr={3} pl={3}>
           <Stack
             direction="row"
@@ -78,7 +50,7 @@ export const NumberBox = ({ handleOpen, handleClose, showEditNumber }) => {
             pb={4}
           >
             <TextLabel>Phone Number</TextLabel>
-            <TextValue>{userProfile.number}</TextValue>
+            <TextValue>{number}</TextValue>
             {!showEditNumber ? (
               <Span
                 direction="row"

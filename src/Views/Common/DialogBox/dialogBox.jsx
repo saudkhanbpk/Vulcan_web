@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { styles } from "../../Home/WelcomeBox/styles";
-import { Typography } from "@mui/material";
+import { Message } from "./style";
 
 export default function DialogBox({ open, setOpen, message }) {
   const theme = useTheme();
@@ -22,10 +22,10 @@ export default function DialogBox({ open, setOpen, message }) {
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogContent>
-          <Typography variant="body2">
+        <DialogContent sx={{display:"flex", justifyContent:"center", alignItems:"center"}}>
+          <Message variant="body2">
           {message}
-          </Typography>
+          </Message>
         </DialogContent>
         <DialogActions>
           <Button

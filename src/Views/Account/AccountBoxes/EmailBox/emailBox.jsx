@@ -2,7 +2,8 @@ import { Box, Stack } from '@mui/material'
 import React from 'react'
 import { TextLabel, TextValue } from '../../styles'
 
-export const EmailBox = ({userEmail}) => {
+export const EmailBox = ({userData}) => {
+  console.log("Email",userData)
   return (
     <Box px={3}>
         <Stack
@@ -12,7 +13,7 @@ export const EmailBox = ({userEmail}) => {
           py={4}
         >
           <TextLabel>Email</TextLabel>
-          <TextValue>{userEmail}</TextValue>
+          <TextValue>{userData?.account?.email}</TextValue>
           <Box></Box>
         </Stack>
         <hr />

@@ -1,38 +1,47 @@
-import React, { useState } from "react"
-import Button from "@mui/material/Button"
-import { Box } from "@mui/system"
-import CastForEducationIcon from "@mui/icons-material/CastForEducation"
-import LocalLibraryIcon from "@mui/icons-material/LocalLibrary"
-import { Divider, Typography } from "@mui/material"
-import { useNavigate } from "react-router-dom"
-import Grid from "@mui/material/Grid"
-import { MyBox, styles } from "./styles"
-import DialogBox from "../../Common/DialogBox/dialogBox"
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
+import { Box } from "@mui/system";
+import CastForEducationIcon from "@mui/icons-material/CastForEducation";
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import { Divider, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import { MyBox, styles } from "./styles";
+import DialogBox from "../../Common/DialogBox/dialogBox";
+import { getAuth } from "firebase/auth";
+import { getDatabase, ref, update } from "firebase/database";
 
-const WelcomeBox = () => {
-  const navigate = useNavigate()
-  const message = "Educator Onboarding Complete"
-  const [isClicked, setIsClicked] = useState(true)
-  const [onboarded, setOnboarded] = useState(false)
-  const [open, setOpen] = React.useState(false)
+const WelcomeBox = ({userData}) => {
+  const navigate = useNavigate();
+  const onboardingComplete = userData?.educator?.onboarding_complete;
+  const message = "Educator Onboarding Complete";
+  const [isClicked, setIsClicked] = useState(true);
+  const [open, setOpen] = React.useState(false);
 
+  const auth = getAuth();
+  const db = getDatabase();
+  const uid = auth?.currentUser?.uid;
   const handleButtonClick = (val) => {
     if (val.value === 1) {
-      setIsClicked(true)
+      setIsClicked(true);
     } else {
-      setIsClicked(false)
+      setIsClicked(false);
     }
-  }
-  const navigateToBecomeEdu = () => {
-    if (onboarded) {
-      setOpen(true)
+  };
+  const navigateToBecomeEdu = async() => {
+    if (onboardingComplete) {
+      setOpen(true);
     } else {
-      navigate("/educator-account")
+      navigate("/educator-account");
+      const userRef = ref(db, `users/${uid}/educator`);
+      await update(userRef,{
+        onboarding_complete: false
+      })
     }
-  }
+  };
   const navigateToCourses = () => {
-    navigate("/courses")
-  }
+    navigate("/courses");
+  };
   return (
     <>
       <DialogBox open={open} setOpen={setOpen} message={message} />
@@ -125,7 +134,7 @@ const WelcomeBox = () => {
         </MyBox>
       </Grid>
     </>
-  )
-}
+  );
+};
 
-export default WelcomeBox
+export default WelcomeBox;

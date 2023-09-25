@@ -25,11 +25,12 @@ import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
 import { ShowErrorToast } from "../../../Common/Toast/toast";
 import { getAuth } from "firebase/auth";
-import { fetchUserData } from "../../../../Infrastructure/States/userDataSlice";
 import { Loader } from "../../../Common/loader";
 import * as Yup from "yup";
+import { getDatabase, ref, update } from "firebase/database";
 
 export const EducatorProfileStep = () => {
+  const db = getDatabase()
   const auth = getAuth();
   const uid = auth.currentUser.uid;
   const dispatch = useDispatch();
@@ -68,7 +69,7 @@ export const EducatorProfileStep = () => {
         setLoaderValue(false);
       } else {
         try {
-          setLoaderValue(true)
+          setLoaderValue(true);
           const updateEducatorStep = httpsCallable(
             functions,
             "updateeducatorprofile"
@@ -78,6 +79,10 @@ export const EducatorProfileStep = () => {
           navigate("/");
           dispatch(resetSteps());
           dispatch(resetExperienceStepValues());
+          const userRef = ref(db, `users/${uid}/educator`);
+          await update(userRef, {
+            onboarding_complete: true,
+          });
         } catch (error) {
           ShowErrorToast(error);
         }
@@ -145,15 +150,11 @@ export const EducatorProfileStep = () => {
     formik.setFieldValue("aboutMe", value);
   };
   useEffect(() => {
-    dispatch(fetchUserData(uid));
-  }, [dispatch, uid]);
-
-  useEffect(() => {
     setCharacterCount(formik.values.aboutMe.length);
   }, [formik.values.aboutMe]);
   return (
     <>
-      {loading || loaderValue? (
+      {loading || loaderValue ? (
         <Loader />
       ) : (
         <Box

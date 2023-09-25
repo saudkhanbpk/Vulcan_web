@@ -1,6 +1,6 @@
 import { Box, Button, Stack, TextField } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FormBox, Span, TextButton, TextLabel, TextValue } from "../../styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -8,48 +8,15 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
-import { getAuth } from "firebase/auth";
-import { getDatabase, off, onValue, ref } from "firebase/database";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
 export const NameBox = ({
-  userFullName,
   handleOpen,
   handleClose,
   showEditName,
-  user,
+  userData,
 }) => {
-  const auth = getAuth();
-  const db = getDatabase();
-  const uid = auth.currentUser.uid;
-  const [userProfile, setUserProfile] = useState({
-    first_name: "",
-    last_name: "",
-  });
-  
-  const userRef = ref(db, `users/${uid}/account`);
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const callback = (snapshot) => {
-          const userData = snapshot.val();
-          if (userData) {
-            setUserProfile(userData);
-            off(userRef, 'value', callback);
-          }
-        };
-        // Subscribe to the listener
-        onValue(userRef, callback);
-        // Return the cleanup function to unsubscribe when the component unmounts
-        return () => {
-          off(userRef, 'value', callback);
-        };
-      } catch (error) {
-        ShowErrorToast(`Something wrong try again.`); 
-      }
-    };
-
-    fetchUserProfile();
-  }, [userRef]);
+  const first_name = userData?.account?.first_name;
+  const last_name = userData?.account?.last_name;
   const nameFormik = useFormik({
     initialValues: {
       firstName: "",
@@ -63,7 +30,7 @@ export const NameBox = ({
       try {
         const { firstName, lastName } = values;
         if (!nameFormik.isValid) {
-          return; // Exit early if form is not valid
+          return;
         }
         const updateProfile = httpsCallable(functions, "updateaccount");
         const requestData = {
@@ -75,6 +42,8 @@ export const NameBox = ({
         );
         handleClose();
         nameFormik.resetForm();
+      } catch (err) {
+        ShowErrorToast(`Something wrong try again.`);
       } finally {
         setSubmitting(false);
       }
@@ -91,7 +60,8 @@ export const NameBox = ({
       >
         <TextLabel>Full Name</TextLabel>
         <TextValue>
-          {userProfile.first_name.charAt(0).toUpperCase() + userProfile.first_name.slice(1)} {userProfile.last_name.charAt(0).toUpperCase() + userProfile.last_name.slice(1)}
+          {first_name?.charAt(0).toUpperCase() + first_name?.slice(1)}{" "}
+          {last_name?.charAt(0).toUpperCase() + last_name?.slice(1)}
         </TextValue>
         {!showEditName ? (
           <Span
