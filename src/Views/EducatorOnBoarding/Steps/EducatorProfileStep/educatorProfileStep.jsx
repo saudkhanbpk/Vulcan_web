@@ -85,7 +85,7 @@ export const EducatorProfileStep = () => {
           });
         } catch (error) {
           ShowErrorToast(error);
-        }finally{
+        } finally {
           setLoaderValue(false);
         }
       }
@@ -313,8 +313,8 @@ export const EducatorProfileStep = () => {
                       {!open
                         ? `${formik.errors.avatar || ""}`
                         : (characterCount < minCharacters ||
-                            characterCount > maxCharacters) &&
-                          message}
+                          characterCount > maxCharacters) &&
+                        message}
                     </h6>
                   </Box>
                   <ContinueButton

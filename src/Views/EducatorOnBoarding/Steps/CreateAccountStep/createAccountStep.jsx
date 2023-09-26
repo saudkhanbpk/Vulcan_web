@@ -245,7 +245,7 @@ export const CreateAccountStep = () => {
                   sx={{ mt: "6px" }}
                   label={
                     formik.touched.reEnterPassword &&
-                    formik.values.password !== formik.values.reEnterPassword
+                      formik.values.password !== formik.values.reEnterPassword
                       ? "Passwords do not match"
                       : "Re-enter Password"
                   }
@@ -280,7 +280,7 @@ export const CreateAccountStep = () => {
                   sx={{ mt: "6px" }}
                   label={
                     formik.touched.phoneNumber &&
-                    Boolean(formik.errors.phoneNumber)
+                      Boolean(formik.errors.phoneNumber)
                       ? `${formik.errors.phoneNumber}`
                       : "Phone Number (Optional)"
                   }
