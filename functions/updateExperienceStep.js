@@ -26,13 +26,8 @@ exports.updateExperienceStep = onCall((request) => {
     mediums.recorded_online = recordedOnline
     mediums.medium_other = mediumOther
     db.ref(`users/${uid}/educator/questions/mediums`).update(mediums)
-
-    db.ref(`users/${uid}/educator/questions`).update({"years": years})
     
-     //set onboarding_complete to false when start onboarding process
-     db.ref(`users/${uid}/educator`).set({
-      onboarding_complete: false
-    })
+    db.ref(`users/${uid}/educator/questions`).update({"years": years})
   } catch (error) {
     dbCalls.logUser("ERROR: Experience Steps: " + error)
     isSuccess = false
