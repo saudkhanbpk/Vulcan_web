@@ -17,10 +17,7 @@ export const Account = () => {
   const [showEditPass, setShowEditPass] = useState(false);
   const [showEditNumber, setShowEditNumber] = useState(false);
   const loading = useSelector((state) => state.userData.loading);
-  const userData = useSelector((state) => state.userData.data);  
-  useEffect(() => {
-    dispatch(fetchUserData(uid));
-  }, [dispatch, uid]);
+  const userData = useSelector((state) => state.userData.data);
   const handleOpen = ({ prop }) => {
     if (prop === "name") {
       setShowEditName(true);
@@ -41,6 +38,9 @@ export const Account = () => {
     setShowEditPass(false);
     setShowEditNumber(false);
   };
+  useEffect(() => {
+    dispatch(fetchUserData(uid));
+  }, [dispatch, uid]);
   return (
     <MainBox>
       <HeadingBox p={5}>

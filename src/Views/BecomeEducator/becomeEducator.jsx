@@ -73,7 +73,6 @@ const BecomeEducator = () => {
                   income.
                 </Typography>
               </Grid>
-
               <Grid
                 display="flex"
                 flexDirection="row"
@@ -92,7 +91,6 @@ const BecomeEducator = () => {
                 >
                   Get Started
                 </Button>
-
                 <Button
                   onClick={scrollToSection}
                   variant="contained"
@@ -107,7 +105,6 @@ const BecomeEducator = () => {
           <Box>
             {!isDesktop && <img src={becomeimg} width={"100%"} alt="" />}
           </Box>
-
           {/* Section 2 */}
           <Box px={5}>
             <Box ref={sectionRef} sx={styles.Sec2Box}>
@@ -115,7 +112,6 @@ const BecomeEducator = () => {
                 Why teach on the Vulcan Learning platform?
               </Typography>
             </Box>
-
             <Grid
               container
               mt={8}
@@ -151,7 +147,6 @@ const BecomeEducator = () => {
                   </Typography>
                 </Box>
               </Grid>
-
               <Grid
                 lg={4}
                 sm={12}

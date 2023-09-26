@@ -159,7 +159,6 @@ export const NameBox = ({
                   </Button>
                 </Box>
               </Grid>
-
               <Grid lg={2} md={2} sm={6} xs={6}>
                 <Box
                   width="90%"

@@ -86,7 +86,7 @@ const EducatorAccountMainPage = () => {
         </Grid>
         <ProgressBar />
       </Header>
-      <Steps controlSteps={steps} />
+      <Steps/>
     </EduMainBox>
   );
 };

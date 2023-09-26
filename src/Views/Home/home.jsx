@@ -15,14 +15,12 @@ const HomeScreen = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const uid = auth?.currentUser?.uid;
-  const loading = useSelector((state) => state.userData.loading);
   const is_desktop = useMediaQuery(theme.breakpoints.up("sm"));
   const userData = useSelector((state) => state.userData.data);  
+  const loading = useSelector((state) => state.userData.loading);
   useEffect(() => {
     dispatch(fetchUserData(uid));
   }, [dispatch, uid]);
-  console.log(userData)
-
   return (
     <>
       {loading ? (

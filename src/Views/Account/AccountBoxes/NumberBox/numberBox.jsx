@@ -9,6 +9,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
+
 export const NumberBox = ({ handleOpen, handleClose, showEditNumber, userData }) => {
   const number = userData?.account?.number; 
   const numberFormik = useFormik({
@@ -122,7 +123,6 @@ export const NumberBox = ({ handleOpen, handleClose, showEditNumber, userData })
                       </Button>
                     </Box>
                   </Grid>
-
                   <Grid lg={2} md={2} sm={6} xs={6}>
                     <Box
                       width="90%"

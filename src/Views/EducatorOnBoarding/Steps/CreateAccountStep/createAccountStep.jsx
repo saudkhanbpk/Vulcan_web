@@ -31,10 +31,10 @@ import useAuthentication from "../../../../Infrastructure/States/onAuthStateChan
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
 
-export const CreateAccountStep = ({ controlSteps }) => {
+export const CreateAccountStep = () => {
   const auth = getAuth();
-  const { user } = useAuthentication();
   const dispatch = useDispatch();
+  const { user } = useAuthentication();
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
   const steps = useSelector((state) => state.educatorSteps.steps);

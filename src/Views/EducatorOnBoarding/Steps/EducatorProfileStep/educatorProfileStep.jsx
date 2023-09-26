@@ -30,15 +30,16 @@ import * as Yup from "yup";
 import { getDatabase, ref, update } from "firebase/database";
 
 export const EducatorProfileStep = () => {
-  const db = getDatabase()
   const auth = getAuth();
-  const uid = auth.currentUser.uid;
+  const db = getDatabase()
+  const minCharacters = 200;
+  const maxCharacters = 2000;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const uid = auth.currentUser.uid;
+  const [open, setOpen] = React.useState(false);
   const [loaderValue, setLoaderValue] = useState(false);
   const message = "!About me text must be 200-2000 character";
-  const maxCharacters = 2000;
-  const minCharacters = 200;
   const userData = useSelector((state) => state.userData.data);
   const firstName =
     userData?.account?.first_name.charAt(0).toUpperCase() +
@@ -49,7 +50,6 @@ export const EducatorProfileStep = () => {
   const loading = useSelector((state) => state.userData.loading);
   const [characterCount, setCharacterCount] = useState(0);
   const steps = useSelector((state) => state.educatorSteps.steps);
-  const [open, setOpen] = React.useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -85,6 +85,8 @@ export const EducatorProfileStep = () => {
           });
         } catch (error) {
           ShowErrorToast(error);
+        }finally{
+          setLoaderValue(false);
         }
       }
     },
