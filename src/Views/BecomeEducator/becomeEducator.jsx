@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import "./becomeEducator.css";
 import { Box } from "@mui/system";
 import { Button, Typography, useMediaQuery, useTheme } from "@mui/material";
@@ -8,10 +8,9 @@ import TeachIcon from "../../Assets/Images/teachIcon.png";
 import becomeimg from "../../Assets/Images/becomeEducatorBgImg.png";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { styles } from "./styles";
 import Auth from "../../Views/Common/AuthModals/authModals";
-import { fetchUserData } from "../../Infrastructure/States/userDataSlice";
 import { getAuth } from "firebase/auth";
 import { getDatabase, ref, update } from "firebase/database";
 import DialogBox from "../Common/DialogBox/dialogBox";
@@ -22,7 +21,6 @@ const BecomeEducator = () => {
   const db = getDatabase();
   const theme = useTheme();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const sectionRef = useRef(null);
   const uid = auth?.currentUser?.uid;
   const [open, setOpen] = React.useState(false);
@@ -50,9 +48,6 @@ const BecomeEducator = () => {
   const scrollToSection = () => {
     sectionRef.current.scrollIntoView({ behavior: "smooth" });
   };
-  useEffect(() => {
-    dispatch(fetchUserData(uid));
-  }, [dispatch, uid]);
   return (
     <>
       {loading ? (

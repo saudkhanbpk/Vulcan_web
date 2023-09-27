@@ -9,12 +9,13 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
+import { useSelector } from "react-redux";
 export const NameBox = ({
   handleOpen,
   handleClose,
   showEditName,
-  userData,
 }) => {
+  const userData = useSelector((state) => state.userData.data);  
   const first_name = userData?.account?.first_name;
   const last_name = userData?.account?.last_name;
   const nameFormik = useFormik({

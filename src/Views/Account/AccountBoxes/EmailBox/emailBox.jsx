@@ -1,9 +1,11 @@
 import { Box, Stack } from '@mui/material'
 import React from 'react'
 import { TextLabel, TextValue } from '../../styles'
+import { useSelector } from 'react-redux';
 
-export const EmailBox = ({userData}) => {
-  console.log("Email",userData)
+export const EmailBox = () => {
+  const userData = useSelector((state) => state.userData.data);
+  const userEmail = userData?.account?.email;
   return (
     <Box px={3}>
         <Stack
@@ -13,7 +15,7 @@ export const EmailBox = ({userData}) => {
           py={4}
         >
           <TextLabel>Email</TextLabel>
-          <TextValue>{userData?.account?.email}</TextValue>
+          <TextValue>{userEmail}</TextValue>
           <Box></Box>
         </Stack>
         <hr />

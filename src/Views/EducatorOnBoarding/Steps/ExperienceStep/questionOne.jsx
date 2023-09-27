@@ -6,9 +6,7 @@ import { ChoiceTypo, QuestionName } from "../../styles";
 
 function QuestionOne() {
   const dispatch = useDispatch();
-  const experienceStep = useSelector(
-    (state) => state.educatorSteps.experienceStep
-  );
+  const experienceStep = useSelector((state) => state.educatorSteps.experienceStep);
   const options = [
     { name: "inPerson", label: "In Person" },
     { name: "liveOnline", label: "Live Online" },

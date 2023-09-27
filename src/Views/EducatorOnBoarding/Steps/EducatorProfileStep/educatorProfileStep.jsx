@@ -13,9 +13,14 @@ import {
   AboutMe,
   CharacterCount,
   ContinueButton,
+  ExitTypo,
   Footer,
   FullName,
+  Header,
+  LogoTypo,
   PreviousButton,
+  Span,
+  StepsTypo,
   TitleText,
 } from "../../styles";
 import ReactQuill from "react-quill";
@@ -28,6 +33,7 @@ import { getAuth } from "firebase/auth";
 import { Loader } from "../../../Common/loader";
 import * as Yup from "yup";
 import { getDatabase, ref, update } from "firebase/database";
+import ProgressBar from "../../progressbar";
 
 export const EducatorProfileStep = () => {
   const auth = getAuth();
@@ -76,7 +82,7 @@ export const EducatorProfileStep = () => {
           );
           await updateEducatorStep(values);
           setOpen(false);
-          navigate("/");
+          navigate("/dashboard");
           dispatch(resetSteps());
           dispatch(resetExperienceStepValues());
           const userRef = ref(db, `users/${uid}/educator`);
@@ -151,11 +157,81 @@ export const EducatorProfileStep = () => {
     setCharacterCount(currentCharacterCount);
     formik.setFieldValue("aboutMe", value);
   };
+  const handleExit = async () => {
+    try {
+      const updateEducatorStep = httpsCallable(
+        functions,
+        "updateeducatorprofile"
+      );
+      await updateEducatorStep(formik.values);
+      dispatch(resetExperienceStepValues());
+      dispatch(resetSteps());
+      navigate("/");
+    } catch (err) {}
+  };
+
   useEffect(() => {
     setCharacterCount(formik.values.aboutMe.length);
   }, [formik.values.aboutMe]);
   return (
     <>
+       <Header alignItems={"center"}>
+        <Grid
+          container
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent="space-between"
+        >
+          <Grid lg={2} md={2} sm={3} xs={3}>
+            <Box
+              sx={{
+                borderRight: "1px solid rgba(128, 128, 128, 0.5)",
+                height: "70px",
+              }}
+              display={"Flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <Span>
+                <LogoTypo color={"primary"} variant="h4" onClick={handleExit}>
+                  Vulcan
+                </LogoTypo>
+              </Span>
+            </Box>
+          </Grid>
+          <Grid
+            display={"flex"}
+            justifyContent={{
+              lg: "flex-start",
+              sm: "center",
+              xs: "center",
+            }}
+            alignItems={"center"}
+            lg={7}
+            md={6}
+            sm={6}
+            xs={6}
+          >
+            <StepsTypo variant="h6">Step {steps} of 4</StepsTypo>
+          </Grid>
+          <Grid
+            lg={2}
+            md={2}
+            sm={2}
+            xs={2}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"flex-end"}
+          >
+            <Span>
+              <ExitTypo variant="h6" color="primary" onClick={handleExit}>
+                Exit
+              </ExitTypo>
+            </Span>
+          </Grid>
+        </Grid>
+        <ProgressBar />
+      </Header>
       {loading || loaderValue ? (
         <Loader />
       ) : (

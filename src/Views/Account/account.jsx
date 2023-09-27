@@ -1,23 +1,19 @@
 import { Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { HeadingBox, MainBox } from "./styles";
 import { NameBox } from "./AccountBoxes/NameBox/nameBox";
 import { PasswordBox } from "./AccountBoxes/PasswordBox/passwordBox";
 import { EmailBox } from "./AccountBoxes/EmailBox/emailBox";
 import { NumberBox } from "./AccountBoxes/NumberBox/numberBox";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Loader } from "../Common/loader";
-import { fetchUserData } from "../../Infrastructure/States/userDataSlice";
-import { getAuth } from "firebase/auth";
 export const Account = () => {
-  const auth = getAuth();
-  const dispatch = useDispatch();
-  const uid = auth?.currentUser?.uid;
   const [showEditName, setShowEditName] = useState(false);
   const [showEditPass, setShowEditPass] = useState(false);
   const [showEditNumber, setShowEditNumber] = useState(false);
   const loading = useSelector((state) => state.userData.loading);
   const userData = useSelector((state) => state.userData.data);
+  console.log("user data in accoutn :",userData)
   const handleOpen = ({ prop }) => {
     if (prop === "name") {
       setShowEditName(true);
@@ -38,9 +34,6 @@ export const Account = () => {
     setShowEditPass(false);
     setShowEditNumber(false);
   };
-  useEffect(() => {
-    dispatch(fetchUserData(uid));
-  }, [dispatch, uid]);
   return (
     <MainBox>
       <HeadingBox p={5}>
@@ -57,13 +50,13 @@ export const Account = () => {
             handleOpen={handleOpen}
             handleClose={handleClose}
             showEditName={showEditName}
-            userData={userData}
+            // userData={userData}
           />
           <NumberBox
             handleOpen={handleOpen}
             handleClose={handleClose}
             showEditNumber={showEditNumber}
-            userData={userData}
+            // userData={userData}
           />
           <PasswordBox
             handleOpen={handleOpen}

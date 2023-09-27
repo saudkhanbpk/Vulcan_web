@@ -9,9 +9,11 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
+import { useSelector } from "react-redux";
 
-export const NumberBox = ({ handleOpen, handleClose, showEditNumber, userData }) => {
-  const number = userData?.account?.number; 
+export const NumberBox = ({ handleOpen, handleClose, showEditNumber }) => {
+  const userData = useSelector((state) => state.userData.data);
+  const number = userData?.account?.number;
   const numberFormik = useFormik({
     initialValues: {
       number: "",
@@ -23,19 +25,20 @@ export const NumberBox = ({ handleOpen, handleClose, showEditNumber, userData })
       try {
         const { number } = values;
         if (!numberFormik.isValid) {
-          return; // Exit early if form is not valid
+          return;
         }
         const updateProfile = httpsCallable(functions, "updateaccount");
         const requestData = {
           number: number,
         };
-        await updateProfile(requestData);
+        let result = await updateProfile(requestData);
+        console.log("result @@@@@:", result);
         ShowSuccessToast("Phone Number updated successfully.");
         handleClose();
       } catch (error) {
         ShowErrorToast("An error occurred while updating the phone number.");
       } finally {
-        setSubmitting(false); // Ensure form submission is complete
+        setSubmitting(false);
       }
     },
   });
@@ -49,7 +52,7 @@ export const NumberBox = ({ handleOpen, handleClose, showEditNumber, userData })
             alignItems="center"
             pt={4}
             pb={4}
-          >
+         >
             <TextLabel>Phone Number</TextLabel>
             <TextValue>{number}</TextValue>
             {!showEditNumber ? (

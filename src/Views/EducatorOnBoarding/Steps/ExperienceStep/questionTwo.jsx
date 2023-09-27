@@ -6,10 +6,7 @@ import { ChoiceTypo, QuestionName } from "../../styles";
 
 function QuestionTwo() {
   const dispatch = useDispatch();
-  const experienceStep = useSelector(
-    (state) => state.educatorSteps.experienceStep
-  );
-
+  const experienceStep = useSelector((state) => state.educatorSteps.experienceStep);
   const options = [
     { name: "professor", label: "Professor at a college / university" },
     { name: "teacher", label: "Teacher at K-12 School" },

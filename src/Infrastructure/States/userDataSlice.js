@@ -8,12 +8,17 @@ export const fetchUserData = createAsyncThunk(
     try {
       const userRef = ref(db, `users/${uid}/`);
       return new Promise((resolve, reject) => {
-        onValue(userRef, (snapshot) => {
-          const userData = snapshot.val();
-          resolve(userData);
-        }, (error) => {
-          reject(error);
-        });
+        onValue(
+          userRef,
+          (snapshot) => {
+            const userData = snapshot.val();
+            console.log("user Data call :",userData)
+            resolve(userData);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
       });
     } catch (error) {
       throw new Error("Failed to fetch user data");
@@ -43,7 +48,5 @@ const userDataSlice = createSlice({
       });
   },
 });
-export const {
-  setUserData,
-} = userDataSlice.actions;
+export const { setUserData } = userDataSlice.actions;
 export default userDataSlice.reducer;

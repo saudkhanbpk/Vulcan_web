@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   decrementSteps,
   incrementSteps,
+  resetExperienceStepValues,
+  resetSteps,
 } from "../../../../Infrastructure/States/educatorStepsSlice";
 import {
   Box,
@@ -18,9 +20,14 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
   ContinueButton,
+  ExitTypo,
   Footer,
   FormBoxEdu,
+  Header,
+  LogoTypo,
   PreviousButton,
+  Span,
+  StepsTypo,
   TopHeading,
   TopHeadingBox,
 } from "../../styles";
@@ -30,9 +37,13 @@ import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
 import useAuthentication from "../../../../Infrastructure/States/onAuthStateChange";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
+import ProgressBar from "../../progressbar";
+import { useNavigate } from "react-router-dom";
+import { Loader } from "../../../Common/loader";
 
 export const CreateAccountStep = () => {
   const auth = getAuth();
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const { user } = useAuthentication();
   const [showPassword, setShowPassword] = useState(true);
@@ -121,9 +132,76 @@ export const CreateAccountStep = () => {
     const specialCharacters = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
     return specialCharacters.test(password);
   };
+  const handleExit = () => {
+    try {
+      dispatch(resetExperienceStepValues());
+      dispatch(resetSteps());
+      navigate("/");
+    } catch (err) { }
+  };
+  if (!user) {
+    return <div><Loader/></div>;
+  }
   return (
     <>
-      <Box pt={14}>
+      <Header alignItems={"center"}>
+        <Grid
+          container
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent="space-between"
+        >
+          <Grid lg={2} md={2} sm={3} xs={3}>
+            <Box
+              sx={{
+                borderRight: "1px solid rgba(128, 128, 128, 0.5)",
+                height: "70px",
+              }}
+              display={"Flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <Span>
+                <LogoTypo color={"primary"} variant="h4" onClick={handleExit}>
+                  Vulcan
+                </LogoTypo>
+              </Span>
+            </Box>
+          </Grid>
+          <Grid
+            display={"flex"}
+            justifyContent={{
+              lg: "flex-start",
+              sm: "center",
+              xs: "center",
+            }}
+            alignItems={"center"}
+            lg={7}
+            md={6}
+            sm={6}
+            xs={6}
+          >
+            <StepsTypo variant="h6">Step {steps} of 4</StepsTypo>
+          </Grid>
+          <Grid
+            lg={2}
+            md={2}
+            sm={2}
+            xs={2}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"flex-end"}
+          >
+            <Span>
+              <ExitTypo variant="h6" color="primary" onClick={handleExit}>
+                Exit
+              </ExitTypo>
+            </Span>
+          </Grid>
+        </Grid>
+        <ProgressBar />
+      </Header>
+      <Box py={14}>
         <TopHeadingBox>
           <TopHeading variant="" mt={5} ml={1}>
             {!user ? "  Create Account" : ""}
@@ -334,7 +412,15 @@ export const CreateAccountStep = () => {
               <Grid>
                 <Grid>
                   <ContinueButton
-                    disabled={!formik.isValid && !user}
+                    disabled={
+                      (!formik.isValid ||
+                        !formik.values.firstName ||
+                        !formik.values.lastName ||
+                        !formik.values.email ||
+                        !formik.values.password ||
+                        !formik.values.reEnterPassword) &&
+                      !user
+                    }
                     variant="contained"
                     type={!user ? "submit" : "button"}
                     onClick={user ? handleClick : undefined}

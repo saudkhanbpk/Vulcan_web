@@ -16,11 +16,14 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   const uid = auth?.currentUser?.uid;
   const is_desktop = useMediaQuery(theme.breakpoints.up("sm"));
-  const userData = useSelector((state) => state.userData.data);  
+  const userData = useSelector((state) => state.userData.data);
   const loading = useSelector((state) => state.userData.loading);
   useEffect(() => {
     dispatch(fetchUserData(uid));
   }, [dispatch, uid]);
+  if (!userData) {
+    return <div><Loader /></div>;
+  }
   return (
     <>
       {loading ? (
@@ -29,12 +32,12 @@ const HomeScreen = () => {
         <Grid>
           {is_desktop ? (
             <Box sx={styles.box} className="home">
-              <WelcomeBox userData={userData}/>
+              <WelcomeBox userData={userData} />
             </Box>
           ) : (
             <>
               <Box component="div">
-                <WelcomeBox userData={userData}/>
+                <WelcomeBox userData={userData} />
               </Box>
               <Box component="div" className="" sx={{ overflow: "hidden" }}>
                 <img src={mobileImage} width={"100%"} height={"auto"} alt="" />
