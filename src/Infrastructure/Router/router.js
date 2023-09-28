@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import OurMission from "../../Views/OurMission/ourMission";
 import BecomeEducator from "../../Views/BecomeEducator/becomeEducator";
@@ -19,15 +19,37 @@ import { Dashboard } from "../../Views/Dashboard/dashboard.jsx";
 import { PrivateOutlet } from "./privateRoute";
 import Error404 from "../../Views/Common/Error404/error404";
 import { Account } from "../../Views/Account/account";
+import { getAuth } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { fetchUserData } from "../States/userDataSlice";
 
 const Router = () => {
   const location = useLocation();
   const { features } = React.useContext(FeatureFlags);
+  const auth = getAuth();
+  const dispatch = useDispatch();
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUserId(user.uid);
+      } else {
+        setUserId(null);
+      }
+    });
+    return () => unsubscribe();
+  }, [auth]);
+
+  useEffect(() => {
+    if(userId){
+      dispatch(fetchUserData(userId));
+    }
+  }, [dispatch, userId]);
 
   return (
     <div>
       {location.pathname !== "/educator-account" ? <Navbar /> : ""}
-
       <Routes>
         <Route exact path="/" element={<HomeScreen />} />
         <Route exact path="/about" element={<OurMission />} />
@@ -52,12 +74,10 @@ const Router = () => {
           path="/educator-account"
           element={<EducatorAccountMainPage />}
         />
-
         <Route element={<PrivateOutlet />}>
           <Route path={"/dashboard"} element={<Dashboard />} />
           <Route path={"/account"} element={<Account />} />
         </Route>
-
         <Route path="*" element={<Error404 />} />
       </Routes>
       {location.pathname !== "/educator-account" ? <Footer /> : ""}

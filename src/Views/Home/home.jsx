@@ -1,27 +1,22 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./home.css";
 import WelcomeBox from "./WelcomeBox/welcomeBox";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { styles } from "./styles";
 import Grid from "@mui/material/Unstable_Grid2";
 import mobileImage from "../../Assets/Images/backhome.png";
-import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../Common/loader";
-import { fetchUserData } from "../../Infrastructure/States/userDataSlice";
-import { getAuth } from "firebase/auth";
+import { useSelector } from "react-redux";
+import useAuthentication from "../../Infrastructure/States/onAuthStateChange";
 
 const HomeScreen = () => {
-  const auth = getAuth();
   const theme = useTheme();
-  const dispatch = useDispatch();
-  const uid = auth?.currentUser?.uid;
+  const {user} = useAuthentication();
   const is_desktop = useMediaQuery(theme.breakpoints.up("sm"));
   const userData = useSelector((state) => state.userData.data);
   const loading = useSelector((state) => state.userData.loading);
-  useEffect(() => {
-    dispatch(fetchUserData(uid));
-  }, [dispatch, uid]);
-  if (!userData) {
+
+  if (!userData && user ) {
     return <div><Loader /></div>;
   }
   return (

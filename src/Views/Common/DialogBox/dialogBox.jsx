@@ -1,12 +1,12 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
+import { Message } from "./style";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material/styles";
 import { styles } from "../../Home/WelcomeBox/styles";
-import { Message } from "./style";
+import DialogContent from "@mui/material/DialogContent";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import DialogActions from "@mui/material/DialogActions";
 
 export default function DialogBox({ open, setOpen, message }) {
   const theme = useTheme();

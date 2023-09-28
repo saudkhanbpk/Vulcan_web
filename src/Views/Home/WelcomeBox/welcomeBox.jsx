@@ -16,6 +16,7 @@ const WelcomeBox = ({userData}) => {
   const db = getDatabase();
   const navigate = useNavigate();
   const uid = auth?.currentUser?.uid;
+  const is_educator = userData?.is_educator
   const [open, setOpen] = React.useState(false);
   const message = "Educator Onboarding Complete";
   const [isClicked, setIsClicked] = useState(true);
@@ -28,6 +29,14 @@ const WelcomeBox = ({userData}) => {
     }
   };
   const navigateToBecomeEdu = async() => {
+    if(!uid){
+      navigate("/educator-account");
+      const userRef = ref(db, `users/${uid}/educator`);
+      await update(userRef,{
+        onboarding_complete: false
+      })
+    }
+    if(is_educator){
     if (onboardingComplete) {
       setOpen(true);
     } else {
@@ -37,13 +46,16 @@ const WelcomeBox = ({userData}) => {
         onboarding_complete: false
       })
     }
+  }else{
+    setOpen(true);
+  }
   };
   const navigateToCourses = () => {
     navigate("/courses");
   };
   return (
     <>
-      <DialogBox open={open} setOpen={setOpen} message={message} />
+      <DialogBox open={open} setOpen={setOpen} message={is_educator ? message : "Students are not able to be teachers."} />
       <Grid container item sx={styles.mainGrid}>
         <MyBox sx={styles.item}>
           <Grid
