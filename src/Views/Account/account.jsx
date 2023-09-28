@@ -11,9 +11,8 @@ export const Account = () => {
   const [showEditName, setShowEditName] = useState(false);
   const [showEditPass, setShowEditPass] = useState(false);
   const [showEditNumber, setShowEditNumber] = useState(false);
-  const loading = useSelector((state) => state.userData.loading);
   const userData = useSelector((state) => state.userData.data);
-  console.log("user data in accoutn :",userData)
+  const loading = useSelector((state) => state.userData.loading);
   const handleOpen = ({ prop }) => {
     if (prop === "name") {
       setShowEditName(true);

@@ -3,7 +3,7 @@ import { getDatabase, ref, onValue } from "firebase/database";
 
 export const fetchUserData = createAsyncThunk(
   "userData/fetchUserData",
-  async (uid) => {
+  async (uid, { dispatch }) => {
     const db = getDatabase();
     try {
       const userRef = ref(db, `users/${uid}/`);
@@ -12,7 +12,7 @@ export const fetchUserData = createAsyncThunk(
           userRef,
           (snapshot) => {
             const userData = snapshot.val();
-            console.log("user Data call :",userData)
+            dispatch(setUserData(userData));
             resolve(userData);
           },
           (error) => {
@@ -32,7 +32,11 @@ const userDataSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    setUserData: (state, action) => {
+      state.data = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserData.pending, (state) => {
