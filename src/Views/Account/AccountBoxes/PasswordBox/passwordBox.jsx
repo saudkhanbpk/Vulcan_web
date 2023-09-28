@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { FormBox, OldPassBox, Span, TextButton, TextLabel } from "../../styles";
-
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
@@ -21,13 +20,14 @@ import {
   updatePassword,
 } from "firebase/auth";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
+import useAuthentication from "../../../../Infrastructure/States/onAuthStateChange";
 
 export const PasswordBox = ({
   handleOpen,
   handleClose,
   showEditPass,
-  user,
 }) => {
+  const {user} = useAuthentication()
   const [showOldPassword, setShowOldPassword] = useState(true);
   const [showNewPassword, setShowNewPassword] = useState(true);
   const [showReEnterPassword, setShowResetPassword] = useState(true);
@@ -266,7 +266,6 @@ export const PasswordBox = ({
                   </Button>
                 </Box>
               </Grid>
-
               <Grid lg={2} md={2} sm={6} xs={6}>
                 <Box
                   width="90%"

@@ -4,12 +4,19 @@ import QuestionThree from "./questionThree";
 import {
   decrementSteps,
   incrementSteps,
+  resetExperienceStepValues,
+  resetSteps,
 } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ContinueButton,
+  ExitTypo,
   Footer,
+  Header,
+  LogoTypo,
   PreviousButton,
+  Span,
+  StepsTypo,
   TopHeading,
   TopHeadingBox,
 } from "../../styles";
@@ -19,13 +26,14 @@ import QuestionTwo from "./questionTwo";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
 import { ShowErrorToast } from "../../../Common/Toast/toast";
+import ProgressBar from "../../progressbar";
+import { useNavigate } from "react-router-dom";
 
 export const ExperienceStep = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const steps = useSelector((state) => state.educatorSteps.steps);
-  const experienceStep = useSelector(
-    (state) => state.educatorSteps.experienceStep
-  );
+  const experienceStep = useSelector((state) => state.educatorSteps.experienceStep);
   const handleDec = async () => {
     if (steps > 1) {
       try {
@@ -36,8 +44,7 @@ export const ExperienceStep = () => {
         await updateexperiences(experienceStep);
         dispatch(decrementSteps());
       } catch (error) {
-        ShowErrorToast(error)
-        
+        ShowErrorToast(error);
       }
     }
   };
@@ -51,13 +58,84 @@ export const ExperienceStep = () => {
         await updateexperiences(experienceStep);
         dispatch(incrementSteps());
       } catch (error) {
-        ShowErrorToast(error)
+        ShowErrorToast(error);
       }
     }
   };
 
+  const handleExit = async () => {
+    try {
+      const updateexperiences = httpsCallable(
+        functions,
+        "updateexperiencestep"
+      );
+      await updateexperiences(experienceStep);
+      dispatch(resetExperienceStepValues());
+      dispatch(resetSteps());
+      navigate("/");
+    } catch (err) {}
+  };
+
   return (
     <>
+      <Header alignItems={"center"}>
+        <Grid
+          container
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent="space-between"
+        >
+          <Grid lg={2} md={2} sm={3} xs={3}>
+            <Box
+              sx={{
+                borderRight: "1px solid rgba(128, 128, 128, 0.5)",
+                height: "70px",
+              }}
+              display={"Flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <Span>
+                <LogoTypo color={"primary"} variant="h4" onClick={handleExit}>
+                  Vulcan
+                </LogoTypo>
+              </Span>
+            </Box>
+          </Grid>
+          <Grid
+            display={"flex"}
+            justifyContent={{
+              lg: "flex-start",
+              sm: "center",
+              xs: "center",
+            }}
+            alignItems={"center"}
+            lg={7}
+            md={6}
+            sm={6}
+            xs={6}
+          >
+            <StepsTypo variant="h6">Step {steps} of 4</StepsTypo>
+          </Grid>
+          <Grid
+            lg={2}
+            md={2}
+            sm={2}
+            xs={2}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"flex-end"}
+          >
+            <Span>
+              <ExitTypo variant="h6" color="primary" onClick={handleExit}>
+                Exit
+              </ExitTypo>
+            </Span>
+          </Grid>
+        </Grid>
+        <ProgressBar />
+      </Header>
+
       <Box pt={14}>
         <TopHeadingBox>
           <TopHeading variant="" mt={5} ml={3}>
@@ -73,14 +151,14 @@ export const ExperienceStep = () => {
           <Grid lg={4} md={6} sm={10} xs={10}>
             <Box p={3} sx={{ height: "100vh" }}>
               <Box sx={{ maxWidth: "100%" }} pt={5}>
-                <QuestionOne />
+                <QuestionTwo />
               </Box>
             </Box>
           </Grid>
           <Grid lg={4} md={6} sm={10} xs={10}>
             <Box p={3} sx={{ height: "100vh" }}>
               <Box sx={{ maxWidth: "100%" }} pt={5}>
-                <QuestionTwo />
+                <QuestionOne />
               </Box>
             </Box>
           </Grid>

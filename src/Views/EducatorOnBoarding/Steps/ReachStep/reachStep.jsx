@@ -2,10 +2,15 @@ import { Box, TextField } from "@mui/material";
 import React from "react";
 import {
   ContinueButton,
+  ExitTypo,
   Footer,
+  Header,
+  LogoTypo,
   PreviousButton,
   QuestionFormBox,
   QuestionName,
+  Span,
+  StepsTypo,
   TopHeading,
   TopHeadingBox,
 } from "../../styles";
@@ -13,14 +18,19 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   decrementSteps,
   incrementSteps,
+  resetExperienceStepValues,
+  resetSteps,
 } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { useFormik } from "formik";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
 import { ShowErrorToast } from "../../../Common/Toast/toast";
+import { useNavigate } from "react-router-dom";
+import ProgressBar from "../../progressbar";
 
 export const ReachStep = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const steps = useSelector((state) => state.educatorSteps.steps);
   const handleDec = async () => {
@@ -56,8 +66,77 @@ export const ReachStep = () => {
       }
     },
   });
-
+  const handleExit = async () => {
+    try {
+      const updateEducatorStep = httpsCallable(
+        functions,
+        "updatereachstep"
+      );
+      await updateEducatorStep(formik.values);
+      dispatch(resetExperienceStepValues());
+      dispatch(resetSteps());
+      navigate("/");
+    } catch (err) {}
+  };
   return (
+    <>
+  <Header alignItems={"center"}>
+        <Grid
+          container
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent="space-between"
+        >
+          <Grid lg={2} md={2} sm={3} xs={3}>
+            <Box
+              sx={{
+                borderRight: "1px solid rgba(128, 128, 128, 0.5)",
+                height: "70px",
+              }}
+              display={"Flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <Span>
+                <LogoTypo color={"primary"} variant="h4" onClick={handleExit}>
+                  Vulcan
+                </LogoTypo>
+              </Span>
+            </Box>
+          </Grid>
+          <Grid
+            display={"flex"}
+            justifyContent={{
+              lg: "flex-start",
+              sm: "center",
+              xs: "center",
+            }}
+            alignItems={"center"}
+            lg={7}
+            md={6}
+            sm={6}
+            xs={6}
+          >
+            <StepsTypo variant="h6">Step {steps} of 4</StepsTypo>
+          </Grid>
+          <Grid
+            lg={2}
+            md={2}
+            sm={2}
+            xs={2}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"flex-end"}
+          >
+            <Span>
+              <ExitTypo variant="h6" color="primary" onClick={handleExit}>
+                Exit
+              </ExitTypo>
+            </Span>
+          </Grid>
+        </Grid>
+        <ProgressBar />
+      </Header>
     <Box mt={14} height="100vh">
       <form onSubmit={formik.handleSubmit}>
         <TopHeadingBox>
@@ -212,5 +291,6 @@ export const ReachStep = () => {
         </Footer>
       </form>
     </Box>
+    </>
   );
 };

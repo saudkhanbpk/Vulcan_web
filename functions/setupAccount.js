@@ -31,6 +31,6 @@ exports.setupAccount = onCall((request) => {
       dbCalls.logUser(uid, `ERROR: ACCOUNT INFO ERROR ID: ${uid}: ${error}`) 
       isSuccess = false 
       errorMessage = error
-    }) 
+    })
   return { isSuccess: isSuccess, errorMessage: errorMessage } 
 }) 

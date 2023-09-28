@@ -6,10 +6,7 @@ import { ChoiceTypo, QuestionName } from "../../styles";
 
 function QuestionTwo() {
   const dispatch = useDispatch();
-  const experienceStep = useSelector(
-    (state) => state.educatorSteps.experienceStep
-  );
-
+  const experienceStep = useSelector((state) => state.educatorSteps.experienceStep);
   const options = [
     { name: "professor", label: "Professor at a college / university" },
     { name: "teacher", label: "Teacher at K-12 School" },
@@ -31,8 +28,7 @@ function QuestionTwo() {
       >
         <Box sx={{ height: { lg: "100px", md: "100px" } }}>
           <QuestionName variant="h6">
-            Approximately how many total years of teaching experience do you
-            have?
+            What teaching roles have you occupied?
           </QuestionName>
         </Box>
         <FormGroup>

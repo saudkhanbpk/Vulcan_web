@@ -1,16 +1,16 @@
-const { onCall } = require("firebase-functions/v2/https")  
+const { onCall } = require("firebase-functions/v2/https")
 const { getDatabase } = require("firebase-admin/database")
 
-const db = getDatabase()  
-const dbCalls = require("./databaseCalls")  
+const db = getDatabase()
+const dbCalls = require("./databaseCalls")
 
 exports.updateExperienceStep = onCall((request) => {
-  let isSuccess = true  
-  let errorMessage = null  
-  const uid = request.auth.uid  
+  let isSuccess = true
+  let errorMessage = null
+  const uid = request.auth.uid
   const { professor, teacher, independent, tutor, experienceOther, inPerson, liveOnline, recordedOnline, mediumOther, years} = request.data  
   try {
-    const experience = {}  
+    const experience = {}
     const mediums = {}
 
     experience.professor = professor
@@ -26,13 +26,12 @@ exports.updateExperienceStep = onCall((request) => {
     mediums.recorded_online = recordedOnline
     mediums.medium_other = mediumOther
     db.ref(`users/${uid}/educator/questions/mediums`).update(mediums)
-
+    
     db.ref(`users/${uid}/educator/questions`).update({"years": years})
-
   } catch (error) {
-    dbCalls.logUser("ERROR: Experience Steps: " + error)  
+    dbCalls.logUser("ERROR: Experience Steps: " + error)
     isSuccess = false
     errorMessage = error
   }
-  return { isSuccess: isSuccess, errorMessage: errorMessage }  
-})  
+  return { isSuccess: isSuccess, errorMessage: errorMessage }
+})

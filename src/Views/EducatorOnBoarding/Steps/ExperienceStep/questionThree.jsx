@@ -11,17 +11,15 @@ import { experienceSteps } from "../../../../Infrastructure/States/educatorSteps
 import { ChoiceTypo, QuestionName } from "../../styles";
 
 function QuestionThree() {
-  const dispatch = useDispatch();
-  const question3 = "Approximately how many total years of teaching experience do you have?";
-  const years = useSelector(
-    (state) => state.educatorSteps.experienceStep.years
-  );
   const options = [
     { id: 0, text: "0-1" },
     { id: 1, text: "1-5" },
     { id: 2, text: "5-10" },
     { id: 3, text: "10+" },
   ];
+  const dispatch = useDispatch();
+  const question3 = "Approximately how many total years of teaching experience do you have?";
+  const years = useSelector((state) => state.educatorSteps.experienceStep.years);
   const handleOptionChange = (e) => {
     let optionValue = e.target.value;
     dispatch(experienceSteps({ optionValue, question: "three" }));

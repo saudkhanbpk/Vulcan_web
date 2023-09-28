@@ -13,9 +13,14 @@ import {
   AboutMe,
   CharacterCount,
   ContinueButton,
+  ExitTypo,
   Footer,
   FullName,
+  Header,
+  LogoTypo,
   PreviousButton,
+  Span,
+  StepsTypo,
   TitleText,
 } from "../../styles";
 import ReactQuill from "react-quill";
@@ -25,18 +30,22 @@ import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
 import { ShowErrorToast } from "../../../Common/Toast/toast";
 import { getAuth } from "firebase/auth";
-import { fetchUserData } from "../../../../Infrastructure/States/userDataSlice";
 import { Loader } from "../../../Common/loader";
 import * as Yup from "yup";
+import { getDatabase, ref, update } from "firebase/database";
+import ProgressBar from "../../progressbar";
 
 export const EducatorProfileStep = () => {
   const auth = getAuth();
-  const uid = auth.currentUser.uid;
+  const db = getDatabase()
+  const minCharacters = 200;
+  const maxCharacters = 2000;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const uid = auth.currentUser.uid;
+  const [open, setOpen] = React.useState(false);
+  const [loaderValue, setLoaderValue] = useState(false);
   const message = "!About me text must be 200-2000 character";
-  const maxCharacters = 2000;
-  const minCharacters = 200;
   const userData = useSelector((state) => state.userData.data);
   const firstName =
     userData?.account?.first_name.charAt(0).toUpperCase() +
@@ -47,7 +56,6 @@ export const EducatorProfileStep = () => {
   const loading = useSelector((state) => state.userData.loading);
   const [characterCount, setCharacterCount] = useState(0);
   const steps = useSelector((state) => state.educatorSteps.steps);
-  const [open, setOpen] = React.useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -64,19 +72,27 @@ export const EducatorProfileStep = () => {
     onSubmit: async (values) => {
       if (characterCount < minCharacters || characterCount > maxCharacters) {
         setOpen(true);
+        setLoaderValue(false);
       } else {
         try {
+          setLoaderValue(true);
           const updateEducatorStep = httpsCallable(
             functions,
             "updateeducatorprofile"
           );
           await updateEducatorStep(values);
           setOpen(false);
-          navigate("/");
+          navigate("/dashboard");
           dispatch(resetSteps());
           dispatch(resetExperienceStepValues());
+          const userRef = ref(db, `users/${uid}/educator`);
+          await update(userRef, {
+            onboarding_complete: true,
+          });
         } catch (error) {
           ShowErrorToast(error);
+        } finally {
+          setLoaderValue(false);
         }
       }
     },
@@ -136,23 +152,87 @@ export const EducatorProfileStep = () => {
     const textWithoutTags = html.replace(/(<([^>]+)>)/gi, "");
     return textWithoutTags.length;
   }
-
   const handleAboutMeChange = (value) => {
     const currentCharacterCount = countCharactersWithoutTags(value);
     setCharacterCount(currentCharacterCount);
     formik.setFieldValue("aboutMe", value);
   };
-
-  useEffect(() => {
-    dispatch(fetchUserData(uid));
-  }, [dispatch, uid]);
+  const handleExit = async () => {
+    try {
+      const updateEducatorStep = httpsCallable(
+        functions,
+        "updateeducatorprofile"
+      );
+      await updateEducatorStep(formik.values);
+      dispatch(resetExperienceStepValues());
+      dispatch(resetSteps());
+      navigate("/");
+    } catch (err) {}
+  };
 
   useEffect(() => {
     setCharacterCount(formik.values.aboutMe.length);
   }, [formik.values.aboutMe]);
   return (
     <>
-      {loading ? (
+       <Header alignItems={"center"}>
+        <Grid
+          container
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent="space-between"
+        >
+          <Grid lg={2} md={2} sm={3} xs={3}>
+            <Box
+              sx={{
+                borderRight: "1px solid rgba(128, 128, 128, 0.5)",
+                height: "70px",
+              }}
+              display={"Flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <Span>
+                <LogoTypo color={"primary"} variant="h4" onClick={handleExit}>
+                  Vulcan
+                </LogoTypo>
+              </Span>
+            </Box>
+          </Grid>
+          <Grid
+            display={"flex"}
+            justifyContent={{
+              lg: "flex-start",
+              sm: "center",
+              xs: "center",
+            }}
+            alignItems={"center"}
+            lg={7}
+            md={6}
+            sm={6}
+            xs={6}
+          >
+            <StepsTypo variant="h6">Step {steps} of 4</StepsTypo>
+          </Grid>
+          <Grid
+            lg={2}
+            md={2}
+            sm={2}
+            xs={2}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"flex-end"}
+          >
+            <Span>
+              <ExitTypo variant="h6" color="primary" onClick={handleExit}>
+                Exit
+              </ExitTypo>
+            </Span>
+          </Grid>
+        </Grid>
+        <ProgressBar />
+      </Header>
+      {loading || loaderValue ? (
         <Loader />
       ) : (
         <Box
@@ -203,7 +283,7 @@ export const EducatorProfileStep = () => {
                   style={{ height: "300px", marginTop: "40px" }}
                 />
               </Box>
-              <Box width={"100%"} my={12}>
+              <Box width={"100%"} my={10}>
                 <CharacterCount>
                   Character Count: {characterCount}
                 </CharacterCount>
@@ -309,8 +389,8 @@ export const EducatorProfileStep = () => {
                       {!open
                         ? `${formik.errors.avatar || ""}`
                         : (characterCount < minCharacters ||
-                            characterCount > maxCharacters) &&
-                          message}
+                          characterCount > maxCharacters) &&
+                        message}
                     </h6>
                   </Box>
                   <ContinueButton

@@ -6,6 +6,7 @@ import "./App.css";
 import Router from "./Infrastructure/Router/router";
 
 function App() {
+ 
   return (
     <>
       <BrowserRouter>

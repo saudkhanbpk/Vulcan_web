@@ -7,11 +7,19 @@ import { Divider, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import { MyBox, styles } from "./styles";
+import DialogBox from "../../Common/DialogBox/dialogBox";
+import { getAuth } from "firebase/auth";
+import { getDatabase, ref, update } from "firebase/database";
 
-  const WelcomeBox = () => {
+const WelcomeBox = ({userData}) => {
+  const auth = getAuth();
+  const db = getDatabase();
   const navigate = useNavigate();
+  const uid = auth?.currentUser?.uid;
+  const [open, setOpen] = React.useState(false);
+  const message = "Educator Onboarding Complete";
   const [isClicked, setIsClicked] = useState(true);
-
+  const onboardingComplete = userData?.educator?.onboarding_complete;
   const handleButtonClick = (val) => {
     if (val.value === 1) {
       setIsClicked(true);
@@ -19,15 +27,23 @@ import { MyBox, styles } from "./styles";
       setIsClicked(false);
     }
   };
-  const navigateToBecomeEdu = () => {
-    navigate("/educator-account");
+  const navigateToBecomeEdu = async() => {
+    if (onboardingComplete) {
+      setOpen(true);
+    } else {
+      navigate("/educator-account");
+      const userRef = ref(db, `users/${uid}/educator`);
+      await update(userRef,{
+        onboarding_complete: false
+      })
+    }
   };
-
   const navigateToCourses = () => {
     navigate("/courses");
   };
   return (
     <>
+      <DialogBox open={open} setOpen={setOpen} message={message} />
       <Grid container item sx={styles.mainGrid}>
         <MyBox sx={styles.item}>
           <Grid

@@ -6,9 +6,7 @@ import { ChoiceTypo, QuestionName } from "../../styles";
 
 function QuestionOne() {
   const dispatch = useDispatch();
-  const experienceStep = useSelector(
-    (state) => state.educatorSteps.experienceStep
-  );
+  const experienceStep = useSelector((state) => state.educatorSteps.experienceStep);
   const options = [
     { name: "inPerson", label: "In Person" },
     { name: "liveOnline", label: "Live Online" },
@@ -28,7 +26,7 @@ function QuestionOne() {
     >
       <Box sx={{ height: { lg: "100px", md: "100px" } }}>
         <QuestionName variant="h6">
-          Approximately how many total years of teaching experience do you have?
+          Which formats have you taught in?
         </QuestionName>
       </Box>
       <FormGroup>

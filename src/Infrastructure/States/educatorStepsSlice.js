@@ -64,6 +64,6 @@ export const {
   decrementSteps,
   experienceSteps,
   resetSteps,
-  resetExperienceStepValues
+  resetExperienceStepValues,
 } = educatorStepsSlice.actions;
 export default educatorStepsSlice.reducer;
