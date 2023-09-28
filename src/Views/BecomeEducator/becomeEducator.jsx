@@ -30,17 +30,29 @@ const BecomeEducator = () => {
   const loading = useSelector((state) => state.userData.loading);
   const onboardingComplete = userData?.educator?.onboarding_complete;
   const chooseModal = useSelector((state) => state.auth.chooseModal);
+ const is_educator = userData?.is_educator
 
-  const navigateToBecomeEdu = async () => {
+  const navigateToBecomeEdu = async() => {
+    if(!uid){
+      navigate("/educator-account");
+      const userRef = ref(db, `users/${uid}/educator`);
+      await update(userRef,{
+        onboarding_complete: false
+      })
+    }
+    if(is_educator){
     if (onboardingComplete) {
       setOpen(true);
     } else {
       navigate("/educator-account");
       const userRef = ref(db, `users/${uid}/educator`);
-      await update(userRef, {
-        onboarding_complete: false,
-      });
+      await update(userRef,{
+        onboarding_complete: false
+      })
     }
+  }else{
+    setOpen(true);
+  }
   };
   const navigateToEdu = () => {
     navigate("/educator-faq");
@@ -55,7 +67,7 @@ const BecomeEducator = () => {
       ) : (
         <>
           {/* Section 1 */}
-          <DialogBox open={open} setOpen={setOpen} message={message} />
+          <DialogBox open={open} setOpen={setOpen} message={is_educator ? message : "Students are not able to be teachers."} />
           {<Auth chooseModal={chooseModal} />}
           <div className={isDesktop ? "bg-img" : "bg-img2"}>
             <Grid container lg={6} sx={styles.Sec1MainGrid}>

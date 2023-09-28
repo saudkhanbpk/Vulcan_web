@@ -49,6 +49,7 @@ export const CreateAccountStep = () => {
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
   const steps = useSelector((state) => state.educatorSteps.steps);
+  const loading = useSelector((state) => state.userData.loading);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   const handleDec = () => {
     if (steps > 1) {
@@ -139,7 +140,7 @@ export const CreateAccountStep = () => {
       navigate("/");
     } catch (err) { }
   };
-  if (!user) {
+  if (user && loading) {
     return <div><Loader/></div>;
   }
   return (
