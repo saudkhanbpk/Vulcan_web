@@ -31,13 +31,13 @@ import {
   ToggleBtn,
   styles,
 } from "./createAccountStyles";
+import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
+import { httpsCallable } from "firebase/functions";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import { useNavigate } from "react-router-dom";
-import { useAuthValue } from "../../../../Infrastructure/States/authContext";
 import { functions, auth } from "../../../../Infrastructure/config";
-import { httpsCallable } from "firebase/functions";
+import { useAuthValue } from "../../../../Infrastructure/States/authContext";
 
 export const CreateAccount = () => {
   const dispatch = useDispatch();

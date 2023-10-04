@@ -6,12 +6,16 @@ import { ChoiceTypo, QuestionName } from "../../styles";
 
 function QuestionOne() {
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userData.data);
   const experienceStep = useSelector((state) => state.educatorSteps.experienceStep);
+  const mediums = userData?.educator?.questions?.mediums;
+  console.log(mediums)
+
   const options = [
-    { name: "inPerson", label: "In Person" },
-    { name: "liveOnline", label: "Live Online" },
-    { name: "recordedOnline", label: "Pre-recorded Online" },
-    { name: "mediumOther", label: "Other" },
+    { name: "in_person", label: "In Person" },
+    { name: "live_online", label: "Live Online" },
+    { name: "recorded_online", label: "Pre-recorded Online" },
+    { name: "medium_other", label: "Other" },
   ];
   return (
     <Box

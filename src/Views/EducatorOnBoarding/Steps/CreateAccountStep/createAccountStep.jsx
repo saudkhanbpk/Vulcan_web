@@ -32,7 +32,7 @@ import {
   TopHeadingBox,
 } from "../../styles";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from "firebase/auth";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
 import useAuthentication from "../../../../Infrastructure/States/onAuthStateChange";
 import { httpsCallable } from "firebase/functions";
@@ -40,12 +40,15 @@ import { functions } from "../../../../Infrastructure/config";
 import ProgressBar from "../../progressbar";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../../../Common/loader";
+import { useAuthValue } from "../../../../Infrastructure/States/authContext";
+import { chooseModalEmailVerify } from "../../../../Infrastructure/States/authModalsSlice";
 
 export const CreateAccountStep = () => {
   const auth = getAuth();
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const { user } = useAuthentication();
+  const { setTimeActive } = useAuthValue();
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
   const steps = useSelector((state) => state.educatorSteps.steps);
@@ -97,6 +100,13 @@ export const CreateAccountStep = () => {
         }
         const createUser = httpsCallable(functions, "createaccount");
         await createUser(requestData);
+        if (!auth.currentUser.emailVerified) {
+          await sendEmailVerification(auth.currentUser);
+          setTimeActive(true);
+          dispatch(chooseModalEmailVerify());
+        } else {
+          navigate("/");
+        }
         dispatch(incrementSteps());
       } catch (error) {
         handleRegistrationError(error);

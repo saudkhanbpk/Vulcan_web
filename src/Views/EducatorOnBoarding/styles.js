@@ -203,8 +203,6 @@ export const QuestionFormBox = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   padding: theme.spacing(2),
-  // paddingLeft: theme.spacing(4),
-  // paddingRight: theme.spacing(4),
   [theme.breakpoints.down("md")]: {
     width: "80%",
   },
