@@ -143,6 +143,11 @@ export const CreateAccount = () => {
       }
     },
   });
+  const handleEducatorButton = () =>{
+    navigate('./educator-account')
+    dispatch(closeChooseModal());
+    formik.resetForm();
+  }
   return (
     <Box>
       {/* Sign Up Modal */}
@@ -193,7 +198,11 @@ export const CreateAccount = () => {
                 <ToggleBtn type="button" value={false}>
                   Student Account
                 </ToggleBtn>
-                <ToggleBtn type="button" value={true}>
+                <ToggleBtn
+                  type="button"
+                  value={true}
+                  onClick={handleEducatorButton}
+                >
                   Educator Account
                 </ToggleBtn>
               </StyledToggleButtonGroup>

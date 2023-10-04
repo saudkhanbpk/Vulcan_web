@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   FormControlLabel,
@@ -7,8 +7,8 @@ import {
   Radio,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { experienceSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { ChoiceTypo, QuestionName } from "../../styles";
+import { experienceSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
 
 function QuestionThree() {
   const options = [
@@ -20,20 +20,20 @@ function QuestionThree() {
   const dispatch = useDispatch();
   const question3 = "Approximately how many total years of teaching experience do you have?";
   const years = useSelector((state) => state.educatorSteps.experienceStep.years);
+  const userData = useSelector((state) => state.userData.data);
+  const questions = userData?.educator?.questions
   const handleOptionChange = (e) => {
     let optionValue = e.target.value;
     dispatch(experienceSteps({ optionValue, question: "three" }));
   };
+  useEffect(() => {
+    if (questions.years) {
+      dispatch(experienceSteps({ optionValue: questions.years, question: "three" }));
+    }
+  }, [questions])
   return (
     <Box
-      sx={{
-        height: {
-          lg: "100vh",
-          md: "50vh",
-          sm: "50vh",
-          xs: "50vh",
-        },
-      }}
+      sx={{ height: "auto" }}
     >
       <Box sx={{ height: { lg: "100px", md: "100px" } }}>
         <QuestionName variant="h6">{question3}</QuestionName>

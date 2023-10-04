@@ -39,6 +39,9 @@ export const educatorStepsSlice = createSlice({
       if (question === "one") {
         state.experienceStep[name] = checked;
       }
+      if (question === "two") {
+        state.experienceStep[name] = checked;
+      }
       if (question === "three") {
         const { optionValue } = action.payload;
         state.experienceStep.years = optionValue;

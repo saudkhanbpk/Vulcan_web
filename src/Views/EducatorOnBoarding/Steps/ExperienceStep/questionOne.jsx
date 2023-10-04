@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, FormControlLabel, FormGroup, Checkbox } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { experienceSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
@@ -7,28 +7,33 @@ import { ChoiceTypo, QuestionName } from "../../styles";
 function QuestionOne() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData.data);
+  const questions = userData?.educator?.questions
   const experienceStep = useSelector((state) => state.educatorSteps.experienceStep);
-  const mediums = userData?.educator?.questions?.mediums;
-  console.log(mediums)
-
   const options = [
-    { name: "in_person", label: "In Person" },
-    { name: "live_online", label: "Live Online" },
-    { name: "recorded_online", label: "Pre-recorded Online" },
-    { name: "medium_other", label: "Other" },
+    { name: "inPerson", label: "In Person" },
+    { name: "liveOnline", label: "Live Online" },
+    { name: "recordedOnline", label: "Pre-recorded Online" },
+    { name: "mediumOther", label: "Other" },
   ];
+  useEffect(() => {
+    if (questions.mediums) {
+      Object.keys(questions.mediums).forEach((key) => {
+        const value = questions.mediums[key];
+        const firstTwoChars = key.substring(0, 2);
+        const option = options.find((option) => option.name.substring(0, 2) === firstTwoChars);
+        if (option) {
+          dispatch(experienceSteps({ name: option.name, checked: value, question: "one" }));
+        }
+      });
+    }
+  }, [questions])
   return (
     <Box
-      sx={{
-        height: {
-          lg: "100vh",
-          md: "50vh",
-          sm: "50vh",
-          xs: "50vh",
-        },
-      }}
+      sx={{ height: "auto" }}
     >
-      <Box sx={{ height: { lg: "100px", md: "100px" } }}>
+      <Box sx={{
+        height: { lg: "100px", md: "100px" }
+      }}>
         <QuestionName variant="h6">
           Which formats have you taught in?
         </QuestionName>

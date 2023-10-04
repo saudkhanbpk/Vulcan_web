@@ -47,6 +47,12 @@ export const EducatorProfileStep = () => {
   const [loaderValue, setLoaderValue] = useState(false);
   const message = "!About me text must be 200-2000 character";
   const userData = useSelector((state) => state.userData.data);
+  const profile = userData?.educator?.profile
+  const youtube = profile?.youtube
+  const linkedin = profile?.linkedin
+  const twitter = profile?.twitter
+  const website = profile?.website
+  const [showAvatarError, setShowAvatarError] = useState(false);
   const firstName =
     userData?.account?.first_name.charAt(0).toUpperCase() +
     userData?.account?.first_name.slice(1);
@@ -59,12 +65,12 @@ export const EducatorProfileStep = () => {
 
   const formik = useFormik({
     initialValues: {
-      aboutMe: "",
-      website: "",
-      youtube: "",
-      twitter: "",
-      linkedin: "",
       avatar: "",
+      aboutMe: "",
+      website: website || "",
+      youtube: youtube || "",
+      twitter: linkedin || "",
+      linkedin: twitter || "",
     },
     validationSchema: Yup.object({
       avatar: Yup.string().required("Must upload profile picture"),
@@ -131,6 +137,8 @@ export const EducatorProfileStep = () => {
     if (steps > 1) {
       if (characterCount < minCharacters || characterCount > maxCharacters) {
         setOpen(true);
+      } else if (!formik.values.avatar) {
+        setShowAvatarError(true)
       } else {
         try {
           const updateEducatorStep = httpsCallable(
@@ -167,7 +175,7 @@ export const EducatorProfileStep = () => {
       dispatch(resetExperienceStepValues());
       dispatch(resetSteps());
       navigate("/");
-    } catch (err) {}
+    } catch (err) { }
   };
 
   useEffect(() => {
@@ -175,7 +183,7 @@ export const EducatorProfileStep = () => {
   }, [formik.values.aboutMe]);
   return (
     <>
-       <Header alignItems={"center"}>
+      <Header alignItems={"center"}>
         <Grid
           container
           display={"flex"}
@@ -238,8 +246,8 @@ export const EducatorProfileStep = () => {
         <Box
           component={"form"}
           onSubmit={formik.handleSubmit}
-          height={{ sm: "120vh", lg: "130vh", xs: "130vh" }}
-          pt={18}
+          height={"auto"}
+          pt={12}
         >
           <Grid
             container
@@ -253,7 +261,7 @@ export const EducatorProfileStep = () => {
               sm={12}
               xs={12}
               p={{ lg: 5, md: 5, sm: 5, xs: 5 }}
-              mb={20}
+              mb={6}
               display={{ lg: "flex" }}
               flexDirection={"column"}
               justifyContent={"flex-start"}
@@ -280,10 +288,12 @@ export const EducatorProfileStep = () => {
                   formats={formats}
                   value={formik.values.aboutMe}
                   onChange={handleAboutMeChange}
-                  style={{ height: "300px", marginTop: "40px" }}
+                  style={{
+                    marginTop: "40px",
+                  }}
                 />
               </Box>
-              <Box width={"100%"} my={10}>
+              <Box width={"100%"}>
                 <CharacterCount>
                   Character Count: {characterCount}
                 </CharacterCount>
@@ -386,7 +396,7 @@ export const EducatorProfileStep = () => {
                     mr={3}
                   >
                     <h6 style={{ color: "red", textAlign: "center" }}>
-                      {!open
+                      {showAvatarError || !open
                         ? `${formik.errors.avatar || ""}`
                         : (characterCount < minCharacters ||
                           characterCount > maxCharacters) &&

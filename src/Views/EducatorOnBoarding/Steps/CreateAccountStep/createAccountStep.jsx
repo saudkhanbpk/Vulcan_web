@@ -11,7 +11,6 @@ import {
   IconButton,
   InputAdornment,
   TextField,
-  Typography,
   useMediaQuery,
 } from "@mui/material";
 import Visibility from "@material-ui/icons/Visibility";
@@ -20,6 +19,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
   ContinueButton,
+  EduBlankTitle,
   ExitTypo,
   Footer,
   FormBoxEdu,
@@ -41,8 +41,8 @@ import ProgressBar from "../../progressbar";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../../../Common/loader";
 import { useAuthValue } from "../../../../Infrastructure/States/authContext";
+import './style.css'
 import { chooseModalEmailVerify } from "../../../../Infrastructure/States/authModalsSlice";
-
 export const CreateAccountStep = () => {
   const auth = getAuth();
   const navigate = useNavigate()
@@ -59,8 +59,14 @@ export const CreateAccountStep = () => {
       dispatch(decrementSteps());
     }
   };
-  const handleClick = () => {
-    dispatch(incrementSteps());
+  const handleClick = async () => {
+    if (!user?.emailVerified) {
+      await sendEmailVerification(auth.currentUser);
+      setTimeActive(true);
+      dispatch(chooseModalEmailVerify());
+    } else {
+      dispatch(incrementSteps());
+    }
   };
   const formik = useFormik({
     initialValues: {
@@ -100,12 +106,20 @@ export const CreateAccountStep = () => {
         }
         const createUser = httpsCallable(functions, "createaccount");
         await createUser(requestData);
-        if (!auth.currentUser.emailVerified) {
+        // if (!auth.currentUser.emailVerified) {
+        //   await sendEmailVerification(auth.currentUser);
+        //   setTimeActive(true);
+        //   dispatch(chooseModalEmailVerify());
+        // } else {
+        //   navigate("/");
+        // }
+
+        if (!user?.emailVerified) {
           await sendEmailVerification(auth.currentUser);
           setTimeActive(true);
           dispatch(chooseModalEmailVerify());
         } else {
-          navigate("/");
+          dispatch(incrementSteps());
         }
         dispatch(incrementSteps());
       } catch (error) {
@@ -151,7 +165,7 @@ export const CreateAccountStep = () => {
     } catch (err) { }
   };
   if (user && loading) {
-    return <div><Loader/></div>;
+    return <div><Loader /></div>;
   }
   return (
     <>
@@ -237,9 +251,10 @@ export const CreateAccountStep = () => {
                       : "First Name"
                   }
                   variant="standard"
+                  type="text"
                   onChange={formik.handleChange}
                   value={formik.values.firstName}
-                  autoComplete="username"
+                  // autoComplete="username"
                   error={
                     formik.touched.firstName && Boolean(formik.errors.firstName)
                   }
@@ -260,12 +275,13 @@ export const CreateAccountStep = () => {
                       : "Last Name"
                   }
                   variant="standard"
+                  type="text"
                   onChange={formik.handleChange}
                   value={formik.values.lastName}
                   error={
                     formik.touched.lastName && Boolean(formik.errors.lastName)
                   }
-                  autoComplete="username"
+                  // autoComplete="username"
                   InputLabelProps={{
                     style: { fontSize: 16 },
                   }}
@@ -283,6 +299,7 @@ export const CreateAccountStep = () => {
                       : "Email"
                   }
                   variant="standard"
+                  type="email"
                   onChange={formik.handleChange}
                   value={formik.values.email}
                   autoComplete="username"
@@ -375,6 +392,7 @@ export const CreateAccountStep = () => {
                   }
                   variant="standard"
                   onChange={formik.handleChange}
+                  type="number"
                   value={formik.values.phoneNumber}
                   error={
                     formik.touched.phoneNumber &&
@@ -385,9 +403,11 @@ export const CreateAccountStep = () => {
                   }}
                   InputProps={{
                     style: { fontSize: 18 },
+                    inputMode: "numeric",
                   }}
                   fullWidth
                 />
+
               </FormBoxEdu>
             </Box>
           ) : (
@@ -400,13 +420,13 @@ export const CreateAccountStep = () => {
               }}
               p={5}
             >
-              <Typography
+              <EduBlankTitle
                 variant={isSmallScreen ? "body2" : "body1"}
                 color="initial"
                 textAlign={"center"}
               >
                 Educator Account Created Successfully Move to Next Step.
-              </Typography>
+              </EduBlankTitle>
             </Box>
           )}
           <Footer>
@@ -423,15 +443,6 @@ export const CreateAccountStep = () => {
               <Grid>
                 <Grid>
                   <ContinueButton
-                    disabled={
-                      (!formik.isValid ||
-                        !formik.values.firstName ||
-                        !formik.values.lastName ||
-                        !formik.values.email ||
-                        !formik.values.password ||
-                        !formik.values.reEnterPassword) &&
-                      !user
-                    }
                     variant="contained"
                     type={!user ? "submit" : "button"}
                     onClick={user ? handleClick : undefined}

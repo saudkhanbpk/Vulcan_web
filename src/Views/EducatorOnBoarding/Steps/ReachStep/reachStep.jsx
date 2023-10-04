@@ -33,6 +33,16 @@ export const ReachStep = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const steps = useSelector((state) => state.educatorSteps.steps);
+  const userData = useSelector((state) => state.userData.data);
+  const socials = userData?.educator?.questions?.socials
+  const platforms = userData?.educator?.questions?.platforms
+  const social1 = socials?.social_link_1;
+  const social2 = socials?.social_link_2;
+  const social3 = socials?.social_link_3;
+  const platform1 = platforms?.platform_link_1;
+  const platform2 = platforms?.platform_link_2;
+  const platform3 = platforms?.platform_link_3;
+
   const handleDec = async () => {
     if (steps > 1) {
       try {
@@ -45,12 +55,12 @@ export const ReachStep = () => {
     }
   };
   const initialValues = {
-    platformLink1: "",
-    platformLink2: "",
-    platformLink3: "",
-    socialLink1: "",
-    socialLink2: "",
-    socialLink3: "",
+    platformLink1: platform1 || "",
+    platformLink2: platform2 || "",
+    platformLink3: platform3 || "",
+    socialLink1: social1 || "",
+    socialLink2: social2 || "",
+    socialLink3: social3 || "",
   };
   const formik = useFormik({
     initialValues,
@@ -76,11 +86,11 @@ export const ReachStep = () => {
       dispatch(resetExperienceStepValues());
       dispatch(resetSteps());
       navigate("/");
-    } catch (err) {}
+    } catch (err) { }
   };
   return (
     <>
-  <Header alignItems={"center"}>
+      <Header alignItems={"center"}>
         <Grid
           container
           display={"flex"}
@@ -137,160 +147,162 @@ export const ReachStep = () => {
         </Grid>
         <ProgressBar />
       </Header>
-    <Box mt={14} height="100vh">
-      <form onSubmit={formik.handleSubmit}>
-        <TopHeadingBox>
-          <TopHeading>Reach</TopHeading>
-        </TopHeadingBox>
-        <Grid
-          container
-          display={"flex"}
-          justifyContent={"center"}
-          alignItems={"center"}
-        >
-          <Grid lg={6} md={6} sm={10} xs={10}>
-            <Box p={3}>
-              <Box my={1} sx={{ height: { lg: "100px", md: "100px" } }}>
-                <QuestionName variant="h6">
-                  Have you taught on any teaching platforms? (Udemy, Skillshare,
-                  Wyzant, etc)
-                </QuestionName>
+      <Box my={12}
+        height="auto">
+        <form onSubmit={formik.handleSubmit}>
+          <TopHeadingBox>
+            <TopHeading>Reach</TopHeading>
+          </TopHeadingBox>
+          <Grid
+            container
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <Grid lg={6} md={6} sm={10} xs={10}>
+              <Box p={3}>
+                <Box my={1} sx={{ height: { lg: "100px", md: "100px" } }}>
+                  <QuestionName variant="h6">
+                    Have you taught on any teaching platforms? (Udemy, Skillshare,
+                    Wyzant, etc)
+                  </QuestionName>
+                </Box>
+                <QuestionFormBox>
+                  <TextField
+                    name="platformLink1"
+                    label="Link 1"
+                    variant="outlined"
+                    placeholder="Paste your link"
+                    onChange={formik.handleChange}
+                    value={formik.values.platformLink1}
+
+                    sx={{ m: "3px" }}
+                    InputLabelProps={{
+                      style: { fontSize: 16 },
+                    }}
+                    InputProps={{
+                      style: { fontSize: 18 },
+                    }}
+                    fullWidth
+                  />
+                  <TextField
+                    name="platformLink2"
+                    label="Link 2"
+                    variant="outlined"
+                    placeholder="Paste your link"
+                    onChange={formik.handleChange}
+                    value={formik.values.platformLink2}
+                    sx={{ m: "3px" }}
+                    InputLabelProps={{
+                      style: { fontSize: 16 },
+                    }}
+                    InputProps={{
+                      style: { fontSize: 18 },
+                    }}
+                    fullWidth
+                  />
+                  <TextField
+                    name="platformLink3"
+                    label="Link 3"
+                    variant="outlined"
+                    placeholder="Paste your link"
+                    onChange={formik.handleChange}
+                    value={formik.values.platformLink3}
+                    sx={{ m: "3px" }}
+                    InputLabelProps={{
+                      style: { fontSize: 16 },
+                    }}
+                    InputProps={{
+                      style: { fontSize: 18 },
+                    }}
+                    fullWidth
+                  />
+                </QuestionFormBox>
               </Box>
-              <QuestionFormBox>
-                <TextField
-                  name="platformLink1"
-                  label="Link 1"
-                  variant="outlined"
-                  placeholder="Paste your link"
-                  onChange={formik.handleChange}
-                  value={formik.values.platformLink1}
-                  sx={{ m: "3px" }}
-                  InputLabelProps={{
-                    style: { fontSize: 16 },
-                  }}
-                  InputProps={{
-                    style: { fontSize: 18 },
-                  }}
-                  fullWidth
-                />
-                <TextField
-                  name="platformLink2"
-                  label="Link 2"
-                  variant="outlined"
-                  placeholder="Paste your link"
-                  onChange={formik.handleChange}
-                  value={formik.values.platformLink2}
-                  sx={{ m: "3px" }}
-                  InputLabelProps={{
-                    style: { fontSize: 16 },
-                  }}
-                  InputProps={{
-                    style: { fontSize: 18 },
-                  }}
-                  fullWidth
-                />
-                <TextField
-                  name="platformLink3"
-                  label="Link 3"
-                  variant="outlined"
-                  placeholder="Paste your link"
-                  onChange={formik.handleChange}
-                  value={formik.values.platformLink3}
-                  sx={{ m: "3px" }}
-                  InputLabelProps={{
-                    style: { fontSize: 16 },
-                  }}
-                  InputProps={{
-                    style: { fontSize: 18 },
-                  }}
-                  fullWidth
-                />
-              </QuestionFormBox>
-            </Box>
-          </Grid>
-          <Grid lg={6} md={6} sm={10} xs={10}>
-            <Box p={3}>
-              <Box my={1} sx={{ height: { lg: "100px", md: "100px" } }}>
-                <QuestionName variant="h6">
-                  Do you have any social media where you post educational
-                  content? (Youtube, Tik Tok, Twitter, etc)
-                </QuestionName>
-              </Box>
-              <QuestionFormBox>
-                <TextField
-                  name="socialLink1"
-                  label="Link 1"
-                  variant="outlined"
-                  placeholder="Paste your link"
-                  onChange={formik.handleChange}
-                  value={formik.values.socialLink1}
-                  sx={{ m: "3px" }}
-                  InputLabelProps={{
-                    style: { fontSize: 16 },
-                  }}
-                  InputProps={{
-                    style: { fontSize: 18 },
-                  }}
-                  fullWidth
-                />
-                <TextField
-                  name="socialLink2"
-                  label="Link 2"
-                  variant="outlined"
-                  placeholder="Paste your link"
-                  onChange={formik.handleChange}
-                  value={formik.values.socialLink2}
-                  sx={{ m: "3px" }}
-                  InputLabelProps={{
-                    style: { fontSize: 16 },
-                  }}
-                  InputProps={{
-                    style: { fontSize: 18 },
-                  }}
-                  fullWidth
-                />
-                <TextField
-                  name="socialLink3"
-                  label="Link 3"
-                  variant="outlined"
-                  placeholder="Paste your link"
-                  onChange={formik.handleChange}
-                  value={formik.values.socialLink3}
-                  sx={{ m: "3px" }}
-                  InputLabelProps={{
-                    style: { fontSize: 16 },
-                  }}
-                  InputProps={{
-                    style: { fontSize: 18 },
-                  }}
-                  fullWidth
-                />
-              </QuestionFormBox>
-            </Box>
-          </Grid>
-        </Grid>
-        <Footer>
-          <Grid container justifyContent={"space-between"} p={2}>
-            <Grid>
-              {steps > 1 ? (
-                <PreviousButton variant="contained" onClick={handleDec}>
-                  Previous
-                </PreviousButton>
-              ) : (
-                <></>
-              )}
             </Grid>
-            <Grid>
+            <Grid lg={6} md={6} sm={10} xs={10}>
+              <Box p={3}>
+                <Box my={1} sx={{ height: { lg: "100px", md: "100px" } }}>
+                  <QuestionName variant="h6">
+                    Do you have any social media where you post educational
+                    content? (Youtube, Tik Tok, Twitter, etc)
+                  </QuestionName>
+                </Box>
+                <QuestionFormBox>
+                  <TextField
+                    name="socialLink1"
+                    label="Link 1"
+                    variant="outlined"
+                    placeholder="Paste your link"
+                    onChange={formik.handleChange}
+                    value={formik.values.socialLink1}
+                    sx={{ m: "3px" }}
+                    InputLabelProps={{
+                      style: { fontSize: 16 },
+                    }}
+                    InputProps={{
+                      style: { fontSize: 18 },
+                    }}
+                    fullWidth
+                  />
+                  <TextField
+                    name="socialLink2"
+                    label="Link 2"
+                    variant="outlined"
+                    placeholder="Paste your link"
+                    onChange={formik.handleChange}
+                    value={formik.values.socialLink2}
+                    sx={{ m: "3px" }}
+                    InputLabelProps={{
+                      style: { fontSize: 16 },
+                    }}
+                    InputProps={{
+                      style: { fontSize: 18 },
+                    }}
+                    fullWidth
+                  />
+                  <TextField
+                    name="socialLink3"
+                    label="Link 3"
+                    variant="outlined"
+                    placeholder="Paste your link"
+                    onChange={formik.handleChange}
+                    value={formik.values.socialLink3}
+                    sx={{ m: "3px" }}
+                    InputLabelProps={{
+                      style: { fontSize: 16 },
+                    }}
+                    InputProps={{
+                      style: { fontSize: 18 },
+                    }}
+                    fullWidth
+                  />
+                </QuestionFormBox>
+              </Box>
+            </Grid>
+          </Grid>
+          <Footer>
+            <Grid container justifyContent={"space-between"} p={2}>
               <Grid>
-                <ContinueButton variant="contained" type="submit">
-                  Continue
-                </ContinueButton>
+                {steps > 1 ? (
+                  <PreviousButton variant="contained" onClick={handleDec}>
+                    Previous
+                  </PreviousButton>
+                ) : (
+                  <></>
+                )}
+              </Grid>
+              <Grid>
+                <Grid>
+                  <ContinueButton variant="contained" type="submit">
+                    Continue
+                  </ContinueButton>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Footer>
-      </form>
-    </Box>
+          </Footer>
+        </form>
+      </Box>
     </>
   );
 };

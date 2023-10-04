@@ -27,7 +27,6 @@ export const PrivateOutlet = (props) => {
       </Box>
     );
   }
-
   if (!user) {
     dispatch(chooseModalLogin());
     return navigate("/");

@@ -28,6 +28,7 @@ export const authSlice = createSlice({
       state.isOpenModal = true;
     },
     chooseModalEmailVerify: (state) => {
+      console.log("choose modal ",state)
       state.chooseModal = ModalTypes.EMAIL_VERIFICATION;
       state.isOpenModal = true;
     },
