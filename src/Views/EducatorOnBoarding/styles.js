@@ -199,8 +199,9 @@ export const ChoiceTypo = styled(Typography)(({ theme }) => ({
   fontSize: "16px",
 }));
 export const EduBlankTitle = styled(Typography)(({ theme }) => ({
-  [theme.breakpoints.down("md")]: {
     fontSize: "28px",
+  [theme.breakpoints.down("md")]: {
+    fontSize: "24px",
   },
   [theme.breakpoints.down("sm")]: {
     fontSize: "16px",

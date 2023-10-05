@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Box, FormControlLabel, FormGroup, Checkbox } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { experienceSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
+import { experienceSteps, resetExperienceStepValues } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { ChoiceTypo, QuestionName } from "../../styles";
 
 function QuestionOne() {
@@ -16,7 +16,7 @@ function QuestionOne() {
     { name: "mediumOther", label: "Other" },
   ];
   useEffect(() => {
-    if (questions.mediums) {
+    if ((userData && questions) && Object.keys(userData.educator).length > 2) {
       Object.keys(questions.mediums).forEach((key) => {
         const value = questions.mediums[key];
         const firstTwoChars = key.substring(0, 2);
@@ -26,7 +26,8 @@ function QuestionOne() {
         }
       });
     }
-  }, [questions])
+  }, [userData, questions, dispatch]);
+  
   return (
     <Box
       sx={{ height: "auto" }}

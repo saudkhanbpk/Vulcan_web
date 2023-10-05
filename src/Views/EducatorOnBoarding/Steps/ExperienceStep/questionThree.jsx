@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { ChoiceTypo, QuestionName } from "../../styles";
-import { experienceSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
+import { experienceSteps, resetExperienceStepValues } from "../../../../Infrastructure/States/educatorStepsSlice";
 
 function QuestionThree() {
   const options = [
@@ -18,16 +18,16 @@ function QuestionThree() {
     { id: 3, text: "10+" },
   ];
   const dispatch = useDispatch();
-  const question3 = "Approximately how many total years of teaching experience do you have?";
-  const years = useSelector((state) => state.educatorSteps.experienceStep.years);
   const userData = useSelector((state) => state.userData.data);
   const questions = userData?.educator?.questions
+  const years = useSelector((state) => state.educatorSteps.experienceStep.years);
+  const question3 = "Approximately how many total years of teaching experience do you have?";
   const handleOptionChange = (e) => {
     let optionValue = e.target.value;
     dispatch(experienceSteps({ optionValue, question: "three" }));
   };
   useEffect(() => {
-    if (questions.years) {
+    if ((userData && questions) && Object.keys(userData.educator).length > 2) {
       dispatch(experienceSteps({ optionValue: questions.years, question: "three" }));
     }
   }, [questions])

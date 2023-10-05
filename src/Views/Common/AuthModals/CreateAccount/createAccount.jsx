@@ -56,7 +56,7 @@ export const CreateAccount = () => {
     dispatch(chooseModalLogin());
     formik.resetForm();
   };
-  const handleChange = (event, newAlignment) => {
+  const handleChangeEducator = (event, newAlignment) => {
     if (newAlignment !== null) {
       setIsEducator(newAlignment);
     }
@@ -143,14 +143,13 @@ export const CreateAccount = () => {
       }
     },
   });
-  const handleEducatorButton = () =>{
+  const handleEducatorButton = () => {
     navigate('./educator-account')
     dispatch(closeChooseModal());
     formik.resetForm();
   }
   return (
     <Box>
-      {/* Sign Up Modal */}
       <Modal
         open={isOpenModal}
         onClose={handleCloseModal}
@@ -192,7 +191,7 @@ export const CreateAccount = () => {
                 color="primary"
                 value={isEducator}
                 exclusive
-                onChange={handleChange}
+                onChange={handleChangeEducator}
                 aria-label="Platform"
               >
                 <ToggleBtn type="button" value={false}>
@@ -307,7 +306,7 @@ export const CreateAccount = () => {
               sx={{ mt: "6px" }}
               label={
                 formik.touched.reEnterPassword &&
-                formik.values.password !== formik.values.reEnterPassword
+                  formik.values.password !== formik.values.reEnterPassword
                   ? "Passwords do not match"
                   : "Re-enter Password"
               }
@@ -347,6 +346,8 @@ export const CreateAccount = () => {
               }
               variant="standard"
               onChange={formik.handleChange}
+              type="tel"
+              autoComplete="tel"
               value={formik.values.phoneNumber}
               error={
                 formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
@@ -356,6 +357,12 @@ export const CreateAccount = () => {
               }}
               InputProps={{
                 style: { fontSize: 18 },
+                inputMode: "numeric",
+                onKeyPress: (event) => {
+                  if (isNaN(event.key)) {
+                    event.preventDefault();
+                  }
+                },
               }}
               fullWidth
             />

@@ -5,10 +5,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import ProfileImage from "../../../../Assets/Images/vector.png";
 import { AvatarBox } from "../../styles";
 import CheckIcon from "@mui/icons-material/Check";
+import { useSelector } from "react-redux";
 
 export const UploadAvatar = ({ onUpload }) => {
   const [preview, setPreview] = useState(null);
   const [open, setOpen] = React.useState(false);
+  const userData = useSelector((state) => state.userData.data);
+  const avatar = userData?.educator?.profile?.avatar
+  console.log(avatar)
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     if (preview) {
@@ -60,7 +64,8 @@ export const UploadAvatar = ({ onUpload }) => {
       </Modal>
       <Box display="flex" justifyContent="center" alignItems="center">
         <img
-          src={preview ? preview : ProfileImage}
+          src={avatar || preview ? preview : ProfileImage} 
+          // src={avatar}
           height={200}
           width={200}
           alt="Preview"
