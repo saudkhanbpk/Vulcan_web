@@ -5,13 +5,12 @@ import {
   Typography,
   Box,
   Modal,
-  styled,
   FormGroup,
   FormControlLabel,
   Switch,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import { styles } from "./styles";
+import { MainBox, styles } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 import { ModalBackgroundBox } from "../../Contact/styles";
 import { FeatureFlags } from "../../../Infrastructure/featureFlags";
@@ -25,6 +24,7 @@ const Footer = () => {
   // Access the showCourses flag
   const showCourses = features.showCourses;
   const flag2 = features.flag2;
+  const emailVerified = features.emailVerified;
   const handleClick = () => {
     setClickCount(clickCount + 1);
   };
@@ -47,29 +47,19 @@ const Footer = () => {
       flag2: !prevFeatures.flag2,
     }));
   };
+  const handleToggleEmailVerified = () => {
+    // Update the showCourses flag value
+    setFeatures((prevFeatures) => ({
+      ...prevFeatures,
+      emailVerified: !prevFeatures.emailVerified,
+    }));
+  };
 
   useEffect(() => {
     if (clickCount === 3) {
       setModalOpen(true);
     }
   }, [clickCount]);
-
-  const MainBox = styled(Box)(({ theme }) => ({
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    border: "1px solid black",
-    borderRadius: "50px",
-    width: "300px",
-    height: "400px",
-    backgroundColor: "white",
-    paddingBottom: 5,
-    pt: 2,
-    [theme.breakpoints.down("md")]: {
-      height: "300px",
-    },
-  }));
 
   return (
     <>
@@ -94,7 +84,7 @@ const Footer = () => {
                 <FormControlLabel
                   control={
                     <Switch
-                      checked={!showCourses}
+                      checked={showCourses}
                       onChange={() => handleToggleShowCourses(showCourses)}
                       sx={{
                         display: "flex",
@@ -119,7 +109,7 @@ const Footer = () => {
                 <FormControlLabel
                   control={
                     <Switch
-                      checked={!flag2}
+                      checked={flag2}
                       onChange={() => handleToggleFlag2(flag2)}
                       sx={{
                         display: "flex",
@@ -138,6 +128,31 @@ const Footer = () => {
                       }}
                     >
                       Flag 2
+                    </span>
+                  }
+                />
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={emailVerified}
+                      onChange={() => handleToggleEmailVerified(emailVerified)}
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    />
+                  }
+                  label={
+                    <span
+                      style={{
+                        fontSize: "20px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      Email Verified
                     </span>
                   }
                 />

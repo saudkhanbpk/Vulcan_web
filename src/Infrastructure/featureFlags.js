@@ -13,6 +13,7 @@ export const FeatureFlagsProvider = ({ children }) => {
       setFeatures({
         showCourses: true,
         flag2: false,
+        emailVerified: false
       });
     }
     setIsLoading(false);
