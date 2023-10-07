@@ -17,18 +17,17 @@ function QuestionTwo() {
     { name: "experienceOther", label: "Other" },
   ];
   useEffect(() => {
-    if (userData) {
-      if (questions  && questions.experience && Object.keys(questions.experience).length > 0) {
-        Object.keys(questions.experience).forEach((key) => {
-          const value = questions.experience[key];
-          const firstTwoChars = key.substring(0, 2);
-          const option = options.find((option) => option.name.substring(0, 2) === firstTwoChars);
-          if (option) {
-            dispatch(experienceSteps({ name: option.name, checked: value, question: "two" }));
-          }
-        });
-      }
+    if (userData && questions && questions?.experience) {
+      Object.keys(questions.experience).forEach((key) => {
+        const value = questions.experience[key];
+        const firstTwoChars = key.substring(0, 2);
+        const option = options.find((option) => option.name.substring(0, 2) === firstTwoChars);
+        if (option) {
+          dispatch(experienceSteps({ name: option.name, checked: value, question: "two" }));
+        }
+      });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questions, dispatch])
   return (
     <>
