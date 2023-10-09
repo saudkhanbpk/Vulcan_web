@@ -12,11 +12,11 @@ export const UploadAvatar = ({ onUpload }) => {
   const [open, setOpen] = React.useState(false);
   const userData = useSelector((state) => state.userData.data);
   const avatar = userData?.educator?.profile?.avatar
-  console.log(avatar)
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     if (preview) {
       onUpload(preview);
+      console.log(preview)
     }
     setOpen(false);
   };
@@ -63,6 +63,7 @@ export const UploadAvatar = ({ onUpload }) => {
         </AvatarBox>
       </Modal>
       <Box display="flex" justifyContent="center" alignItems="center">
+        {console.log("avatar", avatar)}
         <img
           src={avatar || preview ? preview : ProfileImage} 
           // src={avatar}
