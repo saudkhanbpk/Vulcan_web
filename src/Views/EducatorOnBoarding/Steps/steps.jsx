@@ -6,14 +6,13 @@ import { EducatorProfileStep } from "./EducatorProfileStep/educatorProfileStep";
 import { useSelector } from "react-redux";
 
 const Steps = () => {
-  const steps = useSelector((state) => state.educatorSteps.steps);
-
+  const steps = useSelector((state) => state.educatorSteps.steps)
   return (
     <>
-      {steps === 1 && <CreateAccountStep/>}
-      {steps === 2 && <ExperienceStep/>}
-      {steps === 3 && <ReachStep/>}
-      {steps === 4 && <EducatorProfileStep/>}
+      {steps === 1 && <CreateAccountStep />}
+      {steps === 2 && <ExperienceStep />}
+      {steps === 3 && <ReachStep />}
+      {steps === 4 && <EducatorProfileStep />}
     </>
   );
 };

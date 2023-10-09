@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import OurMission from "../../Views/OurMission/ourMission";
 import BecomeEducator from "../../Views/BecomeEducator/becomeEducator";
 import HowItWorks from "../../Views/HowItWorks/howItWorks";
@@ -20,16 +20,18 @@ import { PrivateOutlet } from "./privateRoute";
 import Error404 from "../../Views/Common/Error404/error404";
 import { Account } from "../../Views/Account/account";
 import { getAuth } from "firebase/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData } from "../States/userDataSlice";
 
 const Router = () => {
   const location = useLocation();
   const { features } = React.useContext(FeatureFlags);
   const auth = getAuth();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [userId, setUserId] = useState(null);
-
+  const userData = useSelector((state) => state.userData.data);
+  const onboardingComplete = userData?.educator?.onboarding_complete;
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -42,11 +44,18 @@ const Router = () => {
   }, [auth]);
 
   useEffect(() => {
-    if(userId){
+    if (userId) {
       dispatch(fetchUserData(userId));
     }
   }, [dispatch, userId]);
 
+  // Check if onboarding is complete and user is on "/educator-account" route
+  useEffect(() => {
+    if (onboardingComplete && location.pathname === "/educator-account") {
+      // Navigate to the home path ("/") when onboarding is complete
+      navigate("/");
+    }
+  }, [onboardingComplete, location.pathname, navigate]);
   return (
     <div>
       {location.pathname !== "/educator-account" ? <Navbar /> : ""}

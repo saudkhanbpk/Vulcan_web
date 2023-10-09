@@ -1,12 +1,13 @@
-import { Typography } from "@mui/material";
 import React, { useState } from "react";
+import { Loader } from "../Common/loader";
+import { useSelector } from "react-redux";
+import { Typography } from "@mui/material";
 import { HeadingBox, MainBox } from "./styles";
 import { NameBox } from "./AccountBoxes/NameBox/nameBox";
-import { PasswordBox } from "./AccountBoxes/PasswordBox/passwordBox";
 import { EmailBox } from "./AccountBoxes/EmailBox/emailBox";
 import { NumberBox } from "./AccountBoxes/NumberBox/numberBox";
-import { useSelector } from "react-redux";
-import { Loader } from "../Common/loader";
+import { PasswordBox } from "./AccountBoxes/PasswordBox/passwordBox";
+
 export const Account = () => {
   const [showEditName, setShowEditName] = useState(false);
   const [showEditPass, setShowEditPass] = useState(false);
@@ -49,13 +50,11 @@ export const Account = () => {
             handleOpen={handleOpen}
             handleClose={handleClose}
             showEditName={showEditName}
-            // userData={userData}
           />
           <NumberBox
             handleOpen={handleOpen}
             handleClose={handleClose}
             showEditNumber={showEditNumber}
-            // userData={userData}
           />
           <PasswordBox
             handleOpen={handleOpen}

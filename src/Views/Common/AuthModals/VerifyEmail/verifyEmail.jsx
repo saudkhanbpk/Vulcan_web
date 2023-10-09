@@ -1,29 +1,32 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
   VerifyEmailFormBox,
   VerifyEmailMainBox,
   customStyles,
 } from "./verifyEmailStyles";
-import CloseIcon from "@mui/icons-material/Close";
-import { useDispatch, useSelector } from "react-redux";
-import { closeChooseModal } from "../../../../Infrastructure/States/authModalsSlice";
-import { useAuthValue } from "../../../../Infrastructure/States/authContext";
-import { getAuth, sendEmailVerification } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-export const VerifyEmail = () => {
-  const isOpenModal = useSelector((state) => state.auth.isOpenModal);
-  const [time, setTime] = useState(60);
+import CloseIcon from "@mui/icons-material/Close";
+import { Box, Button, Modal, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { getAuth, sendEmailVerification } from "firebase/auth";
+import { useAuthValue } from "../../../../Infrastructure/States/authContext";
+import { closeChooseModal } from "../../../../Infrastructure/States/authModalsSlice";
 
+export const VerifyEmail = () => {
+  const auth = getAuth();
+  const user = auth.currentUser;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [time, setTime] = useState(60);
+  const userEmailAddress = user?.email;
+  const { currentUser, timeActive, setTimeActive } = useAuthValue();
+  const isOpenModal = useSelector((state) => state.auth.isOpenModal);
   const selectedRoute = useSelector(
     (state) => state.auth.selectedRouteBeforeVerified
   );
-  const navigate = useNavigate();
   const handleCloseModal = () => {
     dispatch(closeChooseModal());
   };
- 
   const handleVerifiedEmailAction = () => {
     handleCloseModal();
     navigate("/dashboard");
@@ -37,13 +40,7 @@ export const VerifyEmail = () => {
         alert(err.message);
       });
   };
-  const { currentUser, timeActive, setTimeActive } = useAuthValue();
 
-  const auth = getAuth();
-  const user = auth.currentUser;
-
-  const userEmailAddress = user?.email;
-  
   useEffect(() => {
     const interval = setInterval(() => {
       currentUser
@@ -58,7 +55,6 @@ export const VerifyEmail = () => {
           alert(err.message);
         });
     }, 1000);
-
     return () => {
       clearInterval(interval);
     };
@@ -81,7 +77,6 @@ export const VerifyEmail = () => {
   return (
     <Box>
       {/* Email Verification Modal */}
-
       <Modal
         open={isOpenModal}
         onClose={handleCloseModal}
@@ -112,7 +107,6 @@ export const VerifyEmail = () => {
           >
             Verify Account
           </Typography>
-
           <VerifyEmailFormBox component="form" noValidate>
             <Box
               p={2}
@@ -149,7 +143,6 @@ export const VerifyEmail = () => {
                     >
                       Verification Link sent to email <br />
                     </Typography>
-
                     <Typography
                       variant="body2"
                       color="secondary"
@@ -193,7 +186,6 @@ export const VerifyEmail = () => {
                   </Button>
                 </Box>
               )}
-
               <Typography
                 variant="body2"
                 color={"secondary"}

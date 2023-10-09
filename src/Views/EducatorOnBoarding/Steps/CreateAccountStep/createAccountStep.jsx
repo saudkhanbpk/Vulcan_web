@@ -11,7 +11,6 @@ import {
   IconButton,
   InputAdornment,
   TextField,
-  Typography,
   useMediaQuery,
 } from "@mui/material";
 import Visibility from "@material-ui/icons/Visibility";
@@ -20,6 +19,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
   ContinueButton,
+  EduBlankTitle,
   ExitTypo,
   Footer,
   FormBoxEdu,
@@ -32,7 +32,7 @@ import {
   TopHeadingBox,
 } from "../../styles";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from "firebase/auth";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
 import useAuthentication from "../../../../Infrastructure/States/onAuthStateChange";
 import { httpsCallable } from "firebase/functions";
@@ -40,12 +40,15 @@ import { functions } from "../../../../Infrastructure/config";
 import ProgressBar from "../../progressbar";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../../../Common/loader";
-
+import { useAuthValue } from "../../../../Infrastructure/States/authContext";
+import './style.css'
+import { VerifyEmailStep } from "./verifyEmailStep";
 export const CreateAccountStep = () => {
   const auth = getAuth();
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const { user } = useAuthentication();
+  const { currentUser, setTimeActive } = useAuthValue();
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
   const steps = useSelector((state) => state.educatorSteps.steps);
@@ -56,7 +59,7 @@ export const CreateAccountStep = () => {
       dispatch(decrementSteps());
     }
   };
-  const handleClick = () => {
+  const handleClick = async () => {
     dispatch(incrementSteps());
   };
   const formik = useFormik({
@@ -97,7 +100,9 @@ export const CreateAccountStep = () => {
         }
         const createUser = httpsCallable(functions, "createaccount");
         await createUser(requestData);
-        dispatch(incrementSteps());
+        await sendEmailVerification(auth.currentUser);
+        setTimeActive(true);
+        setTimeActive(true);
       } catch (error) {
         handleRegistrationError(error);
       }
@@ -140,9 +145,6 @@ export const CreateAccountStep = () => {
       navigate("/");
     } catch (err) { }
   };
-  if (user && loading) {
-    return <div><Loader/></div>;
-  }
   return (
     <>
       <Header alignItems={"center"}>
@@ -202,238 +204,246 @@ export const CreateAccountStep = () => {
         </Grid>
         <ProgressBar />
       </Header>
-      <Box py={14}>
-        <TopHeadingBox>
-          <TopHeading variant="" mt={5} ml={1}>
-            {!user ? "  Create Account" : ""}
-          </TopHeading>
-        </TopHeadingBox>
-        <Box component="form" onSubmit={formik.handleSubmit} noValidate>
-          {!user ? (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <FormBoxEdu p={4}>
-                <TextField
-                  name="firstName"
-                  label={
-                    formik.touched.firstName && Boolean(formik.errors.firstName)
-                      ? `${formik.errors.firstName}`
-                      : "First Name"
-                  }
-                  variant="standard"
-                  onChange={formik.handleChange}
-                  value={formik.values.firstName}
-                  autoComplete="username"
-                  error={
-                    formik.touched.firstName && Boolean(formik.errors.firstName)
-                  }
-                  InputLabelProps={{
-                    style: { fontSize: 16 },
-                  }}
-                  InputProps={{
-                    style: { fontSize: 18 },
-                  }}
-                  fullWidth
-                />
-                <TextField
-                  name="lastName"
-                  sx={{ mt: "6px" }}
-                  label={
-                    formik.touched.lastName && Boolean(formik.errors.lastName)
-                      ? `${formik.errors.lastName}`
-                      : "Last Name"
-                  }
-                  variant="standard"
-                  onChange={formik.handleChange}
-                  value={formik.values.lastName}
-                  error={
-                    formik.touched.lastName && Boolean(formik.errors.lastName)
-                  }
-                  autoComplete="username"
-                  InputLabelProps={{
-                    style: { fontSize: 16 },
-                  }}
-                  InputProps={{
-                    style: { fontSize: 18 },
-                  }}
-                  fullWidth
-                />
-                <TextField
-                  name="email"
-                  sx={{ mt: "6px" }}
-                  label={
-                    formik.touched.email && Boolean(formik.errors.email)
-                      ? `${formik.errors.email}`
-                      : "Email"
-                  }
-                  variant="standard"
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
-                  autoComplete="username"
-                  error={formik.touched.email && Boolean(formik.errors.email)}
-                  InputLabelProps={{
-                    style: { fontSize: 16 },
-                  }}
-                  InputProps={{
-                    style: { fontSize: 18 },
-                  }}
-                  fullWidth
-                />
-                <TextField
-                  name="password"
-                  sx={{ mt: "6px" }}
-                  label={
-                    formik.touched.password && Boolean(formik.errors.password)
-                      ? formik.errors.password
-                      : "Password"
-                  }
-                  variant="standard"
-                  type={showPassword ? "password" : "text"}
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                  autoComplete="new-password"
-                  error={
-                    formik.touched.password &&
-                    !isPasswordValid(formik.values.password)
-                  }
-                  InputLabelProps={{
-                    style: {
-                      fontSize: 16,
-                    },
-                  }}
-                  InputProps={{
-                    style: { fontSize: 18 },
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton onClick={handleTogglePasswordVisibility}>
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  fullWidth
-                />
-                <TextField
-                  name="reEnterPassword"
-                  sx={{ mt: "6px" }}
-                  label={
-                    formik.touched.reEnterPassword &&
-                      formik.values.password !== formik.values.reEnterPassword
-                      ? "Passwords do not match"
-                      : "Re-enter Password"
-                  }
-                  variant="standard"
-                  type={showRePassword ? "password" : "text"}
-                  onChange={formik.handleChange}
-                  value={formik.values.reEnterPassword}
-                  autoComplete="new-Password"
-                  error={
-                    formik.touched.reEnterPassword &&
-                    formik.values.password !== formik.values.reEnterPassword
-                  }
-                  InputLabelProps={{
-                    style: {
-                      fontSize: 16,
-                    },
-                  }}
-                  InputProps={{
-                    style: { fontSize: 18 },
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton onClick={handleToggleRePasswordVisibility}>
-                          {showRePassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  fullWidth
-                />
-                <TextField
-                  name="phoneNumber"
-                  sx={{ mt: "6px" }}
-                  label={
-                    formik.touched.phoneNumber &&
-                      Boolean(formik.errors.phoneNumber)
-                      ? `${formik.errors.phoneNumber}`
-                      : "Phone Number (Optional)"
-                  }
-                  variant="standard"
-                  onChange={formik.handleChange}
-                  value={formik.values.phoneNumber}
-                  error={
-                    formik.touched.phoneNumber &&
-                    Boolean(formik.errors.phoneNumber)
-                  }
-                  InputLabelProps={{
-                    style: { fontSize: 16 },
-                  }}
-                  InputProps={{
-                    style: { fontSize: 18 },
-                  }}
-                  fullWidth
-                />
-              </FormBoxEdu>
-            </Box>
-          ) : (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-              p={5}
-            >
-              <Typography
-                variant={isSmallScreen ? "body2" : "body1"}
-                color="initial"
-                textAlign={"center"}
+      {user && loading ? <Loader /> :
+        <Box py={14}>
+          {!user ?
+            <TopHeadingBox>
+              <TopHeading variant="" mt={5} ml={1}>
+                Create Account
+              </TopHeading>
+            </TopHeadingBox>
+            : ""
+          }
+          <Box component="form" onSubmit={formik.handleSubmit} noValidate>
+            {!user ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
               >
-                Educator Account Created Successfully Move to Next Step.
-              </Typography>
-            </Box>
-          )}
-          <Footer>
-            <Grid container justifyContent={"space-between"} p={2}>
-              <Grid>
-                {steps > 1 ? (
-                  <PreviousButton variant="contained" onClick={handleDec}>
-                    Previous
-                  </PreviousButton>
-                ) : (
-                  <></>
-                )}
-              </Grid>
-              <Grid>
-                <Grid>
-                  <ContinueButton
-                    disabled={
-                      (!formik.isValid ||
-                        !formik.values.firstName ||
-                        !formik.values.lastName ||
-                        !formik.values.email ||
-                        !formik.values.password ||
-                        !formik.values.reEnterPassword) &&
-                      !user
+                <FormBoxEdu p={4}>
+                  <TextField
+                    name="firstName"
+                    label={
+                      formik.touched.firstName && Boolean(formik.errors.firstName)
+                        ? `${formik.errors.firstName}`
+                        : "First Name"
                     }
-                    variant="contained"
-                    type={!user ? "submit" : "button"}
-                    onClick={user ? handleClick : undefined}
+                    variant="standard"
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.firstName}
+                    error={
+                      formik.touched.firstName && Boolean(formik.errors.firstName)
+                    }
+                    InputLabelProps={{
+                      style: { fontSize: 16 },
+                    }}
+                    InputProps={{
+                      style: { fontSize: 18 },
+                    }}
+                    fullWidth
+                  />
+                  <TextField
+                    name="lastName"
+                    sx={{ mt: "6px" }}
+                    label={
+                      formik.touched.lastName && Boolean(formik.errors.lastName)
+                        ? `${formik.errors.lastName}`
+                        : "Last Name"
+                    }
+                    variant="standard"
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.lastName}
+                    error={
+                      formik.touched.lastName && Boolean(formik.errors.lastName)
+                    }
+                    InputLabelProps={{
+                      style: { fontSize: 16 },
+                    }}
+                    InputProps={{
+                      style: { fontSize: 18 },
+                    }}
+                    fullWidth
+                  />
+                  <TextField
+                    name="email"
+                    sx={{ mt: "6px" }}
+                    label={
+                      formik.touched.email && Boolean(formik.errors.email)
+                        ? `${formik.errors.email}`
+                        : "Email"
+                    }
+                    variant="standard"
+                    type="email"
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
+                    autoComplete="username"
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    InputLabelProps={{
+                      style: { fontSize: 16 },
+                    }}
+                    InputProps={{
+                      style: { fontSize: 18 },
+                    }}
+                    fullWidth
+                  />
+                  <TextField
+                    name="password"
+                    sx={{ mt: "6px" }}
+                    label={
+                      formik.touched.password && Boolean(formik.errors.password)
+                        ? formik.errors.password
+                        : "Password"
+                    }
+                    variant="standard"
+                    type={showPassword ? "password" : "text"}
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                    autoComplete="new-password"
+                    error={
+                      formik.touched.password &&
+                      !isPasswordValid(formik.values.password)
+                    }
+                    InputLabelProps={{
+                      style: {
+                        fontSize: 16,
+                      },
+                    }}
+                    InputProps={{
+                      style: { fontSize: 18 },
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton onClick={handleTogglePasswordVisibility}>
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                    fullWidth
+                  />
+                  <TextField
+                    name="reEnterPassword"
+                    sx={{ mt: "6px" }}
+                    label={
+                      formik.touched.reEnterPassword &&
+                        formik.values.password !== formik.values.reEnterPassword
+                        ? "Passwords do not match"
+                        : "Re-enter Password"
+                    }
+                    variant="standard"
+                    type={showRePassword ? "password" : "text"}
+                    onChange={formik.handleChange}
+                    value={formik.values.reEnterPassword}
+                    autoComplete="new-Password"
+                    error={
+                      formik.touched.reEnterPassword &&
+                      formik.values.password !== formik.values.reEnterPassword
+                    }
+                    InputLabelProps={{
+                      style: {
+                        fontSize: 16,
+                      },
+                    }}
+                    InputProps={{
+                      style: { fontSize: 18 },
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton onClick={handleToggleRePasswordVisibility}>
+                            {showRePassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                    fullWidth
+                  />
+                  <TextField
+                    name="phoneNumber"
+                    sx={{ mt: "6px" }}
+                    label={
+                      formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
+                        ? `${formik.errors.phoneNumber}`
+                        : "Phone Number (Optional)"
+                    }
+                    variant="standard"
+                    onChange={formik.handleChange}
+                    type="tel"
+                    autoComplete="tel"
+                    value={formik.values.phoneNumber}
+                    error={
+                      formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
+                    }
+                    InputLabelProps={{
+                      style: { fontSize: 16 },
+                    }}
+                    InputProps={{
+                      style: { fontSize: 18 },
+                      inputMode: "numeric",
+                      onKeyPress: (event) => {
+                        if (isNaN(event.key)) {
+                          event.preventDefault();
+                        }
+                      },
+                    }}
+                    fullWidth
+                  />
+                </FormBoxEdu>
+              </Box>
+            ) : (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                {currentUser?.emailVerified ?
+                  <EduBlankTitle
+                    variant={isSmallScreen ? "body2" : "body1"}
+                    color="initial"
+                    textAlign={"center"}
+                    py={15}
                   >
-                    Continue
-                  </ContinueButton>
+                    Educator Account Created Successfully Move to Next Step.
+                  </EduBlankTitle>
+                  :
+                  <VerifyEmailStep />
+                }
+              </Box>
+            )}
+            <Footer>
+              <Grid container justifyContent={"space-between"} p={2}>
+                <Grid>
+                  {steps > 1 ? (
+                    <PreviousButton variant="contained" onClick={handleDec}>
+                      Previous
+                    </PreviousButton>
+                  ) : (
+                    <></>
+                  )}
+                </Grid>
+                <Grid>
+                  <Grid>
+                    <ContinueButton
+                      disabled={!currentUser?.emailVerified && currentUser}
+                      variant="contained"
+                      type={!user ? "submit" : "button"}
+                      onClick={user ? handleClick : undefined}
+                    >
+                      Continue
+                    </ContinueButton>
+                  </Grid>
                 </Grid>
               </Grid>
-            </Grid>
-          </Footer>
+            </Footer>
+          </Box>
         </Box>
-      </Box>
+      }
     </>
   );
 };

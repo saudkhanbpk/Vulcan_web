@@ -31,13 +31,13 @@ import {
   ToggleBtn,
   styles,
 } from "./createAccountStyles";
+import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
+import { httpsCallable } from "firebase/functions";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import { useNavigate } from "react-router-dom";
-import { useAuthValue } from "../../../../Infrastructure/States/authContext";
 import { functions, auth } from "../../../../Infrastructure/config";
-import { httpsCallable } from "firebase/functions";
+import { useAuthValue } from "../../../../Infrastructure/States/authContext";
 
 export const CreateAccount = () => {
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ export const CreateAccount = () => {
     dispatch(chooseModalLogin());
     formik.resetForm();
   };
-  const handleChange = (event, newAlignment) => {
+  const handleChangeEducator = (event, newAlignment) => {
     if (newAlignment !== null) {
       setIsEducator(newAlignment);
     }
@@ -143,9 +143,13 @@ export const CreateAccount = () => {
       }
     },
   });
+  const handleEducatorButton = () => {
+    navigate('./educator-account')
+    dispatch(closeChooseModal());
+    formik.resetForm();
+  }
   return (
     <Box>
-      {/* Sign Up Modal */}
       <Modal
         open={isOpenModal}
         onClose={handleCloseModal}
@@ -187,13 +191,17 @@ export const CreateAccount = () => {
                 color="primary"
                 value={isEducator}
                 exclusive
-                onChange={handleChange}
+                onChange={handleChangeEducator}
                 aria-label="Platform"
               >
                 <ToggleBtn type="button" value={false}>
                   Student Account
                 </ToggleBtn>
-                <ToggleBtn type="button" value={true}>
+                <ToggleBtn
+                  type="button"
+                  value={true}
+                  onClick={handleEducatorButton}
+                >
                   Educator Account
                 </ToggleBtn>
               </StyledToggleButtonGroup>
@@ -298,7 +306,7 @@ export const CreateAccount = () => {
               sx={{ mt: "6px" }}
               label={
                 formik.touched.reEnterPassword &&
-                formik.values.password !== formik.values.reEnterPassword
+                  formik.values.password !== formik.values.reEnterPassword
                   ? "Passwords do not match"
                   : "Re-enter Password"
               }
@@ -338,6 +346,8 @@ export const CreateAccount = () => {
               }
               variant="standard"
               onChange={formik.handleChange}
+              type="tel"
+              autoComplete="tel"
               value={formik.values.phoneNumber}
               error={
                 formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
@@ -347,6 +357,12 @@ export const CreateAccount = () => {
               }}
               InputProps={{
                 style: { fontSize: 18 },
+                inputMode: "numeric",
+                onKeyPress: (event) => {
+                  if (isNaN(event.key)) {
+                    event.preventDefault();
+                  }
+                },
               }}
               fullWidth
             />

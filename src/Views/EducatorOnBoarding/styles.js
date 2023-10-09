@@ -90,7 +90,7 @@ export const FullName = styled(Typography)((theme) => ({
   fontSize: "28px",
 }));
 export const TopHeadingBox = styled(Box)(({ theme }) => ({
-  padding:theme.spacing(3),
+  padding: theme.spacing(3),
   [theme.breakpoints.down("sm")]: {},
 }));
 export const TopHeading = styled(Typography)(({ theme }) => ({
@@ -112,7 +112,7 @@ export const DescriptionBox = styled(Box)(({ theme }) => ({
   },
 }));
 export const QuestionName = styled(Typography)(({ theme }) => ({
-  padding:theme.spacing(1),
+  padding: theme.spacing(1),
   fontSize: "24px",
   [theme.breakpoints.down("md")]: {
     fontSize: "20px",
@@ -172,6 +172,7 @@ export const SignUpTextLink = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {},
 }));
 export const CharacterCount = styled("p")(({ theme }) => ({
+  fontsize:"22px",
   textAlign: "end",
   fontWeight: "bold",
 }));
@@ -197,14 +198,21 @@ export const ChoiceTypo = styled(Typography)(({ theme }) => ({
   letterSpacing: "-.02rem",
   fontSize: "16px",
 }));
+export const EduBlankTitle = styled(Typography)(({ theme }) => ({
+    fontSize: "28px",
+  [theme.breakpoints.down("md")]: {
+    fontSize: "24px",
+  },
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "16px",
+  },
+}));
 export const QuestionFormBox = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
   padding: theme.spacing(2),
-  // paddingLeft: theme.spacing(4),
-  // paddingRight: theme.spacing(4),
   [theme.breakpoints.down("md")]: {
     width: "80%",
   },
