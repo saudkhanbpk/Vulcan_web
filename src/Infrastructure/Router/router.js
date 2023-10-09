@@ -53,7 +53,7 @@ const Router = () => {
   useEffect(() => {
     if (onboardingComplete && location.pathname === "/educator-account") {
       // Navigate to the home path ("/") when onboarding is complete
-      // navigate("/");
+      navigate("/");
     }
   }, [onboardingComplete, location.pathname, navigate]);
   return (
