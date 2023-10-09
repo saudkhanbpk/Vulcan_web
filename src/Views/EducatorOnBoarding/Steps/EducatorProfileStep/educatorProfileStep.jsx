@@ -42,11 +42,12 @@ export const EducatorProfileStep = () => {
   const maxCharacters = 2000;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const uid = auth.currentUser.uid;
+  const uid = auth?.currentUser?.uid;
   const [open, setOpen] = React.useState(false);
   const [loaderValue, setLoaderValue] = useState(false);
   const message = "!About me text must be 200-2000 character";
   const userData = useSelector((state) => state.userData.data);
+  const aboutMe = userData?.educator?.profile?.about_me
   const profile = userData?.educator?.profile
   const youtube = profile?.youtube
   const linkedin = profile?.linkedin
@@ -62,6 +63,9 @@ export const EducatorProfileStep = () => {
   const loading = useSelector((state) => state.userData.loading);
   const [characterCount, setCharacterCount] = useState(0);
   const steps = useSelector((state) => state.educatorSteps.steps);
+  const [htmlData, setHtmlData] = useState(aboutMe || ""); 
+  // eslint-disable-next-line no-unused-vars
+  const [plainText, setPlainText] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -164,6 +168,7 @@ export const EducatorProfileStep = () => {
     const currentCharacterCount = countCharactersWithoutTags(value);
     setCharacterCount(currentCharacterCount);
     formik.setFieldValue("aboutMe", value);
+    setHtmlData(value);
   };
   const handleExit = async () => {
     try {
@@ -177,10 +182,16 @@ export const EducatorProfileStep = () => {
       navigate("/");
     } catch (err) { }
   };
-
   useEffect(() => {
     setCharacterCount(formik.values.aboutMe.length);
   }, [formik.values.aboutMe]);
+  useEffect(() => {
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = htmlData;
+    const text = tempDiv.textContent || tempDiv.innerText;
+    setPlainText(text);
+    setCharacterCount(text.length);
+  }, [htmlData]);
   return (
     <>
       <Header alignItems={"center"}>
@@ -286,7 +297,7 @@ export const EducatorProfileStep = () => {
                   theme="snow"
                   modules={modules}
                   formats={formats}
-                  value={formik.values.aboutMe}
+                  value={htmlData} 
                   onChange={handleAboutMeChange}
                   style={{
                     marginTop: "40px",
