@@ -12,7 +12,6 @@ export const UploadAvatar = ({ onUpload }) => {
   const [open, setOpen] = React.useState(false);
   const userData = useSelector((state) => state.userData.data);
   const avatar = userData?.educator?.profile?.avatar
-  console.log(avatar)
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     if (preview) {
