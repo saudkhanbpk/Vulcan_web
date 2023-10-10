@@ -26,5 +26,10 @@ firebase-debug.log
 ./firebase-debug.log
 firebase-debug
 
+.serviceAccountKey.json
+/serviceAccountKey.json
+./serviceAccountKey.json
+serviceAccountKey.json
+
 storage.rules
 database.rules.json

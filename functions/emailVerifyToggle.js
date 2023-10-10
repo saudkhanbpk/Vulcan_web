@@ -1,27 +1,26 @@
-const { onCall } = require("firebase-functions/v2/https")
-const { getAuth } = require("firebase-admin/auth")
-// const admin = require('firebase-admin')
+const { onCall } = require("firebase-functions/v2/https");
+const { getAuth } = require("firebase-admin/auth");
+const admin = require('firebase-admin');
+const { getDatabase } = require("firebase-admin/database");
 
-exports.emailVerifyToggle = onCall(async (context) => {
+exports.emailVerifyToggle = onCall(async (request) => {
+  const db = getDatabase();
   try {
-    if (!context.auth) {
-      throw new Error("Authentication required.")
-    }
-    const uid = context.auth.uid
-    const emailVerified = context.auth.token.email_verified
-    
-    console.log("----------------------------")
-    // await admin.auth().updateUser(uid, {
-    //   emailVerified: !emailVerified,
-    // })
-    
-    await getAuth().updateUser(uid, {
-      emailVerified: !emailVerified,
+    const uid = request.auth.uid;
+    const user = await getAuth().getUser(uid);
+    const verifyEmail = user?.emailVerified;
+    const userRef = db.ref(`users/${uid}`);
+
+    await admin.auth().updateUser(uid, {
+      emailVerified: !verifyEmail,
+    }).then(() => {
+      userRef.update({
+        email_verified: verifyEmail,
+      })
     })
-    console.log("----------------------------")
-    return { isSuccess: true, errorMessage: null }
+    return { isSuccess: true, errorMessage: null };
   } catch (error) {
-    // console.error("Error in emailVerify function:", error)
-    return { isSuccess: false, errorMessage: error.message }
+    console.error("Error:", error);
+    return { isSuccess: false, errorMessage: error.message };
   }
-})
+});

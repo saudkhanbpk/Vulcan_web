@@ -1,9 +1,13 @@
-const {setGlobalOptions} = require("firebase-functions/v2")
-const { initializeApp } = require('firebase-admin/app')
+const { setGlobalOptions } = require("firebase-functions/v2")
+var serviceAccount = require("./serviceAccountKey.json")
+var admin = require("firebase-admin")
 
-initializeApp()
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://vulcan-v2-dev-default-rtdb.firebaseio.com"
+})
 
-setGlobalOptions({maxInstances: 10})
+setGlobalOptions({ maxInstances: 10 })
 
 const setupAccount = require('./setupAccount')
 exports.createaccount = setupAccount.setupAccount

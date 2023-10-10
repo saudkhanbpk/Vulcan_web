@@ -4,7 +4,9 @@ import { auth } from "../config";
 const useAuthentication = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log("User Data", user)
+  if(user){
+    console.log("User Data", user)
+  }
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
