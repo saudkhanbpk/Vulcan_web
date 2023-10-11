@@ -306,7 +306,7 @@ export const CreateAccount = () => {
               sx={{ mt: "6px" }}
               label={
                 formik.touched.reEnterPassword &&
-                  formik.values.password !== formik.values.reEnterPassword
+                formik.values.password !== formik.values.reEnterPassword
                   ? "Passwords do not match"
                   : "Re-enter Password"
               }
