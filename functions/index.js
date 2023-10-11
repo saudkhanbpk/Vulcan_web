@@ -7,7 +7,7 @@ admin.initializeApp({
     databaseURL: "https://vulcan-v2-dev-default-rtdb.firebaseio.com"
 })
 
-setGlobalOptions({ maxInstances: 10 })
+setGlobalOptions({maxInstances: 10})
 
 const setupAccount = require('./setupAccount')
 exports.createaccount = setupAccount.setupAccount

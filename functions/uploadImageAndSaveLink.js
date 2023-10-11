@@ -20,5 +20,4 @@ exports.uploadImageAndSaveLink = async (request) => {
     return { imageUrl }
   } catch (error) {
     console.error("Error uploading image:", error)
-  }
-}
+  }}
