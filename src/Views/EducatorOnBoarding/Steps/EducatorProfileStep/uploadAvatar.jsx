@@ -16,6 +16,7 @@ export const UploadAvatar = ({ onUpload }) => {
   const handleClose = () => {
     if (preview) {
       onUpload(preview);
+      console.log(preview)
     }
     setOpen(false);
   };
@@ -62,6 +63,7 @@ export const UploadAvatar = ({ onUpload }) => {
         </AvatarBox>
       </Modal>
       <Box display="flex" justifyContent="center" alignItems="center">
+        {console.log("avatar", avatar)}
         <img
           src={avatar || preview ? preview : ProfileImage} 
           // src={avatar}

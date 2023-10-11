@@ -1,3 +1,5 @@
+import { Box, styled } from "@mui/material";
+
 export const styles = {
   mainBox: {
     backgroundColor: "blue",
@@ -53,3 +55,19 @@ export const styles = {
     cursor: "pointer",
   },
 };
+export const MainBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "flex-start",
+  border: "1px solid black",
+  borderRadius: "50px",
+  width: "300px",
+  height: "400px",
+  backgroundColor: "white",
+  paddingBottom: 5,
+  pt: 2,
+  [theme.breakpoints.down("md")]: {
+    height: "300px",
+  },
+}));
