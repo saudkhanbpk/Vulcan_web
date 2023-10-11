@@ -175,7 +175,9 @@ export const EducatorProfileStep = () => {
       dispatch(resetExperienceStepValues());
       dispatch(resetSteps());
       navigate("/");
-    } catch (err) { }
+    } catch (err) {
+      ShowErrorToast("Something wrong with updating Profile!");
+    }
   };
 
   useEffect(() => {
