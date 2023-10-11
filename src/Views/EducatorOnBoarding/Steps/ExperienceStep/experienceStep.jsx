@@ -79,7 +79,6 @@ export const ExperienceStep = () => {
       navigate("/");
     } catch (err) { }
   };
-  const emailVerified = user?.emailVerified;
   return (
     <>
       <Header alignItems={"center"}>
@@ -139,55 +138,41 @@ export const ExperienceStep = () => {
         </Grid>
         <ProgressBar />
       </Header>
-      {emailVerified ? (
-        <>
-          <Box py={10}>
-            <TopHeadingBox>
-              <TopHeading variant="" mt={5} ml={3}>
-                Experience
-              </TopHeading>
-            </TopHeadingBox>
-            <Grid
-              container
-              display={"flex"}
-              justifyContent={"center"}
-            >
-              <Grid lg={4} md={6} sm={10} xs={10}>
-                <Box p={3} sx={{ height: "auto" }}>
-                  <Box sx={{ maxWidth: "100%" }} pt={5}>
-                    <QuestionTwo />
-                  </Box>
-                </Box>
-              </Grid>
-              <Grid lg={4} md={6} sm={10} xs={10}>
-                <Box p={3} sx={{ height: "auto" }}>
-                  <Box sx={{ maxWidth: "100%" }} pt={5}>
-                    <QuestionOne />
-                  </Box>
-                </Box>
-              </Grid>
-              <Grid lg={4} md={6} sm={10} xs={10}>
-                <Box p={3} sx={{ height: "auto" }}>
-                  <Box sx={{ maxWidth: "100%" }} pt={5}>
-                    <QuestionThree />
-                  </Box>
-                </Box>
-              </Grid>
-            </Grid>
-          </Box>
-        </>
-      ) : (
-        <Box
+      <Box py={10}>
+        <TopHeadingBox>
+          <TopHeading variant="" mt={5} ml={3}>
+            Experience
+          </TopHeading>
+        </TopHeadingBox>
+        <Grid
+          container
           display={"flex"}
           justifyContent={"center"}
-          alignItems={"center"}
-          height={"auto"}
         >
-          <EduBlankTitle variant="body1" color="initial">
-            You need to Verify your Email
-          </EduBlankTitle>
-        </Box>
-      )}
+          <Grid lg={4} md={6} sm={10} xs={10}>
+            <Box p={3} sx={{ height: "auto" }}>
+              <Box sx={{ maxWidth: "100%" }} pt={5}>
+                <QuestionTwo />
+              </Box>
+            </Box>
+          </Grid>
+          <Grid lg={4} md={6} sm={10} xs={10}>
+            <Box p={3} sx={{ height: "auto" }}>
+              <Box sx={{ maxWidth: "100%" }} pt={5}>
+                <QuestionOne />
+              </Box>
+            </Box>
+          </Grid>
+          <Grid lg={4} md={6} sm={10} xs={10}>
+            <Box p={3} sx={{ height: "auto" }}>
+              <Box sx={{ maxWidth: "100%" }} pt={5}>
+                <QuestionThree />
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+
       <Footer>
         <Grid container justifyContent={"space-between"} p={2}>
           <Grid>

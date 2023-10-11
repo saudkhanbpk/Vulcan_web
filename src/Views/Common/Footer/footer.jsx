@@ -14,6 +14,9 @@ import { MainBox, styles } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 import { ModalBackgroundBox } from "../../Contact/styles";
 import { FeatureFlags } from "../../../Infrastructure/featureFlags";
+import { httpsCallable } from "firebase/functions";
+import { ShowErrorToast, ShowSuccessToast } from "../Toast/toast";
+import { functions } from "../../../Infrastructure/config";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -47,12 +50,19 @@ const Footer = () => {
       flag2: !prevFeatures.flag2,
     }));
   };
-  const handleToggleEmailVerified = () => {
-    // Update the showCourses flag value
+  const handleToggleEmailVerified = async () => {
+    // Update the email Verification flag value
     setFeatures((prevFeatures) => ({
       ...prevFeatures,
       emailVerified: !prevFeatures.emailVerified,
     }));
+    try {
+      const verifyEmail = httpsCallable(functions, "emailVerify");
+      await verifyEmail({ emailVerified });
+      ShowSuccessToast("Email Verifications toggled!")
+    } catch (err) {
+      ShowErrorToast("Email Verifications not toggled!")
+    }
   };
 
   useEffect(() => {

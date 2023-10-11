@@ -1,26 +1,23 @@
-const { onCall } = require("firebase-functions/v2/https");
-const { getAuth } = require("firebase-admin/auth");
-const admin = require('firebase-admin');
-const { getDatabase } = require("firebase-admin/database");
+const { onCall } = require("firebase-functions/v2/https")
+const admin = require('firebase-admin')
+const { getDatabase } = require("firebase-admin/database")
 
 exports.emailVerifyToggle = onCall(async (request) => {
-  const db = getDatabase();
+  const db = getDatabase()
   try {
-    const uid = request.auth.uid;
-    const user = await getAuth().getUser(uid);
-    const verifyEmail = user?.emailVerified;
-    const userRef = db.ref(`users/${uid}`);
-
+    const uid = request.auth.uid
+    const { emailVerified } = request.data
+    const userRef = db.ref(`users/${uid}`)
     await admin.auth().updateUser(uid, {
-      emailVerified: !verifyEmail,
+      emailVerified: emailVerified,
     }).then(() => {
       userRef.update({
-        email_verified: verifyEmail,
+        email_verified: emailVerified,
       })
     })
-    return { isSuccess: true, errorMessage: null };
+    return { isSuccess: true, errorMessage: null }
   } catch (error) {
-    console.error("Error:", error);
-    return { isSuccess: false, errorMessage: error.message };
+    console.error("Error:", error)
+    return { isSuccess: false, errorMessage: error.message }
   }
-});
+})
