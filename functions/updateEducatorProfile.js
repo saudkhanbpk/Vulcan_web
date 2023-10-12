@@ -18,7 +18,7 @@ exports.updateEducatorProfile = onCall(async (request) => {
     if (avatar) {
       educatorProfile.avatar = avatar  
       const result = await uploadImageAndSaveLink({
-        base64Image: avatar,
+        base64String: avatar,
         uid: uid,
       })  
       if (result?.imageUrl) {
