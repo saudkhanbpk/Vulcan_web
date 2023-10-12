@@ -63,10 +63,8 @@ export const UploadAvatar = ({ onUpload }) => {
         </AvatarBox>
       </Modal>
       <Box display="flex" justifyContent="center" alignItems="center">
-        {console.log("avatar", avatar)}
         <img
-          src={avatar || preview ? preview : ProfileImage} 
-          // src={avatar}
+          src={avatar ? avatar : (preview ? preview : ProfileImage)}
           height={200}
           width={200}
           alt="Preview"
@@ -80,7 +78,7 @@ export const UploadAvatar = ({ onUpload }) => {
           right: 0,
           color: "blue",
           bgcolor: "white",
-          borderRadius:"50%",
+          borderRadius: "50%",
           border: "1px solid grey",
         }}
         p={0.5}

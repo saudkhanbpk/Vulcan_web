@@ -53,6 +53,7 @@ export const EducatorProfileStep = () => {
   const linkedin = profile?.linkedin
   const twitter = profile?.twitter
   const website = profile?.website
+  const avatar = userData?.educator?.profile?.avatar
   const [showAvatarError, setShowAvatarError] = useState(false);
   const firstName =
     userData?.account?.first_name.charAt(0).toUpperCase() +
@@ -63,7 +64,7 @@ export const EducatorProfileStep = () => {
   const loading = useSelector((state) => state.userData.loading);
   const [characterCount, setCharacterCount] = useState(0);
   const steps = useSelector((state) => state.educatorSteps.steps);
-  const [htmlData, setHtmlData] = useState(aboutMe || ""); 
+  const [htmlData, setHtmlData] = useState(aboutMe || "");
   // eslint-disable-next-line no-unused-vars
   const [plainText, setPlainText] = useState("");
 
@@ -297,7 +298,7 @@ export const EducatorProfileStep = () => {
                   theme="snow"
                   modules={modules}
                   formats={formats}
-                  value={htmlData} 
+                  value={htmlData}
                   onChange={handleAboutMeChange}
                   style={{
                     marginTop: "40px",
@@ -407,11 +408,12 @@ export const EducatorProfileStep = () => {
                     mr={3}
                   >
                     <h6 style={{ color: "red", textAlign: "center" }}>
-                      {showAvatarError || !open
-                        ? `${formik.errors.avatar || ""}`
-                        : (characterCount < minCharacters ||
-                          characterCount > maxCharacters) &&
-                        message}
+                      {!avatar &&
+                        (showAvatarError || !open
+                          ? `${formik.errors.avatar || ""}`
+                          : (characterCount < minCharacters ||
+                            characterCount > maxCharacters) &&
+                          message)}
                     </h6>
                   </Box>
                   <ContinueButton

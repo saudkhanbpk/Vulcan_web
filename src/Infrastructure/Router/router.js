@@ -50,12 +50,12 @@ const Router = () => {
   }, [dispatch, userId]);
 
   // Check if onboarding is complete and user is on "/educator-account" route
-  useEffect(() => {
-    if (onboardingComplete && location.pathname === "/educator-account") {
-      // Navigate to the home path ("/") when onboarding is complete
-      navigate("/");
-    }
-  }, [onboardingComplete, location.pathname, navigate]);
+  // useEffect(() => {
+  //   if (onboardingComplete && location.pathname === "/educator-account") {
+  //     // Navigate to the home path ("/") when onboarding is complete
+  //     navigate("/");
+  //   }
+  // }, [onboardingComplete, location.pathname, navigate]);
   return (
     <div>
       {location.pathname !== "/educator-account" ? <Navbar /> : ""}
