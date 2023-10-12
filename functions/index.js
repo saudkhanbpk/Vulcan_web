@@ -1,6 +1,6 @@
 const { setGlobalOptions } = require("firebase-functions/v2")
 var serviceAccount = require("./serviceAccountKey.json")
-var admin = require("firebase-admin");
+var admin = require("firebase-admin")
 
 admin.initializeApp(
     {
@@ -8,7 +8,7 @@ admin.initializeApp(
   databaseURL: "https://vulcan-v2-dev-default-rtdb.firebaseio.com",
   storageBucket:"gs://vulcan-v2-dev.appspot.com"
 }
-);
+)
 
 
 setGlobalOptions({ maxInstances: 10 })
