@@ -53,7 +53,7 @@ export const EducatorProfileStep = () => {
   const linkedin = profile?.linkedin
   const twitter = profile?.twitter
   const website = profile?.website
-  const avatar = userData?.educator?.profile?.avatar
+  const profilePicture = userData?.educator?.profile?.avatar
   const [showAvatarError, setShowAvatarError] = useState(false);
   const firstName =
     userData?.account?.first_name.charAt(0).toUpperCase() +
@@ -77,8 +77,13 @@ export const EducatorProfileStep = () => {
       twitter: linkedin || "",
       linkedin: twitter || "",
     },
-    validationSchema: Yup.object({
-      avatar: Yup.string().required("Must upload profile picture"),
+    validationSchema: Yup.object((currentSchema) => {
+      if (!profilePicture || showAvatarError) {
+        return currentSchema;
+      }
+      return currentSchema.shape({
+        avatar: Yup.string().required("Must upload profile picture"),
+      });
     }),
     onSubmit: async (values) => {
       if (characterCount < minCharacters || characterCount > maxCharacters) {
@@ -408,7 +413,7 @@ export const EducatorProfileStep = () => {
                     mr={3}
                   >
                     <h6 style={{ color: "red", textAlign: "center" }}>
-                      {!avatar &&
+                      {!profilePicture &&
                         (showAvatarError || !open
                           ? `${formik.errors.avatar || ""}`
                           : (characterCount < minCharacters ||

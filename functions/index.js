@@ -29,4 +29,4 @@ const updateEducatorProfile = require('./updateEducatorProfile')
 exports.updateeducatorprofile = updateEducatorProfile.updateEducatorProfile
 
 const emailVerifyToggle = require('./emailVerifyToggle')
-exports.emailVerify = emailVerifyToggle.emailVerifyToggle
+exports.emailverify = emailVerifyToggle.emailVerifyToggle
