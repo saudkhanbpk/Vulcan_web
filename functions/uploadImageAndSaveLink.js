@@ -10,7 +10,7 @@ exports.uploadImageAndSaveLink = async (request) => {
     const userData = userSnapshot.val()
     const lastName = userData?.last_name
     const fileName = `educators/${uid}__${lastName}.png`
-    const dataPrefix = "data:image/pngbase64,"
+    const dataPrefix = "data:image/png;base64,"
     let actualBase64 = base64String
     if (base64String.startsWith(dataPrefix)) {
       actualBase64 = base64String.slice(dataPrefix.length)
@@ -23,9 +23,11 @@ exports.uploadImageAndSaveLink = async (request) => {
     })
     const imageUrl = await imageRef.getSignedUrl({
       action: 'read',
-      expires: '03-09-2491' // Replace with an appropriate expiration date
+      expires: '03-09-2491'
     })
-    return { imageUrl }
+    if (imageUrl[0]) {
+      return { imageUrl: imageUrl[0] }
+    }
   } catch (error) {
     console.error("Error uploading image:", error)
   }

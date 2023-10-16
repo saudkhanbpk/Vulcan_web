@@ -31,7 +31,6 @@ import { functions } from "../../../../Infrastructure/config";
 import { ShowErrorToast } from "../../../Common/Toast/toast";
 import { getAuth } from "firebase/auth";
 import { Loader } from "../../../Common/loader";
-import * as Yup from "yup";
 import { getDatabase, ref, update } from "firebase/database";
 import ProgressBar from "../../progressbar";
 
@@ -54,7 +53,6 @@ export const EducatorProfileStep = () => {
   const twitter = profile?.twitter
   const website = profile?.website
   const profilePicture = userData?.educator?.profile?.avatar
-  const [showAvatarError, setShowAvatarError] = useState(false);
   const firstName =
     userData?.account?.first_name.charAt(0).toUpperCase() +
     userData?.account?.first_name.slice(1);
@@ -77,16 +75,11 @@ export const EducatorProfileStep = () => {
       twitter: linkedin || "",
       linkedin: twitter || "",
     },
-    validationSchema: Yup.object((currentSchema) => {
-      if (!profilePicture || showAvatarError) {
-        return currentSchema;
-      }
-      return currentSchema.shape({
-        avatar: Yup.string().required("Must upload profile picture"),
-      });
-    }),
     onSubmit: async (values) => {
-      if (characterCount < minCharacters || characterCount > maxCharacters) {
+      if (!values.avatar && !profilePicture) {
+        setOpen(true);
+        formik.setFieldError('avatar', 'Must upload profile picture');
+      } else if (characterCount < minCharacters || characterCount > maxCharacters) {
         setOpen(true);
         setLoaderValue(false);
       } else {
@@ -144,23 +137,15 @@ export const EducatorProfileStep = () => {
     "font",
   ];
   const handleDec = async () => {
-    if (steps > 1) {
-      if (characterCount < minCharacters || characterCount > maxCharacters) {
-        setOpen(true);
-      } else if (!formik.values.avatar) {
-        setShowAvatarError(true)
-      } else {
-        try {
-          const updateEducatorStep = httpsCallable(
-            functions,
-            "updateeducatorprofile"
-          );
-          await updateEducatorStep(formik.values);
-          dispatch(decrementSteps());
-        } catch (error) {
-          ShowErrorToast(error);
-        }
-      }
+    try {
+      const updateEducatorStep = httpsCallable(
+        functions,
+        "updateeducatorprofile"
+      );
+      await updateEducatorStep(formik.values);
+      dispatch(decrementSteps());
+    } catch (error) {
+      ShowErrorToast(error);
     }
   };
   const handleAvatarUpload = (imageDataURL) => {
@@ -413,12 +398,11 @@ export const EducatorProfileStep = () => {
                     mr={3}
                   >
                     <h6 style={{ color: "red", textAlign: "center" }}>
-                      {!profilePicture &&
-                        (showAvatarError || !open
-                          ? `${formik.errors.avatar || ""}`
-                          : (characterCount < minCharacters ||
-                            characterCount > maxCharacters) &&
-                          message)}
+                      {open
+                        ? `${formik.errors.avatar || ""}`
+                        : (characterCount < minCharacters ||
+                          characterCount > maxCharacters) &&
+                        message}
                     </h6>
                   </Box>
                   <ContinueButton

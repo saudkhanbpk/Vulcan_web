@@ -42,13 +42,11 @@ const Router = () => {
     });
     return () => unsubscribe();
   }, [auth]);
-
   useEffect(() => {
     if (userId) {
       dispatch(fetchUserData(userId));
     }
   }, [dispatch, userId]);
-
   // Check if onboarding is complete and user is on "/educator-account" route
   useEffect(() => {
     if (onboardingComplete && location.pathname === "/educator-account") {

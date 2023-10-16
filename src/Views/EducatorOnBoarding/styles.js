@@ -244,3 +244,24 @@ export const AvatarBox = styled(Box)((theme) => ({
   boxShadow: 24,
   backgroundColor: "white",
 }));
+
+export const VerifyEmailMainBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  width: "358px",
+  height: "390px",
+  backgroundColor: "white",
+  paddingBottom: 5,
+}));
+export const VerifyEmailFormBox = styled(Box)(({ theme }) => ({
+  width: "100%",
+  height: "auto",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  alignItems: "center",
+  paddingLeft: theme.spacing(4),
+  paddingRight: theme.spacing(4),
+}));

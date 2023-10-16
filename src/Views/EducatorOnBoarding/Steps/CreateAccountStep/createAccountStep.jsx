@@ -102,7 +102,6 @@ export const CreateAccountStep = () => {
         await createUser(requestData);
         await sendEmailVerification(auth.currentUser);
         setTimeActive(true);
-        setTimeActive(true);
       } catch (error) {
         handleRegistrationError(error);
       }
