@@ -265,3 +265,24 @@ export const VerifyEmailFormBox = styled(Box)(({ theme }) => ({
   paddingLeft: theme.spacing(4),
   paddingRight: theme.spacing(4),
 }));
+export const CountText = styled('span')(({ theme }) => ({
+  display: "inline-block",
+  width: "40px", 
+  textAlign: "left"
+}));
+export const ErrorBlockSmall = styled('h6')(({ theme }) => ({
+  display:"block",
+  color:"red",
+  textAlign:"center",
+  [theme.breakpoints.down("sm")]: {
+    display:"none",
+  },
+}));
+export const ErrorBlockLarge = styled('h6')(({ theme }) => ({
+  display:"none",
+  color:"red",
+  textAlign:"center",
+  [theme.breakpoints.down("sm")]: {
+    display:"block",
+  },
+}));

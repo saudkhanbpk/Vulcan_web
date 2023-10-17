@@ -13,6 +13,9 @@ import {
   AboutMe,
   CharacterCount,
   ContinueButton,
+  CountText,
+  ErrorBlockLarge,
+  ErrorBlockSmall,
   ExitTypo,
   Footer,
   FullName,
@@ -42,9 +45,7 @@ export const EducatorProfileStep = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const uid = auth?.currentUser?.uid;
-  const [open, setOpen] = React.useState(false);
   const [loaderValue, setLoaderValue] = useState(false);
-  const message = "!About me text must be 200-2000 character";
   const userData = useSelector((state) => state.userData.data);
   const aboutMe = userData?.educator?.profile?.about_me
   const profile = userData?.educator?.profile
@@ -65,6 +66,7 @@ export const EducatorProfileStep = () => {
   const [htmlData, setHtmlData] = useState(aboutMe || "");
   // eslint-disable-next-line no-unused-vars
   const [plainText, setPlainText] = useState("");
+  const [displayMessage, setDisplayMessage] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -76,33 +78,35 @@ export const EducatorProfileStep = () => {
       linkedin: twitter || "",
     },
     onSubmit: async (values) => {
+      let newDisplayMessage = "";
       if (!values.avatar && !profilePicture) {
-        setOpen(true);
-        formik.setFieldError('avatar', 'Must upload profile picture');
+        newDisplayMessage = 'Must upload profile picture';
       } else if (characterCount < minCharacters || characterCount > maxCharacters) {
-        setOpen(true);
+        newDisplayMessage = 'About me text must be 200-2000 characters';
+      }
+      setDisplayMessage(newDisplayMessage);
+      if (newDisplayMessage) {
         setLoaderValue(false);
-      } else {
-        try {
-          setLoaderValue(true);
-          const updateEducatorStep = httpsCallable(
-            functions,
-            "updateeducatorprofile"
-          );
-          await updateEducatorStep(values);
-          setOpen(false);
-          navigate("/dashboard");
-          dispatch(resetSteps());
-          dispatch(resetExperienceStepValues());
-          const userRef = ref(db, `users/${uid}/educator`);
-          await update(userRef, {
-            onboarding_complete: true,
-          });
-        } catch (error) {
-          ShowErrorToast(error);
-        } finally {
-          setLoaderValue(false);
-        }
+        return;
+      }
+      try {
+        setLoaderValue(true);
+        const updateEducatorStep = httpsCallable(
+          functions,
+          "updateeducatorprofile"
+        );
+        await updateEducatorStep(values);
+        navigate("/dashboard");
+        dispatch(resetSteps());
+        dispatch(resetExperienceStepValues());
+        const userRef = ref(db, `users/${uid}/educator`);
+        await update(userRef, {
+          onboarding_complete: true,
+        });
+      } catch (error) {
+        ShowErrorToast(error);
+      } finally {
+        setLoaderValue(false);
       }
     },
   });
@@ -157,6 +161,7 @@ export const EducatorProfileStep = () => {
   }
   const handleAboutMeChange = (value) => {
     const currentCharacterCount = countCharactersWithoutTags(value);
+    console.log(currentCharacterCount)
     setCharacterCount(currentCharacterCount);
     formik.setFieldValue("aboutMe", value);
     setHtmlData(value);
@@ -297,8 +302,12 @@ export const EducatorProfileStep = () => {
               </Box>
               <Box width={"100%"}>
                 <CharacterCount>
-                  Character Count: {characterCount}
+                  Character Count: <CountText>{characterCount}</CountText>
                 </CharacterCount>
+                <ErrorBlockLarge>
+                  {(characterCount < minCharacters ||
+                    characterCount > maxCharacters) && displayMessage}
+                </ErrorBlockLarge>
               </Box>
             </Grid>
             <Grid
@@ -397,13 +406,10 @@ export const EducatorProfileStep = () => {
                     alignItems={"center"}
                     mr={3}
                   >
-                    <h6 style={{ color: "red", textAlign: "center" }}>
-                      {open
-                        ? `${formik.errors.avatar || ""}`
-                        : (characterCount < minCharacters ||
-                          characterCount > maxCharacters) &&
-                        message}
-                    </h6>
+                    <ErrorBlockSmall>
+                      {((characterCount < minCharacters ||
+                        characterCount > maxCharacters) || !formik.values.avatar) && displayMessage}
+                    </ErrorBlockSmall>
                   </Box>
                   <ContinueButton
                     variant="contained"
@@ -416,7 +422,7 @@ export const EducatorProfileStep = () => {
               </Grid>
             </Grid>
           </Footer>
-        </Box>
+        </Box >
       )}
     </>
   );

@@ -29,10 +29,8 @@ export const UploadAvatar = ({ onUpload }) => {
   };
   useEffect(() => {
     if (preview) {
-      // If preview data is available, switch to showing the preview
       setShowPreview(true);
     } else {
-      // Reset to showing the avatar if preview is cleared
       setShowPreview(false);
     }
   }, [preview]);
@@ -74,8 +72,6 @@ export const UploadAvatar = ({ onUpload }) => {
       </Modal>
       <Box display="flex" justifyContent="center" alignItems="center">
         <img
-          // src={avatar ? avatar : (preview ? preview : ProfileImage)}
-          // src={showPreview && preview ? preview : avatar || ProfileImage}
           src={showPreview && preview ? preview : (avatar || ProfileImage)}
           height={200}
           width={200}
