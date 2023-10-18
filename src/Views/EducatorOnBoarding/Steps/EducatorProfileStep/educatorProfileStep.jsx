@@ -161,10 +161,12 @@ export const EducatorProfileStep = () => {
   }
   const handleAboutMeChange = (value) => {
     const currentCharacterCount = countCharactersWithoutTags(value);
-    console.log(currentCharacterCount)
     setCharacterCount(currentCharacterCount);
     formik.setFieldValue("aboutMe", value);
     setHtmlData(value);
+    if (currentCharacterCount >= minCharacters && currentCharacterCount <= maxCharacters) {
+      setDisplayMessage("");
+    }
   };
   const handleExit = async () => {
     try {
@@ -304,10 +306,10 @@ export const EducatorProfileStep = () => {
                 <CharacterCount>
                   Character Count: <CountText>{characterCount}</CountText>
                 </CharacterCount>
-                <ErrorBlockLarge>
+                <ErrorBlockSmall>
                   {(characterCount < minCharacters ||
                     characterCount > maxCharacters) && displayMessage}
-                </ErrorBlockLarge>
+                </ErrorBlockSmall>
               </Box>
             </Grid>
             <Grid
@@ -406,10 +408,10 @@ export const EducatorProfileStep = () => {
                     alignItems={"center"}
                     mr={3}
                   >
-                    <ErrorBlockSmall>
+                    <ErrorBlockLarge>
                       {((characterCount < minCharacters ||
-                        characterCount > maxCharacters) || !formik.values.avatar) && displayMessage}
-                    </ErrorBlockSmall>
+                        characterCount > maxCharacters) || !formik.values.avatar) ? displayMessage : ""}
+                    </ErrorBlockLarge>
                   </Box>
                   <ContinueButton
                     variant="contained"

@@ -22,14 +22,16 @@ import { Account } from "../../Views/Account/account";
 import { getAuth } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData } from "../States/userDataSlice";
+import useAuthentication from "../States/onAuthStateChange";
 
 const Router = () => {
-  const location = useLocation();
-  const { features } = React.useContext(FeatureFlags);
   const auth = getAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const {user} = useAuthentication();
   const [userId, setUserId] = useState(null);
+  const { features } = React.useContext(FeatureFlags);
   const userData = useSelector((state) => state.userData.data);
   const onboardingComplete = userData?.educator?.onboarding_complete;
   useEffect(() => {
@@ -49,10 +51,11 @@ const Router = () => {
   }, [dispatch, userId]);
   // Check if onboarding is complete and user is on "/educator-account" route
   useEffect(() => {
+    if(user){
     if (onboardingComplete && location.pathname === "/educator-account") {
       navigate("/");
-    }
-  }, [onboardingComplete, location.pathname, navigate]);
+    }}
+  }, [onboardingComplete, user, location.pathname, navigate]);
   return (
     <div>
       {location.pathname !== "/educator-account" ? <Navbar /> : ""}

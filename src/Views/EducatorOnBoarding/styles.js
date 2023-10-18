@@ -270,7 +270,7 @@ export const CountText = styled('span')(({ theme }) => ({
   width: "40px", 
   textAlign: "left"
 }));
-export const ErrorBlockSmall = styled('h6')(({ theme }) => ({
+export const ErrorBlockLarge = styled('h6')(({ theme }) => ({
   display:"block",
   color:"red",
   textAlign:"center",
@@ -278,7 +278,7 @@ export const ErrorBlockSmall = styled('h6')(({ theme }) => ({
     display:"none",
   },
 }));
-export const ErrorBlockLarge = styled('h6')(({ theme }) => ({
+export const ErrorBlockSmall = styled('h6')(({ theme }) => ({
   display:"none",
   color:"red",
   textAlign:"center",
