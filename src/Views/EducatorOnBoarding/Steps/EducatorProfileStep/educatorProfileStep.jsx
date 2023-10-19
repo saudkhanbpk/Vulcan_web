@@ -6,7 +6,6 @@ import {
   resetSteps,
   decrementSteps,
   resetExperienceStepValues,
-  dashboardNavigateControl,
 } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -103,7 +102,6 @@ export const EducatorProfileStep = () => {
         await update(userRef, {
           onboarding_complete: true,
         });
-        dispatch(dashboardNavigateControl(true))
         navigate("/dashboard");
       } catch (error) {
         ShowErrorToast(error);

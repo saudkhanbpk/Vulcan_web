@@ -23,7 +23,6 @@ import { getAuth } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData } from "../States/userDataSlice";
 import useAuthentication from "../States/onAuthStateChange";
-import { dashboardNavigateControl } from "../States/educatorStepsSlice";
 
 const Router = () => {
   const auth = getAuth();
@@ -34,7 +33,6 @@ const Router = () => {
   const [userId, setUserId] = useState(null);
   const { features } = React.useContext(FeatureFlags);
   const userData = useSelector((state) => state.userData.data);
-  const dashboardControl = useSelector((state) => state.educatorSteps.dashboardControl);
   const onboardingComplete = userData?.educator?.onboarding_complete;
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -51,30 +49,11 @@ const Router = () => {
       dispatch(fetchUserData(userId));
     }
   }, [dispatch, userId]);
-  // useEffect(() => {
-  //   if(user){
-  //   if (onboardingComplete && location.pathname === "/educator-account") {
-  //     console.log("abc",dashboardControl,"onboardingComplete :",onboardingComplete)
-  //     if (dashboardControl === true) {
-  //       // navigate("/dashboard");
-  //     }else{
-  //       // navigate("/");
-  //     }
-  //     dispatch(dashboardNavigateControl(false))
-  //   }}
-  // }, [onboardingComplete, user, location.pathname, navigate, dispatch, dashboardControl]);
- useEffect(() => {
-   console.log("onboardingComplete :",onboardingComplete)
-  if ((user && onboardingComplete) && location.pathname === "/educator-account") {
-        // if (dashboardControl === true) {
-          navigate("/");
-        // }else{
-        //   // navigate("/");
-        // }
-        dispatch(dashboardNavigateControl(false))
-      }
- }, [user,onboardingComplete,location.pathname])
- 
+  useEffect(() => {
+    if ((user && onboardingComplete) && location.pathname === "/educator-account") {
+      navigate("/dashboard");
+    }
+  }, [onboardingComplete, user, location.pathname, navigate, dispatch]);
   return (
     <div>
       {location.pathname !== "/educator-account" ? <Navbar /> : ""}
@@ -97,12 +76,12 @@ const Router = () => {
         <Route exact path="/privacy" element={<Privacy />} />
         <Route exact path="/policies" element={<Policies />} />
         <Route exact path="/contact" element={<Contact />} />
-          {/* <Route
+        {/* <Route
           exact
           path="/educator-account"
           element={(user && onboardingComplete) ? <Dashboard/> : <EducatorAccountMainPage />}
         /> */}
-          <Route
+        <Route
           exact
           path="/educator-account"
           element={<EducatorAccountMainPage />}
