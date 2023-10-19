@@ -15,6 +15,9 @@ export default function DialogBox({ open, setOpen, message }) {
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const handleClose = () => {
     setOpen(false);
+  };
+  const navigateToDashboard = () => {
+    setOpen(false);
     navigate('/dashboard')
   };
   return (
@@ -32,7 +35,7 @@ export default function DialogBox({ open, setOpen, message }) {
         </DialogContent>
         <DialogActions sx={styles.centerButton}>
           <Button
-            onClick={handleClose}
+            onClick={navigateToDashboard}
             variant="contained"
             sx={styles.textCapitalize}
           >

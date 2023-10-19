@@ -3,9 +3,10 @@ import "react-quill/dist/quill.snow.css";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import React, { useEffect, useState } from "react";
 import {
+  resetSteps,
   decrementSteps,
   resetExperienceStepValues,
-  resetSteps,
+  dashboardNavigateControl,
 } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -96,13 +97,14 @@ export const EducatorProfileStep = () => {
           "updateeducatorprofile"
         );
         await updateEducatorStep(values);
-        navigate("/dashboard");
         dispatch(resetSteps());
         dispatch(resetExperienceStepValues());
         const userRef = ref(db, `users/${uid}/educator`);
         await update(userRef, {
           onboarding_complete: true,
         });
+        dispatch(dashboardNavigateControl(true))
+        navigate("/dashboard");
       } catch (error) {
         ShowErrorToast(error);
       } finally {

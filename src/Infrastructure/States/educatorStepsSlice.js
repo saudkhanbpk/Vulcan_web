@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   steps: 1,
+  dashboardControl: null,
   experienceStep: {
     professor: false,
     teacher: false,
@@ -60,13 +61,17 @@ export const educatorStepsSlice = createSlice({
       state.experienceStep.mediumOther = false;
       state.experienceStep.years = "";
     },
+    dashboardNavigateControl: (state, action)=>{
+      state.dashboardControl= action.payload;
+    }
   },
 });
 export const {
+  resetSteps,
   incrementSteps,
   decrementSteps,
   experienceSteps,
-  resetSteps,
-  resetExperienceStepValues,
+  dashboardNavigateControl,
+  resetExperienceStepValues
 } = educatorStepsSlice.actions;
 export default educatorStepsSlice.reducer;
