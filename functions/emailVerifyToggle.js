@@ -6,14 +6,16 @@ exports.emailVerifyToggle = onCall(async (request) => {
   const db = getDatabase()
   try {
     const uid = request.auth.uid
-    const { emailVerified } = request.data
     const userRef = db.ref(`users/${uid}`)
+    const snapshot = await userRef.once('value')
+    const userData = snapshot.val()
+    const emailVerified = userData.email_verified || false
+    const newEmailVerified = !emailVerified
     await admin.auth().updateUser(uid, {
-      emailVerified: emailVerified,
-    }).then(() => {
-      userRef.update({
-        email_verified: emailVerified,
-      })
+      emailVerified: newEmailVerified,
+    })
+    userRef.update({
+      email_verified: newEmailVerified,
     })
     return { isSuccess: true, errorMessage: null }
   } catch (error) {
