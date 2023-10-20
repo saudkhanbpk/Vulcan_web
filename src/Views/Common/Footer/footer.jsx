@@ -58,7 +58,7 @@ const Footer = () => {
     }));
     try {
       const verifyEmail = httpsCallable(functions, "emailverify");
-      await verifyEmail({ emailVerified });
+      await verifyEmail();
       ShowSuccessToast("Email Verifications toggled!")
     } catch (err) {
       ShowErrorToast("Email Verifications not toggled!")
