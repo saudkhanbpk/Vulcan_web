@@ -3,9 +3,9 @@ import "react-quill/dist/quill.snow.css";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import React, { useEffect, useState } from "react";
 import {
+  resetSteps,
   decrementSteps,
   resetExperienceStepValues,
-  resetSteps,
 } from "../../../../Infrastructure/States/educatorStepsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,9 @@ import {
   AboutMe,
   CharacterCount,
   ContinueButton,
+  CountText,
+  ErrorBlockLarge,
+  ErrorBlockSmall,
   ExitTypo,
   Footer,
   FullName,
@@ -31,7 +34,6 @@ import { functions } from "../../../../Infrastructure/config";
 import { ShowErrorToast } from "../../../Common/Toast/toast";
 import { getAuth } from "firebase/auth";
 import { Loader } from "../../../Common/loader";
-import * as Yup from "yup";
 import { getDatabase, ref, update } from "firebase/database";
 import ProgressBar from "../../progressbar";
 
@@ -43,9 +45,7 @@ export const EducatorProfileStep = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const uid = auth?.currentUser?.uid;
-  const [open, setOpen] = React.useState(false);
   const [loaderValue, setLoaderValue] = useState(false);
-  const message = "!About me text must be 200-2000 character";
   const userData = useSelector((state) => state.userData.data);
   const aboutMe = userData?.educator?.profile?.about_me
   const profile = userData?.educator?.profile
@@ -53,7 +53,7 @@ export const EducatorProfileStep = () => {
   const linkedin = profile?.linkedin
   const twitter = profile?.twitter
   const website = profile?.website
-  const [showAvatarError, setShowAvatarError] = useState(false);
+  const profilePicture = userData?.educator?.profile?.avatar
   const firstName =
     userData?.account?.first_name.charAt(0).toUpperCase() +
     userData?.account?.first_name.slice(1);
@@ -63,9 +63,10 @@ export const EducatorProfileStep = () => {
   const loading = useSelector((state) => state.userData.loading);
   const [characterCount, setCharacterCount] = useState(0);
   const steps = useSelector((state) => state.educatorSteps.steps);
-  const [htmlData, setHtmlData] = useState(aboutMe || ""); 
+  const [htmlData, setHtmlData] = useState(aboutMe || "");
   // eslint-disable-next-line no-unused-vars
   const [plainText, setPlainText] = useState("");
+  const [displayMessage, setDisplayMessage] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -76,34 +77,36 @@ export const EducatorProfileStep = () => {
       twitter: linkedin || "",
       linkedin: twitter || "",
     },
-    validationSchema: Yup.object({
-      avatar: Yup.string().required("Must upload profile picture"),
-    }),
     onSubmit: async (values) => {
-      if (characterCount < minCharacters || characterCount > maxCharacters) {
-        setOpen(true);
+      let newDisplayMessage = "";
+      if (!values.avatar && !profilePicture) {
+        newDisplayMessage = 'Must upload profile picture';
+      } else if (characterCount < minCharacters || characterCount > maxCharacters) {
+        newDisplayMessage = 'About me text must be 200-2000 characters';
+      }
+      setDisplayMessage(newDisplayMessage);
+      if (newDisplayMessage) {
         setLoaderValue(false);
-      } else {
-        try {
-          setLoaderValue(true);
-          const updateEducatorStep = httpsCallable(
-            functions,
-            "updateeducatorprofile"
-          );
-          await updateEducatorStep(values);
-          setOpen(false);
-          navigate("/dashboard");
-          dispatch(resetSteps());
-          dispatch(resetExperienceStepValues());
-          const userRef = ref(db, `users/${uid}/educator`);
-          await update(userRef, {
-            onboarding_complete: true,
-          });
-        } catch (error) {
-          ShowErrorToast(error);
-        } finally {
-          setLoaderValue(false);
-        }
+        return;
+      }
+      try {
+        setLoaderValue(true);
+        const updateEducatorStep = httpsCallable(
+          functions,
+          "updateeducatorprofile"
+        );
+        await updateEducatorStep(values);
+        dispatch(resetSteps());
+        dispatch(resetExperienceStepValues());
+        const userRef = ref(db, `users/${uid}/educator`);
+        await update(userRef, {
+          onboarding_complete: true,
+        });
+        navigate("/dashboard");
+      } catch (error) {
+        ShowErrorToast(error);
+      } finally {
+        setLoaderValue(false);
       }
     },
   });
@@ -138,23 +141,15 @@ export const EducatorProfileStep = () => {
     "font",
   ];
   const handleDec = async () => {
-    if (steps > 1) {
-      if (characterCount < minCharacters || characterCount > maxCharacters) {
-        setOpen(true);
-      } else if (!formik.values.avatar) {
-        setShowAvatarError(true)
-      } else {
-        try {
-          const updateEducatorStep = httpsCallable(
-            functions,
-            "updateeducatorprofile"
-          );
-          await updateEducatorStep(formik.values);
-          dispatch(decrementSteps());
-        } catch (error) {
-          ShowErrorToast(error);
-        }
-      }
+    try {
+      const updateEducatorStep = httpsCallable(
+        functions,
+        "updateeducatorprofile"
+      );
+      await updateEducatorStep(formik.values);
+      dispatch(decrementSteps());
+    } catch (error) {
+      ShowErrorToast(error);
     }
   };
   const handleAvatarUpload = (imageDataURL) => {
@@ -169,6 +164,9 @@ export const EducatorProfileStep = () => {
     setCharacterCount(currentCharacterCount);
     formik.setFieldValue("aboutMe", value);
     setHtmlData(value);
+    if (currentCharacterCount >= minCharacters && currentCharacterCount <= maxCharacters) {
+      setDisplayMessage("");
+    }
   };
   const handleExit = async () => {
     try {
@@ -297,7 +295,7 @@ export const EducatorProfileStep = () => {
                   theme="snow"
                   modules={modules}
                   formats={formats}
-                  value={htmlData} 
+                  value={htmlData}
                   onChange={handleAboutMeChange}
                   style={{
                     marginTop: "40px",
@@ -306,8 +304,12 @@ export const EducatorProfileStep = () => {
               </Box>
               <Box width={"100%"}>
                 <CharacterCount>
-                  Character Count: {characterCount}
+                  Character Count: <CountText>{characterCount}</CountText>
                 </CharacterCount>
+                <ErrorBlockSmall>
+                  {(characterCount < minCharacters ||
+                    characterCount > maxCharacters) && displayMessage}
+                </ErrorBlockSmall>
               </Box>
             </Grid>
             <Grid
@@ -406,13 +408,10 @@ export const EducatorProfileStep = () => {
                     alignItems={"center"}
                     mr={3}
                   >
-                    <h6 style={{ color: "red", textAlign: "center" }}>
-                      {showAvatarError || !open
-                        ? `${formik.errors.avatar || ""}`
-                        : (characterCount < minCharacters ||
-                          characterCount > maxCharacters) &&
-                        message}
-                    </h6>
+                    <ErrorBlockLarge>
+                      {((characterCount < minCharacters ||
+                        characterCount > maxCharacters) || !formik.values.avatar) ? displayMessage : ""}
+                    </ErrorBlockLarge>
                   </Box>
                   <ContinueButton
                     variant="contained"
@@ -425,7 +424,7 @@ export const EducatorProfileStep = () => {
               </Grid>
             </Grid>
           </Footer>
-        </Box>
+        </Box >
       )}
     </>
   );

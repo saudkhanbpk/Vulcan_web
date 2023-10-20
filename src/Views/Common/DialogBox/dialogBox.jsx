@@ -7,12 +7,18 @@ import { styles } from "../../Home/WelcomeBox/styles";
 import DialogContent from "@mui/material/DialogContent";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import DialogActions from "@mui/material/DialogActions";
+import { useNavigate } from "react-router-dom";
 
 export default function DialogBox({ open, setOpen, message }) {
   const theme = useTheme();
+  const navigate= useNavigate()
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const handleClose = () => {
     setOpen(false);
+  };
+  const navigateToDashboard = () => {
+    setOpen(false);
+    navigate('/dashboard')
   };
   return (
     <div>
@@ -27,13 +33,13 @@ export default function DialogBox({ open, setOpen, message }) {
           {message}
           </Message>
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={styles.centerButton}>
           <Button
-            onClick={handleClose}
+            onClick={navigateToDashboard}
             variant="contained"
             sx={styles.textCapitalize}
           >
-            Close
+            Dashboard
           </Button>
         </DialogActions>
       </Dialog>

@@ -1,5 +1,5 @@
 import { Modal, Box } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "react-avatar-edit";
 import EditIcon from "@mui/icons-material/Edit";
 import ProfileImage from "../../../../Assets/Images/vector.png";
@@ -10,13 +10,14 @@ import { useSelector } from "react-redux";
 export const UploadAvatar = ({ onUpload }) => {
   const [preview, setPreview] = useState(null);
   const [open, setOpen] = React.useState(false);
+  const [showPreview, setShowPreview] = useState(false);
   const userData = useSelector((state) => state.userData.data);
   const avatar = userData?.educator?.profile?.avatar
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     if (preview) {
       onUpload(preview);
-      console.log(preview)
     }
     setOpen(false);
   };
@@ -26,6 +27,13 @@ export const UploadAvatar = ({ onUpload }) => {
   const onCrop = (view) => {
     setPreview(view);
   };
+  useEffect(() => {
+    if (preview) {
+      setShowPreview(true);
+    } else {
+      setShowPreview(false);
+    }
+  }, [preview]);
   return (
     <div style={{ position: "relative" }}>
       <Modal
@@ -63,10 +71,8 @@ export const UploadAvatar = ({ onUpload }) => {
         </AvatarBox>
       </Modal>
       <Box display="flex" justifyContent="center" alignItems="center">
-        {console.log("avatar", avatar)}
         <img
-          src={avatar || preview ? preview : ProfileImage} 
-          // src={avatar}
+          src={showPreview && preview ? preview : (avatar || ProfileImage)}
           height={200}
           width={200}
           alt="Preview"
@@ -80,7 +86,7 @@ export const UploadAvatar = ({ onUpload }) => {
           right: 0,
           color: "blue",
           bgcolor: "white",
-          borderRadius:"50%",
+          borderRadius: "50%",
           border: "1px solid grey",
         }}
         p={0.5}

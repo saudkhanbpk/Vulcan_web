@@ -22,14 +22,16 @@ import { Account } from "../../Views/Account/account";
 import { getAuth } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData } from "../States/userDataSlice";
+import useAuthentication from "../States/onAuthStateChange";
 
 const Router = () => {
-  const location = useLocation();
-  const { features } = React.useContext(FeatureFlags);
   const auth = getAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const {user} = useAuthentication();
   const [userId, setUserId] = useState(null);
+  const { features } = React.useContext(FeatureFlags);
   const userData = useSelector((state) => state.userData.data);
   const onboardingComplete = userData?.educator?.onboarding_complete;
   useEffect(() => {
@@ -42,20 +44,16 @@ const Router = () => {
     });
     return () => unsubscribe();
   }, [auth]);
-
   useEffect(() => {
     if (userId) {
       dispatch(fetchUserData(userId));
     }
   }, [dispatch, userId]);
-
-  // Check if onboarding is complete and user is on "/educator-account" route
   useEffect(() => {
-    if (onboardingComplete && location.pathname === "/educator-account") {
-      // Navigate to the home path ("/") when onboarding is complete
-      navigate("/");
+    if ((user && onboardingComplete) && location.pathname === "/educator-account") {
+      navigate("/dashboard");
     }
-  }, [onboardingComplete, location.pathname, navigate]);
+  }, [onboardingComplete, user, location.pathname, navigate, dispatch]);
   return (
     <div>
       {location.pathname !== "/educator-account" ? <Navbar /> : ""}
@@ -78,13 +76,18 @@ const Router = () => {
         <Route exact path="/privacy" element={<Privacy />} />
         <Route exact path="/policies" element={<Policies />} />
         <Route exact path="/contact" element={<Contact />} />
+        {/* <Route
+          exact
+          path="/educator-account"
+          element={(user && onboardingComplete) ? <Dashboard/> : <EducatorAccountMainPage />}
+        /> */}
         <Route
           exact
           path="/educator-account"
           element={<EducatorAccountMainPage />}
         />
         <Route element={<PrivateOutlet />}>
-          <Route path={"/dashboard"} element={<Dashboard />} />
+          <Route exact path={"/dashboard"} element={<Dashboard />} />
           <Route path={"/account"} element={<Account />} />
         </Route>
         <Route path="*" element={<Error404 />} />

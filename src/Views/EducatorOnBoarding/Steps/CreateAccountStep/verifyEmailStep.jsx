@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Typography, styled } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { getAuth, sendEmailVerification } from "firebase/auth";
 import { useAuthValue } from "../../../../Infrastructure/States/authContext";
 import { useDispatch, useSelector } from "react-redux";
 import { incrementSteps } from "../../../../Infrastructure/States/educatorStepsSlice";
+import { VerifyEmailFormBox, VerifyEmailMainBox } from "../../styles";
 
 export const VerifyEmailStep = () => {
   const auth = getAuth();
@@ -17,7 +18,6 @@ export const VerifyEmailStep = () => {
   const selectedRoute = useSelector(
     (state) => state.auth.selectedRouteBeforeVerified
   );
-
   const handleVerifiedEmailAction = () => {
     dispatch(incrementSteps());
 
@@ -31,7 +31,6 @@ export const VerifyEmailStep = () => {
         alert(err.message);
       });
   };
-
   useEffect(() => {
     const interval = setInterval(() => {
       currentUser
@@ -50,7 +49,6 @@ export const VerifyEmailStep = () => {
       clearInterval(interval);
     };
   }, [currentUser, selectedRoute, navigate]);
-
   useEffect(() => {
     let interval = null;
     if (timeActive && time !== 0) {
@@ -64,28 +62,6 @@ export const VerifyEmailStep = () => {
     }
     return () => clearInterval(interval);
   }, [timeActive, time, setTimeActive]);
-
-
-  const VerifyEmailMainBox = styled(Box)(({ theme }) => ({
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    width: "358px",
-    height: "390px",
-    backgroundColor: "white",
-    paddingBottom: 5,
-  }));
-  const VerifyEmailFormBox = styled(Box)(({ theme }) => ({
-    width: "100%",
-    height: "auto",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingLeft: theme.spacing(4),
-    paddingRight: theme.spacing(4),
-  }));
   return (
     <Box>
       <VerifyEmailMainBox>

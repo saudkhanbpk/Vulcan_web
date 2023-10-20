@@ -176,7 +176,7 @@ export const ReachStep = () => {
                     onChange={formik.handleChange}
                     value={formik.values.platformLink1}
 
-                    sx={{ m: "3px" }}
+                    sx={{ m: "10px" }}
                     InputLabelProps={{
                       style: { fontSize: 16 },
                     }}
@@ -192,7 +192,7 @@ export const ReachStep = () => {
                     placeholder="Paste your link"
                     onChange={formik.handleChange}
                     value={formik.values.platformLink2}
-                    sx={{ m: "3px" }}
+                    sx={{ m: "10px" }}
                     InputLabelProps={{
                       style: { fontSize: 16 },
                     }}
@@ -208,7 +208,7 @@ export const ReachStep = () => {
                     placeholder="Paste your link"
                     onChange={formik.handleChange}
                     value={formik.values.platformLink3}
-                    sx={{ m: "3px" }}
+                    sx={{ m: "10px" }}
                     InputLabelProps={{
                       style: { fontSize: 16 },
                     }}
@@ -236,7 +236,7 @@ export const ReachStep = () => {
                     placeholder="Paste your link"
                     onChange={formik.handleChange}
                     value={formik.values.socialLink1}
-                    sx={{ m: "3px" }}
+                    sx={{ m: "10px" }}
                     InputLabelProps={{
                       style: { fontSize: 16 },
                     }}
@@ -252,7 +252,7 @@ export const ReachStep = () => {
                     placeholder="Paste your link"
                     onChange={formik.handleChange}
                     value={formik.values.socialLink2}
-                    sx={{ m: "3px" }}
+                    sx={{ m: "10px" }}
                     InputLabelProps={{
                       style: { fontSize: 16 },
                     }}
@@ -268,7 +268,7 @@ export const ReachStep = () => {
                     placeholder="Paste your link"
                     onChange={formik.handleChange}
                     value={formik.values.socialLink3}
-                    sx={{ m: "3px" }}
+                    sx={{ m: "10px" }}
                     InputLabelProps={{
                       style: { fontSize: 16 },
                     }}

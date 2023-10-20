@@ -6,7 +6,7 @@ export const styles = {
     justifyContent: "start",
     alignItems: "center",
   },
-
+  centerButton: { width: "100%", display: "flex", justifyContent: "center", alignItems: "center" },
   item: { borderRadius: "20px" },
   subGrid: { cursor: "pointer" },
   subGridIconClicked: { fontSize: "3.1875rem !important", color: "blue" },

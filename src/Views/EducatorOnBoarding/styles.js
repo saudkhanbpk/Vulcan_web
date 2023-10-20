@@ -244,3 +244,45 @@ export const AvatarBox = styled(Box)((theme) => ({
   boxShadow: 24,
   backgroundColor: "white",
 }));
+
+export const VerifyEmailMainBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  width: "358px",
+  height: "390px",
+  backgroundColor: "white",
+  paddingBottom: 5,
+}));
+export const VerifyEmailFormBox = styled(Box)(({ theme }) => ({
+  width: "100%",
+  height: "auto",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  alignItems: "center",
+  paddingLeft: theme.spacing(4),
+  paddingRight: theme.spacing(4),
+}));
+export const CountText = styled('span')(({ theme }) => ({
+  display: "inline-block",
+  width: "40px", 
+  textAlign: "left"
+}));
+export const ErrorBlockLarge = styled('h6')(({ theme }) => ({
+  display:"block",
+  color:"red",
+  textAlign:"center",
+  [theme.breakpoints.down("sm")]: {
+    display:"none",
+  },
+}));
+export const ErrorBlockSmall = styled('h6')(({ theme }) => ({
+  display:"none",
+  color:"red",
+  textAlign:"center",
+  [theme.breakpoints.down("sm")]: {
+    display:"block",
+  },
+}));

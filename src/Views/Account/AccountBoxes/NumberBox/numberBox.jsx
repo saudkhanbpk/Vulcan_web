@@ -31,8 +31,7 @@ export const NumberBox = ({ handleOpen, handleClose, showEditNumber }) => {
         const requestData = {
           number: number,
         };
-        let result = await updateProfile(requestData);
-        console.log("result @@@@@:", result);
+        await updateProfile(requestData);
         ShowSuccessToast("Phone Number updated successfully.");
         handleClose();
       } catch (error) {

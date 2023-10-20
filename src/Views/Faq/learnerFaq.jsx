@@ -22,7 +22,6 @@ const LearnerFaq = () => {
       <Typography variant="h1" align="center" sx={{ my: 5 }} component="h2">
         Learner FAQ
       </Typography>
-      ;
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
