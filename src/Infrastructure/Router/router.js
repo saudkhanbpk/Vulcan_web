@@ -23,6 +23,7 @@ import { getAuth } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData } from "../States/userDataSlice";
 import useAuthentication from "../States/onAuthStateChange";
+import { EducatorProfiles } from "../../Views/EducatorProfiles/educatorProfiles";
 
 const Router = () => {
   const auth = getAuth();
@@ -76,11 +77,6 @@ const Router = () => {
         <Route exact path="/privacy" element={<Privacy />} />
         <Route exact path="/policies" element={<Policies />} />
         <Route exact path="/contact" element={<Contact />} />
-        {/* <Route
-          exact
-          path="/educator-account"
-          element={(user && onboardingComplete) ? <Dashboard/> : <EducatorAccountMainPage />}
-        /> */}
         <Route
           exact
           path="/educator-account"
@@ -91,6 +87,7 @@ const Router = () => {
           <Route path={"/account"} element={<Account />} />
         </Route>
         <Route path="*" element={<Error404 />} />
+        <Route path="/educators/:name" element={<EducatorProfiles />} />
       </Routes>
       {location.pathname !== "/educator-account" ? <Footer /> : ""}
     </div>
