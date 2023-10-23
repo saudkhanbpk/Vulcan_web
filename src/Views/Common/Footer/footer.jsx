@@ -51,12 +51,12 @@ const Footer = () => {
     }));
   };
   const handleToggleEmailVerified = async () => {
+    try {
     // Update the email Verification flag value
     setFeatures((prevFeatures) => ({
       ...prevFeatures,
       emailVerified: !prevFeatures.emailVerified,
     }));
-    try {
       const verifyEmail = httpsCallable(functions, "emailverify");
       await verifyEmail();
       ShowSuccessToast("Email Verifications toggled!")
