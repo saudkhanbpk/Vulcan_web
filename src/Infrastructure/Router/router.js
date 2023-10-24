@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate, useParams } from "react-router-dom";
 import OurMission from "../../Views/OurMission/ourMission";
 import BecomeEducator from "../../Views/BecomeEducator/becomeEducator";
 import HowItWorks from "../../Views/HowItWorks/howItWorks";
@@ -27,6 +27,7 @@ import { EducatorProfiles } from "../../Views/EducatorProfiles/educatorProfiles"
 
 const Router = () => {
   const auth = getAuth();
+  const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -34,7 +35,10 @@ const Router = () => {
   const [userId, setUserId] = useState(null);
   const { features } = React.useContext(FeatureFlags);
   const userData = useSelector((state) => state.userData.data);
+  const approved = userData?.educator?.approved;
   const onboardingComplete = userData?.educator?.onboarding_complete;
+  const firstNameString = userData?.account?.first_name;
+  const lastNameFirstLetter = userData?.account?.last_name[0];
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -54,7 +58,16 @@ const Router = () => {
     if ((user && onboardingComplete) && location.pathname === "/educator-account") {
       navigate("/dashboard");
     }
-  }, [onboardingComplete, user, location.pathname, navigate, dispatch]);
+  }, [onboardingComplete, user, location.pathname, navigate, dispatch, params]);
+  function getNameFromPathname(pathname) {
+    const parts = pathname.split("/");
+    if (parts.length === 3 && parts[1] === "educators") {
+      return parts[2];
+    } else {
+      return null;
+    }
+  }
+  const name = getNameFromPathname(location.pathname);
   return (
     <div>
       {location.pathname !== "/educator-account" ? <Navbar /> : ""}
@@ -87,7 +100,9 @@ const Router = () => {
           <Route path={"/account"} element={<Account />} />
         </Route>
         <Route path="*" element={<Error404 />} />
-        <Route exact path="/educators/:name" element={<EducatorProfiles />} />
+        {approved && (name === `${firstNameString}${lastNameFirstLetter}`) ? (
+          <Route exact path="/educators/:name" element={<EducatorProfiles />} />
+        ) : null}
       </Routes>
       {location.pathname !== "/educator-account" ? <Footer /> : ""}
     </div>

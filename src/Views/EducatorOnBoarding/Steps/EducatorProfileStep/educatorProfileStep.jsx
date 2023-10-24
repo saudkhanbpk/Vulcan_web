@@ -74,14 +74,22 @@ export const EducatorProfileStep = () => {
     const res = userInput.match(/(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g);
     return res !== null;
   }
+  // Helper function to ensure URLs have a protocol (https://)
+  function ensureHttpsProtocol(url) {
+    if (url && !url.startsWith('https://')) {
+      return 'https://' + url;
+    }
+    return url;
+  }
+
   const formik = useFormik({
     initialValues: {
       avatar: "",
       aboutMe: "",
-      website: website || "",
-      youtube: youtube || "",
-      twitter: twitter || "",
-      linkedin: linkedin || "",
+      website: ensureHttpsProtocol(website) || "",
+      youtube: ensureHttpsProtocol(youtube) || "",
+      twitter: ensureHttpsProtocol(twitter) || "",
+      linkedin: ensureHttpsProtocol(linkedin) || "",
     },
     validationSchema: Yup.object().shape({
       website: Yup.string().test('website', 'Invalid Website URL', (value) => isUrlValid(value)),
@@ -108,14 +116,14 @@ export const EducatorProfileStep = () => {
           "updateeducatorprofile"
         );
         await updateEducatorStep(values);
-        dispatch(resetSteps());
-        dispatch(resetExperienceStepValues());
         const userRef = ref(db, `users/${uid}/educator`);
         await update(userRef, {
           onboarding_complete: true,
           approved: false
         });
         navigate("/dashboard");
+        dispatch(resetSteps());
+        dispatch(resetExperienceStepValues());
       } catch (error) {
         ShowErrorToast(error);
       } finally {
@@ -354,7 +362,7 @@ export const EducatorProfileStep = () => {
                   InputProps={{
                     style: { fontSize: 18 },
                   }}
-                  placeholder="www.example.com"
+                  placeholder="www.website.com"
                   label={formik.errors.website ? `${formik.errors.website}` : "Website Link"}
                   error={formik.touched.website && Boolean(formik.errors.website)}
                   fullWidth
@@ -366,7 +374,7 @@ export const EducatorProfileStep = () => {
                   label={formik.errors.youtube ? `${formik.errors.youtube}` : "Youtube Link"}
                   error={formik.touched.youtube && Boolean(formik.errors.youtube)}
                   {...formik.getFieldProps("youtube")}
-                  placeholder="www.example.com"
+                  placeholder="www.youtube.com"
                   InputLabelProps={{
                     style: { fontSize: 16 },
                   }}
@@ -382,7 +390,7 @@ export const EducatorProfileStep = () => {
                   error={formik.touched.twitter && Boolean(formik.errors.twitter)}
                   variant="standard"
                   {...formik.getFieldProps("twitter")}
-                  placeholder="www.example.com"
+                  placeholder="www.twitter.com"
                   InputLabelProps={{
                     style: { fontSize: 16 },
                   }}
@@ -398,7 +406,7 @@ export const EducatorProfileStep = () => {
                   error={formik.touched.linkedin && Boolean(formik.errors.linkedin)}
                   variant="standard"
                   {...formik.getFieldProps("linkedin")}
-                  placeholder="www.example.com"
+                  placeholder="www.linkedin.com"
                   InputLabelProps={{
                     style: { fontSize: 16 },
                   }}
