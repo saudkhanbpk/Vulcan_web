@@ -87,7 +87,7 @@ const Router = () => {
           <Route path={"/account"} element={<Account />} />
         </Route>
         <Route path="*" element={<Error404 />} />
-        <Route path="/educators/:name" element={<EducatorProfiles />} />
+        <Route exact path="/educators/:name" element={<EducatorProfiles />} />
       </Routes>
       {location.pathname !== "/educator-account" ? <Footer /> : ""}
     </div>

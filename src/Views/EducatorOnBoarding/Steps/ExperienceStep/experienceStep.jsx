@@ -10,7 +10,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   ContinueButton,
-  EduBlankTitle,
   ExitTypo,
   Footer,
   Header,
@@ -29,11 +28,9 @@ import { functions } from "../../../../Infrastructure/config";
 import { ShowErrorToast } from "../../../Common/Toast/toast";
 import ProgressBar from "../../progressbar";
 import { useNavigate } from "react-router-dom";
-import useAuthentication from "../../../../Infrastructure/States/onAuthStateChange";
 export const ExperienceStep = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useAuthentication();
 
   const steps = useSelector((state) => state.educatorSteps.steps);
   const experienceStep = useSelector(

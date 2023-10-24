@@ -1,5 +1,6 @@
 import { Box, TextField } from "@mui/material";
 import React from "react";
+import * as Yup from "yup";
 import {
   ContinueButton,
   ExitTypo,
@@ -62,8 +63,21 @@ export const ReachStep = () => {
     socialLink2: social2 || "",
     socialLink3: social3 || "",
   };
+  // Define the isUrlValid function
+  function isUrlValid(userInput) {
+    const res = userInput.match(/(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g);
+    return res !== null;
+  }
   const formik = useFormik({
     initialValues,
+    validationSchema: Yup.object().shape({
+      platformLink1: Yup.string().test('platformLink1', 'Invalid link URL', (value) => isUrlValid(value)),
+      platformLink2: Yup.string().test('platformLink2', 'Invalid link URL', (value) => isUrlValid(value)),
+      platformLink3: Yup.string().test('platformLink3', 'Invalid link URL', (value) => isUrlValid(value)),
+      socialLink1: Yup.string().test('socialLink1', 'Invalid link URL', (value) => isUrlValid(value)),
+      socialLink2: Yup.string().test('socialLink2', 'Invalid link URL', (value) => isUrlValid(value)),
+      socialLink3: Yup.string().test('socialLink3', 'Invalid link URL', (value) => isUrlValid(value)),
+    }),
     onSubmit: async (values) => {
       if (steps >= 1 && steps < 4) {
         try {
@@ -170,7 +184,12 @@ export const ReachStep = () => {
                 <QuestionFormBox>
                   <TextField
                     name="platformLink1"
-                    label="Link 1"
+                    label={
+                      formik.touched.platformLink1 && Boolean(formik.errors.platformLink1)
+                        ? formik.errors.platformLink1
+                        : "Link 1"
+                    }
+                    error={formik.touched.platformLink1 && Boolean(formik.errors.platformLink1)}
                     variant="outlined"
                     placeholder="Paste your link"
                     onChange={formik.handleChange}
@@ -187,7 +206,12 @@ export const ReachStep = () => {
                   />
                   <TextField
                     name="platformLink2"
-                    label="Link 2"
+                    label={
+                      formik.touched.platformLink2 && Boolean(formik.errors.platformLink2)
+                        ? formik.errors.platformLink2
+                        : "Link 2"
+                    }
+                    error={formik.touched.platformLink2 && Boolean(formik.errors.platformLink2)}
                     variant="outlined"
                     placeholder="Paste your link"
                     onChange={formik.handleChange}
@@ -203,7 +227,12 @@ export const ReachStep = () => {
                   />
                   <TextField
                     name="platformLink3"
-                    label="Link 3"
+                    label={
+                      formik.touched.platformLink3 && Boolean(formik.errors.platformLink3)
+                        ? formik.errors.platformLink3
+                        : "Link 3"
+                    }
+                    error={formik.touched.platformLink3 && Boolean(formik.errors.platformLink3)}
                     variant="outlined"
                     placeholder="Paste your link"
                     onChange={formik.handleChange}
@@ -231,7 +260,12 @@ export const ReachStep = () => {
                 <QuestionFormBox>
                   <TextField
                     name="socialLink1"
-                    label="Link 1"
+                    label={
+                      formik.touched.socialLink1 && Boolean(formik.errors.socialLink1)
+                        ? formik.errors.socialLink1
+                        : "Link 1"
+                    }
+                    error={formik.touched.socialLink1 && Boolean(formik.errors.socialLink1)}
                     variant="outlined"
                     placeholder="Paste your link"
                     onChange={formik.handleChange}
@@ -247,7 +281,12 @@ export const ReachStep = () => {
                   />
                   <TextField
                     name="socialLink2"
-                    label="Link 2"
+                    label={
+                      formik.touched.socialLink2 && Boolean(formik.errors.socialLink2)
+                        ? formik.errors.socialLink2
+                        : "Link 2"
+                    }
+                    error={formik.touched.socialLink2 && Boolean(formik.errors.socialLink2)}
                     variant="outlined"
                     placeholder="Paste your link"
                     onChange={formik.handleChange}
@@ -263,7 +302,12 @@ export const ReachStep = () => {
                   />
                   <TextField
                     name="socialLink3"
-                    label="Link 3"
+                    label={
+                      formik.touched.socialLink3 && Boolean(formik.errors.socialLink3)
+                        ? formik.errors.socialLink3
+                        : "Link 3"
+                    }
+                    error={formik.touched.socialLink3 && Boolean(formik.errors.socialLink3)}
                     variant="outlined"
                     placeholder="Paste your link"
                     onChange={formik.handleChange}

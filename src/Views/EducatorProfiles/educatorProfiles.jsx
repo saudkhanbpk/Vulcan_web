@@ -100,7 +100,7 @@ export const EducatorProfiles = () => {
                                     </Box>
                                 </Stack>
                                 <SocialMediaContainer gap={1} mt={3}>
-                                    {website && <LinkTag href={`https://${website}`} target='_blank' rel="noreferrer">
+                                    {website && <LinkTag href={website} target='_blank' rel="noreferrer">
                                         <SocialMedia>
                                             <InsertLinkIcon fontSize='small' />
                                             <SocialMediaText>
@@ -109,7 +109,7 @@ export const EducatorProfiles = () => {
                                         </SocialMedia>
                                     </LinkTag>
                                     }
-                                    {youtube && <LinkTag href={`https://${youtube}`} target='_blank' rel="noreferrer">
+                                    {youtube && <LinkTag href={youtube} target='_blank' rel="noreferrer">
                                         <SocialMedia>
                                             <YouTubeIcon fontSize='small' />
                                             <SocialMediaText>
@@ -118,7 +118,7 @@ export const EducatorProfiles = () => {
                                         </SocialMedia>
                                     </LinkTag>
                                     }
-                                    {twitter && <LinkTag href={`https://${twitter}`} target='_blank' rel="noreferrer">
+                                    {twitter && <LinkTag href={twitter} target='_blank' rel="noreferrer">
                                         <SocialMedia>
                                             <TwitterIcon fontSize='small' />
                                             <SocialMediaText>
@@ -127,7 +127,7 @@ export const EducatorProfiles = () => {
                                         </SocialMedia>
                                     </LinkTag>
                                     }
-                                    {linkedin && <LinkTag href={`https://${linkedin}`} target='_blank' rel="noreferrer">
+                                    {linkedin && <LinkTag href={linkedin} target='_blank' rel="noreferrer">
                                         <SocialMedia>
                                             <LinkedInIcon fontSize='small' />
                                             <SocialMediaText>

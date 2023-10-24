@@ -68,20 +68,27 @@ export const EducatorProfileStep = () => {
   // eslint-disable-next-line no-unused-vars
   const [plainText, setPlainText] = useState("");
   const [displayMessage, setDisplayMessage] = useState("");
+
+  // Define the isUrlValid function
+  function isUrlValid(userInput) {
+    // const res = userInput.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    const res = userInput.match(/(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g);
+    return res !== null;
+  }
   const formik = useFormik({
     initialValues: {
       avatar: "",
       aboutMe: "",
       website: website || "",
       youtube: youtube || "",
-      twitter: linkedin || "",
-      linkedin: twitter || "",
+      twitter: twitter || "",
+      linkedin: linkedin || "",
     },
     validationSchema: Yup.object().shape({
-      website: Yup.string().url('Invalid Website URL'),
-      youtube: Yup.string().url('Invalid YouTube URL'),
-      twitter: Yup.string().url('Invalid Twitter URL'),
-      linkedin: Yup.string().url('Invalid LinkedIn URL'),
+      website: Yup.string().test('website', 'Invalid Website URL', (value) => isUrlValid(value)),
+      youtube: Yup.string().test('youtube', 'Invalid YouTube URL', (value) => isUrlValid(value)),
+      twitter: Yup.string().test('twitter', 'Invalid Twitter URL', (value) => isUrlValid(value)),
+      linkedin: Yup.string().test('linkedin', 'Invalid LinkedIn URL', (value) => isUrlValid(value)),
     }),
     onSubmit: async (values) => {
       let newDisplayMessage = "";
@@ -348,7 +355,7 @@ export const EducatorProfileStep = () => {
                   InputProps={{
                     style: { fontSize: 18 },
                   }}
-                  placeholder="https://www.example.com"
+                  placeholder="www.example.com"
                   label={formik.errors.website ? `${formik.errors.website}` : "Website Link"}
                   error={formik.touched.website && Boolean(formik.errors.website)}
                   fullWidth
@@ -360,7 +367,7 @@ export const EducatorProfileStep = () => {
                   label={formik.errors.youtube ? `${formik.errors.youtube}` : "Youtube Link"}
                   error={formik.touched.youtube && Boolean(formik.errors.youtube)}
                   {...formik.getFieldProps("youtube")}
-                  placeholder="https://www.example.com"
+                  placeholder="www.example.com"
                   InputLabelProps={{
                     style: { fontSize: 16 },
                   }}
@@ -376,7 +383,7 @@ export const EducatorProfileStep = () => {
                   error={formik.touched.twitter && Boolean(formik.errors.twitter)}
                   variant="standard"
                   {...formik.getFieldProps("twitter")}
-                  placeholder="https://www.example.com"
+                  placeholder="www.example.com"
                   InputLabelProps={{
                     style: { fontSize: 16 },
                   }}
@@ -392,7 +399,7 @@ export const EducatorProfileStep = () => {
                   error={formik.touched.linkedin && Boolean(formik.errors.linkedin)}
                   variant="standard"
                   {...formik.getFieldProps("linkedin")}
-                  placeholder="https://www.example.com"
+                  placeholder="www.example.com"
                   InputLabelProps={{
                     style: { fontSize: 16 },
                   }}
