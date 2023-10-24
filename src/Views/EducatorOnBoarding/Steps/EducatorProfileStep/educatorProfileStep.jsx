@@ -36,6 +36,7 @@ import { getAuth } from "firebase/auth";
 import { Loader } from "../../../Common/loader";
 import { getDatabase, ref, update } from "firebase/database";
 import ProgressBar from "../../progressbar";
+import * as Yup from "yup";
 
 export const EducatorProfileStep = () => {
   const auth = getAuth();
@@ -67,7 +68,6 @@ export const EducatorProfileStep = () => {
   // eslint-disable-next-line no-unused-vars
   const [plainText, setPlainText] = useState("");
   const [displayMessage, setDisplayMessage] = useState("");
-
   const formik = useFormik({
     initialValues: {
       avatar: "",
@@ -77,6 +77,12 @@ export const EducatorProfileStep = () => {
       twitter: linkedin || "",
       linkedin: twitter || "",
     },
+    validationSchema: Yup.object().shape({
+      website: Yup.string().url('Invalid Website URL'),
+      youtube: Yup.string().url('Invalid YouTube URL'),
+      twitter: Yup.string().url('Invalid Twitter URL'),
+      linkedin: Yup.string().url('Invalid LinkedIn URL'),
+    }),
     onSubmit: async (values) => {
       let newDisplayMessage = "";
       if (!values.avatar && !profilePicture) {
@@ -101,6 +107,7 @@ export const EducatorProfileStep = () => {
         const userRef = ref(db, `users/${uid}/educator`);
         await update(userRef, {
           onboarding_complete: true,
+          approved: false
         });
         navigate("/dashboard");
       } catch (error) {
@@ -333,7 +340,6 @@ export const EducatorProfileStep = () => {
                 <TextField
                   name="websiteLink"
                   sx={{ mt: "6px" }}
-                  label={"Website Link"}
                   variant="standard"
                   {...formik.getFieldProps("website")}
                   InputLabelProps={{
@@ -342,14 +348,19 @@ export const EducatorProfileStep = () => {
                   InputProps={{
                     style: { fontSize: 18 },
                   }}
+                  placeholder="https://www.example.com"
+                  label={formik.errors.website ? `${formik.errors.website}` : "Website Link"}
+                  error={formik.touched.website && Boolean(formik.errors.website)}
                   fullWidth
                 />
                 <TextField
                   name="youtubeLink"
                   sx={{ mt: "6px" }}
-                  label={"Youtube Link"}
                   variant="standard"
+                  label={formik.errors.youtube ? `${formik.errors.youtube}` : "Youtube Link"}
+                  error={formik.touched.youtube && Boolean(formik.errors.youtube)}
                   {...formik.getFieldProps("youtube")}
+                  placeholder="https://www.example.com"
                   InputLabelProps={{
                     style: { fontSize: 16 },
                   }}
@@ -361,9 +372,11 @@ export const EducatorProfileStep = () => {
                 <TextField
                   name="twitterLink"
                   sx={{ mt: "6px" }}
-                  label={"Twitter Link"}
+                  label={formik.errors.twitter ? `${formik.errors.twitter}` : "Twitter Link"}
+                  error={formik.touched.twitter && Boolean(formik.errors.twitter)}
                   variant="standard"
                   {...formik.getFieldProps("twitter")}
+                  placeholder="https://www.example.com"
                   InputLabelProps={{
                     style: { fontSize: 16 },
                   }}
@@ -375,9 +388,11 @@ export const EducatorProfileStep = () => {
                 <TextField
                   name="linkedinLink"
                   sx={{ mt: "6px" }}
-                  label={"LinkedIn Link"}
+                  label={formik.errors.linkedin ? `${formik.errors.linkedin}` : "LinkedIn Link"}
+                  error={formik.touched.linkedin && Boolean(formik.errors.linkedin)}
                   variant="standard"
                   {...formik.getFieldProps("linkedin")}
+                  placeholder="https://www.example.com"
                   InputLabelProps={{
                     style: { fontSize: 16 },
                   }}

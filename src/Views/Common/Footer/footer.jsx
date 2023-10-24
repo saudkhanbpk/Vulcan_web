@@ -7,7 +7,7 @@ import {
   Modal,
   FormGroup,
   FormControlLabel,
-  Switch,
+  Switch, Button,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { MainBox, styles } from "./styles";
@@ -17,21 +17,29 @@ import { FeatureFlags } from "../../../Infrastructure/featureFlags";
 import { httpsCallable } from "firebase/functions";
 import { ShowErrorToast, ShowSuccessToast } from "../Toast/toast";
 import { functions } from "../../../Infrastructure/config";
+import { useSelector } from "react-redux";
+import { getDatabase, ref, update } from "firebase/database";
+import useAuthentication from "../../../Infrastructure/States/onAuthStateChange";
 
 const Footer = () => {
+  const db = getDatabase()
   const navigate = useNavigate();
+  const { user } = useAuthentication();
+  const uid = user?.uid;
+  const userData = useSelector((state) => state.userData.data);
+  const firstName = userData?.account?.first_name;
+  const approvedAccount = userData?.educator?.approved;
+  const lastNameFirstLetter = userData?.account?.last_name[0];
   const [clickCount, setClickCount] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const { features, setFeatures } = useContext(FeatureFlags);
-
   // Access the showCourses flag
   const showCourses = features.showCourses;
-  const flag2 = features.flag2;
+  const approved = features.approved;
   const emailVerified = features.emailVerified;
   const handleClick = () => {
     setClickCount(clickCount + 1);
   };
-
   const handleClose = () => {
     setModalOpen(false);
     setClickCount(0);
@@ -43,20 +51,33 @@ const Footer = () => {
       showCourses: !prevFeatures.showCourses,
     }));
   };
-  const handleToggleFlag2 = () => {
+  const handleToggleApproved = async () => {
     // Update the showCourses flag value
-    setFeatures((prevFeatures) => ({
-      ...prevFeatures,
-      flag2: !prevFeatures.flag2,
-    }));
+    try {
+      setFeatures((prevFeatures) => ({
+        ...prevFeatures,
+        approved: !prevFeatures.approved,
+      }));
+      const userRef = ref(db, `users/${uid}/educator`);
+      await update(userRef, {
+        approved: !approved
+      });
+      if (approved !== true) {
+        ShowSuccessToast("Educator Account Approved")
+      } else {
+        ShowSuccessToast("Educator Account not Approved")
+      }
+    } catch (err) {
+      ShowErrorToast("Something went wrong try again!")
+    }
   };
   const handleToggleEmailVerified = async () => {
-    // Update the email Verification flag value
-    setFeatures((prevFeatures) => ({
-      ...prevFeatures,
-      emailVerified: !prevFeatures.emailVerified,
-    }));
     try {
+      // Update the email Verification flag value
+      setFeatures((prevFeatures) => ({
+        ...prevFeatures,
+        emailVerified: !prevFeatures.emailVerified,
+      }));
       const verifyEmail = httpsCallable(functions, "emailverify");
       await verifyEmail();
       ShowSuccessToast("Email Verifications toggled!")
@@ -64,7 +85,14 @@ const Footer = () => {
       ShowErrorToast("Email Verifications not toggled!")
     }
   };
-
+  const handleFunction = () => {
+    if (approvedAccount) {
+      navigate(`/educators/${firstName}${lastNameFirstLetter}`)
+      handleClose()
+    } else {
+      ShowErrorToast("Educator Account is not Approved!")
+    }
+  }
   useEffect(() => {
     if (clickCount === 3) {
       setModalOpen(true);
@@ -119,8 +147,8 @@ const Footer = () => {
                 <FormControlLabel
                   control={
                     <Switch
-                      checked={flag2}
-                      onChange={() => handleToggleFlag2(flag2)}
+                      checked={approved}
+                      onChange={() => handleToggleApproved(approved)}
                       sx={{
                         display: "flex",
                         alignItems: "center",
@@ -137,7 +165,7 @@ const Footer = () => {
                         justifyContent: "center",
                       }}
                     >
-                      Flag 2
+                      Approved
                     </span>
                   }
                 />
@@ -166,6 +194,9 @@ const Footer = () => {
                     </span>
                   }
                 />
+                <Button variant="contained" color="primary" onClick={() => handleFunction()}>
+                  Profile Page
+                </Button>
               </FormGroup>
             </MainBox>
           </Modal>
