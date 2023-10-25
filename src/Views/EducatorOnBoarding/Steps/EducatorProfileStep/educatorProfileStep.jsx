@@ -68,11 +68,12 @@ export const EducatorProfileStep = () => {
   // eslint-disable-next-line no-unused-vars
   const [plainText, setPlainText] = useState("");
   const [displayMessage, setDisplayMessage] = useState("");
-
   // Define the isUrlValid function
   function isUrlValid(userInput) {
+    if(userInput){
     const res = userInput.match(/(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g);
     return res !== null;
+  } return true;
   }
   // Helper function to ensure URLs have a protocol (https://)
   function ensureHttpsProtocol(url) {
@@ -81,7 +82,6 @@ export const EducatorProfileStep = () => {
     }
     return url;
   }
-
   const formik = useFormik({
     initialValues: {
       avatar: "",

@@ -27,6 +27,17 @@ export const EducatorProfiles = () => {
     const lastName =
         userData?.account?.last_name.charAt(0).toUpperCase() +
         userData?.account?.last_name.slice(1);
+    // Helper function to ensure URLs have a protocol (https://)
+    function ensureHttpsProtocol(url) {
+        if (url && !url.startsWith('https://')) {
+            return 'https://' + url;
+        }
+        return url;
+    }
+    const websiteUrl = ensureHttpsProtocol(website)
+    const youtubeUrl = ensureHttpsProtocol(youtube)
+    const linkedinUrl = ensureHttpsProtocol(linkedin)
+    const twitterUrl = ensureHttpsProtocol(twitter)
     return (
         <>
             {loading ? (
@@ -100,7 +111,7 @@ export const EducatorProfiles = () => {
                                     </Box>
                                 </Stack>
                                 <SocialMediaContainer gap={1} mt={3}>
-                                    {website && <LinkTag href={website} target='_blank' rel="noreferrer">
+                                    {websiteUrl && <LinkTag href={websiteUrl} target='_blank' rel="noreferrer">
                                         <SocialMedia>
                                             <InsertLinkIcon fontSize='small' />
                                             <SocialMediaText>
@@ -109,7 +120,7 @@ export const EducatorProfiles = () => {
                                         </SocialMedia>
                                     </LinkTag>
                                     }
-                                    {youtube && <LinkTag href={youtube} target='_blank' rel="noreferrer">
+                                    {youtubeUrl && <LinkTag href={youtubeUrl} target='_blank' rel="noreferrer">
                                         <SocialMedia>
                                             <YouTubeIcon fontSize='small' />
                                             <SocialMediaText>
@@ -118,7 +129,7 @@ export const EducatorProfiles = () => {
                                         </SocialMedia>
                                     </LinkTag>
                                     }
-                                    {twitter && <LinkTag href={twitter} target='_blank' rel="noreferrer">
+                                    {twitterUrl && <LinkTag href={twitterUrl} target='_blank' rel="noreferrer">
                                         <SocialMedia>
                                             <TwitterIcon fontSize='small' />
                                             <SocialMediaText>
@@ -127,7 +138,7 @@ export const EducatorProfiles = () => {
                                         </SocialMedia>
                                     </LinkTag>
                                     }
-                                    {linkedin && <LinkTag href={linkedin} target='_blank' rel="noreferrer">
+                                    {linkedinUrl && <LinkTag href={linkedinUrl} target='_blank' rel="noreferrer">
                                         <SocialMedia>
                                             <LinkedInIcon fontSize='small' />
                                             <SocialMediaText>
