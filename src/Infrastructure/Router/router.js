@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData } from "../States/userDataSlice";
 import useAuthentication from "../States/onAuthStateChange";
 import { EducatorProfiles } from "../../Views/EducatorProfiles/educatorProfiles";
+import LoadingPage from "../../Views/Common/LoadingPage/loadingPage";
 
 const Router = () => {
   const auth = getAuth();
@@ -31,10 +32,11 @@ const Router = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const {user} = useAuthentication();
+  const { user } = useAuthentication();
   const [userId, setUserId] = useState(null);
   const { features } = React.useContext(FeatureFlags);
   const userData = useSelector((state) => state.userData.data);
+  const loading = useSelector((state) => state.userData.loading);
   const approved = userData?.educator?.approved;
   const onboardingComplete = userData?.educator?.onboarding_complete;
   const firstNameString = userData?.account?.first_name;
@@ -67,10 +69,24 @@ const Router = () => {
       return null;
     }
   }
+
+const handleroutefunction=()=>{
+ if (approved && (name === `${firstNameString}${lastNameFirstLetter}`))
+ {
+return <EducatorProfiles /> 
+ }else if((approved && (name != `${firstNameString}${lastNameFirstLetter}`)))
+ {
+ return  <Error404 />
+ }else{
+   <LoadingPage />
+  }
+}
+
   const name = getNameFromPathname(location.pathname);
+  console.log("loading :",loading ,"userData :",userData,"name :",location)
   return (
     <div>
-      {location.pathname !== "/educator-account" ? <Navbar /> : ""}
+      {location.pathname !== "/educator-account" && location.pathname !== "/educator-account"  <Navbar /> : ""}
       <Routes>
         <Route exact path="/" element={<HomeScreen />} />
         <Route exact path="/about" element={<OurMission />} />
@@ -100,13 +116,18 @@ const Router = () => {
           <Route path={"/account"} element={<Account />} />
         </Route>
         <Route path="*" element={<Error404 />} />
-        {approved && (name === `${firstNameString}${lastNameFirstLetter}`) ? (
+        {/* {!loading && approved && (name === `${firstNameString}${lastNameFirstLetter}`) ? (
           <Route exact path="/educators/:name" element={<EducatorProfiles />} />
-        ) : null}
+        ) : null} */}
+        {/* <Route path="/educators/:name" element={!loading ? (approved && (name === `${firstNameString}${lastNameFirstLetter}`) ? <EducatorProfiles /> : <LoadingPage />) : <LoadingPage />} /> */}
+        <Route path="/educators/:name" element={!loading ? handleroutefunction() : <LoadingPage />} />
+        {/* <Route path="/educators/:name" element={loading ? <LoadingPage /> : (approved && name === `${firstNameString}${lastNameFirstLetter}` ? <EducatorProfiles /> : <LoadingPage />)} /> */}
+
       </Routes>
       {location.pathname !== "/educator-account" ? <Footer /> : ""}
     </div>
   );
 };
+
 
 export default Router;
