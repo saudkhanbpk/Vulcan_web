@@ -74,7 +74,7 @@ const handleroutefunction=()=>{
  if (approved && (name === `${firstNameString}${lastNameFirstLetter}`))
  {
 return <EducatorProfiles /> 
- }else if((approved && (name != `${firstNameString}${lastNameFirstLetter}`)))
+ }else if((approved && (name !== `${firstNameString}${lastNameFirstLetter}`)))
  {
  return  <Error404 />
  }else{
@@ -86,7 +86,7 @@ return <EducatorProfiles />
   console.log("loading :",loading ,"userData :",userData,"name :",location)
   return (
     <div>
-      {location.pathname !== "/educator-account" && location.pathname !== "/educator-account"  <Navbar /> : ""}
+      {location.pathname !== "/educator-account" ? <Navbar />:""}
       <Routes>
         <Route exact path="/" element={<HomeScreen />} />
         <Route exact path="/about" element={<OurMission />} />
@@ -115,12 +115,12 @@ return <EducatorProfiles />
           <Route exact path={"/dashboard"} element={<Dashboard />} />
           <Route path={"/account"} element={<Account />} />
         </Route>
-        <Route path="*" element={<Error404 />} />
-        {/* {!loading && approved && (name === `${firstNameString}${lastNameFirstLetter}`) ? (
+        <Route path="*" element={<Error404 />}/>
+        {!loading && approved && (name === `${firstNameString}${lastNameFirstLetter}`) ? (
           <Route exact path="/educators/:name" element={<EducatorProfiles />} />
-        ) : null} */}
+        ) : null}
         {/* <Route path="/educators/:name" element={!loading ? (approved && (name === `${firstNameString}${lastNameFirstLetter}`) ? <EducatorProfiles /> : <LoadingPage />) : <LoadingPage />} /> */}
-        <Route path="/educators/:name" element={!loading ? handleroutefunction() : <LoadingPage />} />
+        {/* <Route path="/educators/:name" element={!loading ? handleroutefunction() : <LoadingPage />} /> */}
         {/* <Route path="/educators/:name" element={loading ? <LoadingPage /> : (approved && name === `${firstNameString}${lastNameFirstLetter}` ? <EducatorProfiles /> : <LoadingPage />)} /> */}
 
       </Routes>

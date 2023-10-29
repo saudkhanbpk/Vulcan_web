@@ -20,7 +20,8 @@ const WelcomeBox = ({userData}) => {
   const [open, setOpen] = React.useState(false);
   const message = "Educator Onboarding Complete";
   const [isClicked, setIsClicked] = useState(true);
-  const onboardingComplete = userData?.educator?.onboarding_complete;
+  // const onboardingComplete = userData?.educator?.onboarding_complete;
+  const onboardingComplete = false
   const handleButtonClick = (val) => {
     if (val.value === 1) {
       setIsClicked(true);
