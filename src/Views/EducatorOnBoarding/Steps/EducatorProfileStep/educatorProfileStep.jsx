@@ -76,35 +76,45 @@ export const EducatorProfileStep = () => {
   } return true
   }
   function isYoutubeUrlValid(userInput) {
-    if (userInput) {
+    if (!userInput || userInput === "https://") {
+      return true; // Skip validation for empty or non-required field
+    }  
+    // if (userInput) {
       const res = userInput.match(/(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g)
   
       if (res !== null) {
         // Check if the domain contains "youtube.com" or "youtu.be"
         return res.some(url => url.includes('youtube.com') || url.includes('youtu.be'))
       }
-    }
+    // }
   
     return false
   }
   function isLinkedinUrlValid(userInput) {
-    if (userInput) {
+    if (!userInput || userInput === "https://") {
+      return true; // Skip validation for empty or non-required field
+    }  
+    // if (userInput) {
       const res = userInput.match(/(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g)
   
       if (res !== null) {
         return res.some(url => url.includes('linkedin.com'))
       }
-    }
+    // }
     return false
   }
   function isTwitterUrlValid(userInput) {
-    if (userInput) {
+    if (!userInput || userInput === "https://") {
+      return true; // Skip validation for empty or non-required field
+    }
+  
+    // if (userInput) {
       const res = userInput.match(/(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g)
   
       if (res !== null) {
         return res.some(url => url.includes('twitter.com'))
       }
-    }
+    // }
     return false
   }
   // Helper function to ensure URLs have a protocol (https://)
