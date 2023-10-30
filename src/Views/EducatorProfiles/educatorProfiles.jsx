@@ -44,7 +44,7 @@ export const EducatorProfiles = () => {
                 <Loader />
             ) : (
                 <Box
-                    height={"auto"}
+                    height={"100vh"}
                     pt={{ lg: 8, md: 6, sm: 3, xs: 2 }}
                 >
                     <Grid
