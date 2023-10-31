@@ -1,14 +1,14 @@
-import { Box, Stack, TextField } from "@mui/material"
-import "react-quill/dist/quill.snow.css"
-import Grid from "@mui/material/Unstable_Grid2/Grid2"
-import React, { useEffect, useState } from "react"
+import { Box, Stack, TextField } from "@mui/material";
+import "react-quill/dist/quill.snow.css";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import React, { useEffect, useState } from "react";
 import {
   resetSteps,
   decrementSteps,
   resetExperienceStepValues,
-} from "../../../../Infrastructure/States/educatorStepsSlice"
-import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+} from "../../../../Infrastructure/States/educatorStepsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   AboutMe,
   CharacterCount,
@@ -25,104 +25,102 @@ import {
   Span,
   StepsTypo,
   TitleText,
-} from "../../styles"
-import ReactQuill from "react-quill"
-import { UploadAvatar } from "./uploadAvatar"
-import { useFormik } from "formik"
-import { httpsCallable } from "firebase/functions"
-import { functions } from "../../../../Infrastructure/config"
-import { ShowErrorToast } from "../../../Common/Toast/toast"
-import { getAuth } from "firebase/auth"
-import { Loader } from "../../../Common/loader"
-import { getDatabase, ref, update } from "firebase/database"
-import ProgressBar from "../../progressbar"
-import * as Yup from "yup"
+} from "../../styles";
+import ReactQuill from "react-quill";
+import { UploadAvatar } from "./uploadAvatar";
+import { useFormik } from "formik";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "../../../../Infrastructure/config";
+import { ShowErrorToast } from "../../../Common/Toast/toast";
+import { getAuth } from "firebase/auth";
+import { Loader } from "../../../Common/loader";
+import { getDatabase, ref, update } from "firebase/database";
+import ProgressBar from "../../progressbar";
+import * as Yup from "yup";
 
 export const EducatorProfileStep = () => {
-  const auth = getAuth()
-  const db = getDatabase()
-  const minCharacters = 200
-  const maxCharacters = 2000
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const uid = auth?.currentUser?.uid
-  const [loaderValue, setLoaderValue] = useState(false)
-  const userData = useSelector((state) => state.userData.data)
-  const aboutMe = userData?.educator?.profile?.about_me
-  const profile = userData?.educator?.profile
-  const youtube = profile?.youtube
-  const linkedin = profile?.linkedin
-  const twitter = profile?.twitter
-  const website = profile?.website
-  const profilePicture = userData?.educator?.profile?.avatar
+  const auth = getAuth();
+  const db = getDatabase();
+  const minCharacters = 200;
+  const maxCharacters = 2000;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const uid = auth?.currentUser?.uid;
+  const [loaderValue, setLoaderValue] = useState(false);
+  const userData = useSelector((state) => state.userData.data);
+  const aboutMe = userData?.educator?.profile?.about_me;
+  const profile = userData?.educator?.profile;
+  const youtube = profile?.youtube;
+  const linkedin = profile?.linkedin;
+  const twitter = profile?.twitter;
+  const website = profile?.website;
+  const profilePicture = userData?.educator?.profile?.avatar;
   const firstName =
     userData?.account?.first_name.charAt(0).toUpperCase() +
-    userData?.account?.first_name.slice(1)
+    userData?.account?.first_name.slice(1);
   const lastName =
     userData?.account?.last_name.charAt(0).toUpperCase() +
-    userData?.account?.last_name.slice(1)
-  const loading = useSelector((state) => state.userData.loading)
-  const [characterCount, setCharacterCount] = useState(0)
-  const steps = useSelector((state) => state.educatorSteps.steps)
-  const [htmlData, setHtmlData] = useState(aboutMe || "")
+    userData?.account?.last_name.slice(1);
+  const loading = useSelector((state) => state.userData.loading);
+  const [characterCount, setCharacterCount] = useState(0);
+  const steps = useSelector((state) => state.educatorSteps.steps);
+  const [htmlData, setHtmlData] = useState(aboutMe || "");
   // eslint-disable-next-line no-unused-vars
-  const [plainText, setPlainText] = useState("")
-  const [displayMessage, setDisplayMessage] = useState("")
+  const [plainText, setPlainText] = useState("");
+  const [displayMessage, setDisplayMessage] = useState("");
   // Define the isUrlValid function
   function isUrlValid(userInput) {
-    if(userInput){
-    const res = userInput.match(/(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g)
-    return res !== null
-  } return true
+    if (userInput) {
+      const res = userInput.match(
+        /(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g
+      );
+      return res !== null;
+    }
+    return true;
   }
   function isYoutubeUrlValid(userInput) {
     if (!userInput || userInput === "https://") {
-      return true; // Skip validation for empty or non-required field
-    }  
-    // if (userInput) {
-      const res = userInput.match(/(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g)
-  
-      if (res !== null) {
-        // Check if the domain contains "youtube.com" or "youtu.be"
-        return res.some(url => url.includes('youtube.com') || url.includes('youtu.be'))
-      }
-    // }
-  
-    return false
+      return true;
+    }
+    const res = userInput.match(
+      /(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g
+    );
+    if (res !== null) {
+      return res.some(
+        (url) => url.includes("youtube.com") || url.includes("youtu.be")
+      );
+    }
+    return false;
   }
   function isLinkedinUrlValid(userInput) {
     if (!userInput || userInput === "https://") {
-      return true; // Skip validation for empty or non-required field
-    }  
-    // if (userInput) {
-      const res = userInput.match(/(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g)
-  
-      if (res !== null) {
-        return res.some(url => url.includes('linkedin.com'))
-      }
-    // }
-    return false
+      return true;
+    }
+    const res = userInput.match(
+      /(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g
+    );
+    if (res !== null) {
+      return res.some((url) => url.includes("linkedin.com"));
+    }
+    return false;
   }
   function isTwitterUrlValid(userInput) {
     if (!userInput || userInput === "https://") {
-      return true; // Skip validation for empty or non-required field
+      return true;
     }
-  
-    // if (userInput) {
-      const res = userInput.match(/(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g)
-  
-      if (res !== null) {
-        return res.some(url => url.includes('twitter.com'))
-      }
-    // }
-    return false
+    const res = userInput.match(
+      /(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g
+    );
+    if (res !== null) {
+      return res.some((url) => url.includes("twitter.com"));
+    }
+    return false;
   }
-  // Helper function to ensure URLs have a protocol (https://)
   function ensureHttpsProtocol(url) {
-    if (url && !url.startsWith('https://')) {
-      return 'https://' + url
+    if (url && !url.startsWith("https://")) {
+      return "https://" + url;
     }
-    return url
+    return url;
   }
   const formik = useFormik({
     initialValues: {
@@ -134,45 +132,62 @@ export const EducatorProfileStep = () => {
       linkedin: ensureHttpsProtocol(linkedin) || "",
     },
     validationSchema: Yup.object().shape({
-      website: Yup.string().test('website', 'Invalid Website URL', (value) => isUrlValid(value)),
-      youtube: Yup.string().test('youtube', 'Invalid YouTube URL Domain', (value) => isYoutubeUrlValid(value)),
-      twitter: Yup.string().test('twitter', 'Invalid Twitter URL Domain', (value) => isTwitterUrlValid(value)),
-      linkedin: Yup.string().test('linkedin', 'Invalid LinkedIn URL Domain', (value) => isLinkedinUrlValid(value)),
+      website: Yup.string().test("website", "Invalid Website URL", (value) =>
+        isUrlValid(value)
+      ),
+      youtube: Yup.string().test(
+        "youtube",
+        "Invalid YouTube URL Domain",
+        (value) => isYoutubeUrlValid(value)
+      ),
+      twitter: Yup.string().test(
+        "twitter",
+        "Invalid Twitter URL Domain",
+        (value) => isTwitterUrlValid(value)
+      ),
+      linkedin: Yup.string().test(
+        "linkedin",
+        "Invalid LinkedIn URL Domain",
+        (value) => isLinkedinUrlValid(value)
+      ),
     }),
     onSubmit: async (values) => {
-      let newDisplayMessage = ""
+      let newDisplayMessage = "";
       if (!values.avatar && !profilePicture) {
-        newDisplayMessage = 'Must upload profile picture'
-      } else if (characterCount < minCharacters || characterCount > maxCharacters) {
-        newDisplayMessage = 'About me text must be 200-2000 characters'
+        newDisplayMessage = "Must upload profile picture";
+      } else if (
+        characterCount < minCharacters ||
+        characterCount > maxCharacters
+      ) {
+        newDisplayMessage = "About me text must be 200-2000 characters";
       }
-      setDisplayMessage(newDisplayMessage)
+      setDisplayMessage(newDisplayMessage);
       if (newDisplayMessage) {
-        setLoaderValue(false)
-        return
+        setLoaderValue(false);
+        return;
       }
       try {
-        setLoaderValue(true)
+        setLoaderValue(true);
         const updateEducatorStep = httpsCallable(
           functions,
           "updateeducatorprofile"
-        )
-        await updateEducatorStep(values)
-        const userRef = ref(db, `users/${uid}/educator`)
+        );
+        await updateEducatorStep(values);
+        const userRef = ref(db, `users/${uid}/educator`);
         await update(userRef, {
           onboarding_complete: true,
-          approved: false
-        })
-        navigate("/dashboard")
-        dispatch(resetSteps())
-        dispatch(resetExperienceStepValues())
+          approved: false,
+        });
+        navigate("/dashboard");
+        dispatch(resetSteps());
+        dispatch(resetExperienceStepValues());
       } catch (error) {
-        ShowErrorToast(error)
+        ShowErrorToast(error);
       } finally {
-        setLoaderValue(false)
+        setLoaderValue(false);
       }
     },
-  })
+  });
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -185,7 +200,7 @@ export const EducatorProfileStep = () => {
       [{ color: ["red", "#785412"] }],
       [{ background: ["red", "#785412"] }],
     ],
-  }
+  };
   const formats = [
     "header",
     "bold",
@@ -202,57 +217,60 @@ export const EducatorProfileStep = () => {
     "align",
     "size",
     "font",
-  ]
+  ];
   const handleDec = async () => {
     try {
       const updateEducatorStep = httpsCallable(
         functions,
         "updateeducatorprofile"
-      )
-      await updateEducatorStep(formik.values)
-      dispatch(decrementSteps())
+      );
+      await updateEducatorStep(formik.values);
+      dispatch(decrementSteps());
     } catch (error) {
-      ShowErrorToast(error)
+      ShowErrorToast(error);
     }
-  }
+  };
   const handleAvatarUpload = (imageDataURL) => {
-    formik.setFieldValue("avatar", imageDataURL)
-  }
+    formik.setFieldValue("avatar", imageDataURL);
+  };
   function countCharactersWithoutTags(html) {
-    const textWithoutTags = html.replace(/(<([^>]+)>)/gi, "")
-    return textWithoutTags.length
+    const textWithoutTags = html.replace(/(<([^>]+)>)/gi, "");
+    return textWithoutTags.length;
   }
   const handleAboutMeChange = (value) => {
-    const currentCharacterCount = countCharactersWithoutTags(value)
-    setCharacterCount(currentCharacterCount)
-    formik.setFieldValue("aboutMe", value)
-    setHtmlData(value)
-    if (currentCharacterCount >= minCharacters && currentCharacterCount <= maxCharacters) {
-      setDisplayMessage("")
+    const currentCharacterCount = countCharactersWithoutTags(value);
+    setCharacterCount(currentCharacterCount);
+    formik.setFieldValue("aboutMe", value);
+    setHtmlData(value);
+    if (
+      currentCharacterCount >= minCharacters &&
+      currentCharacterCount <= maxCharacters
+    ) {
+      setDisplayMessage("");
     }
-  }
+  };
   const handleExit = async () => {
     try {
       const updateEducatorStep = httpsCallable(
         functions,
         "updateeducatorprofile"
-      )
-      await updateEducatorStep(formik.values)
-      dispatch(resetExperienceStepValues())
-      dispatch(resetSteps())
-      navigate("/")
-    } catch (err) { }
-  }
+      );
+      await updateEducatorStep(formik.values);
+      dispatch(resetExperienceStepValues());
+      dispatch(resetSteps());
+      navigate("/");
+    } catch (err) {}
+  };
   useEffect(() => {
-    setCharacterCount(formik.values.aboutMe.length)
-  }, [formik.values.aboutMe])
+    setCharacterCount(formik.values.aboutMe.length);
+  }, [formik.values.aboutMe]);
   useEffect(() => {
-    const tempDiv = document.createElement("div")
-    tempDiv.innerHTML = htmlData
-    const text = tempDiv.textContent || tempDiv.innerText
-    setPlainText(text)
-    setCharacterCount(text.length)
-  }, [htmlData])
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = htmlData;
+    const text = tempDiv.textContent || tempDiv.innerText;
+    setPlainText(text);
+    setCharacterCount(text.length);
+  }, [htmlData]);
   return (
     <>
       <Header alignItems={"center"}>
@@ -371,7 +389,8 @@ export const EducatorProfileStep = () => {
                 </CharacterCount>
                 <ErrorBlockSmall>
                   {(characterCount < minCharacters ||
-                    characterCount > maxCharacters) && displayMessage}
+                    characterCount > maxCharacters) &&
+                    displayMessage}
                 </ErrorBlockSmall>
               </Box>
             </Grid>
@@ -405,16 +424,28 @@ export const EducatorProfileStep = () => {
                     style: { fontSize: 18 },
                   }}
                   placeholder="www.website.com"
-                  label={formik.errors.website ? `${formik.errors.website}` : "Website Link"}
-                  error={formik.touched.website && Boolean(formik.errors.website)}
+                  label={
+                    formik.errors.website
+                      ? `${formik.errors.website}`
+                      : "Website Link"
+                  }
+                  error={
+                    formik.touched.website && Boolean(formik.errors.website)
+                  }
                   fullWidth
                 />
                 <TextField
                   name="youtubeLink"
                   sx={{ mt: "6px" }}
                   variant="standard"
-                  label={formik.errors.youtube ? `${formik.errors.youtube}` : "Youtube Link"}
-                  error={formik.touched.youtube && Boolean(formik.errors.youtube)}
+                  label={
+                    formik.errors.youtube
+                      ? `${formik.errors.youtube}`
+                      : "Youtube Link"
+                  }
+                  error={
+                    formik.touched.youtube && Boolean(formik.errors.youtube)
+                  }
                   {...formik.getFieldProps("youtube")}
                   placeholder="www.youtube.com"
                   InputLabelProps={{
@@ -428,8 +459,14 @@ export const EducatorProfileStep = () => {
                 <TextField
                   name="twitterLink"
                   sx={{ mt: "6px" }}
-                  label={formik.errors.twitter ? `${formik.errors.twitter}` : "Twitter Link"}
-                  error={formik.touched.twitter && Boolean(formik.errors.twitter)}
+                  label={
+                    formik.errors.twitter
+                      ? `${formik.errors.twitter}`
+                      : "Twitter Link"
+                  }
+                  error={
+                    formik.touched.twitter && Boolean(formik.errors.twitter)
+                  }
                   variant="standard"
                   {...formik.getFieldProps("twitter")}
                   placeholder="www.twitter.com"
@@ -444,8 +481,14 @@ export const EducatorProfileStep = () => {
                 <TextField
                   name="linkedinLink"
                   sx={{ mt: "6px" }}
-                  label={formik.errors.linkedin ? `${formik.errors.linkedin}` : "LinkedIn Link"}
-                  error={formik.touched.linkedin && Boolean(formik.errors.linkedin)}
+                  label={
+                    formik.errors.linkedin
+                      ? `${formik.errors.linkedin}`
+                      : "LinkedIn Link"
+                  }
+                  error={
+                    formik.touched.linkedin && Boolean(formik.errors.linkedin)
+                  }
                   variant="standard"
                   {...formik.getFieldProps("linkedin")}
                   placeholder="www.linkedin.com"
@@ -480,8 +523,11 @@ export const EducatorProfileStep = () => {
                     mr={3}
                   >
                     <ErrorBlockLarge>
-                      {((characterCount < minCharacters ||
-                        characterCount > maxCharacters) || !formik.values.avatar) ? displayMessage : ""}
+                      {characterCount < minCharacters ||
+                      characterCount > maxCharacters ||
+                      !formik.values.avatar
+                        ? displayMessage
+                        : ""}
                     </ErrorBlockLarge>
                   </Box>
                   <ContinueButton
@@ -495,8 +541,8 @@ export const EducatorProfileStep = () => {
               </Grid>
             </Grid>
           </Footer>
-        </Box >
+        </Box>
       )}
     </>
-  )
-}
+  );
+};

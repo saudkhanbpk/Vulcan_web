@@ -74,7 +74,9 @@ const Router = () => {
       return <EducatorProfiles />
     } else if ((approved && (name !== `${firstNameString}${lastNameFirstLetter}`))) {
       return <Error404 />
-    } else {
+    } else if ((!approved && (name === `${firstNameString}${lastNameFirstLetter}`))) {
+      return <Error404 />
+    }else {
       return <LoadingPage />
     }
   }
