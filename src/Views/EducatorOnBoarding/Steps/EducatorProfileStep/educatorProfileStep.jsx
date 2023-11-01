@@ -40,7 +40,7 @@ import * as Yup from "yup";
 
 export const EducatorProfileStep = () => {
   const auth = getAuth();
-  const db = getDatabase()
+  const db = getDatabase();
   const minCharacters = 200;
   const maxCharacters = 2000;
   const dispatch = useDispatch();
@@ -48,13 +48,13 @@ export const EducatorProfileStep = () => {
   const uid = auth?.currentUser?.uid;
   const [loaderValue, setLoaderValue] = useState(false);
   const userData = useSelector((state) => state.userData.data);
-  const aboutMe = userData?.educator?.profile?.about_me
-  const profile = userData?.educator?.profile
-  const youtube = profile?.youtube
-  const linkedin = profile?.linkedin
-  const twitter = profile?.twitter
-  const website = profile?.website
-  const profilePicture = userData?.educator?.profile?.avatar
+  const aboutMe = userData?.educator?.profile?.about_me;
+  const profile = userData?.educator?.profile;
+  const youtube = profile?.youtube;
+  const linkedin = profile?.linkedin;
+  const twitter = profile?.twitter;
+  const website = profile?.website;
+  const profilePicture = userData?.educator?.profile?.avatar;
   const firstName =
     userData?.account?.first_name.charAt(0).toUpperCase() +
     userData?.account?.first_name.slice(1);
@@ -68,27 +68,98 @@ export const EducatorProfileStep = () => {
   // eslint-disable-next-line no-unused-vars
   const [plainText, setPlainText] = useState("");
   const [displayMessage, setDisplayMessage] = useState("");
+  // Define the isUrlValid function
+  function isUrlValid(userInput) {
+    if (userInput) {
+      const res = userInput.match(
+        /(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g
+      );
+      return res !== null;
+    }
+    return true;
+  }
+  function isYoutubeUrlValid(userInput) {
+    if (!userInput || userInput === "https://") {
+      return true;
+    }
+    const res = userInput.match(
+      /(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g
+    );
+    if (res !== null) {
+      return res.some(
+        (url) => url.includes("youtube.com") || url.includes("youtu.be")
+      );
+    }
+    return false;
+  }
+  function isLinkedinUrlValid(userInput) {
+    if (!userInput || userInput === "https://") {
+      return true;
+    }
+    const res = userInput.match(
+      /(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g
+    );
+    if (res !== null) {
+      return res.some((url) => url.includes("linkedin.com"));
+    }
+    return false;
+  }
+  function isTwitterUrlValid(userInput) {
+    if (!userInput || userInput === "https://") {
+      return true;
+    }
+    const res = userInput.match(
+      /(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g
+    );
+    if (res !== null) {
+      return res.some((url) => url.includes("twitter.com"));
+    }
+    return false;
+  }
+  function ensureHttpsProtocol(url) {
+    if (url && !url.startsWith("https://")) {
+      return "https://" + url;
+    }
+    return url;
+  }
   const formik = useFormik({
     initialValues: {
       avatar: "",
       aboutMe: "",
-      website: website || "",
-      youtube: youtube || "",
-      twitter: linkedin || "",
-      linkedin: twitter || "",
+      website: ensureHttpsProtocol(website) || "",
+      youtube: ensureHttpsProtocol(youtube) || "",
+      twitter: ensureHttpsProtocol(twitter) || "",
+      linkedin: ensureHttpsProtocol(linkedin) || "",
     },
     validationSchema: Yup.object().shape({
-      website: Yup.string().url('Invalid Website URL'),
-      youtube: Yup.string().url('Invalid YouTube URL'),
-      twitter: Yup.string().url('Invalid Twitter URL'),
-      linkedin: Yup.string().url('Invalid LinkedIn URL'),
+      website: Yup.string().test("website", "Invalid Website URL", (value) =>
+        isUrlValid(value)
+      ),
+      youtube: Yup.string().test(
+        "youtube",
+        "Invalid YouTube URL Domain",
+        (value) => isYoutubeUrlValid(value)
+      ),
+      twitter: Yup.string().test(
+        "twitter",
+        "Invalid Twitter URL Domain",
+        (value) => isTwitterUrlValid(value)
+      ),
+      linkedin: Yup.string().test(
+        "linkedin",
+        "Invalid LinkedIn URL Domain",
+        (value) => isLinkedinUrlValid(value)
+      ),
     }),
     onSubmit: async (values) => {
       let newDisplayMessage = "";
       if (!values.avatar && !profilePicture) {
-        newDisplayMessage = 'Must upload profile picture';
-      } else if (characterCount < minCharacters || characterCount > maxCharacters) {
-        newDisplayMessage = 'About me text must be 200-2000 characters';
+        newDisplayMessage = "Must upload profile picture";
+      } else if (
+        characterCount < minCharacters ||
+        characterCount > maxCharacters
+      ) {
+        newDisplayMessage = "About me text must be 200-2000 characters";
       }
       setDisplayMessage(newDisplayMessage);
       if (newDisplayMessage) {
@@ -102,14 +173,14 @@ export const EducatorProfileStep = () => {
           "updateeducatorprofile"
         );
         await updateEducatorStep(values);
-        dispatch(resetSteps());
-        dispatch(resetExperienceStepValues());
         const userRef = ref(db, `users/${uid}/educator`);
         await update(userRef, {
           onboarding_complete: true,
-          approved: false
+          approved: false,
         });
         navigate("/dashboard");
+        dispatch(resetSteps());
+        dispatch(resetExperienceStepValues());
       } catch (error) {
         ShowErrorToast(error);
       } finally {
@@ -171,7 +242,10 @@ export const EducatorProfileStep = () => {
     setCharacterCount(currentCharacterCount);
     formik.setFieldValue("aboutMe", value);
     setHtmlData(value);
-    if (currentCharacterCount >= minCharacters && currentCharacterCount <= maxCharacters) {
+    if (
+      currentCharacterCount >= minCharacters &&
+      currentCharacterCount <= maxCharacters
+    ) {
       setDisplayMessage("");
     }
   };
@@ -185,7 +259,7 @@ export const EducatorProfileStep = () => {
       dispatch(resetExperienceStepValues());
       dispatch(resetSteps());
       navigate("/");
-    } catch (err) { }
+    } catch (err) {}
   };
   useEffect(() => {
     setCharacterCount(formik.values.aboutMe.length);
@@ -315,7 +389,8 @@ export const EducatorProfileStep = () => {
                 </CharacterCount>
                 <ErrorBlockSmall>
                   {(characterCount < minCharacters ||
-                    characterCount > maxCharacters) && displayMessage}
+                    characterCount > maxCharacters) &&
+                    displayMessage}
                 </ErrorBlockSmall>
               </Box>
             </Grid>
@@ -348,19 +423,31 @@ export const EducatorProfileStep = () => {
                   InputProps={{
                     style: { fontSize: 18 },
                   }}
-                  placeholder="https://www.example.com"
-                  label={formik.errors.website ? `${formik.errors.website}` : "Website Link"}
-                  error={formik.touched.website && Boolean(formik.errors.website)}
+                  placeholder="www.website.com"
+                  label={
+                    formik.errors.website
+                      ? `${formik.errors.website}`
+                      : "Website Link"
+                  }
+                  error={
+                    formik.touched.website && Boolean(formik.errors.website)
+                  }
                   fullWidth
                 />
                 <TextField
                   name="youtubeLink"
                   sx={{ mt: "6px" }}
                   variant="standard"
-                  label={formik.errors.youtube ? `${formik.errors.youtube}` : "Youtube Link"}
-                  error={formik.touched.youtube && Boolean(formik.errors.youtube)}
+                  label={
+                    formik.errors.youtube
+                      ? `${formik.errors.youtube}`
+                      : "Youtube Link"
+                  }
+                  error={
+                    formik.touched.youtube && Boolean(formik.errors.youtube)
+                  }
                   {...formik.getFieldProps("youtube")}
-                  placeholder="https://www.example.com"
+                  placeholder="www.youtube.com"
                   InputLabelProps={{
                     style: { fontSize: 16 },
                   }}
@@ -372,11 +459,17 @@ export const EducatorProfileStep = () => {
                 <TextField
                   name="twitterLink"
                   sx={{ mt: "6px" }}
-                  label={formik.errors.twitter ? `${formik.errors.twitter}` : "Twitter Link"}
-                  error={formik.touched.twitter && Boolean(formik.errors.twitter)}
+                  label={
+                    formik.errors.twitter
+                      ? `${formik.errors.twitter}`
+                      : "Twitter Link"
+                  }
+                  error={
+                    formik.touched.twitter && Boolean(formik.errors.twitter)
+                  }
                   variant="standard"
                   {...formik.getFieldProps("twitter")}
-                  placeholder="https://www.example.com"
+                  placeholder="www.twitter.com"
                   InputLabelProps={{
                     style: { fontSize: 16 },
                   }}
@@ -388,11 +481,17 @@ export const EducatorProfileStep = () => {
                 <TextField
                   name="linkedinLink"
                   sx={{ mt: "6px" }}
-                  label={formik.errors.linkedin ? `${formik.errors.linkedin}` : "LinkedIn Link"}
-                  error={formik.touched.linkedin && Boolean(formik.errors.linkedin)}
+                  label={
+                    formik.errors.linkedin
+                      ? `${formik.errors.linkedin}`
+                      : "LinkedIn Link"
+                  }
+                  error={
+                    formik.touched.linkedin && Boolean(formik.errors.linkedin)
+                  }
                   variant="standard"
                   {...formik.getFieldProps("linkedin")}
-                  placeholder="https://www.example.com"
+                  placeholder="www.linkedin.com"
                   InputLabelProps={{
                     style: { fontSize: 16 },
                   }}
@@ -424,8 +523,11 @@ export const EducatorProfileStep = () => {
                     mr={3}
                   >
                     <ErrorBlockLarge>
-                      {((characterCount < minCharacters ||
-                        characterCount > maxCharacters) || !formik.values.avatar) ? displayMessage : ""}
+                      {characterCount < minCharacters ||
+                      characterCount > maxCharacters ||
+                      !formik.values.avatar
+                        ? displayMessage
+                        : ""}
                     </ErrorBlockLarge>
                   </Box>
                   <ContinueButton
@@ -439,7 +541,7 @@ export const EducatorProfileStep = () => {
               </Grid>
             </Grid>
           </Footer>
-        </Box >
+        </Box>
       )}
     </>
   );

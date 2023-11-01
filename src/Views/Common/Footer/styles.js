@@ -2,11 +2,12 @@ import { Box, styled } from "@mui/material";
 
 export const styles = {
   mainBox: {
-    backgroundColor: "blue",
     p: "20px",
+    bottom:"0",
+    width:"100%",
     color: "white",
     position: "relative",
-    top: "100%",
+    backgroundColor: "blue",
   },
   // Sub Grid 1
   subGrid1Box: { pt: 1, pb: 0, display: "flex" },
