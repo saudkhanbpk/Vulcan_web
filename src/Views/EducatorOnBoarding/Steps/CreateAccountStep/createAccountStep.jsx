@@ -62,6 +62,10 @@ export const CreateAccountStep = () => {
   const handleClick = async () => {
     dispatch(incrementSteps());
   };
+  const isPasswordValid = (password) => {
+    const specialCharacters = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
+    return specialCharacters.test(password);
+  };
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -77,6 +81,7 @@ export const CreateAccountStep = () => {
       email: Yup.string().email("Invalid email address").required("Email"),
       password: Yup.string()
         .min(6, "Must be 6 characters")
+        .test("special-characters", "Password must contain special characters", (value) => isPasswordValid(value))
         .required("Password"),
       reEnterPassword: Yup.string()
         .oneOf([Yup.ref("password"), null], "Passwords must match")
@@ -132,10 +137,6 @@ export const CreateAccountStep = () => {
         ShowErrorToast(error);
     }
     ShowErrorToast(errorMessage);
-  };
-  const isPasswordValid = (password) => {
-    const specialCharacters = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
-    return specialCharacters.test(password);
   };
   const handleExit = () => {
     try {
@@ -305,7 +306,7 @@ export const CreateAccountStep = () => {
                     value={formik.values.password}
                     autoComplete="new-password"
                     error={
-                      formik.touched.password &&
+                      formik.touched.password && Boolean(formik.errors.password) &&
                       !isPasswordValid(formik.values.password)
                     }
                     InputLabelProps={{

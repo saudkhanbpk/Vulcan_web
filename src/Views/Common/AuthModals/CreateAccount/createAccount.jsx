@@ -107,8 +107,9 @@ export const CreateAccount = () => {
       lastName: Yup.string().required("Last Name"),
       email: Yup.string().email("Invalid email address").required("Email"),
       password: Yup.string()
-        .min(6, "Must be 6 characters")
-        .required("Password"),
+      .min(6, "Must be 6 characters")
+      .test("special-characters", "Password must contain special characters", (value) => isPasswordValid(value))
+      .required("Password"),
       reEnterPassword: Yup.string()
         .oneOf([Yup.ref("password"), null], "Passwords must match")
         .required("Re Enter Password."),
