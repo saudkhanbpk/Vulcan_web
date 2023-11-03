@@ -25,6 +25,7 @@ import { fetchUserData } from "../States/userDataSlice";
 import useAuthentication from "../States/onAuthStateChange";
 import { EducatorProfiles } from "../../Views/EducatorProfiles/educatorProfiles";
 import LoadingPage from "../../Views/Common/LoadingPage/loadingPage";
+import { CourseCreationFlow } from "../../Views/CourseCreationFlow/CourseCreationFlow.jsx";
 
 const Router = () => {
   const auth = getAuth();
@@ -107,6 +108,11 @@ const Router = () => {
           exact
           path="/educator-account"
           element={<EducatorAccountMainPage />}
+        />
+        <Route
+          exact
+          path="/create-course"
+          element={<CourseCreationFlow />}
         />
         <Route element={<PrivateOutlet />}>
           <Route exact path={"/dashboard"} element={<Dashboard />} />
