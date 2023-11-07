@@ -28,7 +28,7 @@ import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
 import { ShowErrorToast } from "../../../Common/Toast/toast";
 import { useNavigate } from "react-router-dom";
-import ProgressBar from "../../progressbar";
+import ProgressBar from "../../../Common/ProgressBar/progressbar";
 
 export const ReachStep = () => {
   const navigate = useNavigate()

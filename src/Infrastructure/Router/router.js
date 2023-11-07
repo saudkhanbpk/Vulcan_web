@@ -25,7 +25,7 @@ import { fetchUserData } from "../States/userDataSlice";
 import useAuthentication from "../States/onAuthStateChange";
 import { EducatorProfiles } from "../../Views/EducatorProfiles/educatorProfiles";
 import LoadingPage from "../../Views/Common/LoadingPage/loadingPage";
-import { CourseCreationFlow } from "../../Views/CourseCreationFlow/CourseCreationFlow.jsx";
+import { CourseCreationFlow } from "../../Views/CourseCreationFlow/courseCreationFlow.jsx";
 
 const Router = () => {
   const auth = getAuth();
@@ -84,7 +84,7 @@ const Router = () => {
   const name = getNameFromPathname(location.pathname);
   return (
     <div>
-      {location.pathname !== "/educator-account" ? <Navbar /> : ""}
+      {(location.pathname !== "/educator-account") && (location.pathname !== "/create-course")  ? <Navbar /> : ""}
       <Routes>
         <Route exact path="/" element={<HomeScreen />} />
         <Route exact path="/about" element={<OurMission />} />
@@ -121,7 +121,7 @@ const Router = () => {
         <Route path="*" element={<Error404 />} />
         <Route path="/educators/:name" element={!loading ? handleroutefunction() : <LoadingPage />} />
       </Routes>
-      {location.pathname !== "/educator-account" ? <Footer /> : ""}
+      {(location.pathname !== "/educator-account") && (location.pathname !== "/create-course") ? <Footer /> : ""}
     </div>
   );
 };
