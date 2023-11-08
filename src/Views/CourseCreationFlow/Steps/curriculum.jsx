@@ -34,7 +34,8 @@ export const Curriculum = () => {
   return (
       <Box height={"100vh"} >
           <StepsHeader steps={courseSteps} handleExit={handleExit} />
-          center
+          <Box height={"100px"}></Box>
+            Comming Soon
           <Footer>
               <Grid container justifyContent={"space-between"} p={2}>
                   <Grid>
@@ -55,6 +56,7 @@ export const Curriculum = () => {
                   </Grid>
               </Grid>
           </Footer>
+          <Box height={"100px"}></Box>
       </Box>
   )
 }

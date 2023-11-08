@@ -1,16 +1,15 @@
 import React from 'react'
-import { CourseMainBox } from './styles';
-import { BasicsStep } from './Steps/basicsStep';
-import { LearningObjectives } from './Steps/learningObjectives';
-import { CourseListing } from './Steps/courseListing';
-import { Curriculum } from './Steps/curriculum';
-import { ClassSchedule } from './Steps/classSchedule';
-import { Summary } from './Steps/summary';
-import { useSelector } from 'react-redux';
+import { CourseMainBox } from './styles'
+import { BasicsStep } from './Steps/basicsStep'
+import { LearningObjectives } from './Steps/learningObjectives'
+import { CourseListing } from './Steps/courseListing'
+import { Curriculum } from './Steps/curriculum'
+import { ClassSchedule } from './Steps/classSchedule'
+import { Summary } from './Steps/summary'
+import { useSelector } from 'react-redux'
 
 export const CourseCreationFlow = () => {
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
-    
     return (
         <>
             <CourseMainBox>
@@ -22,5 +21,5 @@ export const CourseCreationFlow = () => {
                 {courseSteps === 6 && <Summary />}
             </CourseMainBox>
         </>
-    );
+    )
 }

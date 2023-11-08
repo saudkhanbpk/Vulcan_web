@@ -30,3 +30,9 @@ exports.updateeducatorprofile = updateEducatorProfile.updateEducatorProfile
 
 const emailVerifyToggle = require('./emailVerifyToggle')
 exports.emailverify = emailVerifyToggle.emailVerifyToggle
+
+const updateCourseObjectives = require('./updateCourseObjectives')
+exports.updatecourseobjectives = updateCourseObjectives.updateCourseObjectives
+
+const updateCategoryStep = require('./updateCategoryStep')
+exports.updatecategorystep = updateCategoryStep.updateCategoryStep

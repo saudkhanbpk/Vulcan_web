@@ -1,7 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    courseSteps: 1,
+  courseSteps: 1,
+  basicStepState: {
+    development: false,
+    business: false,
+    financeAndAccounting: false,
+    itAndSoftware: false,
+    officeProductivity: false,
+    personalDevelopment: false,
+    design: false,
+    marketing: false,
+    lifestyle: false,
+    photographyAndVideo: false,
+    healthAndFitness: false,
+    music: false,
+    teachingAndAcademics: false,
+    iDontKnowYet: false,
+    notSure: false,
+    courseTitle: ""
+  },
 };
 export const coursesStepsSlice = createSlice({
   name: "courseSteps",
@@ -22,39 +40,39 @@ export const coursesStepsSlice = createSlice({
         state.courseSteps = 1;
       }
     },
-    // experienceSteps: (state, action) => {
-    //   const { name, checked, question } = action.payload;
-    //   if (question === "one") {
-    //     state.experienceStep[name] = checked;
-    //   }
-    //   if (question === "two") {
-    //     state.experienceStep[name] = checked;
-    //   }
-    //   if (question === "three") {
-    //     const { optionValue } = action.payload;
-    //     state.experienceStep.years = optionValue;
-    //   }
-    //   return state;
-    // },
-    // resetExperienceStepValues: (state) => {
-    //   state.experienceStep.professor = false;
-    //   state.experienceStep.teacher = false;
-    //   state.experienceStep.independent = false;
-    //   state.experienceStep.tutor = false;
-    //   state.experienceStep.experienceOther = false;
-    //   state.experienceStep.inPerson = false;
-    //   state.experienceStep.liveOnline = false;
-    //   state.experienceStep.recordedOnline = false;
-    //   state.experienceStep.mediumOther = false;
-    //   state.experienceStep.years = "";
-    // },
+    basicStepControl: (state, action) => {
+      const { name, checked, question, courseTitle } = action.payload;
+      if (question == "objectives") {
+        state.basicStepState[name] = checked;
+      } else if (question === "courseTitle") {
+        state.basicStepState.courseTitle = courseTitle;
+      }
+      return state;
+    },
+    resetBasicStepValues: (state) => {
+      state.basicStepState.development = false;
+      state.basicStepState.business = false;
+      state.basicStepState.financeAndAccounting = false;
+      state.basicStepState.itAndSoftware = false;
+      state.basicStepState.officeProductivity = false;
+      state.basicStepState.personalDevelopment = false;
+      state.basicStepState.design = false;
+      state.basicStepState.marketing = false;
+      state.basicStepState.lifestyle = false;
+      state.basicStepState.photographyAndVideo = false;
+      state.basicStepState.healthAndFitness = false;
+      state.basicStepState.music = false;
+      state.basicStepState.teachingAndAcademics = false;
+      state.basicStepState.iDontKnowYet = false;
+      state.basicStepState.notSure = false;
+    },
   },
 });
 export const {
   incrementCoursesSteps,
   decrementCoursesSteps,
   resetCoursesSteps,
-//   experienceSteps,
-//   resetExperienceStepValues
+  basicStepControl,
+  resetBasicStepValues
 } = coursesStepsSlice.actions;
 export default coursesStepsSlice.reducer;

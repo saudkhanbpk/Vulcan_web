@@ -16,25 +16,26 @@ export const ClassSchedule = () => {
   const handleDec = async () => {
     if (courseSteps > 1) {
       try {
-        dispatch(decrementCoursesSteps());
+        dispatch(decrementCoursesSteps())
       } catch (error) {
-        ShowErrorToast(error);
+        ShowErrorToast(error)
       }
     }
-  };
+  }
   const handleInc = async () => {
     if (courseSteps > 1) {
         try {
-            dispatch(incrementCoursesSteps());
+            dispatch(incrementCoursesSteps())
         } catch (error) {
-            ShowErrorToast(error);
+            ShowErrorToast(error)
         }
     }
-};
+}
   return (
       <Box height={"100vh"} >
           <StepsHeader steps={courseSteps} handleExit={handleExit} />
-          center
+          <Box height={"100px"}></Box>
+          Comming Soon
           <Footer>
               <Grid container justifyContent={"space-between"} p={2}>
                   <Grid>
@@ -55,6 +56,7 @@ export const ClassSchedule = () => {
                   </Grid>
               </Grid>
           </Footer>
+          <Box height={"100px"}></Box>
       </Box>
   )
 }
