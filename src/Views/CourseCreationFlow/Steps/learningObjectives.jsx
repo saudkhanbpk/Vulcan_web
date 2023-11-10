@@ -9,10 +9,12 @@ import { functions } from "../../../Infrastructure/config";
 import { StepsHeader } from '../../Common/StepsHeader/stepsHeader'
 import { ShowErrorToast } from '../../Common/Toast/toast'
 import { QuestionName } from '../styles'
-import { decrementCoursesSteps, incrementCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
+import { decrementCoursesSteps, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
+import { useNavigate } from 'react-router-dom';
 
 export const LearningObjectives = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const formikRef = useRef(null)
     const userData = useSelector((state) => state.userData.data);
@@ -34,7 +36,9 @@ export const LearningObjectives = () => {
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const handleExit = () => {
         handleUpdateObjectives()
+        dispatch(resetCoursesSteps)
         formik.resetForm()
+        navigate('/dashboard')
     }
     const handleDec = async () => {
         if (courseSteps > 1) {
@@ -66,19 +70,28 @@ export const LearningObjectives = () => {
             intendedLearner: intendedLearner || ""
         },
         validationSchema: Yup.object().shape({
-            objective1: Yup.string().required("Objective 1 Required"),
-            objective2: Yup.string().required("Objective 2 Required"),
             intendedLearner: Yup.string().required("Intended Learner Required"),
         }),
-        onSubmit: () => {
+        onSubmit: async () => {
             if (courseSteps >= 1 && courseSteps <= 6) {
                 try {
-                    handleUpdateObjectives()
-                    handleInc()
+                    // Check if at least two objectives have data
+                    const objectivesCount = [formik.values.objective1, formik.values.objective2, formik.values.objective3, formik.values.objective4, formik.values.objective5]
+                        .filter(Boolean).length;
+                    if (objectivesCount >= 2) {
+                        // At least two objectives have data, proceed with form submission
+                        await handleUpdateObjectives();
+                        handleInc();
+                    } else {
+                        // Less than two objectives have data, show an alert or handle it accordingly
+                        ShowErrorToast("Please fill at least two objectives")
+                    }
                 } catch (error) {
-                    ShowErrorToast(error)
+                    ShowErrorToast(error);
                 }
+
             }
+
         },
     })
     formikRef.current = formik;

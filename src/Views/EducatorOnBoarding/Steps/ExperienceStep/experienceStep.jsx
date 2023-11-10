@@ -133,7 +133,7 @@ export const ExperienceStep = () => {
             </Span>
           </Grid>
         </Grid>
-        <ProgressBar />
+        <ProgressBar componentName={"eduSteps"}/>
       </Header>
       <Box py={10}>
         <TopHeadingBox>

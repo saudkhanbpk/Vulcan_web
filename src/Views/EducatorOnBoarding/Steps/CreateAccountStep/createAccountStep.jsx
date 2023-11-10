@@ -202,7 +202,7 @@ export const CreateAccountStep = () => {
             </Span>
           </Grid>
         </Grid>
-        <ProgressBar />
+        <ProgressBar componentName={"eduSteps"}/>
       </Header>
       {user && loading ? <Loader /> :
         <Box py={14}>

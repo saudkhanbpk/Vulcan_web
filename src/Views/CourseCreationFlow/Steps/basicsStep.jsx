@@ -9,11 +9,13 @@ import { StepsHeader } from '../../Common/StepsHeader/stepsHeader'
 import { ShowErrorToast } from '../../Common/Toast/toast'
 import { ChoiceTypo, QuestionName } from '../styles'
 import { Box, FormControl, FormControlLabel, Radio, RadioGroup, TextField } from '@mui/material'
-import { basicStepControl, resetBasicStepValues, incrementCoursesSteps, decrementCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
+import { basicStepControl, resetBasicStepValues, incrementCoursesSteps, decrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
+import { useNavigate } from 'react-router-dom';
 
 export const BasicsStep = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const formikRef = useRef(null);
     const userData = useSelector((state) => state.userData.data);
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
@@ -23,7 +25,10 @@ export const BasicsStep = () => {
     const handleExit = () => {
         handleCategoryStep()
         formik.resetForm()
+        navigate('/dashboard')
         dispatch(resetBasicStepValues)
+        dispatch(resetCoursesSteps)
+
     }
     const handleInc = async () => {
         if (courseSteps < 6) {
@@ -87,7 +92,7 @@ export const BasicsStep = () => {
     }, [userData, dispatch, categoryValue, courseTitle, formik.setValues])
     return (
         <Box height={"100vh"}>
-            <StepsHeader steps={courseSteps} handleExit={handleExit} />
+            <StepsHeader steps={courseSteps} handleExit={handleExit}/>
             <Box height={"100px"}></Box>
             <form onSubmit={formik.handleSubmit} display={"flex"} justifyContent={"center"} alignItems={"center"}>
                 <Box px={10}>

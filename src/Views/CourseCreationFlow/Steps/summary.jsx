@@ -4,13 +4,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Box } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { ContinueButton, Footer, PreviousButton } from '../styles'
-import { decrementCoursesSteps, decrementSteps } from '../../../Infrastructure/States/coursesStepsSlice'
+import { decrementCoursesSteps, decrementSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
 import { ShowErrorToast } from '../../Common/Toast/toast'
+import { useNavigate } from 'react-router-dom'
 
 export const Summary = () => {
+    const navigate = useNavigate()
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const handleExit = () => {
         console.log("handle exit clicked")
+        dispatch(resetCoursesSteps)
+        navigate('/dashboard')
     }
     const dispatch = useDispatch()
     const handleDec = async () => {
@@ -40,8 +44,8 @@ export const Summary = () => {
                     </Grid>
                     <Grid>
                         <Grid>
-                            <ContinueButton variant="contained" type="submit">
-                                Finish
+                            <ContinueButton variant="contained" onClick={() => navigate('/dashboard')}>
+                                {courseSteps <= 5 ? "Continue" : "Finish"}
                             </ContinueButton>
                         </Grid>
                     </Grid>

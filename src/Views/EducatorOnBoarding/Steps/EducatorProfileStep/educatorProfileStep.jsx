@@ -328,7 +328,7 @@ export const EducatorProfileStep = () => {
             </Span>
           </Grid>
         </Grid>
-        <ProgressBar />
+        <ProgressBar componentName={"eduSteps"}/>
       </Header>
       {loading || loaderValue ? (
         <Loader />

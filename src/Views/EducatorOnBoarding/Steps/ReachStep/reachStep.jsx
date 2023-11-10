@@ -161,7 +161,7 @@ export const ReachStep = () => {
             </Span>
           </Grid>
         </Grid>
-        <ProgressBar />
+        <ProgressBar componentName={"eduSteps"}/>
       </Header>
       <Box my={12}
         height="auto">

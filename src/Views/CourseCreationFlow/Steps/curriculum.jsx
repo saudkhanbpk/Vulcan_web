@@ -4,15 +4,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Box } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { ContinueButton, Footer, PreviousButton } from '../styles'
-import { decrementCoursesSteps, incrementCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
+import { decrementCoursesSteps, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
 import { ShowErrorToast } from '../../Common/Toast/toast'
+import { useNavigate } from 'react-router-dom'
 
 export const Curriculum = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const handleExit = () => {
         console.log("handle exit clicked")
+        dispatch(resetCoursesSteps)
+        navigate('/dashboard')
+
     }
-    const dispatch = useDispatch()
     const handleDec = async () => {
         if (courseSteps > 1) {
             try {
