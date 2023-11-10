@@ -31,7 +31,6 @@ export const LearningObjectives = () => {
     const prerequisite4 = prerequisites?.prerequisite_4
     const prerequisite5 = prerequisites?.prerequisite_5
 
-    console.log("first", objective4)
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const handleExit = () => {
         handleUpdateObjectives()

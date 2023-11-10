@@ -20,7 +20,6 @@ export const BasicsStep = () => {
     const basicStepState = useSelector((state) => state.courseSteps.basicStepState)
     const categoryValue = userData?.educator?.courses?.pending?.questions?.category?.categoryValue
     const courseTitle = userData?.educator?.courses?.pending?.questions?.courseTitle
-    console.log("basicStepState", basicStepState)
     const handleExit = () => {
         handleCategoryStep()
         formik.resetForm()
@@ -33,23 +32,20 @@ export const BasicsStep = () => {
     }
     const handleCategoryStep = async () => {
         const updateCategoryStep = httpsCallable(functions, "updatecategorystep");
-        await updateCategoryStep(basicStepState);
-        console.log("basicStepState", basicStepState)
+        await updateCategoryStep({categoryValue:basicStepState?.categoryValue , courseTitle:formik.values.courseTitle});
     }
     const formik = useFormik({
-        initialValues: { courseTitle: basicStepState.courseTitle || "" },
+        initialValues: { courseTitle:"" },
         validationSchema: Yup.object().shape({
             courseTitle: Yup.string().required("Course Title Required")
         }),
         onSubmit: (values) => {
             if (courseSteps >= 1 && courseSteps <= 6) {
-                console.log("values.courseTitle", values.courseTitle)
                 dispatch(basicStepControl({ courseTitle: values.courseTitle, question: "courseTitle" }))
                 try {
                     handleCategoryStep()
                     handleInc()
                 } catch (error) {
-                    console.log(error)
                     ShowErrorToast(error)
                 }
             }
@@ -74,16 +70,21 @@ export const BasicsStep = () => {
         { name: "notSure", label: "Not Sure" },
     ]
     const handleOptionChange = (e) => {
-        console.log(e.target.value)
         let categoryValue = e.target.value;
         dispatch(basicStepControl({ categoryValue, question: "category" }));
     };
     useEffect(() => {
         if (userData && categoryValue) {
             dispatch(basicStepControl({ categoryValue: categoryValue, question: "category" }));
-            dispatch(basicStepControl({ categoryValue: courseTitle, question: "courseTitle" }));
         }
-    }, [userData, dispatch, categoryValue, courseTitle])
+        if(userData && courseTitle){
+            dispatch(basicStepControl({ categoryValue: courseTitle, question: "courseTitle" }));
+            formik.setValues({
+                ...formik.values,
+                courseTitle: courseTitle || '',
+            });
+        }
+    }, [userData, dispatch, categoryValue, courseTitle, formik.setValues])
     return (
         <Box height={"100vh"}>
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
