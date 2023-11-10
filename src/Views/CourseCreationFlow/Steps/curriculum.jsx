@@ -8,55 +8,56 @@ import { decrementCoursesSteps, incrementCoursesSteps } from '../../../Infrastru
 import { ShowErrorToast } from '../../Common/Toast/toast'
 
 export const Curriculum = () => {
-  const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
-  const handleExit = () => {
-      console.log("handle exit clicked")
-  }
-  const dispatch = useDispatch()
-  const handleDec = async () => {
-    if (courseSteps > 1) {
-      try {
-        dispatch(decrementCoursesSteps());
-      } catch (error) {
-        ShowErrorToast(error);
-      }
+    const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
+    const handleExit = () => {
+        console.log("handle exit clicked")
     }
-  };
-  const handleInc = async () => {
-    if (courseSteps > 1) {
-        try {
-            dispatch(incrementCoursesSteps());
-        } catch (error) {
-            ShowErrorToast(error);
+    const dispatch = useDispatch()
+    const handleDec = async () => {
+        if (courseSteps > 1) {
+            try {
+                dispatch(decrementCoursesSteps());
+            } catch (error) {
+                ShowErrorToast(error);
+            }
         }
-    }
-};
-  return (
-      <Box height={"100vh"} >
-          <StepsHeader steps={courseSteps} handleExit={handleExit} />
-          <Box height={"100px"}></Box>
-            Comming Soon
-          <Footer>
-              <Grid container justifyContent={"space-between"} p={2}>
-                  <Grid>
-                      {courseSteps > 1 ? (
-                          <PreviousButton variant="contained" onClick={handleDec}>
-                              Previous
-                          </PreviousButton>
-                      ) : (
-                          <></>
-                      )}
-                  </Grid>
-                  <Grid>
-                      <Grid>
-                          <ContinueButton variant="contained" onClick={handleInc} >
-                              Continue
-                          </ContinueButton>
-                      </Grid>
-                  </Grid>
-              </Grid>
-          </Footer>
-          <Box height={"100px"}></Box>
-      </Box>
-  )
+    };
+    const handleInc = async () => {
+        if (courseSteps > 1) {
+            try {
+                dispatch(incrementCoursesSteps());
+            } catch (error) {
+                ShowErrorToast(error);
+            }
+        }
+    };
+    return (
+        <Box height={"100vh"} >
+            <StepsHeader steps={courseSteps} handleExit={handleExit} />
+            <Box height={"100px"}></Box>
+            Curriculum
+            <Footer>
+                <Grid container justifyContent={"space-between"} p={2}>
+                    <Grid>
+                        {courseSteps > 1 ? (
+                            <PreviousButton variant="contained" onClick={handleDec}>
+                                Previous
+                            </PreviousButton>
+                        ) : (
+                            <></>
+                        )}
+                    </Grid>
+                    <Grid>
+                        <Grid>
+                            <ContinueButton variant="contained" onClick={handleInc} >
+                                Continue
+                            </ContinueButton>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Footer>
+            {/* <StepsFooter handleDec={handleDec} formikRef={formikRef} /> */}
+            <Box height={"100px"}></Box>
+        </Box>
+    )
 }

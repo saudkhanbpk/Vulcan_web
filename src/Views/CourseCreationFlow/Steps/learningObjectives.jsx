@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import * as Yup from "yup"
 import { useFormik } from 'formik'
 import { Box, TextField } from '@mui/material'
@@ -7,12 +7,31 @@ import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { useDispatch, useSelector } from 'react-redux'
 import { functions } from "../../../Infrastructure/config";
 import { StepsHeader } from '../../Common/StepsHeader/stepsHeader'
-import { ShowErrorToast, ShowSuccessToast } from '../../Common/Toast/toast'
-import { ContinueButton, Footer, PreviousButton, QuestionName } from '../styles'
+import { ShowErrorToast } from '../../Common/Toast/toast'
+import { QuestionName } from '../styles'
 import { decrementCoursesSteps, incrementCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
+import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
 
 export const LearningObjectives = () => {
     const dispatch = useDispatch()
+    const formikRef = useRef(null)
+    const userData = useSelector((state) => state.userData.data);
+    const intendedLearner = userData?.educator?.courses?.pending?.questions?.intendedLearner
+    const objectives = userData?.educator?.courses?.pending?.questions?.objectives
+    const objective1 = objectives?.objective_1
+    const objective2 = objectives?.objective_2
+    const objective3 = objectives?.objective_3
+    const objective4 = objectives?.objective_4
+    const objective5 = objectives?.objective_5
+
+    const prerequisites = userData?.educator?.courses?.pending?.questions?.prerequisites
+    const prerequisite1 = prerequisites?.prerequisite_1
+    const prerequisite2 = prerequisites?.prerequisite_2
+    const prerequisite3 = prerequisites?.prerequisite_3
+    const prerequisite4 = prerequisites?.prerequisite_4
+    const prerequisite5 = prerequisites?.prerequisite_5
+
+    console.log("first", objective4)
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const handleExit = () => {
         handleUpdateObjectives()
@@ -20,6 +39,7 @@ export const LearningObjectives = () => {
     }
     const handleDec = async () => {
         if (courseSteps > 1) {
+            handleUpdateObjectives()
             dispatch(decrementCoursesSteps())
         }
     }
@@ -34,17 +54,17 @@ export const LearningObjectives = () => {
     }
     const formik = useFormik({
         initialValues: {
-            objective1: "",
-            objective2: "",
-            objective3: "",
-            objective4: "",
-            objective5: "",
-            prerequisite1: "",
-            prerequisite2: "",
-            prerequisite3: "",
-            prerequisite4: "",
-            prerequisite5: "",
-            intendedLearner: ""
+            objective1: objective1 || "",
+            objective2: objective2 || "",
+            objective3: objective3 || "",
+            objective4: objective4 || "",
+            objective5: objective5 || "",
+            prerequisite1: prerequisite1 || "",
+            prerequisite2: prerequisite2 || "",
+            prerequisite3: prerequisite3 || "",
+            prerequisite4: prerequisite4 || "",
+            prerequisite5: prerequisite5 || "",
+            intendedLearner: intendedLearner || ""
         },
         validationSchema: Yup.object().shape({
             objective1: Yup.string().required("Objective 1 Required"),
@@ -54,15 +74,16 @@ export const LearningObjectives = () => {
         onSubmit: () => {
             if (courseSteps >= 1 && courseSteps <= 6) {
                 try {
-                    // handleUpdateObjectives()
+                    handleUpdateObjectives()
                     handleInc()
-                    ShowSuccessToast("Lea")
                 } catch (error) {
                     ShowErrorToast(error)
                 }
             }
         },
     })
+    formikRef.current = formik;
+
     return (
         <Box height={"100vh"} >
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
@@ -278,7 +299,7 @@ export const LearningObjectives = () => {
                             />
                         </Box>
                     </Grid>
-                    <Grid item xs={12} md={6} lg={4} xl={4} spacing={2}>
+                    <Grid item xs={12} md={12} lg={4} xl={4} spacing={2}>
                         <Box height={"100px"}>
                             <QuestionName variant="h6">
                                 Describe the intended learner of your course
@@ -311,26 +332,7 @@ export const LearningObjectives = () => {
 
                     </Grid>
                 </Grid>
-                <Footer>
-                    <Grid container justifyContent={"space-between"} p={2}>
-                        <Grid>
-                            {courseSteps > 1 ? (
-                                <PreviousButton variant="contained" onClick={handleDec}>
-                                    Previous
-                                </PreviousButton>
-                            ) : (
-                                <></>
-                            )}
-                        </Grid>
-                        <Grid>
-                            <Grid>
-                                <ContinueButton variant="contained" type='submit'>
-                                    Continue
-                                </ContinueButton>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Footer>
+                <StepsFooter handleDec={handleDec} formikRef={formikRef} />
             </form>
             <Box height={"100px"}></Box>
         </Box>

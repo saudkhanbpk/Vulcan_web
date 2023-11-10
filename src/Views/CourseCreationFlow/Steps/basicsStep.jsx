@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from "yup"
 import { httpsCallable } from "firebase/functions";
@@ -7,17 +7,22 @@ import { useDispatch, useSelector } from 'react-redux'
 import { functions } from "../../../Infrastructure/config";
 import { StepsHeader } from '../../Common/StepsHeader/stepsHeader'
 import { ShowErrorToast } from '../../Common/Toast/toast'
-import { ChoiceTypo, ContinueButton, Footer, QuestionName } from '../styles'
-import { Box, Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material'
-import { basicStepControl, resetBasicStepValues, incrementCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
+import { ChoiceTypo, QuestionName } from '../styles'
+import { Box, FormControl, FormControlLabel, Radio, RadioGroup, TextField } from '@mui/material'
+import { basicStepControl, resetBasicStepValues, incrementCoursesSteps, decrementCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
+import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
 
 export const BasicsStep = () => {
     const dispatch = useDispatch()
+    const formikRef = useRef(null);
+    const userData = useSelector((state) => state.userData.data);
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const basicStepState = useSelector((state) => state.courseSteps.basicStepState)
-
+    const categoryValue = userData?.educator?.courses?.pending?.questions?.category?.categoryValue
+    const courseTitle = userData?.educator?.courses?.pending?.questions?.courseTitle
+    console.log("basicStepState", basicStepState)
     const handleExit = () => {
-        handleUpdateObjectives()
+        handleCategoryStep()
         formik.resetForm()
         dispatch(resetBasicStepValues)
     }
@@ -26,27 +31,31 @@ export const BasicsStep = () => {
             dispatch(incrementCoursesSteps())
         }
     }
-    const handleUpdateObjectives = async () => {
+    const handleCategoryStep = async () => {
         const updateCategoryStep = httpsCallable(functions, "updatecategorystep");
         await updateCategoryStep(basicStepState);
+        console.log("basicStepState", basicStepState)
     }
     const formik = useFormik({
-        initialValues: { courseTitle: "" },
+        initialValues: { courseTitle: basicStepState.courseTitle || "" },
         validationSchema: Yup.object().shape({
             courseTitle: Yup.string().required("Course Title Required")
         }),
         onSubmit: (values) => {
             if (courseSteps >= 1 && courseSteps <= 6) {
+                console.log("values.courseTitle", values.courseTitle)
+                dispatch(basicStepControl({ courseTitle: values.courseTitle, question: "courseTitle" }))
                 try {
-                    dispatch(basicStepControl({ courseTitle: values.courseTitle, question: "courseTitle" }))
-                    // handleUpdateObjectives()
+                    handleCategoryStep()
                     handleInc()
                 } catch (error) {
+                    console.log(error)
                     ShowErrorToast(error)
                 }
             }
         },
     })
+    formikRef.current = formik;
     const options = [
         { name: "development", label: "Development" },
         { name: "business", label: "Business" },
@@ -64,6 +73,17 @@ export const BasicsStep = () => {
         { name: "iDontKnowYet", label: "I don't know yet" },
         { name: "notSure", label: "Not Sure" },
     ]
+    const handleOptionChange = (e) => {
+        console.log(e.target.value)
+        let categoryValue = e.target.value;
+        dispatch(basicStepControl({ categoryValue, question: "category" }));
+    };
+    useEffect(() => {
+        if (userData && categoryValue) {
+            dispatch(basicStepControl({ categoryValue: categoryValue, question: "category" }));
+            dispatch(basicStepControl({ categoryValue: courseTitle, question: "courseTitle" }));
+        }
+    }, [userData, dispatch, categoryValue, courseTitle])
     return (
         <Box height={"100vh"}>
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
@@ -102,88 +122,72 @@ export const BasicsStep = () => {
                         </QuestionName>
                         <Grid container spacing={3}>
                             <Grid item xs={12} md={6} lg={4} xl={4}>
-                                <FormGroup>
-                                    {options.slice(0, 5).map((option, index) => (
-                                        <FormControlLabel
-                                            key={index}
-                                            control={
-                                                <Checkbox
-                                                    checked={basicStepState[option.name]}
-                                                    onChange={(e) => {
-                                                        const { name, checked } = e.target
-                                                        dispatch(basicStepControl({ name, checked, question: "objectives" }))
-                                                    }}
-                                                    name={option.name}
-                                                    sx={{ color: "#1c1d1f" }}
-                                                />
-                                            }
-                                            label={<ChoiceTypo variant="body1">{option.label}</ChoiceTypo>}
-                                            sx={{ border: "1px solid #1c1d1f", p: 1, m: "3px" }}
-                                        />
-                                    ))}
-                                </FormGroup>
-                            </Grid>
-
-                            {/* Second Checkbox with 6 columns */}
-                            <Grid item xs={12} md={6} lg={4} xl={4}>
-                                <FormGroup>
-                                    {options.slice(5, 10).map((option, index) => (
-                                        <FormControlLabel
-                                            key={index}
-                                            control={
-                                                <Checkbox
-                                                    checked={basicStepState[option.name]}
-                                                    onChange={(e) => {
-                                                        const { name, checked } = e.target
-                                                        dispatch(basicStepControl({ name, checked, question: "objectives" }))
-                                                    }}
-                                                    name={option.name}
-                                                    sx={{ color: "#1c1d1f" }}
-                                                />
-                                            }
-                                            label={<ChoiceTypo variant="body1">{option.label}</ChoiceTypo>}
-                                            sx={{ border: "1px solid #1c1d1f", p: 1, m: "3px" }}
-                                        />
-                                    ))}
-                                </FormGroup>
+                                <FormControl fullWidth>
+                                    <RadioGroup onChange={handleOptionChange} value={basicStepState.categoryValue}>
+                                        {options.slice(0, 5).map((option, index) => (
+                                            <FormControlLabel
+                                                key={option.name}
+                                                value={option.label}
+                                                control={<Radio size="medium" />}
+                                                label={<ChoiceTypo>{option.label}</ChoiceTypo>}
+                                                sx={{
+                                                    width: "100%",
+                                                    border: "1px solid #1c1d1f",
+                                                    p: 1,
+                                                    m: "3px",
+                                                    height: "76px",
+                                                }}
+                                            />
+                                        ))}
+                                    </RadioGroup>
+                                </FormControl>
                             </Grid>
                             <Grid item xs={12} md={6} lg={4} xl={4}>
-                                <FormGroup>
-                                    {options.slice(10, 15).map((option, index) => (
-                                        <FormControlLabel
-                                            key={index}
-                                            control={
-                                                <Checkbox
-                                                    checked={basicStepState[option.name]}
-                                                    onChange={(e) => {
-                                                        const { name, checked } = e.target
-                                                        dispatch(basicStepControl({ name, checked, question: "objectives" }))
-                                                    }}
-                                                    name={option.name}
-                                                    sx={{ color: "#1c1d1f" }}
-                                                />
-                                            }
-                                            label={<ChoiceTypo variant="body1">{option.label}</ChoiceTypo>}
-                                            sx={{ border: "1px solid #1c1d1f", p: 1, m: "3px" }}
-                                        />
-                                    ))}
-                                </FormGroup>
+                                <FormControl fullWidth>
+                                    <RadioGroup onChange={handleOptionChange} value={basicStepState.categoryValue}>
+                                        {options.slice(5, 10).map((option, index) => (
+                                            <FormControlLabel
+                                                key={option.name}
+                                                value={option.label}
+                                                control={<Radio size="medium" />}
+                                                label={<ChoiceTypo>{option.label}</ChoiceTypo>}
+                                                sx={{
+                                                    width: "100%",
+                                                    border: "1px solid #1c1d1f",
+                                                    p: 1,
+                                                    m: "3px",
+                                                    height: "76px",
+                                                }}
+                                            />
+                                        ))}
+                                    </RadioGroup>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12} md={6} lg={4} xl={4}>
+                                <FormControl fullWidth>
+                                    <RadioGroup onChange={handleOptionChange} value={basicStepState.categoryValue}>
+                                        {options.slice(10, 15).map((option, index) => (
+                                            <FormControlLabel
+                                                key={option.name}
+                                                value={option.label}
+                                                control={<Radio size="medium" />}
+                                                label={<ChoiceTypo>{option.label}</ChoiceTypo>}
+                                                sx={{
+                                                    width: "100%",
+                                                    border: "1px solid #1c1d1f",
+                                                    p: 1,
+                                                    m: "3px",
+                                                    height: "76px",
+                                                }}
+                                            />
+                                        ))}
+                                    </RadioGroup>
+                                </FormControl>
                             </Grid>
                         </Grid>
                     </Box>
                 </Box>
-                <Footer>
-                    <Grid container justifyContent={"space-between"} p={2}>
-                        <Grid>
-
-                        </Grid>
-                        <Grid>
-                            <ContinueButton type='submit' variant="contained">
-                                Continue
-                            </ContinueButton>
-                        </Grid>
-                    </Grid>
-                </Footer>
+                <StepsFooter formikRef={formikRef} />
                 <Box height={"100px"}></Box>
             </form>
         </Box>
