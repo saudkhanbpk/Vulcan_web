@@ -35,8 +35,8 @@ import { ShowErrorToast } from "../../../Common/Toast/toast";
 import { getAuth } from "firebase/auth";
 import { Loader } from "../../../Common/loader";
 import { getDatabase, ref, update } from "firebase/database";
-import ProgressBar from "../../progressbar";
 import * as Yup from "yup";
+import ProgressBar from "../../../Common/ProgressBar/progressbar";
 
 export const EducatorProfileStep = () => {
   const auth = getAuth();
@@ -328,7 +328,7 @@ export const EducatorProfileStep = () => {
             </Span>
           </Grid>
         </Grid>
-        <ProgressBar />
+        <ProgressBar componentName={"eduSteps"}/>
       </Header>
       {loading || loaderValue ? (
         <Loader />

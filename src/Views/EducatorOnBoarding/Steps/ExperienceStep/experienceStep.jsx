@@ -26,8 +26,8 @@ import QuestionTwo from "./questionTwo";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
 import { ShowErrorToast } from "../../../Common/Toast/toast";
-import ProgressBar from "../../progressbar";
 import { useNavigate } from "react-router-dom";
+import ProgressBar from "../../../Common/ProgressBar/progressbar";
 export const ExperienceStep = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -133,7 +133,7 @@ export const ExperienceStep = () => {
             </Span>
           </Grid>
         </Grid>
-        <ProgressBar />
+        <ProgressBar componentName={"eduSteps"}/>
       </Header>
       <Box py={10}>
         <TopHeadingBox>

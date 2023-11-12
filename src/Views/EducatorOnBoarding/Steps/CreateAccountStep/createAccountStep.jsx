@@ -37,12 +37,12 @@ import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
 import useAuthentication from "../../../../Infrastructure/States/onAuthStateChange";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../../../../Infrastructure/config";
-import ProgressBar from "../../progressbar";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../../../Common/loader";
 import { useAuthValue } from "../../../../Infrastructure/States/authContext";
 import './style.css'
 import { VerifyEmailStep } from "./verifyEmailStep";
+import ProgressBar from "../../../Common/ProgressBar/progressbar";
 export const CreateAccountStep = () => {
   const auth = getAuth();
   const navigate = useNavigate()
@@ -202,7 +202,7 @@ export const CreateAccountStep = () => {
             </Span>
           </Grid>
         </Grid>
-        <ProgressBar />
+        <ProgressBar componentName={"eduSteps"}/>
       </Header>
       {user && loading ? <Loader /> :
         <Box py={14}>
