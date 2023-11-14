@@ -95,7 +95,11 @@ export const LearningObjectives = () => {
         },
     })
     formikRef.current = formik;
-
+    const handleContinueClick = () => {
+        if (formikRef.current) {
+            formikRef?.current.handleSubmit();
+        }
+    };
     return (
         <Box height={"100vh"} >
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
@@ -344,7 +348,7 @@ export const LearningObjectives = () => {
 
                     </Grid>
                 </Grid>
-                <StepsFooter handleDec={handleDec} formikRef={formikRef} />
+                <StepsFooter handleDec={handleDec} handleContinueClick={handleContinueClick} />
             </form>
             <Box height={"100px"}></Box>
         </Box>

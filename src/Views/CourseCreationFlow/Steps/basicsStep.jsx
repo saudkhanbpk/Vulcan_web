@@ -37,10 +37,10 @@ export const BasicsStep = () => {
     }
     const handleCategoryStep = async () => {
         const updateCategoryStep = httpsCallable(functions, "updatecategorystep");
-        await updateCategoryStep({categoryValue:basicStepState?.categoryValue , courseTitle:formik.values.courseTitle});
+        await updateCategoryStep({ categoryValue: basicStepState?.categoryValue, courseTitle: formik.values.courseTitle });
     }
     const formik = useFormik({
-        initialValues: { courseTitle:"" },
+        initialValues: { courseTitle: "" },
         validationSchema: Yup.object().shape({
             courseTitle: Yup.string().required("Course Title Required")
         }),
@@ -82,7 +82,7 @@ export const BasicsStep = () => {
         if (userData && categoryValue) {
             dispatch(basicStepControl({ categoryValue: categoryValue, question: "category" }));
         }
-        if(userData && courseTitle){
+        if (userData && courseTitle) {
             dispatch(basicStepControl({ categoryValue: courseTitle, question: "courseTitle" }));
             formik.setValues({
                 ...formik.values,
@@ -90,9 +90,15 @@ export const BasicsStep = () => {
             });
         }
     }, [userData, dispatch, categoryValue, courseTitle, formik.setValues])
+
+    const handleContinueClick = () => {
+        if (formikRef.current) {
+            formikRef?.current.handleSubmit();
+        }
+    };
     return (
         <Box height={"100vh"}>
-            <StepsHeader steps={courseSteps} handleExit={handleExit}/>
+            <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={"100px"}></Box>
             <form onSubmit={formik.handleSubmit} display={"flex"} justifyContent={"center"} alignItems={"center"}>
                 <Box px={10}>
@@ -193,7 +199,7 @@ export const BasicsStep = () => {
                         </Grid>
                     </Box>
                 </Box>
-                <StepsFooter formikRef={formikRef} />
+                <StepsFooter handleContinueClick={handleContinueClick} />
                 <Box height={"100px"}></Box>
             </form>
         </Box>
