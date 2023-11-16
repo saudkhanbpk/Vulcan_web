@@ -105,7 +105,7 @@ export const LearningObjectives = () => {
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={"100px"}></Box>
             <form onSubmit={formik.handleSubmit}>
-                <Grid container spacing={3} px={10}>
+                <Grid container spacing={3}px={{xs:2,sm:2,md:10, lg:10, xl:10}}>
                     <Grid item xs={12} md={6} lg={4} xl={4} spacing={2}>
                         <Box height={"100px"}>
                             <QuestionName variant="h6">

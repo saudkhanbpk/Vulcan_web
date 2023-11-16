@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { StepsHeader } from '../../Common/StepsHeader/stepsHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, TextField, Button } from '@mui/material';
@@ -7,7 +7,7 @@ import { ShowErrorToast } from '../../Common/Toast/toast';
 import { useNavigate } from 'react-router-dom';
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { QuestionName } from '../styles';
+import { ErrorBlockSmall, SectionQuestion } from '../styles';
 import { functions } from '../../../Infrastructure/config';
 import { httpsCallable } from 'firebase/functions';
 import { MdOutlineCancel } from "react-icons/md";
@@ -20,6 +20,7 @@ export const Curriculum = () => {
     ]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [showError, setShowError] = useState(false)
     const validSections = sections.filter(section => section.title && section.description);
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps);
 
@@ -59,11 +60,12 @@ export const Curriculum = () => {
         if (courseSteps > 1) {
             try {
                 if (validSections.length >= 3) {
+                    setShowError(false)
                     const updateCurriculumStep = httpsCallable(functions, "updatecurriculum");
-                    await updateCurriculumStep(sections);
+                    await updateCurriculumStep({sections});
                     dispatch(incrementCoursesSteps());
                 } else {
-                    ShowErrorToast("Please fill in title and description for at least 3 sections");
+                    setShowError(true)
                 }
             } catch (error) {
                 ShowErrorToast(error);
@@ -80,18 +82,13 @@ export const Curriculum = () => {
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={'100px'}></Box>
             <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start' }}>
-                <Box my={2} sx={{ width: '70%' }}>
+                <Box my={2} sx={{ width: { xs:"90%",sm: "90%", md: "80%", lg: "70%", xl: "70%" } }}>
                     {sections.map((section, index) => (
-                        <Box key={index} border={1} p={4} my={2}>
-                            {
-                                sections.length > 3 ?
-                                    <Box sx={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
-                                        <MdOutlineCancel style={{ fontSize: '2em', cursor: 'pointer' }} onClick={() => handleRemoveSection(index)} />
-                                    </Box>
-                                    : null
-                            }
+                        <Box key={index} border={1} p={2} my={2}>
                             <Box display="flex" flexDirection="column">
-                                <QuestionName variant="h6">New Section</QuestionName>
+                                <Box sx={{ display: "flex", justifyContent: "space-between" }}> <SectionQuestion variant="h6">New Section</SectionQuestion>
+                                    {sections.length > 3 ? <MdOutlineCancel style={{ fontSize: '2em', cursor: 'pointer' }} onClick={() => handleRemoveSection(index)} /> : null}
+                                </Box>
                                 <TextField
                                     name="title"
                                     label="Title"
@@ -99,16 +96,16 @@ export const Curriculum = () => {
                                     onChange={(event) => handleTitleChange(index, event)}
                                     value={section.title}
                                     InputLabelProps={{
-                                        style: { fontSize: 16 },
+                                        style: { fontSize: 14 },
                                     }}
                                     InputProps={{
-                                        style: { fontSize: 18 },
+                                        style: { fontSize: 14 },
                                     }}
                                     fullWidth
                                 />
                             </Box>
                             <Box display="flex" flexDirection="column">
-                                <QuestionName variant="h6">What the students would do after completing this section</QuestionName>
+                                <SectionQuestion variant="h6">What the students would do after completing this section</SectionQuestion>
                                 <TextField
                                     name="description"
                                     label="Description"
@@ -116,10 +113,10 @@ export const Curriculum = () => {
                                     onChange={(event) => handleDescriptionChange(index, event)}
                                     value={section.description}
                                     InputLabelProps={{
-                                        style: { fontSize: 16 },
+                                        style: { fontSize: 14 },
                                     }}
                                     InputProps={{
-                                        style: { fontSize: 18 },
+                                        style: { fontSize: 14 },
                                     }}
                                     multiline
                                     rows={2}
@@ -132,8 +129,15 @@ export const Curriculum = () => {
                         <AiOutlinePlus /> Section
                     </Button>
                 </Box>
+                {
+                    showError && <Box mt={5}>
+                        <ErrorBlockSmall>
+                            At least 3 sections required to fill.
+                        </ErrorBlockSmall>
+                    </Box>
+                }
             </Box>
-            <StepsFooter handleDec={handleDec} handleContinueClick={handleContinueClick} validSections={validSections} />
+            <StepsFooter handleDec={handleDec} handleContinueClick={handleContinueClick} validSections={showError} />
             <Box height={'100px'}></Box>
         </Box>
     );

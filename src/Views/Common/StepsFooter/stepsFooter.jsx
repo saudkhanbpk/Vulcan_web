@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
-import { ContinueButton, Footer, PreviousButton } from '../../CourseCreationFlow/styles'
+import { ContinueButton, ErrorBlockLarge, Footer, PreviousButton } from '../../CourseCreationFlow/styles'
+import { Box } from '@mui/material'
 
 export const StepsFooter = ({ handleDec, handleContinueClick, validSections }) => {
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
@@ -18,15 +19,26 @@ export const StepsFooter = ({ handleDec, handleContinueClick, validSections }) =
                         <></>
                     )}
                 </Grid>
-                <Grid>
-                    <Grid>
-                        <ContinueButton variant="contained"
-                            disabled={!basicStepState.categoryValue || validSections?.length<3}
-                            onClick={handleContinueClick}
-                        >
-                            {courseSteps <= 5 ? "Continue" : "Finish"}
-                        </ContinueButton>
-                    </Grid>
+                <Grid display={"flex"} >
+                    <Box
+                        display="flex"
+                        justifyContent="flex-end"
+                        alignItems="flex-end"
+                        mr={3}
+                    >
+                        {validSections && (
+                            <ErrorBlockLarge>
+                                <p style={{marginBottom:"0px"}}>At least 3 sections required to fill.</p>
+                            </ErrorBlockLarge>
+                            
+                        )}
+                    </Box>
+                    <ContinueButton variant="contained"
+                        disabled={!basicStepState.categoryValue}
+                        onClick={handleContinueClick}
+                    >
+                        {courseSteps <= 5 ? "Continue" : "Finish"}
+                    </ContinueButton>
                 </Grid>
             </Grid>
         </Footer>

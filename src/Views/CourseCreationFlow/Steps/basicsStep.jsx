@@ -9,7 +9,7 @@ import { StepsHeader } from '../../Common/StepsHeader/stepsHeader'
 import { ShowErrorToast } from '../../Common/Toast/toast'
 import { ChoiceTypo, QuestionName } from '../styles'
 import { Box, FormControl, FormControlLabel, Radio, RadioGroup, TextField } from '@mui/material'
-import { basicStepControl, resetBasicStepValues, incrementCoursesSteps, decrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
+import { basicStepControl, resetBasicStepValues, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
 import { useNavigate } from 'react-router-dom';
 
@@ -101,7 +101,7 @@ export const BasicsStep = () => {
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={"100px"}></Box>
             <form onSubmit={formik.handleSubmit} display={"flex"} justifyContent={"center"} alignItems={"center"}>
-                <Box px={10}>
+                <Box px={{xs:2,sm:2,md:10, lg:10, xl:10}}>
                     <Box width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }}>
                         <QuestionName>
                             What will be the title of your course?
