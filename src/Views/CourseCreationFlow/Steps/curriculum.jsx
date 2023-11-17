@@ -1,33 +1,43 @@
 import React, { useState } from 'react';
-import { StepsHeader } from '../../Common/StepsHeader/stepsHeader';
-import { useDispatch, useSelector } from 'react-redux';
-import { Box, TextField, Button } from '@mui/material';
-import { decrementCoursesSteps, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice';
-import { ShowErrorToast } from '../../Common/Toast/toast';
 import { useNavigate } from 'react-router-dom';
-import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
 import { AiOutlinePlus } from 'react-icons/ai';
+import { MdOutlineCancel } from "react-icons/md";
+import { httpsCallable } from 'firebase/functions';
+import { Box, TextField, Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { ShowErrorToast } from '../../Common/Toast/toast';
 import { ErrorBlockSmall, SectionQuestion } from '../styles';
 import { functions } from '../../../Infrastructure/config';
-import { httpsCallable } from 'firebase/functions';
-import { MdOutlineCancel } from "react-icons/md";
+import { StepsHeader } from '../../Common/StepsHeader/stepsHeader';
+import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
+import { decrementCoursesSteps, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice';
 
 export const Curriculum = () => {
-    const [sections, setSections] = useState([
-        {
-            title: '', description: '',
-        }
-    ]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [showError, setShowError] = useState(false)
-    const validSections = sections.filter(section => section.title && section.description);
+    const userData = useSelector((state) => state.userData.data);
+    const sectionsData = userData?.educator?.courses?.pending?.questions?.curriculum?.sections
+    const defaultSections = sectionsData?.map(section => ({
+        title: section?.title || '',
+        description: section?.description || '',
+    }));
+    const [sections, setSections] = useState(defaultSections || [{
+        title: '',
+        description: '',
+    }]);
+    const validSections = sections?.filter(section => section.title && section.description);
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps);
 
-    const handleExit = () => {
-        console.log('handle exit clicked');
-        dispatch(resetCoursesSteps);
-        navigate('/dashboard');
+    const handleExit = async () => {
+        try {
+            const updateCurriculumStep = httpsCallable(functions, "updatecurriculum");
+            await updateCurriculumStep(sections);
+            dispatch(resetCoursesSteps);
+            navigate('/dashboard');
+        } catch (error) {
+            ShowErrorToast(error);
+        }
     };
 
     const handleDec = async () => {
@@ -39,30 +49,26 @@ export const Curriculum = () => {
             }
         }
     };
-
     const handleAddSection = () => {
         setSections(prevSections => [...prevSections, { title: '', description: '' }]);
     };
-
     const handleTitleChange = (index, event) => {
         const newSections = [...sections];
-        newSections[index].title = event.target.value;
+        newSections[index] = { ...newSections[index], title: event.target.value };
         setSections(newSections);
     };
-
     const handleDescriptionChange = (index, event) => {
         const newSections = [...sections];
-        newSections[index].description = event.target.value;
+        newSections[index] = { ...newSections[index], description: event.target.value };
         setSections(newSections);
     };
-
     const handleContinueClick = async () => {
         if (courseSteps > 1) {
             try {
                 if (validSections.length >= 3) {
                     setShowError(false)
                     const updateCurriculumStep = httpsCallable(functions, "updatecurriculum");
-                    await updateCurriculumStep({sections});
+                    await updateCurriculumStep(sections);
                     dispatch(incrementCoursesSteps());
                 } else {
                     setShowError(true)
@@ -82,19 +88,20 @@ export const Curriculum = () => {
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={'100px'}></Box>
             <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start' }}>
-                <Box my={2} sx={{ width: { xs:"90%",sm: "90%", md: "80%", lg: "70%", xl: "70%" } }}>
-                    {sections.map((section, index) => (
+                <Box my={2} sx={{ width: { xs: "90%", sm: "90%", md: "80%", lg: "70%", xl: "70%" } }}>
+                    {sections?.map((section, index) => (
                         <Box key={index} border={1} p={2} my={2}>
                             <Box display="flex" flexDirection="column">
                                 <Box sx={{ display: "flex", justifyContent: "space-between" }}> <SectionQuestion variant="h6">New Section</SectionQuestion>
-                                    {sections.length > 3 ? <MdOutlineCancel style={{ fontSize: '2em', cursor: 'pointer' }} onClick={() => handleRemoveSection(index)} /> : null}
+                                    {sections?.length > 3 ? <MdOutlineCancel style={{ fontSize: '2em', cursor: 'pointer' }} onClick={() => handleRemoveSection(index)} /> : null}
                                 </Box>
                                 <TextField
                                     name="title"
                                     label="Title"
                                     variant="outlined"
                                     onChange={(event) => handleTitleChange(index, event)}
-                                    value={section.title}
+                                    value={section?.title}
+                                    // value={(userData?.educator?.courses?.pending?.questions?.curriculum && sectionsData[index]?.title) || section.title}
                                     InputLabelProps={{
                                         style: { fontSize: 14 },
                                     }}
@@ -111,7 +118,8 @@ export const Curriculum = () => {
                                     label="Description"
                                     variant="outlined"
                                     onChange={(event) => handleDescriptionChange(index, event)}
-                                    value={section.description}
+                                    value={section?.description}
+                                    // value={(userData?.educator?.courses?.pending?.questions?.curriculum && sectionsData[index]?.description) || section.description}
                                     InputLabelProps={{
                                         style: { fontSize: 14 },
                                     }}

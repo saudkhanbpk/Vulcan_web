@@ -5,6 +5,7 @@ const initialState = {
   basicStepState:{
     categoryValue: "",
     courseTitle: "",
+    courseSubTitle:""
   }
 };
 export const coursesStepsSlice = createSlice({
@@ -27,16 +28,18 @@ export const coursesStepsSlice = createSlice({
       }
     },
     basicStepControl: (state, action) => {
-      const {question, categoryValue, courseTitle } = action.payload;      
+      const {question, categoryValue, courseTitle, courseSubTitle } = action.payload;      
       if (question == "category") {
         state.basicStepState.categoryValue = categoryValue;
       } else if (question === "courseTitle") {
         state.basicStepState.courseTitle = courseTitle;
+        state.basicStepState.courseSubTitle = courseSubTitle;
       }
       return state;
     },
     resetBasicStepValues: (state) => {
       state.basicStepState.courseTitle = "";
+      state.basicStepState.courseSubTitle = "";
       state.basicStepState.categoryValue = "";
     },
   },

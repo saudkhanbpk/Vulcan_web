@@ -22,13 +22,13 @@ export const BasicsStep = () => {
     const basicStepState = useSelector((state) => state.courseSteps.basicStepState)
     const categoryValue = userData?.educator?.courses?.pending?.questions?.category?.categoryValue
     const courseTitle = userData?.educator?.courses?.pending?.questions?.courseTitle
+    const courseSubTitle = userData?.educator?.courses?.pending?.questions?.courseSubTitle
     const handleExit = () => {
         handleCategoryStep()
         formik.resetForm()
         navigate('/dashboard')
         dispatch(resetBasicStepValues)
         dispatch(resetCoursesSteps)
-
     }
     const handleInc = async () => {
         if (courseSteps < 6) {
@@ -37,16 +37,16 @@ export const BasicsStep = () => {
     }
     const handleCategoryStep = async () => {
         const updateCategoryStep = httpsCallable(functions, "updatecategorystep");
-        await updateCategoryStep({ categoryValue: basicStepState?.categoryValue, courseTitle: formik.values.courseTitle });
+        await updateCategoryStep({ categoryValue: basicStepState?.categoryValue, courseTitle: formik.values.courseTitle, courseSubTitle: formik.values.courseSubTitle });
     }
     const formik = useFormik({
-        initialValues: { courseTitle: "" },
+        initialValues: { courseTitle: courseTitle || "", courseSubTitle: courseSubTitle || "" },
         validationSchema: Yup.object().shape({
             courseTitle: Yup.string().required("Course Title Required")
         }),
         onSubmit: (values) => {
             if (courseSteps >= 1 && courseSteps <= 6) {
-                dispatch(basicStepControl({ courseTitle: values.courseTitle, question: "courseTitle" }))
+                dispatch(basicStepControl({ courseTitle: values.courseTitle, question: "courseTitle", courseSubTitle: values.courseSubTitle }))
                 try {
                     handleCategoryStep()
                     handleInc()
@@ -83,10 +83,17 @@ export const BasicsStep = () => {
             dispatch(basicStepControl({ categoryValue: categoryValue, question: "category" }));
         }
         if (userData && courseTitle) {
-            dispatch(basicStepControl({ categoryValue: courseTitle, question: "courseTitle" }));
+            dispatch(basicStepControl({ courseTitle: courseTitle, question: "courseTitle" }));
             formik.setValues({
                 ...formik.values,
                 courseTitle: courseTitle || '',
+            });
+        }
+        if (userData && courseSubTitle) {
+            dispatch(basicStepControl({ courseSubTitle: courseSubTitle, question: "courseTitle" }));
+            formik.setValues({
+                ...formik.values,
+                courseSubTitle: courseSubTitle || '',
             });
         }
     }, [userData, dispatch, categoryValue, courseTitle, formik.setValues])
@@ -100,33 +107,61 @@ export const BasicsStep = () => {
         <Box height={"100vh"}>
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={"100px"}></Box>
-            <form onSubmit={formik.handleSubmit} display={"flex"} justifyContent={"center"} alignItems={"center"}>
-                <Box px={{xs:2,sm:2,md:10, lg:10, xl:10}}>
-                    <Box width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }}>
-                        <QuestionName>
-                            What will be the title of your course?
-                        </QuestionName>
-                        <TextField
-                            name="courseTitle"
-                            label={
-                                formik.touched.courseTitle && Boolean(formik.errors.courseTitle)
-                                    ? formik.errors.courseTitle
-                                    : "Course Title"
-                            }
-                            error={formik.touched.courseTitle && Boolean(formik.errors.courseTitle)}
-                            variant="outlined"
-                            placeholder="Course Title"
-                            onChange={formik.handleChange}
-                            value={formik.values.courseTitle}
-                            ml={1}
-                            InputLabelProps={{
-                                style: { fontSize: 16 },
-                            }}
-                            InputProps={{
-                                style: { fontSize: 18 },
-                            }}
-                            fullWidth
-                        />
+            <form onSubmit={formik.handleSubmit} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Box px={{ xs: 2, sm: 2, md: 10, lg: 10, xl: 10 }}>
+                    <Box display={"flex"} flexDirection={{ sm: "column", xs: "column", md: "column", lg: "row", xl: "row" }}>
+                        <Box width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }} pr={{ lg: 2 }}>
+                            <QuestionName>
+                                What will be the title of your course?
+                            </QuestionName>
+                            <TextField
+                                name="courseTitle"
+                                label={
+                                    formik.touched.courseTitle && Boolean(formik.errors.courseTitle)
+                                        ? formik.errors.courseTitle
+                                        : "Course Title"
+                                }
+                                error={formik.touched.courseTitle && Boolean(formik.errors.courseTitle)}
+                                variant="outlined"
+                                placeholder="Course Title"
+                                onChange={formik.handleChange}
+                                value={formik.values.courseTitle}
+                                ml={1}
+                                InputLabelProps={{
+                                    style: { fontSize: 16 },
+                                }}
+                                InputProps={{
+                                    style: { fontSize: 18 },
+                                }}
+                                fullWidth
+                            />
+                        </Box>
+                        <Box width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }}>
+                            <QuestionName>
+                                What will be the Subtitle of your course?
+                            </QuestionName>
+                            <TextField
+                                name="courseSubTitle"
+                                label={
+                                    formik.touched.courseSubTitle && Boolean(formik.errors.courseSubTitle)
+                                        ? formik.errors.courseSubTitle
+                                        : "Course Subtitle"
+                                }
+                                error={formik.touched.courseSubTitle && Boolean(formik.errors.courseSubTitle)}
+                                variant="outlined"
+                                placeholder="Course Subtitle"
+                                onChange={formik.handleChange}
+                                value={formik.values.courseSubTitle}
+                                ml={1}
+                                InputLabelProps={{
+                                    style: { fontSize: 16 },
+                                }}
+                                InputProps={{
+                                    style: { fontSize: 18 },
+                                }}
+                                fullWidth
+                            />
+                        </Box>
                     </Box>
                     <Box mt={4}>
                         <QuestionName variant="h6">
