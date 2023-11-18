@@ -95,13 +95,17 @@ export const LearningObjectives = () => {
         },
     })
     formikRef.current = formik;
-
+    const handleContinueClick = () => {
+        if (formikRef.current) {
+            formikRef?.current.handleSubmit();
+        }
+    };
     return (
         <Box height={"100vh"} >
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={"100px"}></Box>
             <form onSubmit={formik.handleSubmit}>
-                <Grid container spacing={3} px={10}>
+                <Grid container spacing={3}px={{xs:2,sm:2,md:10, lg:10, xl:10}}>
                     <Grid item xs={12} md={6} lg={4} xl={4} spacing={2}>
                         <Box height={"100px"}>
                             <QuestionName variant="h6">
@@ -344,7 +348,7 @@ export const LearningObjectives = () => {
 
                     </Grid>
                 </Grid>
-                <StepsFooter handleDec={handleDec} formikRef={formikRef} />
+                <StepsFooter handleDec={handleDec} handleContinueClick={handleContinueClick} />
             </form>
             <Box height={"100px"}></Box>
         </Box>

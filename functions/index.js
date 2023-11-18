@@ -36,3 +36,6 @@ exports.updatecourseobjectives = updateCourseObjectives.updateCourseObjectives
 
 const updateCategoryStep = require('./updateCategoryStep')
 exports.updatecategorystep = updateCategoryStep.updateCategoryStep
+
+const updateCurriculum = require('./updateCurriculum')
+exports.updatecurriculum = updateCurriculum.updateCurriculum

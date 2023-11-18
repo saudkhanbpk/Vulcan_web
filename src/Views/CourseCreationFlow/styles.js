@@ -122,6 +122,17 @@ export const QuestionName = styled(Typography)(({ theme }) => ({
     fontSize: "16px",
   },
 }))
+export const SectionQuestion = styled(Typography)(({ theme }) => ({
+  paddingTop: theme.spacing(2),
+  paddingBottom: theme.spacing(2),
+  fontSize: "16px",
+  [theme.breakpoints.down("md")]: {
+    fontSize: "16px",
+  },
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "16px",
+  },
+}))
 export const styles = {
   main: {
     height: "100vh",
