@@ -3,16 +3,18 @@ import React, { useEffect, useState } from "react";
 import Avatar from "react-avatar-edit";
 import EditIcon from "@mui/icons-material/Edit";
 import ProfileImage from "../../../../Assets/Images/vector.png";
+import courseImageVector from "../../../../Assets/Images/courseVector.png";
 import { AvatarBox } from "../../styles";
 import CheckIcon from "@mui/icons-material/Check";
 import { useSelector } from "react-redux";
 
-export const UploadAvatar = ({ onUpload }) => {
+export const UploadAvatar = ({ onUpload, courseImage }) => {
   const [preview, setPreview] = useState(null);
   const [open, setOpen] = React.useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const userData = useSelector((state) => state.userData.data);
   const avatar = userData?.educator?.profile?.avatar
+  const course_image = userData?.educator?.courses?.pending?.details?.course_image
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -71,12 +73,24 @@ export const UploadAvatar = ({ onUpload }) => {
         </AvatarBox>
       </Modal>
       <Box display="flex" justifyContent="center" alignItems="center">
-        <img
-          src={showPreview && preview ? preview : (avatar || ProfileImage)}
-          height={200}
-          width={200}
-          alt="Preview"
-        />
+
+        {
+          !courseImage ?
+            <img
+              src={showPreview && preview ? preview : (avatar || ProfileImage)}
+              height={200}
+              width={200}
+              alt="Preview"
+            />
+            :
+            <img
+              src={showPreview && preview ? preview : (course_image || courseImageVector)}
+              height={200}
+              width={200}
+              alt="Preview"
+            />
+        }
+
       </Box>
       <Box
         onClick={handleOpen}

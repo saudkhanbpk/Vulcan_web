@@ -1,66 +1,338 @@
-import React from 'react'
 import { StepsHeader } from '../../Common/StepsHeader/stepsHeader'
-import { useDispatch, useSelector } from 'react-redux'
-import { Box } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2/Grid2'
-import { ContinueButton, Footer, PreviousButton } from '../styles'
-import { decrementCoursesSteps, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
+import {
+    Details, ContinueButton, Footer,
+    CharacterCount,
+    CountText,
+    ErrorBlockLarge,
+    ErrorBlockSmall,
+    ExitTypo,
+    FullName,
+    Header,
+    LogoTypo,
+    PreviousButton,
+    Span,
+    StepsTypo,
+    TitleText,
+} from '../styles'
+// import { decrementCoursesSteps, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
 import { ShowErrorToast } from '../../Common/Toast/toast'
-import { useNavigate } from 'react-router-dom'
+import { Box, Stack, TextField } from "@mui/material";
+import "react-quill/dist/quill.snow.css";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import ReactQuill from "react-quill";
+import { useFormik } from "formik";
+import { httpsCallable } from "firebase/functions";
+import { getAuth } from "firebase/auth";
+import { getDatabase, ref, update } from "firebase/database";
+import * as Yup from "yup";
+import { UploadAvatar } from '../../EducatorOnBoarding/Steps/EducatorProfileStep/uploadAvatar';
+import { functions } from '../../../Infrastructure/config';
+import { Loader } from '../../Common/loader';
+import { incrementCoursesSteps, decrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice';
+import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
 
 export const CourseListing = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
-    const handleExit = () => {
-        console.log("handle exit clicked")
-        dispatch(resetCoursesSteps)
-        navigate('/dashboard')
+    const auth = getAuth();
+    const db = getDatabase();
+    const minCharacters = 200;
+    const maxCharacters = 2000;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const uid = auth?.currentUser?.uid;
+    const [loaderValue, setLoaderValue] = useState(false);
+    const userData = useSelector((state) => state.userData.data);
+    const loading = useSelector((state) => state.userData.loading);
+    const steps = useSelector((state) => state.educatorSteps.steps);
+    const courseDetails = userData?.educator?.courses?.pending?.details
+    const courseImage = courseDetails?.course_image;
+    const description = courseDetails?.description
+    const promoLink = courseDetails?.promo_link;
+    const [characterCount, setCharacterCount] = useState(0);
+    const [htmlData, setHtmlData] = useState(description || "");
+    // eslint-disable-next-line no-unused-vars
+    const [plainText, setPlainText] = useState("");
+    const [displayMessage, setDisplayMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    // Define the isUrlValid function
+    function isUrlValid(userInput) {
+        if (userInput) {
+            const res = userInput.match(
+                /(https?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&//=]*)/g
+            );
+            return res !== null;
+        }
+        return true;
     }
+    function ensureHttpsProtocol(url) {
+        if (url && !url.startsWith("https://")) {
+            return "https://" + url;
+        }
+        return url;
+    }
+    const formik = useFormik({
+        initialValues: {
+            courseImage: "",
+            description: "",
+            promoLink: ensureHttpsProtocol(promoLink) || "",
+        },
+        validationSchema: Yup.object().shape({
+            promoLink: Yup.string().test("promoLink", "Invalid promoLink URL", (value) =>
+                isUrlValid(value)
+            ),
+        }),
+        onSubmit: async (values) => {
+            let newDisplayMessage = "";
+            if (!values.courseImage && !courseImage) {
+                newDisplayMessage = "Must upload profile picture";
+                setErrorMessage(newDisplayMessage);
+            } else if (
+                characterCount < 200 ||
+                characterCount > 2000
+            ) {
+                newDisplayMessage = "Course details must be 200-2000 characters";
+                setErrorMessage(newDisplayMessage);
+            }
+            else {
+                newDisplayMessage = "";
+                if (newDisplayMessage) {
+                    setLoaderValue(false);
+                    return;
+                }
+                try {
+                    setLoaderValue(true);
+                    const updateCourseDetailsStep = httpsCallable(
+                        functions,
+                        "updatecoursedetailsstep"
+                    );
+                    await updateCourseDetailsStep(values);
+                    dispatch(incrementCoursesSteps());
+                } catch (error) {
+                    ShowErrorToast(error);
+                } finally {
+                    setLoaderValue(false);
+                }
+            }
+        },
+    });
+    const modules = {
+        toolbar: [
+            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+            ["bold", "italic", "underline", "strike", "blockquote"],
+            [{ size: [] }],
+            [{ font: [] }],
+            [{ align: ["right", "center", "justify"] }],
+            [{ list: "ordered" }, { list: "bullet" }],
+            ["link", "image"],
+            [{ color: ["red", "#785412"] }],
+            [{ background: ["red", "#785412"] }],
+        ],
+    };
+    const formats = [
+        "header",
+        "bold",
+        "italic",
+        "underline",
+        "strike",
+        "blockquote",
+        "list",
+        "bullet",
+        "link",
+        "color",
+        "image",
+        "background",
+        "align",
+        "size",
+        "font",
+    ];
     const handleDec = async () => {
-        if (courseSteps > 1) {
-            try {
-                dispatch(decrementCoursesSteps());
-            } catch (error) {
-                ShowErrorToast(error);
-            }
+        try {
+            const updateCourseDetailsStep = httpsCallable(
+                functions,
+                "updatecoursedetailsstep"
+            );
+            await updateCourseDetailsStep(formik.values);
+            dispatch(decrementCoursesSteps());
+        } catch (error) {
+            ShowErrorToast(error);
         }
     };
-    const handleInc = async () => {
-        if (courseSteps > 1) {
-            try {
-                dispatch(incrementCoursesSteps());
-            } catch (error) {
-                ShowErrorToast(error);
-            }
+    const handleContinueClick = async () => {
+        // if (courseSteps > 1 && courseSteps < 7) {
+        //     try {
+        //         if (characterCount < 200 || characterCount > 2000) {
+        //             setErrorMessage("Description text must be 200-2000 characters")
+        //         } else if (!formik.values.courseImage) {
+        //             setErrorMessage("Upload Course Picture")
+        //         }
+        //         formik.handleSubmit()
+        //         dispatch(incrementCoursesSteps());
+        //     } catch (error) {
+        //         ShowErrorToast(error);
+        //     }
+        // }
+        formik.handleSubmit()
+
+    };
+    const handleCourseImageUpload = (imageDataURL) => {
+        formik.setFieldValue("courseImage", imageDataURL);
+    };
+    function countCharactersWithoutTags(html) {
+        const textWithoutTags = html.replace(/(<([^>]+)>)/gi, "");
+        return textWithoutTags.length;
+    }
+    const handleCourseDetailsChange = (value) => {
+        const currentCharacterCount = countCharactersWithoutTags(value);
+        setCharacterCount(currentCharacterCount);
+        formik.setFieldValue("description", value);
+        setHtmlData(value);
+        if (
+            currentCharacterCount >= minCharacters &&
+            currentCharacterCount <= maxCharacters
+        ) {
+            setDisplayMessage("");
         }
     };
+    const handleExit = async () => {
+        try {
+            const updateCourseDetailsStep = httpsCallable(
+                functions,
+                "updatecoursedetailsstep"
+            );
+            await updateCourseDetailsStep(formik.values);
+            dispatch(resetCoursesSteps());
+            navigate("/");
+        } catch (err) { }
+    };
+    useEffect(() => {
+        setCharacterCount(formik.values.description.length);
+    }, [formik.values.description]);
+    useEffect(() => {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = htmlData;
+        const text = tempDiv.textContent || tempDiv.innerText;
+        setPlainText(text);
+        setCharacterCount(text.length);
+    }, [htmlData]);
+
     return (
-        <Box height={"100vh"} >
+        <>
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
-            <Box height={"100px"}></Box>
-            Comming Soon
-            <Footer>
-                <Grid container justifyContent={"space-between"} p={2}>
-                    <Grid>
-                        {courseSteps > 1 ? (
-                            <PreviousButton variant="contained" onClick={handleDec}>
-                                Previous
-                            </PreviousButton>
-                        ) : (
-                            <></>
-                        )}
-                    </Grid>
-                    <Grid>
-                        <Grid>
-                            <ContinueButton variant="contained" onClick={handleInc}  >
-                                Continue
-                            </ContinueButton>
+            <Box height={"100px"} />
+            {loading || loaderValue ? (
+                <Loader />
+            ) : (
+                <Box
+                    component={"form"}
+                    onSubmit={formik.handleSubmit}
+                    height={"auto"}
+                // pt={12}
+                >
+                    <Box height={"50px"}></Box>
+                    <Grid
+                        container
+                        display={"flex"}
+                        justifyContent={"flex-start"}
+                        alignItems={"flex-start"}
+                    >
+                        <Grid
+                            lg={7}
+                            md={12}
+                            sm={12}
+                            xs={12}
+                            px={{ lg: 5, md: 5, sm: 5, xs: 5 }}
+                            mb={6}
+                            display={{ lg: "flex" }}
+                            flexDirection={"column"}
+                            justifyContent={"flex-start"}
+                            alignItems={"flex-start"}
+                            order={{ lg: 1, md: 2, sm: 2, xs: 2 }}
+                        >
+                            <Box
+                                display={"flex"}
+                                flexDirection={"column"}
+                                sx={{ width: "100%" }}
+                            >
+                                <Details color={"primary"} mb={3}>
+                                    Details
+                                </Details>
+                                <ReactQuill
+                                    theme="snow"
+                                    modules={modules}
+                                    formats={formats}
+                                    value={htmlData}
+                                    onChange={handleCourseDetailsChange}
+                                    style={{
+                                        marginTop: "40px",
+                                    }}
+                                />
+                            </Box>
+                            <Box width={"100%"}>
+                                <CharacterCount>
+                                    Character Count: <CountText>{characterCount}</CountText>
+                                </CharacterCount>
+                                <ErrorBlockSmall>
+                                    {(characterCount < minCharacters ||
+                                        characterCount > maxCharacters) &&
+                                        errorMessage}
+                                </ErrorBlockSmall>
+                            </Box>
+                        </Grid>
+                        <Grid
+                            pt={{ lg: 8, md: 8 }}
+                            pb={{ sm: 8, xs: 8 }}
+                            lg={5}
+                            md={12}
+                            sm={12}
+                            xs={12}
+                            height="100%"
+                            display={"flex"}
+                            flexDirection={"column"}
+                            justifyContent={"end"}
+                            alignItems={"center"}
+                            order={{ lg: 2, md: 1, sm: 1, xs: 1 }}
+                        >
+                            <Box maxWidth={{ md: "70%", lg: "100%", xlg: "100%" }}>
+                                <Stack direction="row" spacing={2}>
+                                    <Box position="relative">
+                                        <UploadAvatar onUpload={handleCourseImageUpload} courseImage={true} />
+                                    </Box>
+                                </Stack>
+                                <TextField
+                                    name="promoLink"
+                                    sx={{ mt: "6px" }}
+                                    variant="standard"
+                                    {...formik.getFieldProps("promoLink")}
+                                    InputLabelProps={{
+                                        style: { fontSize: 16 },
+                                    }}
+                                    InputProps={{
+                                        style: { fontSize: 18 },
+                                    }}
+                                    placeholder="www.promoLink.com"
+                                    label={
+                                        formik.errors.promoLink
+                                            ? `${formik.errors.promoLink}`
+                                            : "Promotional Video Link"
+                                    }
+                                    error={
+                                        formik.touched.promoLink && Boolean(formik.errors.promoLink)
+                                    }
+                                    fullWidth
+                                />
+                            </Box>
                         </Grid>
                     </Grid>
-                </Grid>
-            </Footer>
-            <Box height={"100px"}></Box>
-        </Box>
-    )
-}
+
+                </Box>
+            )
+            }
+            <Box height={"100px"} />
+            <StepsFooter handleDec={handleDec} handleContinueClick={handleContinueClick} errorMessage={errorMessage} />
+        </>
+    );
+};

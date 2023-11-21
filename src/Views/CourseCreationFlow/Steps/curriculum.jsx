@@ -26,7 +26,7 @@ export const Curriculum = () => {
         title: '',
         description: '',
     }]);
-    const validSections = sections?.filter(section => section.title && section.description);
+    const validSections = sections?.filter(section => section?.title && section?.description);
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps);
 
     const handleExit = async () => {

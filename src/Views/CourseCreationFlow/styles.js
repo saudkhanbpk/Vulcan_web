@@ -82,8 +82,8 @@ export const TitleText = styled(Typography)((theme) => ({
   fontSize: "16px",
   fontFamily: specialFont,
 }))
-export const AboutMe = styled(Typography)((theme) => ({
-  fontSize: "16px",
+export const Details = styled(Typography)((theme) => ({
+  fontSize: "28px",
   fontFamily: specialFont,
 }))
 export const FullName = styled(Typography)((theme) => ({
