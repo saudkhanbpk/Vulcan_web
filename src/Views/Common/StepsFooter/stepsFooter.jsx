@@ -4,7 +4,7 @@ import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { ContinueButton, ErrorBlockLarge, Footer, PreviousButton } from '../../CourseCreationFlow/styles'
 import { Box } from '@mui/material'
 
-export const StepsFooter = ({ handleDec, handleContinueClick, validSections }) => {
+export const StepsFooter = ({ handleDec, handleContinueClick, validSections, errorMessage }) => {
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const basicStepState = useSelector((state) => state.courseSteps.basicStepState)
     return (
@@ -28,19 +28,24 @@ export const StepsFooter = ({ handleDec, handleContinueClick, validSections }) =
                     >
                         {validSections && (
                             <ErrorBlockLarge>
-                                <p style={{marginBottom:"0px"}}>At least 3 sections required to fill.</p>
+                                <p style={{ marginBottom: "0px" }}>At least 3 sections required to fill.</p>
                             </ErrorBlockLarge>
-                            
                         )}
+
+                        {errorMessage && <ErrorBlockLarge>
+                            <p style={{ marginBottom: "0px" }}>{errorMessage}</p>
+                        </ErrorBlockLarge>}
+
+
                     </Box>
                     <ContinueButton variant="contained"
-                        disabled={!basicStepState.categoryValue}
+                         disabled={!basicStepState.categoryValue}
                         onClick={handleContinueClick}
                     >
                         {courseSteps <= 5 ? "Continue" : "Finish"}
                     </ContinueButton>
                 </Grid>
             </Grid>
-        </Footer>
+        </Footer >
     )
 }
