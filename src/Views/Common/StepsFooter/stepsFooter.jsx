@@ -4,7 +4,7 @@ import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { ContinueButton, ErrorBlockLarge, Footer, PreviousButton } from '../../CourseCreationFlow/styles'
 import { Box } from '@mui/material'
 
-export const StepsFooter = ({ handleDec, handleContinueClick, validSections, errorMessage }) => {
+export const StepsFooter = ({ handleDec, handleContinueClick, step3Error, errorMessage, step2Error }) => {
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const basicStepState = useSelector((state) => state.courseSteps.basicStepState)
     return (
@@ -26,20 +26,14 @@ export const StepsFooter = ({ handleDec, handleContinueClick, validSections, err
                         alignItems="flex-end"
                         mr={3}
                     >
-                        {validSections && (
-                            <ErrorBlockLarge>
-                                <p style={{ marginBottom: "0px" }}>At least 3 sections required to fill.</p>
-                            </ErrorBlockLarge>
-                        )}
-
-                        {errorMessage && <ErrorBlockLarge>
-                            <p style={{ marginBottom: "0px" }}>{errorMessage}</p>
-                        </ErrorBlockLarge>}
-
-
+                        <ErrorBlockLarge>
+                            {step3Error && <p style={{ marginBottom: "0px" }}>{step3Error}</p>}
+                            {step2Error && <p style={{ marginBottom: "0px" }}>{step2Error}</p>}
+                            {errorMessage && <p style={{ marginBottom: "0px" }}>{errorMessage}</p>}
+                        </ErrorBlockLarge>
                     </Box>
                     <ContinueButton variant="contained"
-                         disabled={!basicStepState.categoryValue}
+                        disabled={!basicStepState.categoryValue}
                         onClick={handleContinueClick}
                     >
                         {courseSteps <= 5 ? "Continue" : "Finish"}

@@ -230,7 +230,7 @@ export const CourseListing = () => {
                     component={"form"}
                     onSubmit={formik.handleSubmit}
                     height={"auto"}
-                // pt={12}
+                // pt={8}
                 >
                     <Box height={"50px"}></Box>
                     <Grid
@@ -256,9 +256,10 @@ export const CourseListing = () => {
                                 display={"flex"}
                                 flexDirection={"column"}
                                 sx={{ width: "100%" }}
+                                mt={5}
                             >
-                                <Details color={"primary"} mb={3}>
-                                    Details
+                                <Details color={"primary"}>
+                                    Course description
                                 </Details>
                                 <ReactQuill
                                     theme="snow"
@@ -267,7 +268,7 @@ export const CourseListing = () => {
                                     value={htmlData}
                                     onChange={handleCourseDetailsChange}
                                     style={{
-                                        marginTop: "40px",
+                                        marginTop: "20px",
                                     }}
                                 />
                             </Box>
@@ -283,7 +284,7 @@ export const CourseListing = () => {
                             </Box>
                         </Grid>
                         <Grid
-                            pt={{ lg: 8, md: 8 }}
+                            // pt={{ lg: 8, md: 8 }}
                             pb={{ sm: 8, xs: 8 }}
                             lg={5}
                             md={12}
@@ -292,11 +293,11 @@ export const CourseListing = () => {
                             height="100%"
                             display={"flex"}
                             flexDirection={"column"}
-                            justifyContent={"end"}
+                            justifyContent={"start"}
                             alignItems={"center"}
                             order={{ lg: 2, md: 1, sm: 1, xs: 1 }}
                         >
-                            <Box maxWidth={{ md: "70%", lg: "100%", xlg: "100%" }}>
+                            <Box maxWidth={{ md: "70%", lg: "100%", xlg: "100%" }} gap={4}>
                                 <Stack direction="row" spacing={2}>
                                     <Box position="relative">
                                         <UploadAvatar onUpload={handleCourseImageUpload} courseImage={true} />
@@ -304,7 +305,7 @@ export const CourseListing = () => {
                                 </Stack>
                                 <TextField
                                     name="promoLink"
-                                    sx={{ mt: "6px" }}
+                                    sx={{ mt: "30px" }}
                                     variant="standard"
                                     {...formik.getFieldProps("promoLink")}
                                     InputLabelProps={{

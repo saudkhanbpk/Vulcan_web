@@ -1,8 +1,9 @@
 import React from 'react'
-import { ExitTypo, Header, LogoTypo, Span, StepsTypo } from '../../CourseCreationFlow/styles'
+import { ExitTypo, Header, LogoTypo, Span, StepsTypo, StepsValue } from '../../CourseCreationFlow/styles'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { Box } from '@mui/material'
 import ProgressBar from '../ProgressBar/progressbar'
+import { specialFont } from '../../../Infrastructure/Theme/fontFamily'
 
 export const StepsHeader = ({ handleExit, steps }) => {
   return (
@@ -44,7 +45,7 @@ export const StepsHeader = ({ handleExit, steps }) => {
             sm={6}
             xs={6}
           >
-            <StepsTypo variant="h6">Step {steps} of 6</StepsTypo>
+            <StepsTypo variant="h6">Step {steps} of 6: <StepsValue ml={2} style={{paddingLeft:"10px"}}>{steps === 1 ? "Basics" : (steps === 2 ? "Intended Learner" : (steps === 3 ? "Curriculum": (steps === 4 ? "Details" : (steps === 5 ? "Class Schedule" : (steps === 6 ? "Summary" : "")))))}</StepsValue></StepsTypo>
           </Grid>
           <Grid
             lg={2}

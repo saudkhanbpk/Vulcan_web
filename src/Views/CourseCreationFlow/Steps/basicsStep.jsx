@@ -84,17 +84,11 @@ export const BasicsStep = () => {
         }
         if (userData && courseTitle) {
             dispatch(basicStepControl({ courseTitle: courseTitle, question: "courseTitle" }));
-            formik.setValues({
-                ...formik.values,
-                courseTitle: courseTitle || '',
-            });
+            formik.setFieldValue("courseTitle", courseTitle || '');
         }
         if (userData && courseSubTitle) {
             dispatch(basicStepControl({ courseSubTitle: courseSubTitle, question: "courseTitle" }));
-            formik.setValues({
-                ...formik.values,
-                courseSubTitle: courseSubTitle || '',
-            });
+            formik.setFieldValue("courseSubTitle", courseSubTitle || '');
         }
     }, [userData, dispatch, categoryValue, courseTitle, formik.setValues])
 
@@ -145,7 +139,7 @@ export const BasicsStep = () => {
                                 label={
                                     formik.touched.courseSubTitle && Boolean(formik.errors.courseSubTitle)
                                         ? formik.errors.courseSubTitle
-                                        : "Course Subtitle"
+                                        : "Course Subtitle (optional)"
                                 }
                                 error={formik.touched.courseSubTitle && Boolean(formik.errors.courseSubTitle)}
                                 variant="outlined"
@@ -168,7 +162,7 @@ export const BasicsStep = () => {
                             What category does your course best fit in?
                         </QuestionName>
                         <Grid container spacing={3}>
-                            <Grid item xs={12} md={6} lg={4} xl={4}>
+                            <Grid xs={12} md={6} lg={4} xl={4}>
                                 <FormControl fullWidth>
                                     <RadioGroup onChange={handleOptionChange} value={basicStepState.categoryValue}>
                                         {options.slice(0, 5).map((option, index) => (
@@ -189,7 +183,7 @@ export const BasicsStep = () => {
                                     </RadioGroup>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={12} md={6} lg={4} xl={4}>
+                            <Grid xs={12} md={6} lg={4} xl={4}>
                                 <FormControl fullWidth>
                                     <RadioGroup onChange={handleOptionChange} value={basicStepState.categoryValue}>
                                         {options.slice(5, 10).map((option, index) => (
@@ -210,7 +204,7 @@ export const BasicsStep = () => {
                                     </RadioGroup>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={12} md={6} lg={4} xl={4}>
+                            <Grid xs={12} md={6} lg={4} xl={4}>
                                 <FormControl fullWidth>
                                     <RadioGroup onChange={handleOptionChange} value={basicStepState.categoryValue}>
                                         {options.slice(10, 15).map((option, index) => (

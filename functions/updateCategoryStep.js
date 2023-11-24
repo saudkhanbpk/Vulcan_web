@@ -10,9 +10,9 @@ exports.updateCategoryStep = onCall((request) => {
     let errorMessage = null
     const uid = request.auth.uid
     try {
-        db.ref(`users/${uid}/educator/courses/pending/questions`).update({ courseTitle: courseTitle })
-        db.ref(`users/${uid}/educator/courses/pending/questions`).update({ courseSubTitle: courseSubTitle })
-        db.ref(`users/${uid}/educator/courses/pending/questions/category`).update({ categoryValue: categoryValue })
+        db.ref(`users/${uid}/educator/courses/pending/basics/`).update({ title: courseTitle })
+        db.ref(`users/${uid}/educator/courses/pending/basics/`).update({ subTitle: courseSubTitle })
+        db.ref(`users/${uid}/educator/courses/pending/basics/`).update({ category: categoryValue })
     } catch (error) {
         dbCalls.logUser("ERROR: category Steps: " + error)
         isSuccess = false
