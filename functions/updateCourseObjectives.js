@@ -42,9 +42,12 @@ exports.updateCourseObjectives = onCall((request) => {
         if (prerequisite5) {
             prerequisites.prerequisite_5 = prerequisite5
         }
-        db.ref(`users/${uid}/educator/courses/pending/intended_learner/objectives`).update(objectives)
-        db.ref(`users/${uid}/educator/courses/pending/intended_learner/`).update({ description: intendedLearner })
-        db.ref(`users/${uid}/educator/courses/pending/intended_learner/prerequisites`).update(prerequisites)
+        db.ref(`users/${uid}/educator/courses/pending/intended_learner`).update({
+            objectives: objectives,
+            description: intendedLearner,
+            prerequisites: prerequisites
+          });
+          
     } catch (error) {
         dbCalls.logUser("ERROR: Pre-Requisites Steps: " + error)
         isSuccess = false

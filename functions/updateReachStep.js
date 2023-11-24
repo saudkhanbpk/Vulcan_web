@@ -28,8 +28,6 @@ exports.updateReachStep = onCall((request) => {
             platforms.platform_link_3 = platformLink3
         }
 
-        db.ref(`users/${uid}/educator/questions/platforms`).update(platforms)
-
         if (socialLink1) {
             socials.social_link_1 = socialLink1
         }
@@ -41,9 +39,10 @@ exports.updateReachStep = onCall((request) => {
         if (socialLink3) {
             socials.social_link_3 = socialLink3
         }
-
-        db.ref(`users/${uid}/educator/questions/socials`).update(socials)
-
+        db.ref(`users/${uid}/educator/questions`).update({
+            platforms: platforms,
+            socials: socials
+          });         
     } catch (error) {
         dbCalls.logUser("ERROR: Reach Steps: " + error)  
         isSuccess = false
