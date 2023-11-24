@@ -13,6 +13,7 @@ import {
     Span,
     StepsTypo,
     TitleText,
+    CourseImage,
 } from '../styles'
 // import { decrementCoursesSteps, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
 import { ShowErrorToast } from '../../Common/Toast/toast'
@@ -284,7 +285,6 @@ export const CourseListing = () => {
                             </Box>
                         </Grid>
                         <Grid
-                            // pt={{ lg: 8, md: 8 }}
                             pb={{ sm: 8, xs: 8 }}
                             lg={5}
                             md={12}
@@ -297,12 +297,17 @@ export const CourseListing = () => {
                             alignItems={"center"}
                             order={{ lg: 2, md: 1, sm: 1, xs: 1 }}
                         >
-                            <Box maxWidth={{ md: "70%", lg: "100%", xlg: "100%" }} gap={4}>
-                                <Stack direction="row" spacing={2}>
+                            <Box maxWidth={{ md: "70%", lg: "100%", xlg: "100%" }} display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} >
+                                <Stack direction="row" spacing={2} mb={4}>
                                     <Box position="relative">
                                         <UploadAvatar onUpload={handleCourseImageUpload} courseImage={true} />
                                     </Box>
+                                
                                 </Stack>
+                                <CourseImage>
+                                        Course Image
+                                    </CourseImage>
+
                                 <TextField
                                     name="promoLink"
                                     sx={{ mt: "30px" }}

@@ -19,15 +19,15 @@ export const LearningObjectives = () => {
     const formikRef = useRef(null)
     const [error, setError] = useState(false)
     const userData = useSelector((state) => state.userData.data);
-    const intendedLearner = userData?.educator?.courses?.pending?.questions?.intendedLearner
-    const objectives = userData?.educator?.courses?.pending?.questions?.objectives
+    const intendedLearner = userData?.educator?.courses?.pending?.intended_learner?.description
+    const objectives = userData?.educator?.courses?.pending?.intended_learner?.objectives
     const objective1 = objectives?.objective_1
     const objective2 = objectives?.objective_2
     const objective3 = objectives?.objective_3
     const objective4 = objectives?.objective_4
     const objective5 = objectives?.objective_5
 
-    const prerequisites = userData?.educator?.courses?.pending?.questions?.prerequisites
+    const prerequisites = userData?.educator?.courses?.pending?.intended_learner?.prerequisites
     const prerequisite1 = prerequisites?.prerequisite_1
     const prerequisite2 = prerequisites?.prerequisite_2
     const prerequisite3 = prerequisites?.prerequisite_3

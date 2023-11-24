@@ -189,6 +189,11 @@ export const CharacterCount = styled("p")(({ theme }) => ({
   textAlign: "end",
   fontWeight: "bold",
 }))
+export const CourseImage = styled("p")(({ theme }) => ({
+  fontsize: "32px",
+  textAlign: "center",
+  fontWeight: "bold",
+}))
 export const FormBox = styled(Box)(({ theme }) => ({
   width: "50%",
   display: "flex",

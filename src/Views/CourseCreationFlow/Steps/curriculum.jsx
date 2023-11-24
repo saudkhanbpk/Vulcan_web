@@ -17,7 +17,7 @@ export const Curriculum = () => {
     const navigate = useNavigate();
     const [showError, setShowError] = useState(false)
     const userData = useSelector((state) => state.userData.data);
-    const sectionsData = userData?.educator?.courses?.pending?.questions?.curriculum?.sections
+    const sectionsData = userData?.educator?.courses?.pending?.curriculum
     const defaultSections = sectionsData?.map(section => ({
         title: section?.title || '',
         description: section?.description || '',

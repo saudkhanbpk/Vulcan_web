@@ -20,9 +20,9 @@ export const BasicsStep = () => {
     const userData = useSelector((state) => state.userData.data);
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const basicStepState = useSelector((state) => state.courseSteps.basicStepState)
-    const categoryValue = userData?.educator?.courses?.pending?.questions?.category?.categoryValue
-    const courseTitle = userData?.educator?.courses?.pending?.questions?.courseTitle
-    const courseSubTitle = userData?.educator?.courses?.pending?.questions?.courseSubTitle
+    const categoryValue = userData?.educator?.courses?.pending?.basics?.category
+    const courseTitle = userData?.educator?.courses?.pending?.basics?.title
+    const courseSubTitle = userData?.educator?.courses?.pending?.basics?.subTitle
     const handleExit = () => {
         handleCategoryStep()
         formik.resetForm()

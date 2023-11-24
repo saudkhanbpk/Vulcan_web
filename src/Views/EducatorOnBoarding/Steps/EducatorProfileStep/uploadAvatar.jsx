@@ -66,6 +66,7 @@ export const UploadAvatar = ({ onUpload, courseImage }) => {
               background: "#0000FF",
               padding: "3px",
             }}
+
             onClick={handleClose}
           >
             <CheckIcon style={{ color: "#FFFFFF" }} />
@@ -73,7 +74,6 @@ export const UploadAvatar = ({ onUpload, courseImage }) => {
         </AvatarBox>
       </Modal>
       <Box display="flex" justifyContent="center" alignItems="center">
-
         {
           !courseImage ?
             <img
@@ -90,7 +90,6 @@ export const UploadAvatar = ({ onUpload, courseImage }) => {
               alt="Preview"
             />
         }
-
       </Box>
       <Box
         onClick={handleOpen}
