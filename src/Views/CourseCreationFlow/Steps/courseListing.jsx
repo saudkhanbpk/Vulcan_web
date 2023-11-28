@@ -3,7 +3,7 @@ import {
     Details,
     CharacterCount,
     CountText,
-    ErrorBlockLarge,
+    // ErrorBlockLarge,
     ErrorBlockSmall,
 } from '../styles'
 import { ShowErrorToast } from '../../Common/Toast/toast'
@@ -178,7 +178,9 @@ export const CourseListing = () => {
             await updateCourseDetailsStep(formik.values);
             dispatch(resetCoursesSteps());
             navigate("/");
-        } catch (err) { }
+        } catch (err) {
+            // console.log(err)
+         }
     };
     useEffect(() => {
         setCharacterCount(formik.values.description.length);
@@ -272,10 +274,6 @@ export const CourseListing = () => {
                                     </Box>
                                 
                                 </Stack>
-                                {/* <CourseImage>
-                                        Course Image
-                                    </CourseImage> */}
-
                                 <TextField
                                     name="promoLink"
                                     sx={{ mt: "30px" }}

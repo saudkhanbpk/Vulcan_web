@@ -7,7 +7,6 @@ import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { useDispatch, useSelector } from 'react-redux'
 import { functions } from "../../../Infrastructure/config";
 import { StepsHeader } from '../../Common/StepsHeader/stepsHeader'
-import { ShowErrorToast } from '../../Common/Toast/toast'
 import { QuestionName } from '../styles'
 import { decrementCoursesSteps, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';

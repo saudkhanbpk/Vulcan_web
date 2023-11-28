@@ -3,7 +3,6 @@ import { ExitTypo, Header, LogoTypo, Span, StepsTypo, StepsValue } from '../../C
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { Box } from '@mui/material'
 import ProgressBar from '../ProgressBar/progressbar'
-import { specialFont } from '../../../Infrastructure/Theme/fontFamily'
 
 export const StepsHeader = ({ handleExit, steps }) => {
   return (

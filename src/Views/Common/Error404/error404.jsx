@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorCode, ErrorContainer,ErrorMessage, HomeButton } from "./style";
-import { useSelector } from "react-redux";
 
 const Error404 = () => {
   const navigate = useNavigate();
