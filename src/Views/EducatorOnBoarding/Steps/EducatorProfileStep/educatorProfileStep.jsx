@@ -259,7 +259,9 @@ export const EducatorProfileStep = () => {
       dispatch(resetExperienceStepValues());
       dispatch(resetSteps());
       navigate("/");
-    } catch (err) {}
+    } catch (err) {
+      // console.log(err)
+    }
   };
   useEffect(() => {
     setCharacterCount(formik.values.aboutMe.length);

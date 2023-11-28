@@ -90,7 +90,7 @@ export const BasicsStep = () => {
             dispatch(basicStepControl({ courseSubTitle: courseSubTitle, question: "courseTitle" }));
             formik.setFieldValue("courseSubTitle", courseSubTitle || '');
         }
-    }, [userData, dispatch, categoryValue, courseTitle, formik.setValues])
+    }, [userData, dispatch, categoryValue, courseTitle, courseSubTitle, formik.setValues, formik])
 
     const handleContinueClick = () => {
         if (formikRef.current) {

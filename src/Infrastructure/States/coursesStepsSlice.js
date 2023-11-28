@@ -29,7 +29,7 @@ export const coursesStepsSlice = createSlice({
     },
     basicStepControl: (state, action) => {
       const {question, categoryValue, courseTitle, courseSubTitle } = action.payload;      
-      if (question == "category") {
+      if (question === "category") {
         state.basicStepState.categoryValue = categoryValue;
       } else if (question === "courseTitle") {
         state.basicStepState.courseTitle = courseTitle;

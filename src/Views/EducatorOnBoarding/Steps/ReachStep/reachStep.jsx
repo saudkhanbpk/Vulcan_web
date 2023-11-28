@@ -102,7 +102,9 @@ export const ReachStep = () => {
       dispatch(resetExperienceStepValues());
       dispatch(resetSteps());
       navigate("/");
-    } catch (err) { }
+    } catch (err) {
+      // console.log(err)
+    }
   };
   return (
     <>
