@@ -190,7 +190,7 @@ export const CharacterCount = styled("p")(({ theme }) => ({
   fontWeight: "bold",
 }))
 export const CourseImage = styled("p")(({ theme }) => ({
-  fontsize: "32px",
+  fontsize: "26px",
   textAlign: "center",
   fontWeight: "bold",
 }))

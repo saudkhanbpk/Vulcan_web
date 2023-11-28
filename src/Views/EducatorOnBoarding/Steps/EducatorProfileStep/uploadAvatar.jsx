@@ -7,6 +7,7 @@ import courseImageVector from "../../../../Assets/Images/courseVector.png";
 import { AvatarBox } from "../../styles";
 import CheckIcon from "@mui/icons-material/Check";
 import { useSelector } from "react-redux";
+import { CourseImage } from "../../../CourseCreationFlow/styles";
 
 export const UploadAvatar = ({ onUpload, courseImage }) => {
   const [preview, setPreview] = useState(null);
@@ -37,7 +38,7 @@ export const UploadAvatar = ({ onUpload, courseImage }) => {
     }
   }, [preview]);
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <Modal
         open={open}
         onClose={handleClose}
@@ -51,11 +52,12 @@ export const UploadAvatar = ({ onUpload, courseImage }) => {
           alignItems={"center"}
         >
           <Avatar
-            alt="Remy Sharp"
+            alt="image not found"
             width={260}
             height={260}
             onCrop={onCrop}
             onClose={onClose}
+            exportAsSquare={courseImage ? true : false}
           />
           <Box
             style={{
@@ -73,23 +75,30 @@ export const UploadAvatar = ({ onUpload, courseImage }) => {
           </Box>
         </AvatarBox>
       </Modal>
-      <Box display="flex" justifyContent="center" alignItems="center">
+      <Box display="flex" position={"relative"} flexDirection={"column"} justifyContent="center" alignItems="center" backgroundColor={courseImage ? "gray" : ""} borderRadius={courseImage ? "20%" : ""}>
         {
-          !courseImage ?
-            <img
-              src={showPreview && preview ? preview : (avatar || ProfileImage)}
-              height={200}
-              width={200}
-              alt="Preview"
-            />
-            :
-            <img
-              src={showPreview && preview ? preview : (course_image || courseImageVector)}
-              height={200}
-              width={200}
-              alt="Preview"
-            />
-        }
+          courseImage ?
+            <CourseImage sx={{ position: "absolute", top: 15,  color:"white" }}>
+              Course Image
+            </CourseImage> : null}
+        <Box sx={{ position: "relative", top:0 }}>
+          {
+            !courseImage ?
+              <img
+                src={showPreview && preview ? preview : (avatar || ProfileImage)}
+                height={200}
+                width={200}
+                alt="Preview"
+              />
+              :
+              <img
+                src={showPreview && preview ? preview : (course_image || courseImageVector)}
+                height={200}
+                width={200}
+                alt="Preview"
+              />
+          }
+        </Box>
       </Box>
       <Box
         onClick={handleOpen}

@@ -1,21 +1,11 @@
 import { StepsHeader } from '../../Common/StepsHeader/stepsHeader'
 import {
-    Details, ContinueButton, Footer,
+    Details,
     CharacterCount,
     CountText,
     ErrorBlockLarge,
     ErrorBlockSmall,
-    ExitTypo,
-    FullName,
-    Header,
-    LogoTypo,
-    PreviousButton,
-    Span,
-    StepsTypo,
-    TitleText,
-    CourseImage,
 } from '../styles'
-// import { decrementCoursesSteps, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
 import { ShowErrorToast } from '../../Common/Toast/toast'
 import { Box, Stack, TextField } from "@mui/material";
 import "react-quill/dist/quill.snow.css";
@@ -27,8 +17,6 @@ import { useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import { useFormik } from "formik";
 import { httpsCallable } from "firebase/functions";
-import { getAuth } from "firebase/auth";
-import { getDatabase, ref, update } from "firebase/database";
 import * as Yup from "yup";
 import { UploadAvatar } from '../../EducatorOnBoarding/Steps/EducatorProfileStep/uploadAvatar';
 import { functions } from '../../../Infrastructure/config';
@@ -37,18 +25,13 @@ import { incrementCoursesSteps, decrementCoursesSteps, resetCoursesSteps } from 
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
 
 export const CourseListing = () => {
-    const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
-    const auth = getAuth();
-    const db = getDatabase();
     const minCharacters = 200;
     const maxCharacters = 2000;
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const uid = auth?.currentUser?.uid;
     const [loaderValue, setLoaderValue] = useState(false);
     const userData = useSelector((state) => state.userData.data);
     const loading = useSelector((state) => state.userData.loading);
-    const steps = useSelector((state) => state.educatorSteps.steps);
     const courseDetails = userData?.educator?.courses?.pending?.details
     const courseImage = courseDetails?.course_image;
     const description = courseDetails?.description
@@ -57,8 +40,10 @@ export const CourseListing = () => {
     const [htmlData, setHtmlData] = useState(description || "");
     // eslint-disable-next-line no-unused-vars
     const [plainText, setPlainText] = useState("");
+    // eslint-disable-next-line no-unused-vars
     const [displayMessage, setDisplayMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     // Define the isUrlValid function
     function isUrlValid(userInput) {
         if (userInput) {
@@ -163,21 +148,7 @@ export const CourseListing = () => {
         }
     };
     const handleContinueClick = async () => {
-        // if (courseSteps > 1 && courseSteps < 7) {
-        //     try {
-        //         if (characterCount < 200 || characterCount > 2000) {
-        //             setErrorMessage("Description text must be 200-2000 characters")
-        //         } else if (!formik.values.courseImage) {
-        //             setErrorMessage("Upload Course Picture")
-        //         }
-        //         formik.handleSubmit()
-        //         dispatch(incrementCoursesSteps());
-        //     } catch (error) {
-        //         ShowErrorToast(error);
-        //     }
-        // }
         formik.handleSubmit()
-
     };
     const handleCourseImageUpload = (imageDataURL) => {
         formik.setFieldValue("courseImage", imageDataURL);
@@ -231,7 +202,6 @@ export const CourseListing = () => {
                     component={"form"}
                     onSubmit={formik.handleSubmit}
                     height={"auto"}
-                // pt={8}
                 >
                     <Box height={"50px"}></Box>
                     <Grid
@@ -278,9 +248,7 @@ export const CourseListing = () => {
                                     Character Count: <CountText>{characterCount}</CountText>
                                 </CharacterCount>
                                 <ErrorBlockSmall>
-                                    {(characterCount < minCharacters ||
-                                        characterCount > maxCharacters) &&
-                                        errorMessage}
+                                   {errorMessage}
                                 </ErrorBlockSmall>
                             </Box>
                         </Grid>
@@ -304,9 +272,9 @@ export const CourseListing = () => {
                                     </Box>
                                 
                                 </Stack>
-                                <CourseImage>
+                                {/* <CourseImage>
                                         Course Image
-                                    </CourseImage>
+                                    </CourseImage> */}
 
                                 <TextField
                                     name="promoLink"
