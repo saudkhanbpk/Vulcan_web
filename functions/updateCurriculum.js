@@ -10,7 +10,7 @@ exports.updateCurriculum = onCall((request) => {
     try {
         const uid = request.auth.uid
         const sections = request.data
-        db.ref(`users/${uid}/educator/courses/pending/questions/curriculum/sections`).set(sections)
+        db.ref(`users/${uid}/educator/courses/pending/curriculum/`).set(sections)
     } catch (error) {
         dbCalls.logUser("ERROR: Curriculum Step: " + error)
         isSuccess = false

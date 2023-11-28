@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import * as Yup from "yup"
 import { useFormik } from 'formik'
 import { Box, TextField } from '@mui/material'
@@ -17,16 +17,17 @@ export const LearningObjectives = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const formikRef = useRef(null)
+    const [error, setError] = useState(false)
     const userData = useSelector((state) => state.userData.data);
-    const intendedLearner = userData?.educator?.courses?.pending?.questions?.intendedLearner
-    const objectives = userData?.educator?.courses?.pending?.questions?.objectives
+    const intendedLearner = userData?.educator?.courses?.pending?.intended_learner?.description
+    const objectives = userData?.educator?.courses?.pending?.intended_learner?.objectives
     const objective1 = objectives?.objective_1
     const objective2 = objectives?.objective_2
     const objective3 = objectives?.objective_3
     const objective4 = objectives?.objective_4
     const objective5 = objectives?.objective_5
 
-    const prerequisites = userData?.educator?.courses?.pending?.questions?.prerequisites
+    const prerequisites = userData?.educator?.courses?.pending?.intended_learner?.prerequisites
     const prerequisite1 = prerequisites?.prerequisite_1
     const prerequisite2 = prerequisites?.prerequisite_2
     const prerequisite3 = prerequisites?.prerequisite_3
@@ -82,16 +83,15 @@ export const LearningObjectives = () => {
                         // At least two objectives have data, proceed with form submission
                         await handleUpdateObjectives();
                         handleInc();
+                        setError("")
                     } else {
                         // Less than two objectives have data, show an alert or handle it accordingly
-                        ShowErrorToast("Please fill at least two objectives")
+                        setError("Please fill at least two objectives")
                     }
                 } catch (error) {
-                    ShowErrorToast(error);
+                    setError(error.message)
                 }
-
             }
-
         },
     })
     formikRef.current = formik;
@@ -105,8 +105,8 @@ export const LearningObjectives = () => {
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={"100px"}></Box>
             <form onSubmit={formik.handleSubmit}>
-                <Grid container spacing={3}px={{xs:2,sm:2,md:10, lg:10, xl:10}}>
-                    <Grid item xs={12} md={6} lg={4} xl={4} spacing={2}>
+                <Grid container spacing={3} px={{ xs: 2, sm: 2, md: 10, lg: 10, xl: 10 }}>
+                    <Grid xs={12} md={6} lg={4} xl={4} spacing={2}>
                         <Box height={"100px"}>
                             <QuestionName variant="h6">
                                 What are some learning objectives that learners can expect to achieve after completing your course?
@@ -211,7 +211,7 @@ export const LearningObjectives = () => {
                         </Box>
 
                     </Grid>
-                    <Grid item xs={12} md={6} lg={4} xl={4}>
+                    <Grid xs={12} md={6} lg={4} xl={4}>
                         <Box height={"100px"}>
                             <QuestionName variant="h6">
                                 Are there any prerequisites or requirements for taking your course?
@@ -315,7 +315,7 @@ export const LearningObjectives = () => {
                             />
                         </Box>
                     </Grid>
-                    <Grid item xs={12} md={12} lg={4} xl={4} spacing={2}>
+                    <Grid xs={12} md={12} lg={4} xl={4} spacing={2}>
                         <Box height={"100px"}>
                             <QuestionName variant="h6">
                                 Describe the intended learner of your course
@@ -348,7 +348,7 @@ export const LearningObjectives = () => {
 
                     </Grid>
                 </Grid>
-                <StepsFooter handleDec={handleDec} handleContinueClick={handleContinueClick} />
+                <StepsFooter handleDec={handleDec} handleContinueClick={handleContinueClick} step2Error={error} />
             </form>
             <Box height={"100px"}></Box>
         </Box>

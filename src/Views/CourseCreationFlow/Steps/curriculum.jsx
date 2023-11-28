@@ -17,7 +17,7 @@ export const Curriculum = () => {
     const navigate = useNavigate();
     const [showError, setShowError] = useState(false)
     const userData = useSelector((state) => state.userData.data);
-    const sectionsData = userData?.educator?.courses?.pending?.questions?.curriculum?.sections
+    const sectionsData = userData?.educator?.courses?.pending?.curriculum
     const defaultSections = sectionsData?.map(section => ({
         title: section?.title || '',
         description: section?.description || '',
@@ -50,7 +50,11 @@ export const Curriculum = () => {
         }
     };
     const handleAddSection = () => {
-        setSections(prevSections => [...prevSections, { title: '', description: '' }]);
+        if (sections.length < 20) {
+            setSections(prevSections => [...prevSections, { title: '', description: '' }]);
+        } else {
+            setShowError("Maximum 20 sections are allowed");
+        }
     };
     const handleTitleChange = (index, event) => {
         const newSections = [...sections];
@@ -65,19 +69,27 @@ export const Curriculum = () => {
     const handleContinueClick = async () => {
         if (courseSteps > 1) {
             try {
-                if (validSections.length >= 3) {
-                    setShowError(false)
+                const isEmptySection = sections.some(section => !section.title || !section.description);
+    
+                if (!isEmptySection && validSections.length >= 3) {
+                    setShowError(false);
                     const updateCurriculumStep = httpsCallable(functions, "updatecurriculum");
                     await updateCurriculumStep(sections);
                     dispatch(incrementCoursesSteps());
                 } else {
-                    setShowError(true)
+                    if (validSections.length < 3) {
+                        setShowError("At least 3 sections required to fill.");
+                    } else {
+                        setShowError("Title or description are not filled");
+                    }
                 }
             } catch (error) {
-                ShowErrorToast(error);
+                setShowError("Something went wrong? Try again.");
             }
         }
     };
+    
+    
     const handleRemoveSection = (index) => {
         const updatedSections = [...sections];
         updatedSections.splice(index, 1);
@@ -145,7 +157,7 @@ export const Curriculum = () => {
                     </Box>
                 }
             </Box>
-            <StepsFooter handleDec={handleDec} handleContinueClick={handleContinueClick} validSections={showError} />
+            <StepsFooter handleDec={handleDec} handleContinueClick={handleContinueClick} step3Error={showError} />
             <Box height={'100px'}></Box>
         </Box>
     );

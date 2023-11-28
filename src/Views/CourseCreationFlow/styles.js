@@ -2,6 +2,10 @@ import { specialFont } from "../../Infrastructure/Theme/fontFamily"
 import { Box, Button, Typography, styled } from "@mui/material"
 
 export const CourseMainBox = styled(Box)((theme) => ({}))
+export const StepsValue = styled('span')((theme) => ({
+  fontFamily: specialFont,
+  color: "#0000FF",
+}))
 export const Header = styled(Box)((theme) => ({
   height: "70px",
   width: "100%",
@@ -83,7 +87,7 @@ export const TitleText = styled(Typography)((theme) => ({
   fontFamily: specialFont,
 }))
 export const Details = styled(Typography)((theme) => ({
-  fontSize: "28px",
+  fontSize: "22px",
   fontFamily: specialFont,
 }))
 export const FullName = styled(Typography)((theme) => ({
@@ -183,6 +187,11 @@ export const SignUpTextLink = styled(Typography)(({ theme }) => ({
 export const CharacterCount = styled("p")(({ theme }) => ({
   fontsize: "22px",
   textAlign: "end",
+  fontWeight: "bold",
+}))
+export const CourseImage = styled("p")(({ theme }) => ({
+  fontsize: "26px",
+  textAlign: "center",
   fontWeight: "bold",
 }))
 export const FormBox = styled(Box)(({ theme }) => ({

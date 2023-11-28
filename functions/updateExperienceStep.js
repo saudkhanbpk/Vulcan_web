@@ -19,15 +19,16 @@ exports.updateExperienceStep = onCall((request) => {
     experience.tutor = tutor
     experience.experience_other = experienceOther
 
-    db.ref(`users/${uid}/educator/questions/experience`).update(experience)
-
+    
     mediums.in_person = inPerson
     mediums.live_online = liveOnline
     mediums.recorded_online = recordedOnline
     mediums.medium_other = mediumOther
-    db.ref(`users/${uid}/educator/questions/mediums`).update(mediums)
-    
-    db.ref(`users/${uid}/educator/questions`).update({"years": years})
+    db.ref(`users/${uid}/educator/questions`).update({
+      mediums: mediums,
+      experience: experience,
+      years: years
+    });    
   } catch (error) {
     dbCalls.logUser("ERROR: Experience Steps: " + error)
     isSuccess = false
