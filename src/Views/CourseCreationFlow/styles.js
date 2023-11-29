@@ -304,3 +304,8 @@ export const ErrorBlockSmall = styled('h6')(({ theme }) => ({
     display: "block",
   },
 }))
+export const ClassScheduleTitle = styled('h6')(({ theme }) => ({
+fontsize:"16px",
+  [theme.breakpoints.down("sm")]: {
+  },
+}))
