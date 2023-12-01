@@ -42,3 +42,6 @@ exports.updatecurriculum = updateCurriculum.updateCurriculum
 
 const updateCourseDetailsStep = require('./updateCourseDetailsStep')
 exports.updatecoursedetailsstep = updateCourseDetailsStep.updateCourseDetailsStep
+
+const updateClassScheduleStep = require('./updateClassScheduleStep')
+exports.updateclassschedulestep = updateClassScheduleStep.updateClassScheduleStep
