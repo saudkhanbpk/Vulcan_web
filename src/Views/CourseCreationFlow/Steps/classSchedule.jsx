@@ -2,22 +2,33 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Box, TextField, Typography } from '@mui/material'
+import { Box, InputAdornment, TextField, Typography } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { ShowErrorToast } from '../../Common/Toast/toast'
 import { StepsHeader } from '../../Common/StepsHeader/stepsHeader';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { ClassScheduleTitle, ContinueButton, Footer, PreviousButton } from '../styles'
-import { decrementCoursesSteps, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
+import { ClassScheduleTitle } from '../styles'
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
+import {
+    decrementCoursesSteps,
+    //   incrementCoursesSteps, 
+    resetCoursesSteps
+} from '../../../Infrastructure/States/coursesStepsSlice'
 import { TimePicker, DatePicker } from '@mui/x-date-pickers';
-
+import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
+import { async } from 'q';
+import { httpsCallable } from '@firebase/functions';
+import { functions } from '../../../Infrastructure/config';
 
 export const ClassSchedule = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [value, setValue] = useState('');
+    const [firstClass, setFirstClass] = useState('');
+    const [duration, setDuration] = useState(0);
+    const [error, setError] = useState('');
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const handleExit = () => {
         dispatch(resetCoursesSteps)
@@ -32,15 +43,15 @@ export const ClassSchedule = () => {
             }
         }
     }
-    const handleInc = async () => {
-        if (courseSteps > 1) {
-            try {
-                dispatch(incrementCoursesSteps())
-            } catch (error) {
-                ShowErrorToast(error)
-            }
-        }
-    }
+    // const handleInc = async () => {
+    //     if (courseSteps > 1) {
+    //         try {
+    //             dispatch(incrementCoursesSteps())
+    //         } catch (error) {
+    //             ShowErrorToast(error)
+    //         }
+    //     }
+    // }
     const [formData, setFormData] = useState({
         monday: { start: '', end: '', checked: false },
         tuesday: { start: '', end: '', checked: false },
@@ -69,7 +80,14 @@ export const ClassSchedule = () => {
         }));
     };
 
-    const saveTimes = () => {
+    const saveTimes = async() => {
+        for (const day in formData) {
+            if (formData[day].checked && (!formData[day].start || !formData[day].end)) {
+                // If checked is true and either start or end time is missing
+                setError(`Fill both start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)}`)
+                return; // Stop further processing
+            }
+        }
         const times = {};
         for (const day in formData) {
             if (formData[day].checked) {
@@ -79,20 +97,35 @@ export const ClassSchedule = () => {
                 };
             }
         }
+        setError('')
+        try {
+            const updateCategoryStep = httpsCallable(functions, "updatecategorystep");
+            await updateCategoryStep({firstClass, duration, times});    
+        } catch (error) {
+            setError(error.message)
+        }
         console.log(times);
+        console.log("firstClass", firstClass);
+        console.log("duration", duration);
+
     };
-    console.log(formData)
+    const handleDurationChange = (e) => {
+        // Allow only positive numbers
+        const newValue = e.target.value.replace(/[^0-9]/g, '');
+        setDuration(newValue);
+    };
     return (
         <Box height={"100vh"} >
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={"100px"}></Box>
             <form>
-                <Box px={10}>
+                <Box >
                     <Box
+                        px={{ lg: 10, sm: 4, xs: 4 }}
                         sx={{
                             width: {
-                                lg: '60%',
-                                md: '60%',
+                                lg: '80%',
+                                md: '80%',
                                 sm: '100%',
                                 xs: '100%',
                             },
@@ -102,10 +135,17 @@ export const ClassSchedule = () => {
                             Pick the class schedule for your first cohort. You wil be able to add more cohorts once the course is accepted, You can pick any times and days that work for you. For most courses, we recommend 1-2 hours per day, 2-3 days per week, and a duration of 8-16 weeks. However, choose the schedule that works for you and fits your course the best.
                         </ClassScheduleTitle>
                     </Box>
-                    <Grid container py={5}>
-                        <Grid lg={5} md={5} sm={10} xs={12} mb={{ sm: 3, xs: 3, md: 4 }}>
-                            <Box>
-                                <Box pb={3}>
+                    <Grid container py={5} justifyContent={"center"} px={{ lg: 10, sm: 4, xs: 1 }}>
+                        <Grid lg={5} md={10} sm={12} xs={12} mb={{ sm: 3, xs: 3, md: 4 }}>
+                            <Box
+                                sx={{
+                                    display: { xs: 'flex', sm: 'flex', md: 'flex', lg: 'block' },
+                                    justifyContent: { xs: "space-between", sm: "space-between", md: "space-between" },
+                                    width: { xs: "100%", sm: "100%", md: "100%", lg: "50%", }
+                                }}
+                                gap={1}
+                            >
+                                <Box pt={3}>
                                     <Typography variant="body1" color="initial" pb={2}>
                                         Date of first class:
                                     </Typography>
@@ -113,16 +153,17 @@ export const ClassSchedule = () => {
                                         <DatePicker
                                             variant="outlined"
                                             label="Date of first class"
-                                            value={value}
-                                            onChange={(newValue) => setValue(newValue)}
+                                            value={firstClass}
+                                            onChange={(newValue) => setFirstClass(newValue ? JSON.stringify(newValue) : '')}
+                                            fullWidth
                                             renderInput={(params) => (
                                                 <TextField
                                                     {...params}
                                                     InputLabelProps={{
-                                                        style: { fontSize: '16px' }, // Adjust the font size for the label
+                                                        style: { fontSize: '16px' },
                                                     }}
                                                     InputProps={{
-                                                        style: { fontSize: '14px' }, // Adjust the font size for the input text
+                                                        style: { fontSize: '14px' }, 
                                                     }}
                                                 />
                                             )}
@@ -133,29 +174,45 @@ export const ClassSchedule = () => {
                                     <Typography variant="body1" color="initial" pb={2}>
                                         Course Duration:
                                     </Typography>
-                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                        <DatePicker
-                                            variant="outlined"
-                                            label="Duration"
-                                            value={value}
-                                            onChange={(newValue) => setValue(newValue)}
-                                            renderInput={(params) => (
-                                                <TextField
-                                                    {...params}
-                                                    InputLabelProps={{
-                                                        style: { fontSize: '16px' }, // Adjust the font size for the label
-                                                    }}
-                                                    InputProps={{
-                                                        style: { fontSize: '14px' }, // Adjust the font size for the input text
-                                                    }}
-                                                />
-                                            )}
-                                        />
-                                    </LocalizationProvider>
+                                    <TextField
+                                        id="outlined-number"
+                                        label="Weeks"
+                                        type="number"
+                                        fullWidth
+                                        variant="outlined"
+                                        onChange={handleDurationChange}
+                                        value={duration}
+                                        error={!duration}
+                                        InputProps={{
+                                            onKeyPress: (event) => {
+                                                if (isNaN(event.key) || (event.key === '-' && event.code === 'ArrowDown')) {
+                                                    event.preventDefault();
+                                                }
+                                            },
+                                            endAdornment: (
+                                                <InputAdornment position="end">
+                                                    <Box
+                                                        sx={{
+                                                            display: 'flex',
+                                                            flexDirection: 'column',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            width: '10px',
+                                                            height: '30px',
+                                                            fontWeight: 'bold',
+                                                        }}
+                                                    >
+                                                        <IoIosArrowUp />
+                                                        <IoIosArrowDown />
+                                                    </Box>
+                                                </InputAdornment>
+                                            ),
+                                        }}
+                                    />
                                 </Box>
                             </Box>
                         </Grid>
-                        <Grid lg={7} md={7} sm={10} xs={12} >
+                        <Grid lg={7} md={10} sm={12} xs={12} >
                             <Box>
                                 <Box display={"flex"}>
                                     <Box width={"30%"}></Box>
@@ -169,75 +226,62 @@ export const ClassSchedule = () => {
                                     </Box>
                                 </Box>
                                 {Object.keys(formData).map((day) => (
-                                    <Box key={day} display={"flex"} alignItems={"center"} mb={1}>
+                                    <Box key={day} display={"flex"} alignItems={"center"} mb={1} width={"100%"}>
                                         <input
                                             type="checkbox"
                                             checked={formData[day].checked}
                                             onChange={() => handleCheckboxChange(day)}
                                         />
-                                        <Box display={"flex"} alignItems={"center"} justifyContent={"center"} sx={{ border: "1px solid" }} gap={2} ml={2} px={1}>
-                                            <Typography variant="body1" color="initial" textAlign={"center"} px={2}>
-                                                {day.charAt(0).toUpperCase() + day.slice(1)}:
-                                            </Typography>
-                                            <Box display={"flex"} gap={2}>
-                                                <label>
+                                        <Box display={"flex"} alignItems={"center"} justifyContent={"center"} sx={{ border: "1px solid", flexDirection: { xs: 'column', md: 'row', lg: 'row', xl: 'row', }, }} gap={2} ml={2} px={1} width={"100%"}>
+                                            <Box sx={{ width: { sm: "100%", md: "20%", lg: "20%" } }}>
+                                                <Typography variant="body1" color="initial" textAlign={"center"} px={2}>
+                                                    {day.charAt(0).toUpperCase() + day.slice(1)}:
+                                                </Typography>
+                                            </Box>
+                                            <Box display={"flex"} justifyContent={"space-between"}
 
-                                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                                        <DemoContainer components={['DatePicker']}>
-                                                            <TimePicker
-                                                                label="Start Time"
-                                                                value={formData[day].start}
-                                                                onChange={(value) => handleTimeChange(day, 'start', value)}
-                                                            />
-                                                        </DemoContainer>
-                                                    </LocalizationProvider>
-                                                </label>
-                                                <label>
+                                                pb={1} sx={{
+                                                    width: { sm: "80%", md: "80%", lg: "80%" }, gap: {
+                                                        xs: 0,   // No gap for xs size
+                                                        sm: 2,   // Gap of 2 for sm and larger sizes
+                                                        md: 2,
+                                                        lg: 2,
+                                                        xl: 2,
+                                                    },
+                                                }}>
+                                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                                    <DemoContainer components={['DatePicker']}>
+                                                        <TimePicker
+                                                            label="Start Time"
+                                                            value={formData[day].start}
+                                                            onChange={(value) => handleTimeChange(day, 'start', value)}
+                                                        // sx={{ width: {xs:'20px'} }}
+                                                        />
+                                                    </DemoContainer>
+                                                </LocalizationProvider>
 
-                                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                                        <DemoContainer components={['DatePicker']}>
-                                                            <TimePicker
-                                                                label="End Time"
-                                                                value={formData[day].end}
-                                                                onChange={(value) => handleTimeChange(day, 'end', value)}
-                                                                style={{ '& .MuiIconButton-root': { fontSize: '16px' } }}
-                                                            />
-                                                        </DemoContainer>
-                                                    </LocalizationProvider>
-                                                </label>
+                                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                                    <DemoContainer components={['DatePicker']}>
+                                                        <TimePicker
+                                                            label="End Time"
+                                                            value={formData[day].end}
+                                                            onChange={(value) => handleTimeChange(day, 'end', value)}
+                                                            style={{ '& .MuiIconButton-root': { fontSize: '16px' } }}
+                                                        // sx={{ width: {xs:'80px'} }}
+                                                        />
+                                                    </DemoContainer>
+                                                </LocalizationProvider>
                                             </Box>
                                         </Box>
                                     </Box>
                                 ))}
-                                <button type="button" onClick={saveTimes}>
-                                    Save Times
-                                </button>
                             </Box>
                         </Grid>
                     </Grid>
                 </Box>
-                <Footer>
-                    <Grid container justifyContent={"space-between"} p={2}>
-                        <Grid>
-                            {courseSteps > 1 ? (
-                                <PreviousButton variant="contained" onClick={handleDec}>
-                                    Previous
-                                </PreviousButton>
-                            ) : (
-                                <></>
-                            )}
-                        </Grid>
-                        <Grid>
-                            <Grid>
-                                <ContinueButton variant="contained" onClick={handleInc} >
-                                    Continue
-                                </ContinueButton>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Footer>
+                <StepsFooter handleContinueClick={saveTimes} step5Error={error} selectedDates={formData} handleDec={handleDec} />
                 <Box height={"100px"}></Box>
-            </form>
-        </Box>
+            </form >
+        </Box >
     )
 }

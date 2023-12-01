@@ -4,9 +4,9 @@ import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { ContinueButton, ErrorBlockLarge, Footer, PreviousButton } from '../../CourseCreationFlow/styles'
 import { Box } from '@mui/material'
 
-export const StepsFooter = ({ handleDec, handleContinueClick, step3Error, errorMessage, step2Error }) => {
+export const StepsFooter = ({ handleDec, handleContinueClick, step3Error, errorMessage, step2Error, step5Error }) => {
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
-    const basicStepState = useSelector((state) => state.courseSteps.basicStepState)
+    // const basicStepState = useSelector((state) => state.courseSteps.basicStepState)
     return (
         <Footer>
             <Grid container justifyContent={"space-between"} p={2}>
@@ -29,11 +29,12 @@ export const StepsFooter = ({ handleDec, handleContinueClick, step3Error, errorM
                         <ErrorBlockLarge>
                             {step3Error && <p style={{ marginBottom: "0px" }}>{step3Error}</p>}
                             {step2Error && <p style={{ marginBottom: "0px" }}>{step2Error}</p>}
+                            {step5Error && <p style={{ marginBottom: "0px" }}>{step5Error}</p>}
                             {errorMessage && <p style={{ marginBottom: "0px" }}>{errorMessage}</p>}
                         </ErrorBlockLarge>
                     </Box>
                     <ContinueButton variant="contained"
-                        disabled={!basicStepState.categoryValue}
+                        // disabled={!basicStepState.categoryValue || selectedDates.length>0}
                         onClick={handleContinueClick}
                     >
                         {courseSteps <= 5 ? "Continue" : "Finish"}
