@@ -19,7 +19,6 @@ import {
 } from '../../../Infrastructure/States/coursesStepsSlice'
 import { TimePicker, DatePicker } from '@mui/x-date-pickers';
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
-import { async } from 'q';
 import { httpsCallable } from '@firebase/functions';
 import { functions } from '../../../Infrastructure/config';
 
@@ -31,12 +30,14 @@ export const ClassSchedule = () => {
     const [error, setError] = useState('');
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const handleExit = () => {
+        saveTimes()
         dispatch(resetCoursesSteps)
         navigate('/dashboard')
     }
     const handleDec = async () => {
         if (courseSteps > 1) {
             try {
+                saveTimes()
                 dispatch(decrementCoursesSteps())
             } catch (error) {
                 ShowErrorToast(error)
@@ -99,14 +100,12 @@ export const ClassSchedule = () => {
         }
         setError('')
         try {
-            const updateCategoryStep = httpsCallable(functions, "updatecategorystep");
-            await updateCategoryStep({firstClass, duration, times});    
+            const updateClassScheduleStep = httpsCallable(functions, "updateclassschedulestep");
+            await updateClassScheduleStep({firstClass, duration, times});
         } catch (error) {
-            setError(error.message)
+            setError("Error:",error.message)
         }
-        console.log(times);
-        console.log("firstClass", firstClass);
-        console.log("duration", duration);
+        
 
     };
     const handleDurationChange = (e) => {
