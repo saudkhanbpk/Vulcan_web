@@ -5,20 +5,20 @@ const db = getDatabase()
 const dbCalls = require("./databaseCalls")
 
 exports.updateClassScheduleStep = onCall(async (request) => {
-    const { firstClass, duration, times } = request.data
+    const { firstClassString, duration, times } = request.data
     let isSuccess = true
     let errorMessage = null
     const uid = request.auth.uid
     const courseDetails = {}
 
     try {
-        if (firstClass) {
-            courseDetails.first_class = firstClass
+        if (firstClassString) {
+            courseDetails.first_class = firstClassString
         }
         if (duration) {
             courseDetails.duration = duration
         }
-        if (firstClass) {
+        if (times) {
             courseDetails.times = times
         }
 

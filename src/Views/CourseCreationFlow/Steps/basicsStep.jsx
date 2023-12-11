@@ -228,7 +228,7 @@ export const BasicsStep = () => {
                         </Grid>
                     </Box>
                 </Box>
-                <StepsFooter handleContinueClick={handleContinueClick} />
+                <StepsFooter handleContinueClick={handleContinueClick} step1Error={formik.errors.courseTitle} />
                 <Box height={"100px"}></Box>
             </form>
         </Box>

@@ -48,3 +48,7 @@ body {
 .ql-editor {
 height: 150px !important;
 }
+
+.css-z3c6am-MuiFormControl-root-MuiTextField-root{
+  width: 100% !important;
+}
