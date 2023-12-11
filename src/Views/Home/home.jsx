@@ -1,7 +1,6 @@
 import "./home.css";
 import React from "react";
 import { styles } from "./styles";
-import { Loader } from "../Common/loader";
 import { useSelector } from "react-redux";
 import Grid from "@mui/material/Unstable_Grid2";
 import WelcomeBox from "./WelcomeBox/welcomeBox";
@@ -12,12 +11,8 @@ const HomeScreen = () => {
   const theme = useTheme();
   const is_desktop = useMediaQuery(theme.breakpoints.up("sm"));
   const userData = useSelector((state) => state.userData.data);
-  const loading = useSelector((state) => state.userData.loading);
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : (
         <Grid>
           {is_desktop ? (
             <Box sx={styles.box} className="home">
@@ -34,7 +29,6 @@ const HomeScreen = () => {
             </>
           )}
         </Grid>
-      )}
     </>
   );
 };

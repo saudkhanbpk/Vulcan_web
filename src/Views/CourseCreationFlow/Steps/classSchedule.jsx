@@ -72,6 +72,7 @@ export const ClassSchedule = () => {
         });
     };
     const handleTimeChange = (day, field, value) => {
+        console.log("value ", value)
         setFormData((prevFormData) => ({
             ...prevFormData,
             [day]: {
