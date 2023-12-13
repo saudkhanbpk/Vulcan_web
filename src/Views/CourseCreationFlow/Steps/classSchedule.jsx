@@ -34,7 +34,7 @@ export const ClassSchedule = () => {
     const userData = useSelector((state) => state.userData.data);
     const first_class = userData?.educator?.courses?.pending?.class_schedule?.first_class
     const course_duration = userData?.educator?.courses?.pending?.class_schedule?.duration
-    const [duration, setDuration] = useState( course_duration || 0);
+    const [duration, setDuration] = useState( course_duration || "0");
     const course_times = userData?.educator?.courses?.pending?.class_schedule?.times
     const firstClassOnlyDMY = first_class?.substring(1, 11);
 
@@ -124,6 +124,7 @@ export const ClassSchedule = () => {
     };
     useEffect(() => {
         setFirstClass(dayjs(firstClassOnlyDMY) || null);
+        setDuration(course_duration || '0')
         // Check if course_times exists and is an object
         if (course_times && typeof course_times === 'object') {
             const updatedFormData = { ...formData };
@@ -138,6 +139,7 @@ export const ClassSchedule = () => {
             }
             setFormData(updatedFormData);
         }
+        console.log("course_times", course_times)
     }, []);
     return (
         <Box height={"100vh"} >
@@ -229,7 +231,7 @@ export const ClassSchedule = () => {
                         </Grid>
                         <Grid lg={7} md={10} sm={12} xs={12} >
                             <Box>
-                                <Box display={"flex"}>
+                                {/* <Box display={"flex"}>
                                     <Box width={"30%"}></Box>
                                     <Box display={{ xs: "none", sm: "flex", md: "flex", lg: "flex" }} justifyContent={"space-around"} width={"100%"}>
                                         <Typography variant="body1" color="initial" textAlign={"center"}>
@@ -239,13 +241,14 @@ export const ClassSchedule = () => {
                                             End Time:
                                         </Typography>
                                     </Box>
-                                </Box>
+                                </Box> */}
                                 {Object.keys(formData).map((day) => (
                                     <Box key={day} display={"flex"} alignItems={"center"} mb={1} width={"100%"}>
                                         <input
                                             type="checkbox"
                                             checked={formData[day].checked}
                                             onChange={() => handleCheckboxChange(day)}
+                                            style={{height:"20px", width:"20px"}}
                                         />
                                         <Box display={"flex"} alignItems={"center"} justifyContent={"center"} sx={{ border: "1px solid", flexDirection: { xs: 'column', md: 'row', lg: 'row', xl: 'row', }, }} gap={2} ml={2} px={1} width={"100%"}>
                                             <Box sx={{ width: { sm: "100%", md: "20%", lg: "20%" } }}>
@@ -257,8 +260,8 @@ export const ClassSchedule = () => {
 
                                                 pb={1} sx={{
                                                     width: { xs: "100%", sm: "80%", md: "80%", lg: "80%" }, gap: {
-                                                        xs: 0,   // No gap for xs size
-                                                        sm: 2,   // Gap of 2 for sm and larger sizes
+                                                        xs: 0,    
+                                                        sm: 2,   
                                                         md: 2,
                                                         lg: 2,
                                                         xl: 2,
@@ -282,7 +285,6 @@ export const ClassSchedule = () => {
                                                             value={formData[day].end}
                                                             onChange={(value) => handleTimeChange(day, 'end', value)}
                                                             style={{ '& .MuiIconButton-root': { fontSize: '16px' } }}
-                                                        // sx={{ width: {xs:'80px'} }}
                                                         />
                                                     </DemoContainer>
                                                 </LocalizationProvider>
