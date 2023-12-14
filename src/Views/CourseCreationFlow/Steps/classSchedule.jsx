@@ -27,14 +27,14 @@ import dayjs from 'dayjs';
 export const ClassSchedule = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [firstClass, setFirstClass] = useState(null);
     const [error, setError] = useState('');
-    const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
-    const loading = useSelector((state) => state.userData.loading);
     const userData = useSelector((state) => state.userData.data);
     const first_class = userData?.educator?.courses?.pending?.class_schedule?.first_class
+    const [firstClass, setFirstClass] = useState(dayjs(first_class?.replace(/"/g, '')) || null);
+    const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
+    const loading = useSelector((state) => state.userData.loading);
     const course_duration = userData?.educator?.courses?.pending?.class_schedule?.duration
-    const [duration, setDuration] = useState(course_duration || '');
+    const [duration, setDuration] = useState(course_duration || null);
     const course_times = userData?.educator?.courses?.pending?.class_schedule?.times
     const firstClassOnlyDMY = first_class?.replace(/"/g, '');
 
@@ -113,13 +113,17 @@ export const ClassSchedule = () => {
         for (const day in formData) {
             if (formData[day].checked && (!formData[day].start || !formData[day].end)) {
                 setError(`Fill both start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)}`);
-                return;  
+                return;
             }
             const start = dayjs(formData[day].start);
             const end = dayjs(formData[day].end);
-            if (end.diff(start, 'hour') < 3) {
-                setError(`Must be a 3-hour gap between start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)}`);
-                return;  
+            if (formData[day].checked && end.diff(start, 'hour') > 3) {
+                setError(`Maximum 3-hour gap allowed between start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)}`);
+                return;
+            }
+            if (formData[day].checked && end.isBefore(start)) {
+                setError(`End time must be after start time for ${day.charAt(0).toUpperCase() + day.slice(1)}`);
+                return;
             }
         }
         const times = {};
@@ -200,7 +204,7 @@ export const ClassSchedule = () => {
                                         <DatePicker
                                             variant="outlined"
                                             label="Date of first class"
-                                            value={firstClass === null ? null : dayjs(first_class?.substring(1, 11))}
+                                            value={firstClass}
                                             onChange={(newValue) => setFirstClass(newValue)}
                                             fullWidth
                                         />
@@ -218,7 +222,7 @@ export const ClassSchedule = () => {
                                         variant="outlined"
                                         onChange={handleDurationChange}
                                         value={duration}
-                                        error={!duration}
+                                        error={duration === ''}
                                         InputProps={{
                                             onKeyPress: (event) => {
                                                 if (isNaN(event.key) || (event.key === '-' && event.code === 'ArrowDown')) {
@@ -300,7 +304,7 @@ export const ClassSchedule = () => {
                                     </Box>
                                 ))}
                             </Box>
-                            <ErrorBlockSmall sx={{textAlign:"center"}}>
+                            <ErrorBlockSmall sx={{ textAlign: "center" }}>
                                 {error}
                             </ErrorBlockSmall>
                         </Grid>
