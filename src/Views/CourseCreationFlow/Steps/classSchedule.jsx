@@ -9,7 +9,7 @@ import { StepsHeader } from '../../Common/StepsHeader/stepsHeader';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { ClassScheduleTitle } from '../styles'
+import { ClassScheduleTitle, ErrorBlockSmall } from '../styles'
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { Loader } from '../../Common/loader';
@@ -34,9 +34,10 @@ export const ClassSchedule = () => {
     const userData = useSelector((state) => state.userData.data);
     const first_class = userData?.educator?.courses?.pending?.class_schedule?.first_class
     const course_duration = userData?.educator?.courses?.pending?.class_schedule?.duration
-    const [duration, setDuration] = useState( course_duration || "0");
+    const [duration, setDuration] = useState(course_duration || '');
     const course_times = userData?.educator?.courses?.pending?.class_schedule?.times
-    const firstClassOnlyDMY = first_class?.substring(1, 11);
+    const firstClassOnlyDMY = first_class?.replace(/"/g, '');
+
 
     const handleExit = () => {
         saveTimes()
@@ -89,15 +90,40 @@ export const ClassSchedule = () => {
             },
         }));
     };
+    const handleDurationChange = (e) => {
+        const newValue = e.target.value.replace(/[^0-9]/g, '');
+        setDuration(newValue || '');
+    };
+
     const saveTimes = async () => {
+        if (duration === '' || parseInt(duration, 10) === 0 || parseInt(duration, 10) > 26) {
+            setError('Duration must be a number between 1 and 26 weeks.');
+            return;
+        }
+        if (firstClass === null || firstClass === '') {
+            setError('First class date is required');
+            return;
+        }
+        const isAtLeastOneDaySelected = Object.values(formData).some((day) => day.checked);
+        if (!isAtLeastOneDaySelected) {
+            setError('Please select at least one day.');
+            return;
+        }
+
         for (const day in formData) {
             if (formData[day].checked && (!formData[day].start || !formData[day].end)) {
-                setError(`Fill both start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)}`)
-                return; // Stop further processing
+                setError(`Fill both start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)}`);
+                return;  
+            }
+            const start = dayjs(formData[day].start);
+            const end = dayjs(formData[day].end);
+            if (end.diff(start, 'hour') < 3) {
+                setError(`Must be a 3-hour gap between start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)}`);
+                return;  
             }
         }
         const times = {};
-        const firstClassString = JSON.stringify(firstClass)
+        const firstClassString = JSON.stringify(firstClass);
         for (const day in formData) {
             if (formData[day].checked) {
                 times[day] = {
@@ -106,25 +132,18 @@ export const ClassSchedule = () => {
                 };
             }
         }
-        setError('')
+        setError('');
         try {
-            const updateClassScheduleStep = httpsCallable(functions, "updateclassschedulestep");
+            const updateClassScheduleStep = httpsCallable(functions, 'updateclassschedulestep');
             await updateClassScheduleStep({ firstClassString, duration, times });
-            handleInc()
+            handleInc();
         } catch (error) {
-            setError("Error:", error.message)
+            setError(`Error: ${error.message}`);
         }
-
-
     };
-    const handleDurationChange = (e) => {
-        // Allow only positive numbers
-        const newValue = e.target.value.replace(/[^0-9]/g, '');
-        setDuration(prevDuration => newValue || prevDuration);
-    };
+
     useEffect(() => {
         setFirstClass(dayjs(firstClassOnlyDMY) || null);
-        setDuration(course_duration || '0')
         // Check if course_times exists and is an object
         if (course_times && typeof course_times === 'object') {
             const updatedFormData = { ...formData };
@@ -139,7 +158,7 @@ export const ClassSchedule = () => {
             }
             setFormData(updatedFormData);
         }
-        console.log("course_times", course_times)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <Box height={"100vh"} >
@@ -167,26 +186,26 @@ export const ClassSchedule = () => {
                             <Box
                                 sx={{
                                     display: { xs: 'flex', sm: 'flex', md: 'flex', lg: 'block' },
-                                    flexDirection:{xs:"column", sm:"row", md:"row", lg:"row"},
+                                    flexDirection: { xs: "column", sm: "row", md: "row", lg: "row" },
                                     justifyContent: { xs: "space-between", sm: "space-between", md: "space-between" },
                                     width: { xs: "100%", sm: "100%", md: "100%", lg: "50%", }
                                 }}
                                 gap={1}
                             >
-                                <Box pt={3}  width={"100%"}>
+                                <Box pt={3} width={"100%"}>
                                     <Typography variant="body1" color="initial" pb={2}>
                                         Date of first class:
                                     </Typography>
-                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                            <DatePicker
-                                                variant="outlined"
-                                                label="Date of first class"
-                                                value={firstClass}
-                                                onChange={(newValue) => setFirstClass(newValue)}
-                                                fullWidth
-                                            />
-                                        </LocalizationProvider>
-                                    </Box>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DatePicker
+                                            variant="outlined"
+                                            label="Date of first class"
+                                            value={firstClass === null ? null : dayjs(first_class?.substring(1, 11))}
+                                            onChange={(newValue) => setFirstClass(newValue)}
+                                            fullWidth
+                                        />
+                                    </LocalizationProvider>
+                                </Box>
                                 <Box pt={3} width={"100%"}>
                                     <Typography variant="body1" color="initial" pb={2}>
                                         Course Duration:
@@ -231,24 +250,13 @@ export const ClassSchedule = () => {
                         </Grid>
                         <Grid lg={7} md={10} sm={12} xs={12} >
                             <Box>
-                                {/* <Box display={"flex"}>
-                                    <Box width={"30%"}></Box>
-                                    <Box display={{ xs: "none", sm: "flex", md: "flex", lg: "flex" }} justifyContent={"space-around"} width={"100%"}>
-                                        <Typography variant="body1" color="initial" textAlign={"center"}>
-                                            Start Time:
-                                        </Typography>
-                                        <Typography variant="body1" color="initial" textAlign={"center"}>
-                                            End Time:
-                                        </Typography>
-                                    </Box>
-                                </Box> */}
                                 {Object.keys(formData).map((day) => (
                                     <Box key={day} display={"flex"} alignItems={"center"} mb={1} width={"100%"}>
                                         <input
                                             type="checkbox"
                                             checked={formData[day].checked}
                                             onChange={() => handleCheckboxChange(day)}
-                                            style={{height:"20px", width:"20px"}}
+                                            style={{ height: "20px", width: "20px" }}
                                         />
                                         <Box display={"flex"} alignItems={"center"} justifyContent={"center"} sx={{ border: "1px solid", flexDirection: { xs: 'column', md: 'row', lg: 'row', xl: 'row', }, }} gap={2} ml={2} px={1} width={"100%"}>
                                             <Box sx={{ width: { sm: "100%", md: "20%", lg: "20%" } }}>
@@ -260,8 +268,8 @@ export const ClassSchedule = () => {
 
                                                 pb={1} sx={{
                                                     width: { xs: "100%", sm: "80%", md: "80%", lg: "80%" }, gap: {
-                                                        xs: 0,    
-                                                        sm: 2,   
+                                                        xs: 0,
+                                                        sm: 2,
                                                         md: 2,
                                                         lg: 2,
                                                         xl: 2,
@@ -273,7 +281,6 @@ export const ClassSchedule = () => {
                                                             label="Start Time"
                                                             value={formData[day].start}
                                                             onChange={(value) => handleTimeChange(day, 'start', value)}
-                                                        // sx={{ width: {xs:'20px'} }}
                                                         />
                                                     </DemoContainer>
                                                 </LocalizationProvider>
@@ -293,6 +300,9 @@ export const ClassSchedule = () => {
                                     </Box>
                                 ))}
                             </Box>
+                            <ErrorBlockSmall sx={{textAlign:"center"}}>
+                                {error}
+                            </ErrorBlockSmall>
                         </Grid>
                     </Grid>
                 </Box>}

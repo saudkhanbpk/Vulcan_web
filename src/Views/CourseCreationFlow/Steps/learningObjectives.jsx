@@ -7,7 +7,7 @@ import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { useDispatch, useSelector } from 'react-redux'
 import { functions } from "../../../Infrastructure/config";
 import { StepsHeader } from '../../Common/StepsHeader/stepsHeader'
-import { QuestionName } from '../styles'
+import { ErrorBlockSmall, QuestionName } from '../styles'
 import { decrementCoursesSteps, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
 import { useNavigate } from 'react-router-dom';
@@ -347,6 +347,9 @@ export const LearningObjectives = () => {
 
                     </Grid>
                 </Grid>
+                <ErrorBlockSmall>
+                    {error}
+                </ErrorBlockSmall>
                 <StepsFooter handleDec={handleDec} handleContinueClick={handleContinueClick} step2Error={error} />
             </form>
             <Box height={"100px"}></Box>

@@ -3,7 +3,6 @@ import {
     Details,
     CharacterCount,
     CountText,
-    // ErrorBlockLarge,
     ErrorBlockSmall,
 } from '../styles'
 import { ShowErrorToast } from '../../Common/Toast/toast'
@@ -180,7 +179,7 @@ export const CourseListing = () => {
             navigate("/");
         } catch (err) {
             // console.log(err)
-         }
+        }
     };
     useEffect(() => {
         setCharacterCount(formik.values.description.length);
@@ -249,9 +248,6 @@ export const CourseListing = () => {
                                 <CharacterCount>
                                     Character Count: <CountText>{characterCount}</CountText>
                                 </CharacterCount>
-                                <ErrorBlockSmall>
-                                   {errorMessage}
-                                </ErrorBlockSmall>
                             </Box>
                         </Grid>
                         <Grid
@@ -272,7 +268,7 @@ export const CourseListing = () => {
                                     <Box position="relative">
                                         <UploadAvatar onUpload={handleCourseImageUpload} courseImage={true} />
                                     </Box>
-                                
+
                                 </Stack>
                                 <TextField
                                     name="promoLink"
@@ -299,7 +295,9 @@ export const CourseListing = () => {
                             </Box>
                         </Grid>
                     </Grid>
-
+                    <ErrorBlockSmall sx={{ textAlign: "center" }}>
+                        {errorMessage}
+                    </ErrorBlockSmall>
                 </Box>
             )
             }
