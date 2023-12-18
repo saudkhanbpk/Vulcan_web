@@ -46,6 +46,7 @@ console.log('course_times', userData?.educator?.courses?.pending?.class_schedule
     saveTimes();
     dispatch(resetCoursesSteps);
     navigate('/dashboard');
+    
   };
   const handleDec = async () => {
     if (courseSteps > 1) {
