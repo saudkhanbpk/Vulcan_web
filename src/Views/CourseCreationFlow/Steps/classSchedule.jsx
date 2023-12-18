@@ -1,37 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Box, InputAdornment, TextField, Typography } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { ShowErrorToast } from "../../Common/Toast/toast";
-import { StepsHeader } from "../../Common/StepsHeader/stepsHeader";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { ClassScheduleTitle, ErrorBlockSmall } from "../styles";
-import { IoIosArrowDown } from "react-icons/io";
-import { IoIosArrowUp } from "react-icons/io";
-import { Loader } from "../../Common/loader";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Box, InputAdornment, TextField, Typography } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2/Grid2';
+import { ShowErrorToast } from '../../Common/Toast/toast';
+import { StepsHeader } from '../../Common/StepsHeader/stepsHeader';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { ClassScheduleTitle, ErrorBlockSmall } from '../styles';
+import { IoIosArrowDown } from 'react-icons/io';
+import { IoIosArrowUp } from 'react-icons/io';
+import { Loader } from '../../Common/loader';
 import {
   decrementCoursesSteps,
   incrementCoursesSteps,
   resetCoursesSteps,
-} from "../../../Infrastructure/States/coursesStepsSlice";
-import { TimePicker, DatePicker } from "@mui/x-date-pickers";
-import { StepsFooter } from "../../Common/StepsFooter/stepsFooter";
-import { httpsCallable } from "@firebase/functions";
-import { functions } from "../../../Infrastructure/config";
-import dayjs from "dayjs";
+} from '../../../Infrastructure/States/coursesStepsSlice';
+import { TimePicker, DatePicker } from '@mui/x-date-pickers';
+import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
+import { httpsCallable } from '@firebase/functions';
+import { functions } from '../../../Infrastructure/config';
+import dayjs from 'dayjs';
 
 export const ClassSchedule = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const userData = useSelector((state) => state.userData.data);
   const first_class =
     userData?.educator?.courses?.pending?.class_schedule?.first_class;
   const [firstClass, setFirstClass] = useState(
-    dayjs(first_class?.replace(/"/g, "")) || null
+    dayjs(first_class?.replace(/'/g, '')) || null
   );
   const courseSteps = useSelector((state) => state.courseSteps.courseSteps);
   const loading = useSelector((state) => state.userData.loading);
@@ -40,12 +40,12 @@ export const ClassSchedule = () => {
   const [duration, setDuration] = useState(course_duration || null);
   const course_times =
     userData?.educator?.courses?.pending?.class_schedule?.times;
-  const firstClassOnlyDMY = first_class?.replace(/"/g, "");
-console.log("course_times", userData?.educator?.courses?.pending?.class_schedule)
+  const firstClassOnlyDMY = first_class?.replace(/'/g, '');
+console.log('course_times', userData?.educator?.courses?.pending?.class_schedule)
   const handleExit = () => {
     saveTimes();
     dispatch(resetCoursesSteps);
-    navigate("/dashboard");
+    navigate('/dashboard');
   };
   const handleDec = async () => {
     if (courseSteps > 1) {
@@ -94,8 +94,8 @@ console.log("course_times", userData?.educator?.courses?.pending?.class_schedule
     }));
   };
   const handleDurationChange = (e) => {
-    const newValue = e.target.value.replace(/[^0-9]/g, "");
-    const newDuration = newValue ? Math.min(parseInt(newValue, 10), 26) : "";
+    const newValue = e.target.value.replace(/[^0-9]/g, '');
+    const newDuration = newValue ? Math.min(parseInt(newValue, 10), 26) : '';
     setDuration(newDuration);
   };
 
@@ -109,31 +109,31 @@ console.log("course_times", userData?.educator?.courses?.pending?.class_schedule
 
   const saveTimes = async () => {
     if (
-      duration === "" ||
+      duration === '' ||
       parseInt(duration, 10) === 0 ||
       parseInt(duration, 10) > 26
     ) {
-      setError("Duration must be a number between 1 and 26 weeks.");
+      setError('Duration must be a number between 1 and 26 weeks.');
       return;
     }
-    if (firstClass === null || firstClass === "") {
-      setError("First class date is required");
+    if (firstClass === null || firstClass === '') {
+      setError('First class date is required');
       return;
     }
     const isAtLeastOneDaySelected = Object.values(formData).some(
       (day) => day.checked
     );
     if (!isAtLeastOneDaySelected) {
-      setError("Please select at least one day.");
+      setError('Please select at least one day.');
       return;
     }
-    const firstClassDay = firstClass.format("dddd").toLowerCase();
+    const firstClassDay = firstClass.format('dddd').toLowerCase();
     const selectedDay = Object.keys(formData).find(
       (day) => formData[day].checked
     );
 
     if (selectedDay && firstClassDay !== selectedDay) {
-      setError("Selected day for times must match the day of the first class.");
+      setError('Selected day for times must match the day of the first class.');
       return;
     }
 
@@ -151,7 +151,7 @@ console.log("course_times", userData?.educator?.courses?.pending?.class_schedule
       }
       const start = dayjs(formData[day].start);
       const end = dayjs(formData[day].end);
-      if (formData[day].checked && end.diff(start, "hour") > 3) {
+      if (formData[day].checked && end.diff(start, 'hour') > 3) {
         setError(
           `Maximum 3-hour gap allowed between start and end times for ${
             day.charAt(0).toUpperCase() + day.slice(1)
@@ -176,14 +176,14 @@ console.log("course_times", userData?.educator?.courses?.pending?.class_schedule
           start: JSON.stringify(formData[day].start.unix()),
           end: JSON.stringify(formData[day].end.unix()),
         };
-        console.log("hello", times[day]);
+        console.log('hello', times[day]);
       }
     }
-    setError("");
+    setError('');
     try {
       const updateClassScheduleStep = httpsCallable(
         functions,
-        "updateclassschedulestep"
+        'updateclassschedulestep'
       );
       await updateClassScheduleStep({ firstClassString, duration, times });
       handleInc();
@@ -195,16 +195,16 @@ console.log("course_times", userData?.educator?.courses?.pending?.class_schedule
   useEffect(() => {
     setFirstClass(dayjs(firstClassOnlyDMY) || null);
     // Check if course_times exists and is an object
-    if (course_times && typeof course_times === "object") {
+    if (course_times && typeof course_times === 'object') {
       const updatedFormData = { ...formData };
       for (const day in formData) {
         if (course_times[day]) {
           updatedFormData[day] = {
             start: dayjs(
-              course_times[day].start.replace(/\\/g, "").replace(/"/g, "")
+              course_times[day].start.replace(/\\/g, '').replace(/'/g, '')
             ),
             end: dayjs(
-              course_times[day].end.replace(/\\/g, "").replace(/"/g, "")
+              course_times[day].end.replace(/\\/g, '').replace(/'/g, '')
             ),
             checked: true,
           };
@@ -215,9 +215,9 @@ console.log("course_times", userData?.educator?.courses?.pending?.class_schedule
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <Box height={"100vh"}>
+    <Box height={'100vh'}>
       <StepsHeader steps={courseSteps} handleExit={handleExit} />
-      <Box height={"100px"}></Box>
+      <Box height={'100px'}></Box>
       <form>
         {loading ? (
           <Loader />
@@ -227,10 +227,10 @@ console.log("course_times", userData?.educator?.courses?.pending?.class_schedule
               px={{ lg: 10, sm: 4, xs: 1 }}
               sx={{
                 width: {
-                  lg: "80%",
-                  md: "80%",
-                  sm: "100%",
-                  xs: "100%",
+                  lg: '80%',
+                  md: '80%',
+                  sm: '100%',
+                  xs: '100%',
                 },
               }}
             >
@@ -246,96 +246,96 @@ console.log("course_times", userData?.educator?.courses?.pending?.class_schedule
             <Grid
               container
               py={5}
-              justifyContent={"center"}
+              justifyContent={'center'}
               px={{ lg: 10, sm: 4, xs: 1 }}
             >
               <Grid lg={5} md={10} sm={12} xs={12} mb={{ sm: 3, xs: 3, md: 4 }}>
                 <Box
                   sx={{
                     display: {
-                      xs: "flex",
-                      sm: "flex",
-                      md: "flex",
-                      lg: "block",
+                      xs: 'flex',
+                      sm: 'flex',
+                      md: 'flex',
+                      lg: 'block',
                     },
                     flexDirection: {
-                      xs: "column",
-                      sm: "row",
-                      md: "row",
-                      lg: "row",
+                      xs: 'column',
+                      sm: 'row',
+                      md: 'row',
+                      lg: 'row',
                     },
                     justifyContent: {
-                      xs: "space-between",
-                      sm: "space-between",
-                      md: "space-between",
+                      xs: 'space-between',
+                      sm: 'space-between',
+                      md: 'space-between',
                     },
-                    width: { xs: "100%", sm: "100%", md: "100%", lg: "50%" },
+                    width: { xs: '100%', sm: '100%', md: '100%', lg: '50%' },
                   }}
                   gap={1}
                 >
-                  <Box pt={3} width={"100%"}>
-                    <Typography variant="body1" color="initial" pb={2}>
+                  <Box pt={3} width={'100%'}>
+                    <Typography variant='body1' color='initial' pb={2}>
                       Date of first class:
                     </Typography>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DatePicker
-                        variant="outlined"
-                        label="Date of first class"
+                        variant='outlined'
+                        label='Date of first class'
                         value={firstClass}
                         onChange={(newValue) => setFirstClass(newValue)}
                         fullWidth
                       />
                     </LocalizationProvider>
                   </Box>
-                  <Box pt={3} width={"100%"}>
-                    <Typography variant="body1" color="initial" pb={2}>
+                  <Box pt={3} width={'100%'}>
+                    <Typography variant='body1' color='initial' pb={2}>
                       Course Duration:
                     </Typography>
                     <TextField
-                      id="outlined-number"
-                      label="Weeks"
-                      type="number"
+                      id='outlined-number'
+                      label='Weeks'
+                      type='number'
                       fullWidth
-                      variant="outlined"
+                      variant='outlined'
                       onChange={handleDurationChange}
                       value={duration}
-                      error={duration === ""}
+                      error={duration === ''}
                       InputProps={{
                         onKeyPress: (event) => {
                           if (
                             isNaN(event.key) ||
-                            (event.key === "-" && event.code === "ArrowDown")
+                            (event.key === '-' && event.code === 'ArrowDown')
                           ) {
                             event.preventDefault();
                           }
                         },
                         endAdornment: (
-                          <InputAdornment position="end">
+                          <InputAdornment position='end'>
                             <Box
                               sx={{
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                width: "10px",
-                                height: "30px",
-                                fontWeight: "bold",
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: '10px',
+                                height: '30px',
+                                fontWeight: 'bold',
                               }}
                             >
                               <IoIosArrowUp
                                 onClick={incrementDuration}
                                 style={{
-                                  cursor: "pointer",
-                                  fontSize: "20px",
-                                  ":hover": { color: "secondary" },
+                                  cursor: 'pointer',
+                                  fontSize: '20px',
+                                  ':hover': { color: 'secondary' },
                                 }}
                               />
                               <IoIosArrowDown
                                 onClick={decrementDuration}
                                 style={{
-                                  cursor: "pointer",
-                                  fontSize: "20px",
-                                  hover: { color: "primary" },
+                                  cursor: 'pointer',
+                                  fontSize: '20px',
+                                  hover: { color: 'primary' },
                                 }}
                               />
                             </Box>
@@ -351,63 +351,63 @@ console.log("course_times", userData?.educator?.courses?.pending?.class_schedule
                   {Object.keys(formData).map((day) => (
                     <Box
                       key={day}
-                      display={"flex"}
-                      alignItems={"center"}
+                      display={'flex'}
+                      alignItems={'center'}
                       mb={1}
-                      width={"100%"}
+                      width={'100%'}
                     >
                       <input
-                        type="checkbox"
+                        type='checkbox'
                         checked={formData[day].checked}
                         onChange={() => handleCheckboxChange(day)}
-                        style={{ height: "20px", width: "20px" }}
+                        style={{ height: '20px', width: '20px' }}
                       />
                       <Box
-                        display={"flex"}
-                        alignItems={"center"}
-                        justifyContent={"center"}
+                        display={'flex'}
+                        alignItems={'center'}
+                        justifyContent={'center'}
                         sx={{
-                          border: "1px solid",
+                          border: '1px solid',
                           flexDirection: {
-                            xs: "column",
-                            md: "row",
-                            lg: "row",
-                            xl: "row",
+                            xs: 'column',
+                            md: 'row',
+                            lg: 'row',
+                            xl: 'row',
                           },
                         }}
                         gap={2}
                         ml={2}
                         px={1}
-                        width={"100%"}
+                        width={'100%'}
                       >
                         <Box
-                          sx={{ width: { sm: "100%", md: "20%", lg: "20%" } }}
+                          sx={{ width: { sm: '100%', md: '20%', lg: '20%' } }}
                         >
                           <Typography
-                            variant="body1"
-                            color="initial"
-                            textAlign={"center"}
+                            variant='body1'
+                            color='initial'
+                            textAlign={'center'}
                             px={2}
                           >
                             {day.charAt(0).toUpperCase() + day.slice(1)}:
                           </Typography>
                         </Box>
                         <Box
-                          display={"flex"}
-                          justifyContent={"space-between"}
+                          display={'flex'}
+                          justifyContent={'space-between'}
                           flexDirection={{
-                            xs: "column",
-                            sm: "row",
-                            md: "row",
-                            lg: "row",
+                            xs: 'column',
+                            sm: 'row',
+                            md: 'row',
+                            lg: 'row',
                           }}
                           pb={1}
                           sx={{
                             width: {
-                              xs: "100%",
-                              sm: "80%",
-                              md: "80%",
-                              lg: "80%",
+                              xs: '100%',
+                              sm: '80%',
+                              md: '80%',
+                              lg: '80%',
                             },
                             gap: {
                               xs: 0,
@@ -419,27 +419,27 @@ console.log("course_times", userData?.educator?.courses?.pending?.class_schedule
                           }}
                         >
                           <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DemoContainer components={["DatePicker"]}>
+                            <DemoContainer components={['DatePicker']}>
                               <TimePicker
-                                label="Start Time"
+                                label='Start Time'
                                 value={formData[day].start}
                                 onChange={(value) =>
-                                  handleTimeChange(day, "start", value)
+                                  handleTimeChange(day, 'start', value)
                                 }
                               />
                             </DemoContainer>
                           </LocalizationProvider>
 
                           <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DemoContainer components={["DatePicker"]}>
+                            <DemoContainer components={['DatePicker']}>
                               <TimePicker
-                                label="End Time"
+                                label='End Time'
                                 value={formData[day].end}
                                 onChange={(value) =>
-                                  handleTimeChange(day, "end", value)
+                                  handleTimeChange(day, 'end', value)
                                 }
                                 style={{
-                                  "& .MuiIconButton-root": { fontSize: "16px" },
+                                  '& .MuiIconButton-root': { fontSize: '16px' },
                                 }}
                               />
                             </DemoContainer>
@@ -449,7 +449,7 @@ console.log("course_times", userData?.educator?.courses?.pending?.class_schedule
                     </Box>
                   ))}
                 </Box>
-                <ErrorBlockSmall sx={{ textAlign: "center" }}>
+                <ErrorBlockSmall sx={{ textAlign: 'center' }}>
                   {error}
                 </ErrorBlockSmall>
               </Grid>
@@ -462,7 +462,7 @@ console.log("course_times", userData?.educator?.courses?.pending?.class_schedule
           selectedDates={formData}
           handleDec={handleDec}
         />
-        <Box height={"100px"}></Box>
+        <Box height={'100px'}></Box>
       </form>
     </Box>
   );
