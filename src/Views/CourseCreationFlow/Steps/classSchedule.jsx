@@ -26,19 +26,17 @@ import dayjs from 'dayjs';
 export const ClassSchedule = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [error, setError] = useState('');
+    const [error, setError] = useState(null);
     const userData = useSelector((state) => state.userData.data);
     const first_class =
         userData?.educator?.courses?.pending?.class_schedule?.first_class;
-    const utcFirstClass = (first_class?.replace(/'/g, '') * 1000)
-    const [firstClass, setFirstClass] = useState(
-        dayjs(utcFirstClass) || null
-    );
+    const utcFirstClass = first_class ? dayjs(first_class.replace(/'/g, '') * 1000) : null;
+    const [firstClass, setFirstClass] = useState(utcFirstClass || null);
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps);
     const loading = useSelector((state) => state.userData.loading);
-    const course_duration =userData?.educator?.courses?.pending?.class_schedule?.duration;
+    const course_duration = userData?.educator?.courses?.pending?.class_schedule?.duration;
     const [duration, setDuration] = useState(course_duration || null);
-    const course_times =userData?.educator?.courses?.pending?.class_schedule?.times;
+    const course_times = userData?.educator?.courses?.pending?.class_schedule?.times;
     const handleExit = () => {
         saveTimes();
         dispatch(resetCoursesSteps);
@@ -48,8 +46,8 @@ export const ClassSchedule = () => {
     const handleDec = async () => {
         if (courseSteps > 1) {
             try {
-                saveTimes();
                 dispatch(decrementCoursesSteps());
+                await saveTimes();
             } catch (error) {
                 ShowErrorToast(error);
             }
@@ -58,12 +56,99 @@ export const ClassSchedule = () => {
     const handleInc = async () => {
         if (courseSteps > 1) {
             try {
+                setError(null)
+                if (
+                    duration === null ||
+                    parseInt(duration, 10) === 0 ||
+                    parseInt(duration, 10) > 26
+                ) {
+                    setError('Duration must be a number between 1 and 26 weeks.');
+                    return;
+                }
+                if (firstClass === null || firstClass === '') {
+                    setError('First class date is required');
+                    return;
+                }
+                const isAtLeastOneDaySelected = Object.values(formData).some(
+                    (day) => day.checked
+                );
+                if (!isAtLeastOneDaySelected) {
+                    setError('Please select at least one day.');
+                    return;
+                }
+                const firstClassDay = firstClass.format('dddd').toLowerCase();
+                const selectedDay = Object.keys(formData).find(
+                    (day) => formData[day].checked
+                );
+                if (selectedDay && firstClassDay !== selectedDay) {
+                    setError('Selected day for times must match the day of the first class.');
+                    return;
+                }
+                for (const day in formData) {
+                    if (
+                        formData[day].checked &&
+                        (!formData[day].start || !formData[day].end)
+                    ) {
+                        setError(
+                            `Fill both start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)
+                            }`
+                        );
+                        return;
+                    }
+                    const start = dayjs(formData[day].start);
+                    const end = dayjs(formData[day].end);
+                    if (formData[day].checked && end.isBefore(start)) {
+                        setError(
+                            `End time must be after start time for ${day.charAt(0).toUpperCase() + day.slice(1)
+                            }`
+                        );
+                        return;
+                    }
+                    // Check if the gap between start and end times is greater than 30 minutes
+                    const timeGapHours = end.diff(start, 'hours');
+                    if (formData[day].checked && timeGapHours > 3) {
+                        setError(`Gap between start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)} should not be greater than 3 hours.`);
+                        return;
+                    }
+                    // Check if the gap between start and end times is greater than 30 minutes
+                    const timeGapMinutes = end.diff(start, 'minutes');
+                    if (formData[day].checked && timeGapMinutes < 30) {
+                        setError(`Gap between start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)} should not be less than 30 minutes.`);
+                        return;
+                    }
+
+                }
+                const times = {};
+                const firstClassString = JSON.stringify(firstClass.unix());
+                for (const day in formData) {
+                    if (formData[day].checked) {
+                        const unixStartTimeStamp = Math.floor(new Date(formData[day]?.start).getTime() / 1000);
+                        const unixEndTimeStamp = Math.floor(new Date(formData[day]?.end).getTime() / 1000);
+                        times[day] = {
+                            start: unixStartTimeStamp,
+                            end: unixEndTimeStamp
+                        };
+                    }
+                }
+
+                setError('');
+                try {
+                    const updateClassScheduleStep = httpsCallable(
+                        functions,
+                        'updateclassschedulestep'
+                    );
+                    await updateClassScheduleStep({ firstClassString, duration, times });
+                    setError('');
+                } catch (error) {
+                    setError(`Error: ${error.message}`);
+                }
                 dispatch(incrementCoursesSteps());
             } catch (error) {
                 ShowErrorToast(error);
             }
         }
     };
+
     const [formData, setFormData] = useState({
         monday: { start: null, end: null, checked: false },
         tuesday: { start: null, end: null, checked: false },
@@ -104,6 +189,7 @@ export const ClassSchedule = () => {
         setDuration((prevDuration) => Math.max(prevDuration - 1, 1));
     };
     const saveTimes = async () => {
+        setError(null)
         if (
             duration === '' ||
             parseInt(duration, 10) === 0 ||
@@ -178,14 +264,13 @@ export const ClassSchedule = () => {
                 'updateclassschedulestep'
             );
             await updateClassScheduleStep({ firstClassString, duration, times });
-            handleInc();
             setError('');
         } catch (error) {
             setError(`Error: ${error.message}`);
         }
     };
     useEffect(() => {
-        setFirstClass(dayjs(firstClass) || null);
+        first_class && setFirstClass(dayjs(firstClass) || null);
         // Check if course_times exists and is an object
         if (course_times && typeof course_times === 'object') {
             const updatedFormData = { ...formData };
@@ -348,7 +433,7 @@ export const ClassSchedule = () => {
                                                 type='checkbox'
                                                 checked={formData[day].checked}
                                                 onChange={() => handleCheckboxChange(day)}
-                                                style={{ height: '30px', width: '30px' }}
+                                                style={{ height: '30px', width: '30px', cursor: "pointer" }}
                                             />
                                             <Box
                                                 display={'flex'}
@@ -445,7 +530,7 @@ export const ClassSchedule = () => {
                     </Box>
                 )}
                 <StepsFooter
-                    handleContinueClick={saveTimes}
+                    handleContinueClick={handleInc}
                     step5Error={error}
                     selectedDates={formData}
                     handleDec={handleDec}
