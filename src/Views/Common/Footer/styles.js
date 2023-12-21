@@ -1,5 +1,5 @@
 import { Box, styled } from "@mui/material";
-
+import theme from '../../../Infrastructure/Theme/themes'
 export const styles = {
   mainBox: {
     p: "20px",
@@ -7,7 +7,7 @@ export const styles = {
     width:"100%",
     color: "white",
     position: "relative",
-    backgroundColor: "blue",
+    backgroundColor: theme.palette.primary.main,
   },
   // Sub Grid 1
   subGrid1Box: { pt: 1, pb: 0, display: "flex" },

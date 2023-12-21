@@ -36,6 +36,7 @@ export const styles = {
     fontWeight: 700,
     textAlign: "center",
     marginTop: "40px",
+    color:"primary"
   },
   subgridTypoDescription: {
     fontSize: "24px",
