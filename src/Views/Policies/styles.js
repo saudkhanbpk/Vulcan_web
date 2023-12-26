@@ -56,3 +56,7 @@ export const ItemText = styled(ListItemText)(({ theme }) => ({
   fontSize: "20px",
   fontFamily: "Inter",
 }));
+export const PrivacyLinks = styled("span")(({ theme }) => ({
+  color: theme.palette.primary.main,
+  textDecoration: "underline"
+}));

@@ -9,9 +9,7 @@ export const styles = {
   centerButton: { width: "100%", display: "flex", justifyContent: "center", alignItems: "center" },
   item: { borderRadius: "20px" },
   subGrid: { cursor: "pointer" },
-  subGridIconClicked: { fontSize: "3.1875rem !important", color: "blue" },
-  subGridIconNotClicked: { fontSize: "3.1875rem !important" },
-  dividerAfterClick: { opacity: 1, color: "blue" },
+  dividerAfterClick: { opacity: 1 },
   dividerbeforeClick: { opacity: 0 },
 
   dividerStyle: {

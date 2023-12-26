@@ -26,7 +26,7 @@ export const TextValue = styled(Typography)(({ theme }) => ({
 }));
 export const TextButton = styled(Typography)(({ theme }) => ({
   fontSize: 14,
-  color: "#0000FF",
+  color: theme.palette.primary.main,
   paddingRight: theme.spacing(1),
   [theme.breakpoints.down("md")]: {
     fontSize: 12,

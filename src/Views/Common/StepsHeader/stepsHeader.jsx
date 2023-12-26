@@ -44,7 +44,7 @@ export const StepsHeader = ({ handleExit, steps }) => {
             sm={6}
             xs={6}
           >
-            <StepsTypo variant="h6">Step {steps} of 6: <StepsValue ml={2} style={{paddingLeft:"10px"}}>{steps === 1 ? "Basics" : (steps === 2 ? "Intended Learner" : (steps === 3 ? "Curriculum": (steps === 4 ? "Details" : (steps === 5 ? "Class Schedule" : (steps === 6 ? "Summary" : "")))))}</StepsValue></StepsTypo>
+            <StepsTypo variant="h6">Step {steps} of 6: <StepsValue sx={{ color: (theme) => theme.palette.primary.main }} ml={2} style={{ paddingLeft: "10px" }}>{steps === 1 ? "Basics" : (steps === 2 ? "Intended Learner" : (steps === 3 ? "Curriculum" : (steps === 4 ? "Details" : (steps === 5 ? "Class Schedule" : (steps === 6 ? "Summary" : "")))))}</StepsValue></StepsTypo>
           </Grid>
           <Grid
             lg={2}

@@ -6,6 +6,7 @@ import {
   MainContainer,
   Title,
   MainSubContainer,
+  PrivacyLinks,
 } from "./styles.js";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { FiberManualRecord as BulletIcon } from "@mui/icons-material";
@@ -236,11 +237,11 @@ export default function Policies() {
           {/* ================================================================================================= */}
 
           <Title variant="h5">2. Privacy Policy</Title>
-          <Description variant="body3">
+          <Description color={"primary"} variant="body3">
             Please refer to the Vulcan Privacy Policy at{" "}
-            <a style={{ wordWrap: "break-word" }} href="/">
-              https://www.vulcanlearninginstitute.com/privacy
-            </a>{" "}
+            {/* <a style={{ wordWrap: "break-word", color:"primary" }} href="/"> */}
+            <PrivacyLinks> https://www.vulcanlearninginstitute.com/privacy </PrivacyLinks>
+            {/* </a>{" "} */}
             for information on how Vulcan collects, uses and discloses
             information about you.
           </Description>
@@ -352,7 +353,10 @@ export default function Policies() {
             Act, including without limitation its right to remove anything
             objectionable to Vulcan in its sole discretion. Alleged
             improprieties by any User may be reported to Vulcan by email at
-            info@vulcanlearninginstitute.com.
+            <PrivacyLinks>
+              info@vulcanlearninginstitute.com
+            </PrivacyLinks>
+            .
           </Description>
           {/* ================================================================================================= */}
 
@@ -459,10 +463,9 @@ export default function Policies() {
             third party verification service is inaccurate. When a third party
             verification service is used, you warrant that you will comply with
             the Fair Credit Reporting Act, 15 USC 1681. See
-            <a style={{ wordWrap: "break-word" }} href="/">
-              {" "}
+            <PrivacyLinks>
               http://www.consumer.ftc.gov/articles/pdf-0111-fair-credit-reporting-act.pdf{" "}
-            </a>
+            </PrivacyLinks>
             for details.
           </Description>
 
@@ -608,12 +611,15 @@ export default function Policies() {
             against you, the DMCA permits you to send us a counter-notice.
             Notices and counter-notices must meet the then-current statutory
             requirements imposed by the DMCA; see{" "}
-            <a href="/"> http://www.loc.gov/copyright</a>
-            for details. Vulcan’s agent for notice of claims of copyright or
+            <PrivacyLinks>
+              http://www.loc.gov/copyright
+            </PrivacyLinks>
+            {" "} for details. Vulcan’s agent for notice of claims of copyright or
             other intellectual property infringement can be reached as follows:
           </Description>
+          
           <Description variant="body3">
-            By email: <a href="/">info@vulcanlearninginstitute.com</a>
+            By email:{" "}<PrivacyLinks>info@vulcanlearninginstitute.com</PrivacyLinks> 
           </Description>
           <Description variant="body3">
             We suggest that you consult with a legal advisor before filing a

@@ -60,15 +60,14 @@ export const UploadAvatar = ({ onUpload, courseImage }) => {
             exportAsSquare={courseImage ? true : false}
           />
           <Box
-            style={{
+            sx={{
+              background: (theme) => theme.palette.primary.main,
               borderRadius: "50%",
               position: "absolute",
               bottom: "10px",
               right: "10px",
-              background: "#0000FF",
               padding: "3px",
             }}
-
             onClick={handleClose}
           >
             <CheckIcon style={{ color: "#FFFFFF" }} />
@@ -78,10 +77,10 @@ export const UploadAvatar = ({ onUpload, courseImage }) => {
       <Box display="flex" position={"relative"} flexDirection={"column"} justifyContent="center" alignItems="center" backgroundColor={courseImage ? "gray" : ""} borderRadius={courseImage ? "20%" : ""}>
         {
           courseImage ?
-            <CourseImage sx={{ position: "absolute", top: 15,  color:"white" }}>
+            <CourseImage sx={{ position: "absolute", top: 15, color: "white" }}>
               Course Image
             </CourseImage> : null}
-        <Box sx={{ position: "relative", top:0 }}>
+        <Box sx={{ position: "relative", top: 0 }}>
           {
             !courseImage ?
               <img
@@ -113,7 +112,7 @@ export const UploadAvatar = ({ onUpload, courseImage }) => {
         }}
         p={0.5}
       >
-        <EditIcon />
+        <EditIcon fontSize="large" sx={{ color: (theme) => theme.palette.primary.main }} />
       </Box>
     </div>
   );
