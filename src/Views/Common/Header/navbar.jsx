@@ -70,7 +70,6 @@ const Navbar = () => {
           <Span>
             <Typography
               noWrap
-              component="a"
               onClick={navigateToHome}
               color="primary"
               sx={styles.logoTypo}

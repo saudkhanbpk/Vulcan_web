@@ -1,14 +1,6 @@
 import { Box, styled } from "@mui/material";
 
 export const styles = {
-  mainBox: {
-    p: "20px",
-    bottom:"0",
-    width:"100%",
-    color: "white",
-    position: "relative",
-    backgroundColor: "blue",
-  },
   // Sub Grid 1
   subGrid1Box: { pt: 1, pb: 0, display: "flex" },
   subGrid1BoxTypo: {
@@ -70,5 +62,15 @@ export const MainBox = styled(Box)(({ theme }) => ({
   pt: 2,
   [theme.breakpoints.down("md")]: {
     height: "300px",
+  },
+}));
+export const FooterContainer = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(4),
+  position: "relative",
+  bottom:"0",
+  width:"100%",
+  color: "white",
+  backgroundColor: theme.palette.primary.main,
+  [theme.breakpoints.down("md")]: {
   },
 }));

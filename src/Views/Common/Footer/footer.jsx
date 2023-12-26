@@ -10,7 +10,7 @@ import {
   Switch, Button,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import { MainBox, styles } from "./styles";
+import { FooterContainer, MainBox, styles } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 import { ModalBackgroundBox } from "../../Contact/styles";
 import { FeatureFlags } from "../../../Infrastructure/featureFlags";
@@ -202,7 +202,7 @@ const Footer = () => {
           </Modal>
         </ModalBackgroundBox>
       )}
-      <Box sx={styles.mainBox}>
+      <FooterContainer>
         <Grid container spcing={3}>
           {/* Sub Grid 1 */}
           <Grid xs={12} sm={12} md={12} lg={6} sx={{ mb: { xs: 2, sm: 2 } }}>
@@ -282,12 +282,12 @@ const Footer = () => {
               <TwitterIcon
                 fontSize="large"
                 className="twticon"
-                sx={styles.subGrid3Icon}
+                sx={{ ...styles.subGrid3Icon, color: (theme) => theme.palette.primary.main }}
               />
             </Link>
           </Grid>
         </Grid>
-      </Box>
+      </FooterContainer>
     </>
   );
 };
