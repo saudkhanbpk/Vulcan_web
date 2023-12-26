@@ -58,10 +58,7 @@ const theme = createTheme({
       fontFamily: "'Inter', sans-serif",
     },
     body1: {
-      fontSize: "40px",
       fontWeight: 700,
-      lineHeight: 1.2,
-      fontFamily: "Inter",
     },
     body2: {
       fontSize: "26px",

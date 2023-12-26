@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { functions } from "../../../Infrastructure/config";
 import { StepsHeader } from '../../Common/StepsHeader/stepsHeader'
 import { ShowErrorToast } from '../../Common/Toast/toast'
-import { ChoiceTypo, QuestionName } from '../styles'
+import { ChoiceTypo, ErrorBlockSmall, QuestionName } from '../styles'
 import { Box, FormControl, FormControlLabel, Radio, RadioGroup, TextField } from '@mui/material'
 import { basicStepControl, resetBasicStepValues, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
@@ -90,7 +90,8 @@ export const BasicsStep = () => {
             dispatch(basicStepControl({ courseSubTitle: courseSubTitle, question: "courseTitle" }));
             formik.setFieldValue("courseSubTitle", courseSubTitle || '');
         }
-    }, [userData, dispatch, categoryValue, courseTitle, courseSubTitle, formik.setValues, formik])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userData, dispatch, categoryValue, courseTitle, courseSubTitle, formik.setValues])
 
     const handleContinueClick = () => {
         if (formikRef.current) {
@@ -228,7 +229,10 @@ export const BasicsStep = () => {
                         </Grid>
                     </Box>
                 </Box>
-                <StepsFooter handleContinueClick={handleContinueClick} />
+                <ErrorBlockSmall sx={{ textAlign: "center" }}>
+                        {formik.errors.courseTitle}
+                    </ErrorBlockSmall>
+                <StepsFooter handleContinueClick={handleContinueClick} step1Error={formik.errors.courseTitle} />
                 <Box height={"100px"}></Box>
             </form>
         </Box>
