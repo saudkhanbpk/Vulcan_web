@@ -2,9 +2,8 @@ import { specialFont } from "../../Infrastructure/Theme/fontFamily"
 import { Box, Button, Typography, styled } from "@mui/material"
 
 export const CourseMainBox = styled(Box)((theme) => ({}))
-export const StepsValue = styled('span')(({theme}) => ({
+export const StepsValue = styled('span')(() => ({
   fontFamily: specialFont,
-  color: theme.palette.primary.main,
 }))
 export const Header = styled(Box)((theme) => ({
   height: "70px",

@@ -91,7 +91,7 @@ const EmailModal = ({ open, setOpen, coursesModal }) => {
             <Button
               className="btn-width m-4"
               variant="contained"
-              style={{ textTransform: "capitalize" }}
+              style={{ textTransform: "capitalize", width:"180px" }}
             >
               Join
             </Button>

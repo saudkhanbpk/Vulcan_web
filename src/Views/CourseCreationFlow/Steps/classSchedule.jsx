@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, InputAdornment, TextField, Typography } from '@mui/material';
+import { Box, Checkbox, InputAdornment, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import { ShowErrorToast } from '../../Common/Toast/toast';
 import { StepsHeader } from '../../Common/StepsHeader/stepsHeader';
@@ -21,9 +22,10 @@ import { TimePicker, DatePicker } from '@mui/x-date-pickers';
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
 import { httpsCallable } from '@firebase/functions';
 import { functions } from '../../../Infrastructure/config';
-import dayjs from 'dayjs';
+import { useTheme } from '@mui/material/styles';
 
 export const ClassSchedule = () => {
+    const theme = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [error, setError] = useState(null);
@@ -41,7 +43,6 @@ export const ClassSchedule = () => {
         saveTimes();
         dispatch(resetCoursesSteps);
         navigate('/dashboard');
-
     };
     const handleDec = async () => {
         if (courseSteps > 1) {
@@ -148,7 +149,6 @@ export const ClassSchedule = () => {
             }
         }
     };
-
     const [formData, setFormData] = useState({
         monday: { start: null, end: null, checked: false },
         tuesday: { start: null, end: null, checked: false },
@@ -429,11 +429,15 @@ export const ClassSchedule = () => {
                                             mb={1}
                                             width={'100%'}
                                         >
-                                            <input
-                                                type='checkbox'
-                                                checked={formData[day].checked}
+                                            <Checkbox
+                                                checked={formData[day]?.checked}
                                                 onChange={() => handleCheckboxChange(day)}
-                                                style={{ height: '30px', width: '30px', cursor: "pointer" }}
+                                                style={{
+                                                    height: '30px',
+                                                    width: '30px',
+                                                    cursor: 'pointer',
+                                                    color: theme.palette.primary.main,
+                                                }}
                                             />
                                             <Box
                                                 display={'flex'}
@@ -514,6 +518,8 @@ export const ClassSchedule = () => {
                                                                 style={{
                                                                     '& .MuiIconButton-root': { fontSize: '16px' },
                                                                 }}
+
+                                                                minutesStep={15}
                                                             />
                                                         </DemoContainer>
                                                     </LocalizationProvider>

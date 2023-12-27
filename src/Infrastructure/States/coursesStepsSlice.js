@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  courseSteps: 1,
+  courseSteps: 6,
   basicStepState:{
     categoryValue: "",
     courseTitle: "",

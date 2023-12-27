@@ -11,7 +11,7 @@ import DialogBox from "../../Common/DialogBox/dialogBox";
 import { getAuth } from "firebase/auth";
 import { getDatabase, ref, update } from "firebase/database";
 
-const WelcomeBox = ({userData}) => {
+const WelcomeBox = ({ userData }) => {
   const auth = getAuth();
   const db = getDatabase();
   const navigate = useNavigate();
@@ -28,27 +28,27 @@ const WelcomeBox = ({userData}) => {
       setIsClicked(false);
     }
   };
-  const navigateToBecomeEdu = async() => {
-    if(!uid){
+  const navigateToBecomeEdu = async () => {
+    if (!uid) {
       navigate("/educator-account");
       const userRef = ref(db, `users/${uid}/educator`);
-      await update(userRef,{
+      await update(userRef, {
         onboarding_complete: false
       })
     }
-    if(is_educator){
-    if (onboardingComplete) {
-      setOpen(true);
+    if (is_educator) {
+      if (onboardingComplete) {
+        setOpen(true);
+      } else {
+        navigate("/educator-account");
+        const userRef = ref(db, `users/${uid}/educator`);
+        await update(userRef, {
+          onboarding_complete: false
+        })
+      }
     } else {
-      navigate("/educator-account");
-      const userRef = ref(db, `users/${uid}/educator`);
-      await update(userRef,{
-        onboarding_complete: false
-      })
+      setOpen(true);
     }
-  }else{
-    setOpen(true);
-  }
   };
   const navigateToCourses = () => {
     navigate("/courses");
@@ -68,9 +68,9 @@ const WelcomeBox = ({userData}) => {
               sx={styles.subGrid}
             >
               {isClicked ? (
-                <CastForEducationIcon sx={styles.subGridIconClicked} />
+                <CastForEducationIcon sx={{ fontSize: "3.1875rem !important", color: (theme) => theme.palette.primary.main }} />
               ) : (
-                <CastForEducationIcon sx={styles.subGridIconNotClicked} />
+                <CastForEducationIcon sx={{ fontSize: "3.1875rem !important" }} />
               )}
               <Box>
                 <Typography variant="body5">Teach</Typography>
@@ -87,14 +87,14 @@ const WelcomeBox = ({userData}) => {
               sx={styles.subGrid}
             >
               {isClicked ? (
-                <LocalLibraryIcon sx={styles.subGridIconNotClicked} />
+                <LocalLibraryIcon sx={{ fontSize: "3.1875rem !important" }} />
               ) : (
-                <LocalLibraryIcon sx={styles.subGridIconClicked} />
+                <LocalLibraryIcon sx={{ fontSize: "3.1875rem !important", color: (theme) => theme.palette.primary.main }} />
               )}
               <Box>
                 <Typography variant="body5">Learn</Typography>
                 {isClicked ? (
-                  <Divider sx={styles.dividerbeforeClick} />
+                  <Divider sx={{ ...styles.dividerbeforeClick, color: (theme) => theme.palette.primary.main }} />
                 ) : (
                   <Divider sx={styles.dividerAfterClick} />
                 )}

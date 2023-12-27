@@ -10,6 +10,7 @@ import {
 } from "./styles.js";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { FiberManualRecord as BulletIcon } from "@mui/icons-material";
+import { PrivacyLinks } from "../Policies/styles.js";
 
 const InfoList = () => {
   return (
@@ -260,7 +261,7 @@ export default function privacy() {
         <Description variant="body3">
           {" "}
           This Privacy Policy applies only to personal information we collect
-          via the website <a href="/">www.vulcanlearninginstitute.com</a>{" "}
+          via the website <PrivacyLinks>www.vulcanlearninginstitute.com</PrivacyLinks> {" "}
           (“Site”), online and mobile applications (“Apps”), email, telephone,
           electronic devices and other interactive services (collectively “the
           Service”).
@@ -400,7 +401,7 @@ export default function privacy() {
           the sole purpose of sending this one-time email and reminders and
           tracking the success of our referral program. Your friend may click
           Unsubscribe at the bottom of any email, or contact us at
-          info@vulcanlearninginstitute.com to request removal from our database.
+          <PrivacyLinks>info@vulcanlearninginstitute.com</PrivacyLinks> to request removal from our database.
         </Description>
         {/* =================================================================== */}
 
@@ -416,8 +417,10 @@ export default function privacy() {
           browser to browser, but are typically found in the “options”, “tools”
           or “preferences” menu. There also are online tools available for
           clearing all cookies left behind by the websites you have visited,
-          such as <a href="/">http://www.aboutads.info/choices</a> and{" "}
-          <a href="/">www.allaboutcookies.org</a>.
+          such as <PrivacyLinks> http://www.aboutads.info/choices</PrivacyLinks> and{" "}
+          <PrivacyLinks>
+          www.allaboutcookies.org
+            </PrivacyLinks>.
         </Description>
         {/* =================================================================== */}
 
@@ -547,7 +550,7 @@ export default function privacy() {
         <Description variant="body3">
           To request access to or deletion of your personal information, or to
           exercise any other data rights under California law, please write us
-          at info@vulcanlearninginstitute.com. Please include your full name,
+          at <PrivacyLinks>info@vulcanlearninginstitute.com</PrivacyLinks>. Please include your full name,
           email address, and phone number associated with your use of the Site,
           along with why you are writing, so that we can process your request in
           an efﬁcient manner.
@@ -607,7 +610,7 @@ export default function privacy() {
         <Description variant="body3">
           {" "}
           Questions regarding this Privacy Policy should be directed to {""}
-          <a href="/">info@vulcanlearninginstitute.com</a>
+          <PrivacyLinks>info@vulcanlearninginstitute.com</PrivacyLinks>
         </Description>
       </MainSubContainer>
     </MainContainer>

@@ -56,11 +56,11 @@ export const ToggleBtn = styled(ToggleButton)(({ theme }) => ({
     backgroundColor: "transparent",
   },
   "&.Mui-selected": {
-    backgroundColor: "#000FFF",
+    backgroundColor: theme.palette.primary.main,
     color: "white",
     boxShadow: "none",
     "&:hover": {
-      backgroundColor: "#000FFF",
+      backgroundColor: theme.palette.primary.main,
     },
   },
   "&.MuiToggleButtonGroup-grouped": {
