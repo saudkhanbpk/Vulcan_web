@@ -57,7 +57,7 @@ export const Summary = () => {
                 alignItems={"start"}
                 justifyContent={"center"}
                 px={{ xs: 2, sm: 2, md: 10, lg: 10 }}
-                gap={10}
+                gap={5}
             >
                 <Grid lg={3} md={10} sm={12} xs={12}
                 >
@@ -68,16 +68,18 @@ export const Summary = () => {
                     >
                         <Box
                             borderBottom={`5px solid ${theme.palette.primary.main}`}
-                            borderRadius={10}
+                            borderRadius={8}
                             overflow="hidden"
+                            height={{ xs: '300px', sm: '300px', md: 'auto', lg: 'auto' }}
+                            // width={{ xs: '300px', sm: '300px', md:'auto', lg: 'auto' }}
                         >
                             <img
                                 src={courseImage && courseImage}
                                 alt="image not found"
                                 style={{
                                     objectFit: 'cover',
-                                    height: '200px',  // Adjust this value if needed
-                                    width: '300px',
+                                    height: '100%',  // Adjust this value if needed
+                                    width: '100%',
 
                                 }}
                             />
@@ -123,8 +125,9 @@ export const Summary = () => {
                         </Box>
                     </Box>
                 </Grid>
-                <Grid lg={8} md={10} sm={12} xs={12} display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"start"} gap={5}>
-                  { objectives && <Box
+                <Grid lg={8} md={10} sm={12} xs={12} display={"flex"} flexDirection={"column"}
+                    justifyContent={"center"} alignItems={"start"} gap={5}>
+                    {objectives && <Box
                         p={3}
                         width={"100%"}
                         sx={{
@@ -133,7 +136,8 @@ export const Summary = () => {
                             border: `5px solid ${theme.palette.primary.main}`,
                         }}
                     >
-                        <Typography variant="h6" fontFamily={specialFont} color={'primary'} sx={{ fontWeight: '700', }} pb={3}>
+                        <Typography variant="h6" fontFamily={specialFont} color={'primary'}
+                            sx={{ fontWeight: '700', }} pb={3}>
                             Learning Objectives
                         </Typography>
                         <Box
@@ -144,8 +148,8 @@ export const Summary = () => {
                         >
                             {Object.keys(objectives).map((key) => (
                                 objectives[key] && (
-                                    <Box display={'flex'} alignItems={"start"}>
-                                        <DoneIcon sx={{ color: theme.palette.success.main, fontSize: 20, marginRight: 1 }} />
+                                    <Box display={'flex'} width={"48%"} alignItems={"start"}>
+                                        <DoneIcon sx={{ color: theme.palette.primary.main, fontSize: 20, marginRight: 1 }} />
                                         <Typography
                                             key={key}
                                             variant="body5"
@@ -153,6 +157,7 @@ export const Summary = () => {
                                                 fontWeight: '400',
                                                 display: 'flex',
                                                 alignItems: 'center',
+                                                wordBreak: 'break-word'
                                             }}
                                         >
                                             {objectives[key]}
@@ -188,7 +193,7 @@ export const Summary = () => {
                             </Accordion>
                         ))}
                     </Box>}
-                  { prerequisites && <Box
+                    {prerequisites && <Box
                         p={3}
                         width={"100%"}
                         border={`5px solid ${theme.palette.primary.main}`}
@@ -207,7 +212,7 @@ export const Summary = () => {
                             ))}
                         </ul>
                     </Box>}
-                  {description &&  <Box
+                    {description && <Box
                         p={3}
                         width={"100%"}
                         border={`5px solid ${theme.palette.primary.main}`}
@@ -216,7 +221,7 @@ export const Summary = () => {
                         <Typography variant="h6" fontFamily={specialFont} pb={3} color={'primary'} sx={{ fontWeight: '700', }}>Description</Typography>
                         <div dangerouslySetInnerHTML={{ __html: description }} />
                     </Box>}
-                  {intended_learner &&  <Box
+                    {intended_learner && <Box
                         p={3}
                         width={"100%"}
                         border={`5px solid ${theme.palette.primary.main}`}
