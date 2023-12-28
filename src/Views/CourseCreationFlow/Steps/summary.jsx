@@ -1,7 +1,7 @@
 import React from 'react'
 import { StepsHeader } from '../../Common/StepsHeader/stepsHeader'
 import { useDispatch, useSelector } from 'react-redux'
-import { Box, Rating, Typography } from '@mui/material'
+import { Box, Rating, Typography, Button } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import {
     ContinueButton, Footer, PreviousButton,
@@ -10,31 +10,29 @@ import { decrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructur
 import { ShowErrorToast } from '../../Common/Toast/toast'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles';
-import becomeimg from "../../../Assets/Images/mblteacher.png";
 import DoneIcon from '@mui/icons-material/Done';
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
+import { specialFont } from '../../../Infrastructure/Theme/fontFamily'
 
 export const Summary = () => {
-    const objectives = [
-        'Objective 1',
-        'Objective 2',
-        'Objective 3',
-        'Objective 4',
-        'Objective 5',
-    ];
-    const learningObjectives = [
-        'Objective 1',
-        'Objective 2',
-        'Objective 3',
-        'Objective 4',
-        'Objective 5',
-    ];
     const theme = useTheme();
     const navigate = useNavigate()
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
+    const userData = useSelector((state) => state.userData.data)
+    const avatar = userData?.educator?.profile?.avatar
+    const firstName = userData?.account?.first_name
+    const lastName = userData?.account?.last_name
+    const title = userData?.educator?.courses?.pending?.basics?.title
+    const objectives = userData?.educator?.courses?.pending?.intended_learner?.objectives
+    const prerequisites = userData?.educator?.courses?.pending?.intended_learner?.prerequisites
+    const intended_learner = userData?.educator?.courses?.pending?.intended_learner?.description
+    const courseImage = userData?.educator?.courses?.pending?.details?.course_image
+    const description = userData?.educator?.courses?.pending?.details?.description
+    const curriculum = userData?.educator?.courses?.pending?.curriculum
+    console.log(userData)
     const handleExit = () => {
         dispatch(resetCoursesSteps)
         navigate('/dashboard')
@@ -55,296 +53,178 @@ export const Summary = () => {
             <Box height={"100px"}></Box>
             <Grid
                 container
-                py={5}
-                justifyContent={'center'}
-                px={{ lg: 4, sm: 4, xs: 1 }}
+                display={"flex"}
+                alignItems={"start"}
+                justifyContent={"center"}
+                px={{ xs: 2, sm: 2, md: 10, lg: 10 }}
+                gap={10}
             >
-                <Grid lg={3} md={10} sm={12} xs={12} mb={{ sm: 3, xs: 3, md: 4 }}
+                <Grid lg={3} md={10} sm={12} xs={12}
                 >
                     <Box
-                        sx={{
-                            display: {
-                                xs: 'flex',
-                            },
-                            flexDirection: {
-                                xs: 'column',
-                            },
-                            justifyContent: {
-                                xs: 'space-between',
-                                sm: 'space-between',
-                                md: 'space-between',
-                            },
-                            width: { xs: '100%', sm: '100%', md: '100%', lg: '90%' },
-                            gap: 2,
-                            border: `5px solid ${theme.palette.primary.main}`,
-                            borderRadius: 4,
-                        }}
-                        pb={2}
+                        border={`5px solid ${theme.palette.primary.main}`}
+                        borderRadius={10}
+
                     >
-                        <Box>
+                        <Box
+                            borderBottom={`5px solid ${theme.palette.primary.main}`}
+                            borderRadius={10}
+                            overflow="hidden"
+                        >
                             <img
-                                src={becomeimg}
-                                alt=""
+                                src={courseImage && courseImage}
+                                alt="image not found"
                                 style={{
-                                    width: '100%',
-                                    height: 'auto',
-                                    borderBottom: `5px solid ${theme.palette.primary.main}`,
-                                    borderBottomRadius: 10,
-                                    borderRadius: '5%',
-                                    objectFit: 'cover'
+                                    objectFit: 'cover',
+                                    height: '200px',  // Adjust this value if needed
+                                    width: '300px',
+
                                 }}
                             />
-
-                            {/* <Typography variant="h6" sx={styles.logo}>Learning Objectives dhdb djdbdk hdddkd </Typography> */}
-                            <Typography variant="h1" sx={{ 'font-size': '18px' }} color={"primary"}>Complete 2024 web Development Bootcamp</Typography>
                         </Box>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, px: 2 }} >
-                            <img
-                                src={becomeimg}
-                                width={'50px'}
-                                height={'50px'}
-                                alt=""
-                                style={{ border: `1px solid ${theme.palette.primary.main}`, borderRadius: '50%', objectFit: 'cover', }}
-                            />
-                            <Box>
-                                <Typography sx={{ fontWeight: '700' }}>By John Doe</Typography>
-                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <Rating
-                                        sx={{ fontSize: '1rem' }}
-                                        name="star-rating"
-                                        value={3.5}
-                                        precision={0.5}
-                                    />
 
-                                    <Typography variant="h6" sx={{ fontSize: '8px' }}>
-                                        4.9
-                                    </Typography>
-                                    <Typography variant="h6" sx={{ fontSize: '8px', color: 'blue' }} ml={.2}>
-                                        (40 ratings)
-                                    </Typography>
+                        <Box px={2} display={"flex"} flexDirection={'column'} gap={1}>
+                            <Typography variant="h1" sx={{ fontSize: '18px' }} color={"primary"} pt={1} fontFamily={specialFont}>{title}</Typography>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }} >
+                                <img
+                                    src={avatar}
+                                    width={'50px'}
+                                    height={'50px'}
+                                    alt=""
+                                    style={{ border: `1px solid ${theme.palette.primary.main}`, borderRadius: '50%', objectFit: 'cover', }}
+                                />
+                                <Box>
+                                    <Typography sx={{ fontWeight: '700', textTransform: 'capitalize' }}>{firstName}{" "}{lastName}</Typography>
+                                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                        <Rating
+                                            sx={{ fontSize: '1rem' }}
+                                            name="star-rating"
+                                            value={3.5}
+                                            precision={0.5}
+                                        />
+
+                                        <Typography variant="h6" sx={{ fontSize: '8px' }}>
+                                            4.9
+                                        </Typography>
+                                        <Typography variant="h6" sx={{ fontSize: '8px', color: 'blue' }}>
+                                            (40 ratings)
+                                        </Typography>
+                                    </Box>
                                 </Box>
                             </Box>
-                        </Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, }} px={3}>
-                            <Typography variant="h6" sx={{ fontWeight: '800', fontSize: '10px', color: theme.palette.primary.main }}>Next Cohort starting on 12/18 </Typography>
-                            <Typography variant="h6" sx={{ fontWeight: '700', fontSize: '15px', }}>M/T/Th @ 4pm-5pm PST </Typography>
-                            <button style={{ backgroundColor: theme.palette.primary.main, color: 'white', padding: '3px', borderRadius: '20px', fontWeight: 'bold' }}>Enroll</button>
-                            <Typography sx={{ color: "blue", fontSize: '12px', display: 'flex', justifyContent: 'center' }} >See More Cohort Schedule</Typography>
+                            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, }}>
+                                <Typography variant="h6" sx={{ fontWeight: '800', fontSize: '10px', color: theme.palette.primary.main }}>Next Cohort starting on 12/18 </Typography>
+                                <Typography variant="h6" sx={{ fontWeight: '700', fontSize: '15px', }}>M/T/Th @ 4pm-5pm PST </Typography>
+                                <Button variant="contained" color="primary">
+                                    Enroll Now
+                                </Button>
+                                <Typography sx={{ color: "blue", fontSize: '12px', display: 'flex', justifyContent: 'center' }} >See More Cohort Schedule</Typography>
+                            </Box>
                         </Box>
                     </Box>
                 </Grid>
-                <Grid lg={9} md={10} sm={12} xs={12}>
-                    <Box
-                        py={1}
-                        px={2}
+                <Grid lg={8} md={10} sm={12} xs={12} display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"start"} gap={5}>
+                  { objectives && <Box
+                        p={3}
+                        width={"100%"}
                         sx={{
-                            display: 'flex',
-                            flexDirection: 'column', // Display in a column for all screen sizes
-                            width: { xs: '100%', sm: '100%', md: '100%', lg: '80%' },
-                            marginBottom: 4,
                             borderRadius: 4,
-
-                            justifyContent: 'space-between',
                             gap: 1,
                             border: `5px solid ${theme.palette.primary.main}`,
                         }}
                     >
-                        <Typography variant="h6" color= {'primary'} sx={{ fontWeight: '700',}}>
-                            Objective
+                        <Typography variant="h6" fontFamily={specialFont} color={'primary'} sx={{ fontWeight: '700', }} pb={3}>
+                            Learning Objectives
                         </Typography>
                         <Box
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'row', // Display in a row for all screen sizes
-                                flexWrap: 'wrap',
-                                // Allow items to wrap to the next line
-                            }}
+                            display='flex'
+                            flexDirection='row'
+                            flexWrap='wrap'
+                            gap={2}
                         >
-                            {objectives.map((objective, index) => (
-                                <Typography
-                                    key={index}
-                                    variant="h6"
-                                    sx={{
-                                        fontWeight: '400',
-                                        flexBasis: { xs: '100%', sm: '48%', md: '48%', lg: '48%' },
-                                        boxSizing: 'border-box',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    <DoneIcon sx={{ color: theme.palette.success.main, fontSize: 20, marginRight: 1 }} />
-                                    {objective}
-                                </Typography>
+                            {Object.keys(objectives).map((key) => (
+                                objectives[key] && (
+                                    <Box display={'flex'} alignItems={"start"}>
+                                        <DoneIcon sx={{ color: theme.palette.success.main, fontSize: 20, marginRight: 1 }} />
+                                        <Typography
+                                            key={key}
+                                            variant="body5"
+                                            sx={{
+                                                fontWeight: '400',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            {objectives[key]}
+                                        </Typography>
+                                    </Box>
+                                )
                             ))}
                         </Box>
-                    </Box>
-
-
-                    <Box
-                        py={1}
-                        px={2}
+                    </Box>}
+                    {curriculum && <Box
+                        p={3}
+                        width={"100%"}
                         sx={{
-                            display: {
-                                xs: 'flex',
-
-                            },
-                            flexDirection: {
-                                xs: 'column',
-
-                            },
-                            justifyContent: {
-                                xs: 'space-between',
-                                sm: 'space-between',
-                                md: 'space-between',
-                            },
-                            width: { xs: '100%', sm: '100%', md: '100%', lg: '80%' },
-                            gap: 1,
                             border: `5px solid ${theme.palette.primary.main}`,
                             borderRadius: 4,
-                            marginBottom: 4
                         }}
                     >
-                        <Typography variant="h6" color= {'primary'} sx={{ fontWeight: '700',}}>Curriculum</Typography>
-                        <Accordion
-                            sx={{
-                                width: '50%',
-                                maxWidth: '300px',
-                            }}
-                        >
-                            <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
-                                <Typography variant="subtitle1">Front End Web Development</Typography>
-                                <ExpandMoreIcon style={{ paddingBottom: '3px' }} />
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography variant="subtitle2">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion
-                            sx={{
-                                width: '50%',
-                                maxWidth: '300px',
-                            }}
-                        >
-                            <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
-                                <Typography variant="subtitle1">Introduction to Html</Typography>
-                                <ExpandMoreIcon style={{ paddingBottom: '3px' }} />
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography variant="subtitle2">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion
-                            sx={{
-                                width: '50%',
-                                maxWidth: '300px',
-                            }}
-                        >
-                            <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
-                                <Typography variant="subtitle1">intermediate html</Typography>
-                                <ExpandMoreIcon style={{ paddingBottom: '3px' }} />
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography variant="subtitle2">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
-                    </Box>
-                    <Box
-                        py={1}
-                        px={2}
-                        sx={{
-                            display: {
-                                xs: 'flex',
-                            },
-                            flexDirection: {
-                                xs: 'column',
-                            },
-                            justifyContent: {
-                                xs: 'space-between',
-                                sm: 'space-between',
-                                md: 'space-between',
-                            },
-                            width: { xs: '100%', sm: '100%', md: '100%', lg: '80%' },
-                            gap: 1,
-                            border: `5px solid ${theme.palette.primary.main}`,
-                            borderRadius: 4,
-                            marginBottom: 4,
-                        }}
+                        <Typography variant="h6" color={'primary'} fontFamily={specialFont} fontWeight={'700'} pb={3}>
+                            Curriculum
+                        </Typography>
+                        {curriculum.map((item, index) => (
+                            <Accordion key={index}>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls={`panel${index + 1}-content`}
+                                    id={`panel${index + 1}-header`}
+                                >
+                                    <Typography variant="subtitle1">{item.title}</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <Typography variant="subtitle2">{item.description}</Typography>
+                                </AccordionDetails>
+                            </Accordion>
+                        ))}
+                    </Box>}
+                  { prerequisites && <Box
+                        p={3}
+                        width={"100%"}
+                        border={`5px solid ${theme.palette.primary.main}`}
+                        borderRadius={4}
                     >
-                        <Typography variant="h6" color= {'primary'} sx={{ fontWeight: '700',}}>
+                        <Typography variant="h6" pb={3} fontFamily={specialFont} color={'primary'} fontWeight='700'>
                             Requirements
                         </Typography>
-                        <ul style={{ listStyleType: 'disc', paddingLeft: '20px', margin: '0' }}>
-                            {learningObjectives.map((objective, index) => (
-                                <li key={index} style={{ fontWeight: '500', fontSize: '20px', }}>
-                                    {objective}
+                        <ul style={{ listStyleType: 'disc', }}>
+                            {/* {prerequisites.map((objective, index) => ( */}
+                            {Object.keys(prerequisites).map((key) => (
+
+                                <li style={{ fontWeight: '500', fontSize: '20px', }}>
+                                    {prerequisites[key]}
                                 </li>
                             ))}
                         </ul>
-                    </Box>
-
-                    <Box
-
-                        px={2}
-                        sx={{
-                            display: {
-                                xs: 'flex',
-
-                            },
-                            flexDirection: {
-                                xs: 'column',
-
-                            },
-                            justifyContent: {
-                                xs: 'space-between',
-                                sm: 'space-between',
-                                md: 'space-between',
-                            },
-                            width: { xs: '100%', sm: '100%', md: '100%', lg: '80%' },
-                            gap: 1,
-                            border: `5px solid ${theme.palette.primary.main}`,
-                            borderRadius: 4,
-                            marginBottom: 4,
-                        }}
+                    </Box>}
+                  {description &&  <Box
+                        p={3}
+                        width={"100%"}
+                        border={`5px solid ${theme.palette.primary.main}`}
+                        borderRadius={4}
                     >
-                        <Typography variant="h6" color= {'primary'} sx={{ fontWeight: '700',}}>Description</Typography>
-
-                    </Box>
-                    <Box
-
-                        px={2}
-                        sx={{
-                            display: {
-                                xs: 'flex',
-
-                            },
-                            flexDirection: {
-                                xs: 'column',
-
-                            },
-                            justifyContent: {
-                                xs: 'space-between',
-                                sm: 'space-between',
-                                md: 'space-between',
-                            },
-                            width: { xs: '100%', sm: '100%', md: '100%', lg: '80%' },
-                            gap: 1,
-                            border: `5px solid ${theme.palette.primary.main}`,
-                            borderRadius: 4,
-                            
-                        }}
+                        <Typography variant="h6" fontFamily={specialFont} pb={3} color={'primary'} sx={{ fontWeight: '700', }}>Description</Typography>
+                        <div dangerouslySetInnerHTML={{ __html: description }} />
+                    </Box>}
+                  {intended_learner &&  <Box
+                        p={3}
+                        width={"100%"}
+                        border={`5px solid ${theme.palette.primary.main}`}
+                        borderRadius={4}
                     >
-                        <Typography variant="h6" color= {'primary'} sx={{ fontWeight: '700',}}>Intended Learner</Typography>
-
-                    </Box>
+                        <Typography variant="h6" fontFamily={specialFont} pb={3} color={'primary'} sx={{ fontWeight: '700', }}>Intended Learner</Typography>
+                        <p>{intended_learner}</p>
+                    </Box>}
                 </Grid>
             </Grid>
             <Footer>
