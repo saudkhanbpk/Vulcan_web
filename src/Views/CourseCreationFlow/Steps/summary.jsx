@@ -47,21 +47,17 @@ export const Summary = () => {
     const month = first_class && new Intl.DateTimeFormat('en-US', {
         month: 'numeric',
     }).format(date);
-    
     const formatSchedule = () => {
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         if (coursetimes) {
             const dayGroups = {};
-
             Object.entries(coursetimes).forEach(([day, { start, end }]) => {
                 const formattedStart = convertToLocalTime(start);
                 const formattedEnd = convertToLocalTime(end);
-
                 const hasMinutes = formattedStart.includes(':') || formattedEnd.includes(':');
                 const formattedTime = hasMinutes
                     ? `${formattedStart}-${formattedEnd}`
                     : `${formattedStart.split(':')[0]}-${formattedEnd.split(':')[0]}`;
-
                 if (!dayGroups[formattedTime]) {
                     dayGroups[formattedTime] = [];
                 }
@@ -73,31 +69,18 @@ export const Summary = () => {
                 return `${daysString} @ ${formattedTime} ${timezone}`;
             });
             return <div dangerouslySetInnerHTML={{ __html: formattedSchedule.join('<br/>') }} />;
-
-
         }
-
         return 'No schedule available';
     };
-
-
-
-
     const convertToLocalTime = (timestamp) => {
         const date = new Date(timestamp * 1000);
         const hours = date.getHours();
         const minutes = date.getMinutes();
         const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
         const formattedMinutes = minutes !== 0 ? `:${minutes < 10 ? '0' : ''}${minutes}` : '';
-
         const period = hours < 12 ? 'am' : 'pm';
-
         return `${formattedHours}${formattedMinutes}${period}`;
     };
-
-
-
-
     const handleExit = () => {
         dispatch(resetCoursesSteps)
         navigate('/dashboard')
@@ -136,20 +119,19 @@ export const Summary = () => {
                                     borderBottom={`5px solid ${theme.palette.primary.main}`}
                                     borderRadius={8}
                                     overflow="hidden"
-                                    height={{ xs: '300px', sm: '300px', md: 'auto', lg: 'auto' }}
-                                    sx={{background:"grey"}}
+                                    height="300px"  // Uncomment and modify this line
+                                    sx={{ background: "grey" }}
                                 >
                                     <img
                                         src={courseImage || courseVector}
-                                        alt="image not found"
+                                        alt="not found"
                                         style={{
                                             objectFit: 'cover',
-                                            height: '100%',
+                                            height: '100%',  // Set the height to 100% to cover the Box container
                                             width: '100%',
                                         }}
                                     />
                                 </Box>
-
                                 <Box px={2} display={"flex"} flexDirection={'column'} gap={1}>
                                     <Typography variant="h1" sx={{ fontSize: '18px' }} color={"primary"} pt={1} fontFamily={specialFont}>{title}</Typography>
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }} >
