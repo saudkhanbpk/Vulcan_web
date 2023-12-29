@@ -17,6 +17,8 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { specialFont } from '../../../Infrastructure/Theme/fontFamily'
 import { Loader } from '../../Common/loader'
+import courseVector from '../../../Assets/Images/courseVector.png'
+import profileVector from '../../../Assets/Images/vector.png'
 
 export const Summary = () => {
     const theme = useTheme();
@@ -102,16 +104,15 @@ export const Summary = () => {
                                     borderRadius={8}
                                     overflow="hidden"
                                     height={{ xs: '300px', sm: '300px', md: 'auto', lg: 'auto' }}
-                                // width={{ xs: '300px', sm: '300px', md:'auto', lg: 'auto' }}
+                                    sx={{background:"grey"}}
                                 >
                                     <img
-                                        src={courseImage && courseImage}
+                                        src={courseImage || courseVector}
                                         alt="image not found"
                                         style={{
                                             objectFit: 'cover',
                                             height: '100%',  // Adjust this value if needed
                                             width: '100%',
-
                                         }}
                                     />
                                 </Box>
@@ -120,7 +121,7 @@ export const Summary = () => {
                                     <Typography variant="h1" sx={{ fontSize: '18px' }} color={"primary"} pt={1} fontFamily={specialFont}>{title}</Typography>
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }} >
                                         <img
-                                            src={avatar}
+                                            src={avatar || profileVector}
                                             width={'50px'}
                                             height={'50px'}
                                             alt=""
