@@ -39,6 +39,7 @@ export const ClassSchedule = () => {
     const course_duration = userData?.educator?.courses?.pending?.class_schedule?.duration;
     const [duration, setDuration] = useState(course_duration || null);
     const course_times = userData?.educator?.courses?.pending?.class_schedule?.times;
+    console.log('times',course_times)
     const handleExit = () => {
         saveTimes();
         dispatch(resetCoursesSteps);

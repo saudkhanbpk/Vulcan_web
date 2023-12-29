@@ -36,32 +36,65 @@ export const Summary = () => {
     const courseImage = userData?.educator?.courses?.pending?.details?.course_image
     const description = userData?.educator?.courses?.pending?.details?.description
     const curriculum = userData?.educator?.courses?.pending?.curriculum
-    console.log(userData)
+    const coursetimes = userData?.educator?.courses?.pending?.class_schedule?.times
     const timestampInMilliseconds = first_class && first_class * 1000
-    // Create a Date object
     const date = first_class && new Date(timestampInMilliseconds);
-
-    // Format the date with the desired options
     const weekday = first_class && new Intl.DateTimeFormat('en-US', {
         day: 'numeric',
     }).format(date);
     const month = first_class && new Intl.DateTimeFormat('en-US', {
         month: 'numeric',
     }).format(date);
-    const formatedDate =first_class && new Intl.DateTimeFormat('en-US', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        timeZoneName: 'short'
-    }).format(date);
+    
+    const formatSchedule = () => {
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (coursetimes) {
+            const dayGroups = {};
 
-    console.log("formatedDate", formatedDate)
-    console.log("weekday", weekday)
-    console.log("month", month)
+            Object.entries(coursetimes).forEach(([day, { start, end }]) => {
+                const formattedStart = convertToLocalTime(start);
+                const formattedEnd = convertToLocalTime(end);
+
+                const hasMinutes = formattedStart.includes(':') || formattedEnd.includes(':');
+                const formattedTime = hasMinutes
+                    ? `${formattedStart}-${formattedEnd}`
+                    : `${formattedStart.split(':')[0]}-${formattedEnd.split(':')[0]}`;
+
+                if (!dayGroups[formattedTime]) {
+                    dayGroups[formattedTime] = [];
+                }
+                dayGroups[formattedTime].push(day);
+            });
+            const formattedSchedule = Object.entries(dayGroups).map(([formattedTime, days]) => {
+                const capitalizedDays = days.map(day => day.substring(0, 3).toUpperCase());
+                const daysString = capitalizedDays.join('/');
+                return `${daysString} @ ${formattedTime} ${timezone}`;
+            });
+            return <div dangerouslySetInnerHTML={{ __html: formattedSchedule.join('<br/>') }} />;
+
+
+        }
+
+        return 'No schedule available';
+    };
+
+
+
+
+    const convertToLocalTime = (timestamp) => {
+        const date = new Date(timestamp * 1000);
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+        const formattedMinutes = minutes !== 0 ? `:${minutes < 10 ? '0' : ''}${minutes}` : '';
+
+        const period = hours < 12 ? 'am' : 'pm';
+
+        return `${formattedHours}${formattedMinutes}${period}`;
+    };
+
+
+
 
     const handleExit = () => {
         dispatch(resetCoursesSteps)
@@ -102,14 +135,13 @@ export const Summary = () => {
                                     borderRadius={8}
                                     overflow="hidden"
                                     height={{ xs: '300px', sm: '300px', md: 'auto', lg: 'auto' }}
-                                // width={{ xs: '300px', sm: '300px', md:'auto', lg: 'auto' }}
                                 >
                                     <img
                                         src={courseImage && courseImage}
                                         alt="image not found"
                                         style={{
                                             objectFit: 'cover',
-                                            height: '100%',  // Adjust this value if needed
+                                            height: '100%',
                                             width: '100%',
 
                                         }}
@@ -147,7 +179,10 @@ export const Summary = () => {
                                     </Box>
                                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, }}>
                                         <Typography variant="h6" sx={{ fontWeight: '800', fontSize: '10px', color: theme.palette.primary.main }}>Next Cohort starting on {weekday}/{month} </Typography>
-                                        <Typography variant="h6" sx={{ fontWeight: '700', fontSize: '15px', }}>M/T/Th @ 4pm-5pm PST </Typography>
+                                        <Typography variant="h6" sx={{ fontWeight: '700', fontSize: '15px', }}>
+                                            {formatSchedule()}
+                                        </Typography>
+
                                         <Button variant="contained" color="primary">
                                             Enroll Now
                                         </Button>
@@ -179,7 +214,7 @@ export const Summary = () => {
                                 >
                                     {Object.keys(objectives).map((key) => (
                                         objectives[key] && (
-                                            <Box key={key} display={'flex'} width={{lg:"48%"}} alignItems={"start"}>
+                                            <Box key={key} display={'flex'} width={{ lg: "48%" }} alignItems={"start"}>
                                                 <DoneIcon sx={{ color: theme.palette.primary.main, fontSize: 20, marginRight: 1 }} />
                                                 <Typography
                                                     key={key}
