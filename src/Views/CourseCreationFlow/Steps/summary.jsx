@@ -179,15 +179,13 @@ export const Summary = () => {
                                 >
                                     {Object.keys(objectives).map((key) => (
                                         objectives[key] && (
-                                            <Box key={key} display={'flex'} width={"48%"} alignItems={"start"}>
+                                            <Box key={key} display={'flex'} width={{lg:"48%"}} alignItems={"start"}>
                                                 <DoneIcon sx={{ color: theme.palette.primary.main, fontSize: 20, marginRight: 1 }} />
                                                 <Typography
                                                     key={key}
                                                     variant="body5"
                                                     sx={{
                                                         fontWeight: '400',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
                                                         wordBreak: 'break-word'
                                                     }}
                                                 >
