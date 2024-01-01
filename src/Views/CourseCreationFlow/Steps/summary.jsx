@@ -15,7 +15,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import { specialFont } from '../../../Infrastructure/Theme/fontFamily'
+import { mainFont, specialFont } from '../../../Infrastructure/Theme/fontFamily'
 import { Loader } from '../../Common/loader'
 import courseVector from '../../../Assets/Images/courseVector.png'
 import profileVector from '../../../Assets/Images/vector.png'
@@ -102,6 +102,7 @@ export const Summary = () => {
                 loading ? <Loader /> :
                     <Grid
                         container
+                        position="sticky"
                         display={"flex"}
                         alignItems={"start"}
                         justifyContent={"center"}
@@ -111,15 +112,16 @@ export const Summary = () => {
                         <Grid lg={3} md={10} sm={12} xs={12}
                         >
                             <Box
-                                border={`5px solid ${theme.palette.primary.main}`}
+                                border={`3px solid ${theme.palette.primary.main}`}
                                 borderRadius={10}
-
-                            >
+                                pb={2}
+                                zIndex={1000}              
+                                          >
                                 <Box
                                     borderBottom={`5px solid ${theme.palette.primary.main}`}
                                     borderRadius={8}
                                     overflow="hidden"
-                                    height="300px"  // Uncomment and modify this line
+
                                     sx={{ background: "grey" }}
                                 >
                                     <img
@@ -127,14 +129,14 @@ export const Summary = () => {
                                         alt="not found"
                                         style={{
                                             objectFit: 'cover',
-                                            height: '100%',  // Set the height to 100% to cover the Box container
+                                            maxHeight: '200px',  // Set the height to 100% to cover the Box container
                                             width: '100%',
                                         }}
                                     />
                                 </Box>
-                                <Box px={2} display={"flex"} flexDirection={'column'} gap={1}>
+                                <Box px={2} display="flex" flexDirection="column" gap={3} alignItems="center">
                                     <Typography variant="h1" sx={{ fontSize: '18px' }} color={"primary"} pt={1} fontFamily={specialFont}>{title}</Typography>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }} >
+                                    <Box sx={{ display: 'flex', gap: 1 }} >
                                         <img
                                             src={avatar || profileVector}
                                             width={'50px'}
@@ -144,25 +146,24 @@ export const Summary = () => {
                                         />
                                         <Box>
                                             <Typography sx={{ fontWeight: '700', textTransform: 'capitalize' }}>{firstName}{" "}{lastName}</Typography>
-                                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                            <Box sx={{ display: 'flex', alignItems: 'center', justifyItems: 'start' }}>
                                                 <Rating
                                                     sx={{ fontSize: '1rem' }}
                                                     name="star-rating"
-                                                    value={3.5}
+                                                    value={5}
                                                     precision={0.5}
+                                                    readOnly
                                                 />
 
                                                 <Typography variant="h6" sx={{ fontSize: '8px' }}>
                                                     4.9
                                                 </Typography>
-                                                <Typography variant="h6" sx={{ fontSize: '8px', color: 'blue' }}>
-                                                    (40 ratings)
-                                                </Typography>
+
                                             </Box>
                                         </Box>
                                     </Box>
-                                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, }}>
-                                        <Typography variant="h6" sx={{ fontWeight: '800', fontSize: '10px', color: theme.palette.primary.main }}>Next Cohort starting on {weekday}/{month} </Typography>
+                                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, }}>
+                                        <Typography variant="h6" sx={{ fontWeight: '800', fontSize: '12px', color: theme.palette.primary.main }}>Next Cohort starting on {weekday}/{month} </Typography>
                                         <Typography variant="h6" sx={{ fontWeight: '700', fontSize: '15px', }}>
                                             {formatSchedule()}
                                         </Typography>
@@ -170,7 +171,7 @@ export const Summary = () => {
                                         <Button variant="contained" color="primary">
                                             Enroll Now
                                         </Button>
-                                        <Typography sx={{ color: "blue", fontSize: '12px', display: 'flex', justifyContent: 'center' }} >See More Cohort Schedule</Typography>
+                                        <Typography sx={{ color: "blue", fontSize: '13px', display: 'flex', justifyContent: 'center' }} >See More Cohort Schedule</Typography>
                                     </Box>
                                 </Box>
                             </Box>
@@ -183,10 +184,10 @@ export const Summary = () => {
                                 sx={{
                                     borderRadius: 4,
                                     gap: 1,
-                                    border: `5px solid ${theme.palette.primary.main}`,
+                                    border: `3px solid ${theme.palette.primary.main}`,
                                 }}
                             >
-                                <Typography variant="h6" fontFamily={specialFont} color={'primary'}
+                                <Typography variant="h6" fontFamily={mainFont} color={'primary'}
                                     sx={{ fontWeight: '700', }} pb={3}>
                                     Learning Objectives
                                 </Typography>
@@ -219,7 +220,7 @@ export const Summary = () => {
                                 p={3}
                                 width={"100%"}
                                 sx={{
-                                    border: `5px solid ${theme.palette.primary.main}`,
+                                    border: `3px solid ${theme.palette.primary.main}`,
                                     borderRadius: 4,
                                 }}
                             >
@@ -233,10 +234,12 @@ export const Summary = () => {
                                             aria-controls={`panel${index + 1}-content`}
                                             id={`panel${index + 1}-header`}
                                         >
-                                            <Typography variant="subtitle1">{item.title}</Typography>
+                                            <Typography variant="subtitle1" fontSize={20}>
+                                                {item.title}
+                                            </Typography>
                                         </AccordionSummary>
                                         <AccordionDetails>
-                                            <Typography variant="subtitle2">{item.description}</Typography>
+                                            <Typography variant="subtitle2" fontSize={16}>{item.description}</Typography>
                                         </AccordionDetails>
                                     </Accordion>
                                 ))}
@@ -244,7 +247,7 @@ export const Summary = () => {
                             {prerequisites && <Box
                                 p={3}
                                 width={"100%"}
-                                border={`5px solid ${theme.palette.primary.main}`}
+                                border={`3px solid ${theme.palette.primary.main}`}
                                 borderRadius={4}
                             >
                                 <Typography variant="h6" pb={3} fontFamily={specialFont} color={'primary'} fontWeight='700'>
@@ -263,7 +266,7 @@ export const Summary = () => {
                             {description && <Box
                                 p={3}
                                 width={"100%"}
-                                border={`5px solid ${theme.palette.primary.main}`}
+                                border={`3px solid ${theme.palette.primary.main}`}
                                 borderRadius={4}
                             >
                                 <Typography variant="h6" fontFamily={specialFont} pb={3} color={'primary'} sx={{ fontWeight: '700', }}>Description</Typography>
@@ -272,7 +275,7 @@ export const Summary = () => {
                             {intended_learner && <Box
                                 p={3}
                                 width={"100%"}
-                                border={`5px solid ${theme.palette.primary.main}`}
+                                border={`3px solid ${theme.palette.primary.main}`}
                                 borderRadius={4}
                             >
                                 <Typography variant="h6" fontFamily={specialFont} pb={3} color={'primary'} sx={{ fontWeight: '700', }}>Intended Learner</Typography>
