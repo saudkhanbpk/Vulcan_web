@@ -503,6 +503,7 @@ export const ClassSchedule = () => {
                                                                 onChange={(value) =>
                                                                     handleTimeChange(day, 'start', value)
                                                                 }
+                                                                minutesStep={15}
                                                             />
                                                         </DemoContainer>
                                                     </LocalizationProvider>
