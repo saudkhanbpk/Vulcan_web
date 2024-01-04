@@ -13,7 +13,7 @@ import courseVector from '../../Assets/Images/courseVector.png'
 import profileVector from '../../Assets/Images/vector.png'
 import { Loader } from '../Common/loader';
 
-export const CourseListing = ({ preview = false, live }) => {
+export const CourseDetails = ({ preview = false, live }) => {
     const theme = useTheme();
     const userData = useSelector((state) => state.userData.data)
     const loading = useSelector((state) => state.userData.loading)
@@ -72,27 +72,27 @@ export const CourseListing = ({ preview = false, live }) => {
         const options = { hour12: true, hour: 'numeric', minute: 'numeric', timeZoneName: 'short', timeZone: userTimezone };
         return date.toLocaleString('en-US', options);
     };
-
     return (
         <Box>
             {
                 loading ? <Loader /> :
                     <Grid
                         container
-                        position="sticky"
+                        position="relative"
                         display={"flex"}
                         alignItems={"start"}
-                        justifyContent={"center"}
-                        px={{ xs: 2, sm: 2, md: 10, lg: 10 }}
                         gap={5}
+                        px={{ xs: 2, sm: 2, md: 10, lg: 10 }}
+                        sx={{ justifyContent: { lg: "flex-end", md: "center", } }}
                     >
-                        <Grid lg={3.5} md={10} sm={12} xs={12} sx={{ position: { lg: "sticky" }, top: 0 }}>
+                        <Grid lg={3.5} md={10} sm={12} xs={12} sx={{ position: { lg: "fixed" }, left: { lg: 70 } }} display={"flex"} alignItems={"start"} justifyContent={"center"} zIndex={-20}>
                             <Box
                                 border={`3px solid ${theme.palette.primary.main}`}
                                 borderRadius={10}
                                 pb={2}
                                 zIndex={1000}
                                 sx={{ position: "relative" }}
+                                width={"450px"}
                             >
                                 <Box
                                     borderBottom={`3px solid ${theme.palette.primary.main}`}
@@ -107,6 +107,7 @@ export const CourseListing = ({ preview = false, live }) => {
                                             objectFit: 'cover',
                                             maxHeight: '200px',
                                             width: '100%',
+                                            aspectRatio: "9 / 4"
                                         }}
                                     />
                                 </Box>
@@ -121,7 +122,7 @@ export const CourseListing = ({ preview = false, live }) => {
                                             style={{ border: `1px solid ${theme.palette.primary.main}`, borderRadius: '50%', objectFit: 'cover', }}
                                         />
                                         <Box>
-                                            <Typography sx={{ fontWeight: '700', fontSize: "18px", textTransform: 'capitalize' }}>{firstName}{" "}{lastName}</Typography>
+                                            <Typography sx={{ fontWeight: '700', fontSize: "18px", textTransform: 'capitalize' }}>By {firstName}{" "}{lastName}</Typography>
                                             <Box sx={{ display: 'flex', alignItems: 'center', justifyItems: 'start' }}>
                                                 <Rating
                                                     sx={{ fontSize: '1.2rem' }}

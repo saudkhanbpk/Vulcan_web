@@ -33,7 +33,7 @@ export const Curriculum = () => {
         try {
             const updateCurriculumStep = httpsCallable(functions, "updatecurriculum");
             await updateCurriculumStep(sections);
-            dispatch(resetCoursesSteps);
+            dispatch(resetCoursesSteps());
             navigate('/dashboard');
         } catch (error) {
             ShowErrorToast(error);

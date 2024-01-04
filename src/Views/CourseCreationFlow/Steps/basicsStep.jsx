@@ -28,7 +28,7 @@ export const BasicsStep = () => {
         formik.resetForm()
         navigate('/dashboard')
         dispatch(resetBasicStepValues)
-        dispatch(resetCoursesSteps)
+        dispatch(resetCoursesSteps())
     }
     const handleInc = async () => {
         if (courseSteps < 6) {

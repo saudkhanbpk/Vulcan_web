@@ -36,7 +36,7 @@ export const LearningObjectives = () => {
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const handleExit = () => {
         handleUpdateObjectives()
-        dispatch(resetCoursesSteps)
+        dispatch(resetCoursesSteps())
         formik.resetForm()
         navigate('/dashboard')
     }
