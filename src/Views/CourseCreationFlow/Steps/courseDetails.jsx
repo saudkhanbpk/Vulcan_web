@@ -22,7 +22,7 @@ import { Loader } from '../../Common/loader';
 import { incrementCoursesSteps, decrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice';
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
 import '../styles'
-export const CourseListing = () => {
+export const CourseDetails = () => {
     const minCharacters = 200;
     const maxCharacters = 2000;
     const dispatch = useDispatch();

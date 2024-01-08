@@ -2,10 +2,10 @@ import { Box } from "@mui/material"
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { ShowErrorToast } from "../../Common/Toast/toast";
-import { CourseDetails } from "../../CourseDetails/courseDetails"
 import { StepsHeader } from "../../Common/StepsHeader/stepsHeader"
 import { StepsFooter } from "../../Common/StepsFooter/stepsFooter";
 import { decrementCoursesSteps, resetCoursesSteps } from "../../../Infrastructure/States/coursesStepsSlice";
+import { CourseListing } from "../../CourseListing/courseListing";
 
 export const Summary = () => {
     const approved = false
@@ -33,7 +33,7 @@ export const Summary = () => {
         <>
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={"100px"}></Box>
-            <CourseDetails preview={true} live={false} />
+            <CourseListing live={false} />
             <StepsFooter
                 handleContinueClick={handleSubmit}
                 status={approved}

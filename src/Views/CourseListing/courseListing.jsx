@@ -13,7 +13,7 @@ import courseVector from '../../Assets/Images/courseVector.png'
 import profileVector from '../../Assets/Images/vector.png'
 import { Loader } from '../Common/loader';
 
-export const CourseDetails = ({ preview = false, live }) => {
+export const CourseListing = ({ live }) => {
     const theme = useTheme();
     const userData = useSelector((state) => state.userData.data)
     const loading = useSelector((state) => state.userData.loading)
@@ -81,22 +81,35 @@ export const CourseDetails = ({ preview = false, live }) => {
                         position="relative"
                         display={"flex"}
                         alignItems={"start"}
-                        gap={5}
-                        px={{ xs: 2, sm: 2, md: 10, lg: 10 }}
-                        sx={{ justifyContent: { lg: "flex-end", md: "center", } }}
+                        gap={10}
+                        px={{ xs: 0, sm: 2, md: 10, lg: 10 }}   
+                        sx={{ justifyContent: { lg: "flex-end", md: "center", sm: "center", xs: "center" } }}
                     >
-                        <Grid lg={3.5} md={10} sm={12} xs={12} sx={{ position: { lg: "fixed" }, left: { lg: 70 } }} display={"flex"} alignItems={"start"} justifyContent={"center"} zIndex={-20}>
+                        <Grid
+                            sm={12} xs={12} md={10}
+                            sx={{
+                                position: { lg: "fixed" },
+                                left: { lg: 70 },
+                                width: { xs: 430, sm: 430, md: 430, lg: 430 },
+                                minWidth: 430,
+                                display: "flex",
+                                alignItems: "start",
+                                justifyContent: "center",
+                                zIndex: 0,
+                            }}
+                        >
                             <Box
                                 border={`3px solid ${theme.palette.primary.main}`}
-                                borderRadius={10}
+                                borderRadius={{ lg: 10, md: 10, sm: 10, xs: 4 }}
                                 pb={2}
                                 zIndex={1000}
-                                sx={{ position: "relative" }}
-                                width={"450px"}
+                                sx={{
+                                    position: "relative",
+                                }}
                             >
                                 <Box
                                     borderBottom={`3px solid ${theme.palette.primary.main}`}
-                                    borderRadius={8}
+                                    borderRadius={{ lg: 8, md: 8, sm: 8, xs: 4 }}
                                     overflow="hidden"
                                     sx={{ background: "grey" }}
                                 >
@@ -132,7 +145,7 @@ export const CourseDetails = ({ preview = false, live }) => {
                                                     readOnly
                                                 />
                                                 <Typography variant="h6" sx={{ fontSize: '11px', fontWeight: "bold" }} ml={"3px"} mt={"auto"}>
-                                                    {!preview && 5.00}
+                                                    {live && 5.00}
                                                 </Typography>
                                             </Box>
                                         </Box>
@@ -144,19 +157,24 @@ export const CourseDetails = ({ preview = false, live }) => {
                                                 {formatSchedule()}
                                             </Typography>
                                         </Box>
-
-                                        <Button variant="contained" disabled={preview} color="primary">
+                                        <Button variant="contained" color="primary"
+                                        sx={{
+                                            '&:hover': {
+                                                cursor: live ? 'pointer' : 'not-allowed',
+                                            },
+                                            pointerEvents: live ? 'auto' : 'none',
+                                        }}
+                                        >
                                             Enroll Now
                                         </Button>
                                         <Typography
-                                            disabled={preview}
                                             sx={{
                                                 color: "blue",
                                                 fontSize: '18px',
                                                 display: 'flex',
                                                 justifyContent: 'center',
-                                                cursor: preview ? 'not-allowed' : 'pointer',
-                                                pointerEvents: preview ? 'none' : 'auto'
+                                                cursor: live ? 'pointer' : 'not-allowed',
+                                                pointerEvents: live ? 'auto' : 'none',
                                             }}
                                         >
                                             See More Cohort Schedule
@@ -166,7 +184,7 @@ export const CourseDetails = ({ preview = false, live }) => {
                                 </Box>
                             </Box>
                         </Grid>
-                        <Grid lg={8} md={10} sm={12} xs={12} display={"flex"} flexDirection={"column"} gap={5}>
+                        <Grid lg={6.5} md={10} sm={12} xs={12} display={"flex"} flexDirection={"column"} gap={5} minWidth={430}>
                             {objectives && <Box
                                 p={3}
                                 width={"100%"}
