@@ -24,6 +24,7 @@ import {
   Footer,
   FormBoxEdu,
   Header,
+  LoginButton,
   LogoTypo,
   PreviousButton,
   Span,
@@ -43,11 +44,13 @@ import { useAuthValue } from "../../../../Infrastructure/States/authContext";
 import './style.css'
 import { VerifyEmailStep } from "./verifyEmailStep";
 import ProgressBar from "../../../Common/ProgressBar/progressbar";
+import { chooseModalLogin } from "../../../../Infrastructure/States/authModalsSlice";
 export const CreateAccountStep = () => {
   const auth = getAuth();
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const { user } = useAuthentication();
+  const [isLoading, setIsLoading] = useState(false);
   const { currentUser, setTimeActive } = useAuthValue();
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
@@ -89,6 +92,7 @@ export const CreateAccountStep = () => {
       phoneNumber: Yup.string(),
     }),
     onSubmit: async (values) => {
+      setIsLoading(true)
       try {
         const { email, password, firstName, lastName, phoneNumber } = values;
         await createUserWithEmailAndPassword(auth, email, password).then(() => {
@@ -109,6 +113,8 @@ export const CreateAccountStep = () => {
         setTimeActive(true);
       } catch (error) {
         handleRegistrationError(error);
+      } finally {
+        setIsLoading(false)
       }
     },
   });
@@ -147,6 +153,11 @@ export const CreateAccountStep = () => {
       // console.log(err)
     }
   };
+  const handleLoginButton = () => {
+    // navigate("/")
+    dispatch(chooseModalLogin());
+    formik.resetForm();
+  }
   return (
     <>
       <Header alignItems={"center"}>
@@ -204,16 +215,21 @@ export const CreateAccountStep = () => {
             </Span>
           </Grid>
         </Grid>
-        <ProgressBar componentName={"eduSteps"}/>
+        <ProgressBar componentName={"eduSteps"} />
       </Header>
-      {user && loading ? <Loader /> :
+      {(user && loading) || isLoading ? <Loader /> :
         <Box py={14}>
           {!user ?
-            <TopHeadingBox>
-              <TopHeading variant="" mt={5} ml={1}>
-                Create Account
-              </TopHeading>
-            </TopHeadingBox>
+            <>
+              <TopHeadingBox display={"flex"} justifyContent={"start"} flexDirection={"column"} pl={1}>
+                <TopHeading variant="" my={1}>
+                  Create Account
+                </TopHeading>
+                <LoginButton onClick={handleLoginButton} width={{md:"30%", lg:"20%", xl:"20%"}} color={"primary"}>
+                  Have an account ? Login
+                </LoginButton>
+              </TopHeadingBox>
+            </>
             : ""
           }
           <Box component="form" onSubmit={formik.handleSubmit} noValidate>

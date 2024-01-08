@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import QuestionThree from "./questionThree";
 import {
   decrementSteps,
@@ -28,10 +28,12 @@ import { functions } from "../../../../Infrastructure/config";
 import { ShowErrorToast } from "../../../Common/Toast/toast";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../../../Common/ProgressBar/progressbar";
+import { Loader } from "../../../Common/loader";
+
 export const ExperienceStep = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [isLoading, setIsLoading] = useState(false);
   const steps = useSelector((state) => state.educatorSteps.steps);
   const experienceStep = useSelector(
     (state) => state.educatorSteps.experienceStep
@@ -53,14 +55,17 @@ export const ExperienceStep = () => {
   const handleInc = async () => {
     if (steps >= 1 && steps < 4) {
       try {
+        setIsLoading(true)
         const updateexperiences = httpsCallable(
           functions,
           "updateexperiencestep"
         );
         await updateexperiences(experienceStep);
-        dispatch(incrementSteps());
       } catch (error) {
         ShowErrorToast(error);
+      } finally {
+        setIsLoading(false)
+        dispatch(incrementSteps());
       }
     }
   };
@@ -135,43 +140,45 @@ export const ExperienceStep = () => {
             </Span>
           </Grid>
         </Grid>
-        <ProgressBar componentName={"eduSteps"}/>
+        <ProgressBar componentName={"eduSteps"} />
       </Header>
-      <Box py={10}>
-        <TopHeadingBox>
-          <TopHeading variant="" mt={5} ml={3}>
-            Experience
-          </TopHeading>
-        </TopHeadingBox>
-        <Grid
-          container
-          display={"flex"}
-          justifyContent={"center"}
-        >
-          <Grid lg={4} md={6} sm={10} xs={10}>
-            <Box p={3} sx={{ height: "auto" }}>
-              <Box sx={{ maxWidth: "100%" }} pt={5}>
-                <QuestionTwo />
-              </Box>
-            </Box>
-          </Grid>
-          <Grid lg={4} md={6} sm={10} xs={10}>
-            <Box p={3} sx={{ height: "auto" }}>
-              <Box sx={{ maxWidth: "100%" }} pt={5}>
-                <QuestionOne />
-              </Box>
-            </Box>
-          </Grid>
-          <Grid lg={4} md={6} sm={10} xs={10}>
-            <Box p={3} sx={{ height: "auto" }}>
-              <Box sx={{ maxWidth: "100%" }} pt={5}>
-                <QuestionThree />
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
-
+      {
+        isLoading ? <Loader /> :
+          <Box py={10}>
+            <TopHeadingBox>
+              <TopHeading variant="" mt={5} ml={3}>
+                Experience
+              </TopHeading>
+            </TopHeadingBox>
+            <Grid
+              container
+              display={"flex"}
+              justifyContent={"center"}
+            >
+              <Grid lg={4} md={6} sm={10} xs={10}>
+                <Box p={3} sx={{ height: "auto" }}>
+                  <Box sx={{ maxWidth: "100%" }} pt={5}>
+                    <QuestionTwo />
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid lg={4} md={6} sm={10} xs={10}>
+                <Box p={3} sx={{ height: "auto" }}>
+                  <Box sx={{ maxWidth: "100%" }} pt={5}>
+                    <QuestionOne />
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid lg={4} md={6} sm={10} xs={10}>
+                <Box p={3} sx={{ height: "auto" }}>
+                  <Box sx={{ maxWidth: "100%" }} pt={5}>
+                    <QuestionThree />
+                  </Box>
+                </Box>
+              </Grid>
+            </Grid>
+          </Box>
+      }
       <Footer>
         <Grid container justifyContent={"space-between"} p={2}>
           <Grid>

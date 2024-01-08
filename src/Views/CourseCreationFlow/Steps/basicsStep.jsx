@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from "yup"
 import { httpsCallable } from "firebase/functions";
@@ -12,11 +12,13 @@ import { Box, FormControl, FormControlLabel, Radio, RadioGroup, TextField } from
 import { basicStepControl, resetBasicStepValues, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
 import { useNavigate } from 'react-router-dom';
+import { Loader } from '../../Common/loader';
 
 export const BasicsStep = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const formikRef = useRef(null);
+    const [isLoading, setIsLoading] = useState(false);
     const userData = useSelector((state) => state.userData.data);
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const basicStepState = useSelector((state) => state.courseSteps.basicStepState)
@@ -44,14 +46,19 @@ export const BasicsStep = () => {
         validationSchema: Yup.object().shape({
             courseTitle: Yup.string().required("Course Title Required")
         }),
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
             if (courseSteps >= 1 && courseSteps <= 6) {
                 dispatch(basicStepControl({ courseTitle: values.courseTitle, question: "courseTitle", courseSubTitle: values.courseSubTitle }))
                 try {
-                    handleCategoryStep()
-                    handleInc()
+                    setIsLoading(true)
+                    const updateCategoryStep = httpsCallable(functions, "updatecategorystep");
+                    await updateCategoryStep({ categoryValue: basicStepState?.categoryValue, courseTitle: formik.values.courseTitle, courseSubTitle: formik.values.courseSubTitle });
                 } catch (error) {
                     ShowErrorToast(error)
+                }
+                finally {
+                    setIsLoading(false)
+                    handleInc()
                 }
             }
         },
@@ -93,9 +100,9 @@ export const BasicsStep = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userData, dispatch, categoryValue, courseTitle, courseSubTitle, formik.setValues])
 
-    const handleContinueClick = () => {
+    const handleContinueClick = async () => {
         if (formikRef.current) {
-            formikRef?.current.handleSubmit();
+            await formikRef.current.handleSubmit();
         }
     };
     return (
@@ -103,135 +110,138 @@ export const BasicsStep = () => {
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={"100px"}></Box>
             <form onSubmit={formik.handleSubmit} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <Box px={{ xs: 2, sm: 2, md: 10, lg: 10, xl: 10 }}>
-                    <Box display={"flex"} flexDirection={{ sm: "column", xs: "column", md: "column", lg: "row", xl: "row" }}>
-                        <Box width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }} pr={{ lg: 2 }}>
-                            <QuestionName>
-                                What will be the title of your course?
-                            </QuestionName>
-                            <TextField
-                                name="courseTitle"
-                                label={
-                                    formik.touched.courseTitle && Boolean(formik.errors.courseTitle)
-                                        ? formik.errors.courseTitle
-                                        : "Course Title"
-                                }
-                                error={formik.touched.courseTitle && Boolean(formik.errors.courseTitle)}
-                                variant="outlined"
-                                placeholder="Course Title"
-                                onChange={formik.handleChange}
-                                value={formik.values.courseTitle}
-                                ml={1}
-                                InputLabelProps={{
-                                    style: { fontSize: 16 },
-                                }}
-                                InputProps={{
-                                    style: { fontSize: 18 },
-                                }}
-                                fullWidth
-                            />
+                {
+                    isLoading ? <Loader /> :
+                        <Box px={{ xs: 2, sm: 2, md: 10, lg: 10, xl: 10 }}>
+                            <Box display={"flex"} flexDirection={{ sm: "column", xs: "column", md: "column", lg: "row", xl: "row" }}>
+                                <Box width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }} pr={{ lg: 2 }}>
+                                    <QuestionName>
+                                        What will be the title of your course?
+                                    </QuestionName>
+                                    <TextField
+                                        name="courseTitle"
+                                        label={
+                                            formik.touched.courseTitle && Boolean(formik.errors.courseTitle)
+                                                ? formik.errors.courseTitle
+                                                : "Course Title"
+                                        }
+                                        error={formik.touched.courseTitle && Boolean(formik.errors.courseTitle)}
+                                        variant="outlined"
+                                        placeholder="Course Title"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.courseTitle}
+                                        ml={1}
+                                        InputLabelProps={{
+                                            style: { fontSize: 16 },
+                                        }}
+                                        InputProps={{
+                                            style: { fontSize: 18 },
+                                        }}
+                                        fullWidth
+                                    />
+                                </Box>
+                                <Box width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }}>
+                                    <QuestionName>
+                                        What will be the Subtitle of your course?
+                                    </QuestionName>
+                                    <TextField
+                                        name="courseSubTitle"
+                                        label={
+                                            formik.touched.courseSubTitle && Boolean(formik.errors.courseSubTitle)
+                                                ? formik.errors.courseSubTitle
+                                                : "Course Subtitle (optional)"
+                                        }
+                                        error={formik.touched.courseSubTitle && Boolean(formik.errors.courseSubTitle)}
+                                        variant="outlined"
+                                        placeholder="Course Subtitle"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.courseSubTitle}
+                                        ml={1}
+                                        InputLabelProps={{
+                                            style: { fontSize: 16 },
+                                        }}
+                                        InputProps={{
+                                            style: { fontSize: 18 },
+                                        }}
+                                        fullWidth
+                                    />
+                                </Box>
+                            </Box>
+                            <Box mt={4}>
+                                <QuestionName variant="h6">
+                                    What category does your course best fit in?
+                                </QuestionName>
+                                <Grid container spacing={3}>
+                                    <Grid xs={12} md={6} lg={4} xl={4}>
+                                        <FormControl fullWidth>
+                                            <RadioGroup onChange={handleOptionChange} value={basicStepState.categoryValue}>
+                                                {options.slice(0, 5).map((option, index) => (
+                                                    <FormControlLabel
+                                                        key={option.name}
+                                                        value={option.label}
+                                                        control={<Radio size="medium" />}
+                                                        label={<ChoiceTypo>{option.label}</ChoiceTypo>}
+                                                        sx={{
+                                                            width: "100%",
+                                                            border: "1px solid #1c1d1f",
+                                                            p: 1,
+                                                            m: "3px",
+                                                            height: "76px",
+                                                        }}
+                                                    />
+                                                ))}
+                                            </RadioGroup>
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid xs={12} md={6} lg={4} xl={4}>
+                                        <FormControl fullWidth>
+                                            <RadioGroup onChange={handleOptionChange} value={basicStepState.categoryValue}>
+                                                {options.slice(5, 10).map((option, index) => (
+                                                    <FormControlLabel
+                                                        key={option.name}
+                                                        value={option.label}
+                                                        control={<Radio size="medium" />}
+                                                        label={<ChoiceTypo>{option.label}</ChoiceTypo>}
+                                                        sx={{
+                                                            width: "100%",
+                                                            border: "1px solid #1c1d1f",
+                                                            p: 1,
+                                                            m: "3px",
+                                                            height: "76px",
+                                                        }}
+                                                    />
+                                                ))}
+                                            </RadioGroup>
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid xs={12} md={6} lg={4} xl={4}>
+                                        <FormControl fullWidth>
+                                            <RadioGroup onChange={handleOptionChange} value={basicStepState.categoryValue}>
+                                                {options.slice(10, 15).map((option, index) => (
+                                                    <FormControlLabel
+                                                        key={option.name}
+                                                        value={option.label}
+                                                        control={<Radio size="medium" />}
+                                                        label={<ChoiceTypo>{option.label}</ChoiceTypo>}
+                                                        sx={{
+                                                            width: "100%",
+                                                            border: "1px solid #1c1d1f",
+                                                            p: 1,
+                                                            m: "3px",
+                                                            height: "76px",
+                                                        }}
+                                                    />
+                                                ))}
+                                            </RadioGroup>
+                                        </FormControl>
+                                    </Grid>
+                                </Grid>
+                            </Box>
                         </Box>
-                        <Box width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }}>
-                            <QuestionName>
-                                What will be the Subtitle of your course?
-                            </QuestionName>
-                            <TextField
-                                name="courseSubTitle"
-                                label={
-                                    formik.touched.courseSubTitle && Boolean(formik.errors.courseSubTitle)
-                                        ? formik.errors.courseSubTitle
-                                        : "Course Subtitle (optional)"
-                                }
-                                error={formik.touched.courseSubTitle && Boolean(formik.errors.courseSubTitle)}
-                                variant="outlined"
-                                placeholder="Course Subtitle"
-                                onChange={formik.handleChange}
-                                value={formik.values.courseSubTitle}
-                                ml={1}
-                                InputLabelProps={{
-                                    style: { fontSize: 16 },
-                                }}
-                                InputProps={{
-                                    style: { fontSize: 18 },
-                                }}
-                                fullWidth
-                            />
-                        </Box>
-                    </Box>
-                    <Box mt={4}>
-                        <QuestionName variant="h6">
-                            What category does your course best fit in?
-                        </QuestionName>
-                        <Grid container spacing={3}>
-                            <Grid xs={12} md={6} lg={4} xl={4}>
-                                <FormControl fullWidth>
-                                    <RadioGroup onChange={handleOptionChange} value={basicStepState.categoryValue}>
-                                        {options.slice(0, 5).map((option, index) => (
-                                            <FormControlLabel
-                                                key={option.name}
-                                                value={option.label}
-                                                control={<Radio size="medium" />}
-                                                label={<ChoiceTypo>{option.label}</ChoiceTypo>}
-                                                sx={{
-                                                    width: "100%",
-                                                    border: "1px solid #1c1d1f",
-                                                    p: 1,
-                                                    m: "3px",
-                                                    height: "76px",
-                                                }}
-                                            />
-                                        ))}
-                                    </RadioGroup>
-                                </FormControl>
-                            </Grid>
-                            <Grid xs={12} md={6} lg={4} xl={4}>
-                                <FormControl fullWidth>
-                                    <RadioGroup onChange={handleOptionChange} value={basicStepState.categoryValue}>
-                                        {options.slice(5, 10).map((option, index) => (
-                                            <FormControlLabel
-                                                key={option.name}
-                                                value={option.label}
-                                                control={<Radio size="medium" />}
-                                                label={<ChoiceTypo>{option.label}</ChoiceTypo>}
-                                                sx={{
-                                                    width: "100%",
-                                                    border: "1px solid #1c1d1f",
-                                                    p: 1,
-                                                    m: "3px",
-                                                    height: "76px",
-                                                }}
-                                            />
-                                        ))}
-                                    </RadioGroup>
-                                </FormControl>
-                            </Grid>
-                            <Grid xs={12} md={6} lg={4} xl={4}>
-                                <FormControl fullWidth>
-                                    <RadioGroup onChange={handleOptionChange} value={basicStepState.categoryValue}>
-                                        {options.slice(10, 15).map((option, index) => (
-                                            <FormControlLabel
-                                                key={option.name}
-                                                value={option.label}
-                                                control={<Radio size="medium" />}
-                                                label={<ChoiceTypo>{option.label}</ChoiceTypo>}
-                                                sx={{
-                                                    width: "100%",
-                                                    border: "1px solid #1c1d1f",
-                                                    p: 1,
-                                                    m: "3px",
-                                                    height: "76px",
-                                                }}
-                                            />
-                                        ))}
-                                    </RadioGroup>
-                                </FormControl>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                </Box>
+                }
                 <ErrorBlockSmall sx={{ textAlign: "center" }}>
-                        {formik.errors.courseTitle}
-                    </ErrorBlockSmall>
+                    {formik.errors.courseTitle}
+                </ErrorBlockSmall>
                 <StepsFooter handleContinueClick={handleContinueClick} step1Error={formik.errors.courseTitle} />
                 <Box height={"100px"}></Box>
             </form>

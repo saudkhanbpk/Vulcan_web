@@ -6,11 +6,14 @@ import { StepsHeader } from "../../Common/StepsHeader/stepsHeader"
 import { StepsFooter } from "../../Common/StepsFooter/stepsFooter";
 import { decrementCoursesSteps, resetCoursesSteps } from "../../../Infrastructure/States/coursesStepsSlice";
 import { CourseListing } from "../../CourseListing/courseListing";
+import { Loader } from "../../Common/loader";
+import { useState } from "react";
 
 export const Summary = () => {
     const approved = false
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [isLoading, setIsLoading] = useState(false);
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const handleExit = () => {
         dispatch(resetCoursesSteps())
@@ -26,14 +29,24 @@ export const Summary = () => {
         }
     }
     const handleSubmit = () => {
-        dispatch(resetCoursesSteps())
-        navigate('/dashboard')
+        try {
+            setIsLoading(true)
+            dispatch(resetCoursesSteps())
+            navigate('/dashboard')
+        } catch (err) {
+            //handle Error here
+        } finally {
+            setIsLoading(false)
+        }
     }
     return (
         <>
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={"100px"}></Box>
-            <CourseListing live={false} />
+            {
+                isLoading ? <Loader /> :
+                    <CourseListing live={false} />
+            }
             <StepsFooter
                 handleContinueClick={handleSubmit}
                 status={approved}

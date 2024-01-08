@@ -29,6 +29,7 @@ export const ClassSchedule = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const userData = useSelector((state) => state.userData.data);
     const first_class =
         userData?.educator?.courses?.pending?.class_schedule?.first_class;
@@ -56,96 +57,95 @@ export const ClassSchedule = () => {
     };
     const handleInc = async () => {
         if (courseSteps > 1) {
-            try {
-                setError(null)
+            setError(null)
+            if (
+                duration === null ||
+                parseInt(duration, 10) === 0 ||
+                parseInt(duration, 10) > 26
+            ) {
+                setError('Duration must be a number between 1 and 26 weeks.');
+                return;
+            }
+            if (firstClass === null || firstClass === '') {
+                setError('First class date is required');
+                return;
+            }
+            const isAtLeastOneDaySelected = Object.values(formData).some(
+                (day) => day.checked
+            );
+            if (!isAtLeastOneDaySelected) {
+                setError('Please select at least one day.');
+                return;
+            }
+            const firstClassDay = firstClass.format('dddd').toLowerCase();
+            const selectedDay = Object.keys(formData).find(
+                (day) => formData[day].checked
+            );
+            if (selectedDay && firstClassDay !== selectedDay) {
+                setError('Selected day for times must match the day of the first class.');
+                return;
+            }
+            for (const day in formData) {
                 if (
-                    duration === null ||
-                    parseInt(duration, 10) === 0 ||
-                    parseInt(duration, 10) > 26
+                    formData[day].checked &&
+                    (!formData[day].start || !formData[day].end)
                 ) {
-                    setError('Duration must be a number between 1 and 26 weeks.');
-                    return;
-                }
-                if (firstClass === null || firstClass === '') {
-                    setError('First class date is required');
-                    return;
-                }
-                const isAtLeastOneDaySelected = Object.values(formData).some(
-                    (day) => day.checked
-                );
-                if (!isAtLeastOneDaySelected) {
-                    setError('Please select at least one day.');
-                    return;
-                }
-                const firstClassDay = firstClass.format('dddd').toLowerCase();
-                const selectedDay = Object.keys(formData).find(
-                    (day) => formData[day].checked
-                );
-                if (selectedDay && firstClassDay !== selectedDay) {
-                    setError('Selected day for times must match the day of the first class.');
-                    return;
-                }
-                for (const day in formData) {
-                    if (
-                        formData[day].checked &&
-                        (!formData[day].start || !formData[day].end)
-                    ) {
-                        setError(
-                            `Fill both start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)
-                            }`
-                        );
-                        return;
-                    }
-                    const start = dayjs(formData[day].start);
-                    const end = dayjs(formData[day].end);
-                    if (formData[day].checked && end.isBefore(start)) {
-                        setError(
-                            `End time must be after start time for ${day.charAt(0).toUpperCase() + day.slice(1)
-                            }`
-                        );
-                        return;
-                    }
-                    // Check if the gap between start and end times is greater than 30 minutes
-                    const timeGapHours = end.diff(start, 'hours');
-                    if (formData[day].checked && timeGapHours > 3) {
-                        setError(`Gap between start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)} should not be greater than 3 hours.`);
-                        return;
-                    }
-                    // Check if the gap between start and end times is greater than 30 minutes
-                    const timeGapMinutes = end.diff(start, 'minutes');
-                    if (formData[day].checked && timeGapMinutes < 30) {
-                        setError(`Gap between start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)} should not be less than 30 minutes.`);
-                        return;
-                    }
-
-                }
-                const times = {};
-                const firstClassString = JSON.stringify(firstClass.unix());
-                for (const day in formData) {
-                    if (formData[day].checked) {
-                        const unixStartTimeStamp = Math.floor(new Date(formData[day]?.start).getTime() / 1000);
-                        const unixEndTimeStamp = Math.floor(new Date(formData[day]?.end).getTime() / 1000);
-                        times[day] = {
-                            start: unixStartTimeStamp,
-                            end: unixEndTimeStamp
-                        };
-                    }
-                }
-
-                setError('');
-                try {
-                    const updateClassScheduleStep = httpsCallable(
-                        functions,
-                        'updateclassschedulestep'
+                    setError(
+                        `Fill both start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)
+                        }`
                     );
-                    await updateClassScheduleStep({ firstClassString, duration, times });
-                    setError('');
-                } catch (error) {
-                    setError(`Error: ${error.message}`);
+                    return;
                 }
-                dispatch(incrementCoursesSteps());
+                const start = dayjs(formData[day].start);
+                const end = dayjs(formData[day].end);
+                if (formData[day].checked && end.isBefore(start)) {
+                    setError(
+                        `End time must be after start time for ${day.charAt(0).toUpperCase() + day.slice(1)
+                        }`
+                    );
+                    return;
+                }
+                // Check if the gap between start and end times is greater than 30 minutes
+                const timeGapHours = end.diff(start, 'hours');
+                if (formData[day].checked && timeGapHours > 3) {
+                    setError(`Gap between start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)} should not be greater than 3 hours.`);
+                    return;
+                }
+                // Check if the gap between start and end times is greater than 30 minutes
+                const timeGapMinutes = end.diff(start, 'minutes');
+                if (formData[day].checked && timeGapMinutes < 30) {
+                    setError(`Gap between start and end times for ${day.charAt(0).toUpperCase() + day.slice(1)} should not be less than 30 minutes.`);
+                    return;
+                }
+
+            }
+            const times = {};
+            const firstClassString = JSON.stringify(firstClass.unix());
+            for (const day in formData) {
+                if (formData[day].checked) {
+                    const unixStartTimeStamp = Math.floor(new Date(formData[day]?.start).getTime() / 1000);
+                    const unixEndTimeStamp = Math.floor(new Date(formData[day]?.end).getTime() / 1000);
+                    times[day] = {
+                        start: unixStartTimeStamp,
+                        end: unixEndTimeStamp
+                    };
+                }
+            }
+            setError('');
+            setIsLoading(true)
+            try {
+                const updateClassScheduleStep = httpsCallable(
+                    functions,
+                    'updateclassschedulestep'
+                );
+                await updateClassScheduleStep({ firstClassString, duration, times });
+                setError('');
             } catch (error) {
-                ShowErrorToast(error);
+                setError(`Error: ${error.message}`);
+
+            } finally {
+                setIsLoading(false)
+                dispatch(incrementCoursesSteps());
             }
         }
     };
@@ -292,7 +292,7 @@ export const ClassSchedule = () => {
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={'100px'}></Box>
             <form>
-                {loading ? (
+                {loading || isLoading ? (
                     <Loader />
                 ) : (
                     <Box>
