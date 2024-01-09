@@ -1,21 +1,21 @@
-import React from 'react'
-import { StepsHeader } from '../../Common/StepsHeader/stepsHeader'
-import { useDispatch, useSelector } from 'react-redux'
-import { Box } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2/Grid2'
-import { ContinueButton, Footer, PreviousButton } from '../styles'
-import { decrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice'
-import { ShowErrorToast } from '../../Common/Toast/toast'
-import { useNavigate } from 'react-router-dom'
+import { Box } from "@mui/material"
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { ShowErrorToast } from "../../Common/Toast/toast";
+import { StepsHeader } from "../../Common/StepsHeader/stepsHeader"
+import { StepsFooter } from "../../Common/StepsFooter/stepsFooter";
+import { decrementCoursesSteps, resetCoursesSteps } from "../../../Infrastructure/States/coursesStepsSlice";
+import { CourseListing } from "../../CourseListing/courseListing";
 
 export const Summary = () => {
+    const approved = false
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps)
     const handleExit = () => {
-        dispatch(resetCoursesSteps)
+        dispatch(resetCoursesSteps())
         navigate('/dashboard')
     }
-    const dispatch = useDispatch()
     const handleDec = async () => {
         if (courseSteps > 1) {
             try {
@@ -25,32 +25,21 @@ export const Summary = () => {
             }
         }
     }
+    const handleSubmit = () => {
+        dispatch(resetCoursesSteps())
+        navigate('/dashboard')
+    }
     return (
-        <Box height={"100vh"} >
+        <>
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={"100px"}></Box>
-            Comming Objectives
-            <Footer>
-                <Grid container justifyContent={"space-between"} p={2}>
-                    <Grid>
-                        {courseSteps > 1 ? (
-                            <PreviousButton variant="contained" onClick={handleDec}>
-                                Previous
-                            </PreviousButton>
-                        ) : (
-                            <></>
-                        )}
-                    </Grid>
-                    <Grid>
-                        <Grid>
-                            <ContinueButton variant="contained" onClick={() => navigate('/dashboard')}>
-                                {courseSteps <= 5 ? "Continue" : "Finish"}
-                            </ContinueButton>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Footer>
+            <CourseListing live={false} />
+            <StepsFooter
+                handleContinueClick={handleSubmit}
+                status={approved}
+                handleDec={handleDec}
+            />
             <Box height={"100px"}></Box>
-        </Box>
-    )
+        </>
+    );
 }

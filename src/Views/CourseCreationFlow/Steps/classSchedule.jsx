@@ -41,7 +41,7 @@ export const ClassSchedule = () => {
     const course_times = userData?.educator?.courses?.pending?.class_schedule?.times;
     const handleExit = () => {
         saveTimes();
-        dispatch(resetCoursesSteps);
+        dispatch(resetCoursesSteps());
         navigate('/dashboard');
     };
     const handleDec = async () => {
@@ -503,6 +503,7 @@ export const ClassSchedule = () => {
                                                                 onChange={(value) =>
                                                                     handleTimeChange(day, 'start', value)
                                                                 }
+                                                                minutesStep={15}
                                                             />
                                                         </DemoContainer>
                                                     </LocalizationProvider>

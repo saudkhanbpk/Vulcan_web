@@ -12,7 +12,6 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import ReactQuill from "react-quill";
 import { useFormik } from "formik";
 import { httpsCallable } from "firebase/functions";
@@ -23,7 +22,7 @@ import { Loader } from '../../Common/loader';
 import { incrementCoursesSteps, decrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice';
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
 import '../styles'
-export const CourseListing = () => {
+export const CourseDetails = () => {
     const minCharacters = 200;
     const maxCharacters = 2000;
     const dispatch = useDispatch();
