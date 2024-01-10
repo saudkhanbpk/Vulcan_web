@@ -57,6 +57,8 @@ export const CreateAccountStep = () => {
   const { currentUser, setTimeActive } = useAuthValue();
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
+  const userData = useSelector((state) => state.userData.data);
+  const is_educator = userData?.is_educator
   const steps = useSelector((state) => state.educatorSteps.steps);
   const loading = useSelector((state) => state.userData.loading);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
@@ -112,6 +114,9 @@ export const CreateAccountStep = () => {
           await update(userRef, {
             email_verified: user.emailVerified,
           });
+          if(!is_educator){
+            navigate("/")
+          }
           ShowSuccessToast("User Logged In Successfully.", {
             autoClose: 3000,
             theme: "light",
@@ -139,7 +144,7 @@ export const CreateAccountStep = () => {
         if (isLoginMode) { handleLoginErrors(error) } else { handleRegistrationErrors(error) }
       } finally {
         setIsLoading(false)
-        setIsLoginMode(false)
+        formik.resetForm()
       }
     },
   });
@@ -204,7 +209,7 @@ export const CreateAccountStep = () => {
     setIsLoginMode(!isLoginMode)
     formik.resetForm();
   }
-  console.log(formik.errors)
+  console.log("isEducator", userData?.is_educator)
   return (
     <>
       <Header alignItems={"center"}>
