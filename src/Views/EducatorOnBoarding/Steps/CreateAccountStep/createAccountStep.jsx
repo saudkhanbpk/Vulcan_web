@@ -33,7 +33,7 @@ import {
   TopHeadingBox,
 } from "../../styles";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
 import { ShowErrorToast, ShowSuccessToast } from "../../../Common/Toast/toast";
 import useAuthentication from "../../../../Infrastructure/States/onAuthStateChange";
 import { httpsCallable } from "firebase/functions";
@@ -44,13 +44,16 @@ import { useAuthValue } from "../../../../Infrastructure/States/authContext";
 import './style.css'
 import { VerifyEmailStep } from "./verifyEmailStep";
 import ProgressBar from "../../../Common/ProgressBar/progressbar";
-import { chooseModalLogin } from "../../../../Infrastructure/States/authModalsSlice";
+import { getDatabase, ref, update } from "firebase/database";
+
 export const CreateAccountStep = () => {
   const auth = getAuth();
+  const db = getDatabase();
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const { user } = useAuthentication();
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoginMode, setIsLoginMode] = useState(false);
   const { currentUser, setTimeActive } = useAuthValue();
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
@@ -79,42 +82,64 @@ export const CreateAccountStep = () => {
       phoneNumber: "",
     },
     validationSchema: Yup.object({
-      firstName: Yup.string().required("First Name"),
-      lastName: Yup.string().required("Last Name"),
+      firstName: isLoginMode ? Yup.string() : Yup.string().required("First Name"),
+      lastName: isLoginMode ? Yup.string() : Yup.string().required("Last Name"),
       email: Yup.string().email("Invalid email address").required("Email"),
-      password: Yup.string()
-        .min(6, "Must be 6 characters")
-        .test("special-characters", "Password must contain special characters", (value) => isPasswordValid(value))
-        .required("Password"),
-      reEnterPassword: Yup.string()
+      password: isLoginMode ? Yup.string().min(6, "Must be 6 characters").required("Password")
+        :
+        Yup.string()
+          .min(6, "Must be 6 characters")
+          .test("special-characters", "Password must contain special characters", (value) => isPasswordValid(value))
+          .required("Password"),
+      reEnterPassword: isLoginMode ? Yup.string() : Yup.string()
         .oneOf([Yup.ref("password"), null], "Passwords must match")
         .required("Re Enter Password."),
-      phoneNumber: Yup.string(),
+      phoneNumber: isLoginMode ? Yup.string() : Yup.string(),
     }),
+
     onSubmit: async (values) => {
       setIsLoading(true)
       try {
-        const { email, password, firstName, lastName, phoneNumber } = values;
-        await createUserWithEmailAndPassword(auth, email, password).then(() => {
-          ShowSuccessToast("Account created successfully!");
-        });
-        const requestData = {
-          firstName: firstName,
-          lastName: lastName,
-          number: phoneNumber,
-          isEducator: true,
-        };
-        if (!formik.isValid) {
-          return;
+        if (isLoginMode) {
+          const { email, password } = values;
+          const userCredential = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+          const user = userCredential.user;
+          const userRef = ref(db, `users/${user.uid}`);
+          await update(userRef, {
+            email_verified: user.emailVerified,
+          });
+          ShowSuccessToast("User Logged In Successfully.", {
+            autoClose: 3000,
+            theme: "light",
+          });
+        } else {
+          const { email, password, firstName, lastName, phoneNumber } = values;
+          await createUserWithEmailAndPassword(auth, email, password).then(() => {
+            ShowSuccessToast("Account created successfully!");
+          });
+          const requestData = {
+            firstName: firstName,
+            lastName: lastName,
+            number: phoneNumber,
+            isEducator: true,
+          };
+          if (!formik.isValid) {
+            return;
+          }
+          const createUser = httpsCallable(functions, "createaccount");
+          await createUser(requestData);
+          await sendEmailVerification(auth.currentUser);
+          setTimeActive(true);
         }
-        const createUser = httpsCallable(functions, "createaccount");
-        await createUser(requestData);
-        await sendEmailVerification(auth.currentUser);
-        setTimeActive(true);
       } catch (error) {
-        handleRegistrationError(error);
+        if (isLoginMode) { handleLoginErrors(error) } else { handleRegistrationErrors(error) }
       } finally {
         setIsLoading(false)
+        setIsLoginMode(false)
       }
     },
   });
@@ -124,7 +149,7 @@ export const CreateAccountStep = () => {
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  const handleRegistrationError = (error) => {
+  const handleRegistrationErrors = (error) => {
     if (!error) {
       return;
     }
@@ -144,6 +169,28 @@ export const CreateAccountStep = () => {
     }
     ShowErrorToast(errorMessage);
   };
+  const handleLoginErrors = (error) => {
+    if (!error) {
+      return;
+    }
+    let errorMessage = "Please try again later.";
+    switch (error.code) {
+      case "auth/wrong-password":
+        errorMessage =
+          "Invalid password. Please check your password and try again.";
+        break;
+      case "auth/user-not-found":
+        errorMessage = "User not found! Try another email.";
+        break;
+      case "auth/too-many-requests":
+        errorMessage =
+          error?.error?.message || "Too many requests. Please try again later.";
+        break;
+      default:
+        ShowErrorToast(error);
+    }
+    ShowErrorToast(errorMessage);
+  };
   const handleExit = () => {
     try {
       dispatch(resetExperienceStepValues());
@@ -154,10 +201,10 @@ export const CreateAccountStep = () => {
     }
   };
   const handleLoginButton = () => {
-    // navigate("/")
-    dispatch(chooseModalLogin());
+    setIsLoginMode(!isLoginMode)
     formik.resetForm();
   }
+  console.log(formik.errors)
   return (
     <>
       <Header alignItems={"center"}>
@@ -221,12 +268,13 @@ export const CreateAccountStep = () => {
         <Box py={14}>
           {!user ?
             <>
-              <TopHeadingBox display={"flex"} justifyContent={"start"} flexDirection={"column"} pl={1}>
-                <TopHeading variant="" my={1}>
-                  Create Account
+              <TopHeadingBox display={"flex"} justifyContent={"start"} flexDirection={"column"} pl={1} >
+                <TopHeading variant="" my={1} width={{ md: "30%", lg: "20%", xl: "20%" }}>
+                  {isLoginMode ? "Login" : " Create Account"}
                 </TopHeading>
-                <LoginButton onClick={handleLoginButton} width={{md:"30%", lg:"20%", xl:"20%"}} color={"primary"}>
-                  Have an account ? Login
+                <LoginButton onClick={handleLoginButton} width={{ md: "30%", lg: "20%", xl: "20%" }} color={"primary"}>
+
+                  {isLoginMode ? "New? Create An Account." : "Have an account ? Login"}
                 </LoginButton>
               </TopHeadingBox>
             </>
@@ -243,51 +291,53 @@ export const CreateAccountStep = () => {
                 }}
               >
                 <FormBoxEdu p={4}>
-                  <TextField
-                    name="firstName"
-                    label={
-                      formik.touched.firstName && Boolean(formik.errors.firstName)
-                        ? `${formik.errors.firstName}`
-                        : "First Name"
-                    }
-                    variant="standard"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.firstName}
-                    error={
-                      formik.touched.firstName && Boolean(formik.errors.firstName)
-                    }
-                    InputLabelProps={{
-                      style: { fontSize: 16 },
-                    }}
-                    InputProps={{
-                      style: { fontSize: 18 },
-                    }}
-                    fullWidth
-                  />
-                  <TextField
-                    name="lastName"
-                    sx={{ mt: "6px" }}
-                    label={
-                      formik.touched.lastName && Boolean(formik.errors.lastName)
-                        ? `${formik.errors.lastName}`
-                        : "Last Name"
-                    }
-                    variant="standard"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.lastName}
-                    error={
-                      formik.touched.lastName && Boolean(formik.errors.lastName)
-                    }
-                    InputLabelProps={{
-                      style: { fontSize: 16 },
-                    }}
-                    InputProps={{
-                      style: { fontSize: 18 },
-                    }}
-                    fullWidth
-                  />
+                  {!isLoginMode ? <>
+                    <TextField
+                      name="firstName"
+                      label={
+                        formik.touched.firstName && Boolean(formik.errors.firstName)
+                          ? `${formik.errors.firstName}`
+                          : "First Name"
+                      }
+                      variant="standard"
+                      type="text"
+                      onChange={formik.handleChange}
+                      value={formik.values.firstName}
+                      error={
+                        formik.touched.firstName && Boolean(formik.errors.firstName)
+                      }
+                      InputLabelProps={{
+                        style: { fontSize: 16 },
+                      }}
+                      InputProps={{
+                        style: { fontSize: 18 },
+                      }}
+                      fullWidth
+                    />
+                    <TextField
+                      name="lastName"
+                      sx={{ mt: "6px" }}
+                      label={
+                        formik.touched.lastName && Boolean(formik.errors.lastName)
+                          ? `${formik.errors.lastName}`
+                          : "Last Name"
+                      }
+                      variant="standard"
+                      type="text"
+                      onChange={formik.handleChange}
+                      value={formik.values.lastName}
+                      error={
+                        formik.touched.lastName && Boolean(formik.errors.lastName)
+                      }
+                      InputLabelProps={{
+                        style: { fontSize: 16 },
+                      }}
+                      InputProps={{
+                        style: { fontSize: 18 },
+                      }}
+                      fullWidth
+                    />
+                  </> : ""}
                   <TextField
                     name="email"
                     sx={{ mt: "6px" }}
@@ -310,6 +360,7 @@ export const CreateAccountStep = () => {
                     }}
                     fullWidth
                   />
+                  
                   <TextField
                     name="password"
                     sx={{ mt: "6px" }}
@@ -344,71 +395,75 @@ export const CreateAccountStep = () => {
                     }}
                     fullWidth
                   />
-                  <TextField
-                    name="reEnterPassword"
-                    sx={{ mt: "6px" }}
-                    label={
-                      formik.touched.reEnterPassword &&
+                  {!isLoginMode ? <>
+                    <TextField
+                      name="reEnterPassword"
+                      sx={{ mt: "6px" }}
+                      label={
+                        formik.touched.reEnterPassword &&
+                          formik.values.password !== formik.values.reEnterPassword
+                          ? "Passwords do not match"
+                          : "Re-enter Password"
+                      }
+                      variant="standard"
+                      type={showRePassword ? "password" : "text"}
+                      onChange={formik.handleChange}
+                      value={formik.values.reEnterPassword}
+                      autoComplete="new-Password"
+                      error={
+                        formik.touched.reEnterPassword &&
                         formik.values.password !== formik.values.reEnterPassword
-                        ? "Passwords do not match"
-                        : "Re-enter Password"
-                    }
-                    variant="standard"
-                    type={showRePassword ? "password" : "text"}
-                    onChange={formik.handleChange}
-                    value={formik.values.reEnterPassword}
-                    autoComplete="new-Password"
-                    error={
-                      formik.touched.reEnterPassword &&
-                      formik.values.password !== formik.values.reEnterPassword
-                    }
-                    InputLabelProps={{
-                      style: {
-                        fontSize: 16,
-                      },
-                    }}
-                    InputProps={{
-                      style: { fontSize: 18 },
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton onClick={handleToggleRePasswordVisibility}>
-                            {showRePassword ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                    fullWidth
-                  />
-                  <TextField
-                    name="phoneNumber"
-                    sx={{ mt: "6px" }}
-                    label={
-                      formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
-                        ? `${formik.errors.phoneNumber}`
-                        : "Phone Number (Optional)"
-                    }
-                    variant="standard"
-                    onChange={formik.handleChange}
-                    type="tel"
-                    autoComplete="tel"
-                    value={formik.values.phoneNumber}
-                    error={
-                      formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
-                    }
-                    InputLabelProps={{
-                      style: { fontSize: 16 },
-                    }}
-                    InputProps={{
-                      style: { fontSize: 18 },
-                      inputMode: "numeric",
-                      onKeyPress: (event) => {
-                        if (isNaN(event.key)) {
-                          event.preventDefault();
-                        }
-                      },
-                    }}
-                    fullWidth
-                  />
+                      }
+                      InputLabelProps={{
+                        style: {
+                          fontSize: 16,
+                        },
+                      }}
+                      InputProps={{
+                        style: { fontSize: 18 },
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton onClick={handleToggleRePasswordVisibility}>
+                              {showRePassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                      fullWidth
+                    />
+                    <TextField
+                      name="phoneNumber"
+                      sx={{ mt: "6px" }}
+                      label={
+                        formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
+                          ? `${formik.errors.phoneNumber}`
+                          : "Phone Number (Optional)"
+                      }
+                      variant="standard"
+                      onChange={formik.handleChange}
+                      type="tel"
+                      autoComplete="tel"
+                      value={formik.values.phoneNumber}
+                      error={
+                        formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
+                      }
+                      InputLabelProps={{
+                        style: { fontSize: 16 },
+                      }}
+                      InputProps={{
+                        style: { fontSize: 18 },
+                        inputMode: "numeric",
+                        onKeyPress: (event) => {
+                          if (isNaN(event.key)) {
+                            event.preventDefault();
+                          }
+                        },
+                      }}
+                      fullWidth
+                    />
+                  </>
+                    : ""
+                  }
                 </FormBoxEdu>
               </Box>
             ) : (
