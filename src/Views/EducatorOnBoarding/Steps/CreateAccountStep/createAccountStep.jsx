@@ -44,7 +44,7 @@ import { useAuthValue } from "../../../../Infrastructure/States/authContext";
 import './style.css'
 import { VerifyEmailStep } from "./verifyEmailStep";
 import ProgressBar from "../../../Common/ProgressBar/progressbar";
-import { getDatabase, ref, update } from "firebase/database";
+import { getDatabase, onValue, ref, update } from "firebase/database";
 
 export const CreateAccountStep = () => {
   const auth = getAuth();
@@ -57,8 +57,6 @@ export const CreateAccountStep = () => {
   const { currentUser, setTimeActive } = useAuthValue();
   const [showPassword, setShowPassword] = useState(true);
   const [showRePassword, setShowRePassword] = useState(true);
-  const userData = useSelector((state) => state.userData.data);
-  const is_educator = userData?.is_educator
   const steps = useSelector((state) => state.educatorSteps.steps);
   const loading = useSelector((state) => state.userData.loading);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
@@ -98,7 +96,6 @@ export const CreateAccountStep = () => {
         .required("Re Enter Password."),
       phoneNumber: isLoginMode ? Yup.string() : Yup.string(),
     }),
-
     onSubmit: async (values) => {
       setIsLoading(true)
       try {
@@ -114,13 +111,18 @@ export const CreateAccountStep = () => {
           await update(userRef, {
             email_verified: user.emailVerified,
           });
-          if(!is_educator){
-            navigate("/")
-          }
           ShowSuccessToast("User Logged In Successfully.", {
             autoClose: 3000,
             theme: "light",
           });
+          onValue(
+            userRef,
+            (snapshot) => {
+              const user_data = snapshot.val();
+              if(user_data?.is_educator==false){
+                navigate("/")
+              }
+            })
         } else {
           const { email, password, firstName, lastName, phoneNumber } = values;
           await createUserWithEmailAndPassword(auth, email, password).then(() => {
@@ -209,7 +211,6 @@ export const CreateAccountStep = () => {
     setIsLoginMode(!isLoginMode)
     formik.resetForm();
   }
-  console.log("isEducator", userData?.is_educator)
   return (
     <>
       <Header alignItems={"center"}>
@@ -277,9 +278,9 @@ export const CreateAccountStep = () => {
                 <TopHeading variant="" my={1} width={{ md: "30%", lg: "20%", xl: "20%" }}>
                   {isLoginMode ? "Login" : " Create Account"}
                 </TopHeading>
-                <LoginButton onClick={handleLoginButton} width={{ md: "30%", lg: "20%", xl: "20%" }} color={"primary"}>
-
-                  {isLoginMode ? "New? Create An Account." : "Have an account ? Login"}
+                <LoginButton onClick={handleLoginButton} width={{ md: "30%", lg: "20%", xl: "20%" }} color={"primary"}>                  
+                
+                  {isLoginMode ? "New? Create An Account" : "Have an account ? Login"}                
                 </LoginButton>
               </TopHeadingBox>
             </>
@@ -365,7 +366,7 @@ export const CreateAccountStep = () => {
                     }}
                     fullWidth
                   />
-                  
+
                   <TextField
                     name="password"
                     sx={{ mt: "6px" }}
