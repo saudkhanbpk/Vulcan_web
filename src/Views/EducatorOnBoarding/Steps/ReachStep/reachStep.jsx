@@ -1,5 +1,5 @@
 import { Box, TextField } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import {
   ContinueButton,
@@ -29,10 +29,12 @@ import { functions } from "../../../../Infrastructure/config";
 import { ShowErrorToast } from "../../../Common/Toast/toast";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../../../Common/ProgressBar/progressbar";
+import { Loader } from "../../../Common/loader";
 
 export const ReachStep = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const steps = useSelector((state) => state.educatorSteps.steps);
   const userData = useSelector((state) => state.userData.data);
   const socials = userData?.educator?.questions?.socials
@@ -83,11 +85,14 @@ export const ReachStep = () => {
     onSubmit: async (values) => {
       if (steps >= 1 && steps < 4) {
         try {
+          setIsLoading(true)
           const updateReachStep = httpsCallable(functions, "updatereachstep");
           await updateReachStep(values);
-          dispatch(incrementSteps());
         } catch (error) {
           ShowErrorToast(error);
+        } finally {
+          setIsLoading(false)
+          dispatch(incrementSteps());
         }
       }
     },
@@ -163,172 +168,176 @@ export const ReachStep = () => {
             </Span>
           </Grid>
         </Grid>
-        <ProgressBar componentName={"eduSteps"}/>
+        <ProgressBar componentName={"eduSteps"} />
       </Header>
       <Box my={12}
         height="auto">
         <form onSubmit={formik.handleSubmit}>
-          <TopHeadingBox>
-            <TopHeading>Reach</TopHeading>
-          </TopHeadingBox>
-          <Grid
-            container
-            display={"flex"}
-            justifyContent={"center"}
-            alignItems={"center"}
-          >
-            <Grid lg={6} md={6} sm={10} xs={10}>
-              <Box p={3}>
-                <Box my={1} sx={{ height: { lg: "100px", md: "100px" } }}>
-                  <QuestionName variant="h6">
-                    Have you taught on any teaching platforms? (Udemy, Skillshare,
-                    Wyzant, etc)
-                  </QuestionName>
-                </Box>
-                <QuestionFormBox>
-                  <TextField
-                    name="platformLink1"
-                    label={
-                      formik.touched.platformLink1 && Boolean(formik.errors.platformLink1)
-                        ? formik.errors.platformLink1
-                        : "Link 1"
-                    }
-                    error={formik.touched.platformLink1 && Boolean(formik.errors.platformLink1)}
-                    variant="outlined"
-                    placeholder="Paste your link"
-                    onChange={formik.handleChange}
-                    value={formik.values.platformLink1}
+          {isLoading ? <Loader /> :
+            <>
+              <TopHeadingBox>
+                <TopHeading>Reach</TopHeading>
+              </TopHeadingBox>
+              <Grid
+                container
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+              >
+                <Grid lg={6} md={6} sm={10} xs={10}>
+                  <Box p={3}>
+                    <Box my={1} sx={{ height: { lg: "100px", md: "100px" } }}>
+                      <QuestionName variant="h6">
+                        Have you taught on any teaching platforms? (Udemy, Skillshare,
+                        Wyzant, etc)
+                      </QuestionName>
+                    </Box>
+                    <QuestionFormBox>
+                      <TextField
+                        name="platformLink1"
+                        label={
+                          formik.touched.platformLink1 && Boolean(formik.errors.platformLink1)
+                            ? formik.errors.platformLink1
+                            : "Link 1"
+                        }
+                        error={formik.touched.platformLink1 && Boolean(formik.errors.platformLink1)}
+                        variant="outlined"
+                        placeholder="Paste your link"
+                        onChange={formik.handleChange}
+                        value={formik.values.platformLink1}
 
-                    sx={{ m: "10px" }}
-                    InputLabelProps={{
-                      style: { fontSize: 16 },
-                    }}
-                    InputProps={{
-                      style: { fontSize: 18 },
-                    }}
-                    fullWidth
-                  />
-                  <TextField
-                    name="platformLink2"
-                    label={
-                      formik.touched.platformLink2 && Boolean(formik.errors.platformLink2)
-                        ? formik.errors.platformLink2
-                        : "Link 2"
-                    }
-                    error={formik.touched.platformLink2 && Boolean(formik.errors.platformLink2)}
-                    variant="outlined"
-                    placeholder="Paste your link"
-                    onChange={formik.handleChange}
-                    value={formik.values.platformLink2}
-                    sx={{ m: "10px" }}
-                    InputLabelProps={{
-                      style: { fontSize: 16 },
-                    }}
-                    InputProps={{
-                      style: { fontSize: 18 },
-                    }}
-                    fullWidth
-                  />
-                  <TextField
-                    name="platformLink3"
-                    label={
-                      formik.touched.platformLink3 && Boolean(formik.errors.platformLink3)
-                        ? formik.errors.platformLink3
-                        : "Link 3"
-                    }
-                    error={formik.touched.platformLink3 && Boolean(formik.errors.platformLink3)}
-                    variant="outlined"
-                    placeholder="Paste your link"
-                    onChange={formik.handleChange}
-                    value={formik.values.platformLink3}
-                    sx={{ m: "10px" }}
-                    InputLabelProps={{
-                      style: { fontSize: 16 },
-                    }}
-                    InputProps={{
-                      style: { fontSize: 18 },
-                    }}
-                    fullWidth
-                  />
-                </QuestionFormBox>
-              </Box>
-            </Grid>
-            <Grid lg={6} md={6} sm={10} xs={10}>
-              <Box p={3}>
-                <Box my={1} sx={{ height: { lg: "100px", md: "100px" } }}>
-                  <QuestionName variant="h6">
-                    Do you have any social media where you post educational
-                    content? (Youtube, Tik Tok, Twitter, etc)
-                  </QuestionName>
-                </Box>
-                <QuestionFormBox>
-                  <TextField
-                    name="socialLink1"
-                    label={
-                      formik.touched.socialLink1 && Boolean(formik.errors.socialLink1)
-                        ? formik.errors.socialLink1
-                        : "Link 1"
-                    }
-                    error={formik.touched.socialLink1 && Boolean(formik.errors.socialLink1)}
-                    variant="outlined"
-                    placeholder="Paste your link"
-                    onChange={formik.handleChange}
-                    value={formik.values.socialLink1}
-                    sx={{ m: "10px" }}
-                    InputLabelProps={{
-                      style: { fontSize: 16 },
-                    }}
-                    InputProps={{
-                      style: { fontSize: 18 },
-                    }}
-                    fullWidth
-                  />
-                  <TextField
-                    name="socialLink2"
-                    label={
-                      formik.touched.socialLink2 && Boolean(formik.errors.socialLink2)
-                        ? formik.errors.socialLink2
-                        : "Link 2"
-                    }
-                    error={formik.touched.socialLink2 && Boolean(formik.errors.socialLink2)}
-                    variant="outlined"
-                    placeholder="Paste your link"
-                    onChange={formik.handleChange}
-                    value={formik.values.socialLink2}
-                    sx={{ m: "10px" }}
-                    InputLabelProps={{
-                      style: { fontSize: 16 },
-                    }}
-                    InputProps={{
-                      style: { fontSize: 18 },
-                    }}
-                    fullWidth
-                  />
-                  <TextField
-                    name="socialLink3"
-                    label={
-                      formik.touched.socialLink3 && Boolean(formik.errors.socialLink3)
-                        ? formik.errors.socialLink3
-                        : "Link 3"
-                    }
-                    error={formik.touched.socialLink3 && Boolean(formik.errors.socialLink3)}
-                    variant="outlined"
-                    placeholder="Paste your link"
-                    onChange={formik.handleChange}
-                    value={formik.values.socialLink3}
-                    sx={{ m: "10px" }}
-                    InputLabelProps={{
-                      style: { fontSize: 16 },
-                    }}
-                    InputProps={{
-                      style: { fontSize: 18 },
-                    }}
-                    fullWidth
-                  />
-                </QuestionFormBox>
-              </Box>
-            </Grid>
-          </Grid>
+                        sx={{ m: "10px" }}
+                        InputLabelProps={{
+                          style: { fontSize: 16 },
+                        }}
+                        InputProps={{
+                          style: { fontSize: 18 },
+                        }}
+                        fullWidth
+                      />
+                      <TextField
+                        name="platformLink2"
+                        label={
+                          formik.touched.platformLink2 && Boolean(formik.errors.platformLink2)
+                            ? formik.errors.platformLink2
+                            : "Link 2"
+                        }
+                        error={formik.touched.platformLink2 && Boolean(formik.errors.platformLink2)}
+                        variant="outlined"
+                        placeholder="Paste your link"
+                        onChange={formik.handleChange}
+                        value={formik.values.platformLink2}
+                        sx={{ m: "10px" }}
+                        InputLabelProps={{
+                          style: { fontSize: 16 },
+                        }}
+                        InputProps={{
+                          style: { fontSize: 18 },
+                        }}
+                        fullWidth
+                      />
+                      <TextField
+                        name="platformLink3"
+                        label={
+                          formik.touched.platformLink3 && Boolean(formik.errors.platformLink3)
+                            ? formik.errors.platformLink3
+                            : "Link 3"
+                        }
+                        error={formik.touched.platformLink3 && Boolean(formik.errors.platformLink3)}
+                        variant="outlined"
+                        placeholder="Paste your link"
+                        onChange={formik.handleChange}
+                        value={formik.values.platformLink3}
+                        sx={{ m: "10px" }}
+                        InputLabelProps={{
+                          style: { fontSize: 16 },
+                        }}
+                        InputProps={{
+                          style: { fontSize: 18 },
+                        }}
+                        fullWidth
+                      />
+                    </QuestionFormBox>
+                  </Box>
+                </Grid>
+                <Grid lg={6} md={6} sm={10} xs={10}>
+                  <Box p={3}>
+                    <Box my={1} sx={{ height: { lg: "100px", md: "100px" } }}>
+                      <QuestionName variant="h6">
+                        Do you have any social media where you post educational
+                        content? (Youtube, Tik Tok, Twitter, etc)
+                      </QuestionName>
+                    </Box>
+                    <QuestionFormBox>
+                      <TextField
+                        name="socialLink1"
+                        label={
+                          formik.touched.socialLink1 && Boolean(formik.errors.socialLink1)
+                            ? formik.errors.socialLink1
+                            : "Link 1"
+                        }
+                        error={formik.touched.socialLink1 && Boolean(formik.errors.socialLink1)}
+                        variant="outlined"
+                        placeholder="Paste your link"
+                        onChange={formik.handleChange}
+                        value={formik.values.socialLink1}
+                        sx={{ m: "10px" }}
+                        InputLabelProps={{
+                          style: { fontSize: 16 },
+                        }}
+                        InputProps={{
+                          style: { fontSize: 18 },
+                        }}
+                        fullWidth
+                      />
+                      <TextField
+                        name="socialLink2"
+                        label={
+                          formik.touched.socialLink2 && Boolean(formik.errors.socialLink2)
+                            ? formik.errors.socialLink2
+                            : "Link 2"
+                        }
+                        error={formik.touched.socialLink2 && Boolean(formik.errors.socialLink2)}
+                        variant="outlined"
+                        placeholder="Paste your link"
+                        onChange={formik.handleChange}
+                        value={formik.values.socialLink2}
+                        sx={{ m: "10px" }}
+                        InputLabelProps={{
+                          style: { fontSize: 16 },
+                        }}
+                        InputProps={{
+                          style: { fontSize: 18 },
+                        }}
+                        fullWidth
+                      />
+                      <TextField
+                        name="socialLink3"
+                        label={
+                          formik.touched.socialLink3 && Boolean(formik.errors.socialLink3)
+                            ? formik.errors.socialLink3
+                            : "Link 3"
+                        }
+                        error={formik.touched.socialLink3 && Boolean(formik.errors.socialLink3)}
+                        variant="outlined"
+                        placeholder="Paste your link"
+                        onChange={formik.handleChange}
+                        value={formik.values.socialLink3}
+                        sx={{ m: "10px" }}
+                        InputLabelProps={{
+                          style: { fontSize: 16 },
+                        }}
+                        InputProps={{
+                          style: { fontSize: 18 },
+                        }}
+                        fullWidth
+                      />
+                    </QuestionFormBox>
+                  </Box>
+                </Grid>
+              </Grid>
+            </>
+          }
           <Footer>
             <Grid container justifyContent={"space-between"} p={2}>
               <Grid>

@@ -90,8 +90,9 @@ export const CourseListing = ({ live }) => {
                             sx={{
                                 position: { lg: "fixed" },
                                 left: { lg: 70 },
-                                width: { xs: 430, sm: 430, md: 430, lg: 430 },
-                                minWidth: 430,
+                                width: { xs: 390, sm: 430, md: 430, lg: 430 },
+                                minWidth: 390,
+                                maxWidth: 430,
                                 display: "flex",
                                 alignItems: "start",
                                 justifyContent: "center",

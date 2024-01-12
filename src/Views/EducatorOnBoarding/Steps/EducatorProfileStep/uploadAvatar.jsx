@@ -53,8 +53,8 @@ export const UploadAvatar = ({ onUpload, courseImage }) => {
         >
           <Avatar
             alt="image not found"
-            width={260}
-            height={260}
+            width={200}
+            height={200}
             onCrop={onCrop}
             onClose={onClose}
             exportAsSquare={courseImage ? true : false}

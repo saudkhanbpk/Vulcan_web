@@ -7,7 +7,7 @@ const Error404 = () => {
   return (
     <>
     <ErrorContainer>
-      <ErrorCode variant="h1">404</ErrorCode>
+      <ErrorCode variant="h1" color={'primary'}>404</ErrorCode>
       <ErrorMessage variant="body1">
         Oops! The page you're looking for does not exist.
       </ErrorMessage>

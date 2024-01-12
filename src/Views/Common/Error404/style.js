@@ -11,7 +11,6 @@ export const ErrorContainer = styled(Container)(({ theme }) => ({
   
  export  const ErrorCode = styled(Typography)(({ theme }) => ({
     fontSize: "6rem",
-    color: "#0000FF",
   }));
   
  export  const ErrorMessage = styled(Typography)(({ theme }) => ({

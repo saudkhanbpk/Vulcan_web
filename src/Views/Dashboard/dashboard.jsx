@@ -1,9 +1,12 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const Dashboard = () => {
   const navigate = useNavigate()
+  const userData = useSelector((state) => state.userData.data);
+  const isEducator = userData?.is_educator
   return (
     <Box
       sx={{
@@ -15,8 +18,11 @@ export const Dashboard = () => {
       }}
     >
       <Typography variant="h1" color={"primary"}>Dashboard</Typography>
-      {/* <Typography variant="h5">Create Course</Typography> */}
-      <Button variant="contained" onClick={()=>navigate('/create-course')} sx={{mt:5}}>Create Course</Button>
+      {isEducator ?
+        <Button variant="contained" onClick={() => navigate('/create-course')} sx={{ mt: 5 }}>Create Course</Button>
+        :
+        <Button variant="contained" sx={{ mt: 5 }}>Enroll Course</Button>
+      }
     </Box>
   );
 };

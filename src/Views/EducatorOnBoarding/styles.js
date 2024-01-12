@@ -93,6 +93,17 @@ export const TopHeadingBox = styled(Box)(({ theme }) => ({
   padding: theme.spacing(3),
   [theme.breakpoints.down("sm")]: {},
 }));
+export const LoginButton = styled(Typography)(({ theme }) => ({
+  marginTop: 12,
+  fontWeight: 500,
+  fontSize: "1.3rem",
+  lineHeight: 1.25,
+  letterSpacing: "-.05rem",
+  cursor:"pointer",
+  textDecoration:"underline", 
+  [theme.breakpoints.down("sm")]: {
+  },
+}));
 export const TopHeading = styled(Typography)(({ theme }) => ({
   marginTop: 12,
   fontWeight: 700,
@@ -172,7 +183,7 @@ export const SignUpTextLink = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {},
 }));
 export const CharacterCount = styled("p")(({ theme }) => ({
-  fontsize:"22px",
+  fontsize: "22px",
   textAlign: "end",
   fontWeight: "bold",
 }));
@@ -199,7 +210,7 @@ export const ChoiceTypo = styled(Typography)(({ theme }) => ({
   fontSize: "16px",
 }));
 export const EduBlankTitle = styled(Typography)(({ theme }) => ({
-    fontSize: "28px",
+  fontSize: "28px",
   [theme.breakpoints.down("md")]: {
     fontSize: "24px",
   },
@@ -267,22 +278,22 @@ export const VerifyEmailFormBox = styled(Box)(({ theme }) => ({
 }));
 export const CountText = styled('span')(({ theme }) => ({
   display: "inline-block",
-  width: "40px", 
+  width: "40px",
   textAlign: "left"
 }));
 export const ErrorBlockLarge = styled('h6')(({ theme }) => ({
-  display:"block",
-  color:"red",
-  textAlign:"center",
+  display: "block",
+  color: "red",
+  textAlign: "center",
   [theme.breakpoints.down("sm")]: {
-    display:"none",
+    display: "none",
   },
 }));
 export const ErrorBlockSmall = styled('h6')(({ theme }) => ({
-  display:"none",
-  color:"red",
-  textAlign:"center",
+  display: "none",
+  color: "red",
+  textAlign: "center",
   [theme.breakpoints.down("sm")]: {
-    display:"block",
+    display: "block",
   },
 }));

@@ -11,11 +11,13 @@ import { functions } from '../../../Infrastructure/config';
 import { StepsHeader } from '../../Common/StepsHeader/stepsHeader';
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
 import { decrementCoursesSteps, incrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice';
+import { Loader } from '../../Common/loader';
 
 export const Curriculum = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [showError, setShowError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
     const userData = useSelector((state) => state.userData.data);
     const sectionsData = userData?.educator?.courses?.pending?.curriculum
     const defaultSections = sectionsData?.map(section => ({
@@ -70,9 +72,9 @@ export const Curriculum = () => {
         if (courseSteps > 1) {
             try {
                 const isEmptySection = sections.some(section => !section.title || !section.description);
-    
                 if (!isEmptySection && validSections.length >= 3) {
                     setShowError(false);
+                    setIsLoading(true)
                     const updateCurriculumStep = httpsCallable(functions, "updatecurriculum");
                     await updateCurriculumStep(sections);
                     dispatch(incrementCoursesSteps());
@@ -85,11 +87,13 @@ export const Curriculum = () => {
                 }
             } catch (error) {
                 setShowError("Something went wrong? Try again.");
+            } finally {
+                setIsLoading(false)
             }
         }
     };
-    
-    
+
+
     const handleRemoveSection = (index) => {
         const updatedSections = [...sections];
         updatedSections.splice(index, 1);
@@ -99,6 +103,8 @@ export const Curriculum = () => {
         <Box height={'100vh'}>
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
             <Box height={'100px'}></Box>
+           {
+            isLoading ? <Loader/> :
             <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start' }}>
                 <Box my={2} sx={{ width: { xs: "90%", sm: "90%", md: "80%", lg: "70%", xl: "70%" } }}>
                     {sections?.map((section, index) => (
@@ -157,6 +163,7 @@ export const Curriculum = () => {
                     </Box>
                 }
             </Box>
+           }
             <StepsFooter handleDec={handleDec} handleContinueClick={handleContinueClick} step3Error={showError} />
             <Box height={'100px'}></Box>
         </Box>
