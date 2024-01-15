@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
-import logo from "../../../Assets/Images/Logo.png";
+import logo from "../../../Assets/Images/logo.svg";
 import { useNavigate } from "react-router-dom";
 import {
   styles,
@@ -64,7 +64,7 @@ const Navbar = () => {
         <Toolbar disableGutters>
           <Box sx={styles.logo} onClick={navigateToHome} curser="pointer">
             <Span>
-              <img src={logo} className=" img-fluid logoImage" alt="" />
+              <img src={logo} className=" img-fluid" alt="" />
             </Span>
           </Box>
           <Span>
@@ -83,7 +83,7 @@ const Navbar = () => {
           {/* Small Devices */}
           <Box sx={styles.xsLogoMainBox}>
             <Box sx={styles.xsLogo} onClick={navigateToHome}>
-              <img src={logo} className=" img-fluid logoImage" alt="" />
+              <img src={logo} className=" img-fluid" alt="" />
             </Box>
             <Typography
               variant="h5"
