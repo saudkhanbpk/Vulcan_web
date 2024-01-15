@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../../../../Infrastructure/config";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { RiAccountCircleLine as AccountCircleIcon } from "react-icons/ri";
 
 export const DropdownSmallScreen = ({ handleCloseNavMenu }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);

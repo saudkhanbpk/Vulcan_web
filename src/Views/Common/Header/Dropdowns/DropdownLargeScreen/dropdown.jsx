@@ -1,6 +1,6 @@
 import React from "react";
 import { IconButton, Box } from "@mui/material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { RiAccountCircleLine as AccountCircleIcon } from "react-icons/ri";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../../../../Infrastructure/config";
 import { AuthButton } from "./styles";
