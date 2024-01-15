@@ -22,8 +22,8 @@ const HowItWorks = () => {
       <Grid container alignContent="center" alignItems="center">
         <Grid lg={12} xs={12}>
           <Typography
-            variant="body1"
-            color="black"
+            variant="h1"
+            color={"primary"}
             align="left"
             sx={styles.heading}
           >
