@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import CastForEducationIcon from "@mui/icons-material/CastForEducation";
-import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import { GiTeacher } from "react-icons/gi";
+import { MdLocalLibrary as LocalLibraryIcon} from "react-icons/md";
 import { Divider, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
@@ -10,8 +10,10 @@ import { MyBox, styles } from "./styles";
 import DialogBox from "../../Common/DialogBox/dialogBox";
 import { getAuth } from "firebase/auth";
 import { getDatabase, ref, update } from "firebase/database";
+import { useTheme } from '@mui/material/styles';
 
 const WelcomeBox = ({ userData }) => {
+  const theme = useTheme();
   const auth = getAuth();
   const db = getDatabase();
   const navigate = useNavigate();
@@ -68,9 +70,9 @@ const WelcomeBox = ({ userData }) => {
               sx={styles.subGrid}
             >
               {isClicked ? (
-                <CastForEducationIcon sx={{ fontSize: "3.1875rem !important", color: (theme) => theme.palette.primary.main }} />
+                <GiTeacher size={'3.1875rem'} color={theme.palette.primary.main} />
               ) : (
-                <CastForEducationIcon sx={{ fontSize: "3.1875rem !important" }} />
+                <GiTeacher size={'3.1875rem'} />
               )}
               <Box>
                 <Typography variant="body5">Teach</Typography>
@@ -87,9 +89,9 @@ const WelcomeBox = ({ userData }) => {
               sx={styles.subGrid}
             >
               {isClicked ? (
-                <LocalLibraryIcon sx={{ fontSize: "3.1875rem !important" }} />
+                <LocalLibraryIcon size={'3.1875rem'} />
               ) : (
-                <LocalLibraryIcon sx={{ fontSize: "3.1875rem !important", color: (theme) => theme.palette.primary.main }} />
+                <LocalLibraryIcon size={'3.1875rem'} color={theme.palette.primary.main} />
               )}
               <Box>
                 <Typography variant="body5">Learn</Typography>
