@@ -30,7 +30,6 @@ function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
 export function ImageCropComponent({ setCroppedImage, courseImageUrl, formik, croppedImage }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
     const [imgSrc, setImgSrc] = useState("");
     const previewCanvasRef = useRef(null);
     const imgRef = useRef(null);
@@ -38,6 +37,11 @@ export function ImageCropComponent({ setCroppedImage, courseImageUrl, formik, cr
     const [completedCrop, setCompletedCrop] = useState();
     const aspect = 16 / 9
 
+    const handleClose = () => {
+        const base64String = previewCanvasRef.current?.toDataURL().split(',')[1];
+        setCroppedImage(base64String);
+        setOpen(false)
+    };
     function onSelectFile(e) {
         if (e.target.files && e.target.files.length > 0) {
             setCrop(undefined);
@@ -46,13 +50,6 @@ export function ImageCropComponent({ setCroppedImage, courseImageUrl, formik, cr
                 setImgSrc(reader.result?.toString() || "")
             );
             reader.readAsDataURL(e.target.files[0]);
-            // reader.onload = (event) => {
-            //     const base64String = event.target.result.split(',')[1];
-            //     setCroppedImage(base64String);
-            // };
-            console.log("previewCanvasRef.current :",previewCanvasRef.current)
-            const base64String = previewCanvasRef.current.toDataURL().split(',')[1];
-            setCroppedImage(base64String);
         }
     }
 
@@ -84,9 +81,9 @@ export function ImageCropComponent({ setCroppedImage, courseImageUrl, formik, cr
     );
     useEffect(() => {
         if (croppedImage) {
-          formik.setFieldValue('courseImage', croppedImage);
+            formik.setFieldValue('courseImage', croppedImage);
         }
-      }, [croppedImage]);
+    }, [croppedImage]);
     return (
         <>
 
@@ -130,7 +127,7 @@ export function ImageCropComponent({ setCroppedImage, courseImageUrl, formik, cr
                 </Box>
             </Modal>
             <Box>
-                <Box position="relative" height={242} width={{ xl: 375, sm: 390, md: 400, lg: 430 }}>
+                <Box position="relative" height={200} width={{ xl: 375, sm: 390, md: 400, lg: 430 }}>
                     <Box
                         onClick={handleOpen}
                         sx={{
@@ -149,45 +146,26 @@ export function ImageCropComponent({ setCroppedImage, courseImageUrl, formik, cr
                     </Box>
                     {
                         completedCrop ? <>
-                        {!!completedCrop && (
-                        <Box>
-                            <canvas
-                                ref={previewCanvasRef}
-                                style={{
-                                    border: "1px solid black",
-                                    objectFit: "contain",
-                                    width: { xl: 375, sm: 390, md: 400, lg: 430 },
-                                    height: 242,
-                                }}
-                            />
-                        </Box>
-                    )}
-                        </> : 
-                          <Box height={242} width={{ xl: 375, sm: 390, md: 400, lg: 430 }}>
-                          <img src={courseImageUrl} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                      </Box>
-
+                            {!!completedCrop && (
+                                <Box>
+                                    <canvas
+                                        ref={previewCanvasRef}
+                                        style={{
+                                            border: "1px solid black",
+                                            objectFit: "contain",
+                                            width: { xl: 375, sm: 390, md: 400, lg: 430 },
+                                            height: 200,
+                                        }}
+                                    />
+                                </Box>
+                            )}
+                        </> :
+                            <Box height={200} width={{ xl: 375, sm: 390, md: 400, lg: 430 }}>
+                                <img src={courseImageUrl} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                            </Box>
                     }
-                    {/* <Box height={242} width={{ xl: 375, sm: 390, md: 400, lg: 430 }}>
-                        <img src={courseImage} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                    </Box>
-                    {!!completedCrop && (
-                        <Box>
-                            <canvas
-                                ref={previewCanvasRef}
-                                style={{
-                                    border: "1px solid black",
-                                    objectFit: "contain",
-                                    width: { xl: 375, sm: 390, md: 400, lg: 430 },
-                                    height: 242,
-                                }}
-                            />
-                        </Box>
-                    )} */}
                 </Box>
-
             </Box>
         </>
-
     );
 }

@@ -111,7 +111,6 @@ export const CourseDetails = () => {
             }
         },
     });
-    console.log("croppedImage @:",croppedImage)
     const modules = {
         toolbar: [
             [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -201,7 +200,6 @@ export const CourseDetails = () => {
         setPlainText(text);
         setCharacterCount(text.length);
     }, [htmlData]);
-    console.log("image", croppedImage)
     return (
         <>
             <StepsHeader steps={courseSteps} handleExit={handleExit} />

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import { useTheme } from '@mui/material/styles';
 import DoneIcon from '@mui/icons-material/Done';
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -10,7 +9,6 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import { Box, Rating, Typography, Button } from '@mui/material'
 import { mainFont, specialFont } from '../../Infrastructure/Theme/fontFamily'
 import courseVector from '../../Assets/Images/courseVector.png'
-// import test from '../../Assets/Images/test.jpg'
 import profileVector from '../../Assets/Images/vector.png'
 import { Loader } from '../Common/loader';
 
@@ -73,129 +71,134 @@ export const CourseListing = ({ live }) => {
         const options = { hour12: true, hour: 'numeric', minute: 'numeric', timeZoneName: 'short', timeZone: userTimezone };
         return date.toLocaleString('en-US', options);
     };
-    console.log(courseImage)
     return (
-        <Box>
+        <div>
             {
                 loading ? <Loader /> :
-                    <Grid
-                        container
-                        position="relative"
-                        display={"flex"}
-                        alignItems={"start"}
-                        gap={10}
-                        px={{ xs: 0, sm: 2, md: 10, lg: 10 }}   
-                        sx={{ justifyContent: { lg: "flex-end", md: "center", sm: "center", xs: "center" } }}
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: {
+                                xs: 'column',
+                                sm: 'column',
+                                md: 'row',
+                                lg: 'row',
+                                xl: 'row',
+                            },
+                            alignItems: { xs: "center", sm: "center", md: "center" },
+                            gap: '60px',
+                            position: 'relative',
+                        }}
                     >
-                        <Grid
-                            sm={12} xs={12} md={10}
+                        <Box
                             sx={{
-                                position: { lg: "fixed" },
-                                left: { lg: 70 },
-                                width: { xs: 375, sm: 430, md: 430, lg: 430 },
-                                minWidth: 375,
-                                maxWidth: 430,
-                                display: "flex",
-                                alignItems: "start",
-                                justifyContent: "center",
-                                zIndex: 0,
+                                position: {
+                                    md: 'fixed',
+                                    lg: 'fixed',
+                                    xl: 'fixed',
+                                },
+                                top: { md: '97px', lg: '97px', xl: '97px' },
+                                left: { md: '40px', lg: '40px', xl: '40px' },
+                                border: `3px solid ${theme.palette.primary.main}`,
+                                borderRadius: { xl: 10, lg: 10, md: 10, sm: 10, xs: 4 },
+                                pb: 2,
+                                borderBottom: `3px solid ${theme.palette.primary.main}`,
+                                overflow: 'hidden',
+                                width: { xl: 375, sm: 390, md: 400, lg: 430 },
                             }}
                         >
                             <Box
-                                border={`3px solid ${theme.palette.primary.main}`}
-                                borderRadius={{ lg: 10, md: 10, sm: 10, xs: 4 }}
-                                pb={2}
-                                zIndex={1000}
-                                sx={{
-                                    position: "relative",
-                                }}
+                                borderBottom={`3px solid ${theme.palette.primary.main}`}
+                                borderRadius={{ lg: 8, md: 8, sm: 8, xs: 4 }}
+                                overflow="hidden"
+                                height={200}
+                                width={{ xl: 375, sm: 390, md: 400, lg: 430 }}
+                                sx={{ background: "grey" }}
                             >
-                                <Box
-                                    borderBottom={`3px solid ${theme.palette.primary.main}`}
-                                    borderRadius={{ lg: 8, md: 8, sm: 8, xs: 4 }}
-                                    overflow="hidden"
-                                    sx={{ background: "grey" }}
-                                >
+                                <img
+                                    src={courseImage || courseVector}
+                                    alt="not found"
+                                    style={{
+                                        objectFit: 'cover',
+                                        maxHeight: '100%',
+                                        width: '100%',
+                                        aspectRatio: "16 / 9"
+                                    }}
+                                />
+                            </Box>
+                            <Box px={2} display="flex" flexDirection="column" gap={3} sx={{ wordBreak: "break-word" }}>
+                                <Typography variant="h1" sx={{ fontSize: '18px' }} color={"primary"} mt={2} fontFamily={specialFont}>{title}</Typography>
+                                <Box sx={{ display: 'flex', gap: 1 }} >
                                     <img
-                                        src={courseImage || courseVector}
-                                        // src={test}
-                                        alt="not found"
-                                        style={{
-                                            // objectFit: 'cover',
-                                            maxHeight: '200px',
-                                            width: '100%',
-                                            aspectRatio: "16 / 9"
-                                        }}
+                                        src={avatar || profileVector}
+                                        width={'50px'}
+                                        height={'50px'}
+                                        alt=""
+                                        style={{ border: `1px solid ${theme.palette.primary.main}`, borderRadius: '50%', objectFit: 'cover', }}
                                     />
-                                </Box>
-                                <Box px={2} display="flex" flexDirection="column" gap={3}>
-                                    <Typography variant="h1" sx={{ fontSize: '18px' }} color={"primary"} mt={2} fontFamily={specialFont}>{title}</Typography>
-                                    <Box sx={{ display: 'flex', gap: 1 }} >
-                                        <img
-                                            src={avatar || profileVector}
-                                            width={'50px'}
-                                            height={'50px'}
-                                            alt=""
-                                            style={{ border: `1px solid ${theme.palette.primary.main}`, borderRadius: '50%', objectFit: 'cover', }}
-                                        />
-                                        <Box>
-                                            <Typography sx={{ fontWeight: '700', fontSize: "18px", textTransform: 'capitalize' }}>By {firstName}{" "}{lastName}</Typography>
-                                            <Box sx={{ display: 'flex', alignItems: 'center', justifyItems: 'start' }}>
-                                                <Rating
-                                                    sx={{ fontSize: '1.2rem' }}
-                                                    name="star-rating"
-                                                    value={5}
-                                                    precision={0.5}
-                                                    readOnly
-                                                />
-                                                <Typography variant="h6" sx={{ fontSize: '11px', fontWeight: "bold" }} ml={"3px"} mt={"auto"}>
-                                                    {live && 5.00}
-                                                </Typography>
-                                            </Box>
-                                        </Box>
-                                    </Box>
-                                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, }}>
-                                        <Box>
-                                            <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '18px', color: theme.palette.primary.main }} mb={1}>Next Cohort starting on {weekday}/{month} </Typography>
-                                            <Typography variant="h6" sx={{ fontWeight: '700', fontSize: '18px', }}>
-                                                {formatSchedule()}
+                                    <Box>
+                                        <Typography sx={{ fontWeight: '700', fontSize: "18px", textTransform: 'capitalize' }}>By {firstName}{" "}{lastName}</Typography>
+                                        <Box sx={{ display: 'flex', alignItems: 'center', justifyItems: 'start' }}>
+                                            <Rating
+                                                sx={{ fontSize: '1.2rem' }}
+                                                name="star-rating"
+                                                value={5}
+                                                precision={0.5}
+                                                readOnly
+                                            />
+                                            <Typography variant="h6" sx={{ fontSize: '11px', fontWeight: "bold" }} ml={"3px"} mt={"auto"}>
+                                                {live && 5.00}
                                             </Typography>
                                         </Box>
-                                        <Button variant="contained" color="primary"
+                                    </Box>
+                                </Box>
+                                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, }}>
+                                    <Box>
+                                        <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '18px', color: theme.palette.primary.main }} mb={1}>Next Cohort starting on {weekday}/{month} </Typography>
+                                        <Typography variant="h6" sx={{ fontWeight: '700', fontSize: '18px', }}>
+                                            {formatSchedule()}
+                                        </Typography>
+                                    </Box>
+                                    <Button variant="contained" color="primary"
                                         sx={{
                                             '&:hover': {
                                                 cursor: live ? 'pointer' : 'not-allowed',
                                             },
                                             pointerEvents: live ? 'auto' : 'none',
                                         }}
-                                        >
-                                            Enroll Now
-                                        </Button>
-                                        <Typography
-                                            sx={{
-                                                color: "blue",
-                                                fontSize: '18px',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                                cursor: live ? 'pointer' : 'not-allowed',
-                                                pointerEvents: live ? 'auto' : 'none',
-                                            }}
-                                        >
-                                            See More Cohort Schedule
-                                        </Typography>
+                                    >
+                                        Enroll Now
+                                    </Button>
+                                    <Typography
+                                        sx={{
+                                            color: "blue",
+                                            fontSize: '18px',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            cursor: live ? 'pointer' : 'not-allowed',
+                                            pointerEvents: live ? 'auto' : 'none',
+                                        }}
+                                    >
+                                        See More Cohort Schedule
+                                    </Typography>
 
-                                    </Box>
                                 </Box>
                             </Box>
-                        </Grid>
-                        <Grid lg={6.5} md={10} sm={12} xs={12} display={"flex"} flexDirection={"column"} gap={5} minWidth={430}>
+                        </Box>
+                        <Box sx={{
+                            marginLeft: { xs: 0, sm: 0, md: '500px' },
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: { xs: '30px', sm: '30px', md: '30px' },
+                            pr: { md: 6, lg: 6, xl: 6 },
+                            px:{xs: 2, sm: 2,}
+                        }}>
                             {objectives && <Box
                                 p={3}
                                 width={"100%"}
                                 sx={{
-                                    borderRadius: 4,
-                                    gap: 1,
                                     border: `3px solid ${theme.palette.primary.main}`,
+                                    borderRadius: 4,
                                 }}
                             >
                                 <Typography variant="h6" fontFamily={mainFont} color={'primary'}
@@ -240,7 +243,7 @@ export const CourseListing = ({ live }) => {
                                     Curriculum
                                 </Typography>
                                 {curriculum.map((item, index) => (
-                                    <Accordion key={index}>
+                                    <Accordion key={index} sx={{ wordBreak: "break-word" }}>
                                         <AccordionSummary
                                             expandIcon={<ExpandMoreIcon />}
                                             aria-controls={`panel${index + 1}-content`}
@@ -261,6 +264,7 @@ export const CourseListing = ({ live }) => {
                                 width={"100%"}
                                 border={`3px solid ${theme.palette.primary.main}`}
                                 borderRadius={4}
+                                sx={{ wordBreak: "break-word" }}
                             >
                                 <Typography variant="h6" pb={3} color={'primary'} fontWeight='700'>
                                     Requirements
@@ -278,6 +282,7 @@ export const CourseListing = ({ live }) => {
                                 width={"100%"}
                                 border={`3px solid ${theme.palette.primary.main}`}
                                 borderRadius={4}
+                                sx={{ wordBreak: "break-word" }}
                             >
                                 <Typography variant="h6" pb={3} color={'primary'} sx={{ fontWeight: '700', }}>Description</Typography>
                                 <Box fontSize='18px' dangerouslySetInnerHTML={{ __html: description }} />
@@ -287,14 +292,15 @@ export const CourseListing = ({ live }) => {
                                 width={"100%"}
                                 border={`3px solid ${theme.palette.primary.main}`}
                                 borderRadius={4}
+                                sx={{ wordBreak: "break-word" }}
                             >
                                 <Typography variant="h6" pb={3} color={'primary'} sx={{ fontWeight: '700', fontSize: "18px" }}>Intended Learner</Typography>
                                 <p style={{ fontSize: "18px" }}>{intended_learner}</p>
                             </Box>}
-                        </Grid>
-                    </Grid>
+                        </Box>
+                    </Box>
             }
 
-        </Box>
+        </div >
     )
 }

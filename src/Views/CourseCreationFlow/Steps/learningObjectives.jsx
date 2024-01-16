@@ -83,7 +83,8 @@ export const LearningObjectives = () => {
                     if (objectivesCount >= 2) {
                         // At least two objectives have data, proceed with form submission
                         setIsLoading(true)
-                        await handleUpdateObjectives();
+                        const updateCourseObjectives = httpsCallable(functions, "updatecourseobjectives")
+                        await updateCourseObjectives(formik.values)
                         setError("")
                     } else {
                         // Less than two objectives have data, show an alert or handle it accordingly

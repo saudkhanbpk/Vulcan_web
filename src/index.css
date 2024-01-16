@@ -55,3 +55,19 @@ height: 150px !important;
 .nav-link:hover, .nav-link:focus{
   color: black !important
 }
+.sidedivv{
+  width: 400px !important;
+  border: 1px solid red;
+  position: fixed;
+  top: 80px;
+  left: 40px;
+}
+.maindiv{
+  position: relative;
+}
+.rightdiv{
+  margin-left: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
