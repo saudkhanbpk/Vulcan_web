@@ -356,6 +356,7 @@ export const ClassSchedule = () => {
                                                 label='Date of first class'
                                                 value={firstClass}
                                                 onChange={(newValue) => setFirstClass(newValue)}
+                                                disablePast
                                                 fullWidth
                                             />
                                         </LocalizationProvider>

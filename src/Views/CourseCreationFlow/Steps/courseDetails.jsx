@@ -6,7 +6,7 @@ import {
     ErrorBlockSmall,
 } from '../styles'
 import { ShowErrorToast } from '../../Common/Toast/toast'
-import { Box, Stack, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import "react-quill/dist/quill.snow.css";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import React, { useEffect, useState } from "react";
@@ -16,24 +16,31 @@ import ReactQuill from "react-quill";
 import { useFormik } from "formik";
 import { httpsCallable } from "firebase/functions";
 import * as Yup from "yup";
-import { UploadAvatar } from '../../EducatorOnBoarding/Steps/EducatorProfileStep/uploadAvatar';
+// import { UploadAvatar } from '../../EducatorOnBoarding/Steps/EducatorProfileStep/uploadAvatar';
 import { functions } from '../../../Infrastructure/config';
 import { Loader } from '../../Common/loader';
 import { incrementCoursesSteps, decrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice';
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
+// import courseImageVector from "../../../Assets/Images/courseVector.png";
 import '../styles'
+// import EditIcon from "@mui/icons-material/Edit";
+import { ImageCropComponent } from '../../Common/ImageCropComponent/ImageCropComponent';
+
 export const CourseDetails = () => {
     const minCharacters = 200;
     const maxCharacters = 2000;
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    // const [error, setError] = useState(null);
     const [loaderValue, setLoaderValue] = useState(false);
+    // const [imageString, setImageString] = useState('');
     const userData = useSelector((state) => state.userData.data);
     const loading = useSelector((state) => state.userData.loading);
     const courseDetails = userData?.educator?.courses?.pending?.details
-    const courseImage = courseDetails?.course_image;
+    const courseImageUrl = courseDetails?.course_image;
     const description = courseDetails?.description
     const promoLink = courseDetails?.promo_link;
+    const [croppedImage, setCroppedImage] = useState("");
     const [characterCount, setCharacterCount] = useState(0);
     const [htmlData, setHtmlData] = useState(description || "");
     // eslint-disable-next-line no-unused-vars
@@ -60,8 +67,8 @@ export const CourseDetails = () => {
     }
     const formik = useFormik({
         initialValues: {
-            courseImage: "",
             description: "",
+            courseImage: croppedImage || "",
             promoLink: ensureHttpsProtocol(promoLink) || "",
         },
         validationSchema: Yup.object().shape({
@@ -70,8 +77,9 @@ export const CourseDetails = () => {
             ),
         }),
         onSubmit: async (values) => {
+            setErrorMessage('')
             let newDisplayMessage = "";
-            if (!values.courseImage && !courseImage) {
+            if (!courseImageUrl && (!values.courseImage && !croppedImage)) {
                 newDisplayMessage = "Must upload profile picture";
                 setErrorMessage(newDisplayMessage);
             } else if (
@@ -103,6 +111,7 @@ export const CourseDetails = () => {
             }
         },
     });
+    console.log("croppedImage @:",croppedImage)
     const modules = {
         toolbar: [
             [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -148,9 +157,6 @@ export const CourseDetails = () => {
     const handleContinueClick = async () => {
         formik.handleSubmit()
     };
-    const handleCourseImageUpload = (imageDataURL) => {
-        formik.setFieldValue("courseImage", imageDataURL);
-    };
     function countCharactersWithoutTags(html) {
         const textWithoutTags = html.replace(/(<([^>]+)>)/gi, "");
         return textWithoutTags.length;
@@ -184,13 +190,18 @@ export const CourseDetails = () => {
         setCharacterCount(formik.values.description.length);
     }, [formik.values.description]);
     useEffect(() => {
+        if (croppedImage) {
+            formik.setFieldValue('courseImage', croppedImage)
+        }
+    }, [croppedImage]);
+    useEffect(() => {
         const tempDiv = document.createElement("div");
         tempDiv.innerHTML = htmlData;
         const text = tempDiv.textContent || tempDiv.innerText;
         setPlainText(text);
         setCharacterCount(text.length);
     }, [htmlData]);
-
+    console.log("image", croppedImage)
     return (
         <>
             <StepsHeader steps={courseSteps} handleExit={handleExit} />
@@ -263,12 +274,7 @@ export const CourseDetails = () => {
                             order={{ lg: 2, md: 1, sm: 1, xs: 1 }}
                         >
                             <Box maxWidth={{ md: "70%", lg: "100%", xlg: "100%" }} display={"flex"} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} >
-                                <Stack direction="row" spacing={2} mb={4}>
-                                    <Box position="relative">
-                                        <UploadAvatar onUpload={handleCourseImageUpload} courseImage={true} />
-                                    </Box>
-
-                                </Stack>
+                                <ImageCropComponent setCroppedImage={setCroppedImage} courseImageUrl={courseImageUrl} formik={formik} croppedImage={croppedImage}/>
                                 <TextField
                                     name="promoLink"
                                     sx={{ mt: "30px" }}

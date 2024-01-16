@@ -10,6 +10,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import { Box, Rating, Typography, Button } from '@mui/material'
 import { mainFont, specialFont } from '../../Infrastructure/Theme/fontFamily'
 import courseVector from '../../Assets/Images/courseVector.png'
+// import test from '../../Assets/Images/test.jpg'
 import profileVector from '../../Assets/Images/vector.png'
 import { Loader } from '../Common/loader';
 
@@ -72,6 +73,7 @@ export const CourseListing = ({ live }) => {
         const options = { hour12: true, hour: 'numeric', minute: 'numeric', timeZoneName: 'short', timeZone: userTimezone };
         return date.toLocaleString('en-US', options);
     };
+    console.log(courseImage)
     return (
         <Box>
             {
@@ -90,8 +92,8 @@ export const CourseListing = ({ live }) => {
                             sx={{
                                 position: { lg: "fixed" },
                                 left: { lg: 70 },
-                                width: { xs: 390, sm: 430, md: 430, lg: 430 },
-                                minWidth: 390,
+                                width: { xs: 375, sm: 430, md: 430, lg: 430 },
+                                minWidth: 375,
                                 maxWidth: 430,
                                 display: "flex",
                                 alignItems: "start",
@@ -116,12 +118,13 @@ export const CourseListing = ({ live }) => {
                                 >
                                     <img
                                         src={courseImage || courseVector}
+                                        // src={test}
                                         alt="not found"
                                         style={{
-                                            objectFit: 'cover',
+                                            // objectFit: 'cover',
                                             maxHeight: '200px',
                                             width: '100%',
-                                            aspectRatio: "9 / 4"
+                                            aspectRatio: "16 / 9"
                                         }}
                                     />
                                 </Box>

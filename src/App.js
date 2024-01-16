@@ -15,6 +15,7 @@ function App() {
           <Router />
         </AuthProvider>
       </BrowserRouter>
+      {/* <ImageCropComponent/> */}
     </>
   );
 }
