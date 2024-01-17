@@ -119,7 +119,6 @@ export const Curriculum = () => {
                                     variant="outlined"
                                     onChange={(event) => handleTitleChange(index, event)}
                                     value={section?.title}
-                                    // value={(userData?.educator?.courses?.pending?.questions?.curriculum && sectionsData[index]?.title) || section.title}
                                     InputLabelProps={{
                                         style: { fontSize: 14 },
                                     }}
@@ -137,7 +136,6 @@ export const Curriculum = () => {
                                     variant="outlined"
                                     onChange={(event) => handleDescriptionChange(index, event)}
                                     value={section?.description}
-                                    // value={(userData?.educator?.courses?.pending?.questions?.curriculum && sectionsData[index]?.description) || section.description}
                                     InputLabelProps={{
                                         style: { fontSize: 14 },
                                     }}

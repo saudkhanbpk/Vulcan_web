@@ -39,8 +39,8 @@ export function ImageCropComponent({ setCroppedImage, courseImageUrl, formik, cr
     const aspect = 16 / 9
 
     const handleClose = () => {
-        const base64String = previewCanvasRef.current?.toDataURL().split(',')[1];
-        setCroppedImage(base64String);
+        // const base64String = previewCanvasRef.current?.toDataURL().split(',')[1];
+        // setCroppedImage(base64String);
         setOpen(false)
     };
     function onSelectFile(e) {
@@ -86,6 +86,7 @@ export function ImageCropComponent({ setCroppedImage, courseImageUrl, formik, cr
         }
         // eslint-disable-next-line
     }, [croppedImage]);
+    console.log("image component !!!")
     return (
         <>
 
