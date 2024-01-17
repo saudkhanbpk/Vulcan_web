@@ -10,6 +10,7 @@ export const styles = {
     display: { xs: "none", md: "flex" },
     mr: 0,
     mb: 0,
+    width: "70px",
     curser: "pointer",
   },
   logoTypo: {
@@ -42,6 +43,7 @@ export const styles = {
     display: { xs: "flex", md: "none" },
     alignItems: { xs: "center", md: "none" },
     mr: 1,
+    width: "70px",
   },
   xsLogoName: {
     mr: { xs: 0, md: 2, lg: 2, sm: 0 },

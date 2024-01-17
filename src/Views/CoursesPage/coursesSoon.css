@@ -1,14 +1,3 @@
-.courses-bg-img {
-  background-image: url("../../Assets/Images/coursesBgImage.png");
-  height: 832px;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
 
 .coming-soon {
   margin-right: 40px;
@@ -54,17 +43,6 @@
     background: white;
     height: 832px;
     width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  .courses-bg-img2 {
-    background-image: url("../../Assets/Images/coursesBgImage.png");
-    height: 400px;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
     display: flex;
     justify-content: flex-end;
     align-items: center;

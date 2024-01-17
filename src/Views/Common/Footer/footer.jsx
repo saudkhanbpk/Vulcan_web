@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import footerlogo from "../../../Assets/Images/footerlogo.png";
+import footerlogo from "../../../Assets/Images/logoWhite.svg";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import {
   Typography,
@@ -208,7 +208,7 @@ const Footer = () => {
           <Grid xs={12} sm={12} md={12} lg={6} sx={{ mb: { xs: 2, sm: 2 } }}>
             <Box sx={styles.subGrid1Box}>
               <Box sx={{ cursor: "pointer" }} onClick={() => navigate("/")}>
-                <img src={footerlogo} alt="" />
+                <img src={footerlogo} height="50px" alt="" />
               </Box>
 
               <Typography

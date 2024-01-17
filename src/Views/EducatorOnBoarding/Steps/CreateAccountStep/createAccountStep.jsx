@@ -119,7 +119,7 @@ export const CreateAccountStep = () => {
             userRef,
             (snapshot) => {
               const user_data = snapshot.val();
-              if(user_data?.is_educator==false){
+              if(user_data?.is_educator === false){
                 navigate("/")
               }
             })

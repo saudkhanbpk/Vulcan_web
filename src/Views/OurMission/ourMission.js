@@ -44,7 +44,7 @@ const OurMission = () => {
       </BannerContainer>
 
       <Box m={6}>
-        <Typography align="center">
+        <Typography align="center" variant="h1" color="primary">
           Bringing Education into the 21st century
         </Typography>
       </Box>
