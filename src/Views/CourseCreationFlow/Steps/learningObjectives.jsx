@@ -17,7 +17,7 @@ export const LearningObjectives = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const formikRef = useRef(null)
-    const [error, setError] = useState(false)
+    const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(false);
     const userData = useSelector((state) => state.userData.data);
     const intendedLearner = userData?.educator?.courses?.pending?.intended_learner?.description
@@ -73,23 +73,15 @@ export const LearningObjectives = () => {
         },
         validationSchema: Yup.object().shape({
             intendedLearner: Yup.string().required("Intended Learner Required"),
+            objective1: Yup.string().required("Objective 1 is Required"),
+            objective2: Yup.string().required("Objective 2 is Required"),
+            prerequisite1: Yup.string().required("Prerequisite 1 is Required"),
         }),
         onSubmit: async () => {
             if (courseSteps >= 1 && courseSteps <= 6) {
                 try {
-                    // Check if at least two objectives have data
-                    const objectivesCount = [formik.values.objective1, formik.values.objective2, formik.values.objective3, formik.values.objective4, formik.values.objective5]
-                        .filter(Boolean).length;
-                    if (objectivesCount >= 2) {
-                        // At least two objectives have data, proceed with form submission
-                        setIsLoading(true)
-                        const updateCourseObjectives = httpsCallable(functions, "updatecourseobjectives")
-                        await updateCourseObjectives(formik.values)
-                        setError("")
-                    } else {
-                        // Less than two objectives have data, show an alert or handle it accordingly
-                        setError("Please fill at least two objectives")
-                    }
+                    const updateCourseObjectives = httpsCallable(functions, "updatecourseobjectives")
+                    await updateCourseObjectives(formik.values)
                 } catch (error) {
                     setError(error.message)
                 } finally {

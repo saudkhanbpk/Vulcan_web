@@ -9,5 +9,6 @@ export function useDebounceEffect(fn, waitTime, deps) {
     return () => {
       clearTimeout(t);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }

@@ -38,7 +38,7 @@ export const ClassSchedule = () => {
     const courseSteps = useSelector((state) => state.courseSteps.courseSteps);
     const loading = useSelector((state) => state.userData.loading);
     const course_duration = userData?.educator?.courses?.pending?.class_schedule?.duration;
-    const [duration, setDuration] = useState(course_duration || null);
+    const [duration, setDuration] = useState(course_duration || '');
     const course_times = userData?.educator?.courses?.pending?.class_schedule?.times;
     const handleExit = () => {
         saveTimes();
@@ -59,7 +59,7 @@ export const ClassSchedule = () => {
         if (courseSteps > 1) {
             setError(null)
             if (
-                duration === null ||
+                duration === null || duration === '' ||
                 parseInt(duration, 10) === 0 ||
                 parseInt(duration, 10) > 26
             ) {
@@ -150,13 +150,13 @@ export const ClassSchedule = () => {
         }
     };
     const [formData, setFormData] = useState({
-        monday: { start: null, end: null, checked: false },
-        tuesday: { start: null, end: null, checked: false },
-        wednesday: { start: null, end: null, checked: false },
-        thursday: { start: null, end: null, checked: false },
-        friday: { start: null, end: null, checked: false },
-        saturday: { start: null, end: null, checked: false },
-        sunday: { start: null, end: null, checked: false },
+        monday: { start: '', end: '', checked: false },
+        tuesday: { start: '', end: '', checked: false },
+        wednesday: { start: '', end: '', checked: false },
+        thursday: { start: '', end: '', checked: false },
+        friday: { start: '', end: '', checked: false },
+        saturday: { start: '', end: '', checked: false },
+        sunday: { start: '', end: '', checked: false },
     });
     const handleCheckboxChange = (day) => {
         setFormData({
@@ -168,7 +168,7 @@ export const ClassSchedule = () => {
         });
     }
     const handleTimeChange = (day, field, value) => {
-        const formattedValue = value.format("YYYY-MM-DDTHH:mm");
+        const formattedValue = value?.format("YYYY-MM-DDTHH:mm");
         setFormData((prevFormData) => ({
             ...prevFormData,
             [day]: {
@@ -270,7 +270,7 @@ export const ClassSchedule = () => {
         }
     };
     useEffect(() => {
-        first_class && setFirstClass(dayjs(firstClass) || null);
+        first_class && setFirstClass(dayjs(firstClass) || '');
         // Check if course_times exists and is an object
         if (course_times && typeof course_times === 'object') {
             const updatedFormData = { ...formData };
@@ -373,7 +373,6 @@ export const ClassSchedule = () => {
                                             variant='outlined'
                                             onChange={handleDurationChange}
                                             value={duration}
-                                            error={duration === ''}
                                             InputProps={{
                                                 onKeyPress: (event) => {
                                                     if (

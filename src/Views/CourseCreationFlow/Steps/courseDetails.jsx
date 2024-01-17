@@ -16,14 +16,11 @@ import ReactQuill from "react-quill";
 import { useFormik } from "formik";
 import { httpsCallable } from "firebase/functions";
 import * as Yup from "yup";
-// import { UploadAvatar } from '../../EducatorOnBoarding/Steps/EducatorProfileStep/uploadAvatar';
 import { functions } from '../../../Infrastructure/config';
 import { Loader } from '../../Common/loader';
 import { incrementCoursesSteps, decrementCoursesSteps, resetCoursesSteps } from '../../../Infrastructure/States/coursesStepsSlice';
 import { StepsFooter } from '../../Common/StepsFooter/stepsFooter';
-// import courseImageVector from "../../../Assets/Images/courseVector.png";
 import '../styles'
-// import EditIcon from "@mui/icons-material/Edit";
 import { ImageCropComponent } from '../../Common/ImageCropComponent/ImageCropComponent';
 
 export const CourseDetails = () => {
@@ -31,9 +28,7 @@ export const CourseDetails = () => {
     const maxCharacters = 2000;
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const [error, setError] = useState(null);
     const [loaderValue, setLoaderValue] = useState(false);
-    // const [imageString, setImageString] = useState('');
     const userData = useSelector((state) => state.userData.data);
     const loading = useSelector((state) => state.userData.loading);
     const courseDetails = userData?.educator?.courses?.pending?.details
@@ -192,7 +187,7 @@ export const CourseDetails = () => {
         if (croppedImage) {
             formik.setFieldValue('courseImage', croppedImage)
         }
-    }, [croppedImage]);
+    }, [croppedImage, formik]);
     useEffect(() => {
         const tempDiv = document.createElement("div");
         tempDiv.innerHTML = htmlData;

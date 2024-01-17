@@ -294,7 +294,7 @@ export const CourseListing = ({ live }) => {
                                 borderRadius={4}
                                 sx={{ wordBreak: "break-word" }}
                             >
-                                <Typography variant="h6" pb={3} color={'primary'} sx={{ fontWeight: '700', fontSize: "18px" }}>Intended Learner</Typography>
+                                <Typography variant="h6" pb={3} color={'primary'} sx={{ fontWeight: '700'}}>Intended Learner</Typography>
                                 <p style={{ fontSize: "18px" }}>{intended_learner}</p>
                             </Box>}
                         </Box>

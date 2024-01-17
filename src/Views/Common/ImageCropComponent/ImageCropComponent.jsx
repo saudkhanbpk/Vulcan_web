@@ -9,6 +9,7 @@ import "react-image-crop/dist/ReactCrop.css";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import EditIcon from "@mui/icons-material/Edit";
+import CourseVector from '../../../Assets/Images/courseVector.png'
 
 
 function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
@@ -83,6 +84,7 @@ export function ImageCropComponent({ setCroppedImage, courseImageUrl, formik, cr
         if (croppedImage) {
             formik.setFieldValue('courseImage', croppedImage);
         }
+        // eslint-disable-next-line
     }, [croppedImage]);
     return (
         <>
@@ -152,16 +154,16 @@ export function ImageCropComponent({ setCroppedImage, courseImageUrl, formik, cr
                                         ref={previewCanvasRef}
                                         style={{
                                             border: "1px solid black",
-                                            objectFit: "contain",
-                                            width: { xl: 375, sm: 390, md: 400, lg: 430 },
+                                            objectFit: "cover",
+                                            width: "100%",
                                             height: 200,
                                         }}
                                     />
                                 </Box>
                             )}
                         </> :
-                            <Box height={200} width={{ xl: 375, sm: 390, md: 400, lg: 430 }}>
-                                <img src={courseImageUrl} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                            <Box height={200} width={{ xl: 375, sm: 390, md: 400, lg: 430 }} sx={{ backgroundColor: "grey" }}>
+                                <img src={courseImageUrl || CourseVector} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                             </Box>
                     }
                 </Box>
